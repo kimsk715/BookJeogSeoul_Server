@@ -1,4 +1,5 @@
-package com.app.bookJeog.controller;
+package com.app.bookJeog.controller.admin;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequestMapping("/")
 @RequiredArgsConstructor
-public class InquiryController {
+public class AdminWebController {
 
-    // 고객센터(문의)
-    @GetMapping("/inquiry")
-    public String goToInquiryForm() {
-        return "main/inquiry";
+    @GetMapping("admin")
+    public String goToAdminMain(){
+        return "admin/admin_page";
     }
 }
