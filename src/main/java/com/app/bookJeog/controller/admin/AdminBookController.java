@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -24,11 +25,11 @@ public class AdminBookController {
 
     @GetMapping("admin/books")
     @ResponseBody
-    public void getAllBook(Model model) {
-//        log.info(bookService.getAllBook().toString());
+    public List<BookInfoVO> getAllBook() {
         List<BookInfoVO> Books = bookService.getAllBook();
-        model.addAttribute("books", Books);
-//        log.info(model.getAttribute("books").toString());
-
+        log.info(Books.toString());
+        return Books;
     }
+
+
 }
