@@ -2,7 +2,6 @@ const bookLayout = (() =>{
     const showBookList = (bookList) => {
         const bookTBody = document.querySelector(".book-table tbody");
         let text = ``;
-        console.log("실행됨")
         bookList.forEach((book) => {
             text += `
             <tr>
@@ -23,8 +22,6 @@ const bookLayout = (() =>{
             </tr>
             `
         })
-        // console.log("post text")
-        console.log(text)
         bookTBody.innerHTML = text;
         text=``;
     }

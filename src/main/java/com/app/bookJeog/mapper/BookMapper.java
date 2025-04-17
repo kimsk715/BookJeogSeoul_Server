@@ -4,5 +4,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface BookMapper {
-
+    public void insertTempSelectedBook(Long isbn);
 }

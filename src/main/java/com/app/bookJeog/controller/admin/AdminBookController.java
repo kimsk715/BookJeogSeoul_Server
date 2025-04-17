@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +28,10 @@ public class AdminBookController {
         return Books;
     }
 
-
+    @GetMapping("admin/temp-list")
+    @ResponseBody
+    public void getTempList(@RequestParam("list") List<String> tempList) {
+        log.info(tempList.toString());
+        tempList.forEach(book -> {bookService.insertTempSelectedBook(Long.valueOf(book));});
+    }
 }

@@ -100,32 +100,4 @@ submitListButton.addEventListener("click", () => {
     }
 });
 
-const bookChooseButton = document.querySelector(".book-choose-btn");
-const chosenBooks = document.querySelectorAll(".chosenBook");
-var count = 0;
-var checkedCount =0;
-window.addEventListener("change", () => {
-    chosenBooks.forEach((book) => {
-        if (book.checked) {
-            count++;
-        }
-    });
-    checkedCount = count;
-    console.log(count);
-    count = 0;
-});
-// 책 배열을 임시로 저장하도록 하는 배열이 필요.
-bookChooseButton.addEventListener("click", () => {
-    if(checkedCount == 0){
-        alert("선택된 도서가 없습니다.");
-    }
-    else{
-        alert("선택한 도서가 목록에 저장되었습니다.");
-        chosenBooks.forEach((button) => {
-        button.checked = false;
-    })
-    }
-    console.log(checkedCount)
-    
-    checkedCount = 0;
-});
+
