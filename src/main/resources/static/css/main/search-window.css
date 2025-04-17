@@ -1,0 +1,358 @@
+* {
+    letter-spacing: -.6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+#wrap{
+    height: 100%;
+}
+
+/* 헤더(임시) */
+.top-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: var(--ui-background);
+    border-bottom: 1px solid var(--GTrans-02);
+}
+
+.top-header header{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    max-width: var(--header-width);
+    height: 64px;
+    padding: 0 24px;
+    margin: 0 auto;
+    background: var(--ui-background);
+}
+
+header nav{
+    display: block;
+}
+
+header nav>ul{
+    color: var(--text-strong);
+    display: flex;
+    align-items: center;
+}
+
+header .util-wrap{
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.gnb a{
+    padding: 12px 24px;
+    font-size: 20px;
+    position: relative;
+    color: var(--secondary);
+}
+/* // 헤더(임시) */
+
+@media (min-width: 1000px){
+    .content{
+        user-select: none;
+    }
+}
+
+/* 검색창 상단 */
+.agent-tab-wrapper{
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.agent-tab-wrapper .segment-tab-list{
+    background-color: var(--ui-02);
+    border-radius: 100px;
+    align-items: center;
+    padding: 2px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.agent-tab-wrapper .tab-item{
+    height: 100%;
+    position: relative;
+    padding: 0 16px;
+}
+/* // 검색창 상단 */
+
+/* 검색창 */
+.search-container{
+    background-color: var(--ui-background);
+    display: block;
+    min-height: unset;
+}
+
+.tab-wrapper{
+    position: sticky;
+    top: 65px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    background-color: var(--ui-background);
+}
+
+.search-container .search-input-wrap{
+    position: sticky;
+    top: 48px;
+    z-index: 51;
+    width: 100%;
+    background: var(--ui-background);
+}    
+
+
+@media (min-width: 1000px){
+    .search-input-wrap{
+        top: 129px;
+    }    
+}
+
+.search-input{
+    max-width: 1440px;
+    padding: 8px 0;
+    margin: 0 auto;
+    padding-top: 0;
+}
+
+.search-input .search-inner{
+    padding: 0 20px;
+}
+
+.search-input .search-inner .input-area{
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 44px;
+    padding: 0 14px;
+    margin: 0 auto;
+    background-color: var(--ui-02);
+    border-radius: 20px;
+}
+
+.icon-searchbar{
+    z-index: 1;
+    transition: background-color .2s linear, border-color .2s linear, color .2s linear;
+    overflow: hidden;
+    position: absolute;
+    top: 49%;
+    height: 24px;
+    padding: 0;
+    background: transparent;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--text-03);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: auto;
+}
+
+.icon-searchbar::before{
+    cursor: pointer;
+    letter-spacing: -.6px;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--text-03);
+    font-family: icon;
+    content: "\e83a";
+    vertical-align: top;
+}
+
+.input-default{
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    border: 0;
+    letter-spacing: -.6px;
+    overflow: hidden;
+    width: 100%;
+    height: 44px;
+    padding-left: 24px;
+}
+
+.search-input .input-default label{
+    display: block;
+    height: 100%;
+    padding: 0;
+    border: transparent;
+}
+
+.input-default .inner{
+    height: 100%;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.clear-button{
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.clear-button::before{
+    font-family: icon;
+    content: "\e84e";
+    font-size: 17px;
+    color: var(--ui-06);
+    line-height: 16px;
+}
+
+.inner .input{
+    flex: 1;
+}
+
+label .input input{
+    line-height: 1.15;
+    margin: 0;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: left;
+    color: var(--text-01);
+    height: 100%;
+    padding-left: 10px;
+}
+
+label .input input:focus{
+    outline: none;
+}
+
+label .input input::placeholder{
+    color: #c4c8ca;
+    font-weight: 700;
+}
+/* // 검색창 */
+
+/* 최근 검색기록 */
+.search-recent-list{
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    background: var(--ui-background);
+}
+
+.search-recent{
+    max-width: var(--search-width);
+    margin: 0 auto;
+    padding: 16px 24px 0;
+}
+
+.recent-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 6px 0;
+    align-items: center;
+}
+
+.recent-header>p{
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--text-03);
+}
+
+.search-deleteall{
+    width: auto;
+    height: 32px;
+    color: var(--text-03);
+    font-size: 12px;
+    line-height: 18px;
+    padding: 0;
+    background: transparent;
+}
+
+.recent-list ul li{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 0 10px 32px;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--text-02);
+    justify-content: space-between;
+}
+
+.recent-list ul li::after{
+    content: "";
+    background-image: url(../../images/main/history_icon.png);
+    position: absolute;
+    background-size: 24px;
+    height: 24px;
+    width: 24px;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.search-recent-record a{
+    font-weight: 900;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    width: 100%;
+}
+
+.recent-list ul li .icon-recent-x{
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    border: 0;
+    letter-spacing: -.6px;
+    transition: background-color .2s linear, border-color .2s linear, color .2s linear;
+    overflow: hidden;
+    width: auto;
+    height: 24px;
+    font-size: 24px;
+    color: var(--ui-07);
+    padding: 0;
+    background: transparent;
+}
+
+.recent-list ul li .icon-recent-x::before{
+    font-family: icon;
+    content: "\e826";
+}
+
+.search-recent .recent-list .recent-null{
+    font-weight: 700;
+    text-align: center;
+    position: absolute;
+    bottom: -140px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.search-recent .recent-list 
+.recent-null p{
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--text-03);
+}
+/* // 최근 검색기록 */

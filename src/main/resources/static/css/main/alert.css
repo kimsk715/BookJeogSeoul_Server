@@ -1,0 +1,115 @@
+#wrap {
+    height: 100%;
+}
+
+.bg-sub-inner {
+    padding-bottom: 48px;
+}
+
+.bg-sub-inner .back-component {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 15;
+    background: #fff;
+}
+
+.back-component {
+    height: 48px;
+    background: var(--ui-background);
+}
+
+.back-component.border-hidden {
+    border: none!important;
+}
+
+.back-component .back {
+    position: relative;
+    max-width: var(--header-width);
+    margin: 0 auto;
+    height: 48px;
+}
+
+.back-component .back .close-button {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    width: 24px;
+    height: 24px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.back-component .back .close-button {
+    display: none;
+}
+
+.bgroad-button-list, .web-mount .back-component .close-button, .web-mount .back-component.pc-hidden {
+    display: none;
+}
+
+.back-component i[class^=mds-icon-] {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 23px;
+    color: var(--text-01);
+}
+
+.back-component .back h2 {
+    overflow: hidden;
+    padding: 0 45px;
+    font-size: 18px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    line-height: 48px;
+    color: var(--text-01);
+}
+
+.alarm-center-container .alarm-list-container {
+    max-width: var(--depth-width);
+    margin: 0 auto;
+}
+
+.alarm-center-container .alarm-list-container .alarm-content li {
+    border-bottom: 1px solid var(--ui-03);
+}
+
+.alarm-center-container .alarm-list-container .alarm-content li a {
+    display: -ms-flexbox;
+    display: flex;
+    padding: 22px 16px;
+}
+
+.alarm-center-container .alarm-list-container .alarm-content li a .img {
+    overflow: hidden;
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    margin: auto 0;
+    border-radius: 50%;
+    border: 1px solid var(--ui-06);
+}
+
+.alarm-center-container .alarm-list-container .alarm-content li a .img img {
+    width: 100%;
+    min-height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.alarm-center-container .alarm-list-container .alarm-content li a .context {
+    margin-left: 10px;
+}   
+
+.alarm-center-container .alarm-list-container .alarm-content li a .context .txt {
+    font-size: 16px;
+}
+
+.alarm-center-container .alarm-list-container .alarm-content li a .context .time {
+    padding-top: 4px;
+    color: var(--text-04);
+    font-size: 12px;
+}

@@ -1,0 +1,1417 @@
+* {
+    letter-spacing: -.6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: top;
+    border-style: none;
+    pointer-events: none;
+}
+
+i {
+    font-style: normal;
+}
+
+b, em, strong {
+    font-weight: 700;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+
+button{
+    background: transparent;
+}
+
+button, input {
+    background-color: transparent;
+    border: 0;
+}
+
+textarea {
+    overflow: auto;
+}
+
+#wrap{
+    height: 100%;
+}
+
+[class*=" mds-"], [class^=mds-] {
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    border: 0;
+    letter-spacing: -.6px;
+}
+
+[class*=" mds-icon"]:before, [class^=mds-icon]:before {
+    font-family: icon;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.write{
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -.6px;
+    position: relative;
+}
+
+.post-write.diary{
+    overflow: initial;
+}
+
+/* 헤더 */
+.header{
+    font-style: normal;
+    position: relative;
+    z-index: 9;
+    background-color: var(--ui-background);
+}
+
+.post-write .header{
+    border-bottom: 1px solid var(--ui-03);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+.diary-container{
+    max-width: 832px;
+    margin: 0 auto;
+    padding-top: 32px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.header .header-inner {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    position: relative;
+    padding: 8px 12px;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.header .header-inner .header-right {
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.header .header-inner, .header .header-inner .header-left {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.header .header-inner .header-left {
+    height: 100%;
+}
+
+.header .header-inner .header-left .back-btn {
+    padding: 0;
+    height: auto;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-03);
+    background-color: transparent;
+}
+
+.mds-button>* {
+    position: relative;
+    z-index: 1;
+}
+
+.mds-button span {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.mds-icon-arrow-left::before{
+    content: "\e804";
+}
+
+.header .header-inner .header-right, .header .header-inner .header-right .nav-btn, .header .header-inner .header-right .nav-btn .tempBtn-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.header .header-inner .header-right .nav-btn .publish-btn {
+    overflow: hidden;
+    transition: background-color .2s linear, border-color .2s linear, color .2s linear;
+    background-color: var(--secondary);
+    color: var(--ui-background);
+    width: auto;
+    height: 32px;
+    border-radius: 4px;
+    padding: 0 16px;
+    font-size: 14px;
+}
+/* // 헤더 */
+
+.diary-container .component{
+    margin-bottom: 32px;
+}
+
+/* 책 추가 전 창 */
+.box{
+    background-color: var(--ui-02);
+    border-radius: 8px;
+    padding: 32px 0;
+}
+
+.box p{
+    color: var(--text-04);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.box .add-book-button{
+    width: 73px;
+    margin: 0 auto;
+    display: block;
+}
+
+.mds-shadow-book{
+    box-shadow: 0 0 2px rgba(0, 0, 0, .24), 4px 8px 8px rgba(0, 0, 0, .1), 12px 8px 24px rgba(0, 0, 0, .2);
+}
+/* // 책 추가 전 창 */
+
+/* 책 찾기 모달창 */
+.modal{
+    min-width: 280px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.flex-container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.modal-window{
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    max-width: 952px;
+    min-width: 600px;
+    width: 95%;
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--ui-up);
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.modal-overlay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .8);
+    z-index: 9;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.modal-head{
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    z-index: 10;
+    min-height: 96px;
+    padding: 32px 40px 24px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: all .4s;
+}
+
+.modal-body{
+    width: 100%;
+    height: 100%;
+    padding: 0 32px 16px;
+}
+
+.modal-head-inner .head-top, .modal-head-inner{
+    position: relative;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+}
+
+.modal-head-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.modal-head-button .close-btn{
+    height: 32px;
+    font-size: 12px;
+    padding: 0 12px;
+    border-radius: 4px;
+}
+
+.mds-button-line{
+    border-color: var(--secondary);
+    color: var(--secondary);
+    position: relative;
+    background-color: transparent;
+    border: 1px solid;
+}
+
+.modal-head-button .add-btn, .modal-head-button .close-btn{
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 64px;
+}
+
+.mds-button.mds-button-line:before {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: .1;
+    transition: background-color .2s linear;
+    content: "";
+}
+
+.mds-button>* {
+    position: relative;
+    z-index: 1;
+}
+
+.mds-button span {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.mds-button.mds-button-line {
+    height: 32px;
+    font-size: 12px;
+    padding: 0 12px;
+    border-radius: 4px;
+}
+
+.modal-head-button .add-btn{
+    margin-left: 8px;
+}
+
+.mds-button:disabled {
+    opacity: .2;
+    cursor: not-allowed;
+}
+
+.modal-head-button .add-btn i{
+    font-size: 16px;
+}
+
+.mds-icon-check:before {
+    content: "\e823";
+}
+
+.modal-head-inner .head-top, .modal-head-inner{
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+}
+
+.modal-head-inner .head-top .head-title{
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -.6px;
+    color: var(--text-strong);
+}
+
+.modal-head-inner .head-top .head-subtitle{
+    font-size: 14px;
+    letter-spacing: -.6px;
+    color: var(--cancel-press);
+    margin-top: 4px;
+}
+
+.modal-head-inner .head-top .head-search{
+    width: 100%;
+    height: 56px;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.mds-input.search-bar {
+    overflow: hidden;
+    width: 100%;
+    border-bottom: 1px solid var(--ui-06);
+}
+
+.mds-input>label {
+    display: block;
+    height: 56px;
+    padding: 8px 12px;
+    border: 1px solid;
+}
+
+.post-write .mds-input.mds-input-search label{
+    border-radius: 4px;
+    border: none;
+}
+
+.mds-input .inner {
+    height: 100%;
+    gap: 8px;
+}
+
+.mds-input .inner, .mds-input .mds-icon-searchbar {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.mds-input .mds-icon-searchbar {
+    margin-right: 12px;
+}
+
+.mds-input .mds-icon-searchbar:before {
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--text-01);
+    content: "\e83a";
+}
+
+.mds-input input {
+    width: 100%;
+    height: 24px;
+    font-size: 16px;
+    text-align: left;
+    color: var(--text-01);
+}
+
+.modal-body-inner{
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.modal-body-content{
+    width: 100%;
+    height: 100%;
+}
+
+.modal-body-content>div{
+    position: relative;
+    height: 100%;
+}
+
+.full-list{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    height: 99%;
+    position: absolute;
+    top: 0;
+    right: -40px;
+    left: -40px;
+    padding-top: 1.5px;
+}
+
+.search-list{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: -40px;
+    left: -40px;
+    background-color: var(--ui-up);
+    z-index: 5;
+}
+
+.modal-content{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+    padding: 16px 40px 0;
+    overflow-y: scroll;
+}
+
+.modal-content .books-item{
+    position: relative;
+    width: calc(20% - 12px);
+    padding: 6px;
+    margin: 6px;
+    cursor: pointer;
+}
+
+.modal-content.no-list{
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+}
+
+.modal-content.no-list li{
+    font-size: 2.5rem;
+}
+
+.modal-content .books-item div.books{
+    min-width: auto !important;
+}
+
+.bookjeog-book.books>a, .bookjeog-book.books>button {
+    display: block;
+    width: 100%;
+}
+
+.bookjeog-book.only-books>a {
+    pointer-events: none;
+    cursor: default;
+}
+
+.bookjeog-book.books .book-image {
+    min-height: auto;
+    padding-top: 0;
+    height: 100%;
+}
+
+.bookjeog-book.books .book-image, .bookjeog-book.books .thumbnail {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: end;
+    align-items: flex-end;
+}
+
+.bookjeog-book.books .thumbnail {
+    position: relative;
+    width: 100%;
+}
+
+.bookjeog-book.books .thumbnail-inner {
+    overflow: hidden;
+    position: relative;
+    width: inherit;
+    background: linear-gradient(90deg, var(--ui-05) 25%, var(--ui-05) 37%, var(--ui-05) 63%);
+    border-radius: 0 4px 4px 0;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .1), 0 0 2px rgba(0, 0, 0, .2);
+}
+
+.book-picture{
+    overflow: hidden;
+    position: relative;
+    max-height: 240px;
+    padding-top: 0;
+}
+
+.book-picture picture{
+    transition: opacity .7s;
+    position: static;
+    opacity: 1;
+}
+
+.book-picture picture img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.bookjeog-book.books .metadata {
+    padding-top: 12px;
+    font-size: 12px;
+    text-align: left;
+    position: relative;
+}
+
+.post-write .books .metadata {
+    line-height: 1.5em;
+}
+
+.bookjeog-book.books .metadata .title {
+    -webkit-line-clamp: 2;
+    max-height: 2.7em;
+    color: var(--text-01);
+    font-weight: 700;
+    font-size: 16px;
+    max-height: 3em;
+}
+
+.bookjeog-book.books .metadata .author, .bookjeog-book.books .metadata .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    margin-bottom: 3px;
+    white-space: normal;
+}
+
+.post-write .books .metadata .title {
+    max-height: 2.2em !important;
+}
+
+.bookjeog-book.books .metadata .author {
+    -webkit-line-clamp: 1;
+    max-height: 1.35em;
+    color: var(--text-03);
+    font-size: 14px;
+}
+
+.book-data .metadata .title{
+    margin-bottom: 3px !important;
+}
+
+.user-booklist.books-item:hover:before ,
+.books-item.active::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(96, 255, 138, 0.2);
+    border: 1px solid var(--primary);
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+
+.clear-button::before {
+    content: "\e84e";
+    font-size: 17px;
+    color: var(--ui-06);
+    line-height: 16px;
+}
+
+.mds-input .input {
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.mds-input {
+    overflow: hidden;
+}
+/* // 책 찾기 모달창 */
+
+/* 책 추가 후 창 */
+.title{
+    margin-bottom: 16px !important;
+}
+
+.diary-container .title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.diary-container .title.flex {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.book-container{
+    padding: 32px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border: 1px solid var(--ui-05);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.diary-container .title .library-name {
+    color: var(--text-04);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.book-container .background{
+    -webkit-filter: blur(16px);
+    filter: blur(16px);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 200%;
+    background-image: var(--background-image);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    opacity: .15;
+}
+
+.book-container .background:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    background: var(--GTrans-01);
+}
+
+.book-container .book-name{
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.book-container .book{
+    margin: 24px 0 0;
+    max-height: none;
+    width: 184px;
+    border-radius: 0 4px 4px 0;
+    -webkit-filter: drop-shadow(0 0 2px rgba(0, 0, 0, .24)) drop-shadow(4px 8px 8px rgba(0, 0, 0, .1)) drop-shadow(12px 8px 24px rgba(0, 0, 0, .2));
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, .24)) drop-shadow(4px 8px 8px rgba(0, 0, 0, .1)) drop-shadow(12px 8px 24px rgba(0, 0, 0, .2));
+    background-color: var(--ui-05);
+    position: relative;
+    height: 280px;
+    padding-top: 0;
+    height: auto;
+    padding-top: 0;
+}
+
+.book-container .book:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) .01%, rgba(0, 0, 0, .05) 5.97%, hsla(0, 0%, 100%, .3) 15.89%, hsla(0, 0%, 100%, 0) 28.19%, rgba(0, 0, 0, .05) 0, rgba(0, 0, 0, .0277927) 46.96%, hsla(0, 0%, 100%, 0) 47.51%, hsla(0, 0%, 100%, .1) 54.14%, hsla(0, 0%, 100%, 0));
+    height: 100%;
+}
+
+.book-picture picture{
+    position: static;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity .7s;
+    opacity: 1;
+}
+
+.book-container .book-produce{
+    color: var(--text-02);
+    margin-top: 24px;
+    font-weight: 700;
+}
+
+.book-container .book-info{
+    color: var(--text-04);
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+.book-container .change-button{
+    border: 1px solid var(--secondary);
+    border-radius: 4px;
+    height: 24px;
+    font-size: 12px;
+    color: var(--secondary);
+    width: 72px;
+    margin-top: 24px;
+}
+/* // 책 추가 후 창 */
+.diary-container .title em {
+    color: var(--audio);
+    font-size: 12px;
+    margin-left: 2px;
+    vertical-align: text-top;
+}
+/* 독서 기간 캘린더 */
+.button{
+    border: 1px solid var(--ui-06);
+    border-radius: 4px;
+    width: 248px;
+    -ms-flex-pack: justify;
+    height: 56px;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.button .inner, .button{
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button .inner{
+    padding: 8px 12px;
+    height: 100%;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex: 1;
+    flex: 1;
+    -ms-flex-pack: justify;
+    text-align: left;
+}
+
+.button .img{
+    padding: 8px 12px;
+    position: relative;
+}
+
+.button .label{
+    display: block;
+    margin-bottom: 1px;
+    font-size: 10px;
+    color: var(--text-04);
+}
+
+.button .inner .date{
+    color: var(--placeholder);
+    font-size: 16px;
+}
+
+.button .inner input{
+    display: none;
+}
+
+.button .img:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1px;
+    height: 32px;
+    background-color: var(--GTrans-02);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.button .inner .date.active{
+    color: var(--text-01);
+}
+
+#calendarOverlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* 어두운 배경 */
+    display: none;             /* 초기에는 감춤 */
+    justify-content: center;   /* 수평 중앙 정렬 */
+    align-items: center;       /* 수직 중앙 정렬 */
+    z-index: 9999;
+}
+
+
+.flatpickr-calendar.animate.open.arrowTop{
+    position: absolute;
+    scale: 1.3;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(1.3) !important;
+}
+/* // 독서 기간 캘린더 */
+
+/* 독후감 제목 */
+.mds-textarea {
+    overflow: hidden;
+    display: inline-block;
+    height: 128px;
+    width: 100%;
+}
+
+.mds-textarea .inner {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+}
+
+.mds-textarea .label {
+    display: block;
+    margin-bottom: 1px;
+    font-size: 10px;
+    color: var(--text-04);
+}
+
+.mds-textarea .message-wrap {
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    padding: 2px 8px 0;
+}
+
+.mds-textarea .message-wrap span {
+    font-size: 12px;
+    color: var(--text-04);
+}
+
+input::placeholder{
+    color: var(--placeholder);
+}
+
+input:focus {
+    outline: none;
+}
+
+.mds-textarea .message-wrap .length {
+    margin-left: auto;
+}
+
+.mds-textarea label{
+    flex: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid;
+    border-radius: 4px;
+    height: 100%;
+    border-color: var(--ui-06);
+    border-radius: 4px;
+}
+/* // 독후감 제목 */
+
+/* 독후감 내용 */
+.post-content .mds-textarea textarea{
+    -ms-flex: 1;
+    flex: 1;
+    overflow-y: auto;
+    width: 100%;
+    border: 0;
+    font-size: 16px;
+    color: var(--text-01);
+    resize: none;
+    background: var(--ui-background);
+    line-height: 24px;
+} 
+
+.post-content .mds-textarea textarea:focus{
+    outline: none;
+}
+
+.post-content .mds-textarea textarea::placeholder{
+    color: var(--placeholder);
+}
+/* // 독후감 내용 */
+
+/* 이미지 첨부 */
+.sentence{
+    margin-bottom: 100px !important;
+}
+
+.diary-container .title .count {
+    font-size: 12px;
+    color: var(--text-02);
+}
+
+.diary-container .title .count strong {
+    position: relative;
+    padding-right: 6px;
+    margin-right: 3px;
+}
+
+.diary-container .title .count strong:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 10px;
+    background-color: var(--ui-06);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.diary-container .title .count span {
+    font-weight: 400;
+}
+
+.input-file{
+    display: none;
+}
+
+input.input-file{
+    border-radius: 0;
+    appearance: none;
+}
+
+.diary-container .add-box {
+    background-color: var(--ui-02);
+    border-radius: 8px;
+    padding: 30px 0;
+    text-align: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.diary-container .add-box p {
+    color: var(--text-04);
+    margin-bottom: 24px;
+}
+
+.diary-container .add-box .button {
+    padding: 0 12px;
+    background-color: var(--secondary);
+    border-radius: 4px;
+    height: 32px;
+    width: 100px;
+    color: var(--ui-background);
+    font-size: 12px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+button:focus{
+    outline: none;
+}
+
+.mds-button:focus span {
+    text-decoration: underline;
+}
+
+.images ul{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.images>.mds-button.add-button{
+    position: relative;
+    background-color: transparent;
+    border: 1px solid;
+    height: 32px;
+    font-size: 12px;
+    padding: 0 12px;
+    border-radius: 4px;
+    max-width: 327px;
+    margin: 0 auto;
+    display: block;
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+.images>.mds-button.add-button::before{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: .1;
+    transition: background-color .2s linear;
+    content: "";
+}
+
+.images .item{
+    border: 1px solid var(--GTrans-02);
+    padding: 16px 16px 8px;
+    border-radius: 12px;
+    width: calc(50% - 10px);
+    margin-bottom: 16px;
+}
+
+.images img{
+    width: 355px;
+    height: 355px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.images .buttons, .images .buttons button{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.images .mds-input.memo label {
+    border-radius: 4px;
+    border: 1px solid var(--ui-06);
+}
+
+.mds-input .message-wrap {
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    padding: 0 8px;
+}
+
+.mds-input .clear-button {
+    overflow: hidden;
+    width: 20px;
+    height: 20px;
+    display: none;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.mds-input .clear-button::before{
+    content: "\e84e";
+    font-size: 17px;
+    color: var(--ui-06);
+    line-height: 16px;
+}
+
+.mds-input .message-wrap {
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    padding: 0 8px;
+}
+
+.mds-input .message-wrap .length, .mds-input .message-wrap .message {
+    padding-top: 2px;
+    font-size: 12px;
+    color: var(--text-04);
+}
+
+.mds-input .message-wrap .length {
+    margin-left: auto;
+}
+
+.images .buttons button{
+    width: 50%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.images .buttons .delete{
+    color: var(--danger);
+    position: relative;
+}
+
+.images .buttons .delete::after{
+    content: "";
+    display: block;
+    width: 1px;
+    height: 13px;
+    background-color: var(--GTrans-02);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+/* // 이미지 첨부 */
+
+/* 잠깐 뜨는 창(토스트) */
+#wrap .toast{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 1001;
+    width: 280px;
+    min-height: 52px;
+    padding: 16px;
+    background: rgba(54, 54, 54, .9);
+    box-sizing: border-box;
+    border-radius: 3px;
+    text-align: center;
+    color: #fff;
+    pointer-events: none;
+    word-break: keep-all;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#wrap .toast p{
+    word-break: break-all;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -60%); }
+    10% { opacity: 1; transform: translate(-50%, -50%); }
+    90% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -40%); }
+}
+
+.toast {
+    animation: fadeInOut 2.5s ease-in-out;
+}
+/* // 잠깐 뜨는 창(토스트) */
+
+/* 발행 누르면 뜨는 추가 설정 창 */
+.post-settings{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.post-settings .post-settings-inner{
+    position: absolute;
+    width: 375px;
+    top: 57px;
+    right: 10px;
+    padding: 20px 24px 24px;
+    background: var(--ui-up);
+    box-shadow: 0 4px 13px rgba(0, 0, 0, .16);
+    border-radius: 4px;
+    z-index: 5;
+}
+
+.post-settings .post-settings-inner .publish-setting, 
+.post-settings .post-settings-inner .publish-setting h3{
+    width: 100%;
+    font-weight: 700;
+}
+
+.post-settings .post-settings-inner .post-btn{
+    background-color: var(--secondary);
+    color: var(--ui-background);
+    height: 40px;
+    font-size: 14px;
+    padding: 0 16px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.post-settings .post-settings-inner .publish-setting ul.setting-option{
+    width: 100%;
+    margin: 12px 0 24px;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(176, 179, 188, .3);
+}
+
+.post-settings .post-settings-inner .publish-setting ul.setting-option li{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    color: var(--text-strong);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.post-settings .post-settings-inner .publish-setting ul.setting-option .question{
+    font-size: 16px;
+    color: var(--text-03);
+    cursor: pointer;
+}
+
+.mds-icon-question-mark:before {
+    content: "\e852";
+}
+
+.mds-tooltip {
+    position: absolute;
+    left: -1000em;
+    top: 0;
+    z-index: 10;
+    padding: 6px 8px;
+    background-color: var(--ui-up-01);
+    border-radius: 4px;
+    -webkit-filter: drop-shadow(0 0 4px rgba(0, 0, 0, .12)) drop-shadow(2px 6px 12px rgba(0, 0, 0, .12));
+    filter: drop-shadow(0 0 4px rgba(0, 0, 0, .12)) drop-shadow(2px 6px 12px rgba(0, 0, 0, .12));
+    white-space: nowrap;
+    left: 107px;
+    top: 76px;
+    transform: translate3d(0px, calc(-100% - 10px), 0px);
+    white-space: normal;
+}
+
+.mds-tooltip p {
+    font-size: 12px;
+    text-align: center;
+}
+
+.mds-tooltip .mds-tooltip-content {
+    color: var(--text-01);
+}
+
+.mds-tooltip .mds-tooltip-arrow {
+    position: absolute;
+    border-style: solid;
+    border-color: var(--ui-up-01);
+}
+
+.mds-tooltip .mds-tooltip-arrow {
+    left: 50%;
+    top: 100%;
+    margin-left: -5px;
+    border-width: 6px 5px 0;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    -webkit-filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .12));
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .12));
+    left: 8px;
+    margin-left: 0;
+}
+
+.mds-switch {
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.mds-switch input {
+    position: absolute;
+    left: -1000em;
+    top: 0;
+}
+
+.mds-switch .mds-switch-view {
+    display: block;
+    padding: 0;
+}
+
+.mds-switch .check {
+    display: block;
+    width: 51px;
+    height: 31px;
+    border-radius: 16px;
+    transition: background-color .2s;
+    background-color: var(--ui-05);
+}
+
+.mds-switch .check:after {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .24);
+    -webkit-transform: translate3d(-3px, -3px, 0);
+    transform: translate3d(1.5px, 1.5px, 0);
+    content: "";
+    width: 28px;
+    height: 28px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .3);
+    transition: transform .2s linear, -webkit-transform .2s linear;
+    background-color: #fff;
+}
+
+.mds-switch.checked .check:after{
+    display: block;
+    border-radius: 50%;
+    content: "";
+    width: 28px;
+    height: 28px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .3);
+    transition: transform .2s linear, -webkit-transform .2s linear;
+    transform: translate3d(21.5px, 1.5px, 0);
+    background-color: #fff;
+}
+
+.mds-switch.checked .check{
+    display: block;
+    transition: background-color .2s;
+    width: 51px;
+    height: 31px;
+    border-radius: 16px;
+    background-color: var(--primary);
+}
+
+.post-settings .post-settings-inner .post-btn i{
+    font-size: 16px;
+    margin-right: 3px;
+}
+
+.mds-icon-check:before {
+    content: "\e823";
+}
+/* // 발행 누르면 뜨는 추가 설정 창 */

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>로그인 | 북적북적</title>
+        <link
+            rel="stylesheet"
+            href="../../static/css/login/findpasswd-member.css"
+        />
+        <link
+            rel="shortcut icon"
+            href="/static/images/admin/favicon.ico"
+            type="image/x-icon"
+        />
+    </head>
+    <body>
+        <!-- 로그인 하는 영역 -->
+        <div class="login-container">
+            <div class="login-content">
+                <h3 class="title">아이디/비밀번호 찾기 서비스</h3>
+                <p class="sub-title">가입할 때 입력했던 정보를 확인합니다</p>
+                <!-- 이름 -->
+                <div class="input-item">
+                    <div class="bjs-input-name">
+                        <label class="input-label-name">
+                            <div class="inner">
+                                <div class="input">
+                                    <span class="input-name-label">이름</span>
+                                    <input
+                                        autocomplete="off"
+                                        type="text"
+                                        name=""
+                                        id="bjs-name"
+                                        placeholder="이름 입력."
+                                        style="outline: none; border: none"
+                                    />
+                                </div>
+                                <button
+                                    type="button"
+                                    class="clear-button"
+                                    id="clear-button-for-name"
+                                ></button>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- 이메일 -->
+                <div class="input-item">
+                    <div class="bjs-input-email">
+                        <label class="input-label-email">
+                            <div class="inner">
+                                <div class="input">
+                                    <span class="input-email-label"
+                                        >이메일</span
+                                    >
+                                    <input
+                                        autocomplete="off"
+                                        type="text"
+                                        name=""
+                                        id="bjs-email"
+                                        placeholder="이메일 입력"
+                                        style="outline: none; border: none"
+                                    />
+                                </div>
+                                <button
+                                    type="button"
+                                    class="clear-button"
+                                    id="clear-button-email"
+                                ></button>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- 생년월일 -->
+                <div class="input-item">
+                    <div class="input-birth-gender">
+                        <div class="birth-num">
+                            <div class="birth-wrap">
+                                <label>
+                                    <div class="inner">
+                                        <div class="input">
+                                            <span>생년월일,성별</span>
+                                            <input
+                                                type="text"
+                                                placeholder="생년월일"
+                                                maxlength="6"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                autocomplete="off"
+                                                id="bjs-birth"
+                                            />
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                            <span class="birth-line">-</span>
+                        </div>
+                        <div class="gender-num">
+                            <div class="gender-wrap">
+                                <label>
+                                    <div class="inner">
+                                        <div class="input">
+                                            <input
+                                                type="text"
+                                                autocomplete="off"
+                                                class="gender-input"
+                                                placeholder="0"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                maxlength="1"
+                                                id="bjs-gender"
+                                            />
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                            <span class="gender-dot">● ● ● ● ● ●</span>
+                        </div>
+                        <button
+                            type="button"
+                            class="clear-button"
+                            id="clear-button-gender"
+                        ></button>
+                    </div>
+                </div>
+                <!-- 다음 버튼 -->
+                <div class="login-btn-area">
+                    <button id="login-btn">
+                        <span class="login-btn-tag">로그인</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 로그인 fail 모달 -->
+        <div id="modal">
+            <div id="modal-wrap">
+                <div class="modal-inner">
+                    <div class="modal-header">
+                        <strong>로그인 실패</strong>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <p>아이디 또는 비밀번호를 확인해주세요</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button>
+                        <span>확인</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="../../static/js/login/findpasswd-member.js"></script>
+</html>

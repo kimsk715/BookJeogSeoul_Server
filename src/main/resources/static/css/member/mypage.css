@@ -1,0 +1,818 @@
+* {
+    letter-spacing: -.6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: top;
+    border-style: none;
+    pointer-events: none;
+}
+
+i {
+    font-style: normal;
+}
+
+b, em, strong {
+    font-weight: 700;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+
+button{
+    font-family: inherit;
+    color: var(--text-01);
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    font-weight: 400;
+    appearance: none;
+}
+
+button, input {
+    background-color: transparent;
+    border: 0;
+}
+
+#wrap{
+    height: 100%;
+}
+
+[class*=" mds-"], [class^=mds-] {
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    border: 0;
+    letter-spacing: -.6px;
+}
+
+[class*=" mds-icon"]:before, [class^=mds-icon]:before {
+    font-family: icon;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[type=button], [type=reset], [type=submit], button {
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    -webkit-appearance: button;
+    outline: 0;
+}
+
+main{
+    display: block;
+}
+
+.library-main {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 0px;
+}
+
+.library-main-wrapper{
+    width: 100%;
+    height: 100%;
+    max-width: 1440px;
+    min-width: 320px;
+    margin: 0px auto;
+}
+
+.back-wrapper{
+    position: sticky;
+    top: 65px;
+    left: 0px;
+    right: 0px;
+    background: var(--ui-background);
+    z-index: 50;
+}
+
+@media (max-width: 1279px) {
+    div.back-wrapper {
+        top: 0px;
+    }
+}
+
+div.inner {
+    display: flex;
+    width: 100%;
+    padding: 0px 20px;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+@media (min-width: 1280px) {
+    div.inner {
+        padding: 0px 24px;
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 1280px) {
+    div.inner div.content-top {
+        width: 368px;
+        padding: 0px 20px;
+    }
+}
+
+
+@media (min-width: 1280px) {
+    div.inner div.content-bottom {
+        width: calc(100% - 368px);
+        padding: 0px 0px 0px 44px;
+    }
+}
+
+.inner-title{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 34px;
+    text-align: left;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    margin-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-indent: 0px;
+}
+
+@media (min-width: 1280px) {
+    .inner-title{
+        display: none;
+    }
+}
+
+.profile-view-wrapper{
+    padding: 16px 0 24px;
+}
+
+@media (min-width: 1280px) {
+    .profile-view-wrapper{
+        padding-top: 0px;
+    }
+}
+
+.divide-line{
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    height: 6px;
+    background: var(--ui-02);
+}
+
+@media (min-width: 1280px) {
+    .divide-line {
+        height: 0px;
+    }
+}
+
+.profile-info-wrapper{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.content-count-wrapper{
+    display: flex;
+    margin: 20px -8px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my-button-wrapper{
+    display: flex;
+    gap: 12px;
+    position: relative;
+}
+
+.profile-info{
+    display: flex;
+    width: 100%;
+    max-width: 375px;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.profile-image-wrapper{
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    font-size: 0px;
+}
+
+.profile-metainfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-image{
+    border-radius: 100px;
+    object-fit: cover;
+}
+
+.back-inner{
+    position: relative;
+    max-width: var(--back-width);
+    width: 100%;
+    height: 38px;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 1279px) {
+    div.back-inner {
+        height: 48px;
+    }
+}
+
+.edit-button{
+    position: absolute;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    right: 0px;
+    bottom: 0px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    border: 2px solid var(--ui-background);
+    background: var(--ui-05);
+}
+
+.ir {
+    position: absolute;
+    left: -10000em;
+    top: 0px;
+    line-height: 0;
+}
+
+svg {
+    display: block;
+    pointer-events: none;
+}
+
+.profile-nickname-wrapper{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 4px;
+}
+
+.follow-info{
+    display: flex;
+}
+
+.profile-nickname{
+    align-items: center;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--text-01);
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    max-height: 2.857em;
+}
+
+.follow-info > span {
+    display: flex;
+    gap: 4px;
+}
+
+.label-text{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-02);
+}
+
+.count-text{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-02);
+}
+
+.follow-info > span:last-child::before {
+    display: flex;
+    align-items: center;
+    margin-left: 4px;
+    font-weight: 700;
+    color: var(--text-02);
+    content: "·";
+}
+
+.top-header > .inner{
+    display: block;
+}
+
+.content-count-wrapper > a{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.content-count-info{
+    display: flex;
+    flex-direction: column-reverse;
+    text-align: center;
+}
+
+.content-label{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--text-01, #242424);
+}
+
+.content-count{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--text-01, #242424);
+}
+
+.separater{
+    width: 1px;
+    height: 32px;
+    background: var(--GTrans-01);
+}
+
+.writing-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--secondary);
+    color: var(--ui-background);
+    height: 40px;
+    padding: 0px 16px;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 100px;
+    transition: background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
+}
+
+.add-book{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid var(--cancel);
+    color: var(--text-01);
+    height: 40px;
+    padding: 0px 16px;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 100px;
+    transition: background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
+}
+
+.writing-button span,
+.add-book span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: inherit
+}
+
+.add-book span::before{
+    font-family: icon;
+    content: "\e80f";
+}
+
+.scrap-book-list{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 24px 0px;
+    gap: 12px;
+}
+
+.post-average-wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0px;
+    gap: 16px;
+}
+
+.content-bottom .title-wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.swiper {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    display: block;
+}
+
+.swiper.swiper-horizontal{
+    touch-action: pan-y;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.title-wrapper .title-text{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--text-01, #242424);
+}
+
+.books-button{
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-03, #6f6f6f);
+    cursor: pointer;
+}
+
+.swiper-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    transition-property: transform;
+    transition-timing-function: var(--swiper-wrapper-transition-timing-function, initial);
+    box-sizing: content-box;
+}
+
+div.swiper-wrapper{
+    align-items: baseline;
+}
+
+.swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+    display: block;
+}
+
+.scrap-book-list div.slide-item{
+    backface-visibility: hidden;
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+}
+
+.book-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.book-wrapper-inner{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    gap: 8px;
+}
+
+.book-picture-wrapper{
+    position: relative;
+}
+
+.book-metalink{
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+.book-picture-link{
+    display: block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.book-badges{
+    z-index: 1;
+    position: absolute;
+    top: 14px;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-right: -7px;
+}
+
+.book-picture{
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.book-badges-box{
+    width: 40px;
+    height: 34px;
+    margin-top: -8px;
+    position: relative;
+}
+
+.book-badge-image{
+    display: block;
+    width: inherit;
+    height: inherit;
+}
+
+.styled-picture{
+    min-height: 120px;
+    max-height: 200px;
+    width: 100%;
+    filter: none;
+    display: block;
+    transition: filter 0.3s;
+    background: var(--ui-03);
+    height: 100%;
+}
+
+.styled-picture::after{
+    content: "";
+    border-radius: 8px;
+    position: absolute;
+    inset: 0px;
+    border: 0.5px solid var(--GTrans-02);
+}
+
+.book-meta{
+    display: block;
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+}
+
+.styled-book-name{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    display: -webkit-box;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-bottom: 2px;
+    position: relative;
+    color: var(--text-01);
+}
+
+.styled-book-author{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    display: -webkit-box;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: var(--text-03);
+}
+
+.post-average-wrapper div{
+    position: relative;
+}
+
+.post-title-wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.post-title-text{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--text-01, #242424);
+}
+
+.post-average-wrapper strong.average {
+    color: var(--audio, #96ea77);
+}
+
+.title-caption{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-03, #6f6f6f);
+}
+
+.post-average-wrapper ul.report-list{
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+@media (min-width: 1280px) {
+    .post-average-wrapper ul.report-list {
+        display: flex;
+        flex-direction: row;
+        gap: 24px;
+    }
+}
+
+.post-average-wrapper ul.report-list li {
+    display: table-row;
+    width: 100%;
+    height: 20px;
+}
+
+@media (min-width: 1280px) {
+    .post-average-wrapper ul.report-list li {
+        display: block;
+    }
+}
+
+ul.report-list li span.target {
+    display: table-cell;
+    overflow: hidden;
+    padding-right: 8px;
+    color: var(--text-01, #242424);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.post-average-wrapper ul.report-list li div.progress-bg {
+    display: table-cell;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: var(--ui-02, #f7f7f7);
+    overflow: hidden;
+}
+
+.kGGLpi ul.report-list li span.count {
+    display: table-cell;
+    overflow: hidden;
+    padding-left: 8px;
+    text-align: right;
+    white-space: nowrap;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--audio, #96ea77);
+}
+
+ul.report-list li div.progress-state {
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    border-radius: 4px;
+    background: var(--audio, #96ea77);
+}
+
+ul.report-list li:last-child div.progress-state{
+    background: var(--ui-07, #c1c1c1);
+}
+
+.post-average-wrapper ul.report-list li span.count {
+    display: table-cell;
+    overflow: hidden;
+    padding-left: 8px;
+    text-align: right;
+    white-space: nowrap;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--audio, #96ea77);
+}
+
+.post-average-wrapper ul.report-list li:last-child span.count {
+    color: var(--ui-07, #c1c1c1);
+}
+
+@media (min-width: 1280px) {
+    .post-average-wrapper ul.report-list li {
+        border-top: none;
+    }
+}
+
+/* 잠깐 뜨는 창(토스트) */
+#wrap .toast{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 1001;
+    width: 280px;
+    min-height: 52px;
+    padding: 16px;
+    background: rgba(54, 54, 54, .9);
+    box-sizing: border-box;
+    border-radius: 3px;
+    text-align: center;
+    color: #fff;
+    pointer-events: none;
+    word-break: keep-all;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#wrap .toast p{
+    word-break: break-all;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -60%); }
+    10% { opacity: 1; transform: translate(-50%, -50%); }
+    90% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -40%); }
+}
+
+.toast {
+    animation: fadeInOut 2.5s ease-in-out;
+}
+/* // 잠깐 뜨는 창(토스트) */

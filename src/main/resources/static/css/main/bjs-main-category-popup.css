@@ -1,0 +1,227 @@
+[type=checkbox], [type=radio] {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+input {
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+button, input {
+    background-color: transparent;
+    border: 0;
+}
+input {
+    -webkit-border-radius: 0;
+}
+button, input {
+    overflow: visible;
+}
+.hamburger-popup-wrap {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 109px;
+    bottom: 0;
+    z-index: 60;
+    background: rgba(0, 0, 0, .3);
+}
+.haburger-popup-inner {
+    max-width: 1440px;
+    height: 95%;
+    min-height: 500px;
+    max-height: 800px;
+    margin: 0 auto;
+}
+.favorites-wrap {
+    overflow: hidden;
+        display: flex;
+        align-items: stretch;
+        max-width: 750px;
+        height: 100%;
+        min-height: 500px;
+        max-height: 800px;
+        background-color: var(--ui-02);
+        border-radius: 0 0 16px 16px;
+}
+.favorites {
+    position: sticky;
+    left: 0;
+    top: 0;
+    padding: 24px 24px 32px;
+    background-color: var(--ui-02);
+    flex: 1;
+}
+.favorites-tab-category {
+    overflow-y: auto;
+    max-height: 100%;
+    overscroll-behavior: contain;
+    background-color: var(--ui-up-01);
+    flex: 1;
+}
+.favorites > h2 {
+    padding: 11px 0 32px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-01);
+}
+.favorites > div {
+    position: relative;
+    margin-bottom: 32px;
+}
+.favorites > div:last-child {
+    margin-bottom: 0;
+}
+.favorites .favorites-item > h3 {
+    margin-bottom: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text-04);
+}
+.null-text {
+    padding: 12px 0;
+    background: #fff;
+    border-radius: 12px;
+    font-size: 12px;
+    text-align: center;
+    color: var(--text-04);
+    line-height: 18px;
+}
+.reset-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 12px;
+    color: var(--text-04);
+}
+.bjs-icon--refresh::before {
+    content: "\e836";
+    font-family: icon;
+}
+.tab-item {
+    position: sticky;
+    left: 0;
+    top: 0;
+    border-bottom: 1px solid var(--GTrans-02);
+}
+.tab-content {
+    min-height: 800px;
+    padding: 24px 0;
+}
+.tab-names {
+    background-color: var(--ui-up-01);
+    height: 56px;
+    position: relative;
+}
+.menu {
+    display: flex;
+    height: 100%;
+}
+.bjs-category-item {
+    flex: 1;
+    height: 100%;
+}
+.bjs-category-item > a {
+    padding-top: 12px;
+    font-weight: 700;
+    padding: 0 12px;
+    font-size: 16px;
+    color: var(--text-01);
+    display: block;
+    height: 100%;
+    text-align: center;
+}
+.bjs-category-title > a > span {
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+    align-items: center;
+}
+.bjs-category-title > a {
+    display: block;
+    height: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-01);
+    padding: 0 12px;
+    font-weight: 700;
+    padding-top: 12px
+}
+.bjs-category-title {
+    height: 100%;
+    flex: 1;
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    border: 0;
+    letter-spacing: -.6px;
+}
+.tab-content > dl {
+    padding: 0 24px;
+    font-size: 14px;
+}
+.tab-content > dl > div {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+.tab-content > dl > div > dt {
+    margin-bottom: 12px;
+    font-weight: 700;
+    color: var(--text-01);
+}
+
+.category-name {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 8px 0;
+}
+.ddc {
+    color: var(--text-02);
+}
+.ir {
+    visibility: hidden;
+}
+.star {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+    background: url('/static/images/main/star.51e0520a69835d9f6fb6797328938d6e.svg') 
+    50% / 16px no-repeat;
+    cursor: pointer;
+}
+.category-item {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 3px 0;
+}
+.ir[type=checkbox]:checked+label {
+    background-image: url('/static/images/main/star-checked.44343783851ad3d9c8662da1f6c1b965.svg');
+}
+.favorites-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.favorites-ddc {
+    overflow: hidden;
+    background-color: var(--ui-up-01);
+    border: 1px solid var(--ui-05);
+    border-radius: 18px;
+}
+.my-favorites-link {
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    color: var(--text-02);
+    padding: 8px 12px;
+}
+.ddc-name {
+    font-size: 14px;
+    flex: 1;
+}

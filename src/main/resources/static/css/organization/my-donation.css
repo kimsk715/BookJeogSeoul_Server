@@ -1,0 +1,396 @@
+/* 기부 수혜자 목록 */
+.search-result-donate-more{
+    padding-bottom: 0;
+}
+
+.result-list .slide-wrapper.donate{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding: 12px 24px 24px;
+    gap: 38px;
+}
+
+.result-list .slide-wrapper.donate li{
+    width: calc(50% - 45px);
+    border-radius: 16px;
+    background: var(--ui-up-01);
+    overflow: hidden;
+    height: 443px;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, .06), 2px 2px 10px rgba(0, 0, 0, .04);
+}
+
+@media (min-width: 721px) {
+    .result-list .slide-wrapper.donate .slide-item{
+        min-width: 407px;
+        margin-right: 24px;
+    }
+}
+
+.search-donate-list{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.search-donate-list .donate-inner{
+    display: block;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    height: 100%;
+}
+
+.donate-data{
+    position: relative;
+    height: 100%;
+}
+
+.donate-image{
+    border-radius: 16px 16px 0 0;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 232px;
+    min-height: 232px;
+    max-height: 232px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    display: flex;
+    align-items: center;
+    --background-image: url(../../images/main/donate_example.jpg);
+}
+
+.donate-image::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: inherit;
+    background-image: var(--background-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; 
+}
+
+.donate-text{
+    padding: 24px;
+}
+
+.content.donateType{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    color: var(--text-02);
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+}
+
+.donate-data .donate-text .title{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    color: var(--text-01);
+    margin-bottom: 8px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    white-space: normal;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
+.search-donate-list .author{
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-top: 1px solid var(--ui-05);
+}
+
+.search-donate-list .author .image{
+    border: 1px solid var(--ui-05);
+    border-radius: 100px;
+    overflow: hidden;
+    min-width: 36px;
+    min-height: 36px;
+    margin-right: 16px;
+    -ms-flex: 1;
+    flex: 1;
+    max-width: 36px;
+    max-height: 36px;
+    height: 36px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.search-donate-list .author .info .name{
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--text-03);
+}
+
+.search-donate-list .author .info .regdate {
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 18px;
+    color: #a5a5a5;
+}
+/* // 기부 수혜자 목록 */
+
+/* 검색 정렬 모달창 */
+.modal-section{
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    border: 0;
+    letter-spacing: -.6px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: none; /*켜지면 flex*/
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.modal-wrap{
+    overflow: hidden;
+    background-color: var(--ui-up-03);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 360px;
+}
+
+.modal-inner{
+    padding: 32px 24px;
+}
+
+.modal-footer{
+    display: flex;
+}
+
+.modal-header{
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.modal-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+}
+
+strong.modal-title{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--text-01);
+}
+
+.radio-body{
+    width: 100%;
+}
+
+.radio-body>div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.radio-body>div>div{
+    flex: 0 0 48%;
+    margin-bottom: 8px;
+}
+
+.modal-radio{
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    width: 120px;
+    height: 48px;
+    border: 1px solid var(--ui-06);
+    border-radius: 8px;
+    transition: border-width .2s linear;
+    flex: 0 0 48%;
+    margin-bottom: 8px;
+}
+
+.modal-radio.checked{
+    border-color: var(--primary);
+    border-width: 3px;
+}
+
+.modal-radio input{
+    position: absolute;
+}
+
+.radio-view{
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.ir{
+    position: absolute;
+    left: -10000em;
+    top: 0;
+}
+
+.modal-radio .label{
+    text-align: center;
+    flex: 1;
+    font-size: 14px;
+    transition: color .3s linear;
+    color: var(--text-04);
+}
+
+.modal-radio.checked .label{
+    color: var(--text-01);
+}
+
+.button-cancel{
+    background-color: var(--cancel);
+    color: var(--text-01);
+}
+
+.modal-footer>button{
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    border: 0;
+    letter-spacing: -.6px;
+    overflow: hidden;
+    width: 100%;
+    transition: background-color .2s linear, border-color .2s linear, color .2s linear;
+    height: 56px;
+    font-size: 16px;
+    padding: 0 24px;
+}
+
+.button-cancel span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-footer>button>*{
+    position: relative;
+    z-index: 1;
+}
+
+.button-primary{
+    background-color: var(--primary);
+    color: #242424;
+}
+/* // 검색 정렬 모달창 */
+
+.content{
+    width: 100%;
+    max-width: var(--library-sub-width);
+    margin: 0px auto;
+}
+
+.back-wrapper{
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background: var(--ui-background);
+    z-index: 50;
+    border-bottom: 1px solid var(--ui-05);
+}
+
+.layout-container{
+    padding: 0px 20px;
+}
+
+.styled-back-inner{
+    position: relative;
+    max-width: var(--back-width);
+    width: 100%;
+    height: 48px;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.styled-back-inner>h2{
+    font-size: 18px;
+}
+
+.state-bar-wrapper{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding-top: 20px;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 검색결과 필터 */
+.search-container .search-options .result-list-header{
+    background-color: var(--ui-up);
+    padding: 24px 24px 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    min-height: 64px;
+}
+
+.result-list-header p{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    color: var(--text-01);
+}
+
+.result-list-header div button.icon-arrow-bottom{
+    width: auto;
+    height: 24px;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    padding: 0 20px 0 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-02);
+    align-items: center;
+}
+
+.result-list-header div button.icon-arrow-bottom::before{
+    font-family: icon;
+    content: "\e803";
+    position: absolute;
+    right: 4px;
+}
+/* // 검색결과 필터 */
+
+input{
+    appearance: none;
+}

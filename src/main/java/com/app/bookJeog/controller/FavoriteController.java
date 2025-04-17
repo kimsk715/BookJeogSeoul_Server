@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequestMapping
 @RequiredArgsConstructor
-public class FavoriteController implements MemberControllerDocs {
+public class FavoriteController {
 }

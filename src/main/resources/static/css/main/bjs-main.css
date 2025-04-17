@@ -1,0 +1,946 @@
+@font-face {
+    font-family: SpoqaHanSansNeo;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Regular.woff2) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Regular.woff) format("woff2");
+    font-weight: 400;
+    font-display: swap
+}
+
+@font-face {
+    font-family: SpoqaHanSansNeo;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Bold.woff2) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Bold.woff) format("woff2");
+    font-weight: 700;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Pretendard;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/Pretendard-Regular.subset.woff) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/Pretendard-Regular.subset.woff) format("woff2");
+    font-weight: 400;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Pretendard;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/Pretendard-Bold.subset.woff) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/Pretendard-Bold.subset.woff) format("woff2");
+    font-weight: 700;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "NotoSerifKR";
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/NotoSerifKR-Black.woff2) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/NotoSerifKR-Black.woff) format("woff2");
+    font-weight: 700;
+    font-display: swap
+}
+
+@font-face {
+    font-family: SpoqaHanSansNeo;
+    font-weight: 300;
+    src: local("Spoqa Han Sans Thin"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Thin.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Thin.woff) format("woff")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 200;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-ExtraLight.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 300;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Light.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 400;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Regular.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 500;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Medium.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 600;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-SemiBold.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 700;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Bold.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 800;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Black.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: 300;
+    src: local("Lato"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Lato-Light.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: 400;
+    src: local("Lato"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Lato-Regular.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: 600;
+    src: local("Lato"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Lato-Bold.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: 800;
+    src: local("Lato"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Lato-Black.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 900;
+    font-display: swap;
+    src: local("Pretendard Black"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Black.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Black.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 800;
+    font-display: swap;
+    src: local("Pretendard ExtraBold"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-ExtraBold.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-ExtraBold.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 700;
+    font-display: swap;
+    src: local("Pretendard Bold"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Bold.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Bold.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 600;
+    font-display: swap;
+    src: local("Pretendard SemiBold"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-SemiBold.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-SemiBold.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 500;
+    font-display: swap;
+    src: local("Pretendard Medium"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Medium.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Medium.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 400;
+    font-display: swap;
+    src: local("Pretendard Regular"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Regular.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Regular.subset.woff) format("woff")
+}
+
+@font-face {
+    foface {
+    font-family: Pretendard;
+    font-weight: 200;
+    font-display: swap;
+    src: local("Pretendard ExtraLight"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-ExtraLight.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-ExtraLight.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 100;
+    font-display: swap;
+    src: local("Pretendard Thin"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Thin.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Thin.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: icon;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/mds-icon-v9.woff2) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/mds-icon-v9.woff) format("woff2");
+    font-display: block
+}
+
+@font-face {
+    font-family: fontello;
+    src: local("fontello");
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.eot);
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.eot) format("embedded-opentype"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.woff) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.ttf) format("truetype"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.svg) format("svg");
+    font-weight: 400;
+    font-style: normal
+}nt-family: Pretendard;
+    font-weight: 300;
+    font-display: swap;
+    src: local("Pretendard Light"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Light.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Light.subset.woff) format("woff")
+}
+i {
+    font-style: normal;
+}
+[type=button], [type=reset], [type=submit], button {
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    -webkit-appearance: button;
+    outline: 0;
+}
+@media (min-width: 1000px) {
+    .content {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+@font-face {
+    font-family: SpoqaHanSansNeo;
+    font-weight: 300;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Thin.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Thin.woff) format("woff")
+}
+
+@font-face {
+    font-family: SpoqaHanSansNeo;
+    font-weight: 500;
+    src: url(../../fonts/main/SpoqaHanSansNeo-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: SpoqaHanSansNeo;
+    font-weight: 900;
+    src: url(../../fonts/main/SpoqaHanSansNeo-Bold.ttf) format("truetype");
+}
+*{
+    font-family: SpoqaHanSansNeo, Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 2.5;
+    color: var(--text-01);
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+* {
+    letter-spacing: -.6px;
+}
+
+body, body[data-theme=dark], body[data-theme=dark] .not-dark, body[data-theme=light] {
+    --chatbook: #eb683f;
+    --GTrans-01: rgba(176, 179, 188, 0.1);
+    --GTrans-02: rgba(176, 179, 188, 0.3);
+    --GTrans-03: rgba(176, 179, 188, 0.5);
+    --GTrans-04: rgba(176, 179, 188, 0.7);
+}
+body, body[data-theme=dark], body[data-theme=dark] .not-dark, body[data-theme=light] {
+    --ui-background: #fff;
+    --ui-01: #fbfbfb;
+    --ui-02: #f7f7f7;
+    --ui-03: #f2f2f2;
+    --ui-04: #efefef;
+    --ui-05: #ececec;
+    --ui-06: #dfdfdf;
+    --ui-07: #c1c1c1;
+    --ui-08: #555;
+    --ui-09: #333;
+    --ui-10: #242424;
+    --ui-up: #fff;
+    --ui-up-01: #fff;
+    --ui-up-02: #fff;
+    --ui-up-03: #fff;
+    --ui-up-04: #fff;
+    --primary: #ffeb60;
+    --primary-press: #ffe04b;
+    --secondary: #333;
+    --secondary-press: #242424;
+    --tertiary: #fff;
+    --tertiary-press: #f7f7f7;
+    --danger: #df1d1d;
+    --danger-press: #bc1a1a;
+    --quaternary: #ececec;
+    --quaternary-press: #dfdfdf;
+    --cancel: #c1c1c1;
+    --cancel-press: #a5a5a5;
+    --success: #0073cb;
+    --error: #f05c2e;
+    --text-strong: #000;
+    --text-01: #242424;
+    --text-02: #555;
+    --text-03: #6f6f6f;
+    --text-04: #8b8b8b;
+    --field-readonly: #ececec;
+    --placeholder: #c1c1c1;
+    --audio: #a451f7;
+    --myaudio: #533670;
+    --focus: #469fe3;
+    --Line-01: #dfdfdf;
+    --Line-02: #ececec;
+    --Line-03: #f7f7f7;
+}
+body {
+    --header-width: 1440px;
+    --today-width: 1440px;
+    --search-width: 1440px;
+    --feed-width: 1440px;
+    --library-width: 1440px;
+    --management-width: 600px;
+    --ai-agent-width: 1000px;
+    --book-detail-width: 1440px;
+    --audio-detail-width: 1440px;
+    --depth-width: 1440px;
+    --footer-width: 1440px;
+    --inner-width: 1280px;
+    --middle-width: 700px;
+    --road-detail-width: 1440px;
+    --happy-max-width: 600px;
+    --customer-width: 1440px;
+}
+body {
+    min-width: 320px;
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    font-size: 14px;
+    color: var(--text-01);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--ui-background);
+}
+html {
+    overflow-y: scroll;
+    font-size: 62.5%;
+    line-height: 1.3;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+img {
+    max-width: 100%;
+    vertical-align: top;
+    border-style: none;
+    pointer-events: none;
+}
+.home-tab {
+    position: sticky;
+    top: 65px;
+    z-index: 51;
+    width: 100%;
+    height: 44px;
+    background-color: var(--ui-background);
+    border-bottom: 1px solid var(--ui-06);
+}
+.home-tab-inner {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: var(--header-width);
+    padding-left: 24px;
+    margin: 0px auto;
+}
+.hamburger {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin-top: 5px;
+    margin-right: 12px;
+}
+a, button, img {
+    -webkit-user-drag: none;
+}
+a {
+    cursor: pointer;
+    background-color: transparent;
+    color: inherit;
+}
+.hamburger:before, .hamburger:after {
+    position: absolute;
+    left: 4px;
+    width: 16px;
+    height: 2px;
+    background-color: var(--text-01);
+    border-radius: 1px;
+    content: "";
+    transition: transform .3s ease-in-out;
+}
+.hamburger:before {
+    top: 5px;
+}
+.hamburger:after {
+bottom: 3px;
+}
+.home-tab-inner > a > span {
+    position: absolute;
+    left: 4px;
+    width: 16px;
+    height: 2px;
+    background-color: var(--text-01);
+    border-radius: 1px;
+    top: 50%;
+    text-indent: -1000em;
+    transition: opacity .3s ease-in-out;
+    overflow: hidden;
+}
+.section-divide-area {
+    position: relative;
+}
+.bjs-home-inner {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 800px;
+    height: auto;
+}
+.home-content {
+    padding: 32px 0px;
+}
+.home-inner {
+    max-width: var(--today-width);
+    position: relative;
+    overflow: hidden;
+    margin: 0px auto;
+    padding: 0px 24px;
+}
+.section-title {
+    font-size: 20px;
+    line-height: 24px;
+    position: relative;
+    margin-bottom: 12px;
+}
+.section-sub-title {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-03);
+    margin-top: -8px;
+}
+.section-title > a {
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+    word-break: keep-all;
+    position: relative;
+    font-size: 20px;
+    color: var(--text-01);
+    font-weight: 700;
+    width: 100%;
+}
+a {
+    text-decoration: none;
+}
+.wrapper, a, button, img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+a, button, img {
+    -webkit-user-drag: none;
+}
+a {
+    cursor: pointer;
+    background-color: transparent;
+    color: inherit;
+}
+.bjs-ai-container{
+    padding-top: 16px;
+}
+.bjs-ai-card {
+    position: relative;
+}
+.swiper-container {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    -webkit-tap-highlight-color: transparent;
+    cursor: grab;
+}
+.swiper-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-transition-property: -webkit-transform;
+        transition-property: -webkit-transform;
+        -o-transition-property: transform;
+        transition-property: transform;
+        transition-property: transform, -webkit-transform;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+        position: static;
+        width: auto;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        list-style: none;
+        padding: 0;
+        z-index: 1;
+        overflow-x: scroll;
+}
+.swiper-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+.book-card {
+    display: -ms-flexbox;
+    display: flex;
+    min-width: 280px;
+    height: 424px;
+    padding: 45px 24px 30px;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 16px;
+    -webkit-backdrop-filter: blur(12.5px);
+    backdrop-filter: blur(12.5px);
+    background: #000;
+}
+.content-data {
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 16px;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 8px;
+}
+.book-card .content-data .title {
+    height: 56px;
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    color: #fbfbfb;
+}
+.title > span {
+    display: block;
+    color: #fbfbfb;
+}
+.book-picture {
+    overflow: hidden;
+    position: relative;
+    max-height: 240px;
+    padding-top: 0;
+    margin-bottom: 33px;
+    height: 176px;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .24), 7px 6px 16px 0 rgba(0, 0, 0, .28)
+}
+.book-picture > picture {
+    position: static;
+    opacity: 1;
+}
+
+.swiper-wrapper.active {
+    cursor: grabbing;
+}
+.title > a {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-right: 12px;
+    font-size: 20px;
+    font-weight: 700;
+    word-break: keep-all;
+    color: var(--text-01);
+}
+.category-list {
+    margin: 12px -24px 0;
+}
+.ranking-tab-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 2px 24px;
+    display: flex;
+}
+.category-list > ul > li {
+    height: 100%;
+}
+.category-list  ul > li > a {
+    display: block;
+    height: 100%;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+.bjs-tab-item {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    min-width: 50px;
+    min-height: 32px;
+    border: 1px solid var(--ui-05);
+    border-radius: 100px;
+    transition: border-color .2s linear;
+}
+.bjs-tab-item > a {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-03);
+    transition: color .2s linear;
+    padding: 6px 12px;
+}
+.category-list  ul > li > a > span {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.bjs-tab-item:not(:first-child) {
+    margin-left: 8px;
+}
+
+.--active {
+    border-color: var(--secondary);
+}
+.swiper-item:first-child {
+    margin-left: 8px;
+}
+.swiper-item {
+    min-width: 348px;
+    max-width: 348px;
+}
+.rank-number {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    width: 62px;
+    height: 44px;
+    background-repeat: no-repeat;
+    background-image: url("/static/images/main/ranking_num.2f98001e194689a8fccea11bd68e9ba4.svg");
+}
+.num_1 {
+    background-position-x: -20px;
+    background-position-y: -20px;
+}
+
+.rank-content {
+    display: -ms-flexbox;
+    display: flex
+;
+    position: relative;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 16px;
+    padding: 0 24px;
+    min-height: 84px;
+}
+.thumbnail {
+    position: relative;
+    margin-right: 20px;
+}
+.book-name {
+    flex: 1;
+}
+.thumbnail .book-picture {
+    min-width: 80px;
+    max-width: 80px;
+    min-height: 112px;
+    max-height: 112px;
+    padding-top: 0;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    max-height: 240px;
+}
+
+.num_2 {
+    background-position-x: -94px;
+    background-position-y: -20px;
+}
+.num_3{
+    background-position-x: -168px;
+    background-position-y: -20px;
+}
+.num_4{
+    background-position-x: -242px;
+    background-position-y: -20px;
+}
+.num_5{
+    background-position-x: -316px;
+    background-position-y: -20px;
+
+}
+.num_6{
+    background-position-x: -390px;
+    background-position-y: -20px;
+}
+.num_7{
+    background-position-x: -20px;
+    background-position-y: -102px;
+}
+.num_8{
+    background-position-x: -94px;
+    background-position-y: -102px;
+}
+.num_9{
+    background-position-x: -168px;
+    background-position-y: -102px;
+}
+.num_10{
+    background-position-x: -242px;
+    background-position-y: -102px;
+}
+.num_11{
+    background-position-x: -316px;
+    background-position-y: -102px;
+}
+.num_12{
+    background-position-x: -390px;
+    background-position-y: -102px;
+}
+.book-name-wrapper .title {
+    margin-bottom: 2px;
+    color: var(--text-01);
+    font-size: 16px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    max-height: 1.35em;
+}
+.book-name-wrapper .title {
+    font-weight: 700;
+}
+.book-name-wrapper .author {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-03);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    max-height: 1.35em;
+    opacity: 0.8;
+    font-weight: 700;
+}
+
+.pagination-button-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    min-width: 76px;
+    height: 32px;
+    padding: 4px 10px;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 100px;
+    background: rgba(0, 0, 0, .3);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    gap: 2px;
+}
+.pagination-button-wrapper > em {
+    font-weight: 700;
+    opacity: 1;
+}
+.separation {
+    opacity: .5;
+}
+.pagination-button-wrapper .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+em {
+    font-style: normal;
+}
+.banner-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    text-align: right;
+}
+
+.hero-banner .prev-button {
+    position: absolute;
+    width: 44px;
+    opacity: 0;
+    height: 44px;
+    padding: 10px;
+    top: 50%;
+    transform: translate3d(15px, 0px, 10px);
+    transform: translate3d(-15px, 0px, 10px);
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 100px;
+    background: #fff;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .22);
+    cursor: pointer;
+    z-index: 30;
+    left: 0;
+}
+.hero-banner .next-button {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    opacity: 0;
+    padding: 10px;
+    top: 50%;
+    transform: translate3d(15px, 0px, 10px);
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 100px;
+    background: #fff;
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .22);
+    cursor: pointer;
+    z-index: 30;
+    right: 0;
+}
+.indicator {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    padding: 0 32px 32px;
+    left: 0;
+    bottom: 0;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    gap: 4px;
+    z-index: 30;
+}
+.bjs-visual {
+    position: relative;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+.hero-banner {
+    position: relative;
+    width: 100%;
+    margin-top: 24px;
+}
+.hero-swiper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.hero-swiper-wrapper {
+    height: 400px;
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+.hero-swiper-slide {
+    width: 1392px;
+    transition-duration: 400ms;
+    height: 100%;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    opacity: 1;
+    z-index: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+.banner-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    height: 100%;
+}
+.banner-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+.banner-image > div {
+    width: 100%;
+    height: 100%;
+}
+.bammer-image > div > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+    vertical-align: top;
+    border-style: none;
+    pointer-events: none;
+}
+.hero-swiper-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+.hero-banner:hover .prev-button,
+.hero-banner:hover .next-button {
+    transition: opacity 0.5s;
+    opacity: 1;
+}
+.bjs-tab-item.active {
+    border-color: var(--secondary);
+    font-weight: 700;
+    text-decoration: underline;
+}
+.bjs-tab-item.active > a > span{
+    text-decoration: underline;
+}
+.hamburger.active::before {
+    transform: translate3D(0, 7px, 0) rotate(45deg);
+}
+.hamburger.active::after {
+    transform: translate3D(0, -6px, 0) rotate(-43deg);
+}
+.hamburger.active > span {
+    opacity: 0;
+}
+
+

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>내 서재 | 북적서울</title>
+        <link
+            rel="shortcut icon"
+            href="../../static/images/common/favicon.ico"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="../../static/css/main/global-settings.css"
+        />
+        <link rel="stylesheet" href="../../static/css/main/header.css" />
+        <link rel="stylesheet" href="../../static/css/member/mypage.css" />
+    </head>
+    <body>
+        <div id="wrap">
+            <!-- 헤더 영역 -->
+            <div class="top-header background on">
+                <div class="inner">
+                    <header>
+                        <h1>
+                            <a href="" class="logo">
+                                <img
+                                    src="../../static/images/common/Logo.png"
+                                    alt="북적서울"
+                                    class="bookjeog-logo"
+                                    style="scale: 1.5"
+                                />
+                            </a>
+                        </h1>
+                        <nav>
+                            <ul class="gnb">
+                                <li class="">
+                                    <a
+                                        href=""
+                                        data-content-type="book-report"
+                                        class="book-report"
+                                        >독후감</a
+                                    >
+                                </li>
+                                <li class="">
+                                    <a
+                                        href=""
+                                        data-content-type="donation"
+                                        class="donation"
+                                        >기부</a
+                                    >
+                                </li>
+                                <li class="">
+                                    <a
+                                        href=""
+                                        data-content-type="search"
+                                        class="search"
+                                        >검색</a
+                                    >
+                                </li>
+                                <li class="">
+                                    <a
+                                        href=""
+                                        data-content-type="book-shelf"
+                                        class="book-shelf"
+                                        >내서재</a
+                                    >
+                                </li>
+                                <li class="">
+                                    <a
+                                        href=""
+                                        data-content-type="manage"
+                                        class="manage"
+                                        >관리</a
+                                    >
+                                </li>
+                                <li class="">
+                                    <a
+                                        href=""
+                                        data-content-type="discussion"
+                                        class="discussion"
+                                        >북적북적</a
+                                    >
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="util-wrap">
+                            <!-- data-count가 알람 개수 -->
+                            <a
+                                href=""
+                                class="alarm-button"
+                                data-content-type="alarmCenter"
+                                data-count="10"
+                            >
+                                <span class="mds-icon-alarm">
+                                    <span class="ir">알림센터</span>
+                                </span>
+                            </a>
+                            <ul class="util">
+                                <li class="sign sign-in">
+                                    <a href="" data-content-type="login"
+                                        >로그아웃</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </header>
+                </div>
+            </div>
+            <!-- // 헤더 영역 -->
+            <main class="library-main">
+                <div class="library-main-wrapper">
+                    <div class="back-wrapper">
+                        <div class="back-inner">
+                            <h2 class="inner-title">내서재</h2>
+                        </div>
+                    </div>
+                    <div class="inner">
+                        <div class="content-top">
+                            <section class="profile-view-wrapper">
+                                <div class="profile-info-wrapper">
+                                    <div class="profile-info">
+                                        <div class="profile-image-wrapper">
+                                            <img
+                                                src="../../static/images/post/user_profile_example.png"
+                                                alt="프로필 이미지"
+                                                class="profile-image"
+                                            />
+                                            <button class="edit-button">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="none"
+                                                    viewBox="0 0 16 16"
+                                                    class="mds-icon"
+                                                    color="var(--text-01)"
+                                                >
+                                                    <path
+                                                        fill-rule="evenodd"
+                                                        d="M10.864 1.97a.75.75 0 0 0-1.061 0L2.47 9.303a.75.75 0 0 0-.22.53V13.5c0 .414.336.75.75.75h3.667a.75.75 0 0 0 .53-.22l7.333-7.333a.75.75 0 0 0 0-1.06zM3.75 12.75v-2.606l4.383-4.383 2.606 2.606-4.383 4.383zm8.05-5.444 1.14-1.14-2.607-2.605-1.14 1.14z"
+                                                        clip-rule="evenodd"
+                                                        fill="currentColor"
+                                                    ></path>
+                                                </svg>
+                                                <span class="ir"
+                                                    >프로필 이미지 편집</span
+                                                >
+                                            </button>
+                                        </div>
+                                        <div class="profile-metainfo">
+                                            <div
+                                                class="profile-nickname-wrapper"
+                                            >
+                                                <span class="profile-nickname"
+                                                    >고양이집사알파카</span
+                                                >
+                                            </div>
+                                            <div class="follow-info">
+                                                <span class="followers"
+                                                    ><span class="label-text"
+                                                        >팔로워</span
+                                                    >
+                                                    <span class="count-text"
+                                                        >0</span
+                                                    ></span
+                                                >
+                                                <span class="following">
+                                                    <span class="label-text"
+                                                        >팔로잉</span
+                                                    >
+                                                    <span class="count-text"
+                                                        >2</span
+                                                    >
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-count-wrapper">
+                                    <a href="" class="posts-button">
+                                        <dl class="content-count-info">
+                                            <dt class="content-label">
+                                                독후감
+                                            </dt>
+                                            <dd class="content-count">2</dd>
+                                        </dl>
+                                    </a>
+                                    <hr class="separater" />
+                                    <a href="" class="mileage-button">
+                                        <dl class="content-count-info">
+                                            <dt class="content-label">
+                                                책갈피
+                                            </dt>
+                                            <dd class="content-count">89</dd>
+                                        </dl>
+                                    </a>
+                                </div>
+                                <div class="my-button-wrapper">
+                                    <button
+                                        type="button"
+                                        class="writing-button"
+                                    >
+                                        <span>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="16"
+                                                fill="none"
+                                                viewBox="0 0 16 16"
+                                                class="mds-icon"
+                                                color="var(--ui-background)"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5z"
+                                                    clip-rule="evenodd"
+                                                    fill="currentColor"
+                                                ></path>
+                                            </svg>
+                                            글쓰기
+                                        </span>
+                                    </button>
+                                    <a href="" class="add-book">
+                                        <span>&nbsp;북적북적</span>
+                                    </a>
+                                </div>
+                            </section>
+                            <hr class="divide-line" />
+                        </div>
+                        <div class="content-bottom">
+                            <section class="scrap-book-list">
+                                <div class="title-wrapper">
+                                    <h3 class="title-text">도서</h3>
+                                    <a href="" class="books-button">전체보기</a>
+                                </div>
+                                <div class="swiper swiper-horizontal">
+                                    <div class="swiper-wrapper">
+                                        <div
+                                            class="swiper-slide slide-item"
+                                            style="margin-right: 12px"
+                                        >
+                                            <div class="book-wrapper">
+                                                <div class="book-wrapper-inner">
+                                                    <div
+                                                        class="book-picture-wrapper"
+                                                    >
+                                                        <button
+                                                            class="book-picture-link"
+                                                        >
+                                                            <div
+                                                                class="book-badges"
+                                                            >
+                                                                <div
+                                                                    class="book-badges-box"
+                                                                >
+                                                                    <img
+                                                                        src="../../static/images/member/book-like-badge.png"
+                                                                        alt="찜한책"
+                                                                        class="book-badge-image"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="book-picture"
+                                                            >
+                                                                <picture
+                                                                    class="styled-picture"
+                                                                >
+                                                                    <img
+                                                                        src="../../static/images/book/book_thumbnail.example.png"
+                                                                        alt="도서 이미지"
+                                                                    />
+                                                                </picture>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                    <button
+                                                        type="button"
+                                                        class="book-metalink"
+                                                    >
+                                                        <div class="book-meta">
+                                                            <p
+                                                                class="styled-book-name"
+                                                            >
+                                                                용의자 X의 헌신
+                                                            </p>
+                                                            <p
+                                                                class="styled-book-author"
+                                                            >
+                                                                히가시노 게이고
+                                                                지음
+                                                            </p>
+                                                        </div>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div
+                                            class="swiper-slide slide-item"
+                                            style="margin-right: 12px"
+                                        >
+                                            <div class="book-wrapper">
+                                                <div class="book-wrapper-inner">
+                                                    <div
+                                                        class="book-picture-wrapper"
+                                                    >
+                                                        <button
+                                                            class="book-picture-link"
+                                                        >
+                                                            <div
+                                                                class="book-badges"
+                                                            >
+                                                                <div
+                                                                    class="book-badges-box"
+                                                                >
+                                                                    <img
+                                                                        src="../../static/images/member/book-like-badge.png"
+                                                                        alt="찜한책"
+                                                                        class="book-badge-image"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="book-picture"
+                                                            >
+                                                                <picture
+                                                                    class="styled-picture"
+                                                                >
+                                                                    <img
+                                                                        src="../../static/images/book/book_thumbnail.example.png"
+                                                                        alt="도서 이미지"
+                                                                    />
+                                                                </picture>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                    <button
+                                                        type="button"
+                                                        class="book-metalink"
+                                                    >
+                                                        <div class="book-meta">
+                                                            <p
+                                                                class="styled-book-name"
+                                                            >
+                                                                용의자 X의 헌신
+                                                            </p>
+                                                            <p
+                                                                class="styled-book-author"
+                                                            >
+                                                                히가시노 게이고
+                                                                지음
+                                                            </p>
+                                                        </div>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div
+                                            class="swiper-slide slide-item"
+                                            style="margin-right: 12px"
+                                        >
+                                            <div class="book-wrapper">
+                                                <div class="book-wrapper-inner">
+                                                    <div
+                                                        class="book-picture-wrapper"
+                                                    >
+                                                        <button
+                                                            class="book-picture-link"
+                                                        >
+                                                            <div
+                                                                class="book-badges"
+                                                            >
+                                                                <div
+                                                                    class="book-badges-box"
+                                                                >
+                                                                    <img
+                                                                        src="../../static/images/member/book-like-badge.png"
+                                                                        alt="찜한책"
+                                                                        class="book-badge-image"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="book-picture"
+                                                            >
+                                                                <picture
+                                                                    class="styled-picture"
+                                                                >
+                                                                    <img
+                                                                        src="../../static/images/book/book_thumbnail.example.png"
+                                                                        alt="도서 이미지"
+                                                                    />
+                                                                </picture>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                    <button
+                                                        type="button"
+                                                        class="book-metalink"
+                                                    >
+                                                        <div class="book-meta">
+                                                            <p
+                                                                class="styled-book-name"
+                                                            >
+                                                                용의자 X의 헌신
+                                                            </p>
+                                                            <p
+                                                                class="styled-book-author"
+                                                            >
+                                                                히가시노 게이고
+                                                                지음
+                                                            </p>
+                                                        </div>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div
+                                            class="swiper-slide slide-item"
+                                            style="margin-right: 12px"
+                                        >
+                                            <div class="book-wrapper">
+                                                <div class="book-wrapper-inner">
+                                                    <div
+                                                        class="book-picture-wrapper"
+                                                    >
+                                                        <button
+                                                            class="book-picture-link"
+                                                        >
+                                                            <div
+                                                                class="book-badges"
+                                                            >
+                                                                <div
+                                                                    class="book-badges-box"
+                                                                >
+                                                                    <img
+                                                                        src="../../static/images/member/book-like-badge.png"
+                                                                        alt="찜한책"
+                                                                        class="book-badge-image"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="book-picture"
+                                                            >
+                                                                <picture
+                                                                    class="styled-picture"
+                                                                >
+                                                                    <img
+                                                                        src="../../static/images/book/book_thumbnail.example.png"
+                                                                        alt="도서 이미지"
+                                                                    />
+                                                                </picture>
+                                                            </div>
+                                                        </button>
+                                                    </div>
+                                                    <button
+                                                        type="button"
+                                                        class="book-metalink"
+                                                    >
+                                                        <div class="book-meta">
+                                                            <p
+                                                            class="styled-book-name"
+                                                        >
+                                                            용의자 X의 헌신
+                                                        </p>
+                                                        <p
+                                                            class="styled-book-author"
+                                                        >
+                                                            히가시노 게이고
+                                                            지음
+                                                        </p>
+                                                        </div>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </section>
+                            <section class="post-average-wrapper">
+                                <div class="post-title-wrapper">
+                                    <h3 class="post-title-text">
+                                        이번 달
+                                        <strong class="average">2개</strong>
+                                        독후감 썼어요
+                                    </h3>
+                                    <p class="title-caption">북적 회원들은 한 달 평균 2개 써요</p>
+                                </div>
+                                <div>
+                                    <ul class="report-list">
+                                        <li>
+                                            <span class="target">나</span>
+                                            <div class="progress-bg">
+                                                <div class="progress-state" style="width: 40%;"></div>
+                                            </div>
+                                            <span class="count">2개</span>
+                                        </li>
+                                        <li>
+                                            <span class="target">북적</span>
+                                            <div class="progress-bg">
+                                                <div class="progress-state" style="width: 40%"></div>
+                                            </div>
+                                            <span class="count">2개</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    <script src="../../static/js/member/mypage.js"></script>
+</html>

@@ -1,0 +1,333 @@
+#wrap {
+    height: 100%;
+}
+
+.write {
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: -.6px;
+    position: relative;
+    overflow: hidden;
+}
+
+.post-write.activity,
+.post-write.diary,
+.post-write.insight {
+    overflow: initial;
+}
+
+.header {
+    font-style: normal;
+    position: relative;
+    z-index: 9;
+    background-color: var(--ui-background);
+}
+
+.post-write.activity .header,
+.post-write.diary .header,
+.post-write.insight .header {
+    border-bottom: 1px solid var(--ui-03);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+.header .header-inner {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    position: relative;
+    padding: 8px 12px;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.header .header-inner,
+.header .header-inner .header-left {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.header .header-inner .header-left {
+    height: 100%;
+}
+
+.header .header-inner .header-left .back-btn {
+    padding: 0;
+    height: auto;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-03);
+    background-color: transparent;
+}
+
+.header .header-inner .header-right {
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.header .header-inner .header-right,
+.header .header-inner .header-right .nav-btn,
+.header .header-inner .header-right .nav-btn .tempBtn-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.header .header-inner .header-right .nav-btn .publish-btn {
+    padding: 0 16px;
+    font-size: 14px;
+}
+
+.mds-dialog {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.8);
+}
+
+.mds-dialog .mds-dialog--wrap {
+    overflow: hidden;
+    background-color: var(--ui-up-03);
+    border-radius: 8px;
+    max-width: 328px;
+    width: 100%;
+}
+
+.mds-dialog .mds-dialog--inner {
+    padding: 32px 24px;
+}
+
+.mds-dialog .mds-dialog--header {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.mds-dialog .mds-dialog--header strong {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--text-01);
+}
+
+.mds-dialog .mds-dialog--body {
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-height: 60px;
+}
+
+.mds-dialog .mds-dialog--body,
+.mds-dialog .mds-dialog--footer {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.unload-popup .dialog-content {
+    text-align: center;
+}
+
+.mds-dialog .mds-dialog--body, .mds-dialog .mds-dialog--footer {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.diary-container {
+    max-width: 832px;
+    margin: 0 auto;
+    padding-top: 32px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.diary-container .component {
+    margin-bottom: 32px;
+}
+
+.diary-container .title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.diary-container .title em {
+    color: var(--audio);
+    font-size: 12px;
+    margin-left: 2px;
+    vertical-align: text-top;
+}
+
+.sentence {
+    margin-bottom: 100px!important;
+}
+
+
+
+.diary-container .component {
+    margin-bottom: 32px;
+}
+
+.diary-container .title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.diary-container .title.flex {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.diary-container .title .count {
+    font-size: 12px;
+    color: var(--text-02);
+}
+
+.diary-container .title .count strong {
+    position: relative;
+    padding-right: 6px;
+    margin-right: 3px;
+}
+
+.diary-container .title .count strong:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 1px;
+    height: 10px;
+    background-color: var(--ui-06);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.diary-container .title .count span {
+    font-weight: 400;
+}
+
+.input-file,
+.new-input-file {
+    display: none;
+}
+
+.diary-container .add-box {
+    background-color: var(--ui-02);
+    border-radius: 8px;
+    padding: 30px 0;
+    text-align: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.diary-container .add-box p {
+    color: var(--text-04);
+    margin-bottom: 24px;
+}
+
+.diary-container .add-box .button {
+    background-color: var(--secondary);
+    border-radius: 4px;
+    height: 32px;
+    width: 100px;
+    color: var(--ui-background);
+    font-size: 12px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.images ul {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.images .item {
+    border: 1px solid var(--GTrans-02);
+    padding: 16px 16px 8px;
+    border-radius: 12px;
+    width: calc(50% - 10px);
+    margin-bottom: 16px;
+}
+
+.images img {
+    width: 355px;
+    height: 355px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+
+.images .buttons, .images .buttons button {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.images .buttons button {
+    width: 50%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.images .buttons button svg {
+    margin-right: 2px;
+}
+
+.images .buttons .delete {
+    color: var(--danger);
+    position: relative;
+}
+
+.images .buttons .delete:after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 13px;
+    background-color: var(--GTrans-02);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.add-button {
+    max-width: 327px;
+    margin: 0 auto;
+    display: block;
+}

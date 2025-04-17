@@ -1,0 +1,1322 @@
+* {
+    letter-spacing: -.6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: top;
+    border-style: none;
+    pointer-events: none;
+}
+
+i {
+    font-style: normal;
+}
+
+b, em, strong {
+    font-weight: 700;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+
+button{
+    background: transparent;
+}
+
+#wrap{
+    height: 100%;
+}
+
+@media (max-width: 999px) {
+    #wrap{
+        padding-bottom: 50px;
+    }
+}
+
+/* 상단 이벤트 배너 */
+.book-detail-banner{
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+.home-banner{
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 44px;
+    background: #96ea77;
+    z-index: 50;
+    bottom: auto;
+    position: sticky;
+}
+
+.home-banner a{
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #242424;
+}
+
+.home-banner a p{
+    font-size: 16px;
+    background: url(https://d3udu241ivsax2.cloudfront.net/v3/images/home/banner-arr.60cff0f5defc75c236571b69c8c355e0.png) 0 0 no-repeat;
+    background-size: 16px;
+    background-position: 100%;
+    padding-right: 16px;
+}
+/* // 상단 이벤트 배너 */
+
+@media (min-width: 1000px) {
+    #wrap.show-top-header .content {
+        user-select: none;
+    }
+}
+
+.book-detail-container{
+    line-height: 1.6;
+    min-height: calc(100vh - 65px);
+}
+
+@media (min-width: 960px) {
+    .book-detail-container {
+        max-width: var(--book-detail-width);
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1280px) {
+    .book-detail-container {
+        max-width: var(--book-detail-width);
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1440px) {
+    .book-detail-container {
+        max-width: var(--book-detail-width);
+        margin: 0 auto;
+        border: 1px solid var(--GTrans-02);
+        border-width: 0 1px;
+    }
+}
+
+.book-detail-info{
+    margin-top: -48px;
+}
+
+@media (min-width: 960px) {
+    .book-detail-container .book-detail-info {
+        margin-top: 0;
+    }
+}
+
+@media (min-width: 1000px) {
+    .book-detail-container .book-detail-info {
+        margin-top: 0;
+    }
+}
+
+.book-cover-frame{
+    position: relative;
+    width: 100%;
+    border-bottom: 4px solid var(--ui-02);
+}
+
+@media (min-width: 960px) {
+    .book-cover-frame{
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        padding: 24px;
+    }
+}
+
+/* 책 이미지 영역 */
+.book-cover-frame .book-cover-box{
+    overflow: hidden;
+    position: relative;
+    justify-content: center;
+    will-change: transform;
+}
+
+@media (min-width: 960px) {
+    .book-cover-frame .book-cover-box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        width: 371px;
+        height: 432px;
+        border-radius: 12px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .book-cover-frame .book-cover-box{
+        width: 503px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .book-cover-frame .book-cover-box{
+        width: 571px;
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-frame .book-cover-box{
+        overflow: visible;
+        position: static;
+        padding: 68px 0 32px;
+        padding-bottom: 50px;
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-frame .book-cover-box .book-cover-inner-box{
+        position: relative;
+        z-index: 50;
+        width: 100%;
+        min-height: 200px;
+        padding-top: 24px;
+    }
+}
+
+.book-cover-frame .book-cover-info{
+    position: relative;
+    z-index: 1;
+    background-color: var(--ui-background);
+}
+
+@media (min-width: 960px) {
+    .book-cover-frame .book-cover-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+        align-self: stretch;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-frame .book-cover-info{
+        z-index: 50;
+        padding: 32px 24px 24px;
+        border-radius: 24px 24px 0 0;
+    }
+}
+
+.book-cover-frame .book-cover-box .background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 644px;
+    background: var(--ui-02);
+}
+
+@media (max-width: 959px) {
+.book-cover-frame .book-cover-box .background{
+        height: calc(100% + 24px);
+    }
+}
+
+.book-cover-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-cover-container .thumbnail{
+    position: relative;
+    background-color: var(--ui-05);
+    border-radius: 0 6px 6px 0;
+    z-index: 2;
+    width: 160px;
+}
+
+@media (max-width: 959px) {
+    .book-cover-container .thumbnail{
+        margin-top: 16px;
+    }
+}
+
+.book-cover-container .thumbnail .inner{
+    overflow: hidden;
+    position: relative;
+    min-width: 160px;
+    box-shadow: 12px 8px 24px rgba(0, 0, 0, .2), 4px 8px 8px rgba(0, 0, 0, .1), 0 0 2px rgba(0, 0, 0, .24);
+    border-radius: 0 6px 6px 0;
+}
+
+.book-cover-container .thumbnail .inner::before{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 20px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) .01%, rgba(0, 0, 0, .05) 5.97%, hsla(0, 0%, 100%, .3) 15.89%, hsla(0, 0%, 100%, 0) 28.19%, rgba(0, 0, 0, .05) 0, rgba(0, 0, 0, .0277927) 46.96%, hsla(0, 0%, 100%, 0) 47.51%, hsla(0, 0%, 100%, .1) 54.14%, hsla(0, 0%, 100%, 0));
+    content: "";
+}
+
+.inner .book-picture{
+    overflow: hidden;
+    position: relative;
+    padding-top: 0;
+    max-height: unset;
+}
+
+.book-picture picture,
+.background-cover picture
+{
+    transition: opacity .7s;
+    position: static;
+    opacity: 1;
+}
+
+.book-picture picture img,
+.background-cover picture img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.book-cover-frame .background 
+.background-cover{
+    overflow: hidden;
+    position: relative;
+    padding-top: 0;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    opacity: .35;
+    will-change: opacity;
+}
+
+.book-cover-frame .background .dim{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(176, 179, 188, .1);
+    backdrop-filter: blur(20px);
+}
+
+.book-cover-frame .background 
+.background-cover img{
+    object-fit: cover;
+}
+
+.book-detail-container .back-component{
+    height: 48px;
+    border: none !important;
+    min-height: 48px;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    background: transparent;
+    position: relative;
+}
+
+@media (max-width: 959px){
+    .back-component{
+        top: 24px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .book-detail-container .back-component{
+        display: none;
+    }
+}
+
+.back.line{
+    position: relative;
+    max-width: var(--header-width);
+    width: 100%;
+    height: 48px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button{
+    position: absolute;
+    top: 50%;
+    width: 24px;
+    height: 24px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    z-index: 100;
+    margin-left: 12px;
+    background: none;
+}
+
+.close-button i{
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 23px;
+    color: var(--text-02);
+    background-color: transparent;
+}
+
+.mds-icon-arrow-left::before{
+    content: "\e804";
+}
+
+.back-component h2{
+    overflow: hidden;
+    padding: 0 45px;
+    font-size: 18px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    line-height: 48px;
+    color: var(--text-01);
+}
+
+.book-detail-header{
+    padding: 0 97px 0 43px;
+    width: 100%;
+    height: auto;
+    line-height: inherit;
+    opacity: 0;
+    font-weight: 400;
+    text-indent: 43px;
+}
+
+.scrap-button{
+    width: 24px;
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    right: 11px;
+    transform: translateY(-50%);
+    background: transparent;
+}
+/* // 책 이미지 영역 */
+
+/* 책 제목 영역 */
+.book-cover-info {
+    position: relative;
+    z-index: 1;
+    background-color: var(--ui-background);
+}
+
+@media (min-width: 960px) {
+    .book-cover-frame .book-cover-info{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+        align-self: stretch;
+        border-radius: 12px;
+    }
+}
+
+@media (min-width: 960px) {
+    .book-cover-frame .book-cover-info .book-cover-info-box{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 32px;
+        border: 1px solid var(--GTrans-03);
+        border-bottom: 0;
+        border-radius: 12px 12px 0 0;
+    }
+}
+
+.book-cover-frame .book-cover-info .book-cover-info-btns{
+    display: flex;
+}
+
+@media (min-width: 960px) {
+    .book-cover-frame .book-cover-info .book-cover-info-btns{
+        align-items: center;
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-frame .book-cover-info .book-cover-info-btns{
+        flex-direction: row-reverse;
+        position: fixed;
+        bottom: 50px;
+        left: 0;
+        bottom: calc(env(safe-area-inset-bottom) + 50px);
+        z-index: 99;
+        width: 100%;
+        padding: 12px;
+        transform: none;
+        border-top: 1px solid var(--GTrans-03);
+        background: var(--ui-background);
+    }
+}
+
+@media (min-width: 960px) {
+    .book-cover-frame .book-cover-info .book-cover-info-box-body{
+        flex: 1;
+    }
+}
+
+.book-cover-info-box-body .book-cover-info-title{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: var(--text-01);
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.book-cover-info .book-cover-info-box-body .book-cover-info-athor{
+    display: inline-flex;
+    align-items: flex-start;
+    font-size: 16px;
+    color: var(--text-02);
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+@media (min-width: 960px) {
+    .book-cover-info-box-body .book-cover-info-athor{
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-info-box-body .book-cover-info-athor{
+        margin-top: 16px;
+    }
+}
+
+.book-cover-info .book-cover-info-box-body .book-cover-info-text{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: var(--text-03);
+    line-height: 1.4;
+}
+
+@media (min-width: 960px) {
+    .book-cover-info-box-body .book-cover-info-text{
+        margin-top: 12px;
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-info-box-body .book-cover-info-text{
+        margin-top: 8px;
+    }
+}
+
+.book-cover-info-text .middot {
+    display: block;
+    width: 2px;
+    height: 2px;
+    border-radius: 100%;
+    margin: 0 6px;
+    background-color: var(--text-03);
+}
+
+@media (min-width: 960px) {
+    .book-cover-info .book-cover-info-box-footer{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 33px;
+        border-top: 1px solid var(--GTrans-03);
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-info .book-cover-info-box-footer{
+        display: none;
+    }
+}
+
+@media (min-width: 960px) {
+    .book-cover-footer-count{
+        font-size: 16px;
+        color: var(--text-03);
+    }
+}
+
+@media (min-width: 960px) {
+    .book-cover-footer-count-blk b{
+        margin-left: 4px;
+        font-weight: 700;
+    }
+}
+/* // 책 제목 영역 */
+
+/* 책 상단 버튼영역 */
+.mds-button {
+    overflow: hidden;
+    width: 100%;
+    transition: background-color .2s linear, border-color .2s linear, color .2s linear;
+}
+
+.button-report {
+    height: 48px;
+    font-size: 16px;
+    padding: 0 16px;
+    background-color: var(--secondary);
+    color: var(--ui-background);
+}
+
+@media (min-width: 960px) {
+    .button-report{
+        flex: 1;
+        height: 64px;
+        border-bottom-left-radius: 12px;
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-frame .book-cover-info .book-cover-info-btns .button-report{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        border-radius: 4px;
+    }
+}
+
+.mds-button span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mds-button>* {
+    position: relative;
+    z-index: 1;
+}
+
+.book-cover-info-btns .button-discussion{
+    position: relative;
+    background-color: transparent;
+    border: 1px solid;
+    font-size: 16px;
+    padding: 0 16px;
+    border-color: var(--ui-06);
+    color: var(--text-02);
+}
+
+.button-discussion::before{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    opacity: .1;
+    transition: background-color .2s linear;
+    content: "";
+}
+
+@media (min-width: 960px) {
+    .book-cover-info-btns .button-discussion{
+        flex: 1;
+        height: 64px;
+        border-left: none;
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-info-btns .button-discussion{
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        padding: 0;
+        font-size: 8px;
+        color: var(--text-01);
+        text-align: center;
+        border: none;
+    }
+}
+
+@media (max-width: 959px) {
+    .button-discussion span{
+        display: flex;
+        flex-direction: column;
+        top: -3px;
+    }
+}
+
+@media (min-width: 960px) {
+    .button-discussion span i {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 959px) {
+    .button-discussion span i {
+        font-size: 30px;
+    }
+}
+
+.mds-icon-write::before{
+    content: "\e800";
+}
+
+.mds-icon-discussion::before {
+    content: "\e80f";
+}
+
+span .hidden-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-cover-info-btns .button-scrap{
+    position: relative;
+    background-color: transparent;
+    border: 1px solid;
+    border-left: none;
+    font-size: 16px;
+    border-color: var(--ui-06);
+    color: var(--text-02);
+}
+
+@media (min-width: 960px) {
+    .button-scrap{
+        width: 72px;
+        height: 64px;
+        padding: 0;
+        border-left: none;
+        border-bottom-right-radius: 12px;
+    }
+}
+
+@media (max-width: 959px) {
+    .button-scrap{
+        display: none;
+    }
+}
+
+@media (min-width: 960px) {
+    .book-cover-frame .book-cover-info .book-cover-info-btns .button-scrap{
+        width: 72px;
+        height: 64px;
+        padding: 0;
+        border-left: none;
+        border-bottom-right-radius: 12px;
+    }
+}
+
+@media (max-width: 959px) {
+    .book-cover-frame .book-cover-info .book-cover-info-btns .button-scrap{
+        width: 40px;
+        height: 40px;
+        margin-right: 4px;
+        padding: 0;
+        font-size: 8px;
+        color: var(--text-01);
+        text-align: center;
+        border: none;
+    }
+}
+
+@media (max-width: 959px) {
+    .button-scrap span i {
+        font-size: 24px;
+        margin-top: -3px;
+    }
+}
+
+@media (max-width: 959px) {
+    .mds-icon-scrap::before{
+        content: "\e802";
+    }
+}
+
+@media (max-width: 959px) {
+    span .hidden-text {
+        display: none;
+    }
+}
+
+@media (min-width: 960px) {
+    .book-cover-frame .mds-icon-scrap{
+        font-size: 24px;
+        font-weight: 500;
+        width: 24px;
+        height: 24px;
+        background-size: 24px;
+        background-image: url(https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/detail-heart-off.fc064a68f51248a73513a5ef4c5035f5.png);
+    }
+}
+/* // 책 상단 버튼영역 */
+
+.book-detail-content-cont{
+    display: flex;
+    margin-bottom: 88px;
+}
+
+@media (min-width: 1000px) {
+    .book-detail-content-cont{
+        margin-bottom: 0;
+    }
+}
+
+.book-detail-content-cont .book-detail-content-frm{
+    width: 100%;
+}
+
+@media (min-width: 960px) {
+    .book-detail-content-cont .book-detail-content-frm{
+        flex: 1 0 auto;
+        width: 628px;
+    }
+}
+
+/* 중간 네비게이션 영역 */
+.book-tab-frm{
+    position: sticky;
+    top: 64px;
+    z-index: 49;
+    width: 100%;
+    border-bottom: 1px solid var(--ui-06);
+    background-color: var(--ui-background);
+    will-change: scroll-position;
+}
+
+@media (max-width: 959px) {
+    .book-tab-frm{
+        top: 0 !important;
+    }
+}
+
+@media (min-width: 960px) {
+    .book-detail-content-cont .book-detail-content-frm{
+        top: 65px
+    }
+}
+
+@media (max-width: 959px) {
+    .book-detail-content-cont .book-detail-content-frm{
+        top: 112px;
+    }
+}
+
+.mds-tab.mds-tab-line{
+    position: relative;
+    height: 44px;
+}
+
+.mds-tab ul {
+    display: flex;
+    height: 100%;
+}
+
+.mds-tab-item{
+    height: 100%;
+    flex: 1;
+}
+
+.mds-tab-item a{
+    display: block;
+    height: 100%;
+    text-align: center;
+    font-size: 16px;
+    color: var(--text-01);
+    padding: 0 12px;
+}
+
+.mds-tab-item a span{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+}
+
+.mds-tab-item a span.active{
+    font-weight: 700;
+}
+
+.mds-tab-bar{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: var(--text-01);
+}
+
+.mds-tab-bar.transition {
+    transition: transform .4s, width .25s ease-out .05s, -webkit-transform .4s;
+}
+/* // 중간 네비게이션 영역 */
+
+/* 책 소개 */
+.book-info .introduction{
+    padding: 24px;
+    padding-bottom: 0;
+    border-width: 1px;
+}
+
+.book-info-title{
+    font-weight: 700;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.book-info-more-cont.more-text{
+    position: relative;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--text-02);
+    line-height: 1.71;
+    padding-bottom: 26px;
+}
+
+.book-info-more-cont-inner{
+    position: relative;
+    overflow: hidden;
+    max-height: none;
+}
+
+.book-info-more-cont-inner.hidden{
+    max-height: 96px;
+}
+
+.book-info-more-cont-inner.hidden::after{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 24px;
+    background: linear-gradient(180deg, hsla(0, 0%, 100%, 0), var(--ui-background) 90.28%);
+    content: "";
+}
+
+.book-info-more-cont button{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: #a451f7;
+}
+/* // 책 소개 */
+
+/* 책 상세정보 */
+.book-info .introduction .book-info-detail{
+    overflow: hidden;
+    cursor: grab;
+    scrollbar-width: none;
+    background-color: var(--ui-02);
+    margin: 0 auto;
+    display: flex;
+    width: 73%;
+}
+
+.book-info .introduction .book-info-detail ul{
+    display: inline-flex;
+    height: 100px;
+    align-items: center;
+    padding-top: 0;
+}
+
+.book-info .introduction .book-info-detail li{
+    width: 140px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    padding: 20px 16px;
+}
+
+.book-info-detail li:first-child::before{
+    display: none;
+}
+
+.book-info-detail li::before{
+    content: "";
+    display: block;
+    background-color: var(--ui-06);
+    height: 60px;
+    width: 1px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.book-info-detail li strong{
+    color: var(--text-02);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+/* // 책 상세정보 */
+
+/* 중간 배너 */
+.banner{
+    overflow: hidden;
+    background-color: rgb(92, 136, 218);
+    margin-top: 30px;
+}
+
+.banner .link-banner{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.banner .link-banner .inner-banner{
+    padding: 27px 0 27px 24px;
+    color: #fbfbfb;
+}
+
+.banner .link-banner img{
+    display: block;
+    flex-shrink: 0;
+    width: 122px;
+    height: 100px;
+}
+
+.mds-font-subhead{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;  
+}
+
+.text-desc, .banner .link-banner .inner-banner .text-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    max-height: 1.35em;
+}
+
+.banner .text-desc{
+    margin-top: 4px;
+}
+/* // 중간 배너 */
+
+/* 이 책의 독후감 */
+.thin-line{
+    border-bottom: 1px solid var(--ui-02);
+}
+
+.report-container{
+    padding: 24px 24px 0;
+}
+
+.report-container .slide-container{
+    overflow: hidden;
+    cursor: grab;
+    scrollbar-width: none;
+    margin: 0 -24px;
+}
+
+.book-info-title a{
+    background: url(https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/link-arr.c538fb279ec5c6814836cc777640ca5a.png) 100% no-repeat;
+    background-size: 24px;
+    display: block;
+}
+
+.book-info-title .number{
+    color: #96ea77;
+    font-weight: 700;
+    margin-left: 4px;
+}
+
+.slide-wrapper.report-list{
+    display: inline-flex;
+    padding: 16px 24px 24px;
+    padding-top: 16px
+}
+
+.report-list li{
+    height: 259px;
+    background: var(--ui-up-01);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
+    border-radius: 16px;
+    width: 280px;
+    padding: 24px 16px 16px;
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.report-list li:first-child{
+    margin-left: 0;
+}
+
+.report-list .report-cont{
+    display: block;
+    padding-bottom: 16px;
+}
+
+.report-list .profile{
+    border-top: 1px solid var(--ui-06);
+    padding-top: 16px;
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+}
+
+.report-list .profile .inner{
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.report-list .report-cont .title{
+    display: -webkit-box;
+    font-weight: 700;
+    font-size: 16px;
+    -webkit-line-clamp: 1;
+    max-height: 1.35em;
+    margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    color: black;
+}
+
+.report-list .report-cont .cont{
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    color: var(--text-02);
+    font-size: 14px;
+    line-height: 24px;
+    -webkit-line-clamp: 5;
+    max-height: 120px;
+}
+
+.report-list .profile .image{
+    min-width: 36px;
+    height: 36px;
+    border-radius: 100px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .25);
+    display: block;
+    overflow: hidden;
+    position: relative;
+    background-size: cover;
+    background-position: 50% 50%;
+    margin-right: 8px;
+}
+
+.report-list .profile .name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    max-height: 1.5em;
+    color: var(--text-02);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.report-list .profile button{
+    min-width: 68px;
+    min-height: 32px;
+    height: 100%;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 12px;
+    background-color: var(--secondary);
+    color: var(--ui-background);
+}
+/* // 이 책의 독후감 */
+
+/* 같은 카테고리의 책 */
+.relate-container{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.relate-inner{
+    padding: 24px 0;
+}
+
+.book-info-title.link{
+    font-weight: 700;
+    font-size: 16px;
+    display: block;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 16px;
+}
+
+.report-container .book-info-title.link{
+    font-weight: 700;
+    font-size: 16px;
+    display: block;
+    margin: 0;
+    margin-bottom: 12px;
+}
+
+.book-info-title a{
+    background: url(https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/link-arr.c538fb279ec5c6814836cc777640ca5a.png) 100% no-repeat;
+    background-size: 24px;
+    display: block;
+    color: black;
+}
+
+.book-shelf .slide-container{
+    overflow: hidden;
+    cursor: grab;
+    scrollbar-width: none;
+    margin-top: -16px;
+}
+
+.book-shelf .slide-wrapper {
+    align-items: baseline;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    padding-right: 24px;
+    padding-top: 16px;
+}
+
+.book-shelf .slide-wrapper .slide-item {
+    width: 20%;
+    min-width: 145px;
+    margin-left: 16px;
+    max-width: 145px;
+}
+
+.book-shelf .slide-wrapper .slide-item:first-child{
+    margin-left: 24px !important;
+}
+
+.bookjeog-book.books{
+    min-width: 145px;
+}
+
+.bookjeog-book .book-image {
+    display: block;
+}
+
+.bookjeog-book.books>a, .bookjeog-book.books>button {
+    display: block;
+    width: 100%;
+}
+
+.bookjeog-book.books .book-image {
+    min-height: auto;
+    padding-top: 0;
+    height: 100%;
+}
+
+.bookjeog-book.books .book-image, .bookjeog-book.books .thumbnail{
+    display: flex;
+    align-items: flex-end;
+}
+
+.bookjeog-book.books .thumbnail {
+    position: relative;
+    width: 100%;
+}
+
+.bookjeog-book.books .thumbnail-inner {
+    overflow: hidden;
+    position: relative;
+    width: inherit;
+    background: linear-gradient(90deg, var(--ui-05) 25%, var(--ui-05) 37%, var(--ui-05) 63%);
+    border-radius: 0 4px 4px 0;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, .1), 0 0 2px rgba(0, 0, 0, .2);
+}
+
+.book-picture{
+    overflow: hidden;
+    position: relative;
+    max-height: 240px;
+    padding-top: 0;
+}
+
+.book-picture picture{
+    transition: opacity .7s;
+    position: static;
+    opacity: 1;
+}
+
+.book-picture picture img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.bookjeog-book.books .metadata {
+    padding-top: 12px;
+    font-size: 12px;
+    text-align: left;
+    position: relative;
+}
+
+.bookjeog-book.books .metadata .title {
+    -webkit-line-clamp: 2;
+    max-height: 2.7em;
+    color: var(--text-01);
+    font-weight: 700;
+    font-size: 16px;
+    max-height: 3em;
+}
+
+.bookjeog-book.books .metadata .author, .bookjeog-book.books .metadata .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    margin-bottom: 3px;
+    white-space: normal;
+}
+
+.bookjeog-book.books .metadata .author {
+    -webkit-line-clamp: 1;
+    max-height: 1.35em;
+    color: var(--text-03);
+    font-size: 14px;
+}
+/* // 같은 카테고리의 책 */

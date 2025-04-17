@@ -1,0 +1,316 @@
+body, body[data-theme=dark], body[data-theme=dark] .not-dark, body[data-theme=light] {
+    --chatbook: #eb683f;
+    --GTrans-01: rgba(176, 179, 188, 0.1);
+    --GTrans-02: rgba(176, 179, 188, 0.3);
+    --GTrans-03: rgba(176, 179, 188, 0.5);
+    --GTrans-04: rgba(176, 179, 188, 0.7);
+}
+@media (min-width: 1000px) {
+    #wrap.show-top-header .content {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+}
+body, body[data-theme=dark], body[data-theme=dark] .not-dark, body[data-theme=light] {
+    --ui-background: #fff;
+    --ui-01: #fbfbfb;
+    --ui-02: #f7f7f7;
+    --ui-03: #f2f2f2;
+    --ui-04: #efefef;
+    --ui-05: #ececec;
+    --ui-06: #dfdfdf;
+    --ui-07: #c1c1c1;
+    --ui-08: #555;
+    --ui-09: #333;
+    --ui-10: #242424;
+    --ui-up: #fff;
+    --ui-up-01: #fff;
+    --ui-up-02: #fff;
+    --ui-up-03: #fff;
+    --ui-up-04: #fff;
+    --primary: #ffeb60;
+    --primary-press: #ffe04b;
+    --secondary: #333;
+    --secondary-press: #242424;
+    --tertiary: #fff;
+    --tertiary-press: #f7f7f7;
+    --danger: #df1d1d;
+    --danger-press: #bc1a1a;
+    --quaternary: #ececec;
+    --quaternary-press: #dfdfdf;
+    --cancel: #c1c1c1;
+    --cancel-press: #a5a5a5;
+    --success: #0073cb;
+    --error: #f05c2e;
+    --text-strong: #000;
+    --text-01: #242424;
+    --text-02: #555;
+    --text-03: #6f6f6f;
+    --text-04: #8b8b8b;
+    --field-readonly: #ececec;
+    --placeholder: #c1c1c1;
+    --audio: #a451f7;
+    --myaudio: #533670;
+    --focus: #469fe3;
+    --Line-01: #dfdfdf;
+    --Line-02: #ececec;
+    --Line-03: #f7f7f7;
+}
+body {
+    --header-width: 1440px;
+    --today-width: 1440px;
+    --search-width: 1440px;
+    --feed-width: 1440px;
+    --library-width: 1440px;
+    --management-width: 600px;
+    --ai-agent-width: 1000px;
+    --book-detail-width: 1440px;
+    --audio-detail-width: 1440px;
+    --depth-width: 1440px;
+    --footer-width: 1440px;
+    --inner-width: 1280px;
+    --middle-width: 700px;
+    --road-detail-width: 1440px;
+    --happy-max-width: 600px;
+    --customer-width: 1440px;
+}
+body {
+    min-width: 320px;
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    font-size: 14px;
+    color: var(--text-01);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--ui-background);
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+* {
+    letter-spacing: -.6px;
+}
+body {
+    display: block;
+    margin: 8px;
+}
+html {
+    overflow-y: scroll;
+    font-size: 62.5%;
+    line-height: 1.3;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: SpoqaHanSansNeo;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Regular.woff2) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Regular.woff) format("woff2");
+    font-weight: 400;
+    font-display: swap
+}
+
+@font-face {
+    font-family: SpoqaHanSansNeo;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Bold.woff2) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Bold.woff) format("woff2");
+    font-weight: 700;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Pretendard;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/Pretendard-Regular.subset.woff) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/Pretendard-Regular.subset.woff) format("woff2");
+    font-weight: 400;
+    font-display: swap
+}
+
+@font-face {
+    font-family: Pretendard;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/Pretendard-Bold.subset.woff) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/Pretendard-Bold.subset.woff) format("woff2");
+    font-weight: 700;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "NotoSerifKR";
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/NotoSerifKR-Black.woff2) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/NotoSerifKR-Black.woff) format("woff2");
+    font-weight: 700;
+    font-display: swap
+}
+
+@font-face {
+    font-family: SpoqaHanSansNeo;
+    font-weight: 300;
+    src: local("Spoqa Han Sans Thin"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Thin.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/SpoqaHanSansNeo-Thin.woff) format("woff")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 200;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-ExtraLight.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 300;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Light.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 400;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Regular.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 500;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Medium.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 600;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-SemiBold.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 700;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Bold.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: NotoSerifKR;
+    font-weight: 800;
+    src: local("Noto Serif KR"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/NotoSerifKR-Black.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: 300;
+    src: local("Lato"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Lato-Light.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: 400;
+    src: local("Lato"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Lato-Regular.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: 600;
+    src: local("Lato"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Lato-Bold.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Lato;
+    font-weight: 800;
+    src: local("Lato"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Lato-Black.woff2) format("woff2")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 900;
+    font-display: swap;
+    src: local("Pretendard Black"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Black.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Black.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 800;
+    font-display: swap;
+    src: local("Pretendard ExtraBold"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-ExtraBold.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-ExtraBold.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 700;
+    font-display: swap;
+    src: local("Pretendard Bold"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Bold.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Bold.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 600;
+    font-display: swap;
+    src: local("Pretendard SemiBold"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-SemiBold.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-SemiBold.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 500;
+    font-display: swap;
+    src: local("Pretendard Medium"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Medium.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Medium.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 400;
+    font-display: swap;
+    src: local("Pretendard Regular"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Regular.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Regular.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 300;
+    font-display: swap;
+    src: local("Pretendard Light"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Light.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Light.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 200;
+    font-display: swap;
+    src: local("Pretendard ExtraLight"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-ExtraLight.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-ExtraLight.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: Pretendard;
+    font-weight: 100;
+    font-display: swap;
+    src: local("Pretendard Thin"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Thin.subset.woff2) format("woff2"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/Pretendard-Thin.subset.woff) format("woff")
+}
+
+@font-face {
+    font-family: icon;
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/mds-icon-v9.woff2) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/mds/fonts/mds-icon-v9.woff) format("woff2");
+    font-display: block
+}
+
+@font-face {
+    font-family: fontello;
+    src: local("fontello");
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.eot);
+    src: url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.eot) format("embedded-opentype"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.woff) format("woff"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.ttf) format("truetype"),url(https://d3udu241ivsax2.cloudfront.net/common/css_v3/fonts/fontello.svg) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+a {
+    text-decoration: none;
+}
+.wrapper, a, button, img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+a, button, img {
+    -webkit-user-drag: none;
+}
+a {
+    cursor: pointer;
+    background-color: transparent;
+    color: inherit;
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>북적서울 | 후원 인증 게시판</title>
+    <link rel="stylesheet" href="/static/css/donation/main.css" />
+    <link rel="stylesheet" href="/static/css/donation/mobile.css">
+    <link rel="stylesheet" href="/static/css/donation/feed_common.css" />
+    <link rel="shortcut icon" href="/static/images/admin/favicon.ico" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="/static/css/discussion/tempcss.css"> -->
+    <!-- css 검토용 나중에 문제 없으면 삭제할 부분 -->
+</head>
+
+<body>
+    <div id="wrap" class="show-top-header show-header web-mount pcv-mount">
+        <div class="top-header feed floating background gray-ui on">
+            <div class="inner">
+                <header>
+                    <h1>
+                        <a href="/" data-content-type="logo"><img src="/static/images/admin/logo.png" alt="북적서울"
+                                class="millie-logo" /></a>
+                    </h1>
+                    <nav>
+                        <ul class="gnb">
+                            <li class="">
+                                <a href="" class="gtm-search visit dark-img-before">통합검색</a>
+                            </li>
+                            <li class="">
+                                <a href="/" class="gtm-book-post visit dark-img-before">독후감</a>
+                            </li>
+                            <li class="">
+                                <a href="" class="gtm-feed">북적북적</a>
+                            </li>
+                            <li class="on">
+                                <a href="" class="gtm-donate">기부하기</a>
+                            </li>
+                            <li class="">
+                                <a href="" class="gtm-my visit dark-img-before">내서재</a>
+                            </li>
+                            <li class="">
+                                <a href="" class="gtm-setting visit dark-img-before">관리</a>
+                            </li>
+                            <li class="">
+                                <a href="/" class="gtm-notice visit dark-img-before">공지</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="util-wrap">
+                        <a href="" data-content-type="search" class="search-btn"><span
+                                class="mds-icon--gnb_search"><span class="ir">검색</span></span></a>
+                        <a href="" data-content-type="alarmCenter" data-count="2" class="alarm-btn count"><span
+                                class="mds-icon--alarm-2"><span class="ir">알림센터</span></span></a>
+                        <ul class="util">
+                            <!---->
+                            <li class="sign sign-in" style="display: none;">
+                                <a data-content-type="login" href="" class="">로그인</a>
+                            </li>
+                            <!-- 당연하지만 로그아웃된 상태에서 로그인 버튼을, 로그인된 상태에서 로그아웃 버튼을 보여줘야 함. -->
+                            <li class="sign sign-in" style="display: block;">
+                                <a data-content-type="login" href="" class="">로그아웃</a>
+                            </li>
+                        </ul>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <section class="content">
+            <div class="feed">
+                <div class="feed-header">
+                    <div class="inner">
+                        <div class="menu-list">
+                            <ul id="select-board">
+                                <li class="">
+                                    <a href="" class="menu-button tab-receiver"><span>후원 대상</span></a>
+                                </li>
+                                <li class="active">
+                                    <a href="" class="menu-button tab-donate-cert"><span>후원 인증</span></a>
+                                </li>
+                            </ul>
+                            <ul>
+                                <button type="button" class="write">
+                                    최신 순
+                                    <i class="mds-icon--filter"></i>
+                                </button>
+                                <button type="button" class="write"><i class="mds-icon--add-post"></i></button>
+                            </ul>
+                        </div>
+                    </div>
+                    <div aria-modal="true" role="alertdialog" aria-labelledby="dialog-331-title" style="display: none;"
+                        class="mds-dialog range-popup mds-dialog--open mds-dialog--action">
+                        <div class="mds-dialog--wrap">
+                            <div class="mds-dialog--inner">
+                                <div class="mds-dialog--header"><strong id="dialog-331-title">정렬</strong>
+                                </div>
+                                <div class="mds-dialog--body">
+                                    <div class="popup-contents">
+                                        <ul>
+                                            <li><label class="mds-radio mds-radio--primary mds-radio--button"><input
+                                                        type="radio" id="input-638" name="rangeData" value="day"> <span
+                                                        class="mds-radio-view"><span class="check ir"></span>
+                                                        <span class="label">최신 순</span></span></label>
+                                            </li>
+                                            <li><label class="mds-radio mds-radio--primary mds-radio--button"><input
+                                                        type="radio" id="input-639" name="rangeData" value="week"> <span
+                                                        class="mds-radio-view"><span class="check ir"></span>
+                                                        <span class="label">댓글 수 순</span></span></label>
+                                            </li>
+                                            <li><label class="mds-radio mds-radio--primary mds-radio--button"><input
+                                                        type="radio" id="input-640" name="rangeData" value="month">
+                                                    <span class="mds-radio-view"><span class="check ir"></span>
+                                                        <span class="label">제목 순</span></span></label>
+                                            </li>
+                                            <li><label class="mds-radio mds-radio--primary mds-radio--button"><input
+                                                        type="radio" id="input-641" name="rangeData" value="year"> <span
+                                                        class="mds-radio-view"><span class="check ir"></span>
+                                                        <span class="label">인기 순</span></span></label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mds-dialog--footer mds-dialog--ratio">
+                                <button type="button"
+                                    class="close mds-button mds-button--cancel mds-button--h56"><span>닫기</span></button>
+                                <button type="button"
+                                    class="apply mds-button mds-button--primary mds-button--h56"><span>적용하기</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!---->
+                </div>
+                <div class="sub-menu">
+                    <div class="type-list slide-container">
+                        <ul class="slide-wrapper">
+                            <li class="active">
+                                <button type="button" class="gtm-feed-filter-all">
+                                    전체
+                                </button>
+                            </li>
+                            <li class="">
+                                <button type="button" class="gtm-feed-filter-post">
+                                    포스트
+                                </button>
+                            </li>
+                            <li class="">
+                                <button type="button" class="gtm-feed-filter-review">
+                                    한 줄 리뷰
+                                </button>
+                            </li>
+                            <li class="">
+                                <button type="button" class="gtm-feed-filter-highlight">
+                                    하이라이트
+                                </button>
+                            </li>
+                            <li class="">
+                                <button type="button" class="gtm-feed-filter-lifetime">
+                                    인생책
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+               
+                <div mode="out-in" class="receiver">
+                    <div class="card-container">
+                        <div class="card-list" style="display: flex; margin-left: -16px"> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- header 자리 -->
+    <footer>
+        <!-- <div class="edit-modal">
+                <div class="modal-backdrop" style="display: none;"></div>
+                <div class="modal-container"></div>
+            </div> -->
+
+
+    </footer>
+</body>
+<script src="/static/js/donation/main.js"></script>
+<script src="/static/js/donation/mobile.js"></script>
+
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>글쓰기 | 북적서울</title>
+        <link
+            rel="shortcut icon"
+            href="../../static/images/common/favicon.ico"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="../../static/css/main/global-settings.css"
+        />
+        <link rel="stylesheet" href="../../static/css/post/post-write.css" />
+        <!-- flatpickr 스타일링 -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+        />
+    </head>
+    <body>
+        <!-- 캘린더 오버레이 -->
+        <div id="calendarOverlay">
+            <!-- 캘린더를 넣을 컨테이너 -->
+            <div id="calendarContainer" style="position: relative"></div>
+        </div>
+        <div id="wrap">
+            <section class="content">
+                <div class="post-write write post">
+                    <!-- 헤더 -->
+                    <div id="header" class="header diary">
+                        <div class="header-inner">
+                            <div class="header-left">
+                                <button
+                                    type="button"
+                                    class="back-btn mds-button"
+                                >
+                                    <span>
+                                        <i class="mds-icon-arrow-left"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="header-right">
+                                <div class="nav-btn">
+                                    <button
+                                        type="button"
+                                        class="btn publish-btn mds-font-body01 mds-button"
+                                    >
+                                        <span>발행</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- 발행 버튼을 눌렀을 때 설정 -->
+                            <div class="post-settings on" style="display: none">
+                                <div class="setting-modal post-settings-inner">
+                                    <div class="publish-setting">
+                                        <h3>설정</h3>
+                                        <ul class="setting-option">
+                                            <li>
+                                                <span
+                                                    >포스트 공개
+                                                    <i
+                                                        class="mds-icon-question-mark question"
+                                                    ></i>
+                                                </span>
+                                                <div
+                                                    id="tooltip"
+                                                    class="mds-tooltip"
+                                                    style="display: none"
+                                                >
+                                                    <p
+                                                        class="mds-tooltip-content"
+                                                    >
+                                                        누구나 회원님의 프로필과
+                                                        글을 볼 수 있습니다.
+                                                    </p>
+                                                    <span
+                                                        class="mds-tooltip-arrow"
+                                                    ></span>
+                                                </div>
+                                                <label
+                                                    class="mds-switch mds-switch-large checked"
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        id="publicInput"
+                                                        value="true"
+                                                    />
+                                                    <span
+                                                        class="mds-switch-view"
+                                                    >
+                                                        <span
+                                                            class="check"
+                                                        ></span>
+                                                    </span>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        class="post-btn mds-button"
+                                    >
+                                        <span
+                                            ><i class="mds-icon-check"></i
+                                            >발행하기</span
+                                        >
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- // 발행 버튼을 눌렀을 때 설정 -->
+                        </div>
+                    </div>
+                    <!-- // 헤더 -->
+                    <div class="diary-container">
+                        <!-- 책 추가 -->
+                        <div class="add-book component">
+                            <p class="title flex book-name">
+                                용의자 X의 헌신
+                                <span class="library-name"
+                                    >북적북적시인의 서재</span
+                                >
+                            </p>
+                            <!-- 책을 추가하기 전에 보이는 창 -->
+                            <div class="box">
+                                <p>
+                                    읽은 책을 추가하여 <br />나만의 독후감을
+                                    작성해 보세요.
+                                </p>
+                                <button
+                                    type="button"
+                                    class="add-book-button mds-shadow-book"
+                                >
+                                    <img
+                                        src="../../static/images/book/add-book.png"
+                                    />
+                                </button>
+                            </div>
+                            <!-- // 책을 추가하기 전에 보이는 창 -->
+                            <!-- 책을 추가했을 때 보이는 창 -->
+                            <div
+                                class="book-container"
+                                style="
+                                    --background-image: url('/static/images/book/book_thumbnail.example.png');
+                                    display: none;
+                                "
+                            >
+                                <span class="background"></span>
+                                <p class="book-name">용의자 X의 헌신</p>
+                                <div class="book-picture book">
+                                    <picture>
+                                        <img
+                                            src="../../static/images/book/book_thumbnail.example.png"
+                                            alt="도서 썸네일"
+                                            width="184"
+                                            style="min-height: 0"
+                                        />
+                                    </picture>
+                                </div>
+                                <p class="book-produce">
+                                    히가시노 게이고 지음 · 재인
+                                </p>
+                                <p class="book-info">2017.08.30 출간 · 447P</p>
+                                <button type="button" class="change-button">
+                                    책 변경하기
+                                </button>
+                            </div>
+                            <!-- // 창을 추가했을 때 보이는 창 -->
+                        </div>
+                        <!-- // 책 추가 -->
+                        <!-- 독서 기간 캘린더 -->
+                        <div class="calendar component" style="display: none">
+                            <p class="title">독서 기간<em>*</em></p>
+                            <button
+                                type="button"
+                                class="button"
+                                id="showDatePicker"
+                            >
+                                <div class="inner">
+                                    <span class="label">독서 기간</span>
+                                    <p class="date">기간을 선택해 주세요.</p>
+                                    <!-- 날짜 입력 필드 (숨겨짐) -->
+                                    <input
+                                        type="text"
+                                        id="dateInput"
+                                        style="display: none"
+                                    />
+                                </div>
+                                <span class="img">
+                                    <svg
+                                        data-v-177423d0=""
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <rect
+                                            data-v-177423d0=""
+                                            x="5"
+                                            y="6"
+                                            width="14"
+                                            height="13"
+                                            rx="1"
+                                            stroke="var(--text-03)"
+                                            stroke-width="2"
+                                        ></rect>
+                                        <rect
+                                            data-v-177423d0=""
+                                            x="4.5"
+                                            y="8.5"
+                                            width="15"
+                                            height="1"
+                                            fill="var(--text-03)"
+                                            stroke="var(--text-03)"
+                                        ></rect>
+                                        <rect
+                                            data-v-177423d0=""
+                                            x="8"
+                                            y="3"
+                                            width="2"
+                                            height="3"
+                                            rx="1"
+                                            fill="var(--text-03)"
+                                        ></rect>
+                                        <rect
+                                            data-v-177423d0=""
+                                            x="14"
+                                            y="3"
+                                            width="2"
+                                            height="3"
+                                            rx="1"
+                                            fill="var(--text-03)"
+                                        ></rect>
+                                    </svg>
+                                </span>
+                            </button>
+                        </div>
+                        <!-- // 독서 기간 캘린더 -->
+                        <!-- 독후감 제목 -->
+                        <div class="post-title component" style="display: none">
+                            <p class="title">독후감 제목<em>*</em></p>
+                            <div class="textarea">
+                                <div class="mds-textarea" style="height: 65px">
+                                    <div class="inner" style="height: auto">
+                                        <label for="">
+                                            <span class="label"
+                                                >독후감 제목</span
+                                            >
+                                            <input
+                                                type="text"
+                                                id="textarea-title"
+                                                class="mds-textarea-field"
+                                                placeholder="책을 읽고 느꼈던 생각이나 감정을 한 줄로 적어주세요."
+                                                maxlength="40"
+                                            />
+                                        </label>
+                                        <div class="message-wrap">
+                                            <span class="length">0 / 40</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- // 독후감 제목 -->
+                        <!-- 독후감 내용 -->
+                        <div
+                            class="post-content component"
+                            style="display: none"
+                        >
+                            <p class="title">독후감 내용<em>*</em></p>
+                            <div class="textarea">
+                                <div class="mds-textarea" style="height: 138px">
+                                    <div class="inner">
+                                        <label for="">
+                                            <span class="label"
+                                                >독후감 내용</span
+                                            >
+                                            <textarea
+                                                id="textarea-content"
+                                                class="mds-textarea-field"
+                                                maxlength="2000"
+                                                placeholder="책을 읽고 느꼈던 생각이나 감정을 간단히 적어보세요. 책의 여운이 더 오래 남을 거예요."
+                                            ></textarea>
+                                        </label>
+                                        <div class="message-wrap">
+                                            <span class="length">0 / 2000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- // 독후감 내용 -->
+                        <!-- 이미지 첨부 -->
+                        <div class="sentence component" style="display: none">
+                            <div class="title flex">
+                                이미지 추가
+                                <p class="count">
+                                    <strong>0</strong>
+                                    <span>10개</span>
+                                </p>
+                            </div>
+                            <input
+                                type="file"
+                                accept=".jpg, .png, .jpeg, .webp"
+                                multiple="multiple"
+                                class="input-file"
+                            />
+                            <!-- 넣은 이미지가 없을 때 -->
+                            <div class="add-box">
+                                <p>
+                                    이 독후감에 추가할 이미지를 넣어보세요.
+                                    <br />
+                                    이미지당 최대 5MB까지 업로드 할 수 있습니다.
+                                </p>
+                                <button type="button" class="button mds-button">
+                                    <span>
+                                        <svg
+                                            data-v-a8c352e6=""
+                                            width="17"
+                                            height="16"
+                                            viewBox="0 0 17 16"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                data-v-a8c352e6=""
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M9 4C9 3.72386 8.77614 3.5 8.5 3.5C8.22386 3.5 8 3.72386 8 4V7.5H4.5C4.22386 7.5 4 7.72386 4 8C4 8.27614 4.22386 8.5 4.5 8.5H8V12C8 12.2761 8.22386 12.5 8.5 12.5C8.77614 12.5 9 12.2761 9 12V8.5H12.5C12.7761 8.5 13 8.27614 13 8C13 7.72386 12.7761 7.5 12.5 7.5H9V4Z"
+                                                fill="var(--ui-background)"
+                                            ></path>
+                                        </svg>
+                                        추가하기
+                                    </span>
+                                </button>
+                            </div>
+                            <!-- // 넣은 이미지가 없을 때 -->
+                            <!-- 넣은 이미지가 있을 때 -->
+                            <div class="images" style="display: none">
+                                <ul>
+                                    <!-- <li class="item">
+                                        <img src="../../static/images/login/image (1).png">
+                                        <div class="mds-input memo">
+                                            <label for="">
+                                                <div class="inner">
+                                                    <div class="input">
+                                                        <input type="text" autocomplete="off" placeholder="나만의 메모를 남겨보세요" class="mds-input-field" maxlength="50">
+                                                    </div>
+                                                    <button type="button" class="mds-icon-input-delete clear-button" style="display: none;"></button>
+                                                </div>
+                                            </label>
+                                            <div class="message-wrap">
+                                                <span class="length">0 / 50</span>
+                                            </div>
+                                        </div>
+                                        <div class="buttons">
+                                            <button type="button" class="change-image">
+                                                <input type="file" accept=".jpg, .png, .jpeg" class="input-file">
+                                                <svg data-v-a8c352e6="" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g data-v-a8c352e6="" clip-path="url(#clip0_5831_19518)"><rect data-v-a8c352e6="" x="2.5" y="3.5" width="11" height="9" rx="1.5" stroke="var(--text-01)"></rect> <path data-v-a8c352e6="" d="M4.7002 13.0003L8.81203 6.60709C9.16249 6.06219 9.93066 5.98928 10.3774 6.45852L13.7002 9.94887" stroke="var(--text-01)"></path> <rect data-v-a8c352e6="" x="3.7998" y="5.35254" width="2.4" height="2.35294" rx="1.17647" stroke="var(--text-01)"></rect></g> <defs data-v-a8c352e6=""><clipPath data-v-a8c352e6="" id="clip0_5831_19518"><rect data-v-a8c352e6="" width="12" height="10" fill="white" transform="translate(2 3)"></rect></clipPath></defs></svg>
+                                                이미지 변경
+                                            </button>
+                                            <button type="button" class="delete">
+                                                <svg data-v-a8c352e6="" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-a8c352e6="" fill-rule="evenodd" clip-rule="evenodd" d="M6.5 1C5.67157 1 5 1.67157 5 2.5V3H3.5H2.5C2.22386 3 2 3.22386 2 3.5C2 3.77614 2.22386 4 2.5 4H3V12.5C3 13.8807 4.11929 15 5.5 15H10.5C11.8807 15 13 13.8807 13 12.5V4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H12.5H11V2.5C11 1.67157 10.3284 1 9.5 1H6.5ZM10 3H6V2.5C6 2.22386 6.22386 2 6.5 2H9.5C9.77614 2 10 2.22386 10 2.5V3ZM4 12.5V4H5.5H10.5H12V12.5C12 13.3284 11.3284 14 10.5 14H5.5C4.67157 14 4 13.3284 4 12.5ZM6.5 6C6.5 5.72386 6.27614 5.5 6 5.5C5.72386 5.5 5.5 5.72386 5.5 6V12C5.5 12.2761 5.72386 12.5 6 12.5C6.27614 12.5 6.5 12.2761 6.5 12V6ZM8 5.5C8.27614 5.5 8.5 5.72386 8.5 6V12C8.5 12.2761 8.27614 12.5 8 12.5C7.72386 12.5 7.5 12.2761 7.5 12V6C7.5 5.72386 7.72386 5.5 8 5.5ZM10.5 6C10.5 5.72386 10.2761 5.5 10 5.5C9.72386 5.5 9.5 5.72386 9.5 6V12C9.5 12.2761 9.72386 12.5 10 12.5C10.2761 12.5 10.5 12.2761 10.5 12V6Z" fill="var(--danger)"></path></svg>
+                                                삭제하기
+                                            </button>
+                                        </div>
+                                    </li> -->
+                                </ul>
+                                <button
+                                    type="button"
+                                    class="add-button mds-button"
+                                >
+                                    <span>
+                                        <svg
+                                            data-v-a8c352e6=""
+                                            width="17"
+                                            height="16"
+                                            viewBox="0 0 17 16"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                data-v-a8c352e6=""
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M9 4C9 3.72386 8.77614 3.5 8.5 3.5C8.22386 3.5 8 3.72386 8 4V7.5H4.5C4.22386 7.5 4 7.72386 4 8C4 8.27614 4.22386 8.5 4.5 8.5H8V12C8 12.2761 8.22386 12.5 8.5 12.5C8.77614 12.5 9 12.2761 9 12V8.5H12.5C12.7761 8.5 13 8.27614 13 8C13 7.72386 12.7761 7.5 12.5 7.5H9V4Z"
+                                                fill="var(--secondary)"
+                                            ></path>
+                                        </svg>
+                                        추가하기
+                                    </span>
+                                </button>
+                            </div>
+                            <!-- // 넣은 이미지가 있을 때 -->
+                        </div>
+                        <!-- // 이미지 첨부 -->
+                    </div>
+                    <!-- 책 선택 모달화면 -->
+                    <div class="modal" style="display: none">
+                        <div class="modal-window flex-container">
+                            <div class="modal-head">
+                                <div class="modal-head-inner flex-container">
+                                    <div class="modal-head-button">
+                                        <button
+                                            type="button"
+                                            class="close-btn flex-container mds-button mds-button-line"
+                                        >
+                                            <span>닫기</span>
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="add-btn flex-container mds-button mds-button-line"
+                                            disabled="disabled"
+                                        >
+                                            <i class="mds-icon-check"></i> 추가
+                                        </button>
+                                    </div>
+                                    <div class="modal-custom-header">
+                                        <div class="head-top flex-container">
+                                            <h3 class="head-title">책 선택</h3>
+                                            <p class="head-subtitle">
+                                                독후감을 작성할 책을
+                                                선택해주세요.
+                                            </p>
+                                            <div
+                                                class="head-search flex-container"
+                                            >
+                                                <div
+                                                    class="mds-input search-bar mds-input-search"
+                                                >
+                                                    <label for="">
+                                                        <div class="inner">
+                                                            <span
+                                                                class="mds-icon-searchbar"
+                                                            ></span>
+                                                            <div class="input">
+                                                                <input
+                                                                    autocomplete="off"
+                                                                    id="input-search"
+                                                                    placeholder="도서명, 저자명"
+                                                                    type="search"
+                                                                    class="mds-input-field"
+                                                                />
+                                                            </div>
+                                                            <button
+                                                                type="button"
+                                                                class="mds-icon-input-delete clear-button"
+                                                                style="
+                                                                    display: none;
+                                                                "
+                                                            ></button>
+                                                        </div>
+                                                    </label>
+                                                    <!--  -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <div class="modal-body-inner">
+                                    <div class="modal-body-content">
+                                        <div>
+                                            <div class="full-list">
+                                                <ul class="modal-content">
+                                                    <li
+                                                        class="user-booklist books-item"
+                                                    >
+                                                        <div
+                                                            class="bookjeog-book books only-books"
+                                                        >
+                                                            <a
+                                                                href=""
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail"
+                                                                >
+                                                                    <div
+                                                                        class="thumbnail-inner"
+                                                                    >
+                                                                        <div
+                                                                            class="book-picture"
+                                                                        >
+                                                                            <picture>
+                                                                                <img
+                                                                                    src="../../static/images/book/book_thumbnail.example.png"
+                                                                                    alt="도서 썸네일"
+                                                                                    width="145"
+                                                                                    style="
+                                                                                        min-height: 0;
+                                                                                    "
+                                                                                />
+                                                                            </picture>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <a
+                                                                href=""
+                                                                class="book-data"
+                                                            >
+                                                                <div
+                                                                    class="metadata"
+                                                                >
+                                                                    <p
+                                                                        class="title"
+                                                                    >
+                                                                        용의자
+                                                                        X의 헌신
+                                                                    </p>
+                                                                    <p
+                                                                        class="author"
+                                                                    >
+                                                                        히가시노
+                                                                        게이고
+                                                                    </p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                    <li
+                                                        class="user-booklist books-item"
+                                                    >
+                                                        <div
+                                                            class="bookjeog-book books only-books"
+                                                        >
+                                                            <a
+                                                                href=""
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail"
+                                                                >
+                                                                    <div
+                                                                        class="thumbnail-inner"
+                                                                    >
+                                                                        <div
+                                                                            class="book-picture"
+                                                                        >
+                                                                            <picture>
+                                                                                <img
+                                                                                    src="../../static/images/book/book_thumbnail.example.png"
+                                                                                    alt="도서 썸네일"
+                                                                                    width="145"
+                                                                                    style="
+                                                                                        min-height: 0;
+                                                                                    "
+                                                                                />
+                                                                            </picture>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                            <a
+                                                                href=""
+                                                                class="book-data"
+                                                            >
+                                                                <div
+                                                                    class="metadata"
+                                                                >
+                                                                    <p
+                                                                        class="title"
+                                                                    >
+                                                                        용의자
+                                                                        X의 헌신
+                                                                    </p>
+                                                                    <p
+                                                                        class="author"
+                                                                    >
+                                                                        히가시노
+                                                                        게이고
+                                                                    </p>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- 검색 결과가 없을 때 -->
+                                            <div
+                                                class="search-list"
+                                                style="display: none"
+                                            >
+                                                <ul
+                                                    class="modal-content no-list"
+                                                >
+                                                    <li class="user-booklist">
+                                                        검색결과가 없습니다.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <!-- // 검색 결과가 없을 때 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-overlay" style="display: none"></div>
+                    <!-- // 책 선택 모달화면 -->
+                </div>
+            </section>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- flatpickr 라이브러리 -->
+    <script src="../../static/js/post/post-write.js"></script>
+</html>

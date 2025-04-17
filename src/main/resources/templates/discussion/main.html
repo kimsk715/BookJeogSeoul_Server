@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+    <title>북적서울 | 북적북적</title>
+    <link rel="stylesheet" href="/static/css/discussion/main.css" />
+    <link rel="stylesheet"
+        href="/static/css/discussion/feed_common.css" />
+    <link rel="shortcut icon" href="/static/images/admin/favicon.ico"
+        type="image/x-icon">
+    <!-- <link rel="stylesheet" href="/static/css/discussion/tempcss.css"> -->
+    <!-- css 검토용 나중에 문제 없으면 삭제할 부분 -->
+</head>
+
+<body>
+    <div id="wrap"
+        class="show-top-header show-header web-mount pcv-mount">
+        <div class="top-header feed floating background gray-ui on">
+            <div class="inner">
+                <header>
+                    <h1>
+                        <a href="/" data-content-type="logo"><img
+                                src="/static/images/admin/logo.png"
+                                alt="북적서울" class="millie-logo" /></a>
+                    </h1>
+                    <nav>
+                        <ul class="gnb">
+                            <li class="">
+                                <a href=""
+                                    class="gtm-search visit dark-img-before">통합검색</a>
+                            </li>
+                            <li class="">
+                                <a href="/"
+                                    class="gtm-book-post visit dark-img-before">독후감</a>
+                            </li>
+                            <li class="on">
+                                <a href="" class="gtm-feed">북적북적</a>
+                            </li>
+                            <li class="">
+                                <a href="" class="gtm-donate">기부하기</a>
+                            </li>
+                            <li class="">
+                                <a href=""
+                                    class="gtm-my visit dark-img-before">내서재</a>
+                            </li>
+                            <li class="">
+                                <a href=""
+                                    class="gtm-setting visit dark-img-before">관리</a>
+                            </li>
+                            <li class="">
+                                <a href="/"
+                                    class="gtm-notice visit dark-img-before">공지</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="util-wrap">
+                        <a href="" data-content-type="search"
+                            class="search-btn"><span
+                                class="mds-icon--gnb_search"><span
+                                    class="ir">검색</span></span></a>
+                        <a href="" data-content-type="alarmCenter"
+                            data-count="2"
+                            class="alarm-btn count"><span
+                                class="mds-icon--alarm-2"><span
+                                    class="ir">알림센터</span></span></a>
+                        <ul class="util">
+                            <!---->
+                            <li class="sign sign-in"
+                                style="display: none;">
+                                <a data-content-type="login" href=""
+                                    class="">로그인</a>
+                            </li>
+                            <!-- 당연하지만 로그아웃된 상태에서 로그인 버튼을, 로그인된 상태에서 로그아웃 버튼을 보여줘야 함. -->
+                            <li class="sign sign-in"
+                                style="display: block;">
+                                <a data-content-type="login" href=""
+                                    class="">로그아웃</a>
+                            </li>
+                        </ul>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <section class="content">
+            <div class="feed">
+                <div class="feed-header">
+                    <div class="inner">
+                        <div class="menu-list">
+                            <ul>
+                                <li class="active">
+                                    <a href=""
+                                        class="menu-button gtm-feed-tab-recommend"><span>추천</span></a>
+                                </li>
+                                <li class="">
+                                    <a href=""
+                                        class="menu-button gtm-feed-tab-following"><span>전체</span></a>
+                                </li>
+                            </ul>
+                            <ul>
+                                <button type="button" class="write">
+                                    최신 순
+                                    <i class="mds-icon--filter"></i>
+                                </button>
+                                <button type="button" class="write">
+                                    <i class="mds-icon--add-post"></i>
+                                </button>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                    <div aria-modal="true" role="alertdialog"
+                        aria-labelledby="dialog-331-title"
+                        style="display: none;"
+                        class="mds-dialog range-popup mds-dialog--open mds-dialog--action">
+                        <div class="mds-dialog--wrap">
+                            <div class="mds-dialog--inner">
+                                <div class="mds-dialog--header">
+                                    <strong
+                                        id="dialog-331-title">정렬</strong>
+                                </div>
+                                <div class="mds-dialog--body">
+                                    <div class="popup-contents">
+                                        <ul>
+                                            <li><label
+                                                    class="mds-radio mds-radio--primary mds-radio--button"><input
+                                                        type="radio"
+                                                        id="input-638"
+                                                        name="rangeData"
+                                                        value="day">
+                                                    <span
+                                                        class="mds-radio-view"><span
+                                                            class="check ir"></span>
+                                                        <span
+                                                            class="label">최신
+                                                            순</span></span></label>
+                                            </li>
+                                            <li><label
+                                                    class="mds-radio mds-radio--primary mds-radio--button"><input
+                                                        type="radio"
+                                                        id="input-639"
+                                                        name="rangeData"
+                                                        value="week">
+                                                    <span
+                                                        class="mds-radio-view"><span
+                                                            class="check ir"></span>
+                                                        <span
+                                                            class="label">댓글
+                                                            수
+                                                            순</span></span></label>
+                                            </li>
+                                            <li><label
+                                                    class="mds-radio mds-radio--primary mds-radio--button"><input
+                                                        type="radio"
+                                                        id="input-640"
+                                                        name="rangeData"
+                                                        value="month">
+                                                    <span
+                                                        class="mds-radio-view"><span
+                                                            class="check ir"></span>
+                                                        <span
+                                                            class="label">제목
+                                                            순</span></span></label>
+                                            </li>
+                                            <li><label
+                                                    class="mds-radio mds-radio--primary mds-radio--button"><input
+                                                        type="radio"
+                                                        id="input-641"
+                                                        name="rangeData"
+                                                        value="year">
+                                                    <span
+                                                        class="mds-radio-view"><span
+                                                            class="check ir"></span>
+                                                        <span
+                                                            class="label">인기
+                                                            순</span></span></label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="mds-dialog--footer mds-dialog--ratio">
+                                <button type="button"
+                                    class="close mds-button mds-button--cancel mds-button--h56"><span>닫기</span></button>
+                                <button type="button"
+                                    class="apply mds-button mds-button--primary mds-button--h56"><span>적용하기</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!---->
+                </div>
+               
+                <div mode="out-in">
+                    <div class="card-container">
+                        <div class="card-list"
+                            style="display: flex; margin-left: -16px">
+                            <div class style="
+                                        box-sizing: border-box;
+                                        background-clip: padding-box;
+                                        width: 25%;
+                                        border-width: 0px 0px 0px 16px;
+                                        border-style: solid;
+                                        border-color: transparent;
+                                        border-image: initial;
+                                    ">
+                                <div class="card-item">
+                                    <div class="user diary-theme">
+                                        <a href=""
+                                            class="profile-image gtm-feed-recommend-diary-tem-library"
+                                            style="
+                                                    background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/935d02a7881e4c979a953c3cee2a77a9.jpeg');
+                                                "></a>
+                                        <div class="metadata">
+                                            <a href=""
+                                                class="nickname-link gtm-feed-recommend-diary-tem-library"><span
+                                                    class="nickname">바라암</span>
+                                                <!----></a>
+                                            <div>
+                                                <span class="type">독서
+                                                    다이어리</span>
+                                                <span class="time">1시간
+                                                    전</span>
+                                            </div>
+                                        </div>
+                                        <button type="button"
+                                            class="button gtm-feed-recommend-diary-tem-follow">
+                                            팔로우
+                                        </button>
+                                        <div class="more">
+                                            <button type="button"
+                                                tabindex="0">
+                                                <i
+                                                    class="mds-icon--more-24-1"></i>
+                                            </button>
+                                            <div class="more-area" style="display: none;">
+                                                <button type="button">신고하기</button>
+                                            </div>
+                                        </div>
+                                        <div class="mds-dialog report-popup mds-dialog--open"
+                                            style="display: none;">
+                                            <div
+                                                class="mds-dialog--wrap">
+                                                <div
+                                                    class="mds-dialog--inner">
+                                                    <div
+                                                        class="mds-dialog--header">
+                                                        <strong
+                                                            id="dialog-556-title">신고
+                                                            후
+                                                            차단</strong>
+                                                        <!---->
+                                                    </div>
+                                                    <div
+                                                        class="mds-dialog--body">
+                                                        <div
+                                                            class="report-list">
+                                                            <label
+                                                                class="mds-radio mds-radio--secondary"><input
+                                                                    type="radio"
+                                                                    id="input-702"
+                                                                    name="report"
+                                                                    value="0">
+                                                                <span
+                                                                    class="mds-radio-view"><span
+                                                                        class="check"></span>
+                                                                    <span
+                                                                        class="label">단순
+                                                                        비방,
+                                                                        욕설
+                                                                        등
+                                                                        불쾌감을
+                                                                        주는
+                                                                        내용</span></span></label><label
+                                                                class="mds-radio mds-radio--secondary"><input
+                                                                    type="radio"
+                                                                    id="input-703"
+                                                                    name="report"
+                                                                    value="1">
+                                                                <span
+                                                                    class="mds-radio-view"><span
+                                                                        class="check"></span>
+                                                                    <span
+                                                                        class="label">음란성
+                                                                        또는
+                                                                        청소년에게
+                                                                        부적합</span></span></label><label
+                                                                class="mds-radio mds-radio--secondary"><input
+                                                                    type="radio"
+                                                                    id="input-704"
+                                                                    name="report"
+                                                                    value="2">
+                                                                <span
+                                                                    class="mds-radio-view"><span
+                                                                        class="check"></span>
+                                                                    <span
+                                                                        class="label">주제와
+                                                                        관련
+                                                                        없거나
+                                                                        부적절한
+                                                                        홍보</span></span></label><label
+                                                                class="mds-radio mds-radio--secondary"><input
+                                                                    type="radio"
+                                                                    id="input-705"
+                                                                    name="report"
+                                                                    value="3">
+                                                                <span
+                                                                    class="mds-radio-view"><span
+                                                                        class="check"></span>
+                                                                    <span
+                                                                        class="label">스포일러가
+                                                                        포함된
+                                                                        내용</span></span></label><label
+                                                                class="mds-radio mds-radio--secondary"><input
+                                                                    type="radio"
+                                                                    id="input-706"
+                                                                    name="report"
+                                                                    value="4">
+                                                                <span
+                                                                    class="mds-radio-view"><span
+                                                                        class="check"></span>
+                                                                    <span
+                                                                        class="label">기타</span></span></label>
+                                                            <!---->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="mds-dialog--footer">
+                                                    <button
+                                                        type="button"
+                                                        class="close mds-button mds-button--cancel mds-button--h56"><span>취소</span></button>
+                                                    <button
+                                                        type="button"
+                                                        class="apply mds-button mds-button--primary mds-button--h56"><span>등록</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="post">
+                                        <a href=""
+                                            class="box book-image gtm-feed-recommend-post-tem-detail"
+                                            style="
+                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg);
+                                                ">
+                                            <div class="book-picture imageLoaded"
+                                                style=""
+                                                data-observe="true">
+                                                <picture>
+                                                    <source srcset="
+                                                                https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=140&amp;f=webp&amp;q=80,
+                                                                https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=280&amp;f=webp&amp;q=80 2x
+                                                            "
+                                                        type="image/webp" />
+                                                    <img src="https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=140&amp;q=80"
+                                                        alt=" 도서 썸네일"
+                                                        width="140"
+                                                        style="
+                                                                min-height: 0px;
+                                                            " />
+                                                </picture>
+                                            </div>
+                                        </a>
+                                        <div class="metadata">
+                                            <a href=""
+                                                class="inner gtm-feed-recommend-post-tem-detail">
+                                                <p class="title">
+                                                    마션
+                                                </p>
+                                                <p class="sub-title">
+                                                    혼자일 수밖에 없는
+                                                    인물의 절체절명의 위기,
+                                                    그가 살 수 있었던 “의지,
+                                                    유머, 수긍, 방법” _
+                                                    3번째 재독 완료다. 생의
+                                                    의지를 상실했을 때마다
+                                                    펼쳐든다. 화성에 홀로
+                                                    고립된
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <button type="button"
+                                            class="btn add-shelf">
+                                            <i
+                                                class="mds-icon--add-shelf"></i>담기
+                                        </button>
+                                        <button type="button"
+                                            class="btn like">
+                                            <i
+                                                class="mds-icon--heart-1"></i>
+                                            <span
+                                                class="label">댓글</span>
+                                            <span
+                                                class="value">0</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class style="
+                                        box-sizing: border-box;
+                                        background-clip: padding-box;
+                                        width: 25%;
+                                        border-width: 0px 0px 0px 16px;
+                                        border-style: solid;
+                                        border-color: transparent;
+                                        border-image: initial;
+                                    ">
+                                <div class="card-item">
+                                    <div class="user diary-theme">
+                                        <a href=""
+                                            class="profile-image gtm-feed-recommend-diary-tem-library"
+                                            style="
+                                                    background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/935d02a7881e4c979a953c3cee2a77a9.jpeg');
+                                                "></a>
+                                        <div class="metadata">
+                                            <a href=""
+                                                class="nickname-link gtm-feed-recommend-diary-tem-library"><span
+                                                    class="nickname">바라암</span>
+                                                <!----></a>
+                                            <div>
+                                                <span class="type">독서
+                                                    다이어리</span>
+                                                <span class="time">1시간
+                                                    전</span>
+                                            </div>
+                                        </div>
+                                        <button type="button"
+                                            class="button gtm-feed-recommend-diary-tem-follow">
+                                            팔로우
+                                        </button>
+                                        <div class="more">
+                                            <button type="button"
+                                                tabindex="0">
+                                                <i
+                                                    class="mds-icon--more-24-1"></i>
+                                            </button>
+                                            <div class="more-area" style="display: none;">
+                                                <button type="button">신고하기</button>
+                                            </div>
+                                        </div>
+                                        <!---->
+                                    </div>
+                                    <div class="post">
+                                        <a href=""
+                                            class="box book-image gtm-feed-recommend-post-tem-detail"
+                                            style="
+                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg);
+                                                ">
+                                            <div class="book-picture imageLoaded"
+                                                style=""
+                                                data-observe="true">
+                                                <picture>
+                                                    <source srcset="
+                                                                https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=140&amp;f=webp&amp;q=80,
+                                                                https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=280&amp;f=webp&amp;q=80 2x
+                                                            "
+                                                        type="image/webp" />
+                                                    <img src="https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=140&amp;q=80"
+                                                        alt=" 도서 썸네일"
+                                                        width="140"
+                                                        style="
+                                                                min-height: 0px;
+                                                            " />
+                                                </picture>
+                                            </div>
+                                        </a>
+                                        <div class="metadata">
+                                            <a href=""
+                                                class="inner gtm-feed-recommend-post-tem-detail">
+                                                <p class="title">
+                                                    마션
+                                                </p>
+                                                <p class="sub-title">
+                                                    혼자일 수밖에 없는
+                                                    인물의 절체절명의 위기,
+                                                    그가 살 수 있었던 “의지,
+                                                    유머, 수긍, 방법” _
+                                                    3번째 재독 완료다. 생의
+                                                    의지를 상실했을 때마다
+                                                    펼쳐든다. 화성에 홀로
+                                                    고립된
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <button type="button"
+                                            class="btn add-shelf">
+                                            <i
+                                                class="mds-icon--add-shelf"></i>담기
+                                        </button>
+                                        <button type="button"
+                                            class="btn like">
+                                            <i
+                                                class="mds-icon--heart-1"></i>
+                                            <span
+                                                class="label">댓글</span>
+                                            <span
+                                                class="value">0</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class style="
+                                        box-sizing: border-box;
+                                        background-clip: padding-box;
+                                        width: 25%;
+                                        border-width: 0px 0px 0px 16px;
+                                        border-style: solid;
+                                        border-color: transparent;
+                                        border-image: initial;
+                                    ">
+                                <div class="card-item">
+                                    <div class="user diary-theme">
+                                        <a href=""
+                                            class="profile-image gtm-feed-recommend-diary-tem-library"
+                                            style="
+                                                    background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/935d02a7881e4c979a953c3cee2a77a9.jpeg');
+                                                "></a>
+                                        <div class="metadata">
+                                            <a href=""
+                                                class="nickname-link gtm-feed-recommend-diary-tem-library"><span
+                                                    class="nickname">바라암</span>
+                                                <!----></a>
+                                            <div>
+                                                <span class="type">독서
+                                                    다이어리</span>
+                                                <span class="time">1시간
+                                                    전</span>
+                                            </div>
+                                        </div>
+                                        <button type="button"
+                                            class="button gtm-feed-recommend-diary-tem-follow">
+                                            팔로우
+                                        </button>
+                                        <div class="more">
+                                            <button type="button"
+                                                tabindex="0">
+                                                <i
+                                                    class="mds-icon--more-24-1"></i>
+                                            </button>
+                                            <div class="more-area" style="display: none;">
+                                                <button type="button">신고하기</button>
+                                            </div>
+                                        </div>
+                                        <!---->
+                                    </div>
+                                    <div class="post">
+                                        <a href=""
+                                            class="box book-image gtm-feed-recommend-post-tem-detail"
+                                            style="
+                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg);
+                                                ">
+                                            <div class="book-picture imageLoaded"
+                                                style=""
+                                                data-observe="true">
+                                                <picture>
+                                                    <source srcset="
+                                                                https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=140&amp;f=webp&amp;q=80,
+                                                                https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=280&amp;f=webp&amp;q=80 2x
+                                                            "
+                                                        type="image/webp" />
+                                                    <img src="https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=140&amp;q=80"
+                                                        alt=" 도서 썸네일"
+                                                        width="140"
+                                                        style="
+                                                                min-height: 0px;
+                                                            " />
+                                                </picture>
+                                            </div>
+                                        </a>
+                                        <div class="metadata">
+                                            <a href=""
+                                                class="inner gtm-feed-recommend-post-tem-detail">
+                                                <p class="title">
+                                                    마션
+                                                </p>
+                                                <p class="sub-title">
+                                                    혼자일 수밖에 없는
+                                                    인물의 절체절명의 위기,
+                                                    그가 살 수 있었던 “의지,
+                                                    유머, 수긍, 방법” _
+                                                    3번째 재독 완료다. 생의
+                                                    의지를 상실했을 때마다
+                                                    펼쳐든다. 화성에 홀로
+                                                    고립된
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <button type="button"
+                                            class="btn add-shelf">
+                                            <i
+                                                class="mds-icon--add-shelf"></i>담기
+                                        </button>
+                                        <button type="button"
+                                            class="btn like">
+                                            <i
+                                                class="mds-icon--heart-1"></i>
+                                            <span
+                                                class="label">댓글</span>
+                                            <span
+                                                class="value">0</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class style="
+                                        box-sizing: border-box;
+                                        background-clip: padding-box;
+                                        width: 25%;
+                                        border-width: 0px 0px 0px 16px;
+                                        border-style: solid;
+                                        border-color: transparent;
+                                        border-image: initial;
+                                    ">
+                                <div class="card-item">
+                                    <div class="user diary-theme">
+                                        <a href=""
+                                            class="profile-image gtm-feed-recommend-diary-tem-library"
+                                            style="
+                                                    background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/935d02a7881e4c979a953c3cee2a77a9.jpeg');
+                                                "></a>
+                                        <div class="metadata">
+                                            <a href=""
+                                                class="nickname-link gtm-feed-recommend-diary-tem-library"><span
+                                                    class="nickname">바라암</span>
+                                                <!----></a>
+                                            <div>
+                                                <span class="type">독서
+                                                    다이어리</span>
+                                                <span class="time">1시간
+                                                    전</span>
+                                            </div>
+                                        </div>
+                                        <button type="button"
+                                            class="button gtm-feed-recommend-diary-tem-follow">
+                                            팔로우
+                                        </button>
+                                        <div class="more">
+                                            <button type="button"
+                                                tabindex="0">
+                                                <i
+                                                    class="mds-icon--more-24-1"></i>
+                                            </button>
+                                            <div class="more-area" style="display: none;">
+                                                <button type="button">신고하기</button>
+                                            </div>
+                                        </div>
+                                        <!---->
+                                    </div>
+                                    <div class="post">
+                                        <a href=""
+                                            class="box book-image gtm-feed-recommend-post-tem-detail"
+                                            style="
+                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg);
+                                                ">
+                                            <div class="book-picture imageLoaded"
+                                                style=""
+                                                data-observe="true">
+                                                <picture>
+                                                    <source srcset="
+                                                                https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=140&amp;f=webp&amp;q=80,
+                                                                https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=280&amp;f=webp&amp;q=80 2x
+                                                            "
+                                                        type="image/webp" />
+                                                    <img src="https://cover.millie.co.kr/service/cover/179511276/8d29619eb2c3426b9bda0e6d1b77e9a3.jpg?w=140&amp;q=80"
+                                                        alt=" 도서 썸네일"
+                                                        width="140"
+                                                        style="
+                                                                min-height: 0px;
+                                                            " />
+                                                </picture>
+                                            </div>
+                                        </a>
+                                        <div class="metadata">
+                                            <a href=""
+                                                class="inner gtm-feed-recommend-post-tem-detail">
+                                                <p class="title">
+                                                    마션
+                                                </p>
+                                                <p class="sub-title">
+                                                    혼자일 수밖에 없는
+                                                    인물의 절체절명의 위기,
+                                                    그가 살 수 있었던 “의지,
+                                                    유머, 수긍, 방법” _
+                                                    3번째 재독 완료다. 생의
+                                                    의지를 상실했을 때마다
+                                                    펼쳐든다. 화성에 홀로
+                                                    고립된
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <button type="button"
+                                            class="btn add-shelf">
+                                            <i
+                                                class="mds-icon--add-shelf"></i>담기
+                                        </button>
+                                        <button type="button"
+                                            class="btn like">
+                                            <i
+                                                class="mds-icon--heart-1"></i>
+                                            <span
+                                                class="label">댓글</span>
+                                            <span
+                                                class="value">0</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- header 자리 -->
+    <footer>
+        <!-- <div class="edit-modal">
+                <div class="modal-backdrop" style="display: none;"></div>
+                <div class="modal-container"></div>
+            </div> -->
+
+
+    </footer>
+</body>
+<script src="/static/js/discussion/main.js"></script>
+
+</html>

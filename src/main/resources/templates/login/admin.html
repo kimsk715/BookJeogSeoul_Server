@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>어드민 | 로그인</title>
+        <link rel="stylesheet" href="/static/css/login/admin.css" />
+    </head>
+    <body>
+        <div class="header">
+            <header>
+                <h1>
+                    <a href=""
+                        ><img src="/static/images/admin/admin_logo.png" alt=""
+                    /></a>
+                </h1>
+                <span>관리자 로그인</span>
+            </header>
+        </div>
+        <div class="admin-login">
+            <div class="login-container">
+                <div class="login-wrap">
+                    <!-- 아이디 입력란 -->
+                    <div class="input-item">
+                        <div class="bjs-input-id">
+                            <label class="input-label-id">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-id-label"
+                                            >아이디</span
+                                        >
+                                        <input
+                                            autocomplete="off"
+                                            type="text"
+                                            name=""
+                                            id="bjs-id"
+                                            placeholder="아이디를 입력해주세요."
+                                            style="outline: none; border: none"
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        id="clear-button-id"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 비밀번호 입력란 -->
+                    <div class="input-item">
+                        <div class="bjs-input-pw">
+                            <label class="input-label-pw">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-pw-label"
+                                            >비밀번호</span
+                                        >
+                                        <input
+                                            autocomplete="off"
+                                            type="password"
+                                            name=""
+                                            id="bjs-pw"
+                                            placeholder="비밀번호를 입력해주세요."
+                                            style="outline: none; border: none"
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        id="clear-button-pw"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 로그인 버튼 -->
+                    <div class="login-btn-area">
+                        <button id="login-btn">
+                            <span class="login-btn-tag">로그인</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 모달 -->
+        <div id="modal">
+            <div id="modal-wrap">
+                <div class="modal-inner">
+                    <div class="modal-header">
+                        <strong>로그인 실패</strong>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <p>아이디 또는 비밀번호를 확인해주세요</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button>
+                        <span>확인</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="/static/js/login/admin.js"></script>
+</html>
