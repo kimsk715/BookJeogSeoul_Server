@@ -6,11 +6,11 @@
         <title>로그인 | 북적북적</title>
         <link
             rel="stylesheet"
-            href="../../static/css/register/register-member.css"
+            href="/css/register/register-member.css"
         />
         <link
             rel="shortcut icon"
-            href="/static/images/admin/favicon.ico"
+            href="/images/admin/favicon.ico"
             type="image/x-icon"
         />
     </head>
@@ -19,20 +19,20 @@
         <div class="login-container">
             <div class="login-content">
                 <h3 class="title">정보를 입력해주세요</h3>
-                <!-- 이름 -->
+                <!-- 이메일 -->
                 <div class="input-item">
                     <div class="bjs-input-name">
-                        <label class="input-label-name">
+                        <label class="input-label-name" style="cursor: text">
                             <div class="inner">
                                 <div class="input">
-                                    <span class="input-name-label">이름</span>
+                                    <span class="input-name-label">이메일</span>
                                     <input
                                         autocomplete="off"
                                         type="text"
                                         name=""
                                         id="bjs-name"
-                                        placeholder="이름 입력."
-                                        style="outline: none; border: none"
+                                        placeholder="이메일 입력."
+                                        style="outline: none; border: none; cursor: text"
                                     />
                                 </div>
                                 <button
@@ -44,22 +44,22 @@
                         </label>
                     </div>
                 </div>
-                <!-- 이메일 -->
+                <!-- 비밀번호 -->
                 <div class="input-item">
                     <div class="bjs-input-email">
-                        <label class="input-label-email">
+                        <label class="input-label-email" style="cursor: text">
                             <div class="inner">
                                 <div class="input">
                                     <span class="input-email-label"
-                                        >이메일</span
+                                        >비밀번호</span
                                     >
                                     <input
                                         autocomplete="off"
-                                        type="text"
+                                        type="password"
                                         name=""
                                         id="bjs-email"
-                                        placeholder="이메일 입력"
-                                        style="outline: none; border: none"
+                                        placeholder="비밀번호 입력"
+                                        style="outline: none; border: none; cursor: text"
                                     />
                                 </div>
                                 <button
@@ -76,7 +76,7 @@
                     <div class="input-birth-gender">
                         <div class="birth-num">
                             <div class="birth-wrap">
-                                <label for="bjs-birth">
+                                <label for="bjs-birth" style="cursor: text">
                                     <div class="inner">
                                         <div class="input">
                                             <span>생년월일,성별</span>
@@ -156,5 +156,5 @@
             </div>
         </div>
     </body>
-    <script src="../../static/js/register/register-member.js"></script>
+    <script src="/js/register/register-member.js"></script>
 </html>
