@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 // Enum 클래스를 직접 상속받지 않고 컴파일 과정에서 상속받게 된다.
 // 각 상수들은 인스턴스로 만들어지며, 각 인스턴스는 모두 해당 enum 타입이다.
 // 각 상수는 모두 static으로 처리되고, enum Heap 메모리에 할당된다.
-public enum InquiryType {
+public enum MemberInquiryType {
     BOOK("도서관련 문의"),
     ACCOUNT("계정관련 문의"),
     ETC("기타문의");
@@ -14,7 +14,7 @@ public enum InquiryType {
 
     private final String code;
 
-    private InquiryType(String code){
+    private MemberInquiryType(String code){
         this.code = code;
     }
 
@@ -29,13 +29,13 @@ public enum InquiryType {
 //    RESTful API에서 json형식으로 enum을 받아야할 때,
 //    직접 작성한 code 혹은 label이 있을 경우 재정의해야한다.
     @JsonCreator
-    public static InquiryType forCode(String code){
+    public static MemberInquiryType forCode(String code){
 //        화면에서 전달받은 문자열(code)을
-        for(InquiryType inquiryType : InquiryType.values()){
+        for(MemberInquiryType memberInquiryType : MemberInquiryType.values()){
 //            전체 code와 비교하여 같다면
-            if(inquiryType.getCode().equals(code)){
+            if(memberInquiryType.getCode().equals(code)){
 //                해당 code의 memberType 객체를 리턴한다.
-                return inquiryType;
+                return memberInquiryType;
             }
         }
         throw new IllegalArgumentException("존재하지 않는 값");

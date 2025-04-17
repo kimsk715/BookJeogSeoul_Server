@@ -6,16 +6,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 // Enum 클래스를 직접 상속받지 않고 컴파일 과정에서 상속받게 된다.
 // 각 상수들은 인스턴스로 만들어지며, 각 인스턴스는 모두 해당 enum 타입이다.
 // 각 상수는 모두 static으로 처리되고, enum Heap 메모리에 할당된다.
-public enum MemberStatus {
-    ACTIVE("활성"),
-    DORMANCY("휴면"),
-    SUSPENDED("정지"),
-    DELETE("정지");
-    
+public enum BookPostReportType {
+    ABUSE("욕설"),
+    SEXUAL("음란성"),
+    SPAM("광고성"),
+    SPOILER("스포일러"),
+    ETC("기타");
+
 
     private final String code;
 
-    private MemberStatus(String code){
+    private BookPostReportType(String code){
         this.code = code;
     }
 
@@ -30,13 +31,13 @@ public enum MemberStatus {
 //    RESTful API에서 json형식으로 enum을 받아야할 때,
 //    직접 작성한 code 혹은 label이 있을 경우 재정의해야한다.
     @JsonCreator
-    public static MemberStatus forCode(String code){
+    public static BookPostReportType forCode(String code){
 //        화면에서 전달받은 문자열(code)을
-        for(MemberStatus memberStatus  : MemberStatus.values()){
+        for(BookPostReportType reportType  : BookPostReportType.values()){
 //            전체 code와 비교하여 같다면
-            if(memberStatus.getCode().equals(code)){
+            if(reportType.getCode().equals(code)){
 //                해당 code의 memberType 객체를 리턴한다.
-                return memberStatus;
+                return reportType;
             }
         }
         throw new IllegalArgumentException("존재하지 않는 값");
