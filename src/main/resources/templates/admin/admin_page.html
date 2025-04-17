@@ -517,8 +517,8 @@
                                         <th></th>
                                         <th>일련번호</th>
                                         <th>도서명</th>
-                                        <th>DDC</th>
-                                        <th>KDC</th>
+                                        <th>작가</th>
+                                        <th>출판사</th>
                                         <th>선정여부</th>
                                         <th>대출상태</th>
                                         <th>도서상세정보</th>
@@ -526,47 +526,12 @@
                                 </thead>
                                 <tbody>
                                     <!-- 샘플 데이터 -->
-                                    <tr>
+                                    <tr th:each="book : ${books}">
                                         <td><input type="checkbox" class="chosenBook"></td>
-                                        <td>19282874981</td>
-                                        <td>체크박스를 눌러서 선택 => 카테고리 버튼 처럼 배열에 저장 => 최종 선택 완료시 모달창으로 한번 확인시키기
-                                        </td>
-                                        <td>888.88</td>
-                                        <td>877.77</td>
-                                        <td><span class="status active">선정</span></td>
-                                        <td>
-                                            <span class="status active">대출중</span>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="detail-btn book-detail-btn">
-                                                상세보기
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="chosenBook"></td>
-                                        <td>19282874981</td>
-                                        <td>체크박스를 눌러서 선택 => 카테고리 버튼 처럼 배열에 저장 => 최종 선택 완료시 모달창으로 한번 확인시키기
-                                        </td>
-                                        <td>888.88</td>
-                                        <td>877.77</td>
-                                        <td><span class="status active">선정</span></td>
-                                        <td>
-                                            <span class="status active">대출중</span>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="detail-btn book-detail-btn">
-                                                상세보기
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="chosenBook"></td>
-                                        <td>19282874981</td>
-                                        <td>체크박스를 눌러서 선택 => 카테고리 버튼 처럼 배열에 저장 => 최종 선택 완료시 모달창으로 한번 확인시키기
-                                        </td>
-                                        <td>888.88</td>
-                                        <td>877.77</td>
+                                        <td th:text="${book.isbn}">19282874981</td>
+                                        <td th:text="${book.title}"></td>
+                                        <td th:text="${book.author}"></td>
+                                        <td th:text="${book.publisher}"></td>
                                         <td><span class="status active">선정</span></td>
                                         <td>
                                             <span class="status active">대출중</span>
@@ -2056,6 +2021,9 @@
     <script src="/js/admin/sidebar_toggle.js"></script>
     <script src="/js/admin/main_contents_toggle.js"></script>
     <script src="/js/admin/tempjs.js"></script>
+    <script src="/js/admin/book_event.js"></script>
+    <script src="/js/admin/book_layout.js"></script>
+    <script src="/js/admin/book_service.js"></script>
 </body>
 
 </html>
