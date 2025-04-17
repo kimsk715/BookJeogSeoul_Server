@@ -38,6 +38,7 @@ const inputPw = document.getElementById("bjs-pw");
 const pwLabel = document.querySelector(".input-label-pw");
 const cleartBtnPw = document.querySelector("#clear-button-pw");
 
+
 inputPw.addEventListener("focus", () => {
     pwLabel.style.borderColor = "rgba(51, 51, 51)";
     if (inputPw.value.length > 0) {
@@ -59,8 +60,11 @@ inputPw.addEventListener("input", () => {
         cleartBtnPw.style.display = "none";
     }
 });
+
+
+
 cleartBtnPw.addEventListener("mousedown", (e) => {
-    clearBtn.style.display = "none";
+    cleartBtnPw.style.display = "none";
     e.preventDefault();
     inputPw.value = "";
     activeLoginBtn();
