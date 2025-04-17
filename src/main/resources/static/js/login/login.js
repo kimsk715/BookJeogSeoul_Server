@@ -107,3 +107,8 @@ loginBtn.addEventListener("click", () => {
     modal.style.display = "flex";
     modal.classList.add("fade-in");
 });
+
+
+const goToMain = () => {
+    window.location.href = "http://localhost:10000/main/main"
+}

@@ -1,5 +1,6 @@
 package com.app.bookJeog.controller;
 
+import com.app.bookJeog.controller.member.MemberControllerDocs;
 import com.app.bookJeog.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
