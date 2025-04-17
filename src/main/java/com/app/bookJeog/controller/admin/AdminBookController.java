@@ -12,9 +12,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 @RequiredArgsConstructor
 public class AdminBookController {
-
-    @GetMapping("admin")
-    public String goToAdminMain(){
-        return "admin/admin_page";
-    }
+    
 }
