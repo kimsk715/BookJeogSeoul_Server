@@ -33,6 +33,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-quartz'
     implementation 'com.google.code.gson:gson:2.8.6'
+    /* 버전 때문에 밑줄 표시 뜨는 것. 업데이트 안 할 거면 무시. */
     implementation 'net.coobird:thumbnailator:0.4.8'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
