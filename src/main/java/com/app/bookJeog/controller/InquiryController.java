@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequestMapping
 @RequiredArgsConstructor
-public class InquiryController implements MemberControllerDocs {
+public class InquiryController {
 }

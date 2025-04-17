@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>북적서울 for Admin</title>
+    <link rel="stylesheet" href="../../static/css/admin/global.css" />
+    <link rel="stylesheet" href="../../static/css/admin/navi.css" />
+    <link rel="stylesheet" href="../../static/css/admin/sidebar.css" />
+    <link rel="stylesheet" href="../../static/css/admin/main.css" />
+    <link rel="stylesheet" href="../../static/css/admin/media.css" />
+    <link rel="stylesheet" href="../../static/css/admin/report_modal.css" />
+    <link rel="stylesheet" href="../../static/css/admin/member.css" />
+    <link rel="stylesheet" href="/static/css/admin/book_post.css">
+    <link rel="stylesheet" href="/static/css/admin/bookpost_report.css">
+    <link rel="stylesheet" href="/static/css/admin/comment_report.css">
+    <link rel="stylesheet" href="/static/css/admin/normal_inquiry.css">
+    <link rel="stylesheet" href="/static/css/admin/notice.css">
+    <link rel="stylesheet" href="/static/css/admin/personal_sponsor.css">
+    <link rel="stylesheet" href="/static/css/admin/receiver.css">
+    <link rel="stylesheet" href="/static/css/admin/report.css">
+    <link rel="stylesheet" href="/static/css/admin/sponsor_inquiry.css">
+    <link rel="stylesheet" href="/static/css/admin/sponsorship.css">
+    <link rel="stylesheet" href="/static/css/admin/top_post.css">
+    <link rel="stylesheet" href="/static/css/admin/discussion.css">
+    <link rel="stylesheet" href="/static/css/admin/book.css">
+    <link rel="stylesheet" href="/static/css/admin/admin-manage.css">
+    <link rel="stylesheet" href="/static/css/admin/common_modal.css">
+    <link rel="stylesheet" href="../../static/css/admin/announce_modal.css" />
+    <link rel="stylesheet" href="/static/css/admin/member_modal.css" />
+    <link rel="stylesheet" href="../../static/css/admin/company_member_modal.css" />
+    <link rel="stylesheet" href="../../static/css/admin/normal_inquiry_modal.css" />
+    <link rel="stylesheet" href="../../static/css/admin/company_inquiry_modal.css" />
+    <link rel="shortcut icon" href="/static/images/admin/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="admin-body">
+    <div id="root">
+        <div id="admin-layout" class="layout-container">
+            <!-- 상단 네비게이션 바 -->
+            <header class="gnb-container" id="admin-gnb">
+                <div class="gnb-content">
+                    <div class="logo-wrapper">
+                        <button class="logo-btn" type="button" aria-label="로고 버튼"></button>
+                        <div class="logo-type"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 메인 콘텐츠 영역 -->
+            <div class="main-content">
+                <!-- 사이드바 네비게이션 -->
+                <nav id="sidebar-nav" class="sidebar-container sidebar-expanded sidebar-scroll">
+                    <div class="sidebar-content">
+                        <div class="nav-menu">
+                            <div id="nav-links" class="nav-links-menu" style="overflow: auto">
+                                <!-- 회원관리 섹션 -->
+                                <div class="menu-section">
+                                    <a class="menu-item menu-has-submenu">
+                                        <span class="menu-label">
+                                            <img src="../../static/images/admin/회원1.png" alt="회원관리" class="menu-icon"
+                                                width="16" height="16" />
+                                            회원관리
+                                            <img src="../../static/images/admin/arrow.svg" class="arrow-icon menu-arrow"
+                                                alt="메뉴 화살표" />
+                                        </span>
+                                    </a>
+                                    <div class="submenu-container">
+                                        <a class="submenu-item member-link" href="#">개인회원</a>
+                                    </div>
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/회원1.png" alt="회원관리"
+                                                    class="menu-icon" width="16" height="16" />
+                                                도서관리
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container">
+                                            <a class="submenu-item book-link" href="#">도서관리</a>
+                                        </div>
+                                    </div>
+                                    <!-- 독후감관리 섹션 -->
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/공고.svg" alt="공고관리" class="menu-icon"
+                                                    width="16" height="16" />
+                                                독후감 관리
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container double-menu">
+                                            <a class="submenu-item book-post-link" href="#">독후감목록</a>
+                                            <a class="submenu-item top-post-link" href="#">이달의 독후감 후보</a>
+                                        </div>
+                                    </div>
+                                    <!-- 토론게시판 섹션 -->
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/공고.svg" alt="공고관리" class="menu-icon"
+                                                    width="16" height="16" />
+                                                토론방 관리
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container">
+                                            <a class="submenu-item discussion-link" href="#">토론 목록</a>
+                                        </div>
+                                    </div>
+                                    <!--  후원단체 관리 섹션-->
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/신고.png" alt="신고관리" class="menu-icon"
+                                                    width="16" height="16" />
+                                                후원단체관리
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container">
+                                            <a class="submenu-item sponsorship-link" href="#">후원단체목록</a>
+                                        </div>
+                                    </div>
+                                    <!-- 개인 후원 관리 섹션 -->
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/신고.png" alt="신고관리" class="menu-icon"
+                                                    width="16" height="16" />
+                                                개인후원관리
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container">
+                                            <a class="submenu-item personal-sponsor-link" href="#">개인후원목록</a>
+                                        </div>
+                                    </div>
+                                    <!--  후원대상 관리 섹션 -->
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/신고.png" alt="신고관리" class="menu-icon"
+                                                    width="16" height="16" />
+                                                후원대상관리
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container">
+                                            <a class="submenu-item receiver-link" href="#">후원대상목록</a>
+                                        </div>
+                                    </div>
+                                    <!--  공지 관리 -->
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/신고.png" alt="신고관리" class="menu-icon"
+                                                    width="16" height="16" />
+                                                공지관리
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container">
+                                            <a class="submenu-item notice-link" href="#">공지목록</a>
+                                        </div>
+                                    </div>
+                                    <!-- 문의관리 섹션 -->
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/문의.png" alt="문의관리" class="menu-icon"
+                                                    width="16" height="16" />
+                                                문의관리
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container double-menu">
+                                            <a class="submenu-item normal-inquiry-link" href="#">개인문의</a>
+                                            <a class="submenu-item sponsor-inquiry-link" href="#">단체문의</a>
+                                        </div>
+                                    </div>
+                                    <!-- 신고관리 섹션 -->
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/신고.png" alt="문의관리" class="menu-icon"
+                                                    width="16" height="16" />
+                                                신고관리
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container double-menu">
+                                            <a class="submenu-item comment-report-link" href="#">댓글 신고</a>
+                                            <a class="submenu-item book-post-report-link" href="#">독후감 신고</a>
+                                        </div>
+                                    </div>
+                                    <!-- 관리자 등록 -->
+                                    <div class="menu-section">
+                                        <a class="menu-item menu-has-submenu">
+                                            <span class="menu-label">
+                                                <img src="../../static/images/admin/신고.png" alt="신고관리" class="menu-icon"
+                                                    width="16" height="16" />
+                                                관리자 등록
+                                                <img src="../../static/images/admin/arrow.svg"
+                                                    class="arrow-icon menu-arrow" alt="메뉴 화살표" />
+                                            </span>
+                                        </a>
+                                        <div class="submenu-container">
+                                            <a class="submenu-item admin-manage-link" href="#">관리자 등록</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </nav>
+
+                <!-- 메인 컨텐츠 영역 -->
+                <div id="main-contents" class="contents-container">
+                    <!-- 홈 컨텐츠 -->
+                    <main class="project-container">
+                        <div id="project-content" class="project-box">
+                            <section>
+                                <div class="head-banner"></div>
+                            </section>
+                            <section class="project-presentation">
+                                <h2 class="presentation-title">HOME</h2>
+                                <div class="presentation-desc">
+                                    각 관리 메뉴에 간편하고 빠르게 접근할 수
+                                    있습니다.
+                                </div>
+                                <div class="presentation-content">
+                                    <div class="project-wrapper">
+                                        <div class="project-layout">
+                                            <div class="project-contents">
+                                                <div class="menu-list-container">
+                                                    <ul>
+                                                        <li class="menu-card menu-announce">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    회원관리
+                                                                </div>
+                                                                <a class="menu-btn member-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-announce">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    도서관리
+                                                                </div>
+                                                                <a class="menu-btn book-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-member">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    독후감 관리
+                                                                </div>
+                                                                <em class="menu-status menu-wadiz-color">독후감 목록</em>
+                                                                <a class="menu-btn book-post-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-member">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    독후감 관리
+                                                                </div>
+                                                                <em class="menu-status menu-wadiz-color">이 달의 독후감
+                                                                    선정</em>
+                                                                <a class="menu-btn top-post-link" href="#">
+
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-member">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    토론방 관리
+                                                                </div>
+
+                                                                <a class="menu-btn discussion-link" href="#">
+
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-member">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    후원단체관리
+                                                                </div>
+                                                                <a class="menu-btn sponsorship-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="menu-card menu-inquiry">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    개인후원 관리
+                                                                </div>
+                                                                <a class="menu-btn personal-sponsor-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="menu-card menu-inquiry">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    후원대상관리
+                                                                </div>
+                                                                <a class="menu-btn receiver-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-report">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    공지 관리
+                                                                </div>
+                                                                <a class="menu-btn notice-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-report">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    문의 관리
+                                                                </div>
+                                                                <em class="menu-status menu-wadiz-color">개인 문의</em>
+                                                                <a class="menu-btn normal-inquiry-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-report">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    문의 관리
+                                                                </div>
+                                                                <em class="menu-status menu-wadiz-color">단체 문의</em>
+                                                                <a class="menu-btn sponsor-inquiry-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-report">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    신고 관리
+                                                                </div>
+                                                                <em class="menu-status menu-wadiz-color">댓글 신고</em>
+                                                                <a class="menu-btn comment-report-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-report">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    신고 관리
+                                                                </div>
+                                                                <em class="menu-status menu-wadiz-color">독후감 신고</em>
+                                                                <a class="menu-btn book-post-report-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-card menu-member">
+                                                            <div class="menu-content">
+                                                                <div class="menu-name">
+                                                                    관리자 등록
+                                                                </div>
+                                                                <a class="menu-btn admin-manage-link" href="#">
+                                                                    <span>바로가기</span>
+                                                                </a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </main>
+
+                    <!-- 회원관리 컨텐츠 -->
+                    <div class="member-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="member-search-filter-container member-filter">
+                            <div class="search-box member-search">
+                                <input type="text" placeholder="검색어를 입력하세요" class="search-input member-search-input" />
+                                <button type="button" class="search-btn member-search-btn">
+                                    검색
+                                </button>
+                            </div>
+                            <div class="filter-box member-filter-box">
+                                <select class="status-filter member-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">심사중</option>
+                                    <option value="hold">보류</option>
+                                    <option value="approved">승인</option>
+                                    <option value="rejected">반려</option>
+                                </select>
+                                <select class="date-filter member-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 개인 회원 목록 테이블 -->
+                        <div class="member-table-container">
+                            <table class="member-table">
+                                <thead>
+                                    <tr>
+                                        <th>회원번호</th>
+                                        <th>이름</th>
+                                        <th>이메일</th>
+                                        <th>가입일</th>
+                                        <th>최근접속일</th>
+                                        <th>회원상태</th>
+                                        <th>회원관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>1</td>
+                                        <td>김북적</td>
+                                        <td>bookjeogbookjeog@gmail.com</td>
+                                        <td>2025-03-22</td>
+                                        <td>2025-04-03</td>
+                                        <td>
+                                            <span class="status active">활성</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn member-detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 도서관리 컨텐츠 -->
+                    <div class="book-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="book-search-filter-container book-filter">
+                            <div class="search-box book-search">
+                                <input type="text" placeholder="검색어를 입력하세요" class="search-input book-search-input" />
+                                <button type="button" class="search-btn book-search-btn">
+                                    검색
+                                </button>
+                                <button type="button" class="search-btn book-recommend-btn">
+                                    추천 도서 목록 저장
+                                </button>
+                                <button type="button" class="search-btn book-choose-btn">
+                                    도서 선택
+                                </button>
+                            </div>
+                            <div class="filter-box book-filter-box">
+                                <select class="status-filter book-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">심사중</option>
+                                    <option value="hold">보류</option>
+                                    <option value="approved">승인</option>
+                                    <option value="rejected">반려</option>
+                                </select>
+                                <select class="date-filter book-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 개인 회원 목록 테이블 -->
+                        <div class="book-table-container">
+                            <table class="book-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>일련번호</th>
+                                        <th>도서명</th>
+                                        <th>DDC</th>
+                                        <th>KDC</th>
+                                        <th>선정여부</th>
+                                        <th>대출상태</th>
+                                        <th>도서상세정보</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td><input type="checkbox" class="chosenBook"></td>
+                                        <td>19282874981</td>
+                                        <td>체크박스를 눌러서 선택 => 카테고리 버튼 처럼 배열에 저장 => 최종 선택 완료시 모달창으로 한번 확인시키기
+                                        </td>
+                                        <td>888.88</td>
+                                        <td>877.77</td>
+                                        <td><span class="status active">선정</span></td>
+                                        <td>
+                                            <span class="status active">대출중</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn book-detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="chosenBook"></td>
+                                        <td>19282874981</td>
+                                        <td>체크박스를 눌러서 선택 => 카테고리 버튼 처럼 배열에 저장 => 최종 선택 완료시 모달창으로 한번 확인시키기
+                                        </td>
+                                        <td>888.88</td>
+                                        <td>877.77</td>
+                                        <td><span class="status active">선정</span></td>
+                                        <td>
+                                            <span class="status active">대출중</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn book-detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class="chosenBook"></td>
+                                        <td>19282874981</td>
+                                        <td>체크박스를 눌러서 선택 => 카테고리 버튼 처럼 배열에 저장 => 최종 선택 완료시 모달창으로 한번 확인시키기
+                                        </td>
+                                        <td>888.88</td>
+                                        <td>877.77</td>
+                                        <td><span class="status active">선정</span></td>
+                                        <td>
+                                            <span class="status active">대출중</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn book-detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 독후감관리 컨텐츠 -->
+                    <div class="book-post-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="book-post-search-filter-container book-post-filter">
+                            <div class="search-box book-post-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input book-post-search-input" />
+                                <button type="button" class="search-btn book-post-search-btn">
+                                    검색
+                                </button>
+                                <button type="button" class="search-btn best-post-choose-btn">
+                                    이달의 독후감 후보 선정
+                                </button>
+                            </div>
+                            <div class="filter-box book-post-filter-box">
+                                <select class="status-filter book-post-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">심사중</option>
+                                    <option value="hold">보류</option>
+                                    <option value="approved">승인</option>
+                                    <option value="rejected">반려</option>
+                                </select>
+                                <select class="date-filter book-post-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 공고 목록 테이블 -->
+                        <div class="book-post-table-container">
+                            <table class="book-post-table">
+                                <thead>
+                                    <tr>
+                                        <th>독후감번호</th>
+                                        <th>제목</th>
+                                        <th>연결도서</th>
+                                        <th>작성일시</th>
+                                        <th>수정일시</th>
+                                        <th>좋아요</th>
+                                        <th>추천도서여부</th>
+                                        <th>독후감관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>이 곳에는 전체 독후감 목록이 나올 자리입니다. 더미데이터용이므로, 나중에는 서버에 맞게 적용</td>
+                                        <td>서버담당자는 이렇게 말했다.</td>
+                                        <td>2025-01-15</td>
+                                        <td>2025-02-10</td>
+                                        <td>1000</td>
+                                        <td>
+                                            <span class="status active">활성</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 이 달의 독후감 컨텐츠 -->
+                    <div class="top-post-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="top-post-search-filter-container top-post-filter">
+                            <div class="search-box top-post-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input top-post-search-input" />
+                                <button type="button" class="search-btn top-post-search-btn">
+                                    검색
+                                </button>
+                                <button type="button" class="search-btn top-post-choose-btn">
+                                    이 달의 독후감 선정
+                                </button>
+                            </div>
+                            <div class="filter-box top-post-filter-box">
+                                <select class="status-filter top-post-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">심사중</option>
+                                    <option value="hold">보류</option>
+                                    <option value="approved">승인</option>
+                                    <option value="rejected">반려</option>
+                                </select>
+                                <select class="date-filter top-post-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 이달의 독후감 목록 테이블 -->
+                        <div class="top-post-table-container">
+                            <table class="top-post-table">
+                                <thead>
+                                    <tr>
+                                        <th>독후감번호</th>
+                                        <th>제목</th>
+                                        <th>연결도서</th>
+                                        <th>작성일시</th>
+                                        <th>수정일시</th>
+                                        <th>좋아요</th>
+                                        <th>득표수</th>
+                                        <th>추천도서여부</th>
+                                        <th>독후감관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>고독함의 본질적인 결함은 고독함을 이해하지 못함.고독함의 본질적인 결함은 고독함을 이해하지 못함.</td>
+                                        <td>차라투스트라는 이렇게 말했다.</td>
+                                        <td>2025-01-15</td>
+                                        <td>2025-02-10</td>
+                                        <td>1000</td>
+                                        <td>50</td>
+                                        <td>
+                                            <span class="status active">활성</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 토론방 컨텐츠 -->
+                    <div class="discussion-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="discussion-search-filter-container discussion-filter">
+                            <div class="search-box discussion-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input discussion-search-input" />
+                                <button type="button" class="search-btn discussion-search-btn">
+                                    검색
+                                </button>
+                                <button type="button" class="search-btn open-new-discussion-btn">
+                                    토론 주제 생성하기
+                                </button>
+                            </div>
+                            <div class="filter-box discussion-filter-box">
+                                <select class="status-filter discussion-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">심사중</option>
+                                    <option value="hold">보류</option>
+                                    <option value="approved">승인</option>
+                                    <option value="rejected">반려</option>
+                                </select>
+                                <select class="date-filter discussion-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 공고 목록 테이블 -->
+                        <div class="discussion-table-container">
+                            <table class="discussion-table">
+                                <thead>
+                                    <tr>
+                                        <th>토론번호</th>
+                                        <th>토론주제</th>
+                                        <th>연결도서</th>
+                                        <th>작성일시</th>
+                                        <th>좋아요</th>
+                                        <th>댓글수</th>
+                                        <th>추천도서여부</th>
+                                        <th>토론관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>이 곳에는 토론 주제가 나올 예정입니다! 더미데이터용이므로, 나중에는 서버에 맞게 적용</td>
+                                        <td>서버담당자는 이렇게 말했다.</td>
+                                        <td>2025-02-10</td>
+                                        <td>1000</td>
+                                        <td>50</td>
+                                        <td>
+                                            <span class="status active">활성</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 후원단체 컨텐츠 -->
+                    <div class="sponsorship-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="sponsorship-search-filter-container sponsorship-filter">
+                            <div class="search-box sponsorship-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input sponsorship-search-input" />
+                                <button type="button" class="search-btn sponsorship-search-btn">
+                                    검색
+                                </button>
+                            </div>
+                            <div class="filter-box sponsorship-filter-box">
+                                <select class="status-filter sponsorship-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">심사중</option>
+                                    <option value="hold">보류</option>
+                                    <option value="approved">승인</option>
+                                    <option value="rejected">반려</option>
+                                </select>
+                                <select class="date-filter sponsorship-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 후원단체 목록 테이블 -->
+                        <div class="sponsorship-table-container">
+                            <table class="sponsorship-table">
+                                <thead>
+                                    <tr>
+                                        <th>단체번호</th>
+                                        <th>단체명</th>
+                                        <th>주요사업</th>
+                                        <th>주소</th>
+                                        <th>가입일</th>
+                                        <th>최근접속일</th>
+                                        <th>회원상태</th>
+                                        <th>회원관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>강남구취약계층도우미</td>
+                                        <td>강남구의 독거노인, 다문화, 한부모가정의 어린이 등을 위한 복지를 실현.</td>
+                                        <td><a href="https://m.map.naver.com/search2/search.nhn?query=서울 강남구 역삼동 736-56"
+                                                target="_blank">서울 강남구 역삼동 736-56</a></td>
+                                        <!-- 나중에는 th:href로 주소값 넣기. -->
+                                        <td>2025-01-15</td>
+                                        <td>2025-02-10</td>
+                                        <td>
+                                            <span class="status active">활성</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 개인후원 컨텐츠 -->
+                    <div class="personal-sponsor-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="personal-sponsor-search-filter-container personal-sponsor-filter">
+                            <div class="search-box personal-sponsor-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input personal-sponsor-search-input" />
+                                <button type="button" class="search-btn personal-sponsor-search-btn">
+                                    검색
+                                </button>
+                            </div>
+                            <div class="filter-box personal-sponsor-filter-box">
+                                <select class="status-filter personal-sponsor-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">심사중</option>
+                                    <option value="hold">보류</option>
+                                    <option value="approved">승인</option>
+                                    <option value="rejected">반려</option>
+                                </select>
+                                <select class="date-filter personal-sponsor-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 개인 후원 목록 테이블  -->
+                        <!-- 상세보기에서 기부한 도서 목록이 보이도록 하기 -->
+                        <div class="personal-sponsor-table-container">
+                            <table class="personal-sponsor-table">
+                                <thead>
+                                    <tr>
+                                        <th>기부번호</th>
+                                        <th>기부자</th>
+                                        <th>도서명</th>
+                                        <th>기부일</th>
+                                        <th>수취여부</th>
+                                        <th>기부관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>허세웅</td>
+                                        <td>(차라투스트라는 이렇게 말했다) 외 2권</td>
+                                        <td>2025-02-24</td>
+                                        <td>
+                                            <span class="status active">수취완료</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 후원대상 컨텐츠 -->
+                    <div class="receiver-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="receiver-search-filter-container receiver-filter">
+                            <div class="search-box receiver-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input receiver-search-input" />
+                                <button type="button" class="search-btn receiver-search-btn">
+                                    검색
+                                </button>
+                                <button type="button" class="search-btn receiver-choose-btn">
+                                    후원대상 선정하기
+                                </button>
+                            </div>
+                            <div class="filter-box receiver-filter-box">
+                                <select class="status-filter receiver-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="completed">기부완료</option>
+                                    <option value="waiting">기부대기</option>
+                                </select>
+                                <select class="date-filter receiver-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 후원대상 목록 테이블 -->
+                        <div class="receiver-table-container">
+                            <table class="receiver-table">
+                                <thead>
+                                    <tr>
+                                        <th>게시글번호</th>
+                                        <th>게시단체명</th>
+                                        <th>제목</th>
+                                        <th>등록일</th>
+                                        <th>수정일</th>
+                                        <th>담긴 책갈피 수</th>
+                                        <th>선정여부</th>
+                                        <th>회원관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>종로구베이비박스</td>
+                                        <td>태어나자마자 혼자가 된 아이들을 위한 작은 마음의 양식</td>
+                                        <td>2025-03-15</td>
+                                        <td>2025-04-10</td>
+                                        <td>1521</td>
+                                        <td>
+                                            <span class="status chosen">선정완료</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000002</td>
+                                        <td>종로구베이비박스</td>
+                                        <td>태어나자마자 혼자가 된 아이들을 위한 작은 마음의 양식</td>
+                                        <td>2025-03-15</td>
+                                        <td>2025-04-10</td>
+                                        <td>1521</td>
+                                        <td>
+                                            <span class="status notchosen">선정대기</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 공지 컨텐츠 -->
+                    <div class="notice-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="notice-search-filter-container notice-filter">
+                            <div class="search-box notice-search">
+                                <input type="text" placeholder="검색어를 입력하세요" class="search-input notice-search-input" />
+                                <button type="button" class="search-btn notice-search-btn">
+                                    검색
+                                </button>
+                                <button type="button" class="search-btn notice-add-btn">
+                                    작성
+                                </button>
+                            </div>
+                            <div class="filter-box notice-filter-box">
+                                <select class="status-filter notice-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="notice">공지</option>
+                                    <option value="event">행사</option>
+                                </select>
+                                <select class="date-filter notice-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 공지 목록 테이블 -->
+                        <div class="notice-table-container">
+                            <table class="notice-table">
+                                <thead>
+                                    <tr>
+                                        <th>공지번호</th>
+                                        <th>제목</th>
+                                        <th>등록일</th>
+                                        <th>수정일</th>
+                                        <th>공지유형</th>
+                                        <th>공지관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>25년 5월 이 달의 독후감 선정 결과25년 5월 이 달의 독후감 선정 결과25년 5월 이 달의 독후감 선정 결과</td>
+                                        <td>2025-01-15</td>
+                                        <td>2025-02-10</td>
+                                        <td>
+                                            <span class="status active">행사</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 일반 문의 컨텐츠 -->
+                    <div class="normal-inquiry-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="normal-inquiry-search-filter-container normal-inquiry-filter">
+                            <div class="search-box normal-inquiry-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input normal-inquiry-search-input" />
+                                <button type="button" class="search-btn normal-inquiry-search-btn">
+                                    검색
+                                </button>
+                            </div>
+                            <div class="filter-box normal-inquiry-filter-box">
+                                <select class="status-filter normal-inquiry-type-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">도서 관련 문의</option>
+                                    <option value="hold">기타</option>
+                                </select>
+                                <select class="status-filter normal-inquiry-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">처리대기</option>
+                                    <option value="hold">처리완료</option>
+                                </select>
+                                <select class="date-filter normal-inquiry-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 개인문의 목록 테이블 -->
+                        <div class="normal-inquiry-table-container">
+                            <table class="normal-inquiry-table">
+                                <thead>
+                                    <tr>
+                                        <th>문의번호</th>
+                                        <th>회원명</th>
+                                        <th>제목</th>
+                                        <th>등록일</th>
+                                        <th>문의유형</th>
+                                        <th>처리상태</th>
+                                        <th>문의관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>허세웅</td>
+                                        <td>도서의 대출 여부를 확인할 수 없습니다. 빠른 시일 내에 조치 부탁드립니다.</td>
+                                        <td>2025-02-10</td>
+                                        <td>
+                                            <span class="status active">도서 관련 문의</span>
+                                        </td>
+                                        <td>
+                                            <span class="status active">처리대기</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 단체 문의 컨텐츠 -->
+                    <div class="sponsor-inquiry-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="sponsor-inquiry-search-filter-container sponsor-inquiry-filter">
+                            <div class="search-box sponsor-inquiry-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input sponsor-inquiry-search-input" />
+                                <button type="button" class="search-btn sponsor-inquiry-search-btn">
+                                    검색
+                                </button>
+                            </div>
+                            <div class="filter-box sponsor-inquiry-filter-box">
+                                <select class="status-filter sponsor-inquiry-type-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">기부 관련 문의</option>
+                                    <option value="hold">기타</option>
+                                </select>
+                                <select class="status-filter sponsor-inquiry-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">처리대기</option>
+                                    <option value="hold">처리완료</option>
+                                </select>
+                                <select class="date-filter sponsor-inquiry-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 공고 목록 테이블 -->
+                        <div class="sponsor-inquiry-table-container">
+                            <table class="sponsor-inquiry-table">
+                                <thead>
+                                    <tr>
+                                        <th>문의번호</th>
+                                        <th>단체명</th>
+                                        <th>제목</th>
+                                        <th>등록일</th>
+                                        <th>문의유형</th>
+                                        <th>처리상태</th>
+                                        <th>문의관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>코리아IT아카데미</td>
+                                        <td>25년 6월 1주차 기부 단체로 선정되었는데, 3주 째 도서를 수령하지 못하였습니다.</td>
+                                        <td>2025-07-01</td>
+                                        <td>
+                                            <span class="status active">기부 관련 문의</span>
+                                        </td>
+                                        <td>
+                                            <span class="status active">처리대기</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 댓글 신고 컨텐츠 -->
+                    <div class="comment-report-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="comment-report-search-filter-container comment-report-filter">
+                            <div class="search-box comment-report-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input comment-report-search-input" />
+                                <button type="button" class="search-btn comment-report-search-btn">
+                                    검색
+                                </button>
+                            </div>
+                            <div class="filter-box comment-report-filter-box">
+                                <select class="status-filter comment-report-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">처리대기</option>
+                                    <option value="hold">처리완료</option>
+                                </select>
+                                <select class="date-filter comment-report-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 댓글 신고 목록 테이블 -->
+                        <div class="comment-report-table-container">
+                            <table class="comment-report-table">
+                                <thead>
+                                    <tr>
+                                        <th>신고번호</th>
+                                        <th>신고대상</th>
+                                        <th>토론주제</th>
+                                        <th>댓글내역</th>
+                                        <th>신고일시</th>
+                                        <th>처리상태</th>
+                                        <th>신고관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>트럼프</td>
+                                        <td>상호 간 관세 과연 누구에게 이득이고, 옳은 정책이 맞는가?</td>
+                                        <td>관세전쟁을 해보자! 당연히 미국이 이기는 거야~ 그걸 모름?ㅋㅋㅋㅋㅋ</td>
+                                        <td>2025-05-05</td>
+                                        <td>
+                                            <span class="status active">처리완료</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 독후감 신고 컨텐츠 -->
+                    <div class="book-post-report-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="book-post-report-search-filter-container book-post-report-filter">
+                            <div class="search-box book-post-report-search">
+                                <input type="text" placeholder="검색어를 입력하세요"
+                                    class="search-input book-post-report-search-input" />
+                                <button type="button" class="search-btn book-post-report-search-btn">
+                                    검색
+                                </button>
+                            </div>
+                            <div class="filter-box book-post-report-filter-box">
+                                <select class="status-filter book-post-report-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">처리대기</option>
+                                    <option value="hold">처리완료</option>
+                                </select>
+                                <select class="date-filter book-post-report-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 공고 목록 테이블 -->
+                        <div class="book-post-report-table-container">
+                            <table class="book-post-report-table">
+                                <thead>
+                                    <tr>
+                                        <th>신고번호</th>
+                                        <th>신고대상</th>
+                                        <th>독후감제목</th>
+                                        <th>연결도서</th>
+                                        <th>신고사유</th>
+                                        <th>신고일시</th>
+                                        <th>처리상태</th>
+                                        <th>신고관리</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>일론 머스크</td>
+                                        <td>나만 아는 일론 머스크의 사생활 이야기</td>
+                                        <td>테슬라 폭발적 성장 시나리오</td>
+                                        <td>단순 비방, 욕설 등 불쾌감을 주는 내용</td>
+                                        <td>2025-02-25</td>
+                                        <td>
+                                            <span class="status active">처리대기</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                상세보기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 관리자 등록 컨텐츠 -->
+                    <div class="admin-management" style="display: none">
+                        <!-- 상단 검색/필터 영역 -->
+                        <div class="admin-search-filter-container admin-filter">
+                            <div class="search-box admin-search">
+                                <input type="text" placeholder="검색어를 입력하세요" class="search-input admin-search-input" />
+                                <button type="button" class="search-btn admin-search-btn">
+                                    검색
+                                </button>
+                                <button type="button" class="search-btn admin-choose-btn">
+                                    신규 관리자 등록하기
+                                </button>
+                            </div>
+                            <div class="filter-box admin-filter-box">
+                                <select class="status-filter admin-status-filter">
+                                    <option value="all">전체</option>
+                                    <option value="pending">심사중</option>
+                                    <option value="hold">보류</option>
+                                    <option value="approved">승인</option>
+                                    <option value="rejected">반려</option>
+                                </select>
+                                <select class="date-filter admin-date-filter">
+                                    <option value="week">최근 1주일</option>
+                                    <option value="month">
+                                        최근 1개월
+                                    </option>
+                                    <option value="three-month">
+                                        최근 3개월
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- 관리자 목록 테이블 -->
+                        <div class="admin-table-container">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>등록번호</th>
+                                        <th>성명</th>
+                                        <th>부서</th>
+                                        <th>직급</th>
+                                        <th>최근접속일</th>
+                                        <th>재직상태</th>
+                                        <th>관리하기</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 샘플 데이터 -->
+                                    <tr>
+                                        <td>0000001</td>
+                                        <td>허세웅</td>
+                                        <td>도서관정책과</td>
+                                        <td>5급</td>
+                                        <td>2025-01-12</td>
+                                        <td>
+                                            <span class="status suspended">휴직</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                관리하기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>0000002</td>
+                                        <td>한동석</td>
+                                        <td>도서관정책과</td>
+                                        <td>2급</td>
+                                        <td>2025-04-12</td>
+                                        <td>
+                                            <span class="status active">재직중</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="detail-btn">
+                                                관리하기
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- 사이드바 토글 버튼 -->
+                <button type="button" class="sidebar-toggle-btn sidebar-expanded">
+                    <i class="toggle-icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 신고관리 상세보기 모달 -->
+    <div class="report-modal" style="display: none">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <!-- 모달 헤더 -->
+            <div class="modal-header">
+                <h3>신고 상세정보</h3>
+                <button type="button" class="close-btn">
+                    <img src="../../static/images/admin/cross.png" alt="닫기" />
+                </button>
+            </div>
+
+            <!-- 모달 본문 -->
+            <div class="modal-body">
+                <!-- 신고 기본 정보 -->
+
+                <div class="report-info">
+                    <h4>INFO</h4>
+                    <table class="info-table">
+                        <tbody>
+                            <tr>
+                                <th>신고번호</th>
+                                <td id="report-id">0000001</td>
+                                <th>신고일시</th>
+                                <td id="report-date">2025-02-04</td>
+                            </tr>
+                            <tr>
+                                <th>신고자</th>
+                                <td id="reporter">허세웅</td>
+                                <th>신고대상</th>
+                                <td id="report-target">템프</td>
+                            </tr>
+                            <tr>
+                                <th>신고유형</th>
+                                <td colspan="3" id="report-type">
+                                    부적절한 내용
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 신고 상세 내용 -->
+                <div class="report-detail">
+                    <h4>신고 상세내용</h4>
+                    <div class="detail-content" id="report-content">
+                        템프 공고에 적절하지 않은 텍스트가 포함되어
+                        있습니다.
+                    </div>
+                </div>
+
+                <!-- 처리 상태 선택 -->
+                <div class="status-selection">
+                    <h4>처리 상태</h4>
+                    <select class="status-select">
+                        <option value="processing">처리중</option>
+                        <option value="pending">보류</option>
+                        <option value="false">허위신고</option>
+                        <option value="completed">처리완료</option>
+                    </select>
+                </div>
+
+                <!-- 관리자 메모 -->
+                <div class="admin-memo">
+                    <h4>관리자 메모</h4>
+                    <textarea placeholder="처리 관련 메모를 입력하세요" id="admin-memo"></textarea>
+                </div>
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn">취소</button>
+                <button type="button" class="save-btn">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 개인문의 상세보기 모달 -->
+    <div class="normal-inquiry-modal" style="display: none">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <!-- 모달 헤더 -->
+            <div class="modal-header">
+                <h3>문의 상세정보</h3>
+                <button type="button" class="close-btn">
+                    <img src="../../static/images/admin/cross.png" alt="닫기" />
+                </button>
+            </div>
+
+            <!-- 모달 본문 -->
+            <div class="modal-body">
+                <!-- 문의 기본 정보 -->
+
+                <div class="normal-inquiry-info">
+                    <h4>INFO</h4>
+                    <table class="info-table">
+                        <tbody>
+                            <tr>
+                                <th>문의번호</th>
+                                <td id="normal-inquiry-id">0000001</td>
+                                <th>문의일시</th>
+                                <td id="normal-inquiry-date">2025-02-04</td>
+                            </tr>
+                            <tr>
+                                <th>문의자</th>
+                                <td id="normal-inquirer">허세웅</td>
+                                <th>이메일</th>
+                                <td id="normal-inquiry-email">
+                                    temp123@gmail.com
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>문의유형</th>
+                                <td colspan="3" id="normal-inquiry-type">
+                                    수수료 관련
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 문의 상세 내용 -->
+                <div class="normal-inquiry-detail">
+                    <h4>문의 상세내용</h4>
+                    <div class="detail-content" id="normal-inquiry-content">
+                        공고에 이미 등록한 상태인데 취소해도 수수료를
+                        환불받을 수 없는지에 대해서 문의드립니다.
+                    </div>
+                </div>
+
+                <!-- 처리 상태 선택 -->
+                <div class="status-selection">
+                    <h4>처리 상태</h4>
+                    <select class="status-select">
+                        <option value="processing">처리중</option>
+                        <option value="pending">보류</option>
+                        <option value="completed">처리완료</option>
+                    </select>
+                </div>
+
+                <!-- 관리자 메모 -->
+                <div class="admin-memo">
+                    <h4>관리자 메모</h4>
+                    <textarea placeholder="처리 관련 메모를 입력하세요" id="n-inquiry-admin-memo"></textarea>
+                </div>
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn">취소</button>
+                <button type="button" class="save-btn">저장</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 일반회원 상세정보 모달 -->
+    <div class="member-modal" style="display: none">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <!-- 모달 헤더 -->
+            <div class="modal-header">
+                <h3>일반회원 상세정보</h3>
+                <button type="button" class="close-btn">
+                    <img class="close-btn" src="../../static/images/admin/cross.png" alt="닫기" />
+                </button>
+            </div>
+
+            <!-- 모달 본문 -->
+            <div class="modal-body">
+                <!-- 기본 정보 섹션 -->
+                <div class="member-info">
+                    <h4>INFO</h4>
+                    <table class="info-table">
+                        <tbody>
+                            <tr>
+                                <th>회원번호</th>
+                                <td id="member-id">0000001</td>
+                                <th>이름</th>
+                                <td id="member-name">허세웅</td>
+                            </tr>
+                            <tr>
+                                <th>아이디</th>
+                                <td id="member-userid">woong123</td>
+                                <th>연락처</th>
+                                <td id="member-phone">010-1234-5678</td>
+                            </tr>
+                            <tr>
+                                <th>가입일</th>
+                                <td id="join-date">2025-01-15</td>
+                                <th>최근접속일</th>
+                                <td id="last-access">2025-02-10</td>
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td colspan="3" id="member-email">
+                                    woongzzang123@gmail.com
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 상세 내용 섹션 -->
+                <div class="member-detail">
+                    <h4>회원 상세내용</h4>
+                    <select class="status-select detail-select">
+                        <option value="">카테고리 선택</option>
+                        <option value="profile-image">프로필 사진</option>
+                        <!-- 추가할 항목 넣는 공간 -->
+                    </select>
+                    <!-- 상세 내용 표시 영역 -->
+                    <div class="detail-content">
+                        <!-- 대표 이미지 섹션 -->
+                        <div class="content-section profile-image-section" style="display: none">
+                            <div class="profile-image-view">
+                                <img src="/static/images/admin/default_profile.webp" alt="프로필 이미지" />
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- 활동 내역 섹션 -->
+                <div class="member-activity">
+                    <h4>활동 내역</h4>
+                    <select class="status-select activity-select">
+                        <option value="">카테고리 선택</option>
+                        <option value="application-history">
+                            독후감
+                        </option>
+                        <option value="report-history">댓글</option>
+                    </select>
+                    <!-- 활동 내역 표시 영역 -->
+                    <div class="activity-content">
+                        <!-- 지원이력 섹션 -->
+                        <div class="content-section application-history-section" style="display: none">
+                            <table class="activity-table">
+                                <thead>
+                                    <tr>
+                                        <th>지원일</th>
+                                        <th>기업명</th>
+                                        <th>공고명</th>
+                                        <th>상태</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2025-02-10</td>
+                                        <td>템프</td>
+                                        <td>실무자 원데이 체험 프로그램</td>
+                                        <td>지원완료</td>
+                                    </tr>
+                                    <!-- 추가 데이터는 서버에서 받아와 동적으로 추가 예정 -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 신고내역 섹션 -->
+                        <div class="content-section report-history-section" style="display: none">
+                            <table class="activity-table">
+                                <thead>
+                                    <tr>
+                                        <th>신고일</th>
+                                        <th>신고사유</th>
+                                        <th>처리상태</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2025-02-04</td>
+                                        <td>권리침해</td>
+                                        <td>처리완료</td>
+                                    </tr>
+                                    <!-- 추가 데이터는 서버에서 받아와 동적으로 추가 예정 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn">취소</button>
+                <button type="button" class="save-btn">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 이달의 추천 도서 목록 모달 -->
+    <div class="monthly-book-modal" style="display: none">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <!-- 모달 헤더 -->
+            <div class="modal-header">
+                <h3>서울시 독후감 대상 도서 선정</h3>
+                <button type="button" class="close-btn">
+                    <img class="close-btn" src="../../static/images/admin/cross.png" alt="닫기" />
+                </button>
+            </div>
+
+            <!-- 모달 본문 -->
+            <div class="modal-body">
+                <!-- 기본 정보 섹션 -->
+                <div class="monthly-book-info">
+                    <h4>INFO</h4>
+                    <table class="monthly-book-table info-table">
+                        <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>ISBN</th>
+                                <th>도서명</th>
+                                <th>카테고리 or DDC</th>
+                            </tr>
+                            <tr>
+                                <td>001</td>
+                                <td>1234567890123</td>
+                                <td>차라투스트라는 이렇게 말했다.</td>
+                                <td>189.10</td> 
+                            </tr>   
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+        <button type="button" class="cancel-btn">취소</button>
+        <button type="button" class="save-btn submit-list">선정하기</button>
+    </div>
+        </div>
+    </div>
+
+    <!-- 모달 푸터 -->
+    
+   
+
+    <!-- 기업회원 상세정보 모달 -->
+    <div class="company-member-modal" style="display: none">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <!-- 모달 헤더 -->
+            <div class="modal-header">
+                <h3>기업회원 상세정보</h3>
+                <button type="button" class="close-btn">
+                    <img src="../../static/images/admin/cross.png" alt="닫기" />
+                </button>
+            </div>
+
+            <!-- 모달 본문 -->
+            <div class="modal-body">
+                <!-- 기본 정보 섹션 -->
+                <div class="member-info">
+                    <h4>INFO</h4>
+                    <table class="info-table">
+                        <tbody>
+                            <tr>
+                                <th>회원번호</th>
+                                <td id="company-member-id">0000001</td>
+                                <th>기업명</th>
+                                <td id="company-name">템프</td>
+                            </tr>
+                            <tr>
+                                <th>사업자등록번호</th>
+                                <td id="business-number">123-45-67890</td>
+                                <th>대표자명</th>
+                                <td id="ceo-name">홍길동</td>
+                            </tr>
+                            <tr>
+                                <th>설립일</th>
+                                <td id="establishment-date">2020-01-01</td>
+                                <th>기업규모</th>
+                                <td id="company-size">중소기업</td>
+                            </tr>
+                            <tr>
+                                <th>업종</th>
+                                <td id="company-sector">IT서비스</td>
+                                <th>사원수</th>
+                                <td id="employee-count">50명</td>
+                            </tr>
+                            <tr>
+                                <th>본사주소</th>
+                                <td colspan="3" id="company-address">
+                                    서울시 강남구 테헤란로
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 담당자 정보 섹션 -->
+                <div class="manager-info">
+                    <h4>담당자 정보</h4>
+                    <table class="manager-table">
+                        <tbody>
+                            <tr>
+                                <th>담당자명</th>
+                                <td id="manager-name">김영희</td>
+                                <th>부서/직책</th>
+                                <td id="manager-position">인사팀/과장</td>
+                            </tr>
+                            <tr>
+                                <th>아이디</th>
+                                <td id="manager-userid">younghee123</td>
+                                <th>연락처</th>
+                                <td id="manager-phone">02-1234-5678</td>
+                            </tr>
+                            <tr>
+                                <th>가입일</th>
+                                <td id="join-date">2025-01-15</td>
+                                <th>최근접속일</th>
+                                <td id="last-access">2025-02-10</td>
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td colspan="3" id="manager-email">
+                                    temp@temp.com
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 기업 상세 정보 섹션 -->
+                <div class="company-detail">
+                    <h4>기업 상세정보</h4>
+                    <select class="status-select detail-select">
+                        <option value="">카테고리 선택</option>
+                        <option value="company-logo">기업 로고</option>
+                        <option value="business-certificate">
+                            사업자등록증명원
+                        </option>
+                        <option value="company-intro">기업 소개</option>
+                        <option value="financial-info">재무정보</option>
+                        <option value="welfare">복리후생</option>
+                        <option value="company-culture">기업문화</option>
+                        <option value="etc">기타정보</option>
+                    </select>
+                    <!-- 상세 내용 표시 영역 -->
+                    <div class="detail-content">
+                        <!-- 기업 로고 섹션 -->
+                        <div class="content-section company-logo-section" style="display: none">
+                            <div class="logo-image-view">
+                                <img src="../../static/images/admin/default_logo.jfif" alt="기업 로고" />
+                            </div>
+                        </div>
+                        <!-- 사업자등록증명원 섹션 추가 -->
+                        <div class="content-section business-certificate-section" style="display: none">
+                            <div class="certificate-image-view">
+                                <img src="/static/images/admin/default_certificate.png" alt="사업자등록증명원"
+                                    class="certificate-image" />
+                                <div class="certificate-info">
+                                    <p class="certificate-date">
+                                        등록일: 2025-01-15
+                                    </p>
+                                    <p class="certificate-notice">
+                                        * 이미지를 클릭하면 원본 크기로 볼
+                                        수 있습니다
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 기업 소개 섹션 -->
+                        <div class="content-section company-intro-section" style="display: none">
+                            <p>혁신적인 IT 서비스를 제공하는 기업...</p>
+                        </div>
+
+                        <!-- 재무정보 섹션 -->
+                        <div class="content-section financial-info-section" style="display: none">
+                            <p>연매출 100억원...</p>
+                        </div>
+
+                        <!-- 복리후생 섹션 -->
+                        <div class="content-section welfare-section" style="display: none">
+                            <p>자유로운 연차사용...</p>
+                        </div>
+
+                        <!-- 기업문화 섹션 -->
+                        <div class="content-section company-culture-section" style="display: none">
+                            <p>수평적인 조직문화...</p>
+                        </div>
+
+                        <!-- 기타정보 섹션 -->
+                        <div class="content-section etc-section" style="display: none">
+                            <p>특이사항 없음</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 활동 내역 섹션 -->
+                <div class="company-activity">
+                    <h4>활동 내역</h4>
+                    <select class="status-select activity-select">
+                        <option value="">카테고리 선택</option>
+                        <option value="announcement-history">
+                            공고 등록 내역
+                        </option>
+                        <option value="program-history">
+                            체험 프로그램 운영 내역
+                        </option>
+                        <option value="report-history">신고 내역</option>
+                    </select>
+                    <!-- 활동 내역 표시 영역 -->
+                    <div class="activity-content">
+                        <!-- 공고 등록 내역 섹션 -->
+                        <div class="content-section announcement-history-section" style="display: none">
+                            <table class="activity-table">
+                                <thead>
+                                    <tr>
+                                        <th>공고번호</th>
+                                        <th>공고제목</th>
+                                        <th>등록일</th>
+                                        <th>마감일</th>
+                                        <th>상태</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2025-001</td>
+                                        <td>프론트엔드 개발자 체험</td>
+                                        <td>2025-02-10</td>
+                                        <td>2025-03-10</td>
+                                        <td>진행중</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 체험 프로그램 운영 내역 섹션 -->
+                        <div class="content-section program-history-section" style="display: none">
+                            <table class="activity-table">
+                                <thead>
+                                    <tr>
+                                        <th>프로그램명</th>
+                                        <th>시작일</th>
+                                        <th>종료일</th>
+                                        <th>참가인원</th>
+                                        <th>상태</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>백엔드 개발자 체험</td>
+                                        <td>2025-01-15</td>
+                                        <td>2025-01-16</td>
+                                        <td>3명</td>
+                                        <td>완료</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- 신고 내역 섹션 -->
+                        <div class="content-section report-history-section" style="display: none">
+                            <table class="activity-table">
+                                <thead>
+                                    <tr>
+                                        <th>신고일</th>
+                                        <th>신고사유</th>
+                                        <th>처리상태</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2025-02-04</td>
+                                        <td>부적절한 내용</td>
+                                        <td>처리완료</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 회원 상태 변경 섹션 -->
+                <div class="status-selection">
+                    <h4>회원 상태</h4>
+                    <select class="status-select">
+                        <option value="active">활성</option>
+                        <option value="dormant">휴면</option>
+                        <option value="suspended">정지</option>
+                        <option value="withdrawn">탈퇴</option>
+                    </select>
+                </div>
+
+                <!-- 관리자 메모 -->
+                <div class="admin-memo">
+                    <h4>관리자 메모</h4>
+                    <textarea placeholder="처리 관련 메모를 입력하세요" id="admin-memo"></textarea>
+                </div>
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn">취소</button>
+                <button type="button" class="save-btn">저장</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- JavaScript 파일 연결 -->
+    <script src="../../static/js/admin/sidebar_each_menu_toggle.js"></script>
+    <script src="../../static/js/admin/sidebar_toggle.js"></script>
+    <script src="../../static/js/admin/main_contents_toggle.js"></script>
+    <script src="/static/js/admin/tempjs.js"></script>
+</body>
+
+</html>

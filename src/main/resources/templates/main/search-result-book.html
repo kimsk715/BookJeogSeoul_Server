@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>검색결과 | 북적서울</title>
+        <link
+            rel="stylesheet"
+            href="../../static/css/main/global-settings.css"
+        />
+        <link
+            rel="stylesheet"
+            href="../../static/css/main/search-result-category.css"
+        />
+        <link
+            rel="shortcut icon"
+            href="../../static/images/common/favicon.ico"
+            type="image/x-icon"
+        />
+    </head>
+    <body>
+        <div id="wrap">
+            <section class="content">
+                <div class="search-container result">
+                    <div
+                        id="backComponent"
+                        class="back-component border-hidden"
+                    >
+                        <div class="back-wrap line">
+                            <h1>
+                                <a
+                                    href=""
+                                    style="display: flex; cursor: pointer"
+                                >
+                                    <img
+                                        src="../../static/images/common/Logo.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </h1>
+                            <div class="">
+                                <div class="back">
+                                    <h2>검색결과</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 검색창 부분 -->
+                    <section class="search-input-wrap">
+                        <div class="search-input search-result">
+                            <!-- 검색창 영역 -->
+                            <article id="searchInner" class="search-inner">
+                                <div class="input-area text">
+                                    <!-- 검색 버튼 -->
+                                    <button
+                                        type="button"
+                                        class="icon-searchbar"
+                                    ></button>
+                                    <!-- // 검색 버튼 -->
+                                    <div class="input-default">
+                                        <label>
+                                            <div class="inner">
+                                                <div class="input">
+                                                    <input
+                                                        autocomplete="off"
+                                                        id="input-search"
+                                                        aria-errormessage="input-search-message"
+                                                        type="text"
+                                                        placeholder="검색어를 입력하세요"
+                                                        class="input-field"
+                                                    />
+                                                </div>
+                                                <!-- 내용 삭제 버튼 -->
+                                                <button
+                                                    type="button"
+                                                    aria-label="내용 삭제"
+                                                    class="icon-input-delete clear-button"
+                                                    style="
+                                                        background: transparent;
+                                                    "
+                                                ></button>
+                                                <!-- // 내용 삭제 버튼 -->
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- // 검색창 영역 -->
+                        </div>
+                    </section>
+                    <!-- // 검색창 부분 -->
+                    <!-- 검색 결과목록 -->
+                    <div class="search-result-container">
+                        <div class="search-result-data">
+                            <!-- 검색 분류 네비 -->
+                            <section class="search-sort-wrap">
+                                <div class="sort-tab">
+                                    <ul
+                                        role="menu"
+                                        aria-label="tab menu"
+                                        class="tab-wrapper"
+                                    >
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>통합</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a
+                                                role="menuItem"
+                                                aria-selected="true"
+                                                href=""
+                                                ><span>도서</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>독후감</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>북적북적</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>기부단체</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>도서전달</span></a
+                                            >
+                                        </li>
+                                    </ul>
+                                    <span
+                                        class="tab-bar transition"
+                                        style="
+                                            width: 28px;
+                                            transform: translate3d(64px, 0, 0);
+                                        "
+                                    ></span>
+                                </div>
+                            </section>
+                            <!-- // 검색 분류 네비 -->
+                            <!-- 검색 옵션 -->
+                            <section class="search-options">
+                                <article class="result-list-header">
+                                    <p>
+                                        검색결과
+                                        <span class="result-count">1,429</span>
+                                    </p>
+                                    <div class="filter-wrapper">
+                                        <button
+                                            type="button"
+                                            class="icon-arrow-bottom"
+                                        >
+                                            <span>인기순</span>
+                                        </button>
+                                    </div>
+                                </article>
+                            </section>
+                            <!-- // 검색 옵션 -->
+                            <!-- 전체 도서 리스트 -->
+                            <section class="section-wrap on">
+                                <div class="search-list detail">
+                                    <div class="result-list grid">
+                                        <ul class="book-list">
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div
+                                                    class="search-book-list grid"
+                                                >
+                                                    <div
+                                                        class="book-container books"
+                                                    >
+                                                        <a
+                                                            href=""
+                                                            class="book-image"
+                                                        >
+                                                            <div
+                                                                class="thumbnail"
+                                                            >
+                                                                <div
+                                                                    class="thumbnail-inner"
+                                                                >
+                                                                    <div
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <picture>
+                                                                            <img
+                                                                                src="https://cover.millie.co.kr/service/cover/179574480/f252da5dec09435d829a2fa677f2df4e.jpg?w=145&f=webp&q=80"
+                                                                                alt=""
+                                                                                style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a
+                                                            href=""
+                                                            class="book-data"
+                                                        >
+                                                            <div
+                                                                class="text-data"
+                                                            >
+                                                                <p
+                                                                    class="title"
+                                                                >
+                                                                    썬킴의
+                                                                    세계사 완전
+                                                                    정복
+                                                                </p>
+                                                                <p
+                                                                    class="author"
+                                                                >
+                                                                    썬킴
+                                                                </p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- // 전체 도서 리스트 -->
+                        </div>
+                    </div>
+                    <!-- // 검색 결과목록 -->
+                    <!-- 검색 정렬 모달창 -->
+                    <div class="modal-section">
+                        <div class="modal-wrap">
+                            <div class="modal-inner">
+                                <div class="modal-header">
+                                    <strong class="modal-title">정렬</strong>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="radio-body">
+                                        <div>
+                                            <label class="modal-radio checked">
+                                                <input type="radio" />
+                                                <span class="radio-view">
+                                                    <span
+                                                        class="check ir"
+                                                    ></span>
+                                                    <span class="label"
+                                                        >인기순</span
+                                                    >
+                                                </span>
+                                            </label>
+                                            <label class="modal-radio">
+                                                <input type="radio" />
+                                                <span class="radio-view">
+                                                    <span
+                                                        class="check ir"
+                                                    ></span>
+                                                    <span class="label"
+                                                        >업데이트순</span
+                                                    >
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="button-cancel">
+                                    <span>취소</span>
+                                </button>
+                                <button type="button" class="button-primary">
+                                    <span>확인</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // 검색 정렬 모달창 -->
+                </div>
+            </section>
+        </div>
+    </body>
+    <script src="../../static/js/main/search-result.js"></script>
+</html>

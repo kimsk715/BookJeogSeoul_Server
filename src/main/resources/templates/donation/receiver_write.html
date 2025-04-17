@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>북적서울 | 후원대상 게시글 작성</title>
+    <link rel="stylesheet" href="/static/css/donation/receiver_write.css">
+    <link rel="stylesheet" href="/static/css/donation/feed_common.css">
+    <link rel="shortcut icon" href="/static/images/admin/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="wrap" class="web-mount pcv-mount"><!----> <!----> <!---->
+        <section class="content">
+            <div class="post-write write diary desktop">
+                <div id="header" class="header diary">
+                    <div class="header-inner">
+                        <div class="header-left"><button type="button"
+                                class="back-btn mds-button mds-button--primary mds-button--h56"><span><i
+                                        class="mds-icon--arrow-left"></i></span></button> <!---->
+                        </div>
+                        <div class="header-right">
+                            <div class="nav-btn"><!----> <button type="button"
+                                    class="btn publish-btn mds-font--body01 mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4"><span>게시하기</span></button>
+                            </div>
+                        </div>
+                        <!---->
+                    </div> <!---->
+                    <div class="mds-dialog unload-popup mds-dialog--open" style="display: none;">
+                        <div class="mds-dialog--wrap">
+                            <div class="mds-dialog--inner">
+                                <div class="mds-dialog--header"><strong id="dialog-676-title">포스트 작성 중</strong> <!---->
+                                </div>
+                                <div class="mds-dialog--body">
+                                    <p class="dialog-content">작성 중인 내용은 삭제됩니다.</p>
+                                </div>
+                            </div>
+                            <div class="mds-dialog--footer"><button type="button"
+                                    class="close mds-button mds-button--cancel mds-button--h56"><span>취소</span></button>
+                                <button type="button"
+                                    class="apply mds-button mds-button--danger mds-button--h56"><span>확인</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="diary-container">
+
+                    <div class="reading-diary component">
+                        <p class="title">게시글 제목<em>*</em></p>
+                        <div class="textarea">
+                            <div class="mds-textarea mds-textarea--default">
+                                <div class="inner">
+                                    <label>
+                                        <span class="label">게시글 제목 <!----></span>
+                                        <textarea id="textarea-title"
+                                            placeholder="여러분의 후원대상이 좋은 인상을 심어줄 수 있도록 좋은 제목을 적어주세요. 기부하시는 분들의 기억에 오래 남을 거에요."
+                                            class="mds-textarea-field"></textarea>
+                                    </label>
+                                    <div class="message-wrap"><!----> <span class="title-length length">0 / 100</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="title">게시글 내용<em>*</em></p>
+                        <div class="textarea">
+                            <div class="mds-textarea mds-textarea--default">
+                                <div class="inner"><label><span class="label">게시글 내용 <!----></span> <textarea
+                                            id="textarea-content"
+                                            placeholder="후원대상인 분들에게 도서가 필요한 이유를 정성껏 적어주세요! 후원자님들이 맘에 들어하실 거에요! 그리고 까먹지 말고 우상단의 게시버튼에 이벤트 넣읍시다!"
+                                            class="mds-textarea-field"></textarea></label>
+                                    <div class="message-wrap"><!----> <span class="content-length length">0 /
+                                            2,000</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!---->
+                    <div class="sentence component">
+                        <div class="title flex">
+                            이미지 추가
+                            <p class="count"><strong>0</strong> <span>10개</span></p>
+                        </div>
+                        <input type="file" accept=".jpg, .png, .jpeg, .heic, .webp" multiple="multiple"
+                            class="input-file">
+                        <div class="add-box">
+                            <p>이 게시글에 추가할 이미지를 넣어보세요.<br>이미지당 최대 5MB까지 업로드 할 수
+                                있습니다.</p> <button type="button"
+                                class="button mds-button mds-button--secondary mds-button--h32 mds-button--r4"><span><svg
+                                        width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M9 4C9 3.72386 8.77614 3.5 8.5 3.5C8.22386 3.5 8 3.72386 8 4V7.5H4.5C4.22386 7.5 4 7.72386 4 8C4 8.27614 4.22386 8.5 4.5 8.5H8V12C8 12.2761 8.22386 12.5 8.5 12.5C8.77614 12.5 9 12.2761 9 12V8.5H12.5C12.7761 8.5 13 8.27614 13 8C13 7.72386 12.7761 7.5 12.5 7.5H9V4Z"
+                                            fill="var(--ui-background)"></path>
+                                    </svg>
+                                    추가하기
+                                </span></button>
+                        </div>
+                        <div class="images" style="display: none;">
+                            <ul>
+
+                            </ul> <button type="button"
+                                class="add-button mds-button mds-button--secondary mds-button--line mds-button--h32 mds-button--r4"><span><svg
+                                        width="17" height="16" viewBox="0 0 17 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M9 4C9 3.72386 8.77614 3.5 8.5 3.5C8.22386 3.5 8 3.72386 8 4V7.5H4.5C4.22386 7.5 4 7.72386 4 8C4 8.27614 4.22386 8.5 4.5 8.5H8V12C8 12.2761 8.22386 12.5 8.5 12.5C8.77614 12.5 9 12.2761 9 12V8.5H12.5C12.7761 8.5 13 8.27614 13 8C13 7.72386 12.7761 7.5 12.5 7.5H9V4Z"
+                                            fill="var(--secondary)"></path>
+                                    </svg>
+                                    추가하기
+                                </span></button>
+                        </div>
+                    </div>
+                </div> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!---->
+            </div>
+        </section> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!---->
+    </div>
+</body>
+<script src="/static/js/donation/receiver_write.js"></script>
+
+</html>

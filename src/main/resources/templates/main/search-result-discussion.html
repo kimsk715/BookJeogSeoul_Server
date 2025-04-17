@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>검색결과 | 북적서울</title>
+        <link
+            rel="stylesheet"
+            href="../../static/css/main/global-settings.css"
+        />
+        <link
+            rel="stylesheet"
+            href="../../static/css/main/search-result-category.css"
+        />
+        <link
+            rel="shortcut icon"
+            href="../../static/images/common/favicon.ico"
+            type="image/x-icon"
+        />
+    </head>
+    <body>
+        <div id="wrap">
+            <section class="content">
+                <div class="search-container result">
+                    <div
+                        id="backComponent"
+                        class="back-component border-hidden"
+                    >
+                        <div class="back-wrap line">
+                            <h1>
+                                <a
+                                    href=""
+                                    style="display: flex; cursor: pointer"
+                                >
+                                    <img
+                                        src="../../static/images/common/Logo.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </h1>
+                            <div class="">
+                                <div class="back">
+                                    <h2>검색결과</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 검색창 부분 -->
+                    <section class="search-input-wrap">
+                        <div class="search-input search-result">
+                            <!-- 검색창 영역 -->
+                            <article id="searchInner" class="search-inner">
+                                <div class="input-area text">
+                                    <!-- 검색 버튼 -->
+                                    <button
+                                        type="button"
+                                        class="icon-searchbar"
+                                    ></button>
+                                    <!-- // 검색 버튼 -->
+                                    <div class="input-default">
+                                        <label>
+                                            <div class="inner">
+                                                <div class="input">
+                                                    <input
+                                                        autocomplete="off"
+                                                        id="input-search"
+                                                        aria-errormessage="input-search-message"
+                                                        type="text"
+                                                        placeholder="검색어를 입력하세요"
+                                                        class="input-field"
+                                                    />
+                                                </div>
+                                                <!-- 내용 삭제 버튼 -->
+                                                <button
+                                                    type="button"
+                                                    aria-label="내용 삭제"
+                                                    class="icon-input-delete clear-button"
+                                                    style="
+                                                        background: transparent;
+                                                    "
+                                                ></button>
+                                                <!-- // 내용 삭제 버튼 -->
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </article>
+                            <!-- // 검색창 영역 -->
+                        </div>
+                    </section>
+                    <!-- // 검색창 부분 -->
+                    <!-- 검색 결과목록 -->
+                    <div class="search-result-container">
+                        <div class="search-result-data">
+                            <!-- 검색 분류 네비 -->
+                            <section class="search-sort-wrap">
+                                <div class="sort-tab">
+                                    <ul
+                                        role="menu"
+                                        aria-label="tab menu"
+                                        class="tab-wrapper"
+                                    >
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>통합</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>도서</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>독후감</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a
+                                                role="menuItem"
+                                                aria-selected="true"
+                                                href=""
+                                                ><span>북적북적</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>기부단체</span></a
+                                            >
+                                        </li>
+                                        <li role="none" class="item-menu">
+                                            <a role="menuItem" href=""
+                                                ><span>도서전달</span></a
+                                            >
+                                        </li>
+                                    </ul>
+                                    <span
+                                        class="tab-bar transition"
+                                        style="
+                                            width: 58px;
+                                            transform: translate3d(182px, 0, 0);
+                                        "
+                                    ></span>
+                                </div>
+                            </section>
+                            <!-- // 검색 분류 네비 -->
+                            <!-- 검색 옵션 -->
+                            <section class="search-options">
+                                <article class="result-list-header">
+                                    <p>
+                                        검색결과
+                                        <span class="result-count">829</span>
+                                    </p>
+                                    <div class="filter-wrapper">
+                                        <button
+                                            type="button"
+                                            class="icon-arrow-bottom"
+                                        >
+                                            <span>인기순</span>
+                                        </button>
+                                    </div>
+                                </article>
+                            </section>
+                            <!-- // 검색 옵션 -->
+                            <!-- 토론방 검색결과 -->
+                            <div class="search-list">
+                                <div class="slide-container no-swiper">
+                                    <div class="result-list grid">
+                                        <ul class="discussion slide-wrapper">
+                                            <li class="slide-item">
+                                                <div
+                                                    class="search-discussion-list"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="discussion-inner"
+                                                    >
+                                                        <div
+                                                            class="discussion-data"
+                                                        >
+                                                            <div
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="book-container books"
+                                                                >
+                                                                    <div
+                                                                        class="book-image"
+                                                                    >
+                                                                        <div
+                                                                            class="thumbnail"
+                                                                        >
+                                                                            <div
+                                                                                class="thumbnail-inner"
+                                                                            >
+                                                                                <picture>
+                                                                                    <img
+                                                                                        src="https://cover.millie.co.kr/service/cover/15067573/fde9dd87449f4f8d9289583ab26c507e.jpg?w=145&f=webp&q=80"
+                                                                                        alt=""
+                                                                                        style="
+                                                                                            min-height: 0;
+                                                                                        "
+                                                                                    />
+                                                                                </picture>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="data-text"
+                                                            >
+                                                                <span
+                                                                    class="title"
+                                                                    >역사는 과연
+                                                                    승자의
+                                                                    기록인가?</span
+                                                                >
+                                                                <p
+                                                                    class="content bookType"
+                                                                >
+                                                                    책 속 여러
+                                                                    역사 사건을
+                                                                    보면
+                                                                    '진실'보다
+                                                                    '권력을 가진
+                                                                    자의
+                                                                    시각'으로
+                                                                    서술된
+                                                                    경우가 많아.
+                                                                    그렇다면
+                                                                    역사는
+                                                                    객관적인
+                                                                    기록일까,
+                                                                    아니면
+                                                                    누군가의
+                                                                    해석일까?
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a href="" class="author">
+                                                        <div class="info">
+                                                            <span class="name"
+                                                                >작성된 댓글
+                                                                개수: 12개</span
+                                                            >
+                                                            <p class="regdate">
+                                                                2017.09.28
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="slide-item">
+                                                <div
+                                                    class="search-discussion-list"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="discussion-inner"
+                                                    >
+                                                        <div
+                                                            class="discussion-data"
+                                                        >
+                                                            <div
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="book-container books"
+                                                                >
+                                                                    <div
+                                                                        class="book-image"
+                                                                    >
+                                                                        <div
+                                                                            class="thumbnail"
+                                                                        >
+                                                                            <div
+                                                                                class="thumbnail-inner"
+                                                                            >
+                                                                                <picture>
+                                                                                    <img
+                                                                                        src="https://cover.millie.co.kr/service/cover/15067573/fde9dd87449f4f8d9289583ab26c507e.jpg?w=145&f=webp&q=80"
+                                                                                        alt=""
+                                                                                        style="
+                                                                                            min-height: 0;
+                                                                                        "
+                                                                                    />
+                                                                                </picture>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="data-text"
+                                                            >
+                                                                <span
+                                                                    class="title"
+                                                                    >역사는 과연
+                                                                    승자의
+                                                                    기록인가?</span
+                                                                >
+                                                                <p
+                                                                    class="content bookType"
+                                                                >
+                                                                    책 속 여러
+                                                                    역사 사건을
+                                                                    보면
+                                                                    '진실'보다
+                                                                    '권력을 가진
+                                                                    자의
+                                                                    시각'으로
+                                                                    서술된
+                                                                    경우가 많아.
+                                                                    그렇다면
+                                                                    역사는
+                                                                    객관적인
+                                                                    기록일까,
+                                                                    아니면
+                                                                    누군가의
+                                                                    해석일까?
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a href="" class="author">
+                                                        <div class="info">
+                                                            <span class="name"
+                                                                >작성된 댓글
+                                                                개수: 12개</span
+                                                            >
+                                                            <p class="regdate">
+                                                                2017.09.28
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="slide-item">
+                                                <div
+                                                    class="search-discussion-list"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="discussion-inner"
+                                                    >
+                                                        <div
+                                                            class="discussion-data"
+                                                        >
+                                                            <div
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="book-container books"
+                                                                >
+                                                                    <div
+                                                                        class="book-image"
+                                                                    >
+                                                                        <div
+                                                                            class="thumbnail"
+                                                                        >
+                                                                            <div
+                                                                                class="thumbnail-inner"
+                                                                            >
+                                                                                <picture>
+                                                                                    <img
+                                                                                        src="https://cover.millie.co.kr/service/cover/15067573/fde9dd87449f4f8d9289583ab26c507e.jpg?w=145&f=webp&q=80"
+                                                                                        alt=""
+                                                                                        style="
+                                                                                            min-height: 0;
+                                                                                        "
+                                                                                    />
+                                                                                </picture>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="data-text"
+                                                            >
+                                                                <span
+                                                                    class="title"
+                                                                    >역사는 과연
+                                                                    승자의
+                                                                    기록인가?</span
+                                                                >
+                                                                <p
+                                                                    class="content bookType"
+                                                                >
+                                                                    책 속 여러
+                                                                    역사 사건을
+                                                                    보면
+                                                                    '진실'보다
+                                                                    '권력을 가진
+                                                                    자의
+                                                                    시각'으로
+                                                                    서술된
+                                                                    경우가 많아.
+                                                                    그렇다면
+                                                                    역사는
+                                                                    객관적인
+                                                                    기록일까,
+                                                                    아니면
+                                                                    누군가의
+                                                                    해석일까?
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a href="" class="author">
+                                                        <div class="info">
+                                                            <span class="name"
+                                                                >작성된 댓글
+                                                                개수: 12개</span
+                                                            >
+                                                            <p class="regdate">
+                                                                2017.09.28
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="slide-item">
+                                                <div
+                                                    class="search-discussion-list"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="discussion-inner"
+                                                    >
+                                                        <div
+                                                            class="discussion-data"
+                                                        >
+                                                            <div
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="book-container books"
+                                                                >
+                                                                    <div
+                                                                        class="book-image"
+                                                                    >
+                                                                        <div
+                                                                            class="thumbnail"
+                                                                        >
+                                                                            <div
+                                                                                class="thumbnail-inner"
+                                                                            >
+                                                                                <picture>
+                                                                                    <img
+                                                                                        src="https://cover.millie.co.kr/service/cover/15067573/fde9dd87449f4f8d9289583ab26c507e.jpg?w=145&f=webp&q=80"
+                                                                                        alt=""
+                                                                                        style="
+                                                                                            min-height: 0;
+                                                                                        "
+                                                                                    />
+                                                                                </picture>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="data-text"
+                                                            >
+                                                                <span
+                                                                    class="title"
+                                                                    >역사는 과연
+                                                                    승자의
+                                                                    기록인가?</span
+                                                                >
+                                                                <p
+                                                                    class="content bookType"
+                                                                >
+                                                                    책 속 여러
+                                                                    역사 사건을
+                                                                    보면
+                                                                    '진실'보다
+                                                                    '권력을 가진
+                                                                    자의
+                                                                    시각'으로
+                                                                    서술된
+                                                                    경우가 많아.
+                                                                    그렇다면
+                                                                    역사는
+                                                                    객관적인
+                                                                    기록일까,
+                                                                    아니면
+                                                                    누군가의
+                                                                    해석일까?
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a href="" class="author">
+                                                        <div class="info">
+                                                            <span class="name"
+                                                                >작성된 댓글
+                                                                개수: 12개</span
+                                                            >
+                                                            <p class="regdate">
+                                                                2017.09.28
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="slide-item">
+                                                <div
+                                                    class="search-discussion-list"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="discussion-inner"
+                                                    >
+                                                        <div
+                                                            class="discussion-data"
+                                                        >
+                                                            <div
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="book-container books"
+                                                                >
+                                                                    <div
+                                                                        class="book-image"
+                                                                    >
+                                                                        <div
+                                                                            class="thumbnail"
+                                                                        >
+                                                                            <div
+                                                                                class="thumbnail-inner"
+                                                                            >
+                                                                                <picture>
+                                                                                    <img
+                                                                                        src="https://cover.millie.co.kr/service/cover/15067573/fde9dd87449f4f8d9289583ab26c507e.jpg?w=145&f=webp&q=80"
+                                                                                        alt=""
+                                                                                        style="
+                                                                                            min-height: 0;
+                                                                                        "
+                                                                                    />
+                                                                                </picture>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="data-text"
+                                                            >
+                                                                <span
+                                                                    class="title"
+                                                                    >역사는 과연
+                                                                    승자의
+                                                                    기록인가?</span
+                                                                >
+                                                                <p
+                                                                    class="content bookType"
+                                                                >
+                                                                    책 속 여러
+                                                                    역사 사건을
+                                                                    보면
+                                                                    '진실'보다
+                                                                    '권력을 가진
+                                                                    자의
+                                                                    시각'으로
+                                                                    서술된
+                                                                    경우가 많아.
+                                                                    그렇다면
+                                                                    역사는
+                                                                    객관적인
+                                                                    기록일까,
+                                                                    아니면
+                                                                    누군가의
+                                                                    해석일까?
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a href="" class="author">
+                                                        <div class="info">
+                                                            <span class="name"
+                                                                >작성된 댓글
+                                                                개수: 12개</span
+                                                            >
+                                                            <p class="regdate">
+                                                                2017.09.28
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="slide-item">
+                                                <div
+                                                    class="search-discussion-list"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="discussion-inner"
+                                                    >
+                                                        <div
+                                                            class="discussion-data"
+                                                        >
+                                                            <div
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="book-container books"
+                                                                >
+                                                                    <div
+                                                                        class="book-image"
+                                                                    >
+                                                                        <div
+                                                                            class="thumbnail"
+                                                                        >
+                                                                            <div
+                                                                                class="thumbnail-inner"
+                                                                            >
+                                                                                <picture>
+                                                                                    <img
+                                                                                        src="https://cover.millie.co.kr/service/cover/15067573/fde9dd87449f4f8d9289583ab26c507e.jpg?w=145&f=webp&q=80"
+                                                                                        alt=""
+                                                                                        style="
+                                                                                            min-height: 0;
+                                                                                        "
+                                                                                    />
+                                                                                </picture>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="data-text"
+                                                            >
+                                                                <span
+                                                                    class="title"
+                                                                    >역사는 과연
+                                                                    승자의
+                                                                    기록인가?</span
+                                                                >
+                                                                <p
+                                                                    class="content bookType"
+                                                                >
+                                                                    책 속 여러
+                                                                    역사 사건을
+                                                                    보면
+                                                                    '진실'보다
+                                                                    '권력을 가진
+                                                                    자의
+                                                                    시각'으로
+                                                                    서술된
+                                                                    경우가 많아.
+                                                                    그렇다면
+                                                                    역사는
+                                                                    객관적인
+                                                                    기록일까,
+                                                                    아니면
+                                                                    누군가의
+                                                                    해석일까?
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a href="" class="author">
+                                                        <div class="info">
+                                                            <span class="name"
+                                                                >작성된 댓글
+                                                                개수: 12개</span
+                                                            >
+                                                            <p class="regdate">
+                                                                2017.09.28
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="slide-item">
+                                                <div
+                                                    class="search-discussion-list"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="discussion-inner"
+                                                    >
+                                                        <div
+                                                            class="discussion-data"
+                                                        >
+                                                            <div
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="book-container books"
+                                                                >
+                                                                    <div
+                                                                        class="book-image"
+                                                                    >
+                                                                        <div
+                                                                            class="thumbnail"
+                                                                        >
+                                                                            <div
+                                                                                class="thumbnail-inner"
+                                                                            >
+                                                                                <picture>
+                                                                                    <img
+                                                                                        src="https://cover.millie.co.kr/service/cover/15067573/fde9dd87449f4f8d9289583ab26c507e.jpg?w=145&f=webp&q=80"
+                                                                                        alt=""
+                                                                                        style="
+                                                                                            min-height: 0;
+                                                                                        "
+                                                                                    />
+                                                                                </picture>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="data-text"
+                                                            >
+                                                                <span
+                                                                    class="title"
+                                                                    >역사는 과연
+                                                                    승자의
+                                                                    기록인가?</span
+                                                                >
+                                                                <p
+                                                                    class="content bookType"
+                                                                >
+                                                                    책 속 여러
+                                                                    역사 사건을
+                                                                    보면
+                                                                    '진실'보다
+                                                                    '권력을 가진
+                                                                    자의
+                                                                    시각'으로
+                                                                    서술된
+                                                                    경우가 많아.
+                                                                    그렇다면
+                                                                    역사는
+                                                                    객관적인
+                                                                    기록일까,
+                                                                    아니면
+                                                                    누군가의
+                                                                    해석일까?
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a href="" class="author">
+                                                        <div class="info">
+                                                            <span class="name"
+                                                                >작성된 댓글
+                                                                개수: 12개</span
+                                                            >
+                                                            <p class="regdate">
+                                                                2017.09.28
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li class="slide-item">
+                                                <div
+                                                    class="search-discussion-list"
+                                                >
+                                                    <a
+                                                        href=""
+                                                        class="discussion-inner"
+                                                    >
+                                                        <div
+                                                            class="discussion-data"
+                                                        >
+                                                            <div
+                                                                class="book-image"
+                                                            >
+                                                                <div
+                                                                    class="book-container books"
+                                                                >
+                                                                    <div
+                                                                        class="book-image"
+                                                                    >
+                                                                        <div
+                                                                            class="thumbnail"
+                                                                        >
+                                                                            <div
+                                                                                class="thumbnail-inner"
+                                                                            >
+                                                                                <picture>
+                                                                                    <img
+                                                                                        src="https://cover.millie.co.kr/service/cover/15067573/fde9dd87449f4f8d9289583ab26c507e.jpg?w=145&f=webp&q=80"
+                                                                                        alt=""
+                                                                                        style="
+                                                                                            min-height: 0;
+                                                                                        "
+                                                                                    />
+                                                                                </picture>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="data-text"
+                                                            >
+                                                                <span
+                                                                    class="title"
+                                                                    >역사는 과연
+                                                                    승자의
+                                                                    기록인가?</span
+                                                                >
+                                                                <p
+                                                                    class="content bookType"
+                                                                >
+                                                                    책 속 여러
+                                                                    역사 사건을
+                                                                    보면
+                                                                    '진실'보다
+                                                                    '권력을 가진
+                                                                    자의
+                                                                    시각'으로
+                                                                    서술된
+                                                                    경우가 많아.
+                                                                    그렇다면
+                                                                    역사는
+                                                                    객관적인
+                                                                    기록일까,
+                                                                    아니면
+                                                                    누군가의
+                                                                    해석일까?
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a href="" class="author">
+                                                        <div class="info">
+                                                            <span class="name"
+                                                                >작성된 댓글
+                                                                개수: 12개</span
+                                                            >
+                                                            <p class="regdate">
+                                                                2017.09.28
+                                                            </p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // 토론방 검색결과 -->
+                        </div>
+                    </div>
+                    <!-- // 검색 결과목록 -->
+                    <!-- 검색 정렬 모달창 -->
+                    <div class="modal-section">
+                        <div class="modal-wrap">
+                            <div class="modal-inner">
+                                <div class="modal-header">
+                                    <strong class="modal-title">정렬</strong>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="radio-body">
+                                        <div>
+                                            <label class="modal-radio checked">
+                                                <input type="radio" />
+                                                <span class="radio-view">
+                                                    <span
+                                                        class="check ir"
+                                                    ></span>
+                                                    <span class="label"
+                                                        >인기순</span
+                                                    >
+                                                </span>
+                                            </label>
+                                            <label class="modal-radio">
+                                                <input type="radio" />
+                                                <span class="radio-view">
+                                                    <span
+                                                        class="check ir"
+                                                    ></span>
+                                                    <span class="label"
+                                                        >업데이트순</span
+                                                    >
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="button-cancel">
+                                    <span>취소</span>
+                                </button>
+                                <button type="button" class="button-primary">
+                                    <span>확인</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // 검색 정렬 모달창 -->
+                </div>
+            </section>
+        </div>
+    </body>
+    <script src="../../static/js/main/search-result.js"></script>
+</html>

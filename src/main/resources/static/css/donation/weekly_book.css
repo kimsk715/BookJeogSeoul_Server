@@ -1,0 +1,241 @@
+@media (min-width: 1000px) {
+    .weekly-book-container {
+        max-width: var(--feed-width);
+        margin: 0 auto;
+    }
+}
+
+.weekly-book-container:not(.none) {
+    padding: 0 120px;
+}
+
+.weekly-book-section {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 24px 0px;
+    gap: 12px;
+}
+
+.weekly-title-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.weekly-title {
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--text-01,#242424);
+}
+
+.weekly-total-books {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-03,#6f6f6f);
+    cursor: pointer;
+}
+
+.swiper {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+    display: block;
+}
+
+.swiper-horizontal {
+    touch-action: pan-y;
+}
+
+.weekly-book-section div.swiper {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    transition-property: transform;
+    transition-timing-function: var(--swiper-wrapper-transition-timing-function,initial);
+    box-sizing: content-box;
+}
+
+.weekly-book-section div.swiper-wrapper {
+    align-items: baseline;
+}
+
+.swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+    display: block;
+}
+
+.swiper-backface-hidden .swiper-slide {
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.weekly-book-section div.slide-item {
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+}
+
+.book-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.book-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    gap: 8px;
+}
+
+.book-picture {
+    position: relative;
+}
+
+.book-picture-button {
+    display: block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.book-badge-wrapper {
+    z-index: 1;
+    position: absolute;
+    top: 14px;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-right: -7px;
+}
+
+.book-badge-inner {
+    width: 40px;
+    height: 34px;
+    margin-top: -8px;
+    position: relative;
+}
+
+.book-badge-image {
+    display: block;
+    width: inherit;
+    height: inherit;
+}
+
+.book-badge-text {
+    position: absolute;
+    left: -10000em;
+    top: 0px;
+    line-height: 0;
+}
+
+.book-picture-inner {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.book-picture-frame {
+    min-height: 120px;
+    max-height: 200px;
+    width: 100%;
+    filter: none;
+    display: block;
+    transition: filter 0.3s;
+    background: var(--ui-03);
+    height: 100%;
+}
+
+.book-picture-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+}
+
+
+.book-picture-inner::after {
+    content: "";
+    border-radius: 8px;
+    position: absolute;
+    inset: 0px;
+    border: 0.5px solid var(--GTrans-02);
+}
+
+.book-text-button {
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+.book-text-wrapper {
+    display: block;
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+}
+
+.book-title {
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    display: -webkit-box;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-bottom: 2px;
+    position: relative;
+    color: var(--text-01);
+}
+
+.book-author {
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    display: -webkit-box;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: var(--text-03);
+}

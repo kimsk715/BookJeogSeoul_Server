@@ -1,0 +1,504 @@
+* {
+    letter-spacing: -.6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: top;
+    border-style: none;
+    pointer-events: none;
+}
+
+i {
+    font-style: normal;
+}
+
+b, em, strong {
+    font-weight: 700;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+
+button{
+    font-family: inherit;
+    color: var(--text-01);
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    background-color: transparent;
+    border: 0px;
+    cursor: pointer;
+    font-weight: 400;
+    appearance: none;
+}
+
+button, input {
+    background-color: transparent;
+    border: 0;
+}
+
+#wrap{
+    height: 100%;
+}
+
+[class*=" mds-"], [class^=mds-] {
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    border: 0;
+    letter-spacing: -.6px;
+}
+
+[class*=" mds-icon"]:before, [class^=mds-icon]:before {
+    font-family: icon;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[type=button], [type=reset], [type=submit], button {
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    -webkit-appearance: button;
+    outline: 0;
+}
+
+main.main{
+    width: 100%;
+    max-width: var(--library-sub-width);
+    margin: 0px auto;
+}
+
+.back-wrapper{
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background: var(--ui-background);
+    z-index: 50;
+}
+
+.layout-container{
+    padding: 0px 20px;
+}
+
+.styled-back-inner{
+    position: relative;
+    max-width: var(--back-width);
+    width: 100%;
+    height: 48px;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+}
+
+.state-bar-wrapper{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding-top: 20px;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.styled-book-box{
+    padding-bottom: 20px;
+    padding-top: 12px;
+}
+
+.option-button{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.styled-back-inner>h2{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    text-align: left;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+
+.styled-back-inner>h2:first-child{
+    margin-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-indent: 0px;
+}
+
+.book-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 16px;
+    align-items: baseline;
+}
+
+.book-item{
+    flex: 0 1 100%;
+    max-width: calc(11.2% - 16px);
+}
+
+.book-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.book-wrapper-inner{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    gap: 8px;
+}
+
+.book-picture-wrapper{
+    position: relative;
+}
+
+.book-metalink{
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+.book-picture-link{
+    display: block;
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.book-badges{
+    z-index: 1;
+    position: absolute;
+    top: 14px;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-right: -7px;
+}
+
+.book-picture{
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.book-picture::after{
+    content: "";
+    border-radius: 8px;
+    position: absolute;
+    inset: 0px;
+    border: 0.5px solid var(--GTrans-02);
+}
+
+.book-badges-box{
+    width: 40px;
+    height: 34px;
+    margin-top: -8px;
+    position: relative;
+}
+
+.book-badges-image{
+    display: block;
+    width: inherit;
+    height: inherit;
+}
+
+.styled-picture{
+    min-height: 120px;
+    max-height: 200px;
+    width: 100%;
+    filter: none;
+    display: block;
+    transition: filter 0.3s;
+    background: var(--ui-03);
+    height: 100%;
+}
+
+.styled-img{
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+}
+
+.book-meta{
+    display: block;
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+}
+
+.book-name{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    display: -webkit-box;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin-bottom: 2px;
+    position: relative;
+    color: var(--text-01);
+    padding-right: 16px;
+}
+
+.book-author{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    display: -webkit-box;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: var(--text-03);
+}
+
+/* 모달창 */
+.modal-overlay{
+    position: fixed;
+    inset: 0px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-wrapper{
+    overflow: hidden;
+    background-color: var(--ui-up-03);
+    border-radius: 8px;
+    max-width: 430px;
+    width: 100%;
+    margin: 0px 24px;
+    animation-name: lbWRkT;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-direction: normal;
+}
+
+.modal-inner{
+    padding: 32px 24px;
+    overflow: hidden;
+    background-color: var(--ui-up-03);
+    border-radius: 8px;
+    width: 100%;
+}
+
+.modal-footer{
+    display: flex;
+}
+
+.modal-header{
+    margin-bottom: 24px;
+    text-align: center;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--text-01);
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    text-align: center;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-03);
+    white-space: pre-line;
+}
+
+.grid-component{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.radio-label{
+    height: 48px;
+    border-radius: 8px;
+    transition: border 0.2s linear;
+    border: 1px solid var(--ui-06);
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.radio-input{
+    display: none;
+}
+
+.radio-text{
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-04); 
+}
+
+.radio-label.active{
+    height: 48px;
+    border-radius: 8px;
+    transition: border 0.2s linear;
+    border: 3px solid var(--primary);
+    padding: 0px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+}
+
+.radio-label.active .radio-text{
+    color: var(--text-01);
+}
+
+.modal-cancel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--cancel);
+    color: var(--text-01);
+    height: 56px;
+    padding: 0px 24px;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    border-radius: 0px;
+    transition: background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
+    flex-basis: 40%;
+}
+
+.modal-cancel span{
+    display: fle;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: inherit;
+}
+
+.modal-confirm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--primary);
+    color: rgb(36, 36, 36);
+    height: 56px;
+    padding: 0px 24px;
+    font-family: Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    letter-spacing: 0px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    border-radius: 0px;
+    transition: background-color 0.2s linear, border-color 0.2s linear, color 0.2s linear;
+    flex-basis: 60%;
+}
+
+.modal-confirm span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: inherit;
+}
+/* // 모달창 */
+
+/* 잠깐 뜨는 창(토스트) */
+#wrap .toast{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 1001;
+    width: 280px;
+    min-height: 52px;
+    padding: 16px;
+    background: rgba(54, 54, 54, .9);
+    box-sizing: border-box;
+    border-radius: 3px;
+    text-align: center;
+    color: #fff;
+    pointer-events: none;
+    word-break: keep-all;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#wrap .toast p{
+    word-break: break-all;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -60%); }
+    10% { opacity: 1; transform: translate(-50%, -50%); }
+    90% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -40%); }
+}
+
+.toast {
+    animation: fadeInOut 2.5s ease-in-out;
+}
+/* // 잠깐 뜨는 창(토스트) */

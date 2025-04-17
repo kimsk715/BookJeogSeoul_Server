@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>도서 | 북적서울</title>
+        <link
+            rel="shortcut icon"
+            href="../../static/images/common/favicon.ico"
+            type="image/x-icon"
+        />
+        <link
+            rel="stylesheet"
+            href="../../static/css/main/global-settings.css"
+        />
+        <link rel="stylesheet" href="../../static/css/main/header.css" />
+        <link
+            rel="stylesheet"
+            href="../../static/css/member/scrap-mypage.css"
+        />
+    </head>
+    <body>
+        <div id="wrap">
+            <main class="main">
+                <!-- 상단 헤더 -->
+                <div class="back-wrapper">
+                    <div class="styled-back-inner">
+                        <h2 class="title">도서</h2>
+                    </div>
+                </div>
+                <!-- // 상단 헤더 -->
+                <div class="layout-container">
+                    <div class="state-bar-wrapper">
+                        <button type="button" class="option-button">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="none"
+                                viewBox="0 0 16 16"
+                                class="mds-icon"
+                                color="var(--text-01)"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M7.798 5.576a.5.5 0 0 1-.707 0L5.722 4.207V13a.5.5 0 0 1-1 0V4.207L3.354 5.576a.5.5 0 1 1-.708-.707L4.864 2.65a.5.5 0 0 1 .358-.151h.01a.5.5 0 0 1 .344.146L7.798 4.87a.5.5 0 0 1 0 .707M11.28 3a.5.5 0 0 0-1 0v8.795l-1.37-1.37a.5.5 0 0 0-.708.706l2.222 2.223a.5.5 0 0 0 .355.146h.001a.5.5 0 0 0 .38-.174l2.194-2.195a.5.5 0 0 0-.707-.707l-1.367 1.367z"
+                                    clip-rule="evenodd"
+                                    fill="currentColor"
+                                ></path>
+                            </svg>
+                            <span>최근 본 순</span>
+                        </button>
+                    </div>
+                    <div class="styled-book-box">
+                        <!-- 책 목록 -->
+                        <ul class="book-list">
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="book-item">
+                                <div class="book-wrapper">
+                                    <div class="book-wrapper-inner">
+                                        <div class="book-picture-wrapper">
+                                            <button class="book-picture-link">
+                                                <div class="book-badges">
+                                                    <div
+                                                        class="book-badges-box"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/member/book-like-badge.png"
+                                                            alt="스크랩"
+                                                            class="book-badges-image"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="book-picture">
+                                                    <picture
+                                                        class="styled-picture"
+                                                    >
+                                                        <img
+                                                            src="../../static/images/book/book_thumbnail.example.png"
+                                                            alt="도서 이미지"
+                                                            class="styled-img"
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="book-metalink"
+                                        >
+                                            <div class="book-meta">
+                                                <p class="book-name">
+                                                    용의자 X의 헌신
+                                                </p>
+                                                <p class="book-author">
+                                                    히가시노 게이고 지음
+                                                </p>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- // 책 목록 -->
+                    </div>
+                </div>
+            </main>
+            <!-- 분류 모달 -->
+            <div id="portal">
+                <div class="modal-overlay" style="display: none">
+                    <div class="modal-wrapper">
+                        <div class="modal-inner">
+                            <div class="modal-header">
+                                <strong>정렬</strong>
+                            </div>
+                            <div class="modal-body">
+                                <div class="grid-component">
+                                    <label for="created-at" class="radio-label">
+                                        <input
+                                            type="radio"
+                                            name="sort"
+                                            id="created-at"
+                                            class="radio-input"
+                                            value="created-at"
+                                        />
+                                        <span class="radio-text">최근 담은 순</span>
+                                    </label>
+                                    </label>
+                                    <label
+                                        for="title"
+                                        class="radio-label"
+                                    >
+                                        <input
+                                            type="radio"
+                                            name="sort"
+                                            id="title"
+                                            class="radio-input"
+                                            value="title"
+                                        />
+                                        <span class="radio-text">책 제목 순</span>
+                                    </label>
+                                    <label
+                                        for="author"
+                                        class="radio-label"
+                                    >
+                                        <input
+                                        type="radio"
+                                        name="sort"
+                                        id="author"
+                                        class="radio-input"
+                                        value="author"
+                                        />
+                                        <span class="radio-text">저자명 순</span>
+                                    </label>
+                                    <label
+                                        for="publisher"
+                                        class="radio-label"
+                                    >
+                                        <input
+                                        type="radio"
+                                        name="sort"
+                                        id="publisher"
+                                        class="radio-input"
+                                        value="publisher"
+                                        />
+                                        <span class="radio-text">출판사 순</span>
+                                    </label>
+                                    <label
+                                        for="publish-date"
+                                        class="radio-label"
+                                    >
+                                        <input
+                                        type="radio"
+                                        name="sort"
+                                        id="publish-date"
+                                        class="radio-input"
+                                        value="publish-date"
+                                        />
+                                        <span class="radio-text">출판일 순</span>   
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="modal-cancel"><span>닫기</span></button>
+                            <button type="button" class="modal-confirm"><span>적용하기</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // 분류 모달 -->
+        </div>
+    </body>
+    <script src="../../static/js/member/scrap-mypage.js"></script>
+</html>
