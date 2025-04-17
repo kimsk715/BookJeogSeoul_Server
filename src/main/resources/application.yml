@@ -7,8 +7,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/spring?serverTimezone=Asia/Seoul&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
-    username: spring
+    url: jdbc:mysql://localhost:3306/bookjeogseoul?serverTimezone=Asia/Seoul&useSSL=false&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: bjseoul
     password: 1234
   mail:
     host: smtp.gmail.com
