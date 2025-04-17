@@ -1,10 +1,6 @@
-package com.app.bookJeog.controller;
+package com.app.bookJeog.controller.member;
 
-import com.app.bookJeog.domain.dto.MemberDTO;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.RequestBody;
 
 // 분리하는 이유
 // 문서 작업과 비지니스 로직 작업을 분리하여 가독성을 높이고 유지보수 효과를 극대화하기 위함
