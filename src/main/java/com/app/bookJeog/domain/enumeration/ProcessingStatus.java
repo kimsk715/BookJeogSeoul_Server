@@ -6,14 +6,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 // Enum 클래스를 직접 상속받지 않고 컴파일 과정에서 상속받게 된다.
 // 각 상수들은 인스턴스로 만들어지며, 각 인스턴스는 모두 해당 enum 타입이다.
 // 각 상수는 모두 static으로 처리되고, enum Heap 메모리에 할당된다.
-public enum ProceesingStatus {
+public enum ProcessingStatus {
     WAITING("처리대기"),
     DONE("처리완료");
 
 
     private final String code;
 
-    private ProceesingStatus(String code){
+    private ProcessingStatus(String code){
         this.code = code;
     }
 
@@ -28,13 +28,13 @@ public enum ProceesingStatus {
 //    RESTful API에서 json형식으로 enum을 받아야할 때,
 //    직접 작성한 code 혹은 label이 있을 경우 재정의해야한다.
     @JsonCreator
-    public static ProceesingStatus forCode(String code){
+    public static ProcessingStatus forCode(String code){
 //        화면에서 전달받은 문자열(code)을
-        for(ProceesingStatus proceesingStatus  : ProceesingStatus.values()){
+        for(ProcessingStatus processingStatus : ProcessingStatus.values()){
 //            전체 code와 비교하여 같다면
-            if(proceesingStatus.getCode().equals(code)){
+            if(processingStatus.getCode().equals(code)){
 //                해당 code의 memberType 객체를 리턴한다.
-                return proceesingStatus;
+                return processingStatus;
             }
         }
         throw new IllegalArgumentException("존재하지 않는 값");
