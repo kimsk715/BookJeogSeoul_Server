@@ -934,10 +934,10 @@ em {
     text-decoration: underline;
 }
 .hamburger.active::before {
-    transform: translate3D(0, 7px, 0) rotate(45deg);
+    transform: translate3D(0, 8px, 0) rotate(45deg);
 }
 .hamburger.active::after {
-    transform: translate3D(0, -6px, 0) rotate(-43deg);
+    transform: translate3D(0, -6px, 0) rotate(-40deg);
 }
 .hamburger.active > span {
     opacity: 0;
