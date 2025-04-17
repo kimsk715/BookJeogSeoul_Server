@@ -1,34 +1,17 @@
 const bookService= (() => {
 
 
-    const getAllBook = async(callback, param ={}) =>{
-        // let page = param.page || 1;
-        // let search = param.search;
-        // let companyInquiryKeyword = "";
-        // let status = "";
-        // let date = 0;
-        // if(search){
-        //     companyInquiryKeyword = search.companyInquiryKeyword;
-        //     status = search.status;
-        //     date = search.date;
-        // }
+    const getAllBook = async(callback) =>{
         let path =`/admin/books`;
-        // if(status){
-        //     path += `&status=${status}`
-        // }
-        // if(date){
-        //     path += `&date=${date}`
-        // }
-        // if(companyInquiryKeyword){
-        //     path += `&companyInquiryKeyword=${companyInquiryKeyword}`
-        // }
-        const response = await fetch(path)
+        const response = await fetch(path);
         const bookList = await response.json();
+        console.log("📦 bookList 받음:", bookList);
         if(callback){
+            console.log("콜백 실행 확인")
             callback(bookList)
         }
     }
 
 
-    return {getAllBook: getAllBook};
+    return {getAllBook : getAllBook};
 })();

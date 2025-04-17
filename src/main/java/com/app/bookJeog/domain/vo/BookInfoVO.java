@@ -1,12 +1,7 @@
 package com.app.bookJeog.domain.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
-import org.springframework.stereotype.Component;
-
-@Component
-@ToString
-@Getter
+import lombok.Data;
 
 @Data
 public class BookInfoVO {

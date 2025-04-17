@@ -1,15 +1,16 @@
 const bookLayout = (() =>{
-    const showBookList = async (bookList) => {
+    const showBookList = (bookList) => {
         const bookTBody = document.querySelector(".book-table tbody");
         let text = ``;
+        console.log("실행됨")
         bookList.forEach((book) => {
             text += `
             <tr>
-                <td><input type="checkbox" class="chosenBook"></td>
-                <td>${book.isbn}</td>
-                <td>${book.title}</td>
-                <td>${book.author}</td>
-                <td>${book.publisher}</td>
+                <td><input type="checkbox" class="chosenBook" value="${book.ISBN}"></td>
+                <td>${book.ISBN}</td>
+                <td>${book.TITLE}</td>
+                <td>${book.AUTHOR}</td>
+                <td>${book.PUBLISHER}</td>
                 <td><span class="status active">선정</span></td>
                 <td>
                     <span class="status active">대출중</span>
@@ -22,7 +23,8 @@ const bookLayout = (() =>{
             </tr>
             `
         })
-
+        // console.log("post text")
+        console.log(text)
         bookTBody.innerHTML = text;
         text=``;
     }
@@ -30,4 +32,4 @@ const bookLayout = (() =>{
 
     return{showBookList : showBookList};
 
-    })
+    })();

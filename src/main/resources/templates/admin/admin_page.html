@@ -525,24 +525,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- 샘플 데이터 -->
-                                    <tr th:each="book : ${books}">
-                                        <td><input type="checkbox" class="chosenBook"></td>
-                                        <td th:text="${book.isbn}">19282874981</td>
-                                        <td th:text="${book.title}"></td>
-                                        <td th:text="${book.author}"></td>
-                                        <td th:text="${book.publisher}"></td>
-                                        <td><span class="status active">선정</span></td>
-                                        <td>
-                                            <span class="status active">대출중</span>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="detail-btn book-detail-btn">
-                                                상세보기
-                                            </button>
-                                        </td>
-                                    </tr>
+
                                 </tbody>
+<!--                                <tbody>-->
+<!--                                    <tr th:each="book : ${books}">-->
+<!--                                        <td><input type="checkbox" class="chosenBook"></td>-->
+<!--                                        <td th:text="${book.isbn}">19282874981</td>-->
+<!--                                        <td th:text="${book.title}"></td>-->
+<!--                                        <td th:text="${book.author}"></td>-->
+<!--                                        <td th:text="${book.publisher}"></td>-->
+<!--                                        <td><span class="status active">선정</span></td>-->
+<!--                                        <td>-->
+<!--                                            <span class="status active">대출중</span>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <button type="button" class="detail-btn book-detail-btn">-->
+<!--                                                상세보기-->
+<!--                                            </button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                </tbody>-->
                             </table>
                         </div>
                     </div>
