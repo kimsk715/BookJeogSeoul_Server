@@ -1,3 +1,8 @@
+// 이 책의 스크랩 개수 가져오기
+document.addEventListener("DOMContentLoaded", async () => {
+    await bookDetailLayout.showScrapCount();
+});
+
 // 버튼을 클릭하면 도서 찜하기
 const scrapButton = document.querySelector(".mds-icon-scrap");
 

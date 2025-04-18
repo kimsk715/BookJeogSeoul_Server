@@ -219,7 +219,7 @@
                                     <div class="book-cover-info-box-footer">
                                         <div class="book-cover-footer-count">
                                             이 책이 담긴 서재
-                                            <b>538+</b>
+                                            <b class="scrapCount">538+</b>
                                         </div>
                                     </div>
                                 </div>
@@ -341,11 +341,7 @@
                                         <ul class="slide-wrapper">
                                             <li class="slide-item">
                                                 <p>카테고리</p>
-                                                <strong>소설</strong>
-                                            </li>
-                                            <li class="slide-item">
-                                                <p>페이지</p>
-                                                <strong>447P</strong>
+                                                <strong th:text="${category}">소설</strong>
                                             </li>
                                             <li class="slide-item">
                                                 <p>출판사</p>
@@ -354,10 +350,6 @@
                                             <li class="slide-item">
                                                 <p>출간일</p>
                                                 <strong th:text="${pubDate}">2017.08.30</strong>
-                                            </li>
-                                            <li class="slide-item">
-                                                <p>등록일</p>
-                                                <strong>2022.06.16</strong>
                                             </li>
                                             <li class="slide-item">
                                                 <p>ISBN</p>
@@ -646,14 +638,14 @@
                             </div>
                             <!--  -->
                             <!--  -->
-                            <!-- 같은 카테고리의 다른 도서 -->
+                            <!-- 이 작가의 다른 도서 -->
                             <div class="relate-container thin-line">
                                 <div class="relate-inner">
                                     <h3 class="book-info-title link">
                                         <a
                                             href=""
                                             data-content-type="best-more-button"
-                                            >소설 분야 BEST</a
+                                            >이 작가의 다른 책</a
                                         >
                                     </h3>
                                     <div class="book-shelf overflow">
@@ -1184,14 +1176,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- // 같은 카테고리의 다른 도서 -->
+                            <!-- // 이 작가의 다른 도서 -->
                         </div>
                     </div>
                 </div>
             </section>
         </div>
     </body>
-<!--    <script src="/js/book/book-detail-service.js"></script>-->
-<!--    <script src="/js/book/book-detail-layout.js"></script>-->
+    <script src="/js/book/book-detail-service.js"></script>
+    <script src="/js/book/book-detail-layout.js"></script>
     <script src="/js/book/book-detail-event.js"></script>
 </html>
