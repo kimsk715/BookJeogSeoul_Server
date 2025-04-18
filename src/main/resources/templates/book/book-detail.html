@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>책 제목 | 북적서울</title>
+        <title th:text="${title} + ' | 북적서울'"></title>
         <link
             rel="stylesheet"
             href="/css/main/global-settings.css"
@@ -131,7 +131,7 @@
                                 <i class="mds-icon-arrow-left"></i>
                             </button>
                             <!-- // 뒤로가기 버튼 -->
-                            <h2 class="book-detail-header">용의자 X의 헌신</h2>
+                            <h2 class="book-detail-header" th:text="${title}">제목</h2>
                             <!-- 책 찜하기 버튼 -->
                             <button type="button" class="scrap-button">
                                 <!-- 찜 안 했을 때 -->
@@ -166,7 +166,7 @@
                                                 <div class="book-picture">
                                                     <picture>
                                                         <img
-                                                            src="/images/book/book_thumbnail.example.png"
+                                                            th:src="${cover}"
                                                             alt="도서 썸네일"
                                                             width="200"
                                                             style="
@@ -185,7 +185,7 @@
                                     <div class="background-cover">
                                         <picture>
                                             <img
-                                                src="/images/book/book_thumbnail.example.png"
+                                                th:src="${cover}"
                                                 alt="책 배경 썸네일"
                                                 width="200"
                                                 style="min-height: 0"
@@ -201,16 +201,16 @@
                                 <div class="book-cover-info-box">
                                     <div class="book-cover-info-box-body">
                                         <div>
-                                            <p class="book-cover-info-title">
+                                            <p class="book-cover-info-title" th:text="${title}">
                                                 용의자 X의 헌신
                                             </p>
                                         </div>
                                         <div>
-                                            <p class="book-cover-info-athor">
+                                            <p class="book-cover-info-athor" th:text="${author}">
                                                 히가시노 게이고
                                             </p>
-                                            <p class="book-cover-info-text">
-                                                <span>재인</span>
+                                            <p class="book-cover-info-text" th:text="${pubDate}">
+                                                <span th:text="${publisher}">재인</span>
                                                 <span class="middot"></span>
                                                 2022.06.16
                                             </p>
@@ -300,6 +300,7 @@
                                             <div
                                                 class="desc-box"
                                                 id="intro-more"
+                                                th:text="${description}"
                                             >
                                                 히가시노 게이고 문학의 정수로
                                                 일컬어지는 [용의자 X의 헌신]이
@@ -348,11 +349,11 @@
                                             </li>
                                             <li class="slide-item">
                                                 <p>출판사</p>
-                                                <strong>재인</strong>
+                                                <strong th:text="${publisher}">재인</strong>
                                             </li>
                                             <li class="slide-item">
                                                 <p>출간일</p>
-                                                <strong>2017.08.30</strong>
+                                                <strong th:text="${pubDate}">2017.08.30</strong>
                                             </li>
                                             <li class="slide-item">
                                                 <p>등록일</p>
@@ -360,7 +361,7 @@
                                             </li>
                                             <li class="slide-item">
                                                 <p>ISBN</p>
-                                                <strong>9791197893506</strong>
+                                                <strong th:text="${isbn}">9791197893506</strong>
                                             </li>
                                         </ul>
                                     </div>
@@ -1190,5 +1191,7 @@
             </section>
         </div>
     </body>
-    <script src="/js/book/book-detail.js"></script>
+<!--    <script src="/js/book/book-detail-service.js"></script>-->
+<!--    <script src="/js/book/book-detail-layout.js"></script>-->
+    <script src="/js/book/book-detail-event.js"></script>
 </html>

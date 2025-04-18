@@ -45,8 +45,6 @@ public class PostController {
         return "post/post-write";
     }
 
-
-
     // 독후감 수정
     @GetMapping("bookpost/edit")
     public String gotoBookPostEdit() {
