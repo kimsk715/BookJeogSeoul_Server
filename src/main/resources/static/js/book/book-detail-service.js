@@ -1,33 +1,30 @@
 const bookDetailService = (() => {
 
-    // 책 상세정보 받기
-    const getBookInfo = async () => {
-        const isbn = "9788984374423"; // 예시용
-        const path = `/book/api/detail/${isbn}`;
+    // 책 스크랩 개수 받기
+    const getScrapCount = async () => {
+        // 현재 페이지 경로에서 isbn 추출
+        const path = window.location.pathname;
+        const isbn = path.split("/").pop(); // "9788984374423"
+
+        const url = `/book/scrap-count?isbn=${isbn}`;
 
         try {
-            const response = await fetch(path);
+            console.log("Fetch 시작");
+            const response = await fetch(url);
 
             if (!response.ok) {
-                console.error("서버 응답 실패");
-                return null;
+                console.error("스크랩 개수 조회 실패");
+                return 0;
             }
 
-            const data = await response.json();
-            console.log(data);
+            const count = await response.json();
+            return count;
 
-            if (data && data.title) {
-                // 이제는 data 자체가 책 정보이므로 바로 반환
-                return data;
-            } else {
-                console.error("책 정보가 존재하지 않음:", data);
-                return null;
-            }
         } catch (error) {
             console.error("fetch 에러:", error);
-            return null;
+            return 0;
         }
     };
 
-    return { getBookInfo };
+    return { getScrapCount : getScrapCount };
 })();

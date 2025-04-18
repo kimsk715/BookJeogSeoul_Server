@@ -1,5 +1,6 @@
 package com.app.bookJeog.controller;
 
+import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.app.bookJeog.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,10 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
+import java.util.NoSuchElementException;
 
 @Controller
 @Slf4j
@@ -29,6 +28,8 @@ public class BookController implements BookControllerDocs {
 
         if (response != null) {
             bookService.parseAndAddBookInfoToModel(response, model);
+        } else{
+            throw new ResourceNotFoundException(isbn);
         }
 
         // 디버그 로그로 확인

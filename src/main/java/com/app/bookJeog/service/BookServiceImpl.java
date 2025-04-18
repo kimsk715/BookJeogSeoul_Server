@@ -1,5 +1,6 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -7,8 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @Slf4j
@@ -43,6 +42,10 @@ public class BookServiceImpl implements BookService {
             JsonNode root = objectMapper.readTree(response);
             JsonNode item = root.path("item");
 
+            if (!item.isArray() || item.size() == 0) {
+                throw new ResourceNotFoundException("해당 도서를 찾을 수 없습니다.");
+            }
+
             // item이 배열인지 확인하고, 첫 번째 책 정보 가져오기
             if (item.isArray() && item.size() > 0) {
                 JsonNode bookData = item.get(0);  // 첫 번째 책 정보
@@ -54,6 +57,25 @@ public class BookServiceImpl implements BookService {
                 String description = bookData.path("description").asText();
                 String cover = bookData.path("cover").asText();
 
+                // 국내도서>어린이>초등 전학년>동화/명작/고전 같은 이름에서 마지막 카테고리명만 추출
+                String categoryName = null;
+
+                // categoryName이 null이 아닌지 확인
+                categoryName = bookData.path("categoryName").asText();
+
+                // \u003E를 실제 '>' 기호로 변환
+                if (categoryName != null) {
+                    log.info(categoryName);
+                    categoryName = categoryName.replace("\u003E", ">");
+
+                    // 카테고리 구분 처리
+                    String[] categories = categoryName.split(">");
+                    String lastCategory = categories[categories.length - 1];
+                    model.addAttribute("category", lastCategory);
+                } else {
+                    model.addAttribute("category", "정보 없음");
+                }
+
                 // 모델에 추가
                 model.addAttribute("title", title);
                 model.addAttribute("author", author);
@@ -61,10 +83,9 @@ public class BookServiceImpl implements BookService {
                 model.addAttribute("pubDate", pubDate);
                 model.addAttribute("description", description);
                 model.addAttribute("cover", cover);
-
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("도서 파싱 중 오류 발생");
         }
     }
 }
