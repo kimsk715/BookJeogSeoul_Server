@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class SponsorController {
 
+
     // 단체 마이페이지 조회
     @GetMapping("mypage")
     public String SponsorMypage() {
         return "organization/mypage";
     }
+
 
     // 단체 마이페이지 - 내 기부글
     @GetMapping("mypage/donation")
@@ -24,11 +26,13 @@ public class SponsorController {
         return "organization/my-donation";
     }
 
+
     // 단체 마이페이지 - 비밀번호 확인
     @GetMapping("mypage/password-check")
     public String gotoSponsorPasswordCheck() {
         return "organization/password-check";
     }
+
 
     // 단체 마이페이지 - 내 기부 인증글
     @GetMapping("mypage/donate-cert")
@@ -36,11 +40,13 @@ public class SponsorController {
         return "organization/my-donate-post";
     }
 
+
     // 단체 마이페이지 - 회원정보 변경
     @GetMapping("mypage/profile")
     public String SponsorMypageProfile() {
         return "organization/my-profile";
     }
+
 
     // 단체 회원탈퇴
     @GetMapping("leave")
@@ -48,9 +54,26 @@ public class SponsorController {
         return "organization/leave-organization";
     }
 
+
     // 단체 회원탈퇴 - 탈퇴사유 입력
     @GetMapping("leave/reason")
     public String gotoSponsorLeaveReason() {
         return "organization/leave-reason";
     }
+
+
+    // 단체 로그인
+    @GetMapping("login/sponsorship")
+    public String goToSponsorship() {
+        return "login/sponsorship";
+    }
+
+
+    // 단체 비밀번호 찾기
+    @GetMapping("login/findpasswd-sponsor")
+    public String goToFindPasswdSponsor() {
+        return "login/findpasswd-sponsor";
+    }
 }
+
+

@@ -13,41 +13,84 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PostController {
     // 토론게시판 이동
     @GetMapping("discussion")
-    public String gotoDiscussion() {
+    public String goToDiscussion() {
         return "discussion/main";
     }
 
 
     // 토론 게시글
     @GetMapping("discussion/post")
-    public String gotoDiscussionPost() {
+    public String goToDiscussionPost() {
         return "discussion/post";
     }
 
 
     // 독후감 게시판
     @GetMapping("bookpost")
-    public String gotoBookPost() {
+    public String goToBookPost() {
         return "post/post-list";
     }
 
 
     // 독후감 게시글
     @GetMapping("bookpost/post")
-    public String gotoBookPostPost() {
+    public String goToBookPostPost() {
         return "post/post-detail";
     }
 
 
     // 독후감 작성
     @GetMapping("bookpost/write")
-    public String gotoBookPostWrite() {
+    public String goToBookPostWrite() {
         return "post/post-write";
     }
 
     // 독후감 수정
     @GetMapping("bookpost/edit")
-    public String gotoBookPostEdit() {
+    public String goToBookPostEdit() {
         return "post/post-update";
     }
+
+    // 후원 인증 게시판
+    @GetMapping("donate")
+    public String goToDonateCert(){
+        return "donation/donate_cert_main";
+    }
+    
+    // 후원 인증 게시글    
+    @GetMapping("donate/post")
+    public String goTODonateCertPost(){
+        return "donation/donate_cert_post";
+    }
+
+    // 후원 인증 게시글 작성
+    @GetMapping("donate/write")
+    public String goToDonateCertWrite(){
+        return "donation/donate_cert_write";
+    }
+    
+    // 후원 대상 게시판
+    @GetMapping("receiver")
+    public String goToReceiver(){
+        return "donation/receiver_main";
+    }
+
+    // 후원 대상 게시글
+    @GetMapping("receiver/post")
+    public String goToReceiverPost(){
+        return "donation/receiver_post";
+    }
+
+    // 후원 대상 게시글 작성
+    @GetMapping("receiver/write")
+    public String goToReceiverWrite(){
+        return "donation/receiver_write";
+    }
+
+    // 이 주의 기부도서
+    @GetMapping("weekly")
+    public String goToWeekly(){
+        return "donation/weekly_book";
+    }
+
 }

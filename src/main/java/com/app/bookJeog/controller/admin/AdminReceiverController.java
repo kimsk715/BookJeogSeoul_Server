@@ -1,6 +1,6 @@
-package com.app.bookJeog.controller;
+package com.app.bookJeog.controller.admin;
 
-import com.app.bookJeog.controller.member.MemberControllerDocs;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @RequestMapping("/")
 @RequiredArgsConstructor
-public class AlarmController {
+public class AdminReceiverController {
 
-    // 알림 센터
-    @GetMapping("/alarm")
-    public String goToAlarm() {
-        return "main/alarm";
-    }
+
 }
