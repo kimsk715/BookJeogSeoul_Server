@@ -4,17 +4,28 @@ const emailInput = document.querySelector("#bjs-email");
 const nameInput = document.querySelector("#bjs-name");
 const birthInput = document.querySelector("#bjs-birth");
 const genderInput = document.querySelector("#bjs-gender");
+const pwInput = document.querySelector("#bjs-pw");
+const phoneInput = document.querySelector("#bjs-phone");
+const nickNameInput = document.querySelector("#bjs-nickname");
 
 const birthGenderClrBtn = document.querySelector("#clear-button-gender");
-const nameclrBtn = document.querySelector("#clear-button-for-name");
+const nameclrBtn = document.querySelector("#clear-button-name");
 const emailclrBtn = document.querySelector("#clear-button-email");
+const phoneclrBtn = document.querySelector("#clear-button-phone");
+const pwclrBtn = document.querySelector("#clear-button-for-pw");
+const nicknameclrBtn = document.querySelector("#clear-button-nickname");
+
+
 
 const checkInput = () => {
     if (
         genderInput.value !== "" &&
         birthInput.value !== "" &&
         nameInput.value !== "" &&
-        emailInput.value !== ""
+        emailInput.value !== "" &&
+        phoneInput.value !== "" &&
+        pwInput.value !== "" &&
+        nickNameInput.value !== ""
     ) {
         checkBtn.style.opacity = "1";
         checkBtn.style.cursor = "pointer";
@@ -23,12 +34,40 @@ const checkInput = () => {
         checkBtn.style.cursor = "not-allowed";
     }
 };
+// input
 
 emailInput.addEventListener("input", () => {
     if (emailInput.value !== "") {
         emailclrBtn.style.display = "block";
     } else {
         emailclrBtn.style.display = "none";
+    }
+    checkInput();
+});
+
+nickNameInput.addEventListener("input", () => {
+    if (nickNameInput.value !== "") {
+        nicknameclrBtn.style.display = "block";
+    } else {
+        nicknameclrBtn.style.display = "none";
+    }
+    checkInput();
+});
+
+phoneInput.addEventListener("input", () => {
+    if (phoneInput.value !== "") {
+        phoneclrBtn.style.display = "block";
+    } else {
+        phoneclrBtn.style.display = "none";
+    }
+    checkInput();
+});
+
+pwInput.addEventListener("input", () => {
+    if (pwInput.value !== "") {
+        pwclrBtn.style.display = "block";
+    } else {
+        pwclrBtn.style.display = "none";
     }
     checkInput();
 });
@@ -44,7 +83,6 @@ nameInput.addEventListener("input", () => {
 
 birthInput.addEventListener("input", () => {
     if (birthInput.value.trim() !== "" || genderInput.value.trim() !== "") {
-        console.log("값 있음");
         birthGenderClrBtn.style.display = "block";
     } else {
         birthGenderClrBtn.style.display = "none";
@@ -60,6 +98,29 @@ genderInput.addEventListener("input", () => {
     }
     checkInput();
 });
+
+// focus
+
+
+nickNameInput.addEventListener("focus", () => {
+    if (nickNameInput.value !== "") {
+        nicknameclrBtn.style.display = "block";
+    }
+});
+
+phoneInput.addEventListener("focus", () => {
+    if (phoneInput.value !== "") {
+        phoneclrBtn.style.display = "block";
+    }
+});
+
+pwInput.addEventListener("focus", () => {
+    if (pwInput.value !== "") {
+        pwclrBtn.style.display = "block";
+    }
+});
+
+
 
 emailInput.addEventListener("focus", () => {
     if (emailInput.value !== "") {
@@ -79,6 +140,34 @@ birthInput.addEventListener("focus", () => {
 genderInput.addEventListener("focus", () => {
     if (genderInput.value !== "" && birthInput.value !== "") {
         birthGenderClrBtn.style.display = "block";
+    }
+});
+
+
+// blur
+
+nickNameInput.addEventListener("blur", () => {
+    if (nickNameInput.value !== "") {
+        nicknameclrBtn.style.display = "block";
+    } else {
+        nicknameclrBtn.style.display = "none";
+    }
+});
+
+
+phoneInput.addEventListener("blur", () => {
+    if (phoneInput.value !== "") {
+        phoneclrBtn.style.display = "block";
+    } else {
+        phoneclrBtn.style.display = "none";
+    }
+});
+
+pwInput.addEventListener("blur", () => {
+    if (pwInput.value !== "") {
+        pwclrBtn.style.display = "block";
+    } else {
+        pwclrBtn.style.display = "none";
     }
 });
 
@@ -134,10 +223,36 @@ nameclrBtn.addEventListener("mousedown", (e) => {
     checkInput();
 });
 
+pwclrBtn.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    pwInput.value = "";
+    pwclrBtn.style.display = "none";
+    checkInput();
+});
+
+phoneclrBtn.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    phoneInput.value = "";
+    phoneclrBtn.style.display = "none";
+    checkInput();
+});
+
+nicknameclrBtn.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    nickNameInput.value = "";
+    nicknameclrBtn.style.display = "none";
+    checkInput();
+});
+
+
 // 이메일, 생년월일 형식 체크
 const checkBtn = document.querySelector("#check-btn");
 const nextBtn = document.querySelector("#next-btn");
 const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const checkEmail = () => {
+    emailcheckService.getTrueFalse(document.querySelector("#bjs-email").value)
+}
 
 const checkBirth = () => {
     if (birthInput.value.length > 8) {
@@ -146,24 +261,24 @@ const checkBirth = () => {
     }
 };
 
+
+
 checkBtn.addEventListener("click", (e) => {
-    if (
-        (emailInput.value && !pattern.test(emailInput.value)) ||
-        birthInput.value.length < 6
-    ) {
-        modalHeader.innerText = "형식 오류";
-        modalBody.innerText = "이메일 또는 생년월일 형식이 올바르지 않습니다.";
+    if ((emailInput.value && !pattern.test(emailInput.value)) ||
+        birthInput.value.length < 6 || checkEmail())
+    {
+        console.log(checkEmail());
+        modalHeader.innerText = "형식&중복 오류";
+        modalBody.innerText = "이메일 또는 생년월일 형식&중복을 확인해주세요.";
         modal.classList.remove("fade-out");
         modal.style.display = "flex";
         modal.classList.add("fade-in");
-        console.log("올바르지 않은 이메일 형식");
     } else if (
         (emailInput.value && pattern.test(emailInput.value)) ||
-        birthInput.value.length >= 6
+        birthInput.value.length >= 6 || checkEmail()
     ) {
-        console.log("올바른 이메일 형식");
-        modalHeader.innerText = "거의 다 되었어요!";
-        modalBody.innerText = "다음 버튼을 눌러주세요.";
+        modalHeader.innerText = "확인 완료!!";
+        modalBody.innerText = "다음 버튼을 눌러주세요 :)";
         modal.classList.remove("fade-out");
         modal.style.display = "flex";
         modal.classList.add("fade-in");
@@ -173,9 +288,11 @@ checkBtn.addEventListener("click", (e) => {
         modal.classList.remove("fade-out");
         modal.style.display = "flex";
         modal.classList.add("fade-in");
-        console.log("이메일을 입력해주세요");
     }
 });
+
+
+
 
 // 모달창
 const modal = document.querySelector(".modal");
@@ -192,3 +309,6 @@ modalCloseBtn.addEventListener("click", () => {
         modal.style.display = "none";
     }, 500);
 });
+
+
+
