@@ -2,16 +2,16 @@ package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.app.bookJeog.service.BookService;
-import com.app.bookJeog.controller.member.MemberControllerDocs;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.NoSuchElementException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 @Controller
 @Slf4j
@@ -29,7 +29,7 @@ public class BookController implements BookControllerDocs {
 
         if (response != null) {
             bookService.parseAndAddBookInfoToModel(response, model);
-        } else{
+        } else {
             throw new ResourceNotFoundException(isbn);
         }
 
@@ -37,5 +37,15 @@ public class BookController implements BookControllerDocs {
         log.info("Model contains 'title': " + model.getAttribute("title"));
 
         return "book/book-detail";
+    }
+
+    // 이 작가의 다른 도서 목록
+    @GetMapping("detail/author-books")
+    @ResponseBody
+    public ResponseEntity<String> getAuthorBooks(@RequestParam("author") String encodedAuthor) {
+        String json = bookService.getBooksByAuthor(encodedAuthor);
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/json;charset=UTF-8")
+                .body(json);
     }
 }

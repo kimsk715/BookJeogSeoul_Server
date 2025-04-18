@@ -7,6 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 
 @Service
@@ -22,6 +26,7 @@ public class BookServiceImpl implements BookService {
                 "?ttbkey=" + apiKey +
                 "&itemIdType=ISBN13" +
                 "&ItemId=" + isbn +
+                "&Cover=Big" +
                 "&output=JS&Version=20131101";
 
         // http 통신을 위한 클래스, 외부 도메인에서 데이터를 가져오는데에 사용
@@ -88,5 +93,25 @@ public class BookServiceImpl implements BookService {
             throw new RuntimeException("도서 파싱 중 오류 발생");
         }
     }
-}
+
+    // 이 작가의 다른 책 목록
+    @Override
+    public String getBooksByAuthor(String encodedAuthor) {
+        String apiKey = "ttbsuehanh1551001";
+        String apiUrl = "https://www.aladin.co.kr/ttb/api/ItemSearch.aspx" +
+                "?ttbkey=" + apiKey +
+                "&Query=" + encodedAuthor +
+                "&QueryType=Author" +
+                "&SearchTarget=Book" +
+                "&MaxResults=9" +
+                "&Start=1" +
+                "&Sort=Accuracy" +
+                "&Cover=Big" +
+                "&output=JS" +
+                "&Version=20131101";
+
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(apiUrl, String.class);
+    }
+};
 
