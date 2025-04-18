@@ -1,5 +1,6 @@
 package com.app.bookJeog.domain.vo;
 
+import com.app.bookJeog.domain.enumeration.PostType;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class DonateCertVO extends Period {
+public class DonateCertVO extends PostVO {
     @EqualsAndHashCode.Include
     private Long id;
     private String donateCertTitle;
@@ -16,10 +17,10 @@ public class DonateCertVO extends Period {
 
 
     @Builder
-    public DonateCertVO(String createdDate, String updatedDate, Long id, String donateCertTitle, String donateCertText) {
-        super(createdDate, updatedDate);
-        this.id = id;
-        this.donateCertTitle = donateCertTitle;
+    public DonateCertVO(String createdDate, String updatedDate, Long id, Long memberId, PostType postType, String donateCertText, String donateCertTitle, Long id1) {
+        super(createdDate, updatedDate, id, memberId, postType);
         this.donateCertText = donateCertText;
+        this.donateCertTitle = donateCertTitle;
+        this.id = id1;
     }
 }
