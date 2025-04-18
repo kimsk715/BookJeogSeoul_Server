@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class FollowAlarmVO extends Period {
+public class FollowAlarmVO extends AlarmVO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long alarmSenderId;
 
     @Builder
-    public FollowAlarmVO(String createdDate, String updatedDate, Long alarmSenderId, Long id) {
-        super(createdDate, updatedDate);
+    public FollowAlarmVO(String createdDate, String updatedDate, Long alarmReceiverId, AlarmStatus alarmStatus, Long id, Long alarmSenderId, Long id1) {
+        super(createdDate, updatedDate, alarmReceiverId, alarmStatus, id);
         this.alarmSenderId = alarmSenderId;
-        this.id = id;
+        this.id = id1;
     }
 }

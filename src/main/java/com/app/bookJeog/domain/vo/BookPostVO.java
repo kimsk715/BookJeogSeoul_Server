@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class BookPostVO extends Period {
+public class BookPostVO extends PostVO {
     @EqualsAndHashCode.Include
     private Long id;
     private String bookPostTitle;
@@ -21,16 +21,15 @@ public class BookPostVO extends Period {
     private String bookPostEndDate;
 
 
+
     @Builder
-    public BookPostVO(String createdDate, String updatedDate, Long id, String bookPostTitle, String bookPostText, String bookPostStartDate, BookPostIsPublic bookPostIsPublic, String bookPostEndDate) {
-        super(createdDate, updatedDate);
-        this.id = id;
-        this.bookPostTitle = bookPostTitle;
-        this.bookPostText = bookPostText;
-        this.bookPostStartDate = bookPostStartDate;
-        this.bookPostIsPublic = bookPostIsPublic;
+    public BookPostVO(String createdDate, String updatedDate, Long id, Long memberId, PostType postType, String bookPostEndDate, BookPostIsPublic bookPostIsPublic, String bookPostStartDate, String bookPostText, String bookPostTitle, Long id1) {
+        super(createdDate, updatedDate, id, memberId, postType);
         this.bookPostEndDate = bookPostEndDate;
+        this.bookPostIsPublic = bookPostIsPublic;
+        this.bookPostStartDate = bookPostStartDate;
+        this.bookPostText = bookPostText;
+        this.bookPostTitle = bookPostTitle;
+        this.id = id1;
     }
-
-
 }

@@ -6,10 +6,10 @@
     </settings>
 <!---->
     <typeAliases>
-
+        <typeAlias type="com.app.bookJeog.domain.vo.PersonalMemberVO" alias="personalMemberVO"/>
     </typeAliases>
 <!---->
     <typeHandlers>
-
+        <typeHandler handler="com.app.bookJeog.mybatis.MemberTypeHandler"/>
     </typeHandlers>
 </configuration>
