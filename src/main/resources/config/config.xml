@@ -6,7 +6,7 @@
     </settings>
 <!---->
     <typeAliases>
-
+        <typeAlias type="com.app.bookJeog.domain.dto.BookPostDTO" alias="bookPostDTO"/>
     </typeAliases>
 <!---->
     <typeHandlers>

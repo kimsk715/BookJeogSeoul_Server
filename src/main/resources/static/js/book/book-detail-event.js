@@ -7,6 +7,9 @@ window.addEventListener("load", async () => {
 
     // 받아온 데이터를 layout에서 출력
     await bookDetailLayout.showAuthorBooks(books);
+
+    const posts = await bookDetailService.getThisBookPosts();
+    await bookDetailLayout.showThisBookPosts(posts);
 });
 
 // 버튼을 클릭하면 도서 찜하기
