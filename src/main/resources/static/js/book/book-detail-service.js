@@ -96,5 +96,26 @@ const bookDetailService = (() => {
         }
     }
 
-    return { getScrapCount : getScrapCount , addBookScrap : addBookScrap, deleteBookScrap : deleteBookScrap, getAuthorBooks : getAuthorBooks};
+    // 이 책의 독후감 목록
+    const getThisBookPosts = async () => {
+        const isbn = window.location.pathname.split("/").pop(); // "9788984374423"
+
+        try {
+            const response = await fetch(`/post/book/book-posts?isbn=${isbn}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json;charset-utf-8"
+                }
+            });
+
+            const posts = await response.json();
+            return posts;
+
+        } catch (error) {
+            console.error("fetch 에러:", error);
+            return null;
+        }
+    }
+
+    return { getScrapCount : getScrapCount , addBookScrap : addBookScrap, deleteBookScrap : deleteBookScrap, getAuthorBooks : getAuthorBooks, getThisBookPosts : getThisBookPosts};
 })();

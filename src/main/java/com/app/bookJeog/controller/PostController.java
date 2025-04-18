@@ -1,16 +1,24 @@
 package com.app.bookJeog.controller;
 
+import com.app.bookJeog.domain.dto.BookPostDTO;
+import com.app.bookJeog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/post/*")
 public class PostController {
+    private final PostService postService;
+
     // 토론게시판 이동
     @GetMapping("discussion")
     public String goToDiscussion() {
@@ -93,4 +101,10 @@ public class PostController {
         return "donation/weekly_book";
     }
 
+    // 그 도서의 독후감들
+    @GetMapping("book/book-posts")
+    @ResponseBody
+    public ArrayList<BookPostDTO> selectThisBookPosts(@RequestParam Long isbn){
+        return postService.selectThisBookPosts(isbn);
+    }
 }

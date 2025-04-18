@@ -67,6 +67,54 @@ const bookDetailLayout = (() => {
 
         text = ``;
     }
+
+    // 이 책의 독후감들 출력
+    const showThisBookPosts = async (bookPostListData) => {
+        // 이거 넣을 곳
+        const bookPostsUl = document.querySelector("ul.report-list");
+
+        let text = ``;
+        // 독후감 개수만큼 반복해서 li 생성
+        bookPostListData.forEach((post) => {
+            const imageUrl = `/upload/${post.filePath.split("\\upload\\")[1].replace(/\\/g, "/")}/${post.fileName}`;
+            text += `
+                <li class="slide-item">
+                    <a href="" class="report-cont">
+                        <p class="title">
+                            ${post.bookPostTitle}
+                        </p>
+                        <p class="cont">
+                            ${post.bookPostText}
+                        </p>
+                    </a>
+                    <div class="profile">
+                        <a
+                            href=""
+                            data-content-type="user-profile-button"
+                            class="inner gtm-report-lib"
+                        >
+                            <div
+                                class="image"
+                                style="background-image: url('${imageUrl}');"
+                            ></div>
+                            <p class="name">${post.memberNickName}</p>
+                        </a>
+                        <button
+                            type="button"
+                            class="gtm-report-follow"
+                            id="${post.memberId}"
+                        >
+                            팔로우
+                        </button>
+                    </div>
+                </li>
+            `;
+        })
+
+        bookPostsUl.innerHTML = text;
+
+        text = ``;
+    }
     
-    return {showScrapCount : showScrapCount, showAuthorBooks: showAuthorBooks};
+    return {showScrapCount : showScrapCount, showAuthorBooks: showAuthorBooks, showThisBookPosts : showThisBookPosts};
 })();
