@@ -206,7 +206,7 @@
                                             </p>
                                         </div>
                                         <div>
-                                            <p class="book-cover-info-athor" th:text="${author}">
+                                            <p id="author" class="book-cover-info-athor" th:text="${author}">
                                                 히가시노 게이고
                                             </p>
                                             <p class="book-cover-info-text" th:text="${pubDate}">
@@ -219,7 +219,7 @@
                                     <div class="book-cover-info-box-footer">
                                         <div class="book-cover-footer-count">
                                             이 책이 담긴 서재
-                                            <b class="scrapCount">538+</b>
+                                            <b class="scrapCount">0+</b>
                                         </div>
                                     </div>
                                 </div>
@@ -365,18 +365,18 @@
                             <!--  -->
                             <!--  -->
                             <div class="banner">
-                                <a href="" class="link-banner">
+                                <a href="/book/detail/9788925562360" class="link-banner">
                                     <div class="inner-banner">
                                         <strong
                                             class="text-title mds-font-subhead"
-                                            >매거진《B》 발행인 조수용</strong
+                                            >표현에 서툰 나를 위한 감정 심리학</strong
                                         >
                                         <p class="text-desc mds-font-body">
-                                            일의 감각을 키우는 노하우
+                                            감정에 솔직하지 못한 나에게
                                         </p>
                                     </div>
                                     <img
-                                        src="https://d2j6uvfek9vas1.cloudfront.net/book_category_banner/67ef912e24384.png"
+                                        src="/images/book/recomment-book.png"
                                         alt=""
                                     />
                                 </a>
@@ -645,532 +645,65 @@
                                         <a
                                             href=""
                                             data-content-type="best-more-button"
+                                            th:text="${author} + '의 다른 책'"
                                             >이 작가의 다른 책</a
                                         >
                                     </h3>
                                     <div class="book-shelf overflow">
                                         <div class="slide-container">
                                             <ul class="slide-wrapper">
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
+<!--                                                <li class="slide-item">-->
+<!--                                                    <div-->
+<!--                                                        class="bookjeog-book books"-->
+<!--                                                    >-->
+<!--                                                        <a-->
+<!--                                                            href=""-->
+<!--                                                            class="book-image"-->
+<!--                                                        >-->
+<!--                                                            <div-->
+<!--                                                                class="thumbnail"-->
+<!--                                                            >-->
+<!--                                                                <div-->
+<!--                                                                    class="thumbnail-inner"-->
+<!--                                                                >-->
+<!--                                                                    <div-->
+<!--                                                                        class="book-picture"-->
+<!--                                                                    >-->
+<!--                                                                        <picture>-->
+<!--                                                                            <img-->
+<!--                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"-->
+<!--                                                                                alt="도서 썸네일"-->
+<!--                                                                                width="145"-->
+<!--                                                                                style="-->
+<!--                                                                                    min-height: 0;-->
+<!--                                                                                "-->
+<!--                                                                            />-->
+<!--                                                                        </picture>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </a>-->
+<!--                                                        <a-->
+<!--                                                            href=""-->
+<!--                                                            class="book-data"-->
+<!--                                                        >-->
+<!--                                                            <div-->
+<!--                                                                class="metadata"-->
+<!--                                                            >-->
+<!--                                                                <p-->
+<!--                                                                    class="title"-->
+<!--                                                                >-->
+<!--                                                                    콘클라베-->
+<!--                                                                </p>-->
+<!--                                                                <p-->
+<!--                                                                    class="author"-->
+<!--                                                                >-->
+<!--                                                                    로버트해리스-->
+<!--                                                                </p>-->
+<!--                                                            </div>-->
+<!--                                                        </a>-->
+<!--                                                    </div>-->
+<!--                                                </li>-->
                                             </ul>
                                         </div>
                                     </div>

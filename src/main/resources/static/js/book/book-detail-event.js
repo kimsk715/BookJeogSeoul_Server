@@ -1,20 +1,28 @@
-// 이 책의 스크랩 개수 가져오기
-document.addEventListener("DOMContentLoaded", async () => {
+window.addEventListener("load", async () => {
+    // 이 책의 스크랩 개수 가져오기
     await bookDetailLayout.showScrapCount();
+
+    // 작가의 도서 목록 받아오기
+    const books = await bookDetailService.getAuthorBooks();
+
+    // 받아온 데이터를 layout에서 출력
+    await bookDetailLayout.showAuthorBooks(books);
 });
 
 // 버튼을 클릭하면 도서 찜하기
 const scrapButton = document.querySelector(".mds-icon-scrap");
 
-scrapButton.addEventListener("click", (e) => {
+scrapButton.addEventListener("click", async (e) => {
     const isScrapped = e.target.classList.toggle("scrapped");
 
     if (isScrapped) {
         alert("내 서재에 도서를 넣었습니다.");
+        await bookDetailService.addBookScrap();
         e.target.style.backgroundImage =
             "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png')";
     } else {
         alert("내 서재에 도서를 뺐습니다.");
+        await bookDetailService.deleteBookScrap();
         e.target.style.backgroundImage =
             "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/detail-heart-off.fc064a68f51248a73513a5ef4c5035f5.png')";
     }

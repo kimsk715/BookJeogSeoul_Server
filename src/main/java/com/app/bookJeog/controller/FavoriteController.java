@@ -4,10 +4,7 @@ import com.app.bookJeog.service.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
@@ -21,5 +18,19 @@ public class FavoriteController {
     @ResponseBody
     public int getScrapCount(@RequestParam String isbn) {
         return favoriteService.getScrapCount(isbn);
+    }
+
+    // 스크랩 추가
+    @PostMapping("/book/scrap-add")
+    @ResponseBody
+    public void scrap(@RequestParam String isbn) {
+        favoriteService.scrap(isbn);
+    }
+
+    // 스크랩 삭제
+    @DeleteMapping("/book/scrap-delete")
+    @ResponseBody
+    public void scrapDelete(@RequestParam String isbn) {
+        favoriteService.deleteScrap(isbn);
     }
 }
