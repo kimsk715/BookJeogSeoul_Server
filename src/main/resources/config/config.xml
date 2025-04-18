@@ -6,7 +6,8 @@
     </settings>
 <!---->
     <typeAliases>
-
+        <typeAlias type="com.app.bookJeog.domain.vo.BookInfoVO" alias="bookInfoVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.TempSelectedBookVO" alias="tempSelectedBookVO"/>
     </typeAliases>
 <!---->
     <typeHandlers>
