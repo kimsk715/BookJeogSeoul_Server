@@ -10,7 +10,7 @@ public enum PersonalMemberStatus {
     ACTIVE("활성"),
     DORMANCY("휴면"),
     SUSPENDED("정지"),
-    DELETE("정지");
+    DELETE("탈퇴");
     
 
     private final String code;

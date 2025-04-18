@@ -1,10 +1,14 @@
 package com.app.bookJeog.controller.member;
 
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.service.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class PersonalController {
 
+
+    private final MemberServiceImpl memberServiceImpl;
 
     // 개인 마이페이지 조회
     @GetMapping("mypage")
@@ -78,8 +84,24 @@ public class PersonalController {
 
     // 회원가입
     @GetMapping("register-member")
-    public String goToRegisterMember() {
+    public String goToRegisterMember(PersonalMemberVO personalMemberVO) {
         return "register/register-member";
+    }
+
+
+    // 이메일 중복검사
+    @ResponseBody
+    @PostMapping("check-email")
+    public Optional<PersonalMemberVO> checkEmail(@RequestParam String memberEmail) {
+        return memberServiceImpl.checkEmail(memberEmail);
+    }
+
+
+    // 회원가입 기능
+    @PostMapping("register")
+    public String registerMember(PersonalMemberDTO personalMemberDTO) {
+        memberServiceImpl.insertPersonalMember(personalMemberDTO);
+        return "redirect:/personal/login";
     }
 
 
@@ -94,6 +116,13 @@ public class PersonalController {
     @GetMapping("login/findpasswd-member-certi")
     public String goToFindPasswdMemberCerti() {
         return "login/findpasswd-member-certi";
+    }
+
+
+    // 비밀번호 재설정
+    @GetMapping("login/set-member-passwd")
+    public String gotoFindPasswdMemberCerti() {
+        return "login/set-member-passwd";
     }
 
 }
