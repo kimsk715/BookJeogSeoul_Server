@@ -72,42 +72,37 @@ const bookDetailLayout = (() => {
     const showThisBookPosts = async (bookPostListData) => {
         // 이거 넣을 곳
         const bookPostsUl = document.querySelector("ul.report-list");
+        const isbn = window.location.pathname.split("/").pop();
 
         let text = ``;
         // 독후감 개수만큼 반복해서 li 생성
         bookPostListData.forEach((post) => {
-            const imageUrl = `/upload/${post.filePath.split("\\upload\\")[1].replace(/\\/g, "/")}/${post.fileName}`;
+            let imageUrl = "";
+
+            if (post.filePath && post.fileName) {
+                const rawPath = post.filePath; // 기본 경로
+                const relativePath = rawPath.replace("C:\\upload\\", "").replace(/\\/g, "/"); // 윈도우 경로를 웹 경로로
+                imageUrl = `/member/profile?path=${relativePath}&name=${post.fileName}`;
+            } else {
+                imageUrl = "/images/common/default-profile.png";
+            }
+
             text += `
-                <li class="slide-item">
-                    <a href="" class="report-cont">
-                        <p class="title">
-                            ${post.bookPostTitle}
-                        </p>
-                        <p class="cont">
-                            ${post.bookPostText}
-                        </p>
+            <li class="slide-item">
+                <a href="" class="report-cont">
+                    <p class="title">${post.bookPostTitle}</p>
+                    <p class="cont">${post.bookPostText}</p>
+                </a>
+                <div class="profile">
+                    <a href="" class="inner gtm-report-lib">
+                        <div class="image" style="background-image: url('${imageUrl}');"></div>
+                        <p class="name">${post.memberNickName}</p>
                     </a>
-                    <div class="profile">
-                        <a
-                            href=""
-                            data-content-type="user-profile-button"
-                            class="inner gtm-report-lib"
-                        >
-                            <div
-                                class="image"
-                                style="background-image: url('${imageUrl}');"
-                            ></div>
-                            <p class="name">${post.memberNickName}</p>
-                        </a>
-                        <button
-                            type="button"
-                            class="gtm-report-follow"
-                            id="${post.memberId}"
-                        >
-                            팔로우
-                        </button>
-                    </div>
-                </li>
+                    <button type="button" class="gtm-report-follow" id="${post.memberId}">
+                        팔로우
+                    </button>
+                </div>
+            </li>
             `;
         })
 

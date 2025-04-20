@@ -22,4 +22,12 @@ public class PostMapperTests {
         log.info(postLists.toString());
     }
 
+    // 이 책으로 써진 독후감 전체개수 조회
+    @Test
+    public void selectThisAllBookPosts() {
+        Long isbn = 9788984374423L;
+        int postCount = postMapper.selectBookAllPostsCount(isbn);
+        log.info("이 책의 독후감 개수: " + postCount);
+    }
+
 }

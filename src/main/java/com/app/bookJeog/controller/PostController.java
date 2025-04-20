@@ -101,10 +101,24 @@ public class PostController {
         return "donation/weekly_book";
     }
 
-    // 그 도서의 독후감들
+    // 이 책의 일부 독후감들
     @GetMapping("book/book-posts")
     @ResponseBody
     public ArrayList<BookPostDTO> selectThisBookPosts(@RequestParam Long isbn){
         return postService.selectThisBookPosts(isbn);
+    }
+
+    // 이 책의 전체 독후감들
+    @GetMapping("book/post-list")
+    @ResponseBody
+    public ArrayList<BookPostDTO> selectThisBookAllPosts(@RequestParam Long isbn){
+        return postService.selectThisBookAllPosts(isbn);
+    }
+
+    // 이 책의 전체 독후감들 개수 출력
+    @GetMapping("book/post-count")
+    @ResponseBody
+    public int getBookPostCount(@RequestParam Long isbn) {
+        return postService.selectBookAllPostsCount(isbn);
     }
 }

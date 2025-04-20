@@ -127,3 +127,8 @@ introButton.addEventListener("click", (e) => {
     const isHidden = introText.classList.toggle("hidden");
     introButton.innerText = isHidden ? "더보기" : "접어보기";
 });
+
+// 이 책의 독후감 전체 목록 보기 링크
+const isbn = window.location.pathname.split("/").pop();
+const btn = document.getElementById("thisBookPostsBtn");
+btn.href = `/book/post-list/${isbn}`;
