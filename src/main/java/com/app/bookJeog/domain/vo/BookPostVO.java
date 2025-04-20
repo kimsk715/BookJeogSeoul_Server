@@ -19,10 +19,11 @@ public class BookPostVO extends Period {
     private BookPostIsPublic bookPostIsPublic;
     private String bookPostStartDate;
     private String bookPostEndDate;
-
+    private Long bookId;
+    private Long bookIsbn;
 
     @Builder
-    public BookPostVO(String createdDate, String updatedDate, Long id, String bookPostTitle, String bookPostText, String bookPostStartDate, BookPostIsPublic bookPostIsPublic, String bookPostEndDate) {
+    public BookPostVO(String createdDate, String updatedDate, Long id, String bookPostTitle, String bookPostText, String bookPostStartDate, BookPostIsPublic bookPostIsPublic, String bookPostEndDate, Long bookId, Long bookIsbn) {
         super(createdDate, updatedDate);
         this.id = id;
         this.bookPostTitle = bookPostTitle;
@@ -30,6 +31,8 @@ public class BookPostVO extends Period {
         this.bookPostStartDate = bookPostStartDate;
         this.bookPostIsPublic = bookPostIsPublic;
         this.bookPostEndDate = bookPostEndDate;
+        this.bookId = bookId;
+        this.bookIsbn = bookIsbn;
     }
 
 
