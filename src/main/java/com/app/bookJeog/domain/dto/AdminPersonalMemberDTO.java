@@ -6,10 +6,15 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @ToString
 @Getter
 @Setter
 @NoArgsConstructor
-public class MemberDTO {
+
+public class AdminPersonalMemberDTO {
+    private List<PersonalMemberDTO> personalMemberDTOList;
+    private Pagination pagination;
 }
