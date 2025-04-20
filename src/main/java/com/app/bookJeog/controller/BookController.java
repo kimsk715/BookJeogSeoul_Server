@@ -9,10 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-
 @Controller
 @Slf4j
 @RequestMapping("/book/*")
@@ -47,5 +43,11 @@ public class BookController implements BookControllerDocs {
         return ResponseEntity.ok()
                 .header("Content-Type", "application/json;charset=UTF-8")
                 .body(json);
+    }
+
+    // 이 책의 모든 독후감 목록
+    @GetMapping("post-list/{isbn}")
+    public String gotoPostList(@PathVariable String isbn) {
+        return "book/book-detail-post"; // HTML 페이지 반환
     }
 }
