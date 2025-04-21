@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SuperBuilder
 public class MemberInquiryVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
@@ -23,16 +22,4 @@ public class MemberInquiryVO extends Period {
     private String memberInquiryAnswer;
     private PersonalMemberStatus memberInquiryStatus;
 
-
-
-    public MemberInquiryVO(String createdDate, String updatedDate, Long id, Long memberId, String memberInquiryAnswer, PersonalMemberStatus memberInquiryStatus, String memberInquiryText, String memberInquiryTitle, MemberInquiryType memberInquiryType) {
-        super(createdDate, updatedDate);
-        this.id = id;
-        this.memberId = memberId;
-        this.memberInquiryAnswer = memberInquiryAnswer;
-        this.memberInquiryStatus = memberInquiryStatus;
-        this.memberInquiryText = memberInquiryText;
-        this.memberInquiryTitle = memberInquiryTitle;
-        this.memberInquiryType = memberInquiryType;
-    }
 }

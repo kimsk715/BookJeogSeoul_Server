@@ -22,14 +22,4 @@ public class BookPostVO extends PostVO {
     private String bookPostEndDate;
     private Long bookIsbn;
 
-    public BookPostVO(PostVOBuilder<?, ?> b, Long id, String bookPostTitle, String bookPostText, BookPostIsPublic bookPostIsPublic, String bookPostStartDate, String bookPostEndDate, Long bookIsbn) {
-        super(b);
-        this.id = id;
-        this.bookPostTitle = bookPostTitle;
-        this.bookPostText = bookPostText;
-        this.bookPostIsPublic = bookPostIsPublic;
-        this.bookPostStartDate = bookPostStartDate;
-        this.bookPostEndDate = bookPostEndDate;
-        this.bookIsbn = bookIsbn;
-    }
 }

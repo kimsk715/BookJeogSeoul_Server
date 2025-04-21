@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SuperBuilder
 public class BookPostReportVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
@@ -24,14 +23,4 @@ public class BookPostReportVO extends Period {
     private BookPostReportStatus bookPostReportStatus;
 
 
-
-    public BookPostReportVO(String createdDate, String updatedDate, Long bookPostId, Long bookPostReporterId, BookPostReportStatus bookPostReportStatus, String bookPostReportText, BookPostReportType bookPostReportType, Long id) {
-        super(createdDate, updatedDate);
-        this.bookPostId = bookPostId;
-        this.bookPostReporterId = bookPostReporterId;
-        this.bookPostReportStatus = bookPostReportStatus;
-        this.bookPostReportText = bookPostReportText;
-        this.bookPostReportType = bookPostReportType;
-        this.id = id;
-    }
 }

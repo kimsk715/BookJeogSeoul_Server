@@ -15,10 +15,4 @@ public class SponsorInquiryFileVO extends FileVO {
     private Long id;
     private Long sponsorInquiryId;
 
-
-    public SponsorInquiryFileVO(String createdDate, String updatedDate, String fileName, String filePath, String fileText, Long id, Long id1, Long sponsorInquiryId) {
-        super(createdDate, updatedDate, fileName, filePath, fileText, id);
-        this.id = id1;
-        this.sponsorInquiryId = sponsorInquiryId;
-    }
 }

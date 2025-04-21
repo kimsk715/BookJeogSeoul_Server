@@ -10,17 +10,10 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SuperBuilder
 public class FollowVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
     private Long followReceiverId;
     private Long followSenderId;
 
-    public FollowVO(String createdDate, String updatedDate, Long followReceiverId, Long followSenderId, Long id) {
-        super(createdDate, updatedDate);
-        this.followReceiverId = followReceiverId;
-        this.followSenderId = followSenderId;
-        this.id = id;
-    }
 }

@@ -10,14 +10,9 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SuperBuilder
 public class NoticeFileVO extends FileVO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long noticeId;
 
-    public NoticeFileVO(Long id, Long noticeId) {
-        this.id = id;
-        this.noticeId = noticeId;
-    }
 }
