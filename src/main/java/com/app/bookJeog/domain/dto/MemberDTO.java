@@ -17,15 +17,13 @@ public class MemberDTO {
     @EqualsAndHashCode.Include
     private Long id;
     private MemberType memberType;
-    private String createdDate;
-    private String updatedDate;
 
-    public MemberVO toVO(){
+    public MemberVO toVO() {
         return MemberVO.builder()
                 .id(id)
                 .memberType(memberType)
-                .createdDate(createdDate)
-                .updatedDate(updatedDate)
                 .build();
+
     }
+
 }

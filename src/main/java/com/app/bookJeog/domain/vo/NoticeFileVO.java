@@ -8,11 +8,12 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class NoticeFileVO {
+public class NoticeFileVO extends FileVO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long noticeId;
 
+    @Builder
     public NoticeFileVO(Long id, Long noticeId) {
         this.id = id;
         this.noticeId = noticeId;

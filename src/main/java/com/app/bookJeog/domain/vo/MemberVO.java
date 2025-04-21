@@ -4,9 +4,15 @@ import com.app.bookJeog.domain.enumeration.MemberType;
 import lombok.*;
 
 
-@Getter @ToString(callSuper=true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+
+@Getter
 @NoArgsConstructor
+@ToString(callSuper=true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class MemberVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
