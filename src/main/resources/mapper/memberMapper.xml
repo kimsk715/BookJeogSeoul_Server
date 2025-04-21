@@ -42,9 +42,18 @@
 
     <!--로그인-->
     <select id="loginPersonal" resultType="personalMemberVO">
-        select *
+        select id, member_email, member_password, member_name, member_mileage, member_status, member_birth, member_gender, member_phone, member_nickname
         from tbl_personal_member
-        where member_email = #{memberEmail} and member_password
+        where member_email = #{memberEmail} and member_password = #{memberPassword}
+    </select>
+    
+    
+    
+    <!--비밀번호 찾기-->
+    <select id="searchPassword" resultType="PersonalMemberVO">
+        select id, member_email, member_password, member_name, member_mileage, member_status, member_birth, member_gender, member_phone, member_nickname
+        from tbl_personal_member
+        where member_email = #{memberEmail} and member_name = #{memberName} and member_birth = #{memberBirth} and member_gender = #{memberGender};
     </select>
 </mapper>
 
