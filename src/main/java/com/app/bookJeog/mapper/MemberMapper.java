@@ -22,4 +22,8 @@ public interface MemberMapper {
 
     // 이메일 중복검사
     public Optional<PersonalMemberVO> selectByEmail(String memberEmail);
+
+
+    // 일반 로그인
+    public Optional<PersonalMemberVO> loginPersonal(PersonalMemberVO personalMemberVO);
 }

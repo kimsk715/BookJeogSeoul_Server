@@ -28,7 +28,7 @@
     <select id="loginPersonal" resultType="personalMemberVO">
         select *
         from tbl_personal_member
-        where member_email = #{memberEmail} and member_password
+        where member_email = #{memberEmail} and member_password = #{memberPassword}
     </select>
 </mapper>
 
