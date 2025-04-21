@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
 // 선정 도서 DTO
 public class SelectedBookDTO {
     private Long id;
@@ -22,4 +23,5 @@ public class SelectedBookDTO {
 
         return SelectedBookVO.builder().id(id).bookIsbn(bookIsbn).bookImageUrl(bookImageUrl).build();
     }
+
 }

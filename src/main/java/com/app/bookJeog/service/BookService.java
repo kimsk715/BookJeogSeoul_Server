@@ -8,9 +8,6 @@ import com.app.bookJeog.domain.vo.TempSelectedBookVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -18,15 +15,16 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
+
+
+import org.springframework.ui.Model;
 
 public interface BookService {
 
 //    서울도서관 소장자료 현황 API 로부터 데이터 요청하는 메소드
 //    초기 요청은 페이지 1에 전체 조회이고, 10개만 보임.
 //    페이지 버튼 클릭 시 해당 페이지로 이동
-
     public default List<BookInfoVO> getBookByIsbn(Long bookIsbn) {
         try {
             StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
@@ -246,4 +244,14 @@ public interface BookService {
     public void insertSelectedBook(SelectedBookVO selectedBookVO);
 //    api 요청 코드를 default 메소드로 인터페이스에 분리해서 구현
 //    ex) 신착도서 정보 요청 코드를 bookservice 에 넣기
+
+    // 책 상세정보 API 호출
+    String getBookDetail(String isbn);
+
+    // 책 상세정보를 모델에 추가
+    void parseAndAddBookInfoToModel(String response, Model model);
+
+    // 이 작가의 다른 책
+    String getBooksByAuthor(String authorName);
+
 }

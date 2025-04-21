@@ -2,8 +2,10 @@ package com.app.bookJeog.domain.vo;
 
 import com.app.bookJeog.domain.enumeration.BookCategory;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -15,11 +17,4 @@ public class FavoriteVO extends Period {
     private Long memberId;
     private BookCategory category;
 
-    @Builder
-    public FavoriteVO(String createdDate, String updatedDate, BookCategory category, Long id, Long memberId) {
-        super(createdDate, updatedDate);
-        this.category = category;
-        this.id = id;
-        this.memberId = memberId;
-    }
 }

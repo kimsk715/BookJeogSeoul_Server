@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.MemberMapper">
+    <!-- 관리자 페이지 조회-->
     <select id="selectAllPersonal" resultType="personalMemberVO">
         select pm.id, member_email, member_name, member_phone, member_phone, member_mileage, member_status, createdDate, updatedDate
         from tbl_personal_member pm
@@ -8,10 +9,44 @@
         on pm.id = m.id
     </select>
 
+    <!--페이지네이션용 카운트-->
     <select id="countAllPersonal" resultType="_int">
         select count(*)
         from tbl_personal_member pm
                  join tbl_member m
                       on pm.id = m.id
     </select>
+
+
+    <!--일반 회원가입-->
+    <insert id="insertCommonMember" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_member (member_type)
+        values(#{memberType})
+    </insert>
+
+
+    <!--일반 회원가입-->
+    <insert id="insertPersonalMember">
+        insert into tbl_personal_member (id, member_email, member_password, member_name, member_birth, member_gender, member_phone, member_nickname)
+        values (#{id}, #{memberEmail}, #{memberPassword}, #{memberName}, #{memberBirth}, #{memberGender}, #{memberPhone}, #{memberNickName})
+    </insert>
+
+
+    <!--이메일 중복검사-->
+    <select id="selectByEmail" resultType="personalMemberVO">
+        select *
+        from tbl_personal_member
+        where member_email = #{memberEmail}
+    </select>
+
+
+    <!--로그인-->
+    <select id="loginPersonal" resultType="personalMemberVO">
+        select *
+        from tbl_personal_member
+        where member_email = #{memberEmail} and member_password
+    </select>
 </mapper>
+
+
+

@@ -146,6 +146,21 @@ body, body[data-theme=dark], body[data-theme=dark] .not-dark, body[data-theme=li
     width: 100%;
     overflow: hidden;
 }
+.bjs-input-pw {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+}
+.bjs-input-phone {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+}
+.bjs-input-nickname {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+}
 .inner {
     display: flex;
     align-items: center;
@@ -194,6 +209,34 @@ body, body[data-theme=dark], body[data-theme=dark] .not-dark, body[data-theme=li
     -ms-flex-align: center;
     align-items: center;
 }
+.pw-inner {
+    height: 100%;
+    gap: 8px;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.phone-inner {
+    height: 100%;
+    gap: 8px;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.name-inner {
+    height: 100%;
+    gap: 8px;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.nickname-inner {
+    height: 100%;
+    gap: 8px;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
 .clear-button:before {
     font-size: 17px;
     color: var(--ui-06);
@@ -233,7 +276,28 @@ body, body[data-theme=dark], body[data-theme=dark] .not-dark, body[data-theme=li
     color: var(--text-04);
     cursor: pointer;
 }
+.input-nickname-label {
+    display: block;
+    margin-bottom: -8px;
+    font-size: 10px;
+    color: var(--text-04);
+    cursor: pointer;
+}
 .input-name-label {
+    display: block;
+    margin-bottom: -8px;
+    font-size: 10px;
+    color: var(--text-04);
+    cursor: pointer;
+}
+.input-pw-label {
+    display: block;
+    margin-bottom: -8px;
+    font-size: 10px;
+    color: var(--text-04);
+    cursor: pointer;
+}
+.input-phone-label {
     display: block;
     margin-bottom: -8px;
     font-size: 10px;
@@ -270,6 +334,27 @@ body, body[data-theme=dark], body[data-theme=dark] .not-dark, body[data-theme=li
     border: 2px solid var(--ui-06);
 }
 .input-label-email {
+    border-radius: 4px;
+    display: block;
+    height: 56px;
+    padding: 8px 12px;
+    border: 2px solid var(--ui-06);
+}
+.input-label-pw {
+    border-radius: 4px;
+    display: block;
+    height: 56px;
+    padding: 8px 12px;
+    border: 2px solid var(--ui-06);
+}
+.input-label-phone {
+    border-radius: 4px;
+    display: block;
+    height: 56px;
+    padding: 8px 12px;
+    border: 2px solid var(--ui-06);
+}
+.input-label-nickname {
     border-radius: 4px;
     display: block;
     height: 56px;

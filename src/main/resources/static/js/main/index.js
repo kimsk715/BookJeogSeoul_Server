@@ -49,7 +49,7 @@ fadeEls.forEach((el) => observer.observe(el));
 
 // 로그인 페이지로 이동
 const goToLogin = () => {
-    window.location.href ="http://localhost:10000/login/login"
+    window.location.href ="http://localhost:10000/personal/login"
 }
 
 

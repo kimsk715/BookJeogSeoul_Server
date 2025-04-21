@@ -2,9 +2,10 @@ package com.app.bookJeog.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor @Transactional(rollbackFor = Exception.class)
 public class ReportServiceImpl implements ReportService {
 
 }

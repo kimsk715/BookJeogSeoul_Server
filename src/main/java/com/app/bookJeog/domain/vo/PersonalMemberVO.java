@@ -3,6 +3,7 @@ package com.app.bookJeog.domain.vo;
 import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
+
 public class PersonalMemberVO extends MemberVO{
     @EqualsAndHashCode.Include
     private Long id;
@@ -18,19 +21,9 @@ public class PersonalMemberVO extends MemberVO{
     private String memberName;
     private String memberPhone;
     private String memberNickName;
+    private String memberBirth;
     private int memberMileage;
+    private String memberGender;
     private PersonalMemberStatus memberStatus;
-
-    @Builder
-    public PersonalMemberVO(Long id, String memberEmail, int memberMileage, String memberName, String memberNickName, String memberPassword, String memberPhone, PersonalMemberStatus memberStatus) {
-        this.id = id;
-        this.memberEmail = memberEmail;
-        this.memberMileage = memberMileage;
-        this.memberName = memberName;
-        this.memberNickName = memberNickName;
-        this.memberPassword = memberPassword;
-        this.memberPhone = memberPhone;
-        this.memberStatus = memberStatus;
-    }
 
 }
