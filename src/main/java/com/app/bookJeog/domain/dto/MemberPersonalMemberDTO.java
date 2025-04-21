@@ -25,6 +25,6 @@ public class MemberPersonalMemberDTO {
     private String memberNickName;
     private String memberBirth;
     private int memberMileage;
-    private String memberGender;
+    private int memberGender;
     private PersonalMemberStatus memberStatus;
 }

@@ -8,6 +8,7 @@ import com.app.bookJeog.domain.dto.MemberPersonalMemberDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.mapper.MemberMapper;
 import com.app.bookJeog.repository.MemberDAO;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,8 @@ public class MemberServiceImpl implements MemberService {
     private final MemberDAO memberDAO;
     private final MemberMapper memberMapper;
     private final PersonalMemberDTO personalMemberDTO;
-
+    private final HttpSession session;
+    private final PersonalMemberVO personalMemberVO;
 
 
     @Override
@@ -34,27 +36,48 @@ public class MemberServiceImpl implements MemberService {
     public int countAllPersonal(Pagination pagination) {
         return memberDAO.countAllPersonal(pagination);
     }
-    // 이메일 중복검사
-    public Optional<PersonalMemberVO> checkEmail(String email) {
-        return memberMapper.selectByEmail(email);
-    }
-    // 닉네임 중복검사 만들어야함
 
+
+    // 이메일 중복검사
+    @Override
+    public Optional<PersonalMemberVO> checkEmail(String email) {
+        return memberDAO.findByEmail(email);
+    }
+
+
+    // 닉네임 중복검사 만들어야함
     //일반회원 회원가입
     public void insertPersonalMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
         MemberVO memberVO = toMemberVO();
-        memberMapper.insertCommonMember(memberVO);
+        memberDAO.setCommonMember(memberVO);
 
         memberPersonalMemberDTO.setId(memberVO.getId());
         PersonalMemberVO personalMemberVO = toPersonalMemberVO(memberPersonalMemberDTO);
         personalMemberVO = toPersonalMemberVO(memberPersonalMemberDTO);
 
-        memberMapper.insertPersonalMember(personalMemberVO);
+        memberDAO.setPersonalMember(personalMemberVO);
     }
 
 
     // 로그인
-    public void loginPersonalMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
+    public Optional<PersonalMemberDTO> loginPersonalMember(PersonalMemberDTO personalMemberDTO) {
 
+        PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
+
+        Optional<PersonalMemberVO> foundMember = memberDAO.findPersonalMember(personalMemberVO);
+
+        return  foundMember.map(this::toPersonalMemberDTO);
+    }
+
+
+    // 비밀번호 찾기
+    public Optional<PersonalMemberDTO> searchPassword (PersonalMemberDTO personalMemberDTO) {
+
+        PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
+        log.info("searchPassword: personalMemberVO={}", personalMemberVO);
+
+        Optional<PersonalMemberVO> foundMember = memberDAO.findPersonalMemberPassword(personalMemberVO);
+
+        return foundMember.map(this::toPersonalMemberDTO);
     }
 }

@@ -1,6 +1,5 @@
 package com.app.bookJeog.repository;
 
-
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
@@ -27,21 +26,33 @@ public class MemberDAO {
 
 
     // 일반회원 회원가입
-    public void insertPersonalMember(PersonalMemberVO personalMemberVO) {
+    public void setPersonalMember(PersonalMemberVO personalMemberVO) {
         memberMapper.insertPersonalMember(personalMemberVO);
     }
 
 
     // 슈퍼키 회원가입
-    public void insertCommonMember(MemberVO memberVO) {
+    public void setCommonMember(MemberVO memberVO) {
         memberMapper.insertCommonMember(memberVO);
     }
 
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> selectByEmail(String memberEmail) {
+    public Optional<PersonalMemberVO> findByEmail(String memberEmail) {
         return memberMapper.selectByEmail(memberEmail);
+    }
+
+
+    // 일반 로그인
+    public Optional<PersonalMemberVO> findPersonalMember(PersonalMemberVO personalMemberVO) {
+        return memberMapper.loginPersonal(personalMemberVO);
+    }
+
+
+    // 일반 비밀번호 찾기
+    public Optional<PersonalMemberVO> findPersonalMemberPassword(PersonalMemberVO personalMemberVO) {
+        return memberMapper.searchPassword(personalMemberVO);
     }
 
 }
