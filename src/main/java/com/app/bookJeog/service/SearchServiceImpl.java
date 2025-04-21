@@ -1,5 +1,7 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.repository.PostDAO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
 public class SearchServiceImpl implements SearchService {
+    private final PostDAO postDAO;
 
     // 알라딘 api로 도서검색
     public Map<String, Object> searchBooksByKeyword(String keyword) {
@@ -71,5 +74,8 @@ public class SearchServiceImpl implements SearchService {
         return result;
     }
 
-    
+    // 통합 독후감 검색결과(최신순 3개)
+    public List<BookPostMemberDTO> searchBookPosts(String keyword) {
+        return postDAO.searchBookPosts(keyword);
+    }
 }

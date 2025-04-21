@@ -1,5 +1,6 @@
 package com.app.bookJeog.controller;
 
+import com.app.bookJeog.domain.dto.BookPostMemberDTO;
 import com.app.bookJeog.service.BookService;
 import com.app.bookJeog.service.SearchService;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +55,13 @@ public class SearchController {
     @ResponseBody
     public String gotoSearchResultBookPosts() {
         return "main/search-result-post";
+    }
+
+    // 통합검색-독후감 데이터(REST)
+    @GetMapping("api/book-post-list")
+    @ResponseBody
+    public List<BookPostMemberDTO> getPostsByKeyword(@RequestParam("keyword") String keyword) {
+        return searchService.searchBookPosts(keyword);
     }
 
     // 검색결과-토론방
