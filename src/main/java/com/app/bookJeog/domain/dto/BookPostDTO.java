@@ -1,6 +1,9 @@
 package com.app.bookJeog.domain.dto;
 
 import com.app.bookJeog.domain.enumeration.BookPostIsPublic;
+import com.app.bookJeog.domain.enumeration.BookPostReportStatus;
+import com.app.bookJeog.domain.enumeration.BookPostReportType;
+import com.app.bookJeog.domain.vo.BookPostReportVO;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -41,5 +44,6 @@ public class BookPostDTO {
                 .createdDate(createdDate)
                 .updatedDate(updatedDate)
                 .build();
+
     }
 }

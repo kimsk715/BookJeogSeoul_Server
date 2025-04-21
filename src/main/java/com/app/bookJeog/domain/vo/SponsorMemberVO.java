@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class SponsorMemberVO {
+public class SponsorMemberVO extends MemberVO {
     @EqualsAndHashCode.Include
     private Long id;
     private String sponsorId;

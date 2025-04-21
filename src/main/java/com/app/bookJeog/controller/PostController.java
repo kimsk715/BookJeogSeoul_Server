@@ -59,29 +59,34 @@ public class PostController {
         return "post/post-update";
     }
 
+
     // 후원 인증 게시판
     @GetMapping("donate")
     public String goToDonateCert(){
         return "donation/donate_cert_main";
     }
-    
+
+
     // 후원 인증 게시글    
     @GetMapping("donate/post")
     public String goTODonateCertPost(){
         return "donation/donate_cert_post";
     }
 
+
     // 후원 인증 게시글 작성
     @GetMapping("donate/write")
     public String goToDonateCertWrite(){
         return "donation/donate_cert_write";
     }
-    
+
+
     // 후원 대상 게시판
     @GetMapping("receiver")
     public String goToReceiver(){
         return "donation/receiver_main";
     }
+
 
     // 후원 대상 게시글
     @GetMapping("receiver/post")
@@ -89,11 +94,13 @@ public class PostController {
         return "donation/receiver_post";
     }
 
+
     // 후원 대상 게시글 작성
     @GetMapping("receiver/write")
     public String goToReceiverWrite(){
         return "donation/receiver_write";
     }
+
 
     // 이 주의 기부도서
     @GetMapping("weekly")

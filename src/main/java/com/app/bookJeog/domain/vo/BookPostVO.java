@@ -1,7 +1,9 @@
 package com.app.bookJeog.domain.vo;
 
 import com.app.bookJeog.domain.enumeration.BookPostIsPublic;
+import com.app.bookJeog.domain.enumeration.PostType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,7 +11,8 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class BookPostVO extends Period {
+@SuperBuilder
+public class BookPostVO extends PostVO {
     @EqualsAndHashCode.Include
     private Long id;
     private String bookPostTitle;
@@ -19,15 +22,13 @@ public class BookPostVO extends Period {
     private String bookPostEndDate;
     private Long bookIsbn;
 
-
-    @Builder
-    public BookPostVO(String createdDate, String updatedDate, Long id, String bookPostTitle, String bookPostText, String bookPostStartDate, BookPostIsPublic bookPostIsPublic, String bookPostEndDate, Long bookIsbn) {
-        super(createdDate, updatedDate);
+    public BookPostVO(PostVOBuilder<?, ?> b, Long id, String bookPostTitle, String bookPostText, BookPostIsPublic bookPostIsPublic, String bookPostStartDate, String bookPostEndDate, Long bookIsbn) {
+        super(b);
         this.id = id;
         this.bookPostTitle = bookPostTitle;
         this.bookPostText = bookPostText;
-        this.bookPostStartDate = bookPostStartDate;
         this.bookPostIsPublic = bookPostIsPublic;
+        this.bookPostStartDate = bookPostStartDate;
         this.bookPostEndDate = bookPostEndDate;
         this.bookIsbn = bookIsbn;
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,108 +19,197 @@
         <div class="login-container">
             <div class="login-content">
                 <h3 class="title">정보를 입력해주세요</h3>
-                <!-- 이메일 -->
-                <div class="input-item">
-                    <div class="bjs-input-name">
-                        <label class="input-label-name" style="cursor: text">
-                            <div class="inner">
-                                <div class="input">
-                                    <span class="input-name-label">이메일</span>
-                                    <input
-                                        autocomplete="off"
-                                        type="text"
-                                        name=""
-                                        id="bjs-name"
-                                        placeholder="이메일 입력."
-                                        style="outline: none; border: none; cursor: text"
-                                    />
-                                </div>
-                                <button
-                                    type="button"
-                                    class="clear-button"
-                                    id="clear-button-for-name"
-                                ></button>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                <!-- 비밀번호 -->
-                <div class="input-item">
-                    <div class="bjs-input-email">
-                        <label class="input-label-email" style="cursor: text">
-                            <div class="inner">
-                                <div class="input">
-                                    <span class="input-email-label"
-                                        >비밀번호</span
-                                    >
-                                    <input
-                                        autocomplete="off"
-                                        type="password"
-                                        name=""
-                                        id="bjs-email"
-                                        placeholder="비밀번호 입력"
-                                        style="outline: none; border: none; cursor: text"
-                                    />
-                                </div>
-                                <button
-                                    type="button"
-                                    class="clear-button"
-                                    id="clear-button-email"
-                                ></button>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-                <!-- 생년월일 -->
-                <div class="input-item">
-                    <div class="input-birth-gender">
-                        <div class="birth-num">
-                            <div class="birth-wrap">
-                                <label for="bjs-birth" style="cursor: text">
-                                    <div class="inner">
-                                        <div class="input">
-                                            <span>생년월일,성별</span>
-                                            <input
+                <form action="/personal/register" method="post" id="register-form">
+                    <!-- 이메일 -->
+                    <div class="input-item">
+                        <div class="bjs-input-email">
+                            <label class="input-label-email" style="cursor: text">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-email-label"
+                                        >이메일</span
+                                        >
+                                        <input
+                                                autocomplete="off"
                                                 type="text"
-                                                placeholder="생년월일"
+                                                name="memberEmail"
+                                                id="bjs-email"
+                                                placeholder="이메일"
+                                                style="outline: none; border: none; cursor: text"
+                                        />
+                                    </div>
+                                    <button
+                                            type="button"
+                                            class="clear-button"
+                                            id="clear-button-email"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 비밀번호 -->
+                    <div class="input-item">
+                        <div class="bjs-input-name">
+                            <label class="input-label-pw" style="cursor: text">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-pw-label">비밀번호</span>
+                                        <input
+                                            autocomplete="off"
+                                            type="password"
+                                            name="memberPassword"
+                                            id="bjs-pw"
+                                            placeholder="비밀번호를 적어주세요"
+                                            style="outline: none; border: none; cursor: text"
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        class="clear-button"
+                                        id="clear-button-for-pw"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 이름 -->
+                    <div class="input-item">
+                        <div class="bjs-input-email">
+                            <label class="input-label-email" style="cursor: text">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-email-label"
+                                        >이름</span
+                                        >
+                                        <input
+                                                autocomplete="off"
+                                                type="text"
+                                                name="memberName"
+                                                id="bjs-name"
+                                                placeholder="이름을 적어주세요"
                                                 maxlength="6"
-                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                autocomplete="off"
-                                                id="bjs-birth"
-                                            />
-                                        </div>
+                                                style="outline: none; border: none; cursor: text"
+                                        />
                                     </div>
-                                </label>
-                            </div>
-                            <span class="birth-line">-</span>
+                                    <button
+                                            type="button"
+                                            class="clear-button"
+                                            id="clear-button-name"
+                                    ></button>
+                                </div>
+                            </label>
                         </div>
-                        <div class="gender-num">
-                            <div class="gender-wrap">
-                                <label>
-                                    <div class="inner">
-                                        <div class="input">
-                                            <input
-                                                type="text"
-                                                autocomplete="off"
-                                                class="gender-input"
-                                                placeholder="0"
-                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                                maxlength="1"
-                                                id="bjs-gender"
-                                            />
-                                        </div>
-                                    </div>
-                                </label>
-                            </div>
-                            <span class="gender-dot">● ● ● ● ● ●</span>
-                        </div>
-                        <button
-                            type="button"
-                            class="clear-button"
-                            id="clear-button-gender"
-                        ></button>
                     </div>
-                </div>
+                    <!-- 폰번호 -->
+                    <div class="input-item">
+                        <div class="bjs-input-email">
+                            <label class="input-label-email" style="cursor: text">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-email-label"
+                                        >핸드폰 번호</span
+                                        >
+                                        <input
+                                                type="text"
+                                                name="memberPhone"
+                                                id="bjs-phone"
+                                                placeholder="-빼고 작성해주세요."
+                                                maxlength="11"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                autocomplete="off"
+                                                style="outline: none; border: none; cursor: text"
+                                        />
+                                    </div>
+                                    <button
+                                            type="button"
+                                            class="clear-button"
+                                            id="clear-button-phone"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 닉네임 -->
+                    <div class="input-item">
+                        <div class="bjs-input-nickname">
+                            <label class="input-label-nickname" style="cursor: text">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-nickname-label"
+                                        >닉네임</span
+                                        >
+                                        <input
+                                                autocomplete="off"
+                                                type="text"
+                                                name="memberNickName"
+                                                id="bjs-nickname"
+                                                placeholder="닉네임"
+                                                style="outline: none; border: none; cursor: text"
+                                        />
+                                    </div>
+                                    <button
+                                            type="button"
+                                            class="clear-button"
+                                            id="clear-button-nickname"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 생년월일 -->
+                    <div class="input-item">
+                        <div class="input-birth-gender">
+                            <div class="birth-num">
+                                <div class="birth-wrap">
+                                    <label for="bjs-birth" style="cursor: text">
+                                        <div class="inner">
+                                            <div class="input">
+                                                <span>생년월일,성별</span>
+                                                <input
+                                                    type="text"
+                                                    placeholder="생년월일"
+                                                    maxlength="6"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                    autocomplete="off"
+                                                    id="bjs-birth"
+                                                    name="memberBirth"
+                                                />
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <span class="birth-line">-</span>
+                            </div>
+                            <!-- 성별 -->
+                            <div class="gender-num">
+                                <div class="gender-wrap">
+                                    <label>
+                                        <div class="inner">
+                                            <div class="input">
+                                                <input
+                                                    type="text"
+                                                    autocomplete="off"
+                                                    class="gender-input"
+                                                    placeholder="0"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                    maxlength="1"
+                                                    id="bjs-gender"
+                                                    name="memberGender"
+                                                />
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <span class="gender-dot">● ● ● ● ● ●</span>
+                            </div>
+                            <button
+                                type="button"
+                                class="clear-button"
+                                id="clear-button-gender"
+                            ></button>
+                        </div>
+                    </div>
+                </form>
                 <!-- 체크버튼 -->
                 <div class="check-btn-area check-button">
                     <button id="check-btn">
@@ -129,7 +218,7 @@
                 </div>
                 <!-- 다음 버튼 -->
                 <div class="next-btn-area">
-                    <button id="next-btn">
+                    <button type="button" id="next-btn">
                         <span class="login-btn-tag">회원가입 하기</span>
                     </button>
                 </div>
@@ -156,5 +245,7 @@
             </div>
         </div>
     </body>
-    <script src="/js/register/register-member.js"></script>
+    <script src="/js/register/register-service.js"></script>
+    <script src="/js/register/register-event.js"></script>
+    <script src="/js/register/register-form.js"></script>
 </html>

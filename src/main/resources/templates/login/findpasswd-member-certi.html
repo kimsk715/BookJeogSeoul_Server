@@ -6,7 +6,7 @@
         <title>로그인 | 북적북적</title>
         <link
             rel="stylesheet"
-            href="/css/register/register-member.css"
+            href="/css/login/findpasswd-member-certi.css"
         />
         <link
             rel="shortcut icon"
@@ -16,22 +16,23 @@
     </head>
     <body>
         <!-- 로그인 하는 영역 -->
-        <div class="login-container">
-            <div class="login-content">
-                <h3 class="title">정보를 입력해주세요</h3>
+        <div class="certi-container">
+            <div class="certi-content">
+                <h3 class="title">번호를 입력해주세요</h3>
                 <!-- 인증 -->
                 <div class="input-item">
                     <div class="bjs-input-name">
                         <label class="input-label-name" style="cursor: text">
                             <div class="inner">
                                 <div class="input">
-                                    <span class="input-name-label">이메일</span>
+                                    <span class="input-certi-label">번호입력</span>
                                     <input
                                         autocomplete="off"
-                                        type="text"
                                         name=""
-                                        id="bjs-name"
-                                        placeholder="이메일 입력."
+                                        id="bjs-certi-code"
+                                        type="text" maxlength="5"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 5);"
+                                        placeholder="번호입력"
                                         style="outline: none; border: none; cursor: text"
                                     />
                                 </div>
@@ -53,7 +54,7 @@
                 <!-- 다음 버튼 -->
                 <div class="next-btn-area">
                     <button id="next-btn">
-                        <span class="login-btn-tag">회원가입 하기</span>
+                        <span class="login-btn-tag">다음</span>
                     </button>
                 </div>
             </div>
@@ -79,5 +80,5 @@
             </div>
         </div>
     </body>
-    <script src="/js/register/register-member.js"></script>
+    <script src="/js/login/findpasswd-member-certi.js"></script>
 </html>

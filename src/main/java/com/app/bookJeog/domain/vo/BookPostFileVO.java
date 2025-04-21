@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class BookPostFileVO {
+public class BookPostFileVO extends FileVO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long bookPostId;
