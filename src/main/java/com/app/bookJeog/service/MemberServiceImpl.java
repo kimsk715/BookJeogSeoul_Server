@@ -46,6 +46,6 @@ public class MemberServiceImpl implements MemberService {
 
     // 로그인
     public void loginPersonalMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
-
+        memberMapper.
     }
 }
