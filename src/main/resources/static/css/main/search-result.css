@@ -366,8 +366,8 @@ label .input input::placeholder{
 
 @media (min-width: 1280px) {
     .result-list.grid ul li{
-        width: 11.25%;
-        margin: 0 0 4% 1.4%;
+        width: 15.2%;
+        margin: 0 0 4% 1.7%;
     }
 }
 
@@ -493,9 +493,16 @@ label .input input::placeholder{
 }
 
 .slide-container{
-    overflow: hidden;
+    overflow-x: auto; /* 스크롤 가능하게 */
+    -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
     cursor: grab;
     scrollbar-width: none;
+}
+
+.slide-wrapper{
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    width: max-content;
 }
 
 .result-list .slide-wrapper.book-report{
@@ -521,6 +528,7 @@ label .input input::placeholder{
 
 @media (min-width: 721px) {
     .result-list .slide-wrapper .slide-item{
+        width: 443px;
         min-width: 407px;
         margin-right: 24px;
         margin-bottom: 0;
@@ -976,6 +984,7 @@ div.book-image{
 
 .result-list .slide-wrapper.organization li{
     width: calc(50% - 12px);
+    width: 443px;
     border-radius: 16px;
     background: var(--ui-up-01);
     overflow: hidden;
@@ -1122,6 +1131,7 @@ div.book-image{
 
 @media (min-width: 721px) {
     .result-list .slide-wrapper.donate .slide-item{
+        width: 443px;
         min-width: 407px;
         margin-right: 24px;
         margin-bottom: 0;

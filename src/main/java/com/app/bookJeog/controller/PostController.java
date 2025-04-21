@@ -1,6 +1,7 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.domain.dto.BookPostDTO;
+import com.app.bookJeog.domain.dto.BookPostMemberDTO;
 import com.app.bookJeog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -111,16 +112,14 @@ public class PostController {
     // 이 책의 일부 독후감들
     @GetMapping("book/book-posts")
     @ResponseBody
-    public ArrayList<BookPostDTO> selectThisBookPosts(@RequestParam Long isbn){
+    public ArrayList<BookPostMemberDTO> selectThisBookPosts(@RequestParam Long isbn){
         return postService.selectThisBookPosts(isbn);
     }
 
     // 이 책의 전체 독후감들
     @GetMapping("book/post-list")
     @ResponseBody
-    public ArrayList<BookPostDTO> selectThisBookAllPosts(@RequestParam Long isbn){
-        int offset = 0;
-//    public ArrayList<BookPostDTO> selectThisBookAllPosts(@RequestParam Long isbn, @RequestParam int offset){
+    public ArrayList<BookPostMemberDTO> selectThisBookAllPosts(@RequestParam Long isbn, @RequestParam int offset){
         return postService.selectThisBookAllPosts(isbn, offset);
     }
 

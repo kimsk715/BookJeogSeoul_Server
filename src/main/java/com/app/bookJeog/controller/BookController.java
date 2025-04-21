@@ -47,7 +47,7 @@ public class BookController implements BookControllerDocs {
 
     // 이 책의 모든 독후감 목록
     @GetMapping("post-list/{isbn}")
-    public String gotoPostList(@PathVariable String isbn) {
+    public String gotoPostList(@PathVariable Long isbn) {
         return "book/book-detail-post"; // HTML 페이지 반환
     }
 }
