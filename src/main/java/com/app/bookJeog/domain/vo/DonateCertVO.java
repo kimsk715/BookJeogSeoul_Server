@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class DonateCertVO extends PostVO {
     @EqualsAndHashCode.Include
     private Long id;

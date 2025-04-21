@@ -17,7 +17,6 @@ public class PostVO extends Period {
     private Long memberId ;
     private PostType postType;
 
-
     public PostVO(String createdDate, String updatedDate, Long id, Long memberId, PostType postType) {
         super(createdDate, updatedDate);
         this.id = id;

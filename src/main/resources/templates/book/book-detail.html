@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>책 제목 | 북적서울</title>
+        <title th:text="${title} + ' | 북적서울'"></title>
         <link
             rel="stylesheet"
             href="/css/main/global-settings.css"
@@ -131,7 +131,7 @@
                                 <i class="mds-icon-arrow-left"></i>
                             </button>
                             <!-- // 뒤로가기 버튼 -->
-                            <h2 class="book-detail-header">용의자 X의 헌신</h2>
+                            <h2 class="book-detail-header" th:text="${title}">제목</h2>
                             <!-- 책 찜하기 버튼 -->
                             <button type="button" class="scrap-button">
                                 <!-- 찜 안 했을 때 -->
@@ -166,7 +166,7 @@
                                                 <div class="book-picture">
                                                     <picture>
                                                         <img
-                                                            src="/images/book/book_thumbnail.example.png"
+                                                            th:src="${cover}"
                                                             alt="도서 썸네일"
                                                             width="200"
                                                             style="
@@ -185,7 +185,7 @@
                                     <div class="background-cover">
                                         <picture>
                                             <img
-                                                src="/images/book/book_thumbnail.example.png"
+                                                th:src="${cover}"
                                                 alt="책 배경 썸네일"
                                                 width="200"
                                                 style="min-height: 0"
@@ -201,16 +201,16 @@
                                 <div class="book-cover-info-box">
                                     <div class="book-cover-info-box-body">
                                         <div>
-                                            <p class="book-cover-info-title">
+                                            <p class="book-cover-info-title" th:text="${title}">
                                                 용의자 X의 헌신
                                             </p>
                                         </div>
                                         <div>
-                                            <p class="book-cover-info-athor">
+                                            <p id="author" class="book-cover-info-athor" th:text="${author}">
                                                 히가시노 게이고
                                             </p>
-                                            <p class="book-cover-info-text">
-                                                <span>재인</span>
+                                            <p class="book-cover-info-text" th:text="${pubDate}">
+                                                <span th:text="${publisher}">재인</span>
                                                 <span class="middot"></span>
                                                 2022.06.16
                                             </p>
@@ -219,7 +219,7 @@
                                     <div class="book-cover-info-box-footer">
                                         <div class="book-cover-footer-count">
                                             이 책이 담긴 서재
-                                            <b>538+</b>
+                                            <b class="scrapCount">0+</b>
                                         </div>
                                     </div>
                                 </div>
@@ -300,6 +300,7 @@
                                             <div
                                                 class="desc-box"
                                                 id="intro-more"
+                                                th:text="${description}"
                                             >
                                                 히가시노 게이고 문학의 정수로
                                                 일컬어지는 [용의자 X의 헌신]이
@@ -340,27 +341,19 @@
                                         <ul class="slide-wrapper">
                                             <li class="slide-item">
                                                 <p>카테고리</p>
-                                                <strong>소설</strong>
-                                            </li>
-                                            <li class="slide-item">
-                                                <p>페이지</p>
-                                                <strong>447P</strong>
+                                                <strong th:text="${category}">소설</strong>
                                             </li>
                                             <li class="slide-item">
                                                 <p>출판사</p>
-                                                <strong>재인</strong>
+                                                <strong th:text="${publisher}">재인</strong>
                                             </li>
                                             <li class="slide-item">
                                                 <p>출간일</p>
-                                                <strong>2017.08.30</strong>
-                                            </li>
-                                            <li class="slide-item">
-                                                <p>등록일</p>
-                                                <strong>2022.06.16</strong>
+                                                <strong th:text="${pubDate}">2017.08.30</strong>
                                             </li>
                                             <li class="slide-item">
                                                 <p>ISBN</p>
-                                                <strong>9791197893506</strong>
+                                                <strong th:text="${isbn}">9791197893506</strong>
                                             </li>
                                         </ul>
                                     </div>
@@ -372,18 +365,18 @@
                             <!--  -->
                             <!--  -->
                             <div class="banner">
-                                <a href="" class="link-banner">
+                                <a href="/book/detail/9788925562360" class="link-banner">
                                     <div class="inner-banner">
                                         <strong
                                             class="text-title mds-font-subhead"
-                                            >매거진《B》 발행인 조수용</strong
+                                            >표현에 서툰 나를 위한 감정 심리학</strong
                                         >
                                         <p class="text-desc mds-font-body">
-                                            일의 감각을 키우는 노하우
+                                            감정에 솔직하지 못한 나에게
                                         </p>
                                     </div>
                                     <img
-                                        src="https://d2j6uvfek9vas1.cloudfront.net/book_category_banner/67ef912e24384.png"
+                                        src="/images/book/recomment-book.png"
                                         alt=""
                                     />
                                 </a>
@@ -394,801 +387,148 @@
                             >
                                 <h3 class="book-info-title link">
                                     <a
-                                        href=""
+                                        id="thisBookPostsBtn"
+                                        href="javascript:void(0);"
                                         data-content-type="post-more-button"
                                         class="gtm-report"
                                         >이 책의 독후감
-                                        <span class="number">146</span></a
+                                        <span class="number">0</span></a
                                     >
                                 </h3>
                                 <!-- 독후감 목록 -->
                                 <div class="slide-container">
                                     <ul class="slide-wrapper report-list">
-                                        <li class="slide-item">
-                                            <a href="" class="report-cont">
-                                                <p class="title">
-                                                    영화로 먼저 접하고, 그 뒤에
-                                                    읽은 책
-                                                </p>
-                                                <p class="cont">
-                                                    용의자 X는 무슨 의미일까? 이
-                                                    책을 읽고 히가시노 게이고의
-                                                    열렬한 팬이 되어버렸다. 모든
-                                                    책을 책장에 담을 정도로. 한
-                                                    여자를 사랑하기 때문에
-                                                    본인의 인생을 포기한 남자와,
-                                                    그 남자의 진심을 알고 마음을
-                                                    열어가는 여자의 추리로맨스
-                                                    소설이다. 영화로 먼저 접하고
-                                                    읽게 되어서 영화주인공이었던
-                                                    이요원과 류승범에게 이입해서
-                                                    읽게 되었다. 영화와는 다르게
-                                                    더 많은 용의주도함이 보였고,
-                                                    더 많은 오브젝트가 있었다.
-                                                    한 천재의 눈물겨운 사랑이 한
-                                                    나라
-                                                </p>
-                                            </a>
-                                            <div class="profile">
-                                                <a
-                                                    href=""
-                                                    data-content-type="user-profile-button"
-                                                    class="inner gtm-report-lib"
-                                                >
-                                                    <div
-                                                        class="image"
-                                                        style="
-                                                            background-image: url(/images/common/favicon.png);
-                                                        "
-                                                    ></div>
-                                                    <p class="name">한지수</p>
-                                                </a>
-                                                <button
-                                                    type="button"
-                                                    class="gtm-report-follow"
-                                                >
-                                                    팔로우
-                                                </button>
-                                            </div>
-                                        </li>
-                                        <li class="slide-item">
-                                            <a href="" class="report-cont">
-                                                <p class="title">
-                                                    영화로 먼저 접하고, 그 뒤에
-                                                    읽은 책
-                                                </p>
-                                                <p class="cont">
-                                                    용의자 X는 무슨 의미일까? 이
-                                                    책을 읽고 히가시노 게이고의
-                                                    열렬한 팬이 되어버렸다. 모든
-                                                    책을 책장에 담을 정도로. 한
-                                                    여자를 사랑하기 때문에
-                                                    본인의 인생을 포기한 남자와,
-                                                    그 남자의 진심을 알고 마음을
-                                                    열어가는 여자의 추리로맨스
-                                                    소설이다. 영화로 먼저 접하고
-                                                    읽게 되어서 영화주인공이었던
-                                                    이요원과 류승범에게 이입해서
-                                                    읽게 되었다. 영화와는 다르게
-                                                    더 많은 용의주도함이 보였고,
-                                                    더 많은 오브젝트가 있었다.
-                                                    한 천재의 눈물겨운 사랑이 한
-                                                    나라
-                                                </p>
-                                            </a>
-                                            <div class="profile">
-                                                <a
-                                                    href=""
-                                                    data-content-type="user-profile-button"
-                                                    class="inner gtm-report-lib"
-                                                >
-                                                    <div
-                                                        class="image"
-                                                        style="
-                                                            background-image: url(/images/common/favicon.png);
-                                                        "
-                                                    ></div>
-                                                    <p class="name">한지수</p>
-                                                </a>
-                                                <button
-                                                    type="button"
-                                                    class="gtm-report-follow"
-                                                >
-                                                    팔로우
-                                                </button>
-                                            </div>
-                                        </li>
-                                        <li class="slide-item">
-                                            <a href="" class="report-cont">
-                                                <p class="title">
-                                                    영화로 먼저 접하고, 그 뒤에
-                                                    읽은 책
-                                                </p>
-                                                <p class="cont">
-                                                    용의자 X는 무슨 의미일까? 이
-                                                    책을 읽고 히가시노 게이고의
-                                                    열렬한 팬이 되어버렸다. 모든
-                                                    책을 책장에 담을 정도로. 한
-                                                    여자를 사랑하기 때문에
-                                                    본인의 인생을 포기한 남자와,
-                                                    그 남자의 진심을 알고 마음을
-                                                    열어가는 여자의 추리로맨스
-                                                    소설이다. 영화로 먼저 접하고
-                                                    읽게 되어서 영화주인공이었던
-                                                    이요원과 류승범에게 이입해서
-                                                    읽게 되었다. 영화와는 다르게
-                                                    더 많은 용의주도함이 보였고,
-                                                    더 많은 오브젝트가 있었다.
-                                                    한 천재의 눈물겨운 사랑이 한
-                                                    나라
-                                                </p>
-                                            </a>
-                                            <div class="profile">
-                                                <a
-                                                    href=""
-                                                    data-content-type="user-profile-button"
-                                                    class="inner gtm-report-lib"
-                                                >
-                                                    <div
-                                                        class="image"
-                                                        style="
-                                                            background-image: url(/images/common/favicon.png);
-                                                        "
-                                                    ></div>
-                                                    <p class="name">한지수</p>
-                                                </a>
-                                                <button
-                                                    type="button"
-                                                    class="gtm-report-follow"
-                                                >
-                                                    팔로우
-                                                </button>
-                                            </div>
-                                        </li>
-                                        <li class="slide-item">
-                                            <a href="" class="report-cont">
-                                                <p class="title">
-                                                    영화로 먼저 접하고, 그 뒤에
-                                                    읽은 책
-                                                </p>
-                                                <p class="cont">
-                                                    용의자 X는 무슨 의미일까? 이
-                                                    책을 읽고 히가시노 게이고의
-                                                    열렬한 팬이 되어버렸다. 모든
-                                                    책을 책장에 담을 정도로. 한
-                                                    여자를 사랑하기 때문에
-                                                    본인의 인생을 포기한 남자와,
-                                                    그 남자의 진심을 알고 마음을
-                                                    열어가는 여자의 추리로맨스
-                                                    소설이다. 영화로 먼저 접하고
-                                                    읽게 되어서 영화주인공이었던
-                                                    이요원과 류승범에게 이입해서
-                                                    읽게 되었다. 영화와는 다르게
-                                                    더 많은 용의주도함이 보였고,
-                                                    더 많은 오브젝트가 있었다.
-                                                    한 천재의 눈물겨운 사랑이 한
-                                                    나라
-                                                </p>
-                                            </a>
-                                            <div class="profile">
-                                                <a
-                                                    href=""
-                                                    data-content-type="user-profile-button"
-                                                    class="inner gtm-report-lib"
-                                                >
-                                                    <div
-                                                        class="image"
-                                                        style="
-                                                            background-image: url(/images/common/favicon.png);
-                                                        "
-                                                    ></div>
-                                                    <p class="name">한지수</p>
-                                                </a>
-                                                <button
-                                                    type="button"
-                                                    class="gtm-report-follow"
-                                                >
-                                                    팔로우
-                                                </button>
-                                            </div>
-                                        </li>
-                                        <li class="slide-item">
-                                            <a href="" class="report-cont">
-                                                <p class="title">
-                                                    영화로 먼저 접하고, 그 뒤에
-                                                    읽은 책
-                                                </p>
-                                                <p class="cont">
-                                                    용의자 X는 무슨 의미일까? 이
-                                                    책을 읽고 히가시노 게이고의
-                                                    열렬한 팬이 되어버렸다. 모든
-                                                    책을 책장에 담을 정도로. 한
-                                                    여자를 사랑하기 때문에
-                                                    본인의 인생을 포기한 남자와,
-                                                    그 남자의 진심을 알고 마음을
-                                                    열어가는 여자의 추리로맨스
-                                                    소설이다. 영화로 먼저 접하고
-                                                    읽게 되어서 영화주인공이었던
-                                                    이요원과 류승범에게 이입해서
-                                                    읽게 되었다. 영화와는 다르게
-                                                    더 많은 용의주도함이 보였고,
-                                                    더 많은 오브젝트가 있었다.
-                                                    한 천재의 눈물겨운 사랑이 한
-                                                    나라
-                                                </p>
-                                            </a>
-                                            <div class="profile">
-                                                <a
-                                                    href=""
-                                                    data-content-type="user-profile-button"
-                                                    class="inner gtm-report-lib"
-                                                >
-                                                    <div
-                                                        class="image"
-                                                        style="
-                                                            background-image: url(/images/common/favicon.png);
-                                                        "
-                                                    ></div>
-                                                    <p class="name">한지수</p>
-                                                </a>
-                                                <button
-                                                    type="button"
-                                                    class="gtm-report-follow"
-                                                >
-                                                    팔로우
-                                                </button>
-                                            </div>
-                                        </li>
+<!--                                        <li class="slide-item">-->
+<!--                                            <a href="" class="report-cont">-->
+<!--                                                <p class="title">-->
+<!--                                                    영화로 먼저 접하고, 그 뒤에-->
+<!--                                                    읽은 책-->
+<!--                                                </p>-->
+<!--                                                <p class="cont">-->
+<!--                                                    용의자 X는 무슨 의미일까? 이-->
+<!--                                                    책을 읽고 히가시노 게이고의-->
+<!--                                                    열렬한 팬이 되어버렸다. 모든-->
+<!--                                                    책을 책장에 담을 정도로. 한-->
+<!--                                                    여자를 사랑하기 때문에-->
+<!--                                                    본인의 인생을 포기한 남자와,-->
+<!--                                                    그 남자의 진심을 알고 마음을-->
+<!--                                                    열어가는 여자의 추리로맨스-->
+<!--                                                    소설이다. 영화로 먼저 접하고-->
+<!--                                                    읽게 되어서 영화주인공이었던-->
+<!--                                                    이요원과 류승범에게 이입해서-->
+<!--                                                    읽게 되었다. 영화와는 다르게-->
+<!--                                                    더 많은 용의주도함이 보였고,-->
+<!--                                                    더 많은 오브젝트가 있었다.-->
+<!--                                                    한 천재의 눈물겨운 사랑이 한-->
+<!--                                                    나라-->
+<!--                                                </p>-->
+<!--                                            </a>-->
+<!--                                            <div class="profile">-->
+<!--                                                <a-->
+<!--                                                    href=""-->
+<!--                                                    data-content-type="user-profile-button"-->
+<!--                                                    class="inner gtm-report-lib"-->
+<!--                                                >-->
+<!--                                                    <div-->
+<!--                                                        class="image"-->
+<!--                                                        style="-->
+<!--                                                            background-image: url(/images/common/favicon.png);-->
+<!--                                                        "-->
+<!--                                                    ></div>-->
+<!--                                                    <p class="name">한지수</p>-->
+<!--                                                </a>-->
+<!--                                                <button-->
+<!--                                                    type="button"-->
+<!--                                                    class="gtm-report-follow"-->
+<!--                                                >-->
+<!--                                                    팔로우-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+<!--                                        </li>-->
                                     </ul>
                                 </div>
                                 <!-- // 독후감 목록 -->
                             </div>
                             <!--  -->
                             <!--  -->
-                            <!-- 같은 카테고리의 다른 도서 -->
+                            <!-- 이 작가의 다른 도서 -->
                             <div class="relate-container thin-line">
                                 <div class="relate-inner">
                                     <h3 class="book-info-title link">
                                         <a
                                             href=""
                                             data-content-type="best-more-button"
-                                            >소설 분야 BEST</a
-                                        >
+                                            th:text="${author} + '의 다른 책'"
+                                            >이 작가의 다른 책</a>
                                     </h3>
                                     <div class="book-shelf overflow">
                                         <div class="slide-container">
                                             <ul class="slide-wrapper">
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
-                                                <li class="slide-item">
-                                                    <div
-                                                        class="bookjeog-book books"
-                                                    >
-                                                        <a
-                                                            href=""
-                                                            class="book-image"
-                                                        >
-                                                            <div
-                                                                class="thumbnail"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail-inner"
-                                                                >
-                                                                    <div
-                                                                        class="book-picture"
-                                                                    >
-                                                                        <picture>
-                                                                            <img
-                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"
-                                                                                alt="도서 썸네일"
-                                                                                width="145"
-                                                                                style="
-                                                                                    min-height: 0;
-                                                                                "
-                                                                            />
-                                                                        </picture>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </a>
-                                                        <a
-                                                            href=""
-                                                            class="book-data"
-                                                        >
-                                                            <div
-                                                                class="metadata"
-                                                            >
-                                                                <p
-                                                                    class="title"
-                                                                >
-                                                                    콘클라베
-                                                                </p>
-                                                                <p
-                                                                    class="author"
-                                                                >
-                                                                    로버트해리스
-                                                                </p>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                </li>
+<!--                                                <li class="slide-item">-->
+<!--                                                    <div-->
+<!--                                                        class="bookjeog-book books"-->
+<!--                                                    >-->
+<!--                                                        <a-->
+<!--                                                            href=""-->
+<!--                                                            class="book-image"-->
+<!--                                                        >-->
+<!--                                                            <div-->
+<!--                                                                class="thumbnail"-->
+<!--                                                            >-->
+<!--                                                                <div-->
+<!--                                                                    class="thumbnail-inner"-->
+<!--                                                                >-->
+<!--                                                                    <div-->
+<!--                                                                        class="book-picture"-->
+<!--                                                                    >-->
+<!--                                                                        <picture>-->
+<!--                                                                            <img-->
+<!--                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"-->
+<!--                                                                                alt="도서 썸네일"-->
+<!--                                                                                width="145"-->
+<!--                                                                                style="-->
+<!--                                                                                    min-height: 0;-->
+<!--                                                                                "-->
+<!--                                                                            />-->
+<!--                                                                        </picture>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </a>-->
+<!--                                                        <a-->
+<!--                                                            href=""-->
+<!--                                                            class="book-data"-->
+<!--                                                        >-->
+<!--                                                            <div-->
+<!--                                                                class="metadata"-->
+<!--                                                            >-->
+<!--                                                                <p-->
+<!--                                                                    class="title"-->
+<!--                                                                >-->
+<!--                                                                    콘클라베-->
+<!--                                                                </p>-->
+<!--                                                                <p-->
+<!--                                                                    class="author"-->
+<!--                                                                >-->
+<!--                                                                    로버트해리스-->
+<!--                                                                </p>-->
+<!--                                                            </div>-->
+<!--                                                        </a>-->
+<!--                                                    </div>-->
+<!--                                                </li>-->
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- // 같은 카테고리의 다른 도서 -->
+                            <!-- // 이 작가의 다른 도서 -->
                         </div>
                     </div>
                 </div>
             </section>
         </div>
     </body>
-    <script src="/js/book/book-detail.js"></script>
+    <script src="/js/book/book-detail-service.js"></script>
+    <script src="/js/book/book-detail-layout.js"></script>
+    <script src="/js/book/book-detail-event.js"></script>
 </html>

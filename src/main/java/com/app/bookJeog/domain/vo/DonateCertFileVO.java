@@ -12,6 +12,7 @@ import java.io.File;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class DonateCertFileVO extends FileVO {
     @EqualsAndHashCode.Include
     private Long id;

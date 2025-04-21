@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class NoticeVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
