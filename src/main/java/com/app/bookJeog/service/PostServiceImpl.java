@@ -4,12 +4,14 @@ import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
+import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 import com.app.bookJeog.repository.PostDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor @Transactional(rollbackFor = Exception.class)
@@ -48,5 +50,39 @@ public class PostServiceImpl implements PostService {
     public int selectBookAllPostsCount(Long isbn) {
         return postDAO.selectBookAllPostsCount(isbn);
     }
+
+    // top20 독후감 선정
+    @Override
+    public List<BookPostVO> getTopPosts() {
+        return postDAO.findTopPosts();
+    }
+
+    // top20 독후감 테이블에 저장
+    @Override
+    public void insertTopBookPosts(MonthlyBookPostVO monthlyBookPostVO) {
+        postDAO.insertTopBookPosts(monthlyBookPostVO);
+    }
+
+    // top20
+    @Override
+    public List<MonthlyBookPostVO> getMonthlyBookPosts(Pagination pagination) {
+        return postDAO.findMonthlyBookPosts(pagination);
+    }
+
+    @Override
+    public Optional<MonthlyBookPostVO> getBestPost() {
+        return postDAO.findBestPost();
+    }
+
+    @Override
+    public void insertBestPost(MonthlyBookPostVO monthlyBookPostVO) {
+        postDAO.insertBestPost(monthlyBookPostVO);
+    }
+
+    @Override
+    public int countAllBookPost() {
+        return postDAO.countAllBookPost();
+    }
+
 
 }
