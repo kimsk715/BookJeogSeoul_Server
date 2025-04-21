@@ -13,5 +13,4 @@ public class WebController {
     public String goToMain() {
         return "main/main";
     }
-
 }
