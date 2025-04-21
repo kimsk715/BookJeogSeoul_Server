@@ -110,6 +110,27 @@ const bookDetailLayout = (() => {
 
         text = ``;
     }
+
+    // 이 책의 전체 독후감들 개수 출력
+    const showPostCount = async () => {
+        const count = await bookDetailService.getThisBookPostsCount();
+        const countP = document.querySelector("span.number");
+
+        countP.textContent = count;
+
+        // 독후감이 0개라면 이 책의 독후감 탭 노출 시키지 않기
+        // 독후감 개수가 5개 이하면 이 책의 독후감 전체 페이지 버튼 노출시키지 않기
+        if(count === 0) {
+            document.querySelector("#anchorReport").style.display = "none";
+            } else if (count < 6){
+                document.querySelector("#thisBookPostsBtn").style.background = "none";
+            document.querySelector("#thisBookPostsBtn").style.pointerEvents = "none";
+            } else {
+            // 독후감이 6개 이상일 때만 링크 클릭 가능
+            const isbn = window.location.pathname.split("/").pop();
+            document.querySelector("#thisBookPostsBtn").href = `/book/post-list/${isbn}`;
+        }
+    };
     
-    return {showScrapCount : showScrapCount, showAuthorBooks: showAuthorBooks, showThisBookPosts : showThisBookPosts};
+    return {showScrapCount : showScrapCount, showAuthorBooks: showAuthorBooks, showThisBookPosts : showThisBookPosts, showPostCount : showPostCount};
 })();

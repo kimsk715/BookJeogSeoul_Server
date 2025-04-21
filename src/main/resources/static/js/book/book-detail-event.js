@@ -5,6 +5,10 @@ window.addEventListener("load", async () => {
     // 작가의 도서 목록 받아오기
     const books = await bookDetailService.getAuthorBooks();
 
+    // 도서의 독후감 개수 받아오기
+    const count = await  bookDetailService.getThisBookPostsCount();
+    await bookDetailLayout.showPostCount(count);
+
     // 받아온 데이터를 layout에서 출력
     await bookDetailLayout.showAuthorBooks(books);
 
@@ -128,7 +132,3 @@ introButton.addEventListener("click", (e) => {
     introButton.innerText = isHidden ? "더보기" : "접어보기";
 });
 
-// 이 책의 독후감 전체 목록 보기 링크
-const isbn = window.location.pathname.split("/").pop();
-const btn = document.getElementById("thisBookPostsBtn");
-btn.href = `/book/post-list/${isbn}`;

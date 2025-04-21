@@ -117,5 +117,22 @@ const bookDetailService = (() => {
         }
     }
 
-    return { getScrapCount : getScrapCount , addBookScrap : addBookScrap, deleteBookScrap : deleteBookScrap, getAuthorBooks : getAuthorBooks, getThisBookPosts : getThisBookPosts};
+    // 이 책의 모든 독후감 개수 가져오기
+    const getThisBookPostsCount = async () => {
+        const isbn = window.location.pathname.split("/").pop();
+
+        try {
+            const response = await fetch(`/post/book/post-count?isbn=${isbn}`, {
+                method: "GET"
+            });
+
+            const count = await response.json();
+            return count;
+        } catch (error) {
+            console.error("fetch 에러:", error);
+            return 0;
+        }
+    };
+
+    return { getScrapCount : getScrapCount , addBookScrap : addBookScrap, deleteBookScrap : deleteBookScrap, getAuthorBooks : getAuthorBooks, getThisBookPosts : getThisBookPosts, getThisBookPostsCount : getThisBookPostsCount};
 })();
