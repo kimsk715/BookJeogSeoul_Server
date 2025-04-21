@@ -1,8 +1,10 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -13,13 +15,4 @@ public class NoticeVO extends Period {
     private Long id;
     private String noticeTitle;
     private String noticeContent;
-
-
-    @Builder
-    public NoticeVO(String createdDate, String updatedDate, Long id, String noticeContent, String noticeTitle) {
-        super(createdDate, updatedDate);
-        this.id = id;
-        this.noticeContent = noticeContent;
-        this.noticeTitle = noticeTitle;
-    }
 }

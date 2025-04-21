@@ -1,6 +1,5 @@
 package com.app.bookJeog.domain.vo;
 
-import com.app.bookJeog.domain.enumeration.BookPostStatus;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -23,5 +22,6 @@ public class SelectedBookVO extends Period {
         this.id = id;
         this.bookImageUrl = bookImageUrl;
     }
+
 
 }

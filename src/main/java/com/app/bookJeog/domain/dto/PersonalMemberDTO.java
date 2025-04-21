@@ -1,25 +1,42 @@
 package com.app.bookJeog.domain.dto;
 
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
-@ToString
 @Getter
 @Setter
-@NoArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class PersonalMemberDTO {
+    @EqualsAndHashCode.Include
     private Long id;
-    private String memberName;
     private String memberEmail;
+    private String memberPassword;
+    private String memberName;
     private String memberPhone;
-    private String memberNickname;
+    private String memberNickName;
+    private String memberBirth;
     private int memberMileage;
+    private String memberGender;
     private PersonalMemberStatus memberStatus;
-    private String createdDate;
-    private String updatedDate;
+
+    public PersonalMemberVO toVO() {
+        return PersonalMemberVO.builder()
+                .id(id).
+                memberEmail(memberEmail).
+                memberPassword(memberPassword).
+                memberName(memberName).
+                memberPhone(memberPhone).
+                memberNickName(memberNickName).
+                memberBirth(memberBirth).
+                memberMileage(memberMileage).
+                memberGender(memberGender).
+                memberStatus(memberStatus).
+                build();
+    }
+
+
 }

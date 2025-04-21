@@ -3,8 +3,10 @@ package com.app.bookJeog.domain.vo;
 import com.app.bookJeog.domain.enumeration.SponsorInquiryStatus;
 import com.app.bookJeog.domain.enumeration.SponsorInquiryType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -17,14 +19,4 @@ public class FileVO extends Period {
     private String filePath;
     private String fileText;
 
-
-
-    @Builder
-    public FileVO(String createdDate, String updatedDate, String fileName, String filePath, String fileText, Long id) {
-        super(createdDate, updatedDate);
-        this.fileName = fileName;
-        this.filePath = filePath;
-        this.fileText = fileText;
-        this.id = id;
-    }
 }

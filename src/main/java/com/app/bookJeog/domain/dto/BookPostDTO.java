@@ -2,7 +2,6 @@ package com.app.bookJeog.domain.dto;
 
 import com.app.bookJeog.domain.enumeration.BookPostIsPublic;
 import com.app.bookJeog.domain.vo.BookPostVO;
-import com.app.bookJeog.domain.vo.Period;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -40,5 +39,5 @@ public class BookPostDTO {
                 build();
     }
 
-
+    
 }

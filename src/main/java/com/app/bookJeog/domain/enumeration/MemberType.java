@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 // 각 상수는 모두 static으로 처리되고, enum Heap 메모리에 할당된다.
 public enum MemberType {
     SPONSOR("단체"),
-    PERSONAL("개인");
+    PERSONAL("개인"),
+    ADMIN("관리자");
 
 
     private final String code;

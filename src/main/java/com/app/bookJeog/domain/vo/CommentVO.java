@@ -1,8 +1,10 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -16,13 +18,4 @@ public class CommentVO extends Period {
     private Long memberId;
 
 
-
-    @Builder
-    public CommentVO(String createdDate, String updatedDate, String commentText, Long id, Long memberId, Long postId) {
-        super(createdDate, updatedDate);
-        this.commentText = commentText;
-        this.id = id;
-        this.memberId = memberId;
-        this.postId = postId;
-    }
 }

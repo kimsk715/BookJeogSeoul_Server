@@ -6,6 +6,7 @@ import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface PostService {
@@ -49,4 +50,14 @@ public interface PostService {
     }
 
     public int countAllDiscussionPost(Pagination pagination);
+
+    //   이 책으로 작성한 독후감 일부 조회
+    ArrayList<BookPostDTO> selectThisBookPosts(Long isbn);
+
+    //   이 책으로 작성한 독후감 전체 조회
+    ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn);
+
+    //   이 책으로 작성한 독후감 전체 개수 조회
+    int selectBookAllPostsCount(Long isbn);
+
 }
