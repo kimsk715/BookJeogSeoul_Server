@@ -24,5 +24,4 @@ public class PersonalMemberVO extends MemberVO{
     private int memberMileage;
     private String memberGender;
     private PersonalMemberStatus memberStatus;
-
 }
