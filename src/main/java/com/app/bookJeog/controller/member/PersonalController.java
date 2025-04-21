@@ -1,5 +1,6 @@
 package com.app.bookJeog.controller.member;
 
+import com.app.bookJeog.domain.dto.MemberPersonalMemberDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.service.MemberServiceImpl;
@@ -78,6 +79,7 @@ public class PersonalController {
     // 로그인
     @GetMapping("login")
     public String goToLogin() {
+
         return "login/login";
     }
 
@@ -99,8 +101,9 @@ public class PersonalController {
 
     // 회원가입 기능
     @PostMapping("register")
-    public String registerMember(PersonalMemberDTO personalMemberDTO) {
-        memberServiceImpl.insertPersonalMember(personalMemberDTO);
+    public String registerMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
+        log.info("memberPersonalMemberDTO: {}", memberPersonalMemberDTO);
+        memberServiceImpl.insertPersonalMember(memberPersonalMemberDTO);
         return "redirect:/personal/login";
     }
 

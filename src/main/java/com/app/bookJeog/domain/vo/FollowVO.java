@@ -1,8 +1,10 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -14,7 +16,6 @@ public class FollowVO extends Period {
     private Long followReceiverId;
     private Long followSenderId;
 
-    @Builder
     public FollowVO(String createdDate, String updatedDate, Long followReceiverId, Long followSenderId, Long id) {
         super(createdDate, updatedDate);
         this.followReceiverId = followReceiverId;

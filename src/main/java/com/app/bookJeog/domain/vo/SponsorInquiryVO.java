@@ -5,8 +5,10 @@ import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import com.app.bookJeog.domain.enumeration.SponsorInquiryStatus;
 import com.app.bookJeog.domain.enumeration.SponsorInquiryType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -23,7 +25,6 @@ public class SponsorInquiryVO extends Period {
     private SponsorInquiryStatus sponsorInquiryStatus;
 
 
-    @Builder
     public SponsorInquiryVO(String createdDate, String updatedDate, Long id, Long sponsorId, String sponsorInquiryAnswer, SponsorInquiryStatus sponsorInquiryStatus, String sponsorInquiryText, String sponsorInquiryTitle, SponsorInquiryType sponsorInquiryType) {
         super(createdDate, updatedDate);
         this.id = id;

@@ -1,8 +1,10 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -13,7 +15,6 @@ public class NoticeFileVO extends FileVO {
     private Long id;
     private Long noticeId;
 
-    @Builder
     public NoticeFileVO(Long id, Long noticeId) {
         this.id = id;
         this.noticeId = noticeId;
