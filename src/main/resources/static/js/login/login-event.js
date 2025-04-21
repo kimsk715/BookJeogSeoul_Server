@@ -69,6 +69,8 @@ cleartBtnPw.addEventListener("mousedown", (e) => {
 // 아이디 비밀번호 value가 없으면 로그인 활성화 안함
 // 반대로 있으면 활성화함
 const loginBtn = document.querySelector("#login-btn");
+// form 버튼
+const loginForm = document.querySelector("#login-form");
 
 const activeLoginBtn = () => {
     if (inputId.value.length > 0 && inputPw.value.length > 0) {
@@ -79,20 +81,25 @@ const activeLoginBtn = () => {
         loginBtn.style.cursor = "not-allowed";
     }
 };
+
+const personalMemberDTO = {
+    memberEmail: inputId,
+    memberPassword: inputPw
+};
+
+
 inputId.addEventListener("input", activeLoginBtn);
 inputPw.addEventListener("input", activeLoginBtn);
 
 // 모달 테스트
 // 모달 창을 띄우기 위한 코드
 // 안쓸거면 주석 하면됨
-const modal = document.querySelector(".modal");
+const modal = document.querySelector("#modal");
 const modalCloseBtn = document.querySelector(
     "#modal-wrap > .modal-footer > button"
 );
 const modalHeader = document.querySelector(".modal-header > strong");
 const modalBody = document.querySelector(".modal-body > p");
-console.log(modalHeader);
-console.log(modalBody);
 
 modalCloseBtn.addEventListener("click", () => {
     modal.classList.add("fade-out");
@@ -102,13 +109,24 @@ modalCloseBtn.addEventListener("click", () => {
     }, 500);
 });
 
-loginBtn.addEventListener("click", () => {
-    modal.classList.remove("fade-out");
-    modal.style.display = "flex";
-    modal.classList.add("fade-in");
+window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("result") === "fail") {
+        modal.style.display = "flex";
+        modal.classList.add("fade-in");
+    }
 });
 
+// form 전송
+loginBtn.addEventListener('click', () => {
+    loginForm.submit();
+})
 
-const goToMain = () => {
-    window.location.href = "http://localhost:10000/main/main"
-}
+
+
+
+
+
+
+
+

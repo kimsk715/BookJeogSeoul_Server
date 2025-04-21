@@ -119,3 +119,37 @@ nameclrBtn.addEventListener("mousedown", (e) => {
 });
 
 const nextBtn = document.querySelector("#login-btn");
+const checkSubmit = document.querySelector("#info-check")
+
+nextBtn.addEventListener('click', () =>{
+    checkSubmit.submit();
+})
+
+// 모달 테스트
+// 모달 창을 띄우기 위한 코드
+// 안쓸거면 주석 하면됨
+const modal = document.querySelector("#modal");
+const modalCloseBtn = document.querySelector(
+    "#modal-wrap > .modal-footer > button"
+);
+const modalHeader = document.querySelector(".modal-header > strong");
+const modalBody = document.querySelector(".modal-body > p");
+
+modalCloseBtn.addEventListener("click", () => {
+    modal.classList.add("fade-out");
+    modal.classList.remove("fade-in");
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 500);
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("result") === "fail") {
+
+        modal.classList.add("fade-in");
+        setTimeout(() => {
+            modal.style.display = "flex";
+        }, 500);
+    }
+});

@@ -1,5 +1,6 @@
 package com.app.bookJeog.domain.vo;
 
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import lombok.*;
@@ -23,6 +24,7 @@ public class PersonalMemberVO extends MemberVO{
     private String memberNickName;
     private String memberBirth;
     private int memberMileage;
-    private String memberGender;
+    private int memberGender;
     private PersonalMemberStatus memberStatus;
+
 }

@@ -45,6 +45,14 @@ public class MemberDAO {
 
 
     // 일반 로그인
-    public
+    public Optional<PersonalMemberVO> findPersonalMember(PersonalMemberVO personalMemberVO) {
+        return memberMapper.loginPersonal(personalMemberVO);
+    }
+
+
+    // 일반 비밀번호 찾기
+    public Optional<PersonalMemberVO> findPersonalMemberPassword(PersonalMemberVO personalMemberVO) {
+        return memberMapper.searchPassword(personalMemberVO);
+    }
 
 }
