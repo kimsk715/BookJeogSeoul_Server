@@ -4,11 +4,12 @@ import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.repository.PostDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor @Transactional(rollbackFor = Exception.class)
 public class PostServiceImpl implements PostService {
     private final PostDAO postDAO;
 
