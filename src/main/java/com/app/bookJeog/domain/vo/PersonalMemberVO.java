@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @SuperBuilder
+
 public class PersonalMemberVO extends MemberVO{
     @EqualsAndHashCode.Include
     private Long id;

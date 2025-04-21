@@ -1,16 +1,21 @@
 package com.app.bookJeog.mapper;
 
-import com.app.bookJeog.domain.dto.PersonalMemberDTO;
-import com.app.bookJeog.domain.enumeration.MemberType;
-import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
+
+import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import org.apache.ibatis.annotations.Mapper;
-
+import java.util.List;
 import java.util.Optional;
+
 
 @Mapper
 public interface MemberMapper {
+    // 관리자 페이지 개인 회원 조회
+    public List<PersonalMemberVO> selectAllPersonal(Pagination pagination);
+
+    // 관리자 페이지 개인 회원 페이지네이션
+    public int countAllPersonal(Pagination pagination);
 
     // 일반 회원 회원가입
     public void insertPersonalMember(PersonalMemberVO personalMemberVO);
