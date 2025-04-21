@@ -3,6 +3,7 @@ package com.app.bookJeog.domain.vo;
 import com.app.bookJeog.domain.enumeration.SponsorInquiryStatus;
 import com.app.bookJeog.domain.enumeration.SponsorInquiryType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class FileVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
@@ -19,7 +21,6 @@ public class FileVO extends Period {
 
 
 
-    @Builder
     public FileVO(String createdDate, String updatedDate, String fileName, String filePath, String fileText, Long id) {
         super(createdDate, updatedDate);
         this.fileName = fileName;

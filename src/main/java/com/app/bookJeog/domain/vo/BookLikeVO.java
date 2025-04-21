@@ -2,6 +2,7 @@ package com.app.bookJeog.domain.vo;
 
 import com.app.bookJeog.domain.enumeration.AlarmStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class BookLikeVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
@@ -17,7 +19,6 @@ public class BookLikeVO extends Period {
     private AlarmStatus alarmStatus;
 
 
-    @Builder
     public BookLikeVO(String createdDate, String updatedDate, AlarmStatus alarmStatus, Long bookIsbn, Long id, Long memberId) {
         super(createdDate, updatedDate);
         this.alarmStatus = alarmStatus;

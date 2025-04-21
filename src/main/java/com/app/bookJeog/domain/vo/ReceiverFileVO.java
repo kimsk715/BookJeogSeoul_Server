@@ -1,6 +1,7 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -10,6 +11,7 @@ import java.io.File;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class ReceiverFileVO extends FileVO {
     @EqualsAndHashCode.Include
     private Long id;
@@ -17,7 +19,6 @@ public class ReceiverFileVO extends FileVO {
 
 
 
-    @Builder
     public ReceiverFileVO(Long donateCertId, Long id) {
         this.donateCertId = donateCertId;
         this.id = id;

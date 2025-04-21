@@ -1,6 +1,7 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -8,13 +9,13 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class FollowVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
     private Long followReceiverId;
     private Long followSenderId;
 
-    @Builder
     public FollowVO(String createdDate, String updatedDate, Long followReceiverId, Long followSenderId, Long id) {
         super(createdDate, updatedDate);
         this.followReceiverId = followReceiverId;

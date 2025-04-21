@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
     //일반회원 회원가입
     public void insertPersonalMember(PersonalMemberDTO personalMemberDTO) {
 
-         memberDAO.insertCommonMember();
+//         memberDAO.insertCommonMember();
 
 
     }

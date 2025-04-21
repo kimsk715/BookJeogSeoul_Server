@@ -2,6 +2,7 @@ package com.app.bookJeog.domain.vo;
 
 import com.app.bookJeog.domain.enumeration.BookPostStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class ReceiverVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
@@ -16,7 +18,6 @@ public class ReceiverVO extends Period {
     private String receiverText;
 
 
-    @Builder
     public ReceiverVO(String createdDate, String updatedDate, Long id, String receiverText, String receiverTitle) {
         super(createdDate, updatedDate);
         this.id = id;
