@@ -31,4 +31,8 @@ public interface MemberMapper {
 
     // 일반 로그인
     public Optional<PersonalMemberVO> loginPersonal(PersonalMemberVO personalMemberVO);
+
+
+    // 일반 비밀번호 찾기
+    public Optional<PersonalMemberVO> searchPassword(PersonalMemberVO personalMemberVO);
 }

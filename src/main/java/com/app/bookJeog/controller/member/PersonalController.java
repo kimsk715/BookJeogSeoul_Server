@@ -3,12 +3,16 @@ package com.app.bookJeog.controller.member;
 import com.app.bookJeog.domain.dto.MemberPersonalMemberDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.service.MemberService;
 import com.app.bookJeog.service.MemberServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Controller
@@ -19,6 +23,8 @@ public class PersonalController {
 
 
     private final MemberServiceImpl memberServiceImpl;
+    private final MemberService memberService;
+    private final HttpSession session;
 
     // 개인 마이페이지 조회
     @GetMapping("mypage")
@@ -84,6 +90,23 @@ public class PersonalController {
     }
 
 
+    // 로그인 기능
+    @PostMapping("/personal/login-check")
+    public String loginSuccess(PersonalMemberDTO personalMemberDTO) {
+        Optional<PersonalMemberDTO> foundMember = memberServiceImpl.loginPersonalMember(personalMemberDTO);
+
+        if(foundMember.isPresent()) {
+            session.setAttribute("member", foundMember);
+            return "redirect:/main/main";
+        } else {
+            return "redirect:/personal/login?result=fail";
+        }
+    };
+
+
+
+
+
     // 회원가입
     @GetMapping("register-member")
     public String goToRegisterMember(PersonalMemberVO personalMemberVO) {
@@ -115,6 +138,18 @@ public class PersonalController {
     }
 
 
+    // 비밀번호 찾기 기능
+    @PostMapping("search-my-password")
+    public String searchMyPassword(PersonalMemberDTO personalMemberDTO) {
+        Optional<PersonalMemberDTO> foundMember = memberServiceImpl.searchPassword(personalMemberDTO);
+        if(foundMember.isPresent()) {
+            return "redirect:/personal/my-password";
+        } else {
+        return "redirect:/personal/login/findpasswd-member?result=fail";
+        }
+    }
+
+
     // 비밀번호 찾기 인증페이지
     @GetMapping("login/findpasswd-member-certi")
     public String goToFindPasswdMemberCerti() {
@@ -122,10 +157,12 @@ public class PersonalController {
     }
 
 
+
     // 비밀번호 재설정
     @GetMapping("login/set-member-passwd")
     public String gotoFindPasswdMemberCerti() {
         return "login/set-member-passwd";
     }
+
 
 }
