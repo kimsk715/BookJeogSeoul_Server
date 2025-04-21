@@ -1,20 +1,15 @@
 package com.app.bookJeog.domain.dto;
 
 import com.app.bookJeog.domain.enumeration.BookPostIsPublic;
-import com.app.bookJeog.domain.enumeration.BookPostReportStatus;
-import com.app.bookJeog.domain.enumeration.BookPostReportType;
-import com.app.bookJeog.domain.vo.BookPostReportVO;
 import com.app.bookJeog.domain.vo.BookPostVO;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
+@ToString
 @Getter
 @Setter
-@ToString
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class BookPostDTO {
     @EqualsAndHashCode.Include
@@ -24,26 +19,25 @@ public class BookPostDTO {
     private BookPostIsPublic bookPostIsPublic;
     private String bookPostStartDate;
     private String bookPostEndDate;
-    private Long bookIsbn;
     private String createdDate;
     private String updatedDate;
-    private Long memberId;
-    private String memberNickName;
-    private String filePath;
-    private String fileName;
+    private Long bookId;
+    private Long bookIsbn;
 
-    public BookPostVO toVO() {
-        return BookPostVO.builder()
-                .id(id)
-                .bookPostTitle(bookPostTitle)
-                .bookPostText(bookPostText)
-                .bookPostIsPublic(bookPostIsPublic)
-                .bookPostStartDate(bookPostStartDate)
-                .bookPostEndDate(bookPostEndDate)
-                .bookIsbn(bookIsbn)
-                .createdDate(createdDate)
-                .updatedDate(updatedDate)
-                .build();
-
+    public BookPostVO toVO(){
+        return BookPostVO.builder().
+                id(id).
+                bookPostTitle(bookPostTitle).
+                bookPostText(bookPostText).
+                bookPostIsPublic(bookPostIsPublic).
+                bookPostStartDate(bookPostStartDate).
+                bookPostEndDate(bookPostEndDate).
+                bookId(bookId).
+                bookIsbn(bookIsbn).
+                createdDate(createdDate).
+                updatedDate(updatedDate).
+                build();
     }
+
+    
 }
