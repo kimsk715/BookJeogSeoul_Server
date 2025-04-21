@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,57 +12,59 @@
             <div class="login-content">
                 <h3 class="title">독서와 친해지면 지혜가 늘어나요</h3>
                 <p class="sub-title">책을 읽고 지식 뿜뿜!</p>
-                <!-- 아이디 입력란 -->
-                <div class="input-item">
-                    <div class="bjs-input-id">
-                        <label class="input-label-id">
-                            <div class="inner">
-                                <div class="input">
-                                    <span class="input-id-label">아이디</span>
-                                    <input
-                                        autocomplete="off"
-                                        type="text"
-                                        name=""
-                                        id="bjs-id"
-                                        placeholder="아이디를 입력해주세요."
-                                        style="outline: none; border: none"
-                                    />
+                    <!-- 아이디 입력란 -->
+                <form action="/personal/login-check" method="post" id="login-form">
+                    <div class="input-item">
+                        <div class="bjs-input-id">
+                            <label class="input-label-id">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-id-label">이메일</span>
+                                        <input
+                                            autocomplete="off"
+                                            type="text"
+                                            name="memberEmail"
+                                            id="bjs-id"
+                                            placeholder="이메일를 입력해주세요."
+                                            style="outline: none; border: none"
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        id="clear-button-id"
+                                    ></button>
                                 </div>
-                                <button
-                                    type="button"
-                                    id="clear-button-id"
-                                ></button>
-                            </div>
-                        </label>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <!-- 비밀번호 입력란 -->
-                <div class="input-item">
-                    <div class="bjs-input-pw">
-                        <label class="input-label-pw">
-                            <div class="inner">
-                                <div class="input">
-                                    <span class="input-pw-label">비밀번호</span>
-                                    <input
-                                        autocomplete="off"
-                                        type="password"
-                                        name=""
-                                        id="bjs-pw"
-                                        placeholder="비밀번호를 입력해주세요."
-                                        style="outline: none; border: none"
-                                    />
+                    <!-- 비밀번호 입력란 -->
+                    <div class="input-item">
+                        <div class="bjs-input-pw">
+                            <label class="input-label-pw">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-pw-label">비밀번호</span>
+                                        <input
+                                            autocomplete="off"
+                                            type="password"
+                                            name="memberPassword"
+                                            id="bjs-pw"
+                                            placeholder="비밀번호를 입력해주세요."
+                                            style="outline: none; border: none"
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        id="clear-button-pw"
+                                    ></button>
                                 </div>
-                                <button
-                                    type="button"
-                                    id="clear-button-pw"
-                                ></button>
-                            </div>
-                        </label>
+                            </label>
+                        </div>
                     </div>
-                </div>
+                </form>
                 <!-- 로그인 버튼 -->
                 <div class="login-btn-area">
-                    <button type="button" onclick="goToMain()" id="login-btn">
+                    <button type="button" id="login-btn">
                         <span class="login-btn-tag">로그인</span>
                     </button>
                 </div>
@@ -113,5 +115,5 @@
             </div>
         </div>
     </body>
-    <script src="/js/login/login.js"></script>
+    <script src="/js/login/login-event.js"></script>
 </html>

@@ -1,5 +1,6 @@
 package com.app.bookJeog.domain.vo;
 
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import lombok.*;
