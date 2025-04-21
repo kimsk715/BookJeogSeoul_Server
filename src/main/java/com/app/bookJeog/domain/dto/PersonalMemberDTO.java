@@ -2,10 +2,7 @@ package com.app.bookJeog.domain.dto;
 
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -40,5 +37,6 @@ public class PersonalMemberDTO {
                 memberStatus(memberStatus).
                 build();
     }
+
 
 }

@@ -479,9 +479,37 @@
                         <div class="book-search-filter-container book-filter">
                             <div class="search-box book-search">
                                 <input type="text" placeholder="검색어를 입력하세요" class="search-input book-search-input" />
+                                <div class="filter-box book-filter-box">
+                                    <select class="status-filter keyword-filter">
+                                        <option value="isbn">ISBN</option>
+                                        <option value="title">도서명</option>
+                                        <option value="author">작가명</option>
+
+                                    </select>
+
+                                </div>
+                                <div class="filter-box book-filter-box">
+                                    <select class="status-filter book-status-filter">
+                                        <option value="all">전체</option>
+                                        <option value="pending">심사중</option>
+                                        <option value="hold">보류</option>
+                                        <option value="approved">승인</option>
+                                        <option value="rejected">반려</option>
+                                    </select>
+                                    <select class="date-filter book-date-filter">
+                                        <option value="week">최근 1주일</option>
+                                        <option value="month">
+                                            최근 1개월
+                                        </option>
+                                        <option value="three-month">
+                                            최근 3개월
+                                        </option>
+                                    </select>
+                                </div>
                                 <button type="button" class="search-btn book-search-btn">
                                     검색
                                 </button>
+
                                 <button type="button" class="search-btn book-recommend-btn">
                                     추천 도서 목록 저장
                                 </button>
@@ -489,27 +517,10 @@
                                     도서 선택
                                 </button>
                             </div>
-                            <div class="filter-box book-filter-box">
-                                <select class="status-filter book-status-filter">
-                                    <option value="all">전체</option>
-                                    <option value="pending">심사중</option>
-                                    <option value="hold">보류</option>
-                                    <option value="approved">승인</option>
-                                    <option value="rejected">반려</option>
-                                </select>
-                                <select class="date-filter book-date-filter">
-                                    <option value="week">최근 1주일</option>
-                                    <option value="month">
-                                        최근 1개월
-                                    </option>
-                                    <option value="three-month">
-                                        최근 3개월
-                                    </option>
-                                </select>
-                            </div>
+
                         </div>
 
-                        <!-- 개인 회원 목록 테이블 -->
+                        <!-- 도서 목록 테이블 -->
                         <div class="book-table-container">
                             <table class="book-table">
                                 <thead>
@@ -517,69 +528,37 @@
                                         <th></th>
                                         <th>일련번호</th>
                                         <th>도서명</th>
-                                        <th>DDC</th>
-                                        <th>KDC</th>
+                                        <th>작가</th>
+                                        <th>출판사</th>
                                         <th>선정여부</th>
                                         <th>대출상태</th>
                                         <th>도서상세정보</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- 샘플 데이터 -->
-                                    <tr>
-                                        <td><input type="checkbox" class="chosenBook"></td>
-                                        <td>19282874981</td>
-                                        <td>체크박스를 눌러서 선택 => 카테고리 버튼 처럼 배열에 저장 => 최종 선택 완료시 모달창으로 한번 확인시키기
-                                        </td>
-                                        <td>888.88</td>
-                                        <td>877.77</td>
-                                        <td><span class="status active">선정</span></td>
-                                        <td>
-                                            <span class="status active">대출중</span>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="detail-btn book-detail-btn">
-                                                상세보기
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="chosenBook"></td>
-                                        <td>19282874981</td>
-                                        <td>체크박스를 눌러서 선택 => 카테고리 버튼 처럼 배열에 저장 => 최종 선택 완료시 모달창으로 한번 확인시키기
-                                        </td>
-                                        <td>888.88</td>
-                                        <td>877.77</td>
-                                        <td><span class="status active">선정</span></td>
-                                        <td>
-                                            <span class="status active">대출중</span>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="detail-btn book-detail-btn">
-                                                상세보기
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox" class="chosenBook"></td>
-                                        <td>19282874981</td>
-                                        <td>체크박스를 눌러서 선택 => 카테고리 버튼 처럼 배열에 저장 => 최종 선택 완료시 모달창으로 한번 확인시키기
-                                        </td>
-                                        <td>888.88</td>
-                                        <td>877.77</td>
-                                        <td><span class="status active">선정</span></td>
-                                        <td>
-                                            <span class="status active">대출중</span>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="detail-btn book-detail-btn">
-                                                상세보기
-                                            </button>
-                                        </td>
-                                    </tr>
+
                                 </tbody>
+<!--                                <tbody>-->
+<!--                                    <tr th:each="book : ${books}">-->
+<!--                                        <td><input type="checkbox" class="chosenBook"></td>-->
+<!--                                        <td th:text="${book.isbn}">19282874981</td>-->
+<!--                                        <td th:text="${book.title}"></td>-->
+<!--                                        <td th:text="${book.author}"></td>-->
+<!--                                        <td th:text="${book.publisher}"></td>-->
+<!--                                        <td><span class="status active">선정</span></td>-->
+<!--                                        <td>-->
+<!--                                            <span class="status active">대출중</span>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <button type="button" class="detail-btn book-detail-btn">-->
+<!--                                                상세보기-->
+<!--                                            </button>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                </tbody>-->
                             </table>
                         </div>
+                        <div class="book-pagination"></div>
                     </div>
                     <!-- 독후감관리 컨텐츠 -->
                     <div class="book-post-management" style="display: none">
@@ -625,8 +604,8 @@
                                         <th>연결도서</th>
                                         <th>작성일시</th>
                                         <th>수정일시</th>
-                                        <th>좋아요</th>
                                         <th>추천도서여부</th>
+                                        <th>공개여부</th>
                                         <th>독후감관리</th>
                                     </tr>
                                 </thead>
@@ -1756,19 +1735,21 @@
                 <div class="monthly-book-info">
                     <h4>INFO</h4>
                     <table class="monthly-book-table info-table">
-                        <tbody>
+                        <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>ISBN</th>
                                 <th>도서명</th>
                                 <th>카테고리 or DDC</th>
                             </tr>
+                        </thead>
+                        <tbody>
                             <tr>
                                 <td>001</td>
                                 <td>1234567890123</td>
                                 <td>차라투스트라는 이렇게 말했다.</td>
                                 <td>189.10</td> 
-                            </tr>   
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -2056,6 +2037,18 @@
     <script src="/js/admin/sidebar_toggle.js"></script>
     <script src="/js/admin/main_contents_toggle.js"></script>
     <script src="/js/admin/tempjs.js"></script>
+    <script src="/js/admin/book_event.js"></script>
+    <script src="/js/admin/book_layout.js"></script>
+    <script src="/js/admin/book_service.js"></script>
+    <script src="/js/admin/bookpost_event.js"></script>
+    <script src="/js/admin/bookpost_layout.js"></script>
+    <script src="/js/admin/bookpost_service.js"></script>
+    <script src="/js/admin/discussion_event.js"></script>
+    <script src="/js/admin/discussion_layout.js"></script>
+    <script src="/js/admin/discussion_service.js"></script>
+    <script src="/js/admin/personal_event.js"></script>
+    <script src="/js/admin/personal_layout.js"></script>
+    <script src="/js/admin/personal_service.js"></script>
 </body>
 
 </html>
