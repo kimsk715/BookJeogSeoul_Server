@@ -28,11 +28,8 @@ public class AdminBookController {
     @ResponseBody
     public BookInfoDTO getAllBook(@RequestParam(value = "type", required = false) String type, @RequestParam("page") int page, @RequestParam(value = "keyword", required = false) String keyword ,HttpServletRequest request, Pagination pagination) {
         pagination.setPage(page);
-
         BookInfoDTO Books = bookService.getAllBook(pagination, keyword, type);
         log.info("{}",request.getAttribute("test"));
-
-
         return Books;
     }
 

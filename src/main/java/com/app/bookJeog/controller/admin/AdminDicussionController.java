@@ -30,16 +30,17 @@ public class AdminDicussionController {
         AdminDiscussionDTO adminDiscussionDTO = new AdminDiscussionDTO();
 
         List<DiscussionVO> tempDiscussionList = postService.getAllDiscussionPost(pagination);
-log.info("{}", tempDiscussionList);
+        log.info("{}", tempDiscussionList);
         List<DiscussionDTO> discussionDTOList = new ArrayList<>();
         for (DiscussionVO discussion : tempDiscussionList) {
             DiscussionDTO discussionDTO = new DiscussionDTO();
             discussionDTO.setId(discussion.getId());
             discussionDTO.setDiscussionTitle(discussion.getDiscussionTitle());
             discussionDTO.setDiscussionText(discussion.getDiscussionText());
+            discussionDTO.setBookIsbn(discussion.getBookIsbn());
             discussionDTOList.add(discussionDTO);
         }
-log.info("{}", discussionDTOList);
+        log.info("{}", discussionDTOList);
         adminDiscussionDTO.setDiscussionDTOList(discussionDTOList);
         pagination.create(postService.countAllDiscussionPost(pagination));
         adminDiscussionDTO.setPagination(pagination);

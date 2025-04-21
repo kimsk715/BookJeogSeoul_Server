@@ -4,20 +4,23 @@ package com.app.bookJeog.repository;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
+import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 import com.app.bookJeog.mapper.BookMapper;
 
 import com.app.bookJeog.domain.dto.BookPostDTO;
 
 import com.app.bookJeog.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
-
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class PostDAO {
@@ -52,4 +55,32 @@ public class PostDAO {
         return postMapper.selectBookAllPostsCount(isbn);
     };
 
+
+    public List<BookPostVO> findTopPosts(){
+        return postMapper.selectTopPosts();
+    }
+
+    public void insertTopBookPosts(MonthlyBookPostVO monthlyBookPostVO){
+        postMapper.insertTopBookPosts(monthlyBookPostVO);
+    }
+
+    public List<MonthlyBookPostVO> findMonthlyBookPosts(Pagination pagination){
+        return postMapper.selectMonthlyBookPosts(pagination);
+    }
+
+    public Optional<MonthlyBookPostVO> findBestPost(){
+        return postMapper.selectBestPost();
+    }
+
+    public void insertBestPost(MonthlyBookPostVO monthlyBookPostVO){
+        postMapper.insertBestPost(monthlyBookPostVO);
+    }
+
+    public int countAllBookPost(){
+        return postMapper.countAllBookPost();
+    }
+
+    public int countTopPosts(){
+        return postMapper.countTopPosts();
+    }
 }

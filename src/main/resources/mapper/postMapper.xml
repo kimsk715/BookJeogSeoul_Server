@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.PostMapper">
+    <!-- 전체 독후감 조회(관리자) -->
     <select id="selectAllBookPost" resultType="bookPostVO">
-        select bp.id, bp.book_post_title, bp.book_post_text, bp.book_post_is_public, bp.book_post_start_date, bp.book_post_end_date,
-               nbp.book_isbn, sbp.book_id, sbp.book_post_status, p.createdDate, p.updatedDate
-        from tbl_book_post bp
-            join tbl_post p on bp.id = p.id
-                 left join tbl_normal_book_post nbp
-                           on bp.id = nbp.id
-                 left join tbl_selected_book_post sbp
-                           on bp.id = sbp.id
-    </select>
+        select p.id, member_id, createdDate, updatedDate, book_post_title, book_post_text,
+                book_post_is_public, book_post_start_date, book_post_end_date, bp.book_isbn, bookPostLikeCount, bookPostVoteCount
+            from (tbl_post p join tbl_book_post bp on p.id = bp.id
+                left join tbl_selected_book_post sbp on bp.id = sbp.id
+                left join tbl_normal_book_post nbp on bp.id = nbp.id
+                /*and sbp.book_post_status = 'PUBLIC' and bp.book_post_is_public = 'PUBLIC'*/
+                left join (select book_post_id, count(*) as bookPostLikeCount
+                           from tbl_book_post_like
+                           group by book_post_id) cnt
+                on cnt.book_post_id = bp.id
+                left join
+                (select book_post_id, count(*) as bookPostVoteCount
+                 from tbl_book_post_vote
+                 group by book_post_id) vote
+                  on vote.book_post_id = bp.id
+                     )
+        order by bp.id desc
+            limit #{rowCount}
+                offset #{offset}
 
+    </select>
+    <select id="countAllBookPost" resultType="_int">
+        select count(*)
+        from tbl_book_post bp
+        left join tbl_selected_book_post sbp on bp.id = sbp.id
+        left join tbl_normal_book_post nbp on bp.id = nbp.id
+
+    </select>
     <!-- 토론 게시글 조회(관리자)-->
     <select id="selectAllDiscussionPost" resultType="discussionVO">
         select d.id, discussion_title, discussion_text, book_isbn, p.member_id, p.createdDate, p.updatedDate
@@ -76,6 +95,68 @@
                  join tbl_file f on f.id = mp.id
         where bp.book_post_is_public = 'PUBLIC'
           and bp.book_isbn = #{bookIsbn}
-
     </select>
+
+    <!-- Quartz 로 매달 N 일에 자동으로 후보로 등록-->
+    <insert id="insertTopBookPosts">
+        insert into tbl_monthly_book_post (book_post_id, book_post_title, book_post_text, book_post_like_count)
+        values (#{bookPostId}, #{bookPostTitle}, #{bookPostText}, #{bookPostLikeCount})
+    </insert>
+
+    <!-- Quartz 로 가져올 후보들 현재는 테스트라 top20 만 가져옴-->
+    <select id="selectTopPosts" resultType="bookPostVO">
+        select p.id, book_post_title, book_post_text, book_post_id, bookPostLikeCount
+        from tbl_post p join tbl_book_post bp on p.id = bp.id
+                        join tbl_selected_book_post sbp on bp.id = sbp.id and sbp.book_post_status = 'PUBLIC' and bp.book_post_is_public = 'PUBLIC'
+                        left join (
+            select book_post_id, count(*) as bookPostLikeCount
+            from tbl_book_post_like
+            group by book_post_id
+        ) cnt
+          on cnt.book_post_id = bp.id
+           order by bookPostLikeCount desc
+        limit 20;
+    </select>
+
+    <!-- top20 후보 중 투표 수로 정렬하여 가져옴. -->
+    <select id="selectMonthlyBookPosts" resultType="monthlyBookPostVO">
+        select *
+        from tbl_monthly_book_post mbp
+            left join
+            (
+                select book_post_id, count(*) as bookPostVoteCount
+                from tbl_book_post_vote
+                group by book_post_id
+            ) vote
+            on mbp.book_post_id = vote.book_post_id
+            order by bookPostVoteCount desc
+        limit #{rowCount}
+            offset #{offset}
+    </select>
+
+    <!--top20 페이징 처리용 -->
+    <select id="countTopPosts" resultType="_int">
+        select count(*) from tbl_monthly_book_post
+    </select>
+
+    <!-- top1 독후감 select -->
+    <select id="selectBestPost" resultType="monthlyBookPostVO">
+        select *
+        from tbl_monthly_book_post mbp
+                 left join
+             (
+                 select book_post_id, count(*) as bookPostVoteCount
+                 from tbl_book_post_vote
+                 group by book_post_id
+             ) vote
+             on mbp.book_post_id = vote.book_post_id
+        order by bookPostVoteCount desc
+        limit 1
+    </select>
+
+    <!-- top1 독후감 테이블에 넣기 (Quartz 로 매달 1일에)-->
+    <insert id="insertBestPost">
+         insert into tbl_best_book_post (book_post_id, book_post_title, book_post_text)
+         values (#{bookPostId}, #{bookPostTitle}, #{bookPostText})
+    </insert>
 </mapper>

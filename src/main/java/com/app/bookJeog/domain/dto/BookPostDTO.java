@@ -23,6 +23,8 @@ public class BookPostDTO {
     private String updatedDate;
     private Long bookId;
     private Long bookIsbn;
+    private int bookPostLikeCount;
+    private int bookPostVoteCount;
 
     public BookPostVO toVO(){
         return BookPostVO.builder().
@@ -36,6 +38,8 @@ public class BookPostDTO {
                 bookIsbn(bookIsbn).
                 createdDate(createdDate).
                 updatedDate(updatedDate).
+                bookPostLikeCount(bookPostLikeCount).
+                bookPostVoteCount(bookPostVoteCount).
                 build();
     }
 
