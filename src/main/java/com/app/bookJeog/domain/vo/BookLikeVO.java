@@ -2,8 +2,10 @@ package com.app.bookJeog.domain.vo;
 
 import com.app.bookJeog.domain.enumeration.AlarmStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -17,7 +19,6 @@ public class BookLikeVO extends Period {
     private AlarmStatus alarmStatus;
 
 
-    @Builder
     public BookLikeVO(String createdDate, String updatedDate, AlarmStatus alarmStatus, Long bookIsbn, Long id, Long memberId) {
         super(createdDate, updatedDate);
         this.alarmStatus = alarmStatus;

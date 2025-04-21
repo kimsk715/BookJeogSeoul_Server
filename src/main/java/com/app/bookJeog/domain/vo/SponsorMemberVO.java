@@ -3,8 +3,10 @@ package com.app.bookJeog.domain.vo;
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import com.app.bookJeog.domain.enumeration.SponsorMemberStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -21,7 +23,6 @@ public class SponsorMemberVO extends MemberVO {
     private String sponsorSubAddress;
     private SponsorMemberStatus sponsorMemberStatus;
 
-    @Builder
     public SponsorMemberVO(Long id, String sponsorId, String sponsorMainAddress, SponsorMemberStatus sponsorMemberStatus, String sponsorName, String sponsorPassword, String sponsorPhone, String sponsorSubAddress) {
         this.id = id;
         this.sponsorId = sponsorId;

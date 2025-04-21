@@ -1,7 +1,6 @@
 package com.app.bookJeog.domain.dto;
 
 import com.app.bookJeog.domain.enumeration.MemberType;
-import com.app.bookJeog.domain.vo.FollowVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class memberDTO {
+public class MemberDTO {
     @EqualsAndHashCode.Include
     private Long id;
     private MemberType memberType;

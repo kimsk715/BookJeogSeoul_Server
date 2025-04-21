@@ -1,10 +1,12 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -17,7 +19,6 @@ public class DonateCertFileVO extends FileVO {
 
 
 
-    @Builder
     public DonateCertFileVO(Long donateCertId, Long id) {
         this.donateCertId = donateCertId;
         this.id = id;
