@@ -2,8 +2,9 @@ package com.app.bookJeog.domain.vo;
 
 import com.app.bookJeog.domain.enumeration.BookPostStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
-
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -15,12 +16,4 @@ public class TempSelectedBookVO extends Period {
     private Long id;
     private Long bookIsbn;
 
-
-
-    @Builder
-    public TempSelectedBookVO(String createdDate, String updatedDate, Long bookIsbn, Long id) {
-        super(createdDate, updatedDate);
-        this.bookIsbn = bookIsbn;
-        this.id = id;
-    }
 }

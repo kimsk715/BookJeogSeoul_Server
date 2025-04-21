@@ -1,8 +1,10 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -13,15 +15,5 @@ public class SelectedBookVO extends Period {
     private Long id;
     private Long bookIsbn;
     private String bookImageUrl;
-
-
-    @Builder
-    public SelectedBookVO(String createdDate, String updatedDate, Long bookIsbn, Long id, String bookImageUrl) {
-        super(createdDate, updatedDate);
-        this.bookIsbn = bookIsbn;
-        this.id = id;
-        this.bookImageUrl = bookImageUrl;
-    }
-
 
 }
