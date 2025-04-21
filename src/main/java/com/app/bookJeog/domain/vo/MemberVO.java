@@ -7,20 +7,22 @@ import lombok.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 
 @Getter
 @NoArgsConstructor
 @ToString(callSuper=true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class MemberVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
     private MemberType memberType;
 
-    @Builder
-    public MemberVO(String createdDate, String updatedDate, Long id, MemberType memberType) {
-        super(createdDate, updatedDate);
+
+    public MemberVO(PeriodBuilder<?, ?> b, Long id, MemberType memberType) {
+        super(b);
         this.id = id;
         this.memberType = memberType;
     }
