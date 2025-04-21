@@ -1,6 +1,6 @@
 const bookPostService= (() => {
+    // 전체 독후감
     const getAllBookPost = async(callback, param ={}) =>{
-
         let page = param.page || 1;
         let search = param.search;
         let bookPostKeyword = "";
@@ -23,7 +23,7 @@ const bookPostService= (() => {
             callback(bookList)
         }
     }
-
+    //  이 달의 독후감
     const getTopBookPost = async(callback, param ={}) =>{
         let page = param.page || 1;
         let search = param.search;

@@ -80,4 +80,7 @@ public class PostDAO {
         return postMapper.countAllBookPost();
     }
 
+    public int countTopPosts(){
+        return postMapper.countTopPosts();
+    }
 }

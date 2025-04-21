@@ -73,5 +73,7 @@ public interface PostService {
     public void insertBestPost(MonthlyBookPostVO monthlyBookPostVO);
 
     public int countAllBookPost();
+
+    public int countTopPosts();
 }
 
