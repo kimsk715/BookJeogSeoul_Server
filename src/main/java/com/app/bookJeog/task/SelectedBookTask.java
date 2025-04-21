@@ -29,7 +29,7 @@ public class SelectedBookTask {
      *   0 0 0 1 * ? : 매월 1일 마다
      *   * 10-13 * * * * : 매 10, 11, 12, 13분에 동작한다.
      * */
-
+// 매 달 1일 마다 임시 선정 도서를 실제 선정 도서
     @Scheduled(cron = "0 0 0 1 * *")
     public void insertSelectedBook() {
         List<TempSelectedBookVO> tempList = bookService.getTempSelectedBook();
@@ -39,7 +39,7 @@ public class SelectedBookTask {
             SelectedBookDTO selectedDTO = new SelectedBookDTO();
             selectedDTO.setId(temp.getId());
             selectedDTO.setBookIsbn(temp.getBookIsbn());
-            selectedDTO.setBookImageUrl("1"); // 임시 테스트용
+            selectedDTO.setBookImageUrl("1"); // 임시 테스트용 여기 자리에 표지 이미지 가져올 수 있는 API 연결.
             SelectedBookVO selectedVO = selectedDTO.toSelectedBookVO();
             log.info(selectedVO.toString());
             selectedList.add(selectedVO);
