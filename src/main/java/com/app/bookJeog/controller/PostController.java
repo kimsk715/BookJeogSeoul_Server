@@ -119,7 +119,9 @@ public class PostController {
     @GetMapping("book/post-list")
     @ResponseBody
     public ArrayList<BookPostDTO> selectThisBookAllPosts(@RequestParam Long isbn){
-        return postService.selectThisBookAllPosts(isbn);
+        int offset = 0;
+//    public ArrayList<BookPostDTO> selectThisBookAllPosts(@RequestParam Long isbn, @RequestParam int offset){
+        return postService.selectThisBookAllPosts(isbn, offset);
     }
 
     // 이 책의 전체 독후감들 개수 출력

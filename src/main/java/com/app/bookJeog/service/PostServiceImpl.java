@@ -19,8 +19,8 @@ public class PostServiceImpl implements PostService {
     };
 
     //   이 책으로 작성한 독후감 전체 조회
-    public ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn){
-        return postDAO.selectThisBookAllPosts(isbn);
+    public ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn, int offset){
+        return postDAO.selectThisBookAllPosts(isbn, offset);
     };
 
     //   이 책으로 작성한 독후감 전체 개수 조회

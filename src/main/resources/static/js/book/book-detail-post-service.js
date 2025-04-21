@@ -13,6 +13,8 @@ const bookDetailPostService = (() => {
             });
 
             const posts = await response.json();
+            const responseText = await response.text();
+            console.log("👉 응답 확인:", responseText);
             return posts;
 
         } catch (error) {
