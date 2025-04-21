@@ -27,8 +27,9 @@ public class MemberServiceImpl implements MemberService {
     public Optional<PersonalMemberVO> checkEmail(String email) {
         return memberMapper.selectByEmail(email);
     }
-    // 닉네임 중복검사 만들어야함
 
+
+    // 닉네임 중복검사 만들어야함
     //일반회원 회원가입
     public void insertPersonalMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
 
