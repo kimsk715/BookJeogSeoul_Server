@@ -1,8 +1,10 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -15,7 +17,6 @@ public class CommentMentionVO extends Period {
     private Long mentionMemberId;
 
 
-    @Builder
     public CommentMentionVO(String createdDate, String updatedDate, Long id, Long memberId, Long mentionMemberId) {
         super(createdDate, updatedDate);
         this.id = id;
