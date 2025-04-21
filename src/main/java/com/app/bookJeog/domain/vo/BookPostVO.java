@@ -6,12 +6,12 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString(callSuper = true)
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SuperBuilder
 public class BookPostVO extends PostVO {
     @EqualsAndHashCode.Include
     private Long id;

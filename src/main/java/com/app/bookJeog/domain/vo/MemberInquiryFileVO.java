@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
