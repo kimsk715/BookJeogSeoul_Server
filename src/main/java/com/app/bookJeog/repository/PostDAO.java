@@ -18,8 +18,8 @@ public class PostDAO {
     };
 
     //   이 책으로 작성한 독후감 전체 조회
-    public ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn){
-        return postMapper.selectThisAllBookPosts(isbn);
+    public ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn, int offset){
+        return postMapper.selectThisAllBookPosts(isbn, offset);
     };
 
     //   이 책으로 작성한 독후감 전체 개수 조회

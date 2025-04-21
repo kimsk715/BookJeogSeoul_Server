@@ -11,7 +11,7 @@ public interface PostMapper {
     public ArrayList<BookPostDTO> selectThisBookPosts(Long isbn);
 
     //   이 책으로 작성한 독후감 전체 조회
-    public ArrayList<BookPostDTO> selectThisAllBookPosts(Long isbn);
+    public ArrayList<BookPostDTO> selectThisAllBookPosts(Long isbn, int offset);
 
     //   이 책으로 작성한 독후감 전체 개수 조회
     public int selectBookAllPostsCount(Long isbn);

@@ -21,7 +21,7 @@
         limit 5
     </select>
 
-    <!--  이 책으로 작성한 독후감 전체 조회  -->
+    <!--  이 책으로 작성한 독후감 전체 조회(무한스크롤 6개씩)  -->
     <select id="selectThisAllBookPosts" resultType="bookPostDTO">
         select
             bp.id,
@@ -38,6 +38,7 @@
         where bp.book_post_is_public = 'PUBLIC'
           and bp.book_isbn = #{bookIsbn}
         order by p.createdDate desc
+        limit 6 offset #{offset}
     </select>
 
     <!--  이 책으로 작성한 독후감 전체 개수 조회  -->

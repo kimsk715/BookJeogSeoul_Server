@@ -9,7 +9,7 @@ public interface PostService {
     ArrayList<BookPostDTO> selectThisBookPosts(Long isbn);
 
     //   이 책으로 작성한 독후감 전체 조회
-    ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn);
+    ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn, int offset);
 
     //   이 책으로 작성한 독후감 전체 개수 조회
     int selectBookAllPostsCount(Long isbn);
