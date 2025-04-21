@@ -7,6 +7,7 @@ import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
 import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,11 @@ import java.util.Optional;
 
 @Mapper
 public interface PostMapper {
-        public List<BookPostVO> selectAllBookPost(Pagination pagination);
+    public List<BookPostVO> selectAllBookPost(Pagination pagination);
 
-        public List<DiscussionVO> selectAllDiscussionPost(Pagination pagination);
+    public List<DiscussionVO> selectAllDiscussionPost(Pagination pagination);
 
-        public int countAllDiscussionPost(Pagination pagination);
+    public int countAllDiscussionPost(Pagination pagination);
 
     //   이 책으로 작성한 독후감 일부 조회
     public ArrayList<BookPostDTO> selectThisBookPosts(Long isbn);
@@ -40,5 +41,7 @@ public interface PostMapper {
     public void insertBestPost(MonthlyBookPostVO monthlyBookPostVO);
 
     public int countAllBookPost();
+
+    public int countTopPosts();
 }
 

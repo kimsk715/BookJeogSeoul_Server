@@ -4,7 +4,7 @@ const bookPostLayout = (() =>{
         let text = ``;
         const pagination = bookPostList.pagination;
         const pageWrap = document.querySelector(".book-post-pagination")
-
+        console.log(bookPostList)
         bookPostList.bookPostDTOList.forEach((post) => {
             let className = "";
             let classText = "";
@@ -46,6 +46,7 @@ const bookPostLayout = (() =>{
             `
         })
         bookPostTBody.innerHTML = text;
+
         text=``;
 
         if(pagination.prev) {
@@ -93,7 +94,7 @@ const bookPostLayout = (() =>{
 
             text += `
             <tr>
-                <td>${post.id}</td>
+                <td>${post.bookPostId}</td>
                 <td>${post.bookPostTitle}</td>
                 <td>${post.bookPostText}</td>
                 <td>${post.createdDate}</td>

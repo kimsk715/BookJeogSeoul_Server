@@ -5,23 +5,24 @@
     <select id="selectAllBookPost" resultType="bookPostVO">
         select p.id, member_id, createdDate, updatedDate, book_post_title, book_post_text,
                 book_post_is_public, book_post_start_date, book_post_end_date, bp.book_isbn, bookPostLikeCount, bookPostVoteCount
-            from tbl_post p join tbl_book_post bp on p.id = bp.id
-            left join tbl_selected_book_post sbp on bp.id = sbp.id
+            from (tbl_post p join tbl_book_post bp on p.id = bp.id
+                left join tbl_selected_book_post sbp on bp.id = sbp.id
                 left join tbl_normal_book_post nbp on bp.id = nbp.id
-               /*and sbp.book_post_status = 'PUBLIC' and bp.book_post_is_public = 'PUBLIC'*/
-                left join (
-                    select book_post_id, count(*) as bookPostLikeCount
-                    from tbl_book_post_like
-                    group by book_post_id
-                ) cnt
-                    on cnt.book_post_id = bp.id
-                    left join
-                         (
-                            select book_post_id, count(*) as bookPostVoteCount
-                            from tbl_book_post_vote
-                            group by book_post_id
-                        ) vote
-                    on vote.book_post_id = bp.id
+                /*and sbp.book_post_status = 'PUBLIC' and bp.book_post_is_public = 'PUBLIC'*/
+                left join (select book_post_id, count(*) as bookPostLikeCount
+                           from tbl_book_post_like
+                           group by book_post_id) cnt
+                on cnt.book_post_id = bp.id
+                left join
+                (select book_post_id, count(*) as bookPostVoteCount
+                 from tbl_book_post_vote
+                 group by book_post_id) vote
+                  on vote.book_post_id = bp.id
+                     )
+        order by bp.id desc
+            limit #{rowCount}
+                offset #{offset}
+
     </select>
     <select id="countAllBookPost" resultType="_int">
         select count(*)
@@ -102,7 +103,7 @@
         values (#{bookPostId}, #{bookPostTitle}, #{bookPostText}, #{bookPostLikeCount})
     </insert>
 
-    <!-- Quartz 로 가져올 후보들 현재는 테스트라 top3 만 가져옴-->
+    <!-- Quartz 로 가져올 후보들 현재는 테스트라 top20 만 가져옴-->
     <select id="selectTopPosts" resultType="bookPostVO">
         select p.id, book_post_title, book_post_text, book_post_id, bookPostLikeCount
         from tbl_post p join tbl_book_post bp on p.id = bp.id
@@ -114,7 +115,7 @@
         ) cnt
           on cnt.book_post_id = bp.id
            order by bookPostLikeCount desc
-        limit 3;
+        limit 20;
     </select>
 
     <!-- top20 후보 중 투표 수로 정렬하여 가져옴. -->
@@ -129,6 +130,13 @@
             ) vote
             on mbp.book_post_id = vote.book_post_id
             order by bookPostVoteCount desc
+        limit #{rowCount}
+            offset #{offset}
+    </select>
+
+    <!--top20 페이징 처리용 -->
+    <select id="countTopPosts" resultType="_int">
+        select count(*) from tbl_monthly_book_post
     </select>
 
     <!-- top1 독후감 select -->
