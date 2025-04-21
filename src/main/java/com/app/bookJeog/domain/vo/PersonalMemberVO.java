@@ -25,17 +25,4 @@ public class PersonalMemberVO extends MemberVO{
     private String memberGender;
     private PersonalMemberStatus memberStatus;
 
-    public PersonalMemberVO(MemberVOBuilder b, Long id, String memberBirth, String memberEmail, String memberGender, int memberMileage, String memberName, String memberNickName, String memberPassword, String memberPhone, PersonalMemberStatus memberStatus) {
-        super(b);
-        this.id = id;
-        this.memberBirth = memberBirth;
-        this.memberEmail = memberEmail;
-        this.memberGender = memberGender;
-        this.memberMileage = memberMileage;
-        this.memberName = memberName;
-        this.memberNickName = memberNickName;
-        this.memberPassword = memberPassword;
-        this.memberPhone = memberPhone;
-        this.memberStatus = memberStatus;
-    }
 }
