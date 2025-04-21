@@ -21,11 +21,4 @@ public class SelectedBookPostVO extends BookPostVO {
     private Long bookId;
     private BookPostStatus bookPostStatus;
 
-
-    public SelectedBookPostVO(BookPostVOBuilder<?, ?> b, Long id, Long bookId, BookPostStatus bookPostStatus) {
-        super(b);
-        this.id = id;
-        this.bookId = bookId;
-        this.bookPostStatus = bookPostStatus;
-    }
 }

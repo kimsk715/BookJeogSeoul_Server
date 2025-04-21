@@ -12,16 +12,9 @@ import java.io.File;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SuperBuilder
 public class ReceiverFileVO extends FileVO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long donateCertId;
 
-
-
-    public ReceiverFileVO(Long donateCertId, Long id) {
-        this.donateCertId = donateCertId;
-        this.id = id;
-    }
 }
