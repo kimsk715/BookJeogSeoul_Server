@@ -6,8 +6,11 @@
     </settings>
 <!---->
     <typeAliases>
+        <typeAlias type="com.app.bookJeog.domain.vo.BookInfoVO" alias="bookInfoVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.TempSelectedBookVO" alias="tempSelectedBookVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.BookPostVO" alias="bookPostVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.DiscussionVO" alias="discussionVO"/>
         <typeAlias type="com.app.bookJeog.domain.dto.BookPostDTO" alias="bookPostDTO"/>
-        <typeAlias type="com.app.bookJeog.domain.vo.PersonalMemberVO" alias="personalMemberVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.PersonalMemberVO" alias="personalMemberVO"/>
     </typeAliases>
 <!---->

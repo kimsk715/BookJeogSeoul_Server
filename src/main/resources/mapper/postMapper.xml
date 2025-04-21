@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.PostMapper">
+    <select id="selectAllBookPost" resultType="bookPostVO">
+        select bp.id, bp.book_post_title, bp.book_post_text, bp.book_post_is_public, bp.book_post_start_date, bp.book_post_end_date,
+               nbp.book_isbn, sbp.book_id, sbp.book_post_status, p.createdDate, p.updatedDate
+        from tbl_book_post bp
+            join tbl_post p on bp.id = p.id
+                 left join tbl_normal_book_post nbp
+                           on bp.id = nbp.id
+                 left join tbl_selected_book_post sbp
+                           on bp.id = sbp.id
+    </select>
+
+    <!-- 토론 게시글 조회(관리자)-->
+    <select id="selectAllDiscussionPost" resultType="discussionVO">
+        select d.id, discussion_title, discussion_text, book_isbn, p.member_id, p.createdDate, p.updatedDate
+        from tbl_discussion d
+            join tbl_post p
+                on d.id = p.id
+    </select>
+
+    <select id="countAllDiscussionPost" resultType="_int">
+        select count(*)
+        from tbl_discussion d
+                 join tbl_post p
+                      on d.id = p.id
+    </select>
     <!--  이 책으로 작성한 독후감 일부 조회  -->
     <select id="selectThisBookPosts" resultType="bookPostDTO">
         select
@@ -52,5 +77,6 @@
                  join tbl_file f on f.id = mp.id
         where bp.book_post_is_public = 'PUBLIC'
           and bp.book_isbn = #{bookIsbn}
+
     </select>
 </mapper>
