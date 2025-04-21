@@ -5,9 +5,11 @@ import com.app.bookJeog.domain.dto.DiscussionDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
+import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public interface PostService {
 
@@ -60,4 +62,18 @@ public interface PostService {
     //   이 책으로 작성한 독후감 전체 개수 조회
     int selectBookAllPostsCount(Long isbn);
 
+    public List<BookPostVO> getTopPosts();
+
+    public void insertTopBookPosts(MonthlyBookPostVO monthlyBookPostVO);
+
+    public List<MonthlyBookPostVO> getMonthlyBookPosts(Pagination pagination);
+
+    public Optional<MonthlyBookPostVO> getBestPost();
+
+    public void insertBestPost(MonthlyBookPostVO monthlyBookPostVO);
+
+    public int countAllBookPost();
+
+    public int countTopPosts();
 }
+

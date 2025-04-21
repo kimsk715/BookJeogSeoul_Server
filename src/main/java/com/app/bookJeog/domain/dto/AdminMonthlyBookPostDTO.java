@@ -1,7 +1,9 @@
 package com.app.bookJeog.domain.dto;
 
-
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,8 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-
-public class AdminBookPostDTO {
-    private List<BookPostDTO> bookPostDTOList;
+public class AdminMonthlyBookPostDTO {
+    private List<MonthlyBookPostDTO> monthlyBookPostDTOList;
     private Pagination pagination;
 }
