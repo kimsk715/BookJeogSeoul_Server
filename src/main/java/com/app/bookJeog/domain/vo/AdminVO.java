@@ -21,14 +21,4 @@ public class AdminVO extends Period {
     private String adminGrade;
     private AdminMemberStatus adminMemberStatus;
 
-    public AdminVO(PeriodBuilder<?, ?> b, Long id, Long adminId, String adminPassword, String adminName, String adminDepartMent, String adminGrade, AdminMemberStatus adminMemberStatus) {
-        super(b);
-        this.id = id;
-        this.adminId = adminId;
-        this.adminPassword = adminPassword;
-        this.adminName = adminName;
-        this.adminDepartMent = adminDepartMent;
-        this.adminGrade = adminGrade;
-        this.adminMemberStatus = adminMemberStatus;
-    }
 }

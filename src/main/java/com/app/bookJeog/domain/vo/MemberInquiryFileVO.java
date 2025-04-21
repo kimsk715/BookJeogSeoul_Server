@@ -12,16 +12,9 @@ import java.io.File;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SuperBuilder
 public class MemberInquiryFileVO extends FileVO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long memberInquiryId;
 
-
-    public MemberInquiryFileVO(String createdDate, String updatedDate, String fileName, String filePath, String fileText, Long id, Long id1, Long memberInquiryId) {
-        super(createdDate, updatedDate, fileName, filePath, fileText, id);
-        this.id = id1;
-        this.memberInquiryId = memberInquiryId;
-    }
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@SuperBuilder
 public class CommentMentionVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
@@ -18,10 +17,4 @@ public class CommentMentionVO extends Period {
     private Long mentionMemberId;
 
 
-    public CommentMentionVO(String createdDate, String updatedDate, Long id, Long memberId, Long mentionMemberId) {
-        super(createdDate, updatedDate);
-        this.id = id;
-        this.memberId = memberId;
-        this.mentionMemberId = mentionMemberId;
-    }
 }
