@@ -15,8 +15,4 @@ public class NoticeFileVO extends FileVO {
     private Long id;
     private Long noticeId;
 
-    public NoticeFileVO(Long id, Long noticeId) {
-        this.id = id;
-        this.noticeId = noticeId;
-    }
 }

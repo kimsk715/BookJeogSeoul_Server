@@ -17,11 +17,4 @@ public class DonateCertVO extends PostVO {
     private String donateCertTitle;
     private String donateCertText;
 
-
-    public DonateCertVO(String createdDate, String updatedDate, Long id, Long memberId, PostType postType, String donateCertText, String donateCertTitle, Long id1) {
-        super(createdDate, updatedDate, id, memberId, postType);
-        this.donateCertText = donateCertText;
-        this.donateCertTitle = donateCertTitle;
-        this.id = id1;
-    }
 }

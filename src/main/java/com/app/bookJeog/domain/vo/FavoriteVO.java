@@ -17,10 +17,4 @@ public class FavoriteVO extends Period {
     private Long memberId;
     private BookCategory category;
 
-    public FavoriteVO(String createdDate, String updatedDate, BookCategory category, Long id, Long memberId) {
-        super(createdDate, updatedDate);
-        this.category = category;
-        this.id = id;
-        this.memberId = memberId;
-    }
 }

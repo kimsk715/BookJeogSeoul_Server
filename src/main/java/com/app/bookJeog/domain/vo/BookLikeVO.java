@@ -18,12 +18,4 @@ public class BookLikeVO extends Period {
     private Long bookIsbn;
     private AlarmStatus alarmStatus;
 
-
-    public BookLikeVO(String createdDate, String updatedDate, AlarmStatus alarmStatus, Long bookIsbn, Long id, Long memberId) {
-        super(createdDate, updatedDate);
-        this.alarmStatus = alarmStatus;
-        this.bookIsbn = bookIsbn;
-        this.id = id;
-        this.memberId = memberId;
-    }
 }

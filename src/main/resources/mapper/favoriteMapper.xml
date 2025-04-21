@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.FavoriteMapper">
+    <!--  책 찜(스크랩)하기  -->
+    <insert id="insertBookScrap">
+        insert into tbl_book_like (member_id, book_isbn)
+        values (#{memberId}, #{bookIsbn})
+    </insert>
 
+    <!--  중복 insert 방지위해 그 멤버의 스크랩 여부 조회  -->
+    <select id="isBookScrapped" resultType="_int">
+        select count(*) from tbl_book_like
+        where book_isbn = #{bookIsbn} and member_id = #{memberId}
+    </select>
+
+    <!--  특정 책의 스크랩 개수 조회  -->
+    <select id="selectThisScrapCount" resultType="_int">
+        select count(*) from tbl_book_like
+        where book_isbn = #{bookIsbn}
+    </select>
+
+    <!--  책 스크랩 취소  -->
+    <delete id="deleteBookScrap">
+        delete from tbl_book_like
+        where member_id = #{memberId} and book_isbn = #{bookIsbn}
+    </delete>
 </mapper>

@@ -16,11 +16,5 @@ public class CommentAlarmVO extends AlarmVO {
     private Long id;
     private Long commentId;
 
-
-    public CommentAlarmVO(String createdDate, String updatedDate, Long alarmReceiverId, AlarmStatus alarmStatus, Long id, Long commentId, Long id1) {
-        super(createdDate, updatedDate, alarmReceiverId, alarmStatus, id);
-        this.commentId = commentId;
-        this.id = id1;
-    }
 }
 

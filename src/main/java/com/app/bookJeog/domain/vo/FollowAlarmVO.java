@@ -16,9 +16,4 @@ public class FollowAlarmVO extends AlarmVO {
     private Long id;
     private Long alarmSenderId;
 
-    public FollowAlarmVO(String createdDate, String updatedDate, Long alarmReceiverId, AlarmStatus alarmStatus, Long id, Long alarmSenderId, Long id1) {
-        super(createdDate, updatedDate, alarmReceiverId, alarmStatus, id);
-        this.alarmSenderId = alarmSenderId;
-        this.id = id1;
-    }
 }

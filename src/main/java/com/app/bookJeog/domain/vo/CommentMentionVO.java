@@ -17,10 +17,4 @@ public class CommentMentionVO extends Period {
     private Long mentionMemberId;
 
 
-    public CommentMentionVO(String createdDate, String updatedDate, Long id, Long memberId, Long mentionMemberId) {
-        super(createdDate, updatedDate);
-        this.id = id;
-        this.memberId = memberId;
-        this.mentionMemberId = mentionMemberId;
-    }
 }

@@ -6,12 +6,12 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
-@SuperBuilder
 @Component
 @ToString
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class PersonalMemberVO extends MemberVO{
     @EqualsAndHashCode.Include
     private Long id;

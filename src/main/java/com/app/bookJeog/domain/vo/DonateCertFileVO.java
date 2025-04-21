@@ -17,10 +17,4 @@ public class DonateCertFileVO extends FileVO {
     private Long id;
     private Long donateCertId;
 
-
-
-    public DonateCertFileVO(Long donateCertId, Long id) {
-        this.donateCertId = donateCertId;
-        this.id = id;
-    }
 }
