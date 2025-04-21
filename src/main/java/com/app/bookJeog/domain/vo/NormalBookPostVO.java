@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class NormalBookPostVO extends PostVO {
     @EqualsAndHashCode.Include
     private Long id;

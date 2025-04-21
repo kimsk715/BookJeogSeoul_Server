@@ -1,16 +1,24 @@
 package com.app.bookJeog.controller;
 
+import com.app.bookJeog.domain.dto.BookPostDTO;
+import com.app.bookJeog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/post/*")
 public class PostController {
+    private final PostService postService;
+
     // 토론게시판 이동
     @GetMapping("discussion")
     public String goToDiscussion() {
@@ -44,8 +52,6 @@ public class PostController {
     public String goToBookPostWrite() {
         return "post/post-write";
     }
-
-
 
     // 독후감 수정
     @GetMapping("bookpost/edit")
@@ -102,4 +108,24 @@ public class PostController {
         return "donation/weekly_book";
     }
 
+    // 이 책의 일부 독후감들
+    @GetMapping("book/book-posts")
+    @ResponseBody
+    public ArrayList<BookPostDTO> selectThisBookPosts(@RequestParam Long isbn){
+        return postService.selectThisBookPosts(isbn);
+    }
+
+    // 이 책의 전체 독후감들
+    @GetMapping("book/post-list")
+    @ResponseBody
+    public ArrayList<BookPostDTO> selectThisBookAllPosts(@RequestParam Long isbn){
+        return postService.selectThisBookAllPosts(isbn);
+    }
+
+    // 이 책의 전체 독후감들 개수 출력
+    @GetMapping("book/post-count")
+    @ResponseBody
+    public int getBookPostCount(@RequestParam Long isbn) {
+        return postService.selectBookAllPostsCount(isbn);
+    }
 }

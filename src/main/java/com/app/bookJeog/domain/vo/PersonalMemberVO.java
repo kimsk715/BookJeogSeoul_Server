@@ -6,12 +6,12 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
-@SuperBuilder
 @Component
 @ToString
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class PersonalMemberVO extends MemberVO{
     @EqualsAndHashCode.Include
     private Long id;
@@ -24,8 +24,6 @@ public class PersonalMemberVO extends MemberVO{
     private int memberMileage;
     private String memberGender;
     private PersonalMemberStatus memberStatus;
-
-
 
     public PersonalMemberVO(MemberVOBuilder b, Long id, String memberBirth, String memberEmail, String memberGender, int memberMileage, String memberName, String memberNickName, String memberPassword, String memberPhone, PersonalMemberStatus memberStatus) {
         super(b);

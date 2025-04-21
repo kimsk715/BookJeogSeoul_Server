@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.PostMapper">
+    <!--  이 책으로 작성한 독후감 일부 조회  -->
+    <select id="selectThisBookPosts" resultType="bookPostDTO">
+        select
+            bp.id,
+            bp.book_post_title,
+            bp.book_post_text,
+            pm.member_nickname,
+            pm.id as member_id,
+            f.file_name, f.file_path
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
+        where bp.book_post_is_public = 'PUBLIC'
+          and bp.book_isbn = #{bookIsbn}
+        order by p.createdDate desc
+        limit 5
+    </select>
 
+    <!--  이 책으로 작성한 독후감 전체 조회  -->
+    <select id="selectThisAllBookPosts" resultType="bookPostDTO">
+        select
+            bp.id,
+            bp.book_post_title,
+            bp.book_post_text,
+            pm.member_nickname,
+            pm.id as member_id,
+            f.file_name, f.file_path
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
+        where bp.book_post_is_public = 'PUBLIC'
+          and bp.book_isbn = #{bookIsbn}
+        order by p.createdDate desc
+    </select>
+
+    <!--  이 책으로 작성한 독후감 전체 개수 조회  -->
+    <select id="selectBookAllPostsCount" resultType="_int">
+        select
+            count(*)
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
+        where bp.book_post_is_public = 'PUBLIC'
+          and bp.book_isbn = #{bookIsbn}
+    </select>
 </mapper>

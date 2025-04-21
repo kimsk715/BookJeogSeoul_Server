@@ -24,6 +24,13 @@ public class BookPostDTO {
     private BookPostIsPublic bookPostIsPublic;
     private String bookPostStartDate;
     private String bookPostEndDate;
+    private Long bookIsbn;
+    private String createdDate;
+    private String updatedDate;
+    private Long memberId;
+    private String memberNickName;
+    private String filePath;
+    private String fileName;
 
     public BookPostVO toVO() {
         return BookPostVO.builder()
@@ -33,8 +40,10 @@ public class BookPostDTO {
                 .bookPostIsPublic(bookPostIsPublic)
                 .bookPostStartDate(bookPostStartDate)
                 .bookPostEndDate(bookPostEndDate)
+                .bookIsbn(bookIsbn)
+                .createdDate(createdDate)
+                .updatedDate(updatedDate)
                 .build();
 
     }
-
 }

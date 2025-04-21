@@ -5,12 +5,12 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
-@SuperBuilder
 @Component
 @ToString
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class AdminVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
@@ -21,15 +21,14 @@ public class AdminVO extends Period {
     private String adminGrade;
     private AdminMemberStatus adminMemberStatus;
 
-
-    public AdminVO(String createdDate, String updatedDate, String adminDepartMent, String adminGrade, Long adminId, AdminMemberStatus adminMemberStatus, String adminName, String adminPassword, Long id) {
-        super(createdDate, updatedDate);
+    public AdminVO(PeriodBuilder<?, ?> b, Long id, Long adminId, String adminPassword, String adminName, String adminDepartMent, String adminGrade, AdminMemberStatus adminMemberStatus) {
+        super(b);
+        this.id = id;
+        this.adminId = adminId;
+        this.adminPassword = adminPassword;
+        this.adminName = adminName;
         this.adminDepartMent = adminDepartMent;
         this.adminGrade = adminGrade;
-        this.adminId = adminId;
         this.adminMemberStatus = adminMemberStatus;
-        this.adminName = adminName;
-        this.adminPassword = adminPassword;
-        this.id = id;
     }
 }

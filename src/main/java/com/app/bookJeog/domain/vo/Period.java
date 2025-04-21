@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @NoArgsConstructor
+@SuperBuilder
 public class Period {
     protected String createdDate;
     protected String updatedDate;

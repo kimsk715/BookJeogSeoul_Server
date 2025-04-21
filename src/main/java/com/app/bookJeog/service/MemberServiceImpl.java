@@ -32,9 +32,9 @@ public class MemberServiceImpl implements MemberService {
     //일반회원 회원가입
     public void insertPersonalMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
 
+//         memberDAO.insertCommonMember();
         MemberVO memberVO = toMemberVO();
         memberMapper.insertCommonMember(memberVO);
-
         memberPersonalMemberDTO.setId(memberVO.getId());
         PersonalMemberVO personalMemberVO = toPersonalMemberVO(memberPersonalMemberDTO);
         personalMemberVO = toPersonalMemberVO(memberPersonalMemberDTO);

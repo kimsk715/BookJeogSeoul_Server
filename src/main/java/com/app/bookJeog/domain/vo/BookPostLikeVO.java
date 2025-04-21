@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class BookPostLikeVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;

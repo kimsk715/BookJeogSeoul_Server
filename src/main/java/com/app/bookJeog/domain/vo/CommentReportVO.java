@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@SuperBuilder
 public class CommentReportVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
