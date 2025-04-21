@@ -4,6 +4,8 @@
     <select id="selectAllMemberInquiry" resultType="memberInquiryVO">
         select *
         from tbl_member_inquiry
+        limit #{rowCount}
+        offset #{offset}
     </select>
 
     <select id="countAllMemberInquiry" resultType="_int">
