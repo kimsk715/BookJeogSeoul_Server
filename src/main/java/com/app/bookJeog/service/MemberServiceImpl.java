@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
 
     // 이메일 중복검사
     public Optional<PersonalMemberVO> checkEmail(String email) {
-        return memberMapper.selectByEmail(email);
+        return memberDAO.findByEmail(email);
     }
 
 
@@ -34,18 +34,18 @@ public class MemberServiceImpl implements MemberService {
     public void insertPersonalMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
 
         MemberVO memberVO = toMemberVO();
-        memberMapper.insertCommonMember(memberVO);
+        memberDAO.setCommonMember(memberVO);
 
         memberPersonalMemberDTO.setId(memberVO.getId());
         PersonalMemberVO personalMemberVO = toPersonalMemberVO(memberPersonalMemberDTO);
         personalMemberVO = toPersonalMemberVO(memberPersonalMemberDTO);
 
-        memberMapper.insertPersonalMember(personalMemberVO);
+        memberDAO.setPersonalMember(personalMemberVO);
     }
 
 
     // 로그인
     public void loginPersonalMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
-        memberMapper.
+        memberDAO.
     }
 }
