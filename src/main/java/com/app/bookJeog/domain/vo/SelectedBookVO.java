@@ -19,11 +19,4 @@ public class SelectedBookVO extends Period {
     private Long bookId;
     private BookPostStatus bookPostStatus;
 
-
-    public SelectedBookVO(String createdDate, String updatedDate, Long bookId, BookPostStatus bookPostStatus, Long id) {
-        super(createdDate, updatedDate);
-        this.bookId = bookId;
-        this.bookPostStatus = bookPostStatus;
-        this.id = id;
-    }
 }

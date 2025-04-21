@@ -19,13 +19,4 @@ public class CommentReportVO extends Period {
     private String commentReportText;
     private CommentReportStatus commentReportStatus;
 
-
-    public CommentReportVO(String createdDate, String updatedDate, Long commentId, CommentReportStatus commentReportStatus, String commentReportText, String commentReportType, Long id) {
-        super(createdDate, updatedDate);
-        this.commentId = commentId;
-        this.commentReportStatus = commentReportStatus;
-        this.commentReportText = commentReportText;
-        this.commentReportType = commentReportType;
-        this.id = id;
-    }
 }

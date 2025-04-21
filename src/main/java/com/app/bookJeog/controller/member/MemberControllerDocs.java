@@ -14,5 +14,5 @@ public interface MemberControllerDocs {
 //                    @Parameter(name="memberPassword", description = "회원 비밀번호"),
 //                    @Parameter(name="memberName", description = "회원 이름"),
 //            })
-//    public void join(@RequestBody MemberDTO memberDTO);
+//    public void join(@RequestBody MemberDTO MemberDTO);
 }

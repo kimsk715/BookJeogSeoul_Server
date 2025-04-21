@@ -17,12 +17,4 @@ public class ReceiverLikeVO extends Period {
     private Long memberId;
     private int receiverLikePoint;
 
-
-    public ReceiverLikeVO(String createdDate, String updatedDate, Long id, Long memberId, Long receiverId, int receiverLikePoint) {
-        super(createdDate, updatedDate);
-        this.id = id;
-        this.memberId = memberId;
-        this.receiverId = receiverId;
-        this.receiverLikePoint = receiverLikePoint;
-    }
 }

@@ -16,11 +16,4 @@ public class MemberHistoryVO extends Period {
     private Long memberId;
     private Long bookIsbn;
 
-
-    public MemberHistoryVO(String createdDate, String updatedDate, Long bookIsbn, Long id, Long memberId) {
-        super(createdDate, updatedDate);
-        this.bookIsbn = bookIsbn;
-        this.id = id;
-        this.memberId = memberId;
-    }
 }

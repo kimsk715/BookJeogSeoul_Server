@@ -15,12 +15,4 @@ public class NoticeVO extends Period {
     private Long id;
     private String noticeTitle;
     private String noticeContent;
-
-
-    public NoticeVO(String createdDate, String updatedDate, Long id, String noticeContent, String noticeTitle) {
-        super(createdDate, updatedDate);
-        this.id = id;
-        this.noticeContent = noticeContent;
-        this.noticeTitle = noticeTitle;
-    }
 }

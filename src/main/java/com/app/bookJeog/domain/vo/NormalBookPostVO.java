@@ -16,10 +16,4 @@ public class NormalBookPostVO extends PostVO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long bookId;
-
-    public NormalBookPostVO(String createdDate, String updatedDate, Long id, Long memberId, PostType postType, Long bookId, Long id1) {
-        super(createdDate, updatedDate, id, memberId, postType);
-        this.bookId = bookId;
-        this.id = id1;
-    }
 }

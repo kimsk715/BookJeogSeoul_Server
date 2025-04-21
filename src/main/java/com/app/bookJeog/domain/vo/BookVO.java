@@ -19,15 +19,4 @@ public class BookVO extends Period {
     private String bookIntroUrl;
     private String bookSummary;
     private String bookSummaryUrl;
-
-
-    public BookVO(String createdDate, String updatedDate, String bookIntro, String bookIntroUrl, String bookIsbn, String bookSummary, String bookSummaryUrl, Long id) {
-        super(createdDate, updatedDate);
-        this.bookIntro = bookIntro;
-        this.bookIntroUrl = bookIntroUrl;
-        this.bookIsbn = bookIsbn;
-        this.bookSummary = bookSummary;
-        this.bookSummaryUrl = bookSummaryUrl;
-        this.id = id;
-    }
 }
