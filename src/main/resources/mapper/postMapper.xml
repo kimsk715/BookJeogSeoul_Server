@@ -27,7 +27,7 @@
                       on d.id = p.id
     </select>
     <!--  이 책으로 작성한 독후감 일부 조회  -->
-    <select id="selectThisBookPosts" resultType="bookPostDTO">
+    <select id="selectThisBookPosts" resultType="bookPostMemberDTO">
         select
             bp.id,
             bp.book_post_title,
@@ -47,7 +47,7 @@
     </select>
 
     <!--  이 책으로 작성한 독후감 전체 조회(무한스크롤 6개씩)  -->
-    <select id="selectThisAllBookPosts" resultType="bookPostDTO">
+    <select id="selectThisAllBookPosts" resultType="bookPostMemberDTO">
         select
             bp.id,
             bp.book_post_title,
@@ -78,5 +78,30 @@
         where bp.book_post_is_public = 'PUBLIC'
           and bp.book_isbn = #{bookIsbn}
 
+    </select>
+    <!--  검색한 검색어에 맞는 독후감 통합검색 조회  -->
+    <select id="searchBookPosts" resultType="bookPostMemberDTO">
+        SELECT
+            p.member_id,
+            bp.book_post_title,
+            bp.book_post_text,
+            pm.member_nickname,
+            f.file_path,
+            f.file_name,
+            DATE_FORMAT(p.createdDate, '%Y.%m.%d') AS createdDate,
+            bp.book_isbn
+        FROM tbl_book_post bp
+                 JOIN tbl_post p ON p.id = bp.id
+                 JOIN tbl_personal_member pm ON pm.id = p.member_id
+                 JOIN tbl_member_profile mp ON mp.member_id = pm.id
+                 JOIN tbl_file f ON f.id = mp.id
+        WHERE bp.book_post_is_public = 'PUBLIC'
+          AND (
+            bp.book_post_title LIKE CONCAT('%', #{keyword}, '%')
+                OR bp.book_post_text LIKE CONCAT('%', #{keyword}, '%')
+                OR pm.member_nickname LIKE CONCAT('%', #{keyword}, '%')
+            )
+        ORDER BY p.createdDate DESC
+        LIMIT 3
     </select>
 </mapper>

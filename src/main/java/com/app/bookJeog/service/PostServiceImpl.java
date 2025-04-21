@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookPostDTO;
+import com.app.bookJeog.domain.dto.BookPostMemberDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
@@ -35,12 +36,12 @@ public class PostServiceImpl implements PostService {
 
 
     //   이 책으로 작성한 독후감 일부 조회
-    public ArrayList<BookPostDTO> selectThisBookPosts(Long isbn){
+    public ArrayList<BookPostMemberDTO> selectThisBookPosts(Long isbn){
         return postDAO.selectThisBookPosts(isbn);
     };
 
     //   이 책으로 작성한 독후감 전체 조회
-    public ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn, int offset){
+    public ArrayList<BookPostMemberDTO> selectThisBookAllPosts(Long isbn, int offset){
         return postDAO.selectThisBookAllPosts(isbn, offset);
     };
 

@@ -128,7 +128,7 @@ const bookDetailLayout = (() => {
             } else {
             // 독후감이 6개 이상일 때만 링크 클릭 가능
             const isbn = window.location.pathname.split("/").pop();
-            document.querySelector("#thisBookPostsBtn").href = `/post/book/post-list/${isbn}`;
+            document.querySelector("#thisBookPostsBtn").href = `/book/post-list/${isbn}`;
         }
     };
     

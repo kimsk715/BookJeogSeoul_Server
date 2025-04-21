@@ -1,6 +1,7 @@
 package com.app.bookJeog.repository;
 
 
+import com.app.bookJeog.domain.dto.BookPostMemberDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
@@ -38,12 +39,12 @@ public class PostDAO {
 
 
     //   이 책으로 작성한 독후감 일부 조회
-    public ArrayList<BookPostDTO> selectThisBookPosts(Long isbn){
+    public ArrayList<BookPostMemberDTO> selectThisBookPosts(Long isbn){
         return postMapper.selectThisBookPosts(isbn);
     };
 
     //   이 책으로 작성한 독후감 전체 조회
-    public ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn, int offset){
+    public ArrayList<BookPostMemberDTO> selectThisBookAllPosts(Long isbn, int offset){
         return postMapper.selectThisAllBookPosts(isbn, offset);
     };
 
@@ -52,4 +53,8 @@ public class PostDAO {
         return postMapper.selectBookAllPostsCount(isbn);
     };
 
+    // 검색한 검색어에 맞는 독후감 통합검색 조회
+    public ArrayList<BookPostMemberDTO> searchBookPosts(String keyword){
+        return postMapper.searchBookPosts(keyword);
+    };
 }
