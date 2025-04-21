@@ -3,8 +3,10 @@ package com.app.bookJeog.domain.vo;
 import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -23,8 +25,10 @@ public class PersonalMemberVO extends MemberVO{
     private String memberGender;
     private PersonalMemberStatus memberStatus;
 
-    @Builder
-    public PersonalMemberVO(Long id, String memberBirth, String memberEmail, String memberGender, int memberMileage, String memberName, String memberNickName, String memberPassword, String memberPhone, PersonalMemberStatus memberStatus) {
+
+
+    public PersonalMemberVO(MemberVOBuilder b, Long id, String memberBirth, String memberEmail, String memberGender, int memberMileage, String memberName, String memberNickName, String memberPassword, String memberPhone, PersonalMemberStatus memberStatus) {
+        super(b);
         this.id = id;
         this.memberBirth = memberBirth;
         this.memberEmail = memberEmail;

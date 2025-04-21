@@ -4,10 +4,12 @@ import com.app.bookJeog.domain.enumeration.BookPostIsPublic;
 import com.app.bookJeog.domain.enumeration.BookPostStatus;
 import com.app.bookJeog.domain.enumeration.PostType;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
 import java.awt.print.Book;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -21,7 +23,6 @@ public class SelectedBookPostVO extends BookPostVO {
 
 
 
-    @Builder
     public SelectedBookPostVO(String createdDate, String updatedDate, Long id, Long memberId, PostType postType, String bookPostEndDate, BookPostIsPublic bookPostIsPublic, String bookPostStartDate, String bookPostText, String bookPostTitle, Long id1, Long bookId, BookPostStatus bookPostStatus, Long id2) {
         super(createdDate, updatedDate, id, memberId, postType, bookPostEndDate, bookPostIsPublic, bookPostStartDate, bookPostText, bookPostTitle, id1);
         this.bookId = bookId;

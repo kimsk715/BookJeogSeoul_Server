@@ -1,8 +1,10 @@
 package com.app.bookJeog.domain.vo;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -15,7 +17,6 @@ public class MemberHistoryVO extends Period {
     private Long bookIsbn;
 
 
-    @Builder
     public MemberHistoryVO(String createdDate, String updatedDate, Long bookIsbn, Long id, Long memberId) {
         super(createdDate, updatedDate);
         this.bookIsbn = bookIsbn;

@@ -3,8 +3,10 @@ package com.app.bookJeog.domain.vo;
 import com.app.bookJeog.domain.enumeration.MemberInquiryType;
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -22,7 +24,6 @@ public class MemberInquiryVO extends Period {
 
 
 
-    @Builder
     public MemberInquiryVO(String createdDate, String updatedDate, Long id, Long memberId, String memberInquiryAnswer, PersonalMemberStatus memberInquiryStatus, String memberInquiryText, String memberInquiryTitle, MemberInquiryType memberInquiryType) {
         super(createdDate, updatedDate);
         this.id = id;

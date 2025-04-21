@@ -2,8 +2,10 @@ package com.app.bookJeog.domain.vo;
 
 import com.app.bookJeog.domain.enumeration.AdminMemberStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
+@SuperBuilder
 @Component
 @ToString
 @Getter
@@ -19,7 +21,7 @@ public class AdminVO extends Period {
     private String adminGrade;
     private AdminMemberStatus adminMemberStatus;
 
-    @Builder
+
     public AdminVO(String createdDate, String updatedDate, String adminDepartMent, String adminGrade, Long adminId, AdminMemberStatus adminMemberStatus, String adminName, String adminPassword, Long id) {
         super(createdDate, updatedDate);
         this.adminDepartMent = adminDepartMent;
