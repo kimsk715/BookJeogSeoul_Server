@@ -1,25 +1,41 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.vo.SelectedBookVO;
+import com.app.bookJeog.domain.vo.TempSelectedBookVO;
+import com.app.bookJeog.repository.BookDAO;
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
 public class BookServiceImpl implements BookService {
+
+    private final BookDAO bookDAO;
+    @Override
+    public void insertTempSelectedBook(Long isbn) {
+        bookDAO.insertTempSelectedBook(isbn);
+    }
+
+    @Override
+    public List<TempSelectedBookVO> getTempSelectedBook() {
+        return bookDAO.findTempSelectedBook();
+    }
+
+    @Override
+    public void insertSelectedBook(SelectedBookVO selectedBookVO) {
+        bookDAO.insertSelectedBook(selectedBookVO);
+    }
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     // 책 상세정보 API 호출
@@ -118,4 +134,5 @@ public class BookServiceImpl implements BookService {
         return restTemplate.getForObject(apiUrl, String.class);
     }
 };
+
 
