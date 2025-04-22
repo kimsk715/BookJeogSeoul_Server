@@ -6,7 +6,7 @@ window.addEventListener("load", async () => {
     const books = await bookDetailService.getAuthorBooks();
 
     // 도서의 독후감 개수 받아오기
-    const count = await  bookDetailService.getThisBookPostsCount();
+    const count = await bookDetailService.getThisBookPostsCount();
     await bookDetailLayout.showPostCount(count);
 
     // 받아온 데이터를 layout에서 출력
@@ -14,44 +14,89 @@ window.addEventListener("load", async () => {
 
     const posts = await bookDetailService.getThisBookPosts();
     await bookDetailLayout.showThisBookPosts(posts);
+
+    await bookDetailService.saveBookHistory(); // 히스토리 저장 실행
+
+    // 스크랩 여부 조회해서 버튼 상태 세팅
+    const isScrapped = await bookDetailService.checkBookScrap();
+    const scrapButton = document.querySelector(".mds-icon-scrap");
+    const mobileScrapButton = document.querySelector(".scrap-button");
+
+    if (isScrapped) {
+        scrapButton?.classList.add("scrapped");
+        scrapButton.style.backgroundImage =
+            "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png')";
+
+        mobileScrapButton?.classList.add("scrapped");
+        const img = mobileScrapButton?.querySelector("img");
+        if (img) {
+            img.src =
+                "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png";
+        }
+    } else {
+        scrapButton?.classList.remove("scrapped");
+        scrapButton.style.backgroundImage =
+            "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/detail-heart-off.fc064a68f51248a73513a5ef4c5035f5.png')";
+
+        mobileScrapButton?.classList.remove("scrapped");
+        const img = mobileScrapButton?.querySelector("img");
+        if (img) {
+            img.src =
+                "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-off.b5cd493b0e38b74654f26e2ebf2a3aaf.png";
+
+        }
+    }
 });
 
 // 버튼을 클릭하면 도서 찜하기
 const scrapButton = document.querySelector(".mds-icon-scrap");
 
 scrapButton.addEventListener("click", async (e) => {
-    const isScrapped = e.target.classList.toggle("scrapped");
+    const isScrapped = scrapButton.classList.contains("scrapped");
 
-    if (isScrapped) {
-        alert("내 서재에 도서를 넣었습니다.");
-        await bookDetailService.addBookScrap();
-        e.target.style.backgroundImage =
-            "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png')";
+    if (!isScrapped) {
+        const success = await bookDetailService.addBookScrap();
+        if (success) {
+            alert("내 서재에 도서를 넣었습니다.");
+            scrapButton.classList.add("scrapped");
+            scrapButton.style.backgroundImage =
+                "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png')";
+        }
     } else {
-        alert("내 서재에 도서를 뺐습니다.");
-        await bookDetailService.deleteBookScrap();
-        e.target.style.backgroundImage =
-            "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/detail-heart-off.fc064a68f51248a73513a5ef4c5035f5.png')";
+        const success = await bookDetailService.deleteBookScrap();
+        if (success) {
+            alert("내 서재에 도서를 뺐습니다.");
+            scrapButton.classList.remove("scrapped");
+            scrapButton.style.backgroundImage =
+                "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/detail-heart-off.fc064a68f51248a73513a5ef4c5035f5.png')";
+        }
     }
 });
 
 // 버튼을 클릭하면 도서 찜하기(모바일 버튼)
 const mobileScrapButton = document.querySelector(".scrap-button");
 
-mobileScrapButton.addEventListener("click", (e) => {
-    // 버튼 안의 찜 이미지
-    const img = e.target.querySelector("img");
+mobileScrapButton.addEventListener("click", async (e) => {
+    const button = e.currentTarget;
+    const img = button.querySelector("img");
+    const isScrapped = button.classList.contains("scrapped");
 
-    const isScrapped = e.target.classList.toggle("scrapped");
-
-    if (isScrapped) {
-        alert("내 서재에 도서를 넣었습니다.");
-        img.src =
-            "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png";
+    if (!isScrapped) {
+        const success = await bookDetailService.addBookScrap();
+        if (success) {
+            alert("내 서재에 도서를 넣었습니다.");
+            button.classList.add("scrapped");
+            img.src =
+                "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png";
+        }
     } else {
-        alert("내 서재에 도서를 뺐습니다.");
-        img.src =
-            "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-off.b5cd493b0e38b74654f26e2ebf2a3aaf.png";
+        const success = await bookDetailService.deleteBookScrap();
+        if (success) {
+            alert("내 서재에 도서를 뺐습니다.");
+            button.classList.remove("scrapped");
+            img.src =
+                "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-off.b5cd493b0e38b74654f26e2ebf2a3aaf.png";
+        }
     }
 });
 

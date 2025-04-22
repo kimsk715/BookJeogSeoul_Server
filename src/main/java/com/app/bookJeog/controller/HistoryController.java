@@ -1,12 +1,9 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.domain.dto.HistoryDTO;
-import com.app.bookJeog.domain.vo.HistoryVO;
-import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.service.HistoryService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +21,16 @@ public class HistoryController {
     @PostMapping("save")
     @ResponseBody
     public void saveHistoryIfNotExists(@RequestBody HistoryDTO historyDTO) {
-        Long memberId = ((MemberVO) session.getAttribute("member")).getId();
-        historyDTO.setMemberId(memberId); // 세션에서 memberId 추가 주입
+//        MemberDTO member = (MemberDTO) session.getAttribute("member");
+//        if (member == null) {
+//            // 로그인이 안 된 경우 아무 동작도 하지 않고 리턴
+//            return;
+//        }
 
+        Long memberId = 1L;
+//        historyDTO.setMemberId(member.getId()); // 세션에서 memberId 추가 주입
+        historyDTO.setMemberId(memberId);
         historyService.saveHistoryIfNotExists(historyDTO); // DTO 통째로 넘김
+
     }
 }
