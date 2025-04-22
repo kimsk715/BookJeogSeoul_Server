@@ -29,7 +29,7 @@
                         <div class="back-wrap line">
                             <h1>
                                 <a
-                                    href=""
+                                    href="/main/main"
                                     style="display: flex; cursor: pointer"
                                 >
                                     <img
@@ -100,12 +100,12 @@
                                         class="tab-wrapper"
                                     >
                                         <li role="none" class="item-menu">
-                                            <a role="menuItem" href=""
+                                            <a role="menuItem" th:href="@{/search/result(keyword=${keyword})}" class="dynamic-keyword-link"
                                                 ><span>통합</span></a
                                             >
                                         </li>
                                         <li role="none" class="item-menu">
-                                            <a role="menuItem" href=""
+                                            <a role="menuItem" th:href="@{/search/result/books(keyword=${keyword})}" class="dynamic-keyword-link"
                                                 ><span>도서</span></a
                                             >
                                         </li>
@@ -113,22 +113,22 @@
                                             <a
                                                 role="menuItem"
                                                 aria-selected="true"
-                                                href=""
+                                                th:href="@{/search/result/book-posts(keyword=${keyword})}" class="dynamic-keyword-link"
                                                 ><span>독후감</span></a
                                             >
                                         </li>
                                         <li role="none" class="item-menu">
-                                            <a role="menuItem" href=""
+                                            <a role="menuItem" th:href="@{/search/result/discussions(keyword=${keyword})}" class="dynamic-keyword-link"
                                                 ><span>북적북적</span></a
                                             >
                                         </li>
                                         <li role="none" class="item-menu">
-                                            <a role="menuItem" href=""
+                                            <a role="menuItem" th:href="@{/search/result/sponsors(keyword=${keyword})}" class="dynamic-keyword-link"
                                                 ><span>기부단체</span></a
                                             >
                                         </li>
                                         <li role="none" class="item-menu">
-                                            <a role="menuItem" href=""
+                                            <a role="menuItem" th:href="@{/search/result/donations(keyword=${keyword})}" class="dynamic-keyword-link"
                                                 ><span>기부글</span></a
                                             >
                                         </li>
@@ -378,6 +378,7 @@
             </section>
         </div>
     </body>
+    <script src="/js/search/search-menu-layout.js"></script>
     <script src="/js/search/search-result-post-service.js"></script>
     <script src="/js/search/search-result-post-layout.js"></script>
     <script src="/js/search/search-result-post-event.js"></script>

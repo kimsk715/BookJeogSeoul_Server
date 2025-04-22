@@ -46,7 +46,8 @@ public class SearchController {
 
     // 검색결과-도서페이지
     @GetMapping("result/books")
-    public String gotoSearchResultBooks() {
+    public String gotoSearchResultBooks(@RequestParam("keyword") String keyword, Model model) {
+        model.addAttribute("keyword", keyword);
         return "search/search-result-book";
     }
 
