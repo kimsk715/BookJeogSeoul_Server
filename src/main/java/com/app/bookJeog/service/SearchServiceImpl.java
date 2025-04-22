@@ -76,6 +76,13 @@ public class SearchServiceImpl implements SearchService {
 
     // 통합 독후감 검색결과(최신순 3개)
     public List<BookPostMemberDTO> searchBookPosts(String keyword) {
-        return postDAO.searchBookPosts(keyword);
+        int totalCount = postDAO.selectBookPostsCount(keyword); // 독후감 개수
+        List<BookPostMemberDTO> posts = postDAO.searchBookPosts(keyword); // 독후감 내용
+
+        // 각 DTO에 count 값을 추가로 세팅
+        for (BookPostMemberDTO post : posts) {
+            post.setCount(totalCount);
+        }
+        return posts;
     }
 }

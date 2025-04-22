@@ -104,4 +104,21 @@
         ORDER BY p.createdDate DESC
         LIMIT 3
     </select>
+    <!--  검색한 검색어에 맞는 독후감 통합검색 개수 조회  -->
+    <select id="selectBookPostsCount" resultType="_int">
+        SELECT
+            count(*)
+        FROM tbl_book_post bp
+                 JOIN tbl_post p ON p.id = bp.id
+                 JOIN tbl_personal_member pm ON pm.id = p.member_id
+                 JOIN tbl_member_profile mp ON mp.member_id = pm.id
+                 JOIN tbl_file f ON f.id = mp.id
+        WHERE bp.book_post_is_public = 'PUBLIC'
+          AND (
+            bp.book_post_title LIKE CONCAT('%', #{keyword}, '%')
+                OR bp.book_post_text LIKE CONCAT('%', #{keyword}, '%')
+                OR pm.member_nickname LIKE CONCAT('%', #{keyword}, '%')
+            )
+        ORDER BY p.createdDate DESC
+    </select>
 </mapper>

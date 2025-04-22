@@ -1,6 +1,8 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
+import com.app.bookJeog.service.AladinService;
+import com.app.bookJeog.service.AladinServiceImpl;
 import com.app.bookJeog.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/book/*")
 @RequiredArgsConstructor
 public class BookController implements BookControllerDocs {
-
     private final BookService bookService;
+    private final AladinService aladinService;
 
 
     // 도서 상세 페이지로 이동
@@ -49,5 +51,12 @@ public class BookController implements BookControllerDocs {
     @GetMapping("post-list/{isbn}")
     public String gotoPostList(@PathVariable Long isbn) {
         return "book/book-detail-post"; // HTML 페이지 반환
+    }
+
+    // 커버 이미지 링크만 반환
+    @GetMapping("cover")
+    @ResponseBody
+    public String getBookCover(@RequestParam Long isbn) {
+        return aladinService.getBookCover(isbn);
     }
 }

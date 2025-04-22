@@ -1,11 +1,11 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
-import com.app.bookJeog.service.BookService;
+import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,18 +22,19 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SearchController {
     private final SearchService searchService;
+    private final AladinService aladinService;
 
     // 검색창 이동
     @GetMapping("window")
     public String gotoSearch() {
-        return "main/search-window";
+        return "search/search-window";
     }
 
     // 검색결과 이동
     @GetMapping("result")
     public String gotoSearchResult(@RequestParam("keyword") String keyword, Model model) {
         model.addAttribute("keyword", keyword); // view에 넘겨줌
-        return "main/search-result";
+        return "search/search-result";
     }
 
     // 통합검색-도서 데이터(REST)
@@ -45,16 +46,24 @@ public class SearchController {
 
     // 검색결과-도서
     @GetMapping("result/books")
-    @ResponseBody
     public String gotoSearchResultBooks() {
-        return "main/search-result-book";
+        return "search/search-result-book";
+    }
+
+    // 검색결과-도서페이지 데이터(REST)
+    @GetMapping("api/result/books")
+    @ResponseBody
+    public Map<String, Object> getAllBooks(@RequestParam String keyword,
+                                                  @RequestParam(defaultValue = "1") int startIndex,
+                                                  @RequestParam(defaultValue = "35") int maxResults,
+                                                  @RequestParam(defaultValue = "Accuracy") String sort) throws JSONException {
+        return aladinService.searchBooksToMap(keyword, startIndex, maxResults, sort);
     }
 
     // 검색결과-독후감
     @GetMapping("result/book-posts")
-    @ResponseBody
     public String gotoSearchResultBookPosts() {
-        return "main/search-result-post";
+        return "search/search-result-post";
     }
 
     // 통합검색-독후감 데이터(REST)
@@ -66,22 +75,19 @@ public class SearchController {
 
     // 검색결과-토론방
     @GetMapping("result/discussions")
-    @ResponseBody
     public String gotoSearchResultDiscussions() {
-        return "main/search-result-discussion";
+        return "search/search-result-discussion";
     }
 
     // 검색결과-기부단체
     @GetMapping("result/sponsors")
-    @ResponseBody
     public String gotoSearchResultSponsors() {
-        return "main/search-result-organization";
+        return "search/search-result-organization";
     }
 
     // 검색결과-기부글
     @GetMapping("result/donations")
-    @ResponseBody
     public String gotoSearchResultDonations() {
-        return "main/search-result-donate";
+        return "search/search-result-donate";
     }
 }
