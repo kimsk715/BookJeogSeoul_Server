@@ -2,6 +2,7 @@ package com.app.bookJeog.mapper;
 
 
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,4 +28,13 @@ public interface MemberMapper {
 
     // 이메일 중복검사
     public Optional<PersonalMemberVO> selectByEmail(String memberEmail);
+
+    // 기업회원 통합검색 조회
+    public List<SponsorMemberProfileDTO> selectSponsorMembersWithProfile(String keyword);
+
+    // 기업회원 검색 결과 개수 조회
+    public int selectSponsorMembersTotal(String keyword);
+
+    // 기업회원 전체페이지 조회(무한스크롤)
+    public List<SponsorMemberProfileDTO> selectAllSponsorMembers(String keyword, int offset, String sortType);
 }

@@ -2,6 +2,7 @@ package com.app.bookJeog.repository;
 
 
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.mapper.MemberMapper;
@@ -44,4 +45,19 @@ public class MemberDAO {
         return memberMapper.selectByEmail(memberEmail);
     }
 
+
+    // 기업회원 통합검색 조회
+    public List<SponsorMemberProfileDTO> findSponsorMembersWithProfile(String keyword){
+        return memberMapper.selectSponsorMembersWithProfile(keyword);
+    };
+
+    // 기업회원 검색 결과 개수 조회
+    public int findSponsorMembersTotal(String keyword){
+        return memberMapper.selectSponsorMembersTotal(keyword);
+    };
+
+    // 기업회원 전체페이지 조회(무한스크롤)
+    public List<SponsorMemberProfileDTO> findAllSponsorMembers(String keyword, int offset, String sortType) {
+        return memberMapper.selectAllSponsorMembers(keyword, offset, sortType);
+    };
 }

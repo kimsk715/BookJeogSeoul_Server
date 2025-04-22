@@ -1,6 +1,7 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.SearchService;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,20 @@ public class SearchController {
         return searchService.searchBooksByKeyword(keyword);
     }
 
+    // 통합검색-기부단체 데이터(REST)
+    @GetMapping("api/sponsor-list")
+    @ResponseBody
+    public Map<String, Object> getSponsorsByKeyword(@RequestParam("keyword") String keyword) {
+        List<SponsorMemberProfileDTO> previewList = searchService.findSponsorMembersWithProfile(keyword);
+        int totalCount = searchService.findSponsorMembersTotal(keyword);
+
+        // map 타입으로 결과 List랑 int totalCount 같이 반환
+        return Map.of(
+                "sponsors", previewList,
+                "totalCount", totalCount
+        );
+    }
+
     // 검색결과-도서페이지
     @GetMapping("result/books")
     public String gotoSearchResultBooks(@RequestParam("keyword") String keyword, Model model) {
@@ -70,7 +85,8 @@ public class SearchController {
 
     // 검색결과-독후감페이지
     @GetMapping("result/book-posts")
-    public String gotoSearchResultBookPosts() {
+    public String gotoSearchResultBookPosts(@RequestParam String keyword, Model model) {
+        model.addAttribute("keyword", keyword);
         return "search/search-result-post";
     }
 
@@ -83,18 +99,34 @@ public class SearchController {
         return searchService.getAllBooksWithCount(keyword, offset, sortType);
     }
 
-    // 검색결과-토론방
+    // 검색결과-토론방 페이지
     @GetMapping("result/discussions")
     public String gotoSearchResultDiscussions() {
         return "search/search-result-discussion";
     }
 
-    // 검색결과-기부단체
+    // 검색결과-기부단체 페이지
     @GetMapping("result/sponsors")
-    public String gotoSearchResultSponsors() {
+    public String gotoSearchResultSponsors(@RequestParam String keyword, Model model) {
+        model.addAttribute("keyword", keyword);
         return "search/search-result-organization";
     }
 
+    // 검색결과 - 기부단체 페이지 데이터(REST)
+    @GetMapping("api/result/sponsors")
+    @ResponseBody
+    public Map<String, Object> getAllSponsors(@RequestParam String keyword,
+                                               @RequestParam(defaultValue = "0") int offset,
+                                               @RequestParam(defaultValue = "new") String sortType) {
+        List<SponsorMemberProfileDTO> fullList = searchService.findAllSponsorMembers(keyword, offset, sortType);
+        int totalCount = searchService.findSponsorMembersTotal(keyword);
+
+        return Map.of(
+                "sponsors", fullList,
+                "totalCount", totalCount
+        );
+    }
+    
     // 검색결과-기부글
     @GetMapping("result/donations")
     public String gotoSearchResultDonations() {

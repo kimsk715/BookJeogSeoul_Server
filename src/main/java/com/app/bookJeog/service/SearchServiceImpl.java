@@ -1,6 +1,8 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
+import com.app.bookJeog.repository.MemberDAO;
 import com.app.bookJeog.repository.PostDAO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,6 +23,7 @@ import java.util.Map;
 @Transactional(rollbackFor = Exception.class)
 public class SearchServiceImpl implements SearchService {
     private final PostDAO postDAO;
+    private final MemberDAO memberDAO;
 
     // 알라딘 api로 도서검색
     public Map<String, Object> searchBooksByKeyword(String keyword) {
@@ -96,5 +99,20 @@ public class SearchServiceImpl implements SearchService {
         result.put("totalCount", totalCount);
 
         return result;
+    }
+
+    // 기업회원 통합검색 조회
+    public List<SponsorMemberProfileDTO> findSponsorMembersWithProfile(String keyword) {
+        return memberDAO.findSponsorMembersWithProfile(keyword);
+    }
+
+    // 기업회원 검색 결과 개수 조회
+    public int findSponsorMembersTotal(String keyword){
+        return memberDAO.findSponsorMembersTotal(keyword);
+    }
+
+    // 기업회원 전체페이지 조회(무한스크롤)
+    public List<SponsorMemberProfileDTO> findAllSponsorMembers(String keyword, int offset, String sortType){
+        return memberDAO.findAllSponsorMembers(keyword, offset, sortType);
     }
 }
