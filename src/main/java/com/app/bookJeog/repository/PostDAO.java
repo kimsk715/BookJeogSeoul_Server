@@ -83,4 +83,8 @@ public class PostDAO {
     public int countTopPosts(){
         return postMapper.countTopPosts();
     }
+
+    public BookPostVO findBookPostById(Long id){
+        return postMapper.selectBookPostById(id);
+    }
 }

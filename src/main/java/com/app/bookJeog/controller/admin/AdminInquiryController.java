@@ -3,6 +3,7 @@ package com.app.bookJeog.controller.admin;
 
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.MemberInquiryStatus;
+import com.app.bookJeog.domain.enumeration.SponsorInquiryStatus;
 import com.app.bookJeog.domain.vo.MemberInquiryVO;
 import com.app.bookJeog.domain.vo.SponsorInquiryVO;
 import com.app.bookJeog.service.InquiryService;
@@ -93,5 +94,28 @@ public class AdminInquiryController {
         adminSponsorInquiryDTO.setSponsorInquiryDTOList(sponsorInquiryDTOList);
 //        log.info(adminMemberInquiryDTO.toString());
         return adminSponsorInquiryDTO;
+    }
+
+    @GetMapping("admin/sponsor-inquiry")
+    @ResponseBody
+    public SponsorInquiryDTO sponsorInquiryDetail(@RequestParam("id") Long inquiryId) {
+        SponsorInquiryDTO sponsorInquiryDTO = new SponsorInquiryDTO();
+        Optional<SponsorInquiryVO> foundInquiry = inquiryService.getSponsorInquiry(inquiryId);
+        sponsorInquiryDTO = inquiryService.tosponsorInquiryDTO(foundInquiry.get());
+        return sponsorInquiryDTO;
+    }
+
+    @GetMapping("admin/answer-sponsor")
+    @ResponseBody
+    public void answerSponsor(@RequestParam("id") Long inquiryId, @RequestParam("answer") String inquiryAnswer) {;
+        SponsorInquiryDTO sponsorInquiryDTO = new SponsorInquiryDTO();
+        sponsorInquiryDTO.setSponsorInquiryAnswer(inquiryAnswer);
+        sponsorInquiryDTO.setId(inquiryId);
+//        log.info("컨트롤러 : {}",memberInquiryDTO.toMemberInquiryVO().toString());
+        if(inquiryAnswer != null) {
+            sponsorInquiryDTO.setSponsorInquiryStatus(SponsorInquiryStatus.DONE);
+        }
+        inquiryService.answerSponsorInquiry(sponsorInquiryDTO.toVO());
+
     }
 }

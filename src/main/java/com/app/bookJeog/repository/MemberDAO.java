@@ -3,6 +3,7 @@ package com.app.bookJeog.repository;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -58,4 +59,17 @@ public class MemberDAO {
         return memberMapper.searchPassword(personalMemberVO);
     }
 
+    // 시퀀스로 회원 찾기
+
+    public MemberVO findById(Long id) {
+        return memberMapper.selectById(id);
+    }
+
+    public PersonalMemberVO findPersonalMemberById(Long id){
+        return memberMapper.selectPersonalMemberById(id);
+    }
+
+    public SponsorMemberVO findSponsorMemberById(Long id){
+        return memberMapper.selectSponsorMemberById(id);
+    }
 }
