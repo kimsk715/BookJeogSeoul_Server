@@ -6,10 +6,7 @@ import com.app.bookJeog.domain.enumeration.MemberInquiryType;
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import com.app.bookJeog.domain.vo.CommentMentionVO;
 import com.app.bookJeog.domain.vo.MemberInquiryVO;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,6 +26,19 @@ public class MemberInquiryDTO {
     private String createdDate;
     private String updatedDate;
 
-
+    @Builder
+    public MemberInquiryVO toMemberInquiryVO() {
+        return MemberInquiryVO.builder().
+                id(id).
+                memberId(memberId).
+                memberInquiryTitle(memberInquiryTitle).
+                memberInquiryAnswer(memberInquiryAnswer).
+                memberInquiryStatus(memberInquiryStatus).
+                memberInquiryText(memberInquiryText).
+                memberInquiryType(memberInquiryType).
+                createdDate(createdDate).
+                updatedDate(updatedDate).
+                build();
+    }
 
 }

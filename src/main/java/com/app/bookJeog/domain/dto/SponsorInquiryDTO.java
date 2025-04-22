@@ -1,15 +1,10 @@
 package com.app.bookJeog.domain.dto;
 
 
-import com.app.bookJeog.domain.enumeration.PostType;
 import com.app.bookJeog.domain.enumeration.SponsorInquiryStatus;
 import com.app.bookJeog.domain.enumeration.SponsorInquiryType;
-import com.app.bookJeog.domain.vo.PostVO;
 import com.app.bookJeog.domain.vo.SponsorInquiryVO;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -26,7 +21,10 @@ public class SponsorInquiryDTO {
     private String sponsorInquiryTitle;
     private String sponsorInquiryAnswer;
     private SponsorInquiryStatus sponsorInquiryStatus;
+    private String createdDate;
+    private String updatedDate;
 
+    @Builder
     public SponsorInquiryVO toVO() {
         return SponsorInquiryVO.builder()
                 .id(id)
@@ -36,6 +34,8 @@ public class SponsorInquiryDTO {
                 .sponsorInquiryTitle(sponsorInquiryTitle)
                 .sponsorInquiryAnswer(sponsorInquiryAnswer)
                 .sponsorInquiryStatus(sponsorInquiryStatus)
+                .createdDate(createdDate)
+                .updatedDate(updatedDate)
                 .build();
     }
 

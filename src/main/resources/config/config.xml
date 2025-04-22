@@ -15,6 +15,7 @@
         <typeAlias type="com.app.bookJeog.domain.vo.MonthlyBookPostVO" alias="monthlyBookPostVO"/>
         <typeAlias type="com.app.bookJeog.domain.dto.MonthlyBookPostDTO" alias="monthlyBookPostDTO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.MemberInquiryVO" alias="memberInquiryVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.SponsorInquiryVO" alias="sponsorInquiryVO"/>
     </typeAliases>
 <!---->
     <typeHandlers>

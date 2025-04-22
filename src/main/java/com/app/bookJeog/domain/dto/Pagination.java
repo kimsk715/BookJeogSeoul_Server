@@ -21,7 +21,7 @@ public class Pagination {
     private boolean prev, next;
     private int total;
     private int offset;
-
+    private String keyword;
     public void create(int total) {
         this.page = this.page == 0 ? 1 : this.page;
         this.rowCount = 10;
