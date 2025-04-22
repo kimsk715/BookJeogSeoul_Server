@@ -19,4 +19,12 @@ public class ReportDAO {
     public int countAllBooKPostReport(Pagination pagination){
         return reportMapper.countAllBooKPostReport(pagination);
     }
+
+    public BookPostReportVO findBookPostReport(Long inquiryId) {
+        return reportMapper.selectBookPostReport(inquiryId);
+    }
+
+    public void updateReportStatus(Long inquiryId) {
+        reportMapper.updateReportStatus(inquiryId);
+    }
 }

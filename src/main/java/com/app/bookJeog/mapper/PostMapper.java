@@ -44,5 +44,7 @@ public interface PostMapper {
     public int countTopPosts();
 
     public BookPostVO selectBookPostById(Long id);
+
+    public void updateBookPostStatus(Long postId);
 }
 

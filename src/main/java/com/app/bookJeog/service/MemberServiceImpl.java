@@ -44,6 +44,11 @@ public class MemberServiceImpl implements MemberService {
         return memberDAO.findByEmail(email);
     }
 
+    @Override
+    public void updateMemberStatus(Long memberId) {
+        memberMapper.updateMemberStatus(memberId);
+    }
+
 
     // 닉네임 중복검사 만들어야함
     //일반회원 회원가입

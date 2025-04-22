@@ -27,8 +27,7 @@ public interface ReportService {
         return bookPostReportDTO;
     };
 
-    default BookPostReportInfoDTO toBookPostReportInfoDTO(BookPostReportDTO bookPostReportDTO){
+    public BookPostReportInfoDTO getBookPostReportInfo(Long inquiryId);
 
-        return null;
-    }
+    public void updateReportStatus(Long inquiryId);
 }

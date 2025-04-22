@@ -10,6 +10,9 @@ import java.util.List;
 public interface ReportMapper {
     List<BookPostReportVO> selectAllBookPostReport(Pagination pagination);
 
-
     int countAllBooKPostReport(Pagination pagination);
+
+    public BookPostReportVO selectBookPostReport(Long inquiryId);
+
+    public void updateReportStatus(Long inquiryId);
 }

@@ -34,10 +34,13 @@
 
     <!-- 단일 독후감 조회 -->
     <select id="selectBookPostById" resultType="bookPostVO">
-        select *
-        from tbl_book_post
-        where id = #{id}
+        select bp.id, book_post_title, member_id
+        from tbl_book_post bp
+        join tbl_post p on bp.id = p.id
+        where bp.id = #{id}
     </select>
+
+
     <!-- 토론 게시글 조회(관리자)-->
     <select id="selectAllDiscussionPost" resultType="discussionVO">
         select d.id, discussion_title, discussion_text, book_isbn, p.member_id, p.createdDate, p.updatedDate
@@ -180,4 +183,10 @@
          insert into tbl_best_book_post (book_post_id, book_post_title, book_post_text)
          values (#{bookPostId}, #{bookPostTitle}, #{bookPostText})
     </insert>
+
+    <update id="updateBookPostStatus">
+        update tbl_book_post
+        set book_post_is_public = 'PRIVATE'
+        where id = #{postId}
+    </update>
 </mapper>

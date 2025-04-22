@@ -58,5 +58,6 @@ public interface MemberService {
         return personalMemberDTO;
     }
 
+    public void updateMemberStatus(Long memberId);
 }
 

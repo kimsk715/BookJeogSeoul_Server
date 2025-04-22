@@ -87,6 +87,12 @@
         from tbl_sponsor_member
         where id = #{id}
     </select>
+
+    <update id="updateMemberStatus">
+        update tbl_personal_member
+        set member_status = 'SUSPENDED'
+        where id = #{memberId}
+    </update>
 </mapper>
 
 
