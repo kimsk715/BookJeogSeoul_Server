@@ -834,16 +834,18 @@ div.book-image{
 }
 
 .result-list .slide-wrapper.discussion{
-    display: flex;
-    flex-direction: row;
+    display: grid;
     justify-content: space-between;
     align-items: flex-end;
-    flex-wrap: wrap;
-    padding: 12px 24px 24px;
+    grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
+    gap: 16px;
+    max-width: 1408px;
+    margin: 0 auto;
+    padding: 0 16px;
 }
 
 .result-list ul.discussion li{
-    width: calc(50% - 45px);
+    /*width: calc(50% - 45px);*/
     border-radius: 16px;
     background: var(--ui-up-01);
     overflow: hidden;
@@ -975,8 +977,8 @@ div.book-image{
 
 .discussion-data .data-text .title{
     font-weight: 700;
-    font-size: 24px;
-    line-height: 36px;
+    font-size: 18px;
+    line-height: 29px;
     color: var(--text-01);
     margin-bottom: 8px;
     text-overflow: ellipsis;
@@ -992,8 +994,8 @@ div.book-image{
     max-width: unset;
     padding: 0;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 28px;
+    font-size: 13px;
+    line-height: 22px;
     color: var(--text-02);
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -1001,7 +1003,7 @@ div.book-image{
     word-wrap: break-word;
     white-space: normal;
     overflow: hidden;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
 }
 
 .search-discussion-list .author{
@@ -1062,7 +1064,7 @@ div.book-image{
 }
 
 .result-list .slide-wrapper.organization li{
-    width: calc(50% - 45px);
+    /*width: calc(50% - 45px);*/
     border-radius: 16px;
     background: var(--ui-up-01);
     overflow: hidden;
@@ -1078,12 +1080,14 @@ div.book-image{
 }
 
 .result-list .organization.slide-wrapper{
-    display: flex;
-    flex-direction: row;
+    display: grid;
     justify-content: space-between;
     align-items: flex-end;
-    flex-wrap: wrap;
-    padding: 12px 24px 24px;
+    grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
+    gap: 16px;
+    max-width: 1408px;
+    margin: 0 auto;
+    padding: 0 16px;
 }
 
 .search-organization-list{
@@ -1141,8 +1145,8 @@ div.book-image{
 
 .organization-text .title{
     font-weight: 700;
-    font-size: 24px;
-    line-height: 36px;
+    font-size: 18px;
+    line-height: 29px;
     color: var(--text-01);
     margin-bottom: 8px;
     text-overflow: ellipsis;
@@ -1162,8 +1166,8 @@ div.book-image{
 .organization-text .content{
     margin-top: 10px;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 28px;
+    font-size: 13px;
+    line-height: 22px;
     color: var(--text-02);
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -1171,7 +1175,7 @@ div.book-image{
     word-wrap: break-word;
     white-space: normal;
     overflow: hidden;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
 }
 
 .search-list .slide-container{

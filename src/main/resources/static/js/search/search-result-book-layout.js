@@ -15,7 +15,7 @@ const searchResultBookLayout = (function () {
                 <li>
                     <div class="search-book-list grid">
                         <div class="book-container books">
-                            <a href="" class="book-image">
+                            <a href="/book/detail/${book.isbn}" class="book-image">
                                 <div class="thumbnail">
                                     <div class="thumbnail-inner">
                                         <div class="book-picture">

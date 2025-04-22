@@ -153,5 +153,58 @@ const searchResultLayout = (() => {
             }
         }
     };
-    return {showBookList : showBookList, showPostList : showPostList}
+
+    // 기부 단체 목록
+    const showSponsorList = async (totalCount, sponsors) => {
+        const sponsorListContainer = document.querySelector("ul.organization");
+        const resultCount = document.querySelector("small.organization-count");
+
+        // 총 검색 결과 개수 표시
+        resultCount.innerText = totalCount.toLocaleString();
+
+        sponsorListContainer.innerHTML = "";
+
+        sponsors.forEach((sponsor) => {
+            const li = document.createElement("li");
+            li.className = "slide-item";
+
+            const imageUrl = (sponsor.filePath && sponsor.fileName)
+                ? `/member/profile?path=${sponsor.filePath.replace("C:\\upload\\", "").replace(/\\/g, "/")}&name=${sponsor.fileName}`
+                : "/images/common/user-profile-example.png";
+
+            li.innerHTML = `
+            <div class="search-organization-list">
+                <a href="" class="organization-inner">
+                    <div class="organization-data">
+                        <div class="organization-image"></div>
+                        <div class="organization-text">
+                            <span class="title">${sponsor.sponsorName}</span>
+                            <div class="line"></div>
+                            <p class="content">
+                                ${sponsor.sponsorMainAddress || ''}
+                                ${sponsor.sponsorSubAddress || ''}<br/>
+                                ${sponsor.sponsorPhoneNumber || ''}
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        `;
+
+            // 이미지 넣기 (.organization-image::before에서 쓰는 CSS 변수 설정)
+            li.querySelector(".organization-image")
+                .style.setProperty("--background-image", `url(${imageUrl})`);
+
+            sponsorListContainer.appendChild(li);
+        });
+        // 단체 결과가 3개 이하면 이동 막기
+        if (totalCount <= 3) {
+            const sponsorLink = document.querySelector(".result-organization-more>.link.icon-arrow-right");
+            if (sponsorLink) {
+                sponsorLink.classList.add("disabled");
+                sponsorLink.removeAttribute("href"); // 링크 비활성화
+            }
+        }
+    };
+    return {showBookList : showBookList, showPostList : showPostList, showSponsorList : showSponsorList}
 })();

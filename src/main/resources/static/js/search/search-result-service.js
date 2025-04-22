@@ -38,5 +38,20 @@ const searchResultService = (() => {
         imageElement.src = coverUrl;
     }
 
-    return {getSearchedBooks : getSearchedBooks, getSearchedPosts : getSearchedPosts, getCoverImages : getCoverImages}
+    // 기부단체 검색결과 출력
+    const getSearchedSponsors = async () => {
+        const keyword = new URLSearchParams(window.location.search).get("keyword");
+
+        let path = `/search/api/sponsor-list?keyword=${keyword}`;
+
+        const response = await fetch(path);
+        const data = await response.json();
+
+        const totalCount = data.totalCount;
+        const sponsors = data.sponsors;
+
+        return {totalCount, sponsors};
+    }
+
+    return {getSearchedBooks : getSearchedBooks, getSearchedPosts : getSearchedPosts, getCoverImages : getCoverImages, getSearchedSponsors : getSearchedSponsors}
 })();
