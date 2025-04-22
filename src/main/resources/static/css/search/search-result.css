@@ -344,6 +344,10 @@ label .input input::placeholder{
     font-size: 28px;
 }
 
+.section-wrap .search-list>h2 .link.disabled::before {
+    display: none !important; /* 화살표 제거 */
+}
+
 .icon-arrow-right::before{
     font-family: icon;
     content: "\e805";

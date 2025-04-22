@@ -455,6 +455,7 @@ label .input input::placeholder{
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
+    gap: 25px;
 }
 
 @media (min-width: 1280px) {
@@ -569,12 +570,6 @@ label .input input::placeholder{
 /* // 검색 목록 */
 
 /* 독후감 검색 목록 */
-@media (min-width: 1280px) {
-    .result-list.grid ul li:nth-child(2n+1) {
-        margin-left: 16px;
-    }
-}
-
 .search-result-book-report{
     display: flex;
     align-items: center;
@@ -598,16 +593,18 @@ label .input input::placeholder{
 }
 
 .result-list .slide-wrapper.book-report{
-    display: flex;
-    flex-direction: row;
+    display: grid;
     justify-content: space-between;
     align-items: flex-end;
-    flex-wrap: wrap;
-    padding: 12px 24px 24px;
+    grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
+    gap: 16px;
+    max-width: 1408px;
+    margin: 0 auto;
+    padding: 0 16px;
     }
 
 .result-list ul.book-report li{
-    width: calc(50% - 45px);
+    /*width: calc(50% - 45px);*/
     border-radius: 16px;
     background: var(--ui-up-01);
     overflow: hidden;
@@ -740,8 +737,8 @@ div.book-image{
 
 .book-report-data .data-text .title{
     font-weight: 700;
-    font-size: 24px;
-    line-height: 36px;
+    font-size: 18px;
+    line-height: 29px;
     color: var(--text-01);
     margin-bottom: 8px;
     text-overflow: ellipsis;
@@ -757,8 +754,8 @@ div.book-image{
     max-width: unset;
     padding: 0;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 28px;
+    font-size: 13px;
+    line-height: 22px;
     color: var(--text-02);
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -766,7 +763,7 @@ div.book-image{
     word-wrap: break-word;
     white-space: normal;
     overflow: hidden;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
 }
 
 .search-book-report-list .author{
@@ -856,8 +853,7 @@ div.book-image{
 
 @media (min-width: 721px) {
     .result-list .slide-wrapper .slide-item{
-        min-width: 407px;
-        margin-right: 24px;
+        min-width: 330px;
     }
 }
 
@@ -1487,3 +1483,10 @@ strong.modal-title{
     color: #242424;
 }
 /* // 검색 정렬 모달창 */
+
+/*로딩 스타일*/
+.book-container.books {
+    min-height: 200px; /* 예상되는 최대 높이보다 살짝 여유 있게 */
+    overflow: hidden;
+}
+/*// 로딩 스타일*/

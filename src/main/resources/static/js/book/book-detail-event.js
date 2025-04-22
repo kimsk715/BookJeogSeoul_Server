@@ -1,102 +1,106 @@
+// 로딩 gif
+const showLoading = () => {
+    const loading = document.getElementById("loading");
+    if (loading) {
+        loading.style.display = "block";
+    }
+};
+
+const hideLoading = () => {
+    const loading = document.getElementById("loading");
+    if (loading) {
+        loading.style.display = "none";
+    }
+};
+
+// 페이지와 동시에 실행
 window.addEventListener("load", async () => {
-    // 이 책의 스크랩 개수 가져오기
-    await bookDetailLayout.showScrapCount();
+    showLoading();
 
-    // 작가의 도서 목록 받아오기
-    const books = await bookDetailService.getAuthorBooks();
+    try {
+        // 스크랩 개수, 독후감 개수, 작가 도서 목록
+        await bookDetailLayout.showScrapCount();
+        const [books, postCount, posts] = await Promise.all([
+            bookDetailService.getAuthorBooks(),
+            bookDetailService.getThisBookPostsCount(),
+            bookDetailService.getThisBookPosts()
+        ]);
 
-    // 도서의 독후감 개수 받아오기
-    const count = await bookDetailService.getThisBookPostsCount();
-    await bookDetailLayout.showPostCount(count);
+        await bookDetailLayout.showPostCount(postCount);
+        await bookDetailLayout.showAuthorBooks(books);
+        await bookDetailLayout.showThisBookPosts(posts);
 
-    // 받아온 데이터를 layout에서 출력
-    await bookDetailLayout.showAuthorBooks(books);
+        // 히스토리 저장
+        await bookDetailService.saveBookHistory();
 
-    const posts = await bookDetailService.getThisBookPosts();
-    await bookDetailLayout.showThisBookPosts(posts);
+        // 스크랩 상태 반영
+        const isScrapped = await bookDetailService.checkBookScrap();
+        updateScrapButtonUI(isScrapped);
 
-    await bookDetailService.saveBookHistory(); // 히스토리 저장 실행
+    } catch (error) {
+        console.error("상세 페이지 로딩 중 오류 발생:", error);
+    } finally {
+        hideLoading(); // 무조건 로딩 종료
+    }
+});
 
-    // 스크랩 여부 조회해서 버튼 상태 세팅
-    const isScrapped = await bookDetailService.checkBookScrap();
+// 버튼 상태 처리 함수
+function updateScrapButtonUI(isScrapped) {
     const scrapButton = document.querySelector(".mds-icon-scrap");
     const mobileScrapButton = document.querySelector(".scrap-button");
 
-    if (isScrapped) {
-        scrapButton?.classList.add("scrapped");
-        scrapButton.style.backgroundImage =
-            "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png')";
+    const heartOn = "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png";
+    const heartOff = "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/detail-heart-off.fc064a68f51248a73513a5ef4c5035f5.png";
+    const mobileOff = "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-off.b5cd493b0e38b74654f26e2ebf2a3aaf.png";
 
-        mobileScrapButton?.classList.add("scrapped");
-        const img = mobileScrapButton?.querySelector("img");
+
+    // PC화면 버튼
+    if (scrapButton) {
+        scrapButton.classList.toggle("scrapped", isScrapped);
+        scrapButton.style.backgroundImage = `url('${isScrapped ? heartOn : heartOff}')`;
+    }
+
+    // 모바일화면 버튼
+    if (mobileScrapButton) {
+        const img = mobileScrapButton.querySelector("img");
+        mobileScrapButton.classList.toggle("scrapped", isScrapped);
         if (img) {
-            img.src =
-                "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png";
-        }
-    } else {
-        scrapButton?.classList.remove("scrapped");
-        scrapButton.style.backgroundImage =
-            "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/detail-heart-off.fc064a68f51248a73513a5ef4c5035f5.png')";
-
-        mobileScrapButton?.classList.remove("scrapped");
-        const img = mobileScrapButton?.querySelector("img");
-        if (img) {
-            img.src =
-                "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-off.b5cd493b0e38b74654f26e2ebf2a3aaf.png";
-
+            img.src = isScrapped ? heartOn : mobileOff;
         }
     }
-});
+}
 
-// 버튼을 클릭하면 도서 찜하기
-const scrapButton = document.querySelector(".mds-icon-scrap");
-
-scrapButton.addEventListener("click", async (e) => {
-    const isScrapped = scrapButton.classList.contains("scrapped");
-
-    if (!isScrapped) {
-        const success = await bookDetailService.addBookScrap();
-        if (success) {
-            alert("내 서재에 도서를 넣었습니다.");
-            scrapButton.classList.add("scrapped");
-            scrapButton.style.backgroundImage =
-                "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png')";
-        }
-    } else {
-        const success = await bookDetailService.deleteBookScrap();
-        if (success) {
-            alert("내 서재에 도서를 뺐습니다.");
-            scrapButton.classList.remove("scrapped");
-            scrapButton.style.backgroundImage =
-                "url('https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/detail-heart-off.fc064a68f51248a73513a5ef4c5035f5.png')";
-        }
-    }
-});
-
-// 버튼을 클릭하면 도서 찜하기(모바일 버튼)
-const mobileScrapButton = document.querySelector(".scrap-button");
-
-mobileScrapButton.addEventListener("click", async (e) => {
+// 스크랩 버튼 클릭 이벤트
+document.querySelector(".mds-icon-scrap")?.addEventListener("click", async (e) => {
     const button = e.currentTarget;
-    const img = button.querySelector("img");
     const isScrapped = button.classList.contains("scrapped");
 
+    let success = false;
     if (!isScrapped) {
-        const success = await bookDetailService.addBookScrap();
-        if (success) {
-            alert("내 서재에 도서를 넣었습니다.");
-            button.classList.add("scrapped");
-            img.src =
-                "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png";
-        }
+        success = await bookDetailService.addBookScrap();
     } else {
-        const success = await bookDetailService.deleteBookScrap();
-        if (success) {
-            alert("내 서재에 도서를 뺐습니다.");
-            button.classList.remove("scrapped");
-            img.src =
-                "https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-off.b5cd493b0e38b74654f26e2ebf2a3aaf.png";
-        }
+        success = await bookDetailService.deleteBookScrap();
+    }
+
+    if (success) {
+        updateScrapButtonUI(!isScrapped);
+    }
+});
+
+// 모바일용 스크랩 버튼
+document.querySelector(".scrap-button")?.addEventListener("click", async (e) => {
+    const button = e.currentTarget;
+    const isScrapped = button.classList.contains("scrapped");
+
+    let success = false;
+    if (!isScrapped) {
+        success = await bookDetailService.addBookScrap();
+    } else {
+        success = await bookDetailService.deleteBookScrap();
+    }
+
+    if (success) {
+        updateScrapButtonUI(!isScrapped);
     }
 });
 

@@ -27,6 +27,7 @@ public class BookPostMemberDTO {
     private String filePath;
     private String fileName;
     private String bookCover;
+    private int count;
 
     public BookPostVO toVO() {
         return BookPostVO.builder()
