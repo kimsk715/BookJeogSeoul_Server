@@ -25,11 +25,12 @@ const searchResultService = (() => {
         let path = `/search/api/book-post-list?keyword=${keyword}`;
 
         const response = await fetch(path);
-        const data = await response.json();
-
-        const posts = data;
+        const posts = await response.json();
 
         return posts;
     }
+
+    // 독후감
+
     return {getSearchedBooks : getSearchedBooks, getSearchedPosts : getSearchedPosts}
 })();
