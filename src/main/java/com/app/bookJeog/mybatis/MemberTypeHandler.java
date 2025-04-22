@@ -32,17 +32,35 @@ public class MemberTypeHandler implements TypeHandler<MemberType> {
                 return MemberType.SPONSOR;
             case "개인" :
                 return MemberType.PERSONAL;
+            case "관리자":
+                return MemberType.ADMIN;
         }
         return null;
     }
 
     @Override
     public MemberType getResult(ResultSet rs, int columnIndex) throws SQLException {
+        switch (rs.getString(columnIndex)){
+            case "개인":
+                return MemberType.PERSONAL;
+            case "관리자":
+                return MemberType.ADMIN;
+            case "단체" :
+                return MemberType.SPONSOR;
+        }
         return null;
     }
 
     @Override
     public MemberType getResult(CallableStatement cs, int columnIndex) throws SQLException {
+        switch (cs.getString(columnIndex)){
+            case "개인":
+                return MemberType.PERSONAL;
+            case "관리자":
+                return MemberType.ADMIN;
+            case "단체" :
+                return MemberType.SPONSOR;
+        }
         return null;
     }
 }

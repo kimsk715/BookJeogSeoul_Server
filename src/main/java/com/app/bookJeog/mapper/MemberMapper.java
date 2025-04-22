@@ -4,6 +4,7 @@ package com.app.bookJeog.mapper;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Optional;
@@ -35,4 +36,12 @@ public interface MemberMapper {
 
     // 일반 비밀번호 찾기
     public Optional<PersonalMemberVO> searchPassword(PersonalMemberVO personalMemberVO);
+
+    // 시퀀스(id)로 회원 찾기
+
+    MemberVO selectById(Long id);
+
+    PersonalMemberVO selectPersonalMemberById(Long id);
+
+    SponsorMemberVO selectSponsorMemberById(Long id);
 }

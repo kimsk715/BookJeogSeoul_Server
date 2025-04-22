@@ -6,7 +6,7 @@ document.addEventListener(('click'),(e) => {
 
 const normalInquiryPageWrap = document.querySelector(".normal-inquiry-pagination")
 const normalInquiryKeywordWrap = document.querySelector(".normal-inquiry-search-input")
-
+const normalInquiryWrapper = document.querySelector(".normal-inquiry-management")
 normalInquiryPageWrap.addEventListener('click', (e) => {
     if(e.target.classList.contains("page-btn")){
         const param = {page : e.target.id, search : {keyword : normalInquiryKeywordWrap.value}};
@@ -20,7 +20,7 @@ normalInquiryKeywordWrap.addEventListener('change',(e) => {
     inquiryService.getAllMemberInquiry(inquiryLayout.showMemberInquiry, param);
 })
 
-document.addEventListener("click",(e) =>{
+normalInquiryWrapper.addEventListener("click",(e) =>{
     if(e.target.classList.contains("modal-detail-btn")){
         inquiryService.getMemberInquiry(inquiryLayout.showMemberDetail, e.target.value);
     }
@@ -40,6 +40,7 @@ document.addEventListener("click",(e) =>{
 /* 단체 문의 이벤트 */
 const sponsorInquiryPageWrap = document.querySelector(".sponsor-inquiry-pagination")
 const sponsorInquiryKeywordWrap = document.querySelector(".sponsor-inquiry-search-input")
+const sponsorInquiryWrapper = document.querySelector(".sponsor-inquiry-management")
 document.addEventListener(('click'),(e) => {
     if(e.target.classList.contains("sponsor-inquiry-link")){
         inquiryService.getAllSponsorInquiry(inquiryLayout.showSponsorInquiry);
@@ -59,7 +60,7 @@ sponsorInquiryKeywordWrap.addEventListener('change',(e) => {
     inquiryService.getAllSponsorInquiry(inquiryLayout.showSponsorInquiry, param);
 })
 
-document.addEventListener("click",(e) =>{
+sponsorInquiryWrapper.addEventListener("click",(e) =>{
     if(e.target.classList.contains("modal-detail-btn")){
         inquiryService.getSponsorInquiry(inquiryLayout.showSponsorDetail, e.target.value);
     }

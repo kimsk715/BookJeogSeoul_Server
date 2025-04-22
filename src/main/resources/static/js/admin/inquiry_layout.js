@@ -237,16 +237,16 @@ const inquiryLayout = (() =>{
                                 </tr>
                                 <tr>
                                     <th>문의자</th>
-                                    <td id="sponsor-inquirer">${sponsorInquiry.memberName}</td>
+                                    <td id="sponsor-inquirer">${sponsorInquiry.sponsorName}</td>
                                     <th>이메일</th>
                                     <td id="sponsor-inquiry-email">
-                                        ${sponsorInquiry.memberEmail}
+                                        ${sponsorInquiry.sponsorEmail}
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>문의유형</th>
                                     <td colspan="3" id="sponsor-inquiry-type">
-                                        ${sponsorInquiry.memberInquiryType}
+                                        ${sponsorInquiry.sponsorInquiryType}
                                     </td>
                                 </tr>
                             </tbody>
@@ -257,7 +257,7 @@ const inquiryLayout = (() =>{
                     <div class="sponsor-inquiry-detail">
                         <h4>문의 상세내용</h4>
                         <div class="detail-content" id="sponsor-inquiry-content">
-                            ${sponsorInquiry.memberInquiryText}
+                            ${sponsorInquiry.sponsorInquiryText}
                         </div>
                     </div>
 

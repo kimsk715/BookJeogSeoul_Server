@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.ReportMapper">
+    <select id="selectAllBookPostReport" resultType="bookPostReportVO">
+        select *
+        from tbl_book_post_report
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+                book_post_report_text like concat('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+        limit #{rowCount}
+        offset #{offset}
+    </select>
+    <select id="countAllBooKPostReport" resultType="_int">
+        select count(*)
+        from tbl_book_post_report
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+
+                book_post_report_text like concat('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+    </select>
 
 </mapper>

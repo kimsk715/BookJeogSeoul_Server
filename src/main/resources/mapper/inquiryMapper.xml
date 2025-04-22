@@ -24,7 +24,8 @@
         from tbl_member_inquiry
         <where>
             <if test="keyword != null and keyword != ''">
-                (member_inquiry_title like concat('%', #{keyword}, '%') or
+                (
+                member_inquiry_title like concat('%', #{keyword}, '%') or
                 member_inquiry_text like concat('%', #{keyword}, '%') or
                 member_inquiry_answer like concat('%', #{keyword}, '%'))
             </if>
