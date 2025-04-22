@@ -85,4 +85,16 @@ public class SearchServiceImpl implements SearchService {
         }
         return posts;
     }
+
+    // 독후감 전체목록 조회(무한스크롤)
+    public Map<String, Object> getAllBooksWithCount(String keyword, int offset, String sortType) {
+        List<BookPostMemberDTO> posts = postDAO.selectAllBooks(keyword, offset, sortType); // 목록
+        int totalCount = postDAO.selectAllBooksCount(keyword); // 개수
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("posts", posts);
+        result.put("totalCount", totalCount);
+
+        return result;
+    }
 }

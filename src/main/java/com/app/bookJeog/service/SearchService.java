@@ -12,4 +12,7 @@ public interface SearchService {
 
     // 검색한 검색어에 맞는 독후감 통합검색 조회
     List<BookPostMemberDTO> searchBookPosts(String keyword);
+
+    // 검색한 검색어에 맞는 독후감 무한스크롤로 출력
+    public Map<String, Object> getAllBooksWithCount(String keyword, int offset, String sortType);
 }

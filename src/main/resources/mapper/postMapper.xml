@@ -90,16 +90,16 @@
             f.file_name,
             DATE_FORMAT(p.createdDate, '%Y.%m.%d') AS createdDate,
             bp.book_isbn
-        FROM tbl_book_post bp
-                 JOIN tbl_post p ON p.id = bp.id
-                 JOIN tbl_personal_member pm ON pm.id = p.member_id
-                 JOIN tbl_member_profile mp ON mp.member_id = pm.id
-                 JOIN tbl_file f ON f.id = mp.id
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
         WHERE bp.book_post_is_public = 'PUBLIC'
           AND (
-            bp.book_post_title LIKE CONCAT('%', #{keyword}, '%')
-                OR bp.book_post_text LIKE CONCAT('%', #{keyword}, '%')
-                OR pm.member_nickname LIKE CONCAT('%', #{keyword}, '%')
+            bp.book_post_title LIKE concat('%', #{keyword}, '%')
+                OR bp.book_post_text LIKE concat('%', #{keyword}, '%')
+                OR pm.member_nickname LIKE concat('%', #{keyword}, '%')
             )
         ORDER BY p.createdDate DESC
         LIMIT 3
@@ -108,17 +108,74 @@
     <select id="selectBookPostsCount" resultType="_int">
         SELECT
             count(*)
-        FROM tbl_book_post bp
-                 JOIN tbl_post p ON p.id = bp.id
-                 JOIN tbl_personal_member pm ON pm.id = p.member_id
-                 JOIN tbl_member_profile mp ON mp.member_id = pm.id
-                 JOIN tbl_file f ON f.id = mp.id
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
         WHERE bp.book_post_is_public = 'PUBLIC'
           AND (
-            bp.book_post_title LIKE CONCAT('%', #{keyword}, '%')
-                OR bp.book_post_text LIKE CONCAT('%', #{keyword}, '%')
-                OR pm.member_nickname LIKE CONCAT('%', #{keyword}, '%')
+            bp.book_post_title LIKE concat('%', #{keyword}, '%')
+                OR bp.book_post_text LIKE concat('%', #{keyword}, '%')
+                OR pm.member_nickname LIKE concat('%', #{keyword}, '%')
             )
         ORDER BY p.createdDate DESC
+    </select>
+    <!--  검색한 검색어에 맞는 독후감 무한스크롤로 출력  -->
+    <select id="selectAllBooks" resultType="bookPostMemberDTO">
+        select
+        bp.id,
+        bp.book_post_title,
+        bp.book_post_text,
+        bp.book_isbn,
+        p.createdDate as createdDate,
+        pm.member_nickname,
+        pm.id as member_id,
+        count(bpl.id) as like_count,
+        f.file_name,
+        f.file_path
+        from tbl_book_post bp
+        join tbl_post p on p.id = bp.id
+        left join tbl_book_post_like bpl on bpl.book_post_id = bp.id
+        join tbl_personal_member pm on pm.id = p.member_id
+        join tbl_member_profile mp on mp.member_id = pm.id
+        join tbl_file f on f.id = mp.id
+        where bp.book_post_is_public = 'PUBLIC'
+        and (
+        bp.book_post_title like concat('%', #{keyword}, '%')
+        or bp.book_post_text like concat('%', #{keyword}, '%')
+        or pm.member_nickname like concat('%', #{keyword}, '%')
+        )
+        group by bp.id, bp.book_post_title, bp.book_post_text,
+        pm.member_nickname, pm.id,
+        f.file_name, f.file_path
+        <choose>
+            <when test="sortType == 'like'">
+                order by like_count desc
+            </when>
+            <when test="sortType == 'name'">
+                order by bp.book_post_title collate utf8mb4_unicode_ci asc
+            </when>
+            <otherwise>
+                order by p.createddate desc
+            </otherwise>
+        </choose>
+        limit 8 offset #{offset}
+    </select>
+    <!--  검색한 검색어에 맞는 독후감 전체 개수  -->
+    <select id="selectAllBooksCount" resultType="_int">
+        select
+            count(*)
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
+        where bp.book_post_is_public = 'PUBLIC'
+          and (
+                bp.book_post_title like concat('%', #{keyword}, '%')
+                or bp.book_post_text like concat('%', #{keyword}, '%')
+                or pm.member_nickname like concat('%', #{keyword}, '%')
+            )
     </select>
 </mapper>

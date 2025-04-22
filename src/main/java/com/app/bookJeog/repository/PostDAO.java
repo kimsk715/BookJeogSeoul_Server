@@ -62,4 +62,14 @@ public class PostDAO {
     public int selectBookPostsCount(String keyword){
         return postMapper.selectBookPostsCount(keyword);
     }
+
+    // 검색한 검색어에 맞는 독후감 무한스크롤로 출력
+    public ArrayList<BookPostMemberDTO> selectAllBooks(String keyword, int offset, String sortType){
+        return postMapper.selectAllBooks(keyword, offset, sortType);
+    };
+
+    // 검색한 검색어에 맞는 독후감 전체 개수
+    public int selectAllBooksCount(String keyword){
+        return postMapper.selectAllBooksCount(keyword);
+    };
 }

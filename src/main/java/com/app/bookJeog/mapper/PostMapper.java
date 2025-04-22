@@ -35,5 +35,11 @@ public interface PostMapper {
 
     // 검색한 검색어에 맞는 독후감 통합검색 개수 조회
     public int selectBookPostsCount(String keyword);
+
+    // 검색한 검색어에 맞는 독후감 무한스크롤로 출력
+    public ArrayList<BookPostMemberDTO> selectAllBooks(String keyword, int offset, String sortType);
+
+    // 검색한 검색어에 맞는 독후감 전체 개수
+    public int selectAllBooksCount(String keyword);
 }
 
