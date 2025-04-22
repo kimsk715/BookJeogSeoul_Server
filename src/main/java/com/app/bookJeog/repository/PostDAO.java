@@ -87,4 +87,7 @@ public class PostDAO {
     public BookPostVO findBookPostById(Long id){
         return postMapper.selectBookPostById(id);
     }
+    public void updateBookPostStatus(Long postId) {
+        postMapper.updateBookPostStatus(postId);
+    }
 }

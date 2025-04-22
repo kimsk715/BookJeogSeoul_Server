@@ -44,4 +44,7 @@ public interface MemberMapper {
     PersonalMemberVO selectPersonalMemberById(Long id);
 
     SponsorMemberVO selectSponsorMemberById(Long id);
+
+    // 개인 회원 활동 상태 변경
+    public void updateMemberStatus(Long memberId);
 }

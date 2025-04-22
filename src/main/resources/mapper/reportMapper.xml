@@ -8,12 +8,20 @@
             <if test="keyword != null and keyword != ''">
                 (
                 book_post_report_text like concat('%', #{keyword}, '%')
+
                 )
             </if>
         </where>
         limit #{rowCount}
         offset #{offset}
     </select>
+
+    <select id="selectBookPostReport" resultType="bookPostReportVO">
+        select *
+        from tbl_book_post_report
+        where id = #{id}
+    </select>
+
     <select id="countAllBooKPostReport" resultType="_int">
         select count(*)
         from tbl_book_post_report
@@ -26,5 +34,9 @@
             </if>
         </where>
     </select>
-
+    <update id="updateReportStatus">
+        update tbl_book_post_report
+        set book_post_report_status = 'DONE'
+        where id = #{inquiryId}
+    </update>
 </mapper>

@@ -72,4 +72,8 @@ public class MemberDAO {
     public SponsorMemberVO findSponsorMemberById(Long id){
         return memberMapper.selectSponsorMemberById(id);
     }
+
+    public void updateMemberStatus(Long memberId) {
+        memberMapper.updateMemberStatus(memberId);
+    }
 }

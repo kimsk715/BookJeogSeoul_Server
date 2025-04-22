@@ -22,18 +22,18 @@ const reportService= (() => {
             callback(bookPostReportDTOList)
         }
     }
-    const getMemberReport = async(callback, reportId) =>{
-        let path = `/admin/member-report?id=${reportId}`
+    const getBookPostReport = async(callback, reportId) =>{
+        let path = `/admin/book-post-report?id=${reportId}`
         console.log(path)
         const response = await fetch(path);
-        const memberReport = await response.json();
+        const bookPostReport = await response.json();
         if(callback){
-            callback(memberReport)
+            callback(bookPostReport)
         }
     }
 
-    const personalReportAnswer = async(reportId, reportAnswer) => {
-        let path = `/admin/answer-personal?id=${reportId}&answer=${reportAnswer}`
+    const bookReportProcess = async(reportId, postId) => {
+        let path = `/admin/answer-book-post?id=${reportId}&post-id=${postId}`
         console.log(path)
         await fetch(path);
     }
@@ -78,11 +78,9 @@ const reportService= (() => {
         await fetch(path);
     }
 
-
-
-
     return {getAllBookPostReports : getAllBookPostReports,
-            // getMemberReport:getMemberReport,
+        getBookPostReport: getBookPostReport,
+        bookReportProcess : bookReportProcess,
             // personalReportAnswer:personalReportAnswer,
             // getAllSponsorReport:getAllSponsorReport,
             // getSponsorReport:getSponsorReport,
