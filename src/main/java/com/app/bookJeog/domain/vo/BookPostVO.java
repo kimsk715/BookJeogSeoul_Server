@@ -22,5 +22,5 @@ public class BookPostVO extends PostVO {
     private String bookPostEndDate;
     private Long bookId;
     private Long bookIsbn;
-
+    private String bookTitle;
 }

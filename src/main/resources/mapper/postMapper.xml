@@ -99,6 +99,7 @@
           AND (
             bp.book_post_title LIKE concat('%', #{keyword}, '%')
                 OR bp.book_post_text LIKE concat('%', #{keyword}, '%')
+                or bp.book_title like concat('%', #{keyword}, '%')
                 OR pm.member_nickname LIKE concat('%', #{keyword}, '%')
             )
         ORDER BY p.createdDate DESC
@@ -117,6 +118,7 @@
           AND (
             bp.book_post_title LIKE concat('%', #{keyword}, '%')
                 OR bp.book_post_text LIKE concat('%', #{keyword}, '%')
+                or bp.book_title like concat('%', #{keyword}, '%')
                 OR pm.member_nickname LIKE concat('%', #{keyword}, '%')
             )
         ORDER BY p.createdDate DESC
@@ -144,6 +146,7 @@
         and (
         bp.book_post_title like concat('%', #{keyword}, '%')
         or bp.book_post_text like concat('%', #{keyword}, '%')
+        or bp.book_title like concat('%', #{keyword}, '%')
         or pm.member_nickname like concat('%', #{keyword}, '%')
         )
         group by bp.id, bp.book_post_title, bp.book_post_text,
@@ -175,6 +178,7 @@
           and (
                 bp.book_post_title like concat('%', #{keyword}, '%')
                 or bp.book_post_text like concat('%', #{keyword}, '%')
+                    or bp.book_title like concat('%', #{keyword}, '%')
                 or pm.member_nickname like concat('%', #{keyword}, '%')
             )
     </select>

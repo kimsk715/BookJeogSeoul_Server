@@ -21,7 +21,7 @@
                 <div id="backComponent" class="back-component border-hidden">
                     <div class="back-wrap line">
                         <h1>
-                            <a href="" style="display: flex; cursor: pointer">
+                            <a href="/main/main" style="display: flex; cursor: pointer">
                                 <img
                                     src="/images/common/Logo.png"
                                     alt=""
@@ -86,41 +86,41 @@
                         <section class="search-sort-wrap">
                             <div class="sort-tab">
                                 <ul
-                                    role="menu"
-                                    aria-label="tab menu"
-                                    class="tab-wrapper"
+                                        role="menu"
+                                        aria-label="tab menu"
+                                        class="tab-wrapper"
                                 >
                                     <li role="none" class="item-menu">
+                                        <a role="menuItem" th:href="@{/search/result(keyword=${keyword})}" class="dynamic-keyword-link"
+                                        ><span>통합</span></a
+                                        >
+                                    </li>
+                                    <li role="none" class="item-menu">
+                                        <a role="menuItem" th:href="@{/search/result/books(keyword=${keyword})}" class="dynamic-keyword-link"
+                                        ><span>도서</span></a
+                                        >
+                                    </li>
+                                    <li role="none" class="item-menu">
                                         <a
-                                            role="menuItem"
-                                            aria-selected="true"
-                                            href=""
-                                            ><span>통합</span></a
+                                                role="menuItem"
+                                                aria-selected="true"
+                                                th:href="@{/search/result/book-posts(keyword=${keyword})}" class="dynamic-keyword-link"
+                                        ><span>독후감</span></a
                                         >
                                     </li>
                                     <li role="none" class="item-menu">
-                                        <a role="menuItem" href=""
-                                            ><span>도서</span></a
+                                        <a role="menuItem" th:href="@{/search/result/discussions(keyword=${keyword})}" class="dynamic-keyword-link"
+                                        ><span>북적북적</span></a
                                         >
                                     </li>
                                     <li role="none" class="item-menu">
-                                        <a role="menuItem" href=""
-                                            ><span>독후감</span></a
+                                        <a role="menuItem" th:href="@{/search/result/sponsors(keyword=${keyword})}" class="dynamic-keyword-link"
+                                        ><span>기부단체</span></a
                                         >
                                     </li>
                                     <li role="none" class="item-menu">
-                                        <a role="menuItem" href=""
-                                            ><span>북적북적</span></a
-                                        >
-                                    </li>
-                                    <li role="none" class="item-menu">
-                                        <a role="menuItem" href=""
-                                            ><span>기부단체</span></a
-                                        >
-                                    </li>
-                                    <li role="none" class="item-menu">
-                                        <a role="menuItem" href=""
-                                            ><span>도서전달</span></a
+                                        <a role="menuItem" th:href="@{/search/result/donations(keyword=${keyword})}" class="dynamic-keyword-link"
+                                        ><span>기부글</span></a
                                         >
                                     </li>
                                 </ul>
@@ -1696,6 +1696,7 @@
             </div>
         </section>
     </body>
+    <script src="/js/search/search-menu-layout.js"></script>
     <script src="/js/search/search-result-service.js"></script>
     <script src="/js/search/search-result-layout.js"></script>
     <script src="/js/search/search-result-event.js"></script>

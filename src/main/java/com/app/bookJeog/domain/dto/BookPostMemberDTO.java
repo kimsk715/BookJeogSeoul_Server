@@ -20,6 +20,7 @@ public class BookPostMemberDTO {
     private String bookPostStartDate;
     private String bookPostEndDate;
     private Long bookIsbn;
+    private String bookTitle;
     private String createdDate;
     private String updatedDate;
     private Long memberId;
@@ -39,6 +40,7 @@ public class BookPostMemberDTO {
                 .bookPostStartDate(bookPostStartDate)
                 .bookPostEndDate(bookPostEndDate)
                 .bookIsbn(bookIsbn)
+                .bookTitle(bookTitle)
                 .createdDate(createdDate)
                 .updatedDate(updatedDate)
                 .build();
