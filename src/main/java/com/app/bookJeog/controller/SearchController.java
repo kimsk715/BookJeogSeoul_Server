@@ -44,7 +44,7 @@ public class SearchController {
         return searchService.searchBooksByKeyword(keyword);
     }
 
-    // 검색결과-도서
+    // 검색결과-도서페이지
     @GetMapping("result/books")
     public String gotoSearchResultBooks() {
         return "search/search-result-book";
@@ -60,17 +60,26 @@ public class SearchController {
         return aladinService.searchBooksToMap(keyword, startIndex, maxResults, sort);
     }
 
-    // 검색결과-독후감
-    @GetMapping("result/book-posts")
-    public String gotoSearchResultBookPosts() {
-        return "search/search-result-post";
-    }
-
     // 통합검색-독후감 데이터(REST)
     @GetMapping("api/book-post-list")
     @ResponseBody
     public List<BookPostMemberDTO> getPostsByKeyword(@RequestParam("keyword") String keyword) {
         return searchService.searchBookPosts(keyword);
+    }
+
+    // 검색결과-독후감페이지
+    @GetMapping("result/book-posts")
+    public String gotoSearchResultBookPosts() {
+        return "search/search-result-post";
+    }
+
+    // 검색결과 - 독후감페이지 데이터(REST)
+    @GetMapping("api/result/book-posts")
+    @ResponseBody
+    public Map<String, Object> getAllBookPosts(@RequestParam String keyword,
+                                               @RequestParam(defaultValue = "0") int offset,
+                                               @RequestParam(defaultValue = "new") String sortType) {
+        return searchService.getAllBooksWithCount(keyword, offset, sortType);
     }
 
     // 검색결과-토론방

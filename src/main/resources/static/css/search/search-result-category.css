@@ -490,7 +490,7 @@ label .input input::placeholder{
 
 .book-container.books .book-image{
     min-height: auto;
-    padding-top: 0;
+    padding-top: 18px;
     height: 100%;
     display: flex;
     align-items: flex-end;
