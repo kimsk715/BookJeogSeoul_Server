@@ -83,15 +83,15 @@ monthlyBookButton.addEventListener("click", () => {
     bookService.tempLists(bookLayout.showTempSelectedList)
 });
 
-const submitListButton = document.querySelector(".submit-list");
-
-submitListButton.addEventListener("click", () => {
-    if (
-        confirm(
-            "아래 목록에 있는 도서들이 이 달의 독후감 지정 도서로 결정됩니다. 결정하시려면 '확인'을, 다시 확인하시려면 '취소'를 눌러주세요"
-        )
-    ) {
-        closeModal(monthlyBookListModal);
-        // 여기에는 나중에 서버와 연동
-    }
-});
+// const submitListButton = document.querySelector(".submit-list");
+//
+// submitListButton.addEventListener("click", () => {
+//     if (
+//         confirm(
+//             "아래 목록에 있는 도서들이 이 달의 독후감 지정 도서로 결정됩니다. 결정하시려면 '확인'을, 다시 확인하시려면 '취소'를 눌러주세요"
+//         )
+//     ) {
+//         closeModal(monthlyBookListModal);
+//         // 여기에는 나중에 서버와 연동
+//     }
+// });

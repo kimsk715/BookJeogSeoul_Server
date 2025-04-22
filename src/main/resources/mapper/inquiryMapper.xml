@@ -1,15 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.InquiryMapper">
+    <!-- 개인 문의 전체 불러오기(키워드/페이징 처리) -->
     <select id="selectAllMemberInquiry" resultType="memberInquiryVO">
         select *
         from tbl_member_inquiry
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+                member_inquiry_title like concat('%', #{keyword}, '%') or
+                member_inquiry_text like concat('%', #{keyword}, '%') or
+                member_inquiry_answer like concat('%', #{keyword}, '%')
+             )
+            </if>
+        </where>
         limit #{rowCount}
         offset #{offset}
     </select>
 
+    <!--페이징처리용 카운트-->
     <select id="countAllMemberInquiry" resultType="_int">
         select count(*)
         from tbl_member_inquiry
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (member_inquiry_title like concat('%', #{keyword}, '%') or
+                member_inquiry_text like concat('%', #{keyword}, '%') or
+                member_inquiry_answer like concat('%', #{keyword}, '%'))
+            </if>
+        </where>
     </select>
+
+    <!-- 단일 개인 문의 조회(관리자 상세 보기) -->
+    <select id="selectMemberInquiry" resultType="memberInquiryVO">
+        select *
+        from tbl_member_inquiry
+        where id = #{inquiryId}
+    </select>
+
+    <!-- 개인 문의 답변 -->
+   <update id="answerPersonalInquiry">
+       update tbl_member_inquiry
+       set member_inquiry_answer = #{memberInquiryAnswer}, member_inquiry_status = #{memberInquiryStatus}
+       where id = #{id}
+   </update>
+
+    <!-- 단체 문의 전체 불러오기(키워드/페이징 처리) -->
+    <select id="selectAllSponsorInquiry" resultType="sponsorInquiryVO">
+        select *
+        from tbl_sponsor_inquiry
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+                sponsor_inquiry_title like concat('%', #{keyword}, '%') or
+                sponsor_inquiry_text like concat('%', #{keyword}, '%') or
+                sponsor_inquiry_answer like concat('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+        limit #{rowCount}
+        offset #{offset}
+    </select>
+
+    <!--페이징처리용 카운트-->
+    <select id="countAllSponsorInquiry" resultType="_int">
+        select count(*)
+        from tbl_sponsor_inquiry
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (sponsor_inquiry_title like concat('%', #{keyword}, '%') or
+                sponsor_inquiry_text like concat('%', #{keyword}, '%') or
+                sponsor_inquiry_answer like concat('%', #{keyword}, '%'))
+            </if>
+        </where>
+    </select>
+
+    <!-- 단일 단체 문의 조회(관리자 상세 보기) -->
+    <select id="selectSponsorInquiry" resultType="sponsorInquiryVO">
+        select *
+        from tbl_sponsor_inquiry
+        where id = #{inquiryId}
+    </select>
+
+    <!-- 단체 문의 답변 -->
+    <update id="answerSponsorInquiry">
+        update tbl_sponsor_inquiry
+        set sponsor_inquiry_answer = #{sponsorInquiryAnswer}, sponsor_inquiry_status = #{sponsorInquiryStatus}
+        where id = #{id}
+    </update>
+
+
+
+
+
 </mapper>

@@ -37,6 +37,14 @@
         from tbl_discussion d
             join tbl_post p
                 on d.id = p.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                discussion_title like concat('%', #{keyword}, '%') or
+                discussion_text like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+                    limit #{rowCount}
+                        offset #{offset}
     </select>
 
     <select id="countAllDiscussionPost" resultType="_int">
@@ -44,6 +52,12 @@
         from tbl_discussion d
                  join tbl_post p
                       on d.id = p.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                discussion_title like concat('%', #{keyword}, '%') or
+                discussion_text like concat('%', #{keyword}, '%')
+            </if>
+        </where>
     </select>
     <!--  이 책으로 작성한 독후감 일부 조회  -->
     <select id="selectThisBookPosts" resultType="bookPostDTO">
