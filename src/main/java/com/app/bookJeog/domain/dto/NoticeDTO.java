@@ -9,6 +9,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @Getter
 @Setter
@@ -18,13 +20,18 @@ public class NoticeDTO {
     @EqualsAndHashCode.Include
     private Long id;
     private String noticeTitle;
-    private String noticeContent;
+    private String noticeText;
+    private String createdDate;
+    private String updatedDate;
+
 
     public NoticeVO toVO() {
         return NoticeVO.builder()
                 .id(id)
                 .noticeTitle(noticeTitle)
-                .noticeContent(noticeContent)
+                .noticeText(noticeText)
+                .createdDate(createdDate)
+                .updatedDate(updatedDate)
                 .build();
     }
 

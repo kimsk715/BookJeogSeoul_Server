@@ -62,5 +62,5 @@ public class AdminMemberController {
         return adminPersonalMemberDTO;
     }
 
-    
+
 }

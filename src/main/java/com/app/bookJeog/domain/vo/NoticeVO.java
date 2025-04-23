@@ -14,5 +14,5 @@ public class NoticeVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
     private String noticeTitle;
-    private String noticeContent;
+    private String noticeText;
 }
