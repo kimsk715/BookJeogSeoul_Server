@@ -127,11 +127,11 @@
     - 수직 리사이즈 가능
     - 최소 높이 설정
  */
-.admin-memo {
+.admin-answer {
     margin-top: 8px;
 }
 
-#n-inquiry-admin-memo {
+#normal-inquiry-answer {
     width: 100%;
     min-height: 100px;
     padding: 12px;

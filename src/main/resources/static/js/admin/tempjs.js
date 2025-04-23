@@ -29,14 +29,15 @@ const closeModal = (modal) => {
 };
 
 // 현재 회원 모달만 구현, 클래스명만 바꿔서 다른 카테고리에도 적용하면 됨.
-const memberModal = document.querySelector(".member-modal");
-const memberDetailButton = document.querySelectorAll(".member-detail-btn");
+const commonModal = document.querySelector(".common-modal");
+const commonModalContainer = document.querySelector(".common-modal div.modal-container");
 
-memberDetailButton.forEach((button) => {
-    button.addEventListener("click", () => {
-        openModal(memberModal);
-    });
-});
+document.addEventListener("click",(e) =>{
+    if(e.target.classList.contains("modal-detail-btn")){
+        openModal(commonModal);
+    }
+})
+
 
 document.addEventListener("click", (e) => {
     if (
@@ -45,14 +46,14 @@ document.addEventListener("click", (e) => {
         e.target.classList.contains("close-btn") ||
         e.target.classList.contains("modal-backdrop")
     ) {
-        closeModal(memberModal);
+        closeModal(commonModal);
         closeModal(monthlyBookListModal);
     }
 });
 
 document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && memberModal.style.display === "block") {
-        closeModal(memberModal);
+    if (e.key === "Escape" && commonModal.style.display === "block") {
+        closeModal(commonModal);
     }
 });
 

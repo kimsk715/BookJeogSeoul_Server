@@ -3,10 +3,18 @@
 <mapper namespace="com.app.bookJeog.mapper.MemberMapper">
     <!-- 관리자 페이지 조회-->
     <select id="selectAllPersonal" resultType="personalMemberVO">
-        select pm.id, member_email, member_name, member_phone, member_phone, member_mileage, member_status, createdDate, updatedDate
+        select pm.id, member_email, member_name, member_phone, member_mileage, member_status,
+        date(createdDate) as createdDate, date(updatedDate) as updatedDate
         from tbl_personal_member pm
         join tbl_member m
-        on pm.id = m.id
+        on pm.id = m.id and m.member_type = 'PERSONAL'
+        <where>
+            <if test="keyword != null and keyword != ''">
+                member_name like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        limit #{rowCount}
+            offset #{offset}
     </select>
 
     <!--페이지네이션용 카운트-->
@@ -15,6 +23,11 @@
         from tbl_personal_member pm
                  join tbl_member m
                       on pm.id = m.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                member_name like concat('%', #{keyword}, '%')
+            </if>
+        </where>
     </select>
 
 
@@ -42,9 +55,9 @@
 
     <!--로그인-->
     <select id="loginPersonal" resultType="personalMemberVO">
-        select *
+        select id, member_email, member_password, member_name, member_mileage, member_status, member_birth, member_gender, member_phone, member_nickname
         from tbl_personal_member
-        where member_email = #{memberEmail} and member_password
+        where member_email = #{memberEmail} and member_password = #{memberPassword}
     </select>
 
     <!--  기업회원 통합검색 조회  -->
@@ -106,6 +119,46 @@
         </choose>
         limit 8 offset #{offset}
     </select>
+
+    
+    
+    <!--비밀번호 찾기-->
+    <select id="searchPassword" resultType="personalMemberVO">
+        select id, member_email, member_password, member_name, member_mileage, member_status, member_birth, member_gender, member_phone, member_nickname
+        from tbl_personal_member
+        where member_email = #{memberEmail} and member_name = #{memberName} and member_birth = #{memberBirth} and member_gender = #{memberGender};
+    </select>
+
+    <!-- 시퀀스로 회원 찾기 -->
+    <select id="selectById" resultType="memberVO">
+        select *
+        from tbl_member
+            where id = #{id}
+    </select>
+
+    <select id="selectPersonalMemberById" resultType="personalMemberVO">
+        select member_name
+        from tbl_personal_member
+        where id = #{id}
+    </select>
+
+    <select id="selectSponsorMemberById" resultType="sponsorMemberVO">
+        select sponsor_name
+        from tbl_sponsor_member
+        where id = #{id}
+    </select>
+
+    <update id="updatePersonalMemberStatus">
+        update tbl_personal_member
+        set member_status = 'SUSPENDED'
+        where id = #{memberId}
+    </update>
+
+    <update id="updateSponsorMemberStatus">
+        update tbl_sponsor_member
+        set sponsor_member_status = 'SUSPENDED'
+        where id = #{sponsorId}
+    </update>
 </mapper>
 
 

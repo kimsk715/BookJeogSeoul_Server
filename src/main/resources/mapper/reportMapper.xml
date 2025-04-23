@@ -1,5 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.ReportMapper">
+    <select id="selectAllBookPostReport" resultType="bookPostReportVO">
+        select *
+        from tbl_book_post_report
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+                book_post_report_text like concat('%', #{keyword}, '%')
 
+                )
+            </if>
+        </where>
+        limit #{rowCount}
+        offset #{offset}
+    </select>
+
+    <select id="selectBookPostReport" resultType="bookPostReportVO">
+        select *
+        from tbl_book_post_report
+        where id = #{id}
+    </select>
+
+    <select id="countAllBooKPostReport" resultType="_int">
+        select count(*)
+        from tbl_book_post_report
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+
+                book_post_report_text like concat('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+    </select>
+    <update id="updateReportStatus">
+        update tbl_book_post_report
+        set book_post_report_status = 'DONE'
+        where id = #{inquiryId}
+    </update>
+
+    <!-- 댓글 신고 목록 조회용 -->
+    <select id="selectAllCommentReport" resultType="commentReportVO">
+        select cm.id, cm.comment_id, cm.comment_reporter_id, cm.comment_report_type, cm.comment_report_text, cm.comment_report_status, date(cm.createdDate) as createdDate, date(cm.updatedDate) as updatedDate, comment_text
+        from tbl_comment_report cm
+            join tbl_comment c on cm.comment_id = c.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+                c.comment_text like concat('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+        limit #{rowCount}
+        offset #{offset}
+    </select>
+
+    <!--댓글 신고 목록 페이징 처리용 카운트-->
+    <select id="countAllCommentReport" resultType="_int">
+        select count(*)
+        from tbl_comment_report cm
+        join tbl_comment c on cm.comment_id = c.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+                c.comment_text like concat('%', #{keyword}, '%')
+                )
+            </if>
+        </where>
+    </select>
+
+    <!-- 댓글 신고 단일 항목 조회-->
+    <select id="selectCommentReport" resultType="commentReportVO">
+        select cm.id, cm.comment_id, cm.comment_reporter_id, cm.comment_report_type, cm.comment_report_text, cm.comment_report_status, date(cm.createdDate) as createdDate, date(cm.updatedDate) as updatedDate, comment_text
+        from tbl_comment_report cm
+                 join tbl_comment c on cm.comment_id = c.id
+        where cm.id = #{id}
+    </select>
+
+    <!-- 댓글 신고 처리 상태 변경(to 처리완료) -->
+    <update id="updateCommentReportStatus">
+        update tbl_comment_report
+        set comment_report_status = 'DONE'
+        where id = #{reportId}
+    </update>
 </mapper>

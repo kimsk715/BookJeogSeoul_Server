@@ -2,6 +2,7 @@ package com.app.bookJeog.domain.dto;
 
 
 import com.app.bookJeog.domain.enumeration.CommentReportStatus;
+import com.app.bookJeog.domain.enumeration.CommentStatus;
 import com.app.bookJeog.domain.vo.CommentReportVO;
 import com.app.bookJeog.domain.vo.CommentVO;
 import lombok.EqualsAndHashCode;
@@ -21,6 +22,7 @@ public class CommentDTO {
     private String commentText;
     private Long postId;
     private Long memberId;
+    private CommentStatus commentStatus;
 
     public CommentVO toVO() {
         return CommentVO.builder()
@@ -28,6 +30,7 @@ public class CommentDTO {
                 .commentText(commentText)
                 .postId(postId)
                 .memberId(memberId)
+                .commentStatus(commentStatus)
                 .build();
     }
 

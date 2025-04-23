@@ -18,6 +18,17 @@
         <typeAlias type="com.app.bookJeog.domain.dto.ReceiverPostDTO" alias="receiverPostDTO"/>
         <typeAlias type="com.app.bookJeog.domain.dto.BookPostFileDTO" alias="bookPostFileDTO"/>
         <typeAlias type="com.app.bookJeog.domain.dto.FileBookPostDTO" alias="fileBookPostDTO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.MonthlyBookPostVO" alias="monthlyBookPostVO"/>
+        <typeAlias type="com.app.bookJeog.domain.dto.MonthlyBookPostDTO" alias="monthlyBookPostDTO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.MemberInquiryVO" alias="memberInquiryVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.SponsorInquiryVO" alias="sponsorInquiryVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.BookPostReportVO" alias="bookPostReportVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.MemberVO" alias="memberVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.SponsorMemberVO" alias="sponsorMemberVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.CommentReportVO" alias="commentReportVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.CommentVO" alias="commentVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.PostVO" alias="postVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.NoticeVO" alias="noticeVO"/>
     </typeAliases>
 <!---->
     <typeHandlers>

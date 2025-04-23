@@ -3,8 +3,7 @@ package com.app.bookJeog.controller.admin;
 
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.BookPostVO;
-import com.app.bookJeog.domain.vo.DiscussionVO;
-import com.app.bookJeog.service.BookService;
+import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 import com.app.bookJeog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +26,10 @@ public class AdminBookPostController {
         @ResponseBody
         public AdminBookPostDTO getAllBookPost(Pagination pagination) {
             AdminBookPostDTO adminBookPostDTO = new AdminBookPostDTO();
+            pagination.create(postService.countAllBookPost());
+            adminBookPostDTO.setPagination(pagination);
             List<BookPostVO> tempBookPostList = postService.getAllBookPost(pagination);
-            log.info(tempBookPostList.toString());
+//            log.info(tempBookPostList.toString());
             List<BookPostDTO> bookPostDTOList = new ArrayList<>();
             for (BookPostVO bookPost : tempBookPostList) {
                 BookPostDTO bookPostDTO = new BookPostDTO();
@@ -46,14 +47,47 @@ public class AdminBookPostController {
                 }
                 bookPostDTO.setCreatedDate(bookPost.getCreatedDate());
                 bookPostDTO.setUpdatedDate(bookPost.getUpdatedDate());
+                bookPostDTO.setBookPostLikeCount(bookPost.getBookPostLikeCount());
+                bookPostDTO.setBookPostVoteCount(bookPost.getBookPostVoteCount());
                 bookPostDTOList.add(bookPostDTO);
             }
 
-            log.info(bookPostDTOList.toString());
-            adminBookPostDTO.setBookPostDTOList(bookPostDTOList);
-            log.info(adminBookPostDTO.toString());
-            return adminBookPostDTO;
+            log.info(String.valueOf(postService.countAllBookPost()));
 
+            adminBookPostDTO.setBookPostDTOList(bookPostDTOList);
+
+            log.info(adminBookPostDTO.getPagination().toString());
+            log.info(pagination.toString());
+            return adminBookPostDTO;
+        }
+
+        @GetMapping("admin/top-posts")
+        @ResponseBody
+    public AdminMonthlyBookPostDTO getTopBookPosts(Pagination pagination) {
+            AdminMonthlyBookPostDTO adminBookPostDTO = new AdminMonthlyBookPostDTO();
+            pagination.create(postService.countTopPosts()); // top20 선정이라 고정해도 되고, count 값을 가져와도 됨.
+            adminBookPostDTO.setPagination(pagination);
+            List<MonthlyBookPostVO> tempList = postService.getMonthlyBookPosts(pagination);
+
+            List<MonthlyBookPostDTO> bookPostDTOList = new ArrayList<>();
+            for (MonthlyBookPostVO bookPost : tempList) {
+                MonthlyBookPostDTO bookPostDTO = new MonthlyBookPostDTO();
+                bookPostDTO.setId(bookPost.getId());
+                bookPostDTO.setBookPostId(bookPost.getBookPostId());
+                bookPostDTO.setBookPostTitle(bookPost.getBookPostTitle());
+                bookPostDTO.setBookPostText(bookPost.getBookPostText());
+                bookPostDTO.setBookPostLikeCount(bookPost.getBookPostLikeCount());
+                bookPostDTO.setBookPostVoteCount(bookPost.getBookPostVoteCount());
+                bookPostDTO.setCreatedDate(bookPost.getCreatedDate());
+                bookPostDTO.setUpdatedDate(bookPost.getUpdatedDate());
+                bookPostDTOList.add(bookPostDTO);
+            }
+//            log.info(bookPostDTOList.toString());
+
+            adminBookPostDTO.setMonthlyBookPostDTOList(bookPostDTOList);
+
+            log.info(adminBookPostDTO.getPagination().toString());
+            return adminBookPostDTO;
         }
 
 

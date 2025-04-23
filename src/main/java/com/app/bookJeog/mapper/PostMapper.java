@@ -4,19 +4,22 @@ package com.app.bookJeog.mapper;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
+import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
+import com.app.bookJeog.domain.vo.PostVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface PostMapper {
-        public List<BookPostVO> selectAllBookPost(Pagination pagination);
+    public List<BookPostVO> selectAllBookPost(Pagination pagination);
 
-        public List<DiscussionVO> selectAllDiscussionPost(Pagination pagination);
+    public List<DiscussionVO> selectAllDiscussionPost(Pagination pagination);
 
-        public int countAllDiscussionPost(Pagination pagination);
+    public int countAllDiscussionPost(Pagination pagination);
 
     //   이 책으로 작성한 독후감 일부 조회
     public ArrayList<BookPostMemberDTO> selectThisBookPosts(Long isbn);
@@ -63,5 +66,25 @@ public interface PostMapper {
 
     //  특정 독후감의 첨부파일 목록 조회
     public List<BookPostFileDTO> selectBookPostFiles(Long bookPostId);
+
+    public List<BookPostVO> selectTopPosts();
+
+    public void insertTopBookPosts(MonthlyBookPostVO monthlyBookPostVO);
+
+    public List<MonthlyBookPostVO> selectMonthlyBookPosts(Pagination pagination);
+
+    public Optional<MonthlyBookPostVO> selectBestPost();
+
+    public void insertBestPost(MonthlyBookPostVO monthlyBookPostVO);
+
+    public int countAllBookPost();
+
+    public int countTopPosts();
+
+    public BookPostVO selectBookPostById(Long id);
+
+    public void updateBookPostStatus(Long postId);
+
+    public PostVO selectPostById(Long id);
 }
 
