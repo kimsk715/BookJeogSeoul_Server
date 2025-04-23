@@ -75,5 +75,9 @@ public interface PostService {
     public int countAllBookPost();
 
     public int countTopPosts();
+
+    public BookPostVO getBookPostById(Long id);
+
+    public void updateBookPostStatus(Long postId);
 }
 

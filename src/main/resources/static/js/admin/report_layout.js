@@ -1,27 +1,33 @@
-const inquiryLayout = (() =>{
-    const showMemberInquiry = (memberInquiryList) => {
-        const inquiryTBody = document.querySelector(".normal-inquiry-table tbody");
+const reportLayout = (() =>{
+    const showBookPostReports = (bookPostReportInfoDTOList) => {
+        const bookPostReportTBody = document.querySelector(".book-post-report-table tbody");
         let text = ``;
-        const pagination = memberInquiryList.pagination;
-        const pageWrap = document.querySelector(".normal-inquiry-pagination")
-        console.log(memberInquiryList)
+        const pagination = bookPostReportInfoDTOList.pagination;
+        const list = bookPostReportInfoDTOList.bookPostReportInfoDTOList
+        const pageWrap = document.querySelector(".book-post-report-pagination")
         let className = "";
         let classText = "";
-        memberInquiryList.memberInquiryDTOList.forEach((inquiry) => {
+        list.forEach((report) => {
 
-            switch(inquiry.memberInquiryType){
-                case("BOOK"):
+            switch(report.bookPostReportVO.bookPostReportType){
+                case("ABUSE"):
                     className = "active"
                     break;
-                case("ACCOUNT"):
+                case("SEXUAL"):
                     className = "suspended"
                     break;
-                case("ETC"):
+                case("SPAM"):
                     className = "dormancy"
+                    break;
+                case("SPOILER"):
+                    className = "withdrawn"
+                    break;
+                case("ETC"):
+                    className = "active"
                     break;
             }
 
-            if(inquiry.memberInquiryStatus === "WAITING"){
+            if(report.bookPostReportVO.bookPostReportStatus === "WAITING"){
                 classText = "suspended"
             }
             else{
@@ -30,21 +36,22 @@ const inquiryLayout = (() =>{
 
             text += `
             <tr>
-                <td>${inquiry.id}</td>
-                <td>${inquiry.memberId}</td>
-                <td>${inquiry.memberInquiryTitle}</td>
-                <td>${inquiry.createdDate}</td>
-                <td><span class="status ${className}">${inquiry.memberInquiryType}</span></td>
-                <td><span class="status ${classText}">${inquiry.memberInquiryStatus}</span></td>
+                <td>${report.bookPostReportVO.id}</td>
+                <td>${report.memberName}</td>
+                <td>${report.bookPostTitle}</td>
+                <td>${report.bookTitle}</td>
+                <td><span class="status ${className}">${report.bookPostReportVO.bookPostReportType}</span></td>
+                <td>${report.bookPostReportVO.createdDate}</td>               
+                <td><span class="status ${classText}">${report.bookPostReportVO.bookPostReportStatus}</span></td>
                 <td>
-                    <button type="button" class="detail-btn modal-detail-btn" value="${inquiry.id}">
+                    <button type="button" class="detail-btn modal-detail-btn" value="${report.bookPostReportVO.id}">
                         상세보기
                     </button>
                 </td>
             </tr>
             `
         })
-        inquiryTBody.innerHTML = text;
+        bookPostReportTBody.innerHTML = text;
         text=``;
 
         if(pagination.prev) {
@@ -64,10 +71,11 @@ const inquiryLayout = (() =>{
         pageWrap.innerHTML = text;
         text=``;
     }
-    const showMemberDetail = (memberInquiry) =>{
+    const showBookPostReport = (bookPostReport) =>{
+        console.log(bookPostReport)
         commonModalContainer.innerHTML = `
             <div class="modal-header">
-                    <h3>문의 상세정보</h3>
+                    <h3>신고 상세정보</h3>
                     <button type="button" class="close-btn">
                         <img
                             class="close-button"
@@ -81,28 +89,28 @@ const inquiryLayout = (() =>{
                 <div class="modal-body">
                     <!-- 문의 기본 정보 -->
 
-                    <div class="normal-inquiry-info">
+                    <div class="normal-report-info">
                         <h4>INFO</h4>
                         <table class="info-table">
                             <tbody>
                                 <tr>
                                     <th>문의번호</th>
-                                    <td id="normal-inquiry-id">${memberInquiry.id}</td>
+                                    <td id="normal-report-id">${bookPostReport.bookPostReportVO.id}</td>
                                     <th>문의일시</th>
-                                    <td id="normal-inquiry-date">${memberInquiry.createdDate}</td>
+                                    <td id="normal-report-date">${bookPostReport.bookPostReportVO.createdDate}</td>
                                 </tr>
                                 <tr>
                                     <th>문의자</th>
-                                    <td id="normal-inquirer">${memberInquiry.memberName}</td>
+                                    <td id="normal-inquirer">${bookPostReport.memberName}</td>
                                     <th>이메일</th>
-                                    <td id="normal-inquiry-email">
-                                        ${memberInquiry.memberEmail}
+                                    <td id="normal-report-email">
+                                     
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>문의유형</th>
-                                    <td colspan="3" id="normal-inquiry-type">
-                                        ${memberInquiry.memberInquiryType}
+                                    <td colspan="3" id="book-post-report-type">
+                                        ${bookPostReport.bookPostReportVO.bookPostReportType}
                                     </td>
                                 </tr>
                             </tbody>
@@ -110,62 +118,74 @@ const inquiryLayout = (() =>{
                     </div>
 
                     <!-- 문의 상세 내용 -->
-                    <div class="normal-inquiry-detail">
+                    <div class="book-post-report-detail">
                         <h4>문의 상세내용</h4>
-                        <div class="detail-content" id="normal-inquiry-content">
-                            ${memberInquiry.memberInquiryText}
+                        <div class="detail-content" id="book-post-report-content">
+                            ${bookPostReport.bookPostReportVO.bookPostReportText}
                         </div>
                     </div>
 
                     <!-- 처리 상태 선택 -->
                     <div class="status-selection">
-                        <h4>처리 상태</h4>
+                        <h4>회원 상태</h4>
                         <select class="status-select">
-                            <option value="처리대기">처리대기</option>
-                            <option value="처리완료">처리완료</option>
+                            <option value="처리대기">활동</option>
+                            <option value="처리완료">정지</option>
+                        </select>
+                        <h4>독후감 상태</h4>
+                        <select class="status-select">
+                            <option value="처리대기">활성화</option>
+                            <option value="처리완료">비활성화</option>
                         </select>
                     </div>
+                    
 
                     <!-- 관리자 답변 영역 -->
                     <div class="admin-answer">
                         <h4>답변 내역</h4>
                         <textarea
                             placeholder="답변할 내용을 입력하세요"
-                            id="normal-inquiry-answer"
+                            id="book-post-report-answer"
                         ></textarea>
                     </div>
                 </div>
 
                 <!-- 모달 푸터 -->
-                <div class="modal-footer">
+                <div class="modal-footer book-post-report-footer">
                     <button type="button" class="cancel-btn close-button">취소</button>
-                    <button type="button" class="save-btn close-button" value="${memberInquiry.id}">저장</button>
+                    <button type="button" class="save-btn close-button" value="${bookPostReport.bookPostReportVO.id}">저장</button>
+                    <input type="hidden" value="${bookPostReport.bookPostReportVO.bookPostId}">
                 </div>
         `
     }
-    const showSponsorInquiry = (sponsorInquiryList) =>{
-        const sponsorInquiryTBody = document.querySelector(".sponsor-inquiry-table tbody");
+    const showCommentReports = (commentReportList) =>{
+        const commentReportTBody = document.querySelector(".comment-report-table tbody");
         let text = ``;
-        const pagination = sponsorInquiryList.pagination;
-        const pageWrap = document.querySelector(".sponsor-inquiry-pagination")
-        console.log(sponsorInquiryList)
+        const pagination = commentReportList.pagination;
+        const pageWrap = document.querySelector(".comment-report-pagination")
         let className = "";
         let classText = "";
-        sponsorInquiryList.sponsorInquiryDTOList.forEach((inquiry) => {
+        commentReportList.commentReportInfoDTOList.forEach((report) => {
 
-            switch(inquiry.sponsorInquiryType){
-                case("BOOK"):
+            switch(report.commentReportVO.commentReportType){
+                case("ABUSE"):
                     className = "active"
                     break;
-                case("ACCOUNT"):
+                case("SEXUAL"):
                     className = "suspended"
                     break;
-                case("ETC"):
+                case("SPAM"):
                     className = "dormancy"
+                    break;
+                case("SPOILER"):
+                    className = "withdrawn"
+                    break;
+                case("ETC"):
+                    className = "active"
                     break;
             }
 
-            if(inquiry.sponsorInquiryStatus === "WAITING"){
+            if(report.commentReportVO.commentReportStatus === "WAITING"){
                 classText = "suspended"
             }
             else{
@@ -174,21 +194,21 @@ const inquiryLayout = (() =>{
 
             text += `
             <tr>
-                <td>${inquiry.id}</td>
-                <td>${inquiry.sponsorId}</td>
-                <td>${inquiry.sponsorInquiryTitle}</td>
-                <td>${inquiry.createdDate}</td>
-                <td><span class="status ${className}">${inquiry.sponsorInquiryType}</span></td>
-                <td><span class="status ${classText}">${inquiry.sponsorInquiryStatus}</span></td>
+                <td>${report.commentReportVO.id}</td>
+                <td>${report.commentReportVO.commentId}</td>
+                <td>${report.commentText}</td>
+                <td>${report.commentReportVO.createdDate}</td>
+                <td><span class="status ${className}">${report.commentReportVO.commentReportType}</span></td>
+                <td><span class="status ${classText}">${report.commentReportVO.commentReportStatus}</span></td>
                 <td>
-                    <button type="button" class="detail-btn modal-detail-btn" value="${inquiry.id}">
+                    <button type="button" class="detail-btn modal-detail-btn" value="${report.commentReportVO.id}">
                         상세보기
                     </button>
                 </td>
             </tr>
             `
         })
-        sponsorInquiryTBody.innerHTML = text;
+        commentReportTBody.innerHTML = text;
         text=``;
 
         if(pagination.prev) {
@@ -208,7 +228,7 @@ const inquiryLayout = (() =>{
         pageWrap.innerHTML = text;
         text=``;
     }
-    const showSponsorDetail = (sponsorInquiry) =>{
+    const showCommentReport = (commentReport) =>{
         commonModalContainer.innerHTML = `
             <div class="modal-header">
                     <h3>문의 상세정보</h3>
@@ -225,28 +245,28 @@ const inquiryLayout = (() =>{
                 <div class="modal-body">
                     <!-- 문의 기본 정보 -->
 
-                    <div class="sponsor-inquiry-info">
+                    <div class="comment-report-info">
                         <h4>INFO</h4>
                         <table class="info-table">
                             <tbody>
                                 <tr>
                                     <th>문의번호</th>
-                                    <td id="sponsor-inquiry-id">${sponsorInquiry.id}</td>
+                                    <td id="comment-report-id">${commentReport.commentReportVO.id}</td>
                                     <th>문의일시</th>
-                                    <td id="sponsor-inquiry-date">${sponsorInquiry.createdDate}</td>
+                                    <td id="comment-report-date">${commentReport.commentReportVO.createdDate}</td>
                                 </tr>
                                 <tr>
                                     <th>문의자</th>
-                                    <td id="sponsor-inquirer">${sponsorInquiry.sponsorName}</td>
+                                    <td id="comment-inquirer">${commentReport.memberName}</td>
                                     <th>이메일</th>
-                                    <td id="sponsor-inquiry-email">
-                                        ${sponsorInquiry.sponsorEmail}
+                                    <td id="comment-report-email">
+                                        
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>문의유형</th>
-                                    <td colspan="3" id="sponsor-inquiry-type">
-                                        ${sponsorInquiry.sponsorInquiryType}
+                                    <td colspan="3" id="comment-report-type">
+                                        ${commentReport.commentReportVO.commentReportType}
                                     </td>
                                 </tr>
                             </tbody>
@@ -254,19 +274,24 @@ const inquiryLayout = (() =>{
                     </div>
 
                     <!-- 문의 상세 내용 -->
-                    <div class="sponsor-inquiry-detail">
+                    <div class="comment-report-detail">
                         <h4>문의 상세내용</h4>
-                        <div class="detail-content" id="sponsor-inquiry-content">
-                            ${sponsorInquiry.sponsorInquiryText}
+                        <div class="detail-content" id="comment-report-content">
+                            ${commentReport.commentReportVO.commentReportText}
                         </div>
                     </div>
 
                     <!-- 처리 상태 선택 -->
                     <div class="status-selection">
-                        <h4>처리 상태</h4>
+                        <h4>회원 상태</h4>
                         <select class="status-select">
-                            <option value="처리대기">처리대기</option>
-                            <option value="처리완료">처리완료</option>
+                            <option value="처리대기">활성</option>
+                            <option value="처리완료">정지</option>
+                        </select>
+                        <h4>댓글 상태</h4>
+                        <select class="status-select">
+                            <option value="처리대기">유지</option>
+                            <option value="처리완료">삭제</option>
                         </select>
                     </div>
 
@@ -275,22 +300,23 @@ const inquiryLayout = (() =>{
                         <h4>답변 내역</h4>
                         <textarea
                             placeholder="답변할 내용을 입력하세요"
-                            id="sponsor-inquiry-answer"
+                            id="comment-report-answer"
                         ></textarea>
                     </div>
                 </div>
 
                 <!-- 모달 푸터 -->
-                <div class="modal-footer">
+                <div class="modal-footer comment-report-footer">
                     <button type="button" class="cancel-btn close-button">취소</button>
-                    <button type="button" class="save-btn close-button" value="${sponsorInquiry.id}">저장</button>
+                    <button type="button" class="save-btn close-button" value="${commentReport.commentReportVO.id}">저장</button>
+                    <input type="hidden" value="${commentReport.commentReportVO.commentId}">
                 </div>
         `
     }
-    return{showMemberInquiry : showMemberInquiry,
-            showMemberDetail:showMemberDetail,
-            showSponsorInquiry:showSponsorInquiry,
-            showSponsorDetail:showSponsorDetail
+    return{showBookPostReports : showBookPostReports,
+        showBookPostReport : showBookPostReport,
+        showCommentReports : showCommentReports,
+        showCommentReport : showCommentReport
             };
 
     })();

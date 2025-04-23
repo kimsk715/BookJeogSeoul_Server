@@ -44,6 +44,22 @@ public class MemberServiceImpl implements MemberService {
         return memberDAO.findByEmail(email);
     }
 
+    // 회원 타입에 따라 상태 변경(개인 회원이면 개인 회원 테이블에 영향
+    @Override
+    public void updateMemberStatus(Long memberId) {
+        if(memberDAO.findById(memberId).getMemberType().getCode().equals("개인")){
+            memberDAO.updatePersonalMemberStatus(memberId);
+        }
+        else{
+            memberDAO.updateSponsorMemberStatus(memberId);
+        }
+    }
+
+    @Override
+    public MemberVO getById(Long id) {
+        return memberDAO.findById(id);
+    }
+
 
     // 닉네임 중복검사 만들어야함
     //일반회원 회원가입

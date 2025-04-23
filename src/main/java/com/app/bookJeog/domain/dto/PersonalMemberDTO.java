@@ -22,6 +22,9 @@ public class PersonalMemberDTO {
     private int memberMileage;
     private int memberGender;
     private PersonalMemberStatus memberStatus;
+    private String createdDate;
+    private String updatedDate;
+
 
     public PersonalMemberVO toVO() {
         return PersonalMemberVO.builder()
@@ -35,6 +38,8 @@ public class PersonalMemberDTO {
                 memberMileage(memberMileage).
                 memberGender(memberGender).
                 memberStatus(memberStatus).
+                createdDate(createdDate).
+                updatedDate(updatedDate).
                 build();
     }
 

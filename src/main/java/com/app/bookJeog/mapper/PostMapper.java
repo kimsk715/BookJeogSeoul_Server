@@ -6,6 +6,7 @@ import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
 import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
+import com.app.bookJeog.domain.vo.PostVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -42,5 +43,11 @@ public interface PostMapper {
     public int countAllBookPost();
 
     public int countTopPosts();
+
+    public BookPostVO selectBookPostById(Long id);
+
+    public void updateBookPostStatus(Long postId);
+
+    public PostVO selectPostById(Long id);
 }
 

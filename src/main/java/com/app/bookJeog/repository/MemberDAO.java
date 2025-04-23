@@ -3,8 +3,10 @@ package com.app.bookJeog.repository;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
@@ -12,14 +14,16 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
+@Slf4j
 public class MemberDAO {
     private final MemberMapper memberMapper;
 
-    public List<PersonalMemberVO> findAllPersonal(Pagination pagination){
+    public List<PersonalMemberVO> findAllPersonal(Pagination pagination) {
+
         return memberMapper.selectAllPersonal(pagination);
     }
 
-    public int countAllPersonal(Pagination pagination){
+    public int countAllPersonal(Pagination pagination) {
         return memberMapper.countAllPersonal(pagination);
     }
 
@@ -55,4 +59,24 @@ public class MemberDAO {
         return memberMapper.searchPassword(personalMemberVO);
     }
 
+    // 시퀀스로 회원 찾기
+    public MemberVO findById(Long id) {
+        return memberMapper.selectById(id);
+    }
+
+    public PersonalMemberVO findPersonalMemberById(Long id){
+        return memberMapper.selectPersonalMemberById(id);
+    }
+
+    public SponsorMemberVO findSponsorMemberById(Long id){
+        return memberMapper.selectSponsorMemberById(id);
+    }
+
+    public void updatePersonalMemberStatus(Long memberId) {
+        memberMapper.updatePersonalMemberStatus(memberId);
+    }
+
+    public void updateSponsorMemberStatus(Long sponsorId) {
+        memberMapper.updateSponsorMemberStatus(sponsorId);
+    }
 }

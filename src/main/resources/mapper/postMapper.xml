@@ -24,27 +24,53 @@
                 offset #{offset}
 
     </select>
+    <!-- 페이지네이션용 카운트 -->
     <select id="countAllBookPost" resultType="_int">
         select count(*)
         from tbl_book_post bp
         left join tbl_selected_book_post sbp on bp.id = sbp.id
         left join tbl_normal_book_post nbp on bp.id = nbp.id
-
     </select>
+
+    <!-- 단일 독후감 조회 -->
+    <select id="selectBookPostById" resultType="bookPostVO">
+        select bp.id, book_post_title, member_id
+        from tbl_book_post bp
+        join tbl_post p on bp.id = p.id
+        where bp.id = #{id}
+    </select>
+
+
     <!-- 토론 게시글 조회(관리자)-->
     <select id="selectAllDiscussionPost" resultType="discussionVO">
         select d.id, discussion_title, discussion_text, book_isbn, p.member_id, p.createdDate, p.updatedDate
         from tbl_discussion d
             join tbl_post p
                 on d.id = p.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                discussion_title like concat('%', #{keyword}, '%') or
+                discussion_text like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+                    limit #{rowCount}
+                        offset #{offset}
     </select>
 
+    <!-- 토론 게시글 페이징 처리 카운트-->
     <select id="countAllDiscussionPost" resultType="_int">
         select count(*)
         from tbl_discussion d
                  join tbl_post p
                       on d.id = p.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                discussion_title like concat('%', #{keyword}, '%') or
+                discussion_text like concat('%', #{keyword}, '%')
+            </if>
+        </where>
     </select>
+
     <!--  이 책으로 작성한 독후감 일부 조회  -->
     <select id="selectThisBookPosts" resultType="bookPostDTO">
         select
@@ -159,4 +185,17 @@
          insert into tbl_best_book_post (book_post_id, book_post_title, book_post_text)
          values (#{bookPostId}, #{bookPostTitle}, #{bookPostText})
     </insert>
+
+    <!-- 독후감 상태 변경(부적절한 게시글 처리용)  -->
+    <update id="updateBookPostStatus">
+        update tbl_book_post
+        set book_post_is_public = 'PRIVATE'
+        where id = #{postId}
+    </update>
+
+    <select id="selectPostById" resultType="postVO">
+        select *
+        from tbl_post
+        where id = #{id}
+    </select>
 </mapper>

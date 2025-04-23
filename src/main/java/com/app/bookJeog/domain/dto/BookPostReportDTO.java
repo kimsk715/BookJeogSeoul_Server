@@ -24,6 +24,8 @@ public class BookPostReportDTO {
     private String bookPostReportText;
     private BookPostReportType bookPostReportType;
     private BookPostReportStatus bookPostReportStatus;
+    private String createdDate;
+    private String updatedDate;
 
     public BookPostReportVO toVO() {
         return BookPostReportVO.builder()
@@ -33,6 +35,8 @@ public class BookPostReportDTO {
                 .bookPostReportText(bookPostReportText)
                 .bookPostReportType(bookPostReportType)
                 .bookPostReportStatus(bookPostReportStatus)
+                .createdDate(createdDate)
+                .updatedDate(updatedDate)
                 .build();
 
     }
