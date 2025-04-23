@@ -145,7 +145,8 @@ const searchResultLayout = (() => {
             }
         });
         // 독후감 결과가 3개 이하면 이동 막기
-        if (posts[0]?.count <= 3) {
+        console.log("독후감 수" + resultCount.innerText);
+        if (resultCount.innerText <= 3) {
             const postLink = document.querySelector(".search-result-book-report>.link.icon-arrow-right");
             if (postLink) {
                 postLink.classList.add("disabled");
