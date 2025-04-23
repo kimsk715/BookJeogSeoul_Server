@@ -144,8 +144,8 @@ const searchResultLayout = (() => {
                 });
             }
         });
-        // 독후감 결과가 5개 이하면 이동 막기
-        if (posts[0]?.count <= 5) {
+        // 독후감 결과가 3개 이하면 이동 막기
+        if (posts[0]?.count <= 3) {
             const postLink = document.querySelector(".search-result-book-report>.link.icon-arrow-right");
             if (postLink) {
                 postLink.classList.add("disabled");
@@ -153,6 +153,126 @@ const searchResultLayout = (() => {
             }
         }
     };
+
+    // 토론글 목록
+    const showDiscussionList = async (totalCount, discussions) => {
+        const discussionListContainer = document.querySelector("ul.discussion");
+        const resultCount = document.querySelector("small.discussion-count");
+        console.log(resultCount, totalCount);
+
+        // 총 검색 결과 수 표시
+        resultCount.innerText = totalCount || 0;
+
+        // 기존 목록 초기화
+        discussionListContainer.innerHTML = "";
+
+        // for문으로 반복(forEach는 await을 쓰기 부적절함)
+        for (const discussion of discussions) {
+            const formattedDate = discussion.createdDate.split(" ")[0];
+
+            const li = document.createElement("li");
+            li.className = "slide-item";
+
+            li.innerHTML = `
+                            <div
+                                    class="search-discussion-list"
+                                >
+                                    <a
+                                        href=""
+                                        class="discussion-inner"
+                                    >
+                                        <div
+                                            class="discussion-data"
+                                        >
+                                            <div
+                                                class="book-image book-background"
+                                            >
+                                                <div
+                                                    class="book-container books"
+                                                >
+                                                    <div
+                                                        class="book-image book-foreground"
+                                                    >
+                                                        <div
+                                                            class="thumbnail"
+                                                        >
+                                                            <div
+                                                                class="thumbnail-inner"
+                                                            >
+                                                                <picture>
+                                                                    <img
+                                                                        src="/images/common/default-book-cover.png"
+                                                                        alt="도서 커버"
+                                                                        style="
+                                                                            min-height: 0;
+                                                                        "
+                                                                         class="book-cover"
+                                                                    />
+                                                                </picture>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="data-text"
+                                            >
+                                                <span
+                                                    class="title"
+                                                    >${discussion.discussionTitle}</span
+                                                >
+                                                <p
+                                                    class="content bookType"
+                                                >
+                                                    ${discussion.discussionText}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="" class="author">
+                                        <div class="info">
+                                            <span class="name"
+                                                >작성된 댓글
+                                                개수: ${discussion.commentCount || 0}개</span
+                                            >
+                                            <p class="regdate">
+                                                ${formattedDate}
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+        `;
+
+            discussionListContainer.appendChild(li);
+
+            const img = li.querySelector("img.book-cover");
+            const bookImageWrapper = li.querySelector(".book-image.book-background");
+
+            if (discussion.bookIsbn) {
+                try {
+                    // img가 있을 경우에만 두 번째 인자로 전달
+                    const coverUrl = await searchResultService.getCoverImages(discussion.bookIsbn, img || null);
+
+                    // 배경 이미지는 별도로 적용
+                    if (bookImageWrapper) {
+                        bookImageWrapper.style.setProperty("--background-image", `url('${coverUrl}')`);
+                    }
+                } catch (error) {
+                    console.error("커버 이미지 로딩 실패:", error);
+                }
+            }
+        }
+
+        // 결과가 3개 이하이면 전체보기 링크 비활성화
+        if (totalCount <= 3) {
+            const discussionLink = document.querySelector(".search-result-discussion > .link.icon-arrow-right");
+            if (discussionLink) {
+                discussionLink.classList.add("disabled");
+                discussionLink.removeAttribute("href");
+            }
+        }
+    };
+
 
     // 기부 단체 목록
     const showSponsorList = async (totalCount, sponsors) => {
@@ -206,5 +326,5 @@ const searchResultLayout = (() => {
             }
         }
     };
-    return {showBookList : showBookList, showPostList : showPostList, showSponsorList : showSponsorList}
+    return {showBookList : showBookList, showPostList : showPostList, showDiscussionList : showDiscussionList, showSponsorList : showSponsorList}
 })();

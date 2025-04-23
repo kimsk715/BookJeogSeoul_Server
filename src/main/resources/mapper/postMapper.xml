@@ -182,4 +182,71 @@
                 or pm.member_nickname like concat('%', #{keyword}, '%')
             )
     </select>
+    <!--  검색한 검색어에 맞는 토론글 통합검색 조회  -->
+    <select id="searchDiscussions" resultType="discussionPostDTO">
+        select p.id, d.discussion_title, d.discussion_text, d.book_isbn, d.book_title, p.createdDate
+        from tbl_discussion d
+                 join tbl_post p on d.id = p.id
+        where (
+                  d.discussion_title like concat('%', #{keyword}, '%')
+                  or d.discussion_text like concat('%', #{keyword}, '%')
+                  or d.book_title like concat('%', #{keyword}, '%')
+              )
+        order by p.createddate desc
+        limit 3
+    </select>
+    <!--  검색한 검색어에 맞는 토론글 통합검색 개수 조회  -->
+    <select id="selectAllDiscussionCount" resultType="_int">
+        select count(*)
+        from tbl_discussion d
+                 join tbl_post p on d.id = p.id
+        where (
+                  d.discussion_title like concat('%', #{keyword}, '%')
+                  or d.discussion_text like concat('%', #{keyword}, '%')
+                  or d.book_title like concat('%', #{keyword}, '%')
+              )
+    </select>
+    <!--  검색한 검색어에 맞는 토론글 무한스크롤로 출력  -->
+    <select id="selectAllDiscussion" resultType="discussionPostDTO">
+        select
+        p.id,
+        d.discussion_title,
+        d.discussion_text,
+        d.book_isbn,
+        d.book_title,
+        p.createdDate,
+        (select count(*) from tbl_comment c where c.post_id = p.id) as comment_count
+        from tbl_discussion d
+        join tbl_post p on d.id = p.id
+        where (
+                d.discussion_title like concat('%', #{keyword}, '%')
+                or d.discussion_text like concat('%', #{keyword}, '%')
+                or d.book_title like concat('%', #{keyword}, '%')
+        )
+        <choose>
+            <when test="sortType == 'comment'">
+                order by comment_count desc
+            </when>
+            <when test="sortType == 'name'">
+                order by d.discussion_title collate utf8mb4_unicode_ci asc
+            </when>
+            <otherwise>
+                order by p.createdDate desc
+            </otherwise>
+        </choose>
+        limit 8 offset #{offset}
+    </select>
+    <!--  검색한 검색어에 맞는 기부글 통합검색 조회  -->
+    <select id="searchReceivers" resultType="discussionPostDTO">
+        select p.id, d.discussion_title, d.discussion_text, d.book_isbn, d.book_title, p.createdDate
+        from tbl_receiver r
+                 join tbl_post p on d.id = p.id
+        where (
+                  d.discussion_title like concat('%', #{keyword}, '%')
+                      or d.discussion_text like concat('%', #{keyword}, '%')
+                      or d.book_title like concat('%', #{keyword}, '%')
+                  )
+        order by p.createddate desc
+        limit 3
+    </select>
 </mapper>

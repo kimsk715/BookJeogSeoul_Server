@@ -37,17 +37,16 @@ public class PostServiceImpl implements PostService {
 
     //   이 책으로 작성한 독후감 일부 조회
     public ArrayList<BookPostMemberDTO> selectThisBookPosts(Long isbn){
-        return postDAO.selectThisBookPosts(isbn);
+        return postDAO.findThisBookPosts(isbn);
     };
 
     //   이 책으로 작성한 독후감 전체 조회
     public ArrayList<BookPostMemberDTO> selectThisBookAllPosts(Long isbn, int offset){
-        return postDAO.selectThisBookAllPosts(isbn, offset);
+        return postDAO.findThisBookAllPosts(isbn, offset);
     };
 
     //   이 책으로 작성한 독후감 전체 개수 조회
     public int selectBookAllPostsCount(Long isbn) {
-        return postDAO.selectBookAllPostsCount(isbn);
+        return postDAO.findBookAllPostsCount(isbn);
     }
-
 }

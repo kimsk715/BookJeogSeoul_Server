@@ -8,8 +8,12 @@ window.addEventListener("load", async () => {
     const posts = await searchResultService.getSearchedPosts();
     await searchResultLayout.showPostList(posts);
 
+    // 토론글
+    const { totalCount: discussionCount, discussions } = await searchResultService.getSearchedDiscussions();
+    await searchResultLayout.showDiscussionList(discussionCount, discussions);
+
     // 기부단체
-    const { totalCount, sponsors } = await searchResultService.getSearchedSponsors();
-    await searchResultLayout.showSponsorList(totalCount, sponsors);
+    const { totalCount: sponsorCount, sponsors } = await searchResultService.getSearchedSponsors();
+    await searchResultLayout.showSponsorList(sponsorCount, sponsors);
 });
 

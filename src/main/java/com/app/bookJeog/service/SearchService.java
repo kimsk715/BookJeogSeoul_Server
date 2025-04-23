@@ -1,8 +1,10 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.DiscussionPostDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,4 +27,13 @@ public interface SearchService {
 
     // 기업회원 전체페이지 조회(무한스크롤)
     List<SponsorMemberProfileDTO> findAllSponsorMembers(String keyword, int offset, String sortType);
+
+    // 검색한 검색어에 맞는 토론글 통합검색 조회
+    List<DiscussionPostDTO> searchDiscussions(String keyword);
+
+    // 검색한 검색어에 맞는 토론글 통합검색 개수 조회
+    int findAllDiscussionCount(String keyword);
+
+    // 검색한 검색어에 맞는 토론글 무한스크롤로 출력
+    List<DiscussionPostDTO> findAllDiscussion(String keyword, int offset, String sortType);
 }

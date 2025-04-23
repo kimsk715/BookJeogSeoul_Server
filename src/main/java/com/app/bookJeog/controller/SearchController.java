@@ -1,6 +1,7 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.DiscussionPostDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.SearchService;
@@ -83,6 +84,20 @@ public class SearchController {
         return searchService.searchBookPosts(keyword);
     }
 
+    // 통합검색-토론글 데이터(REST)
+    @GetMapping("api/discussion-list")
+    @ResponseBody
+    public Map<String, Object> getDiscussionsByKeyword(@RequestParam("keyword") String keyword) {
+        List<DiscussionPostDTO> previewList = searchService.searchDiscussions(keyword);
+        int totalCount = searchService.findAllDiscussionCount(keyword);
+
+        // map 타입으로 결과 List랑 int totalCount 같이 반환
+        return Map.of(
+                "discussions", previewList,
+                "totalCount", totalCount
+        );
+    }
+
     // 검색결과-독후감페이지
     @GetMapping("result/book-posts")
     public String gotoSearchResultBookPosts(@RequestParam String keyword, Model model) {
@@ -103,6 +118,21 @@ public class SearchController {
     @GetMapping("result/discussions")
     public String gotoSearchResultDiscussions() {
         return "search/search-result-discussion";
+    }
+
+    // 검색결과 - 토론글 페이지 데이터(REST)
+    @GetMapping("api/result/discussions")
+    @ResponseBody
+    public Map<String, Object> getAllDiscussions(@RequestParam String keyword,
+                                              @RequestParam(defaultValue = "0") int offset,
+                                              @RequestParam(defaultValue = "new") String sortType) {
+        List<DiscussionPostDTO> fullList = searchService.findAllDiscussion(keyword, offset, sortType);
+        int totalCount = searchService.findAllDiscussionCount(keyword);
+
+        return Map.of(
+                "discussions", fullList,
+                "totalCount", totalCount
+        );
     }
 
     // 검색결과-기부단체 페이지

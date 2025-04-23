@@ -32,10 +32,35 @@ const searchResultService = (() => {
 
     // 독후감, 토론방 커버 이미지 가져오기
     const getCoverImages = async (isbn, imageElement) => {
-        const response = await fetch(`/book/cover?isbn=${isbn}`)
-        const coverUrl = await response.text(); // 서버에서 String으로 받음
+        try {
+            const response = await fetch(`/book/cover?isbn=${isbn}`);
+            const coverUrl = await response.text();
+            imageElement.src = coverUrl;
+            return coverUrl;
+        } catch (error) {
+            imageElement.src = "/images/common/default-book-cover.png";
+            if (imageElement) {
+                imageElement.src = fallbackUrl;
+            }
+            return fallbackUrl;
+        }
+    };
 
-        imageElement.src = coverUrl;
+    // 토론방 검색결과 출력
+    const getSearchedDiscussions = async () => {
+        // URL에서 keyword 파라미터 추출
+        const keyword = new URLSearchParams(window.location.search).get("keyword");
+
+        let path = `/search/api/discussion-list?keyword=${keyword}`;
+
+        const response = await fetch(path);
+        const data = await response.json();
+        console.log("✅ API 응답 data:", data);
+
+        const totalCount = data.totalCount;
+        const discussions = data.discussions;
+
+        return {totalCount, discussions};
     }
 
     // 기부단체 검색결과 출력
@@ -53,5 +78,5 @@ const searchResultService = (() => {
         return {totalCount, sponsors};
     }
 
-    return {getSearchedBooks : getSearchedBooks, getSearchedPosts : getSearchedPosts, getCoverImages : getCoverImages, getSearchedSponsors : getSearchedSponsors}
+    return {getSearchedBooks : getSearchedBooks, getSearchedPosts : getSearchedPosts, getCoverImages : getCoverImages, getSearchedDiscussions : getSearchedDiscussions, getSearchedSponsors : getSearchedSponsors}
 })();
