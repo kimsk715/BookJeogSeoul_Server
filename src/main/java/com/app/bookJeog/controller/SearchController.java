@@ -2,6 +2,7 @@ package com.app.bookJeog.controller;
 
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
 import com.app.bookJeog.domain.dto.DiscussionPostDTO;
+import com.app.bookJeog.domain.dto.ReceiverPostDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.SearchService;
@@ -56,6 +57,20 @@ public class SearchController {
         // map 타입으로 결과 List랑 int totalCount 같이 반환
         return Map.of(
                 "sponsors", previewList,
+                "totalCount", totalCount
+        );
+    }
+
+    // 통합검색-기부글 데이터(REST)
+    @GetMapping("api/receiver-list")
+    @ResponseBody
+    public Map<String, Object> getReceiversByKeyword(@RequestParam("keyword") String keyword) {
+        List<ReceiverPostDTO> previewList = searchService.searchReceivers(keyword);
+        int totalCount = searchService.findAllReceiverCount(keyword);
+
+        // map 타입으로 결과 List랑 int totalCount 같이 반환
+        return Map.of(
+                "receivers", previewList,
                 "totalCount", totalCount
         );
     }
@@ -161,5 +176,20 @@ public class SearchController {
     @GetMapping("result/donations")
     public String gotoSearchResultDonations() {
         return "search/search-result-donate";
+    }
+
+    // 검색결과 - 기부글 페이지 데이터(REST)
+    @GetMapping("api/result/receivers")
+    @ResponseBody
+    public Map<String, Object> getAllReceivers(@RequestParam String keyword,
+                                              @RequestParam(defaultValue = "0") int offset,
+                                              @RequestParam(defaultValue = "new") String sortType) {
+        List<ReceiverPostDTO> fullList = searchService.findAllReceivers(keyword, offset, sortType);
+        int totalCount = searchService.findAllReceiverCount(keyword);
+
+        return Map.of(
+                "receivers", fullList,
+                "totalCount", totalCount
+        );
     }
 }

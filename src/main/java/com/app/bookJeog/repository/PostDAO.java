@@ -1,14 +1,10 @@
 package com.app.bookJeog.repository;
 
 
-import com.app.bookJeog.domain.dto.BookPostMemberDTO;
-import com.app.bookJeog.domain.dto.DiscussionPostDTO;
-import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
 import com.app.bookJeog.mapper.BookMapper;
-
-import com.app.bookJeog.domain.dto.BookPostDTO;
 
 import com.app.bookJeog.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
@@ -87,5 +83,20 @@ public class PostDAO {
     // 검색한 검색어에 맞는 토론글 무한스크롤로 출력
     public List<DiscussionPostDTO> findAllDiscussion(String keyword, int offset, String sortType){
         return postMapper.selectAllDiscussion(keyword, offset, sortType);
+    };
+
+    // 검색한 검색어에 맞는 기부글 통합검색 조회
+    public List<ReceiverPostDTO> searchReceivers(String keyword){
+        return postMapper.searchReceivers(keyword);
+    };
+
+    // 검색한 검색어에 맞는 기부글 통합검색 개수 조회
+    public int findAllReceiverCount(String keyword){
+        return postMapper.selectAllReceiverCount(keyword);
+    };
+
+    // 검색한 검색어에 맞는 기부글 무한스크롤로 출력
+    public List<ReceiverPostDTO> findAllReceivers(String keyword, int offset, String sortType){
+        return postMapper.selectAllReceivers(keyword, offset, sortType);
     };
 }

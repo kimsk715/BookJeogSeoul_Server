@@ -237,16 +237,86 @@
         limit 8 offset #{offset}
     </select>
     <!--  검색한 검색어에 맞는 기부글 통합검색 조회  -->
-    <select id="searchReceivers" resultType="discussionPostDTO">
-        select p.id, d.discussion_title, d.discussion_text, d.book_isbn, d.book_title, p.createdDate
+    <select id="searchReceivers" resultType="receiverPostDTO">
+        select
+            p.id,
+            r.receiver_title,
+            r.receiver_text,
+            rf_file.file_name as receiver_file_name,
+            rf_file.file_path as receiver_file_path,
+            mp_file.file_name as profile_file_name,
+            mp_file.file_path as profile_file_path,
+            p.createdDate,
+            sm.sponsor_name
         from tbl_receiver r
-                 join tbl_post p on d.id = p.id
+                 join tbl_post p on r.id = p.id
+                 join tbl_receiver_file rf on rf.receiver_id = r.id
+                 join tbl_file rf_file on rf.id = rf_file.id
+                 join tbl_sponsor_member sm on p.member_id = sm.id
+                 join tbl_member_profile mp on mp.member_id = sm.id
+                 join tbl_file mp_file on mp.id = mp_file.id
         where (
-                  d.discussion_title like concat('%', #{keyword}, '%')
-                      or d.discussion_text like concat('%', #{keyword}, '%')
-                      or d.book_title like concat('%', #{keyword}, '%')
+                  r.receiver_title like concat('%', #{keyword}, '%')
+                      or r.receiver_text like concat('%', #{keyword}, '%')
+                      or sm.sponsor_name like concat('%', #{keyword}, '%')
                   )
         order by p.createddate desc
         limit 3
+    </select>
+    <!--  검색한 검색어에 맞는 기부글 통합검색 개수 조회  -->
+    <select id="selectAllReceiverCount" resultType="_int">
+        select
+            count(*)
+        from tbl_receiver r
+                 join tbl_post p on r.id = p.id
+                 join tbl_receiver_file rf on rf.receiver_id = r.id
+                 join tbl_file rf_file on rf.id = rf_file.id
+                 join tbl_sponsor_member sm on p.member_id = sm.id
+                 join tbl_member_profile mp on mp.member_id = sm.id
+                 join tbl_file mp_file on mp.id = mp_file.id
+        where (
+                  r.receiver_title like concat('%', #{keyword}, '%')
+                      or r.receiver_text like concat('%', #{keyword}, '%')
+                      or sm.sponsor_name like concat('%', #{keyword}, '%')
+                  )
+    </select>
+    <!--  검색한 검색어에 맞는 기부글 무한스크롤로 출력  -->
+    <!--  coalesce = 값이 하나도 없어서 null일 때 null 대신 지정한 값 반환  -->
+    <select id="selectAllReceivers" resultType="receiverPostDTO">
+        select
+        p.id,
+        r.receiver_title,
+        r.receiver_text,
+        rf_file.file_name as receiver_file_name,
+        rf_file.file_path as receiver_file_path,
+        mp_file.file_name as profile_file_name,
+        mp_file.file_path as profile_file_path,
+        p.createdDate,
+        sm.sponsor_name,
+        (select coalesce(sum(rl.receiver_like_point), 0) from tbl_receiver_like rl where rl.receiver_id = r.id) as like_score
+        from tbl_receiver r
+        join tbl_post p on r.id = p.id
+        join tbl_receiver_file rf on rf.receiver_id = r.id
+        join tbl_file rf_file on rf.id = rf_file.id
+        join tbl_sponsor_member sm on p.member_id = sm.id
+        join tbl_member_profile mp on mp.member_id = sm.id
+        join tbl_file mp_file on mp.id = mp_file.id
+        where (
+        r.receiver_title like concat('%', #{keyword}, '%')
+        or r.receiver_text like concat('%', #{keyword}, '%')
+        or sm.sponsor_name like concat('%', #{keyword}, '%')
+        )
+        <choose>
+            <when test="sortType == 'like'">
+                order by like_score desc
+            </when>
+            <when test="sortType == 'name'">
+                order by r.receiver_title collate utf8mb4_unicode_ci asc
+            </when>
+            <otherwise>
+                order by p.createdDate desc
+            </otherwise>
+        </choose>
+        limit 8 offset #{offset}
     </select>
 </mapper>

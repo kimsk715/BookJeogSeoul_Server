@@ -1,41 +1,39 @@
 let currentPage = 1; // 현재 페이지
 let isFetching = false; // 중복 로딩 방지
-const pageSize = 35; // 한 번에 불러올 도서 개수
-let sortType = "Accuracy"; // 기본 정렬 기준
+const pageSize = 8; // 한 번에 불러올 기부글 개수
+let sortType = "new"; // 기본 정렬
 let hasMoreData = true; // 더 이상 불러올 데이터가 있는지 여부
 
-// 페이지 최초 로딩 시 첫 도서 리스트 보여주기
+// 페이지 최초 로딩 시 첫 기부글 리스트 보여주기
 window.addEventListener("DOMContentLoaded", () => {
-    loadMoreBooks();
+    loadMoreReceivers();
 });
 
-// 스크롤 이벤트 추가
+// 스크롤 이벤트 (무한스크롤)
 window.addEventListener("scroll", async () => {
-    if (!hasMoreData) return;
-
     const scrollTop = window.scrollY;
     const scrollHeight = document.documentElement.scrollHeight;
     const clientHeight = document.documentElement.clientHeight;
 
     if (scrollTop + clientHeight >= scrollHeight - 30 && !isFetching) {
-        console.log("✅ 스크롤 감지, 추가 로딩 시도");
-        await loadMoreBooks();
+        console.log("스크롤 감지, 추가 로딩 시도");
+        await loadMoreReceivers();
     }
 });
 
-// 도서 무한스크롤 로딩 함수
-const loadMoreBooks = async () => {
-    if (isFetching || !hasMoreData) return; // 이미 로딩 중이거나 데이터 없으면 리턴
+// 기부글 무한스크롤 로딩 함수
+const loadMoreReceivers = async () => {
+    if (isFetching || !hasMoreData) return;
     isFetching = true;
 
     const keyword = new URLSearchParams(window.location.search).get("keyword");
-    const startIndex = (currentPage - 1) * pageSize + 1; // 알라딘 API는 1부터 시작
+    const offset = (currentPage - 1) * pageSize;
 
     try {
-        const { totalResults, books } = await searchResultBookService.getBookList(keyword, startIndex, pageSize, sortType);
-        searchResultBookLayout.showBookList(totalResults, books);
+        const { totalCount, receivers } = await searchResultReceiverService.getReceiverList(keyword, offset, sortType);
+        await searchResultReceiverLayout.showReceiverList(totalCount, receivers);
 
-        if ((currentPage * pageSize) >= totalResults) {
+        if ((currentPage * pageSize) >= totalCount) {
             hasMoreData = false;
             console.log("더 이상 불러올 데이터 없음");
         } else {
@@ -48,41 +46,36 @@ const loadMoreBooks = async () => {
     }
 };
 
-// 정렬 텍스트를 알라딘 API의 Sort값으로 변환하기 위한 맵
+// 정렬 텍스트 → sortType 값 매핑
 const sortValueMap = {
-    "정확도순": "Accuracy",
-    "출간일순": "PublishTime",
-    "제목순": "Title"
+    "최신순": "new",
+    "책갈피순": "like",
+    "제목순": "name"
 };
 
-// 모달창 열기 전 체크된 라벨 저장
+// 모달창 관련 요소
 let previousCheckedLabel = null;
-
-// 모달창 관련 요소들
 const sortModal = document.querySelector(".modal-section");
 const openModalButton = document.querySelector(".filter-wrapper");
 
-// 모달창 열기
-openModalButton.addEventListener("click", (e) => {
+// 모달 열기
+openModalButton.addEventListener("click", () => {
     previousCheckedLabel = document.querySelector(".modal-radio.checked");
     sortModal.style.display = "flex";
 });
 
-// 정렬 옵션 선택 시 스타일 적용
+// 정렬 옵션 클릭
 const optionButtons = document.querySelectorAll(".modal-radio");
-const optionTexts = document.querySelectorAll(".label");
-
 optionButtons.forEach((optionButton) => {
-    optionButton.addEventListener("click", (e) => {
+    optionButton.addEventListener("click", () => {
         optionButtons.forEach((btn) => btn.classList.remove("checked"));
         optionButton.classList.add("checked");
     });
 });
 
-// 정렬 모달창 닫기 (취소 시)
+// 취소 버튼 클릭
 const cancelButton = document.querySelector(".button-cancel");
-
-cancelButton.addEventListener("click", (e) => {
+cancelButton.addEventListener("click", () => {
     optionButtons.forEach((label) => label.classList.remove("checked"));
     if (previousCheckedLabel) {
         previousCheckedLabel.classList.add("checked");
@@ -90,21 +83,20 @@ cancelButton.addEventListener("click", (e) => {
     sortModal.style.display = "none";
 });
 
-// 정렬 모달창 "확인" 클릭 시
+// 확인 버튼 클릭 → 정렬 적용
 const confirmButton = document.querySelector(".button-primary");
-
-confirmButton.addEventListener("click", (e) => {
+confirmButton.addEventListener("click", () => {
     const selectedLabel = document.querySelector(".modal-radio.checked");
     const selectedText = selectedLabel.innerText;
 
     openModalButton.querySelector(".icon-arrow-bottom span").innerText = selectedText;
-    sortType = sortValueMap[selectedText] || "Accuracy";
+    sortType = sortValueMap[selectedText] || "new";
 
-    // 리스트 초기화 + 다시 불러오기
+    // 리스트 초기화 및 첫 페이지로
     currentPage = 1;
     hasMoreData = true;
-    document.querySelector("ul.book-list").innerHTML = "";
-    loadMoreBooks();
+    document.querySelector("ul.donate").innerHTML = "";
+    loadMoreReceivers();
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     sortModal.style.display = "none";
