@@ -22,9 +22,9 @@ public class HistoryServiceImpl implements HistoryService {
 
         if(count == 0){
             historyDAO.insertHistory(historyVO);
-            log.info("히스토리 저장 완료 - memberId: {}, isbn: {}", historyVO.getMemberId(), historyVO.getBookIsbn());
+//            log.info("히스토리 저장 완료 - memberId: {}, isbn: {}", historyVO.getMemberId(), historyVO.getBookIsbn());
         } else{
-            log.info("오늘 이미 조회된 책 - 저장 생략됨 (memberId: {}, isbn: {})", historyVO.getMemberId(), historyVO.getBookIsbn());
+//            log.info("오늘 이미 조회된 책 - 저장 생략됨 (memberId: {}, isbn: {})", historyVO.getMemberId(), historyVO.getBookIsbn());
         }
     }
 }

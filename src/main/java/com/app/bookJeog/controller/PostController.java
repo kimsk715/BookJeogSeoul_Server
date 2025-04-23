@@ -1,18 +1,18 @@
 package com.app.bookJeog.controller;
 
+import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.app.bookJeog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,8 +47,11 @@ public class PostController {
 
 
     // 독후감 게시글
-    @GetMapping("bookpost/post")
-    public String goToBookPostPost() {
+    @GetMapping("bookpost/{id}")
+    public String goToBookPostPost(@PathVariable Long id, Model model) {
+        FileBookPostDTO post = postService.getPostWithFiles(id);
+        model.addAttribute("post", post);
+
         return "post/post-detail";
     }
 

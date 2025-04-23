@@ -57,5 +57,11 @@ public interface PostMapper {
 
     // 검색한 검색어에 맞는 기부글 무한스크롤로 출력
     public List<ReceiverPostDTO> selectAllReceivers(String keyword, int offset, String sortType);
+
+    // 특정 독후감의 상세 정보와 회원 프로필 이미지 조회
+    public FileBookPostDTO selectBookPostWithFiles(Long id);
+
+    //  특정 독후감의 첨부파일 목록 조회
+    public List<BookPostFileDTO> selectBookPostFiles(Long bookPostId);
 }
 

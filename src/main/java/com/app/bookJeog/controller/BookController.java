@@ -31,9 +31,6 @@ public class BookController implements BookControllerDocs {
             throw new ResourceNotFoundException(isbn);
         }
 
-        // 디버그 로그로 확인
-        log.info("Model contains 'title': " + model.getAttribute("title"));
-
         return "book/book-detail";
     }
 

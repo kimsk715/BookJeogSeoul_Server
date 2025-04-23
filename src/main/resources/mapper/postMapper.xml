@@ -319,4 +319,52 @@
         </choose>
         limit 8 offset #{offset}
     </select>
+
+    <!-- 특정 독후감 + 작성자 프로필 포함 상세정보 조회 -->
+    <select id="selectBookPostWithFiles" resultType="fileBookPostDTO">
+        select
+            bp.id,
+            bp.book_title,
+            bp.book_isbn,
+            count(bpl.id) as like_count,
+            pm.member_name,
+            f.file_path,
+            f.file_name,
+            bp.book_post_title,
+            bp.book_post_text,
+            bp.book_post_start_date,
+            bp.book_post_end_date,
+            p.createdDate
+        from tbl_book_post bp
+                 join tbl_post p on bp.id = p.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
+                 left join tbl_book_post_like bpl on bpl.book_post_id = bp.id
+        where bp.book_post_is_public = 'PUBLIC'
+          and bp.id = #{id}
+        group by
+            bp.id,
+            bp.book_title,
+            bp.book_isbn,
+            pm.member_name,
+            f.file_path,
+            f.file_name,
+            f.file_text,
+            bp.book_post_start_date,
+            bp.book_post_end_date,
+            p.createdDate
+    </select>
+
+    <!-- 특정 독후감의 첨부파일 목록 -->
+    <select id="selectBookPostFiles" resultType="bookPostFileDTO">
+        select
+            f.id,
+            f.file_name,
+            f.file_path,
+            f.file_text
+        from tbl_book_post_file bpf
+        join tbl_file f on f.id = bpf.id
+        where bpf.book_post_id = #{bookPostId}
+    </select>
 </mapper>
