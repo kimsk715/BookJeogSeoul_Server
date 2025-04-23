@@ -23,9 +23,12 @@
         <typeAlias type="com.app.bookJeog.domain.vo.CommentVO" alias="commentVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.PostVO" alias="postVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.NoticeVO" alias="noticeVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.BookDonateVO" alias="bookDonateVO"/>
     </typeAliases>
 <!---->
     <typeHandlers>
         <typeHandler handler="com.app.bookJeog.mybatis.MemberTypeHandler"/>
+        <typeHandler handler="com.app.bookJeog.mybatis.BookReceivedStatusHandler"/>
+
     </typeHandlers>
 </configuration>
