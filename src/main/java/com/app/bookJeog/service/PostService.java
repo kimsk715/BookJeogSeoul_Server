@@ -3,9 +3,11 @@ package com.app.bookJeog.service;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
+import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public interface PostService {
 
@@ -60,4 +62,23 @@ public interface PostService {
 
     //   특정 독후감 상세정보 조회(회원 프로필, 첨부파일 포함)
     FileBookPostDTO getPostWithFiles(Long id);
+
+    public List<BookPostVO> getTopPosts();
+
+    public void insertTopBookPosts(MonthlyBookPostVO monthlyBookPostVO);
+
+    public List<MonthlyBookPostVO> getMonthlyBookPosts(Pagination pagination);
+
+    public Optional<MonthlyBookPostVO> getBestPost();
+
+    public void insertBestPost(MonthlyBookPostVO monthlyBookPostVO);
+
+    public int countAllBookPost();
+
+    public int countTopPosts();
+
+    public BookPostVO getBookPostById(Long id);
+
+    public void updateBookPostStatus(Long postId);
 }
+

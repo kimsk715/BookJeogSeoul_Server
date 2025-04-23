@@ -23,4 +23,7 @@ public class BookPostVO extends PostVO {
     private Long bookId;
     private Long bookIsbn;
     private String bookTitle;
+    private int bookPostLikeCount;
+    private int bookPostVoteCount;
+
 }

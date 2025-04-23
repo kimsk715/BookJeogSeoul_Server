@@ -4,9 +4,28 @@ const personalLayout = (() =>{
         let text = ``;
         const pagination = personalMemberList.pagination;
         const pageWrap = document.querySelector(".member-pagination")
-        console.log(personalMemberList)
-        personalMemberList.personalMemberDTOList.forEach((member) => {
 
+        let className = "";
+        let classText = "";
+        personalMemberList.personalMemberDTOList.forEach((member) => {
+            switch (member.memberStatus){
+                case("ACTIVE") :
+                    className = "active";
+                    classText = "활성"
+                    break;
+                case("DORMANCY"):
+                    className = "dormant"
+                    classText = "휴면"
+                    break;
+                case("SUSPENDED"):
+                    className = "suspended"
+                    classText = "정지"
+                    break;
+                case("DELETE"):
+                    className = "withdrawn"
+                    classText = "탈퇴"
+                    break;
+            }
             text += `
             <tr>
                 <td>${member.id}</td>
@@ -15,7 +34,7 @@ const personalLayout = (() =>{
                 <td>${member.createdDate}</td>
                 <td>${member.updatedDate}</td>
                 <td>
-                    <span class="status">${member.memberStatus}</span>
+                    <span class="status ${className}">${classText}</span>
                 </td>
                 <td>
                     <button type="button" class="detail-btn book-detail-btn">

@@ -17,11 +17,10 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @NoArgsConstructor
 @ToString(callSuper=true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class MemberVO extends Period {
-    @EqualsAndHashCode.Include
     private Long id;
     private MemberType memberType;
+
 
     // Period에서 받은 createdDate, updatedDate를 그대로 사용
     public MemberVO(String createdDate, String updatedDate, Long id, MemberType memberType) {

@@ -1,7 +1,6 @@
 package com.app.bookJeog.domain.dto;
 
-import com.app.bookJeog.domain.enumeration.BookPostIsPublic;
-import com.app.bookJeog.domain.vo.BookPostVO;
+
 import lombok.*;
 import org.springframework.stereotype.Component;
 

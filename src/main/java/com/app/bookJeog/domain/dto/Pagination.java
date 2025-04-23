@@ -1,6 +1,7 @@
 package com.app.bookJeog.domain.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 @ToString
 @Getter
 @Setter
+@NoArgsConstructor
 public class Pagination {
     private int page;
     private int rowCount;
@@ -19,7 +21,7 @@ public class Pagination {
     private boolean prev, next;
     private int total;
     private int offset;
-
+    private String keyword;
     public void create(int total) {
         this.page = this.page == 0 ? 1 : this.page;
         this.rowCount = 10;

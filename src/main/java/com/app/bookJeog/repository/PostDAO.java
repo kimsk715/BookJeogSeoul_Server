@@ -4,18 +4,22 @@ package com.app.bookJeog.repository;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
+import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
+import com.app.bookJeog.domain.vo.PostVO;
 import com.app.bookJeog.mapper.BookMapper;
 
 import com.app.bookJeog.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 
 import java.util.List;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
-
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class PostDAO {
@@ -108,5 +112,43 @@ public class PostDAO {
     //  특정 독후감의 첨부파일 목록 조회
     public List<BookPostFileDTO> findPostFiles(Long postId) {
         return postMapper.selectBookPostFiles(postId);
+
+    public List<BookPostVO> findTopPosts(){
+        return postMapper.selectTopPosts();
+    }
+
+    public void insertTopBookPosts(MonthlyBookPostVO monthlyBookPostVO){
+        postMapper.insertTopBookPosts(monthlyBookPostVO);
+    }
+
+    public List<MonthlyBookPostVO> findMonthlyBookPosts(Pagination pagination){
+        return postMapper.selectMonthlyBookPosts(pagination);
+    }
+
+    public Optional<MonthlyBookPostVO> findBestPost(){
+        return postMapper.selectBestPost();
+    }
+
+    public void insertBestPost(MonthlyBookPostVO monthlyBookPostVO){
+        postMapper.insertBestPost(monthlyBookPostVO);
+    }
+
+    public int countAllBookPost(){
+        return postMapper.countAllBookPost();
+    }
+
+    public int countTopPosts(){
+        return postMapper.countTopPosts();
+    }
+
+    public BookPostVO findBookPostById(Long id){
+        return postMapper.selectBookPostById(id);
+    }
+    public void updateBookPostStatus(Long postId) {
+        postMapper.updateBookPostStatus(postId);
+    }
+
+    public PostVO findPostById(Long id){
+        return postMapper.selectPostById(id);
     }
 }

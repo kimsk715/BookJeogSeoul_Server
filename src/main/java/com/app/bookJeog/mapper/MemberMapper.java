@@ -5,6 +5,7 @@ import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Optional;
@@ -37,4 +38,24 @@ public interface MemberMapper {
 
     // 기업회원 전체페이지 조회(무한스크롤)
     public List<SponsorMemberProfileDTO> selectAllSponsorMembers(String keyword, int offset, String sortType);
+
+    // 일반 로그인
+    public Optional<PersonalMemberVO> loginPersonal(PersonalMemberVO personalMemberVO);
+
+
+    // 일반 비밀번호 찾기
+    public Optional<PersonalMemberVO> searchPassword(PersonalMemberVO personalMemberVO);
+
+    // 시퀀스(id)로 회원 찾기
+
+    MemberVO selectById(Long id);
+
+    PersonalMemberVO selectPersonalMemberById(Long id);
+
+    SponsorMemberVO selectSponsorMemberById(Long id);
+
+    // 개인 회원 활동 상태 변경
+    public void updatePersonalMemberStatus(Long memberId);
+
+    public void updateSponsorMemberStatus(Long sponsorId);
 }

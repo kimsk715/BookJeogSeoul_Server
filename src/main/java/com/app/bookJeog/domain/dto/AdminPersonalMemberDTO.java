@@ -1,5 +1,6 @@
 package com.app.bookJeog.domain.dto;
 
+import com.app.bookJeog.domain.vo.MemberVO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
