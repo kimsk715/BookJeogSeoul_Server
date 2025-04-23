@@ -2,6 +2,7 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
@@ -48,5 +49,12 @@ public class PostServiceImpl implements PostService {
     //   이 책으로 작성한 독후감 전체 개수 조회
     public int selectBookAllPostsCount(Long isbn) {
         return postDAO.findBookAllPostsCount(isbn);
+    }
+
+    //   특정 독후감 상세정보 조회(회원 프로필, 첨부파일 포함)
+    public FileBookPostDTO getPostWithFiles(Long id) {
+        FileBookPostDTO fileBookPostDTO = postDAO.findPostDetail(id);
+        fileBookPostDTO.setFileList(postDAO.findPostFiles(id));
+        return fileBookPostDTO;
     }
 }

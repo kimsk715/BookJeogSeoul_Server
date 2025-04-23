@@ -16,6 +16,8 @@
         <typeAlias type="com.app.bookJeog.domain.dto.SponsorMemberProfileDTO" alias="sponsorMemberProfileDTO"/>
         <typeAlias type="com.app.bookJeog.domain.dto.DiscussionPostDTO" alias="discussionPostDTO"/>
         <typeAlias type="com.app.bookJeog.domain.dto.ReceiverPostDTO" alias="receiverPostDTO"/>
+        <typeAlias type="com.app.bookJeog.domain.dto.BookPostFileDTO" alias="bookPostFileDTO"/>
+        <typeAlias type="com.app.bookJeog.domain.dto.FileBookPostDTO" alias="fileBookPostDTO"/>
     </typeAliases>
 <!---->
     <typeHandlers>

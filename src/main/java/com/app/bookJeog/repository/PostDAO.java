@@ -99,4 +99,14 @@ public class PostDAO {
     public List<ReceiverPostDTO> findAllReceivers(String keyword, int offset, String sortType){
         return postMapper.selectAllReceivers(keyword, offset, sortType);
     };
+
+    // 특정 독후감의 상세 정보와 회원 프로필 이미지 조회
+    public FileBookPostDTO findPostDetail(Long id) {
+        return postMapper.selectBookPostWithFiles(id);
+    }
+
+    //  특정 독후감의 첨부파일 목록 조회
+    public List<BookPostFileDTO> findPostFiles(Long postId) {
+        return postMapper.selectBookPostFiles(postId);
+    }
 }
