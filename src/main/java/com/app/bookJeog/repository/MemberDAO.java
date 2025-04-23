@@ -60,7 +60,6 @@ public class MemberDAO {
     }
 
     // 시퀀스로 회원 찾기
-
     public MemberVO findById(Long id) {
         return memberMapper.selectById(id);
     }
@@ -73,7 +72,11 @@ public class MemberDAO {
         return memberMapper.selectSponsorMemberById(id);
     }
 
-    public void updateMemberStatus(Long memberId) {
-        memberMapper.updateMemberStatus(memberId);
+    public void updatePersonalMemberStatus(Long memberId) {
+        memberMapper.updatePersonalMemberStatus(memberId);
+    }
+
+    public void updateSponsorMemberStatus(Long sponsorId) {
+        memberMapper.updateSponsorMemberStatus(sponsorId);
     }
 }

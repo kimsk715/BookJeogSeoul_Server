@@ -38,42 +38,42 @@ const reportService= (() => {
         await fetch(path);
     }
 
-    const getAllSponsorReport = async(callback, param ={}) =>{
+    const getAllCommentReports = async(callback, param ={}) =>{
         let page = param.page || 1;
         let search = param.search;
-        let sponsorReportKeyword = "";
+        let commentReportKeyword = "";
         let type = "";
-        let path =`/admin/sponsor-inquiries?page=${page}`;
+        let path =`/admin/comment-reports?page=${page}`;
         if(search){
-            sponsorReportKeyword = search.keyword;
+            commentReportKeyword = search.keyword;
             type = search.type;
         }
         if(type){
             path += `&type=${type}`
         }
-        if(sponsorReportKeyword){
-            path += `&keyword=${sponsorReportKeyword}`
+        if(commentReportKeyword){
+            path += `&keyword=${commentReportKeyword}`
         }
         console.log(path)
         const response = await fetch(path);
-        const sponsorReportList = await response.json();
+        const commentReportList = await response.json();
         if(callback){
-            callback(sponsorReportList)
+            callback(commentReportList)
         }
     }
 
-    const getSponsorReport = async(callback, reportId) =>{
-        let path = `/admin/sponsor-report?id=${reportId}`
+    const getCommentReport = async(callback, reportId) =>{
+        let path = `/admin/comment-report?id=${reportId}`
         console.log(path)
         const response = await fetch(path);
-        const sponsorReport = await response.json();
+        const commentReport = await response.json();
         if(callback){
-            callback(sponsorReport)
+            callback(commentReport)
         }
     }
 
-    const sponsorReportAnswer = async(reportId, reportAnswer) => {
-        let path = `/admin/answer-sponsor?id=${reportId}&answer=${reportAnswer}`
+    const commentReportAnswer = async(reportId, commentId) => {
+        let path = `/admin/answer-comment?id=${reportId}&comment-id=${commentId}`
         console.log(path)
         await fetch(path);
     }
@@ -81,9 +81,8 @@ const reportService= (() => {
     return {getAllBookPostReports : getAllBookPostReports,
         getBookPostReport: getBookPostReport,
         bookReportProcess : bookReportProcess,
-            // personalReportAnswer:personalReportAnswer,
-            // getAllSponsorReport:getAllSponsorReport,
-            // getSponsorReport:getSponsorReport,
-            // sponsorReportAnswer:sponsorReportAnswer
+        getAllCommentReports : getAllCommentReports,
+        getCommentReport : getCommentReport,
+        commentReportAnswer : commentReportAnswer
             };
 })();

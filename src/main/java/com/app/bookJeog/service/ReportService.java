@@ -2,13 +2,15 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookPostReportDTO;
 import com.app.bookJeog.domain.dto.BookPostReportInfoDTO;
+import com.app.bookJeog.domain.dto.CommentReportInfoDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostReportVO;
+import com.app.bookJeog.domain.vo.CommentReportVO;
 
 import java.util.List;
 
 public interface ReportService {
-    public List<BookPostReportVO> getAllBookPostReport(Pagination pagination);
+
 
     public List<BookPostReportInfoDTO> getAllBookPostReportInfo(Pagination pagination);
 
@@ -27,7 +29,17 @@ public interface ReportService {
         return bookPostReportDTO;
     };
 
-    public BookPostReportInfoDTO getBookPostReportInfo(Long inquiryId);
+    public BookPostReportInfoDTO getBookPostReportInfo(Long reportId);
 
-    public void updateReportStatus(Long inquiryId);
+    public void updateReportStatus(Long reportId);
+
+    public List<CommentReportVO> getAllCommentReport(Pagination pagination);
+
+    public List<CommentReportInfoDTO> getAllCommentReportInfo(Pagination pagination);
+
+    public int countAllCommentReport(Pagination pagination);
+
+    public CommentReportInfoDTO getCommentReportInfo(Long reportId);
+
+    public void updateCommentReportStatus(Long reportId);
 }
