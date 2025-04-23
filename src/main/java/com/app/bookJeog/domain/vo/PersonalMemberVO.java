@@ -26,5 +26,4 @@ public class PersonalMemberVO extends MemberVO{
     private int memberMileage;
     private int memberGender;
     private PersonalMemberStatus memberStatus;
-
 }

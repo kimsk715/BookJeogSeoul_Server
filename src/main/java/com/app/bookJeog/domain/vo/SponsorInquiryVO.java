@@ -13,9 +13,7 @@ import org.springframework.stereotype.Component;
 @ToString
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class SponsorInquiryVO extends Period {
-    @EqualsAndHashCode.Include
     private Long id;
     private Long sponsorId;
     private SponsorInquiryType sponsorInquiryType;

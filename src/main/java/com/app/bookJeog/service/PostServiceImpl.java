@@ -89,5 +89,15 @@ public class PostServiceImpl implements PostService {
         return postDAO.countTopPosts();
     }
 
+    @Override
+    public BookPostVO getBookPostById(Long id) {
+        return postDAO.findBookPostById(id);
+    }
+
+    @Override
+    public void updateBookPostStatus(Long postId) {
+        postDAO.updateBookPostStatus(postId);
+    }
+
 
 }

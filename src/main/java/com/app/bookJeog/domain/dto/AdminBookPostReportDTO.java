@@ -1,6 +1,5 @@
 package com.app.bookJeog.domain.dto;
 
-import com.app.bookJeog.domain.vo.MemberVO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,8 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-
-public class AdminPersonalMemberDTO {
-    private List<PersonalMemberDTO> personalMemberDTOList;
+public class AdminBookPostReportDTO {
+    private List<BookPostReportInfoDTO> bookPostReportInfoDTOList;
     private Pagination pagination;
 }

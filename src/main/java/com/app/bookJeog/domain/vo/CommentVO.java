@@ -1,5 +1,6 @@
 package com.app.bookJeog.domain.vo;
 
+import com.app.bookJeog.domain.enumeration.CommentStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
@@ -16,4 +17,5 @@ public class CommentVO extends Period {
     private String commentText;
     private Long postId;
     private Long memberId;
+    private CommentStatus commentStatus;
 }

@@ -5,6 +5,7 @@ import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
 import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
+import com.app.bookJeog.domain.vo.PostVO;
 import com.app.bookJeog.mapper.BookMapper;
 
 import com.app.bookJeog.domain.dto.BookPostDTO;
@@ -82,5 +83,16 @@ public class PostDAO {
 
     public int countTopPosts(){
         return postMapper.countTopPosts();
+    }
+
+    public BookPostVO findBookPostById(Long id){
+        return postMapper.selectBookPostById(id);
+    }
+    public void updateBookPostStatus(Long postId) {
+        postMapper.updateBookPostStatus(postId);
+    }
+
+    public PostVO findPostById(Long id){
+        return postMapper.selectPostById(id);
     }
 }
