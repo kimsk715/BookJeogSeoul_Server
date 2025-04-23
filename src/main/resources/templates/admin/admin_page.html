@@ -29,9 +29,10 @@
     <link rel="stylesheet" href="/css/admin/common_modal.css">
     <link rel="stylesheet" href="/css/admin/announce_modal.css" />
     <link rel="stylesheet" href="/css/admin/member_modal.css" />
-    <link rel="stylesheet" href="/css/admin/company_member_modal.css" />
-    <link rel="stylesheet" href="/css/admin/normal_inquiry_modal.css" />
+    <link rel="stylesheet" href="/css/admin/company_member_modal.css"/>
+    <link rel="stylesheet" href="/css/admin/normal_inquiry_modal.css"/>
     <link rel="stylesheet" href="/css/admin/bookpost_report_modal.css">
+    <link rel="stylesheet" href="/css/admin/comment_report_modal.css">
     <link rel="stylesheet" href="/css/admin/sponsor_inquiry_modal.css" />
     <link rel="shortcut icon" href="/images/admin/favicon.ico" type="image/x-icon">
 </head>
@@ -1194,34 +1195,21 @@
                                 <thead>
                                     <tr>
                                         <th>신고번호</th>
-                                        <th>신고대상</th>
-                                        <th>토론주제</th>
+                                        <th>게시글링크</th>
                                         <th>댓글내역</th>
                                         <th>신고일시</th>
+                                        <th>신고유형</th>
                                         <th>처리상태</th>
                                         <th>신고관리</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <!-- 샘플 데이터 -->
-                                    <tr>
-                                        <td>0000001</td>
-                                        <td>트럼프</td>
-                                        <td>상호 간 관세 과연 누구에게 이득이고, 옳은 정책이 맞는가?</td>
-                                        <td>관세전쟁을 해보자! 당연히 미국이 이기는 거야~ 그걸 모름?ㅋㅋㅋㅋㅋ</td>
-                                        <td>2025-05-05</td>
-                                        <td>
-                                            <span class="status active">처리완료</span>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="detail-btn">
-                                                상세보기
-                                            </button>
-                                        </td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
+                        <div class="comment-report-pagination"></div>
                     </div>
                     <!-- 독후감 신고 컨텐츠 -->
                     <div class="book-post-report-management" style="display: none">

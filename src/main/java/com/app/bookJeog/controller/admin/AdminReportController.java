@@ -1,15 +1,9 @@
 package com.app.bookJeog.controller.admin;
 
 
-import com.app.bookJeog.domain.dto.AdminBookPostReportDTO;
-import com.app.bookJeog.domain.dto.BookPostReportDTO;
-import com.app.bookJeog.domain.dto.BookPostReportInfoDTO;
-import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.BookPostReportVO;
-import com.app.bookJeog.service.BookService;
-import com.app.bookJeog.service.MemberService;
-import com.app.bookJeog.service.PostService;
-import com.app.bookJeog.service.ReportService;
+import com.app.bookJeog.service.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +24,7 @@ public class AdminReportController {
     private final ReportService reportService;
     private final PostService postService;
     private final MemberService memberService;
+    private final CommentService commentService;
 
     @GetMapping("admin/book-post-reports")
     @ResponseBody
@@ -57,6 +52,36 @@ public class AdminReportController {
         postService.updateBookPostStatus(postId);
         reportService.updateReportStatus(reportId);
         Long memberId = postService.getBookPostById(postId).getMemberId();
+//        log.info(memberId.toString());
+        memberService.updateMemberStatus(memberId);
+    }
+
+    @GetMapping("admin/comment-reports")
+    @ResponseBody
+    public AdminCommentReportDTO getAllCommentReport(Pagination pagination, @RequestParam("page") int page, @RequestParam(value = "keyword", required = false) String keyword) {
+        AdminCommentReportDTO adminCommentReportDTO = new AdminCommentReportDTO();
+        pagination.setKeyword(keyword);
+        pagination.create(reportService.countAllCommentReport(pagination));
+        adminCommentReportDTO.setPagination(pagination);
+        adminCommentReportDTO.setCommentReportInfoDTOList(reportService.getAllCommentReportInfo(pagination));
+
+        return adminCommentReportDTO;
+    }
+
+    @GetMapping("admin/comment-report")
+    @ResponseBody
+    public CommentReportInfoDTO getCommentReportDetail(@RequestParam("id") Long inquiryId){
+//        log.info(reportService.getCommentReportInfo(inquiryId).toString());
+        return reportService.getCommentReportInfo(inquiryId);
+    }
+
+    @GetMapping("admin/answer-comment")
+    @ResponseBody
+    public void commentReportProcess(@RequestParam("id") Long reportId, @RequestParam("comment-id") Long commentId) {
+        commentService.updateCommentStatus(commentId);
+        log.info(reportId.toString());
+        reportService.updateCommentReportStatus(reportId);
+        Long memberId = commentService.getCommentById(commentId).getMemberId();
         log.info(memberId.toString());
         memberService.updateMemberStatus(memberId);
     }

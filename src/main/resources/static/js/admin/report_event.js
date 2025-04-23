@@ -26,7 +26,8 @@ bookPostReportKeywordWrap.addEventListener('change',(e)=>{
 })
 
 document.addEventListener("click",(e) =>{
-    if(e.target.classList.contains("save-btn")){
+
+    if(e.target.classList.contains("save-btn") && e.target.parentElement.classList.contains("book-post-report-footer")){
         const reportId = e.target.value;
         const postId = e.target.nextElementSibling.value;
         console.log(postId)
@@ -40,37 +41,35 @@ const commentReportKeywordWrap = document.querySelector(".comment-report-search-
 const commentReportWrapper = document.querySelector(".comment-report-management")
 document.addEventListener(('click'),(e) => {
     if(e.target.classList.contains("comment-report-link")){
-        reportService.getAllCommentReport(reportLayout.showCommentReport);
+        reportService.getAllCommentReports(reportLayout.showCommentReports);
     }
 })
 
 commentReportPageWrap.addEventListener('click', (e) => {
     if(e.target.classList.contains("page-btn")){
         const param = {page : e.target.id, search : {keyword : commentReportKeywordWrap.value}};
-        reportService.getAllCommentReport(reportLayout.showCommentReport, param);
+        reportService.getAllCommentReports(reportLayout.showCommentReports, param);
     }
 })
 
 commentReportKeywordWrap.addEventListener('change',(e) => {
     console.log(e.target.value)
     const param = {search : {keyword : e.target.value}}
-    reportService.getAllCommentReport(reportLayout.showCommentReport, param);
+    reportService.getAllCommentReports(reportLayout.showCommentReports, param);
 })
 
 commentReportWrapper.addEventListener("click",(e) =>{
     if(e.target.classList.contains("modal-detail-btn")){
-        reportService.getCommentReport(reportLayout.showCommentDetail, e.target.value);
+        reportService.getCommentReport(reportLayout.showCommentReport, e.target.value);
     }
 })
 
+
 document.addEventListener("click",(e) =>{
-    console.log("이벤트 확인")
-    const reportAnswerArea = commonModalContainer.querySelector("#comment-report-answer")
-    if(e.target.classList.contains("save-btn")){
-        console.log("이벤트 확인")
-        const reportAnswer = reportAnswerArea.value;
+    if(e.target.classList.contains("save-btn") && e.target.parentElement.classList.contains("comment-report-footer")){
         const reportId = e.target.value;
-        reportService.commentReportAnswer(reportId, reportAnswer)
+        const commentId = e.target.nextElementSibling.value;
+        reportService.commentReportAnswer(reportId, commentId)
     }
 })
 

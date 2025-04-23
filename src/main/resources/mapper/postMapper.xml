@@ -57,6 +57,7 @@
                         offset #{offset}
     </select>
 
+    <!-- 토론 게시글 페이징 처리 카운트-->
     <select id="countAllDiscussionPost" resultType="_int">
         select count(*)
         from tbl_discussion d
@@ -69,6 +70,7 @@
             </if>
         </where>
     </select>
+
     <!--  이 책으로 작성한 독후감 일부 조회  -->
     <select id="selectThisBookPosts" resultType="bookPostDTO">
         select
@@ -184,9 +186,16 @@
          values (#{bookPostId}, #{bookPostTitle}, #{bookPostText})
     </insert>
 
+    <!-- 독후감 상태 변경(부적절한 게시글 처리용)  -->
     <update id="updateBookPostStatus">
         update tbl_book_post
         set book_post_is_public = 'PRIVATE'
         where id = #{postId}
     </update>
+
+    <select id="selectPostById" resultType="postVO">
+        select *
+        from tbl_post
+        where id = #{id}
+    </select>
 </mapper>

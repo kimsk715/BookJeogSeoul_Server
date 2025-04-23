@@ -1,19 +1,25 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookPostReportInfoDTO;
+import com.app.bookJeog.domain.dto.CommentReportInfoDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.enumeration.MemberType;
+import com.app.bookJeog.domain.enumeration.PostType;
 import com.app.bookJeog.domain.vo.BookPostReportVO;
+import com.app.bookJeog.domain.vo.CommentReportVO;
+import com.app.bookJeog.domain.vo.PostVO;
+import com.app.bookJeog.repository.CommentDAO;
 import com.app.bookJeog.repository.MemberDAO;
 import com.app.bookJeog.repository.PostDAO;
 import com.app.bookJeog.repository.ReportDAO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor @Transactional(rollbackFor = Exception.class)
 public class ReportServiceImpl implements ReportService {
@@ -21,10 +27,9 @@ public class ReportServiceImpl implements ReportService {
     private final MemberDAO memberDAO;
     private final PostDAO postDAO;
     private final BookService bookService; // api가 서비스 계층에 있어서 어쩔 수 없이 서비스 계층 가져다 씀.
-    @Override
-    public List<BookPostReportVO> getAllBookPostReport(Pagination pagination) {
-        return reportDAO.findAllBookPostReport(pagination);
-    }
+    private final CommentDAO commentDAO;
+    private final PostService postService;
+
 
     @Override
     public List<BookPostReportInfoDTO> getAllBookPostReportInfo(Pagination pagination) {
@@ -52,9 +57,9 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public BookPostReportInfoDTO getBookPostReportInfo(Long inquiryId) {
+    public BookPostReportInfoDTO getBookPostReportInfo(Long reportId) {
         BookPostReportInfoDTO bookPostReportInfoDTO = new BookPostReportInfoDTO();
-        BookPostReportVO bookPostReportVO = reportDAO.findBookPostReport(inquiryId);
+        BookPostReportVO bookPostReportVO = reportDAO.findBookPostReport(reportId);
         bookPostReportInfoDTO.setBookPostReportVO(bookPostReportVO);
         MemberType memberType = memberDAO.findById(bookPostReportVO.getBookPostReporterId()).getMemberType();
         if(memberType.getCode().equals("개인")){
@@ -69,7 +74,101 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void updateReportStatus(Long inquiryId) {
-        reportDAO.updateReportStatus(inquiryId);
+    public void updateReportStatus(Long reportId) {
+        reportDAO.updateReportStatus(reportId);
+    }
+
+    @Override
+    public List<CommentReportVO> getAllCommentReport(Pagination pagination) {
+        return reportDAO.findAllCommentReport(pagination);
+    }
+
+    @Override
+    public List<CommentReportInfoDTO> getAllCommentReportInfo(Pagination pagination) {
+        List<CommentReportVO> tempList = reportDAO.findAllCommentReport(pagination);
+        List<CommentReportInfoDTO> commentReportInfoDTOList = new ArrayList<>();
+        for(CommentReportVO report : tempList) {
+            CommentReportInfoDTO reportInfoDTO = new CommentReportInfoDTO();
+            reportInfoDTO.setCommentReportVO(report);
+            Long memberId = commentDAO.findCommentById(report.getCommentId()).getMemberId();
+            Long postId = commentDAO.findCommentById(report.getCommentId()).getPostId();
+
+            MemberType memberType = memberDAO.findById(memberId).getMemberType();
+            String memberName = "";
+            if(memberType.getCode().equals("개인")){
+                memberName = memberDAO.findPersonalMemberById(memberId).getMemberName();
+            }
+            else{
+                memberName = memberDAO.findSponsorMemberById(memberId).getSponsorName();
+            }
+
+            reportInfoDTO.setMemberName(memberName);
+            // 게시글 타입 별로 제목을 받아와야 하는 곳이 다름.?
+            // 아님 게시글 링크만 걸어줄까?
+            PostType postType = postDAO.findPostById(postId).getPostType();
+        log.info(postType.getCode());
+            String postTitle = switch (postType.getCode()) {
+                case ("독후감") -> postDAO.findBookPostById(postId).getBookPostTitle();
+                case ("토론") -> "테스트용 토론 제목";
+                case ("후원인증") -> "테스트용 후원 인증 제목";
+                case ("후원대상") -> "테스트용 후원 대상 제목";
+                default -> "";
+            };
+            reportInfoDTO.setPostTitle(postTitle);
+            String commentText = commentDAO.findCommentById(report.getCommentId()).getCommentText();
+            reportInfoDTO.setCommentText(commentText);
+            commentReportInfoDTOList.add(reportInfoDTO);
+        }
+
+        return commentReportInfoDTOList;
+    }
+
+    @Override
+    public int countAllCommentReport(Pagination pagination) {
+        return reportDAO.countAllCommentReport(pagination)  ;
+    }
+
+    @Override
+    public CommentReportInfoDTO getCommentReportInfo(Long reportId) {
+        CommentReportVO commentReportVO = reportDAO.findCommentReport(reportId);
+        CommentReportInfoDTO commentReportInfoDTO = new CommentReportInfoDTO();
+
+
+        commentReportInfoDTO.setCommentReportVO(commentReportVO);
+            Long memberId = commentDAO.findCommentById(commentReportVO.getCommentId()).getMemberId();
+            Long postId = commentDAO.findCommentById(commentReportVO.getCommentId()).getPostId();
+
+            MemberType memberType = memberDAO.findById(memberId).getMemberType();
+            String memberName = "";
+            if(memberType.getCode().equals("개인")){
+                memberName = memberDAO.findPersonalMemberById(memberId).getMemberName();
+            }
+            else{
+                memberName = memberDAO.findSponsorMemberById(memberId).getSponsorName();
+            }
+
+        commentReportInfoDTO.setMemberName(memberName);
+            // 게시글 타입 별로 제목을 받아와야 하는 곳이 다름.?
+            // 아님 게시글 링크만 걸어줄까?
+            PostType postType = postDAO.findPostById(postId).getPostType();
+
+            String postTitle = switch (postType.getCode()) {
+                case ("독후감") -> postDAO.findBookPostById(postId).getBookPostTitle();
+                case ("토론") -> "테스트용 토론 제목";
+                case ("후원인증") -> "테스트용 후원 인증 제목";
+                case ("후원대상") -> "테스트용 후원 대상 제목";
+                default -> "";
+            };
+        commentReportInfoDTO.setPostTitle(postTitle);
+            String commentText = commentDAO.findCommentById(commentReportVO.getCommentId()).getCommentText();
+        commentReportInfoDTO.setCommentText(commentText);
+
+
+        return commentReportInfoDTO;
+    }
+
+    @Override
+    public void updateCommentReportStatus(Long reportId) {
+        reportDAO.updateCommentStatus(reportId);
     }
 }

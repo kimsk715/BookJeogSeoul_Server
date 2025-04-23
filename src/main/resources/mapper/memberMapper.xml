@@ -88,10 +88,16 @@
         where id = #{id}
     </select>
 
-    <update id="updateMemberStatus">
+    <update id="updatePersonalMemberStatus">
         update tbl_personal_member
         set member_status = 'SUSPENDED'
         where id = #{memberId}
+    </update>
+
+    <update id="updateSponsorMemberStatus">
+        update tbl_sponsor_member
+        set sponsor_member_status = 'SUSPENDED'
+        where id = #{sponsorId}
     </update>
 </mapper>
 
