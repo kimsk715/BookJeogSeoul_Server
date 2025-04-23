@@ -326,5 +326,67 @@ const searchResultLayout = (() => {
             }
         }
     };
-    return {showBookList : showBookList, showPostList : showPostList, showDiscussionList : showDiscussionList, showSponsorList : showSponsorList}
+
+    // 기부글 목록
+    const showReceiverList = async (totalCount, receivers) => {
+        const receiverListContainer = document.querySelector("ul.donate");
+        const resultCount = document.querySelector("small.donate-count");
+
+        // 총 검색 결과 개수 표시
+        resultCount.innerText = totalCount.toLocaleString();
+
+        // 기존 목록 비우기
+        receiverListContainer.innerHTML = "";
+
+        receivers.forEach((receiver) => {
+            const li = document.createElement("li");
+            li.className = "slide-item";
+
+            // 프로필 이미지
+            const profileUrl = (receiver.profileFilePath && receiver.profileFileName)
+                ? `/member/profile?path=${receiver.profileFilePath.replace("C:\\upload\\", "").replace(/\\/g, "/")}&name=${receiver.profileFileName}`
+                : "/images/common/user-profile-example.png";
+
+            // 본문 이미지
+            const receiverImageUrl = (receiver.receiverFilePath && receiver.receiverFileName)
+                ? `/post/thumbnail?path=${receiver.receiverFilePath.replace("C:\\upload\\", "").replace(/\\/g, "/")}&name=${receiver.receiverFileName}`
+                : "/images/common/default-donate-image.png";
+
+            // 날짜 포맷 yyyy-mm-dd
+            const formattedDate = receiver.createdDate?.split(" ")[0] || "";
+
+            li.innerHTML = `
+            <div class="search-donate-list">
+                <a href="" class="donate-inner">
+                    <div class="donate-data">
+                        <div class="donate-image" style="--background-image: url('${receiverImageUrl}');"></div>
+                        <div class="donate-text">
+                            <span class="title">${receiver.receiverTitle}</span>
+                            <p class="content donateType">${receiver.receiverText.replace(/\n/g, "<br/>")}</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="author">
+                    <div class="image" style="background-image: url('${profileUrl}')"></div>
+                    <div class="info">
+                        <span class="name">${receiver.sponsorName}</span>
+                        <p class="regdate">${formattedDate}</p>
+                    </div>
+                </a>
+            </div>
+        `;
+
+            receiverListContainer.appendChild(li);
+        });
+
+        // 결과가 3개 이하일 경우 더보기 링크 비활성화
+        if (totalCount <= 3) {
+            const receiverLink = document.querySelector(".search-result-donate-more>.link.icon-arrow-right");
+            if (receiverLink) {
+                receiverLink.classList.add("disabled");
+                receiverLink.removeAttribute("href");
+            }
+        }
+    };
+    return {showBookList : showBookList, showPostList : showPostList, showDiscussionList : showDiscussionList, showSponsorList : showSponsorList, showReceiverList : showReceiverList}
 })();

@@ -596,7 +596,7 @@ label .input input::placeholder{
     display: grid;
     justify-content: space-between;
     align-items: flex-end;
-    grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(318px, 1fr));
     gap: 16px;
     max-width: 1408px;
     margin: 0 auto;
@@ -837,7 +837,7 @@ div.book-image{
     display: grid;
     justify-content: space-between;
     align-items: flex-end;
-    grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(318px, 1fr));
     gap: 16px;
     max-width: 1408px;
     margin: 0 auto;
@@ -1083,7 +1083,7 @@ div.book-image{
     display: grid;
     justify-content: space-between;
     align-items: flex-end;
-    grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(318px, 1fr));
     gap: 16px;
     max-width: 1408px;
     margin: 0 auto;
@@ -1194,7 +1194,7 @@ div.book-image{
     display: grid;
     justify-content: space-between;
     align-items: flex-end;
-    grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(318px, 1fr));
     gap: 16px;
     max-width: 1408px;
     margin: 0 auto;

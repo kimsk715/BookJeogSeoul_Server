@@ -5,7 +5,10 @@ const searchResultDiscussionLayout = (() => {
 
         // 총 개수 표시
         resultCount.innerText = totalCount || 0;
-        discussionListContainer.innerHTML = "";
+
+        if (currentPage === 1) {
+            discussionListContainer.innerHTML = "";
+        }
 
         for (const discussion of discussions) {
             const formattedDate = discussion.createdDate.split(" ")[0];

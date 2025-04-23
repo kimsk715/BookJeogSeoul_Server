@@ -5,12 +5,17 @@ import com.app.bookJeog.domain.dto.BookPostMemberDTO;
 import com.app.bookJeog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Controller
@@ -128,5 +133,25 @@ public class PostController {
     @ResponseBody
     public int getBookPostCount(@RequestParam Long isbn) {
         return postService.selectBookAllPostsCount(isbn);
+    }
+
+    // 기부글 이미지 출력
+    @GetMapping("thumbnail")
+    @ResponseBody
+    public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,
+                                                  @RequestParam("name") String name) throws IOException {
+        // 이미지 파일 경로 설정
+        File imageFile = new File("C:/upload/" + path.replace("/", File.separator) + "/" + name);
+
+        // 파일이 없으면 기본 이미지 사용
+        if (!imageFile.exists()) {
+            imageFile = new File("src/main/resources/static/images/common/default-donate-image.png");
+        }
+
+        // 이미지 파일을 바이트 배열로 읽기
+        byte[] imageBytes = FileCopyUtils.copyToByteArray(imageFile);
+
+        // 응답 반환
+        return new ResponseEntity<>(imageBytes, HttpStatus.OK);
     }
 }

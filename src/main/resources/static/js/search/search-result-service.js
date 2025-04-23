@@ -78,5 +78,20 @@ const searchResultService = (() => {
         return {totalCount, sponsors};
     }
 
-    return {getSearchedBooks : getSearchedBooks, getSearchedPosts : getSearchedPosts, getCoverImages : getCoverImages, getSearchedDiscussions : getSearchedDiscussions, getSearchedSponsors : getSearchedSponsors}
+    // 기부글 검색결과 출력
+    const getSearchedReceivers = async () => {
+        const keyword = new URLSearchParams(window.location.search).get("keyword");
+
+        let path = `/search/api/receiver-list?keyword=${keyword}`;
+
+        const response = await fetch(path);
+        const data = await response.json();
+
+        const totalCount = data.totalCount;
+        const receivers = data.receivers;
+
+        return {totalCount, receivers};
+    }
+
+    return {getSearchedBooks : getSearchedBooks, getSearchedPosts : getSearchedPosts, getCoverImages : getCoverImages, getSearchedDiscussions : getSearchedDiscussions, getSearchedSponsors : getSearchedSponsors, getSearchedReceivers : getSearchedReceivers}
 })();

@@ -1,6 +1,8 @@
 let currentPage = 1; // 현재 페이지
 let isFetching = false; // 중복 로딩 방지
 const pageSize = 8; // 한 번에 불러올 독후감 개수
+let sortType = "new"; // 기본 정렬
+let hasMoreData = true; // 더 이상 불러올 데이터가 있는지 여부
 
 // 페이지 최초 로딩 시 첫 독후감 리스트 보여주기
 window.addEventListener("DOMContentLoaded", () => {
@@ -9,6 +11,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // 스크롤 이벤트 (무한스크롤)
 window.addEventListener("scroll", async () => {
+    if (!hasMoreData) return; // 🔹 더 이상 불러올 데이터가 없으면 이벤트 처리 중단
+
     const scrollTop = window.scrollY;
     const scrollHeight = document.documentElement.scrollHeight;
     const clientHeight = document.documentElement.clientHeight;
@@ -30,7 +34,14 @@ const loadMorePosts = async () => {
     try {
         const { totalCount, posts } = await searchResultPostService.getPostList(keyword, offset, sortType);
         await searchResultPostLayout.showPostList(totalCount, posts);
-        currentPage++;
+
+        if ((currentPage * pageSize) >= totalCount) {
+            hasMoreData = false;
+            console.log("더 이상 불러올 데이터 없음");
+        } else {
+            currentPage++;
+        }
+
     } catch (error) {
         console.error("로딩 에러:", error);
     } finally {
@@ -44,8 +55,6 @@ const sortValueMap = {
     "인기순": "like",
     "제목순": "name"
 };
-
-let sortType = "new"; // 기본 정렬
 
 // 모달창 관련 요소
 let previousCheckedLabel = null;

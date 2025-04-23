@@ -15,5 +15,9 @@ window.addEventListener("load", async () => {
     // 기부단체
     const { totalCount: sponsorCount, sponsors } = await searchResultService.getSearchedSponsors();
     await searchResultLayout.showSponsorList(sponsorCount, sponsors);
+
+    // 기부글
+    const {totalCount: receiverCount, receivers } = await searchResultService.getSearchedReceivers();
+    await searchResultLayout.showReceiverList(receiverCount, receivers);
 });
 

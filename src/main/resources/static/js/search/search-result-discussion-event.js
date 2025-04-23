@@ -1,6 +1,7 @@
 let currentPage = 1; // 현재 페이지
 let isFetching = false; // 중복 로딩 방지
 const pageSize = 8; // 한 번에 불러올 토론글 개수
+let hasMoreData = true; // 더 이상 불러올 데이터가 있는지 여부
 
 // 페이지 최초 로딩 시 첫 토론글 리스트 보여주기
 window.addEventListener("DOMContentLoaded", () => {
@@ -9,6 +10,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
 // 스크롤 이벤트 (무한스크롤)
 window.addEventListener("scroll", async () => {
+    if (!hasMoreData) return; // 🔹 더 이상 불러올 데이터가 없으면 이벤트 처리 중단
+
     const scrollTop = window.scrollY;
     const scrollHeight = document.documentElement.scrollHeight;
     const clientHeight = document.documentElement.clientHeight;
@@ -43,7 +46,12 @@ const loadMoreDiscussions = async () => {
         }
 
         await searchResultDiscussionLayout.showDiscussionList(totalCount, discussions);
-        currentPage++;
+        if ((currentPage * pageSize) >= totalCount) {
+            hasMoreData = false;
+            console.log("더 이상 불러올 데이터 없음");
+        } else {
+            currentPage++;
+        }
     } catch (error) {
         console.error("로딩 에러:", error);
     } finally {
