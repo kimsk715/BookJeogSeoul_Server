@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.BookDonateMapper">
-<!--    <select id="selectAllDonation" resultType="bookDonateVO">-->
-<!--        -->
-<!--    </select>-->
+    <select id="selectAllDonation" resultType="bookDonateVO">
+        select bd.id, bd.member_id, book_isbn, book_title, book_received_status, date(bd.createdDate) as createdDate, date(bd.updatedDate) as updatedDate, member_name
+        from tbl_book_donate bd
+         join tbl_member m on bd.member_id = m.id
+            join tbl_personal_member pm on m.id = pm.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+                member_name like concat('%', #{keyword}, '%') or
+                book_title like concat('%',#{keyword},'%')
+                )
+            </if>
+        </where>
+    </select>
+    <select id="countAllDonation" resultType="_int">
+        select count(*)
+        from tbl_book_donate bd
+        join tbl_member m on bd.member_id = m.id
+        join tbl_personal_member pm on m.id = pm.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+                member_name like concat('%', #{keyword}, '%') or
+                book_title like concat('%',#{keyword},'%')
+                )
+            </if>
+        </where>
+    </select>
+
+    <select id="selectDonation" resultType="bookDonateVO">
+        select bd.id, bd.member_id, book_isbn, book_title, book_received_status, date(bd.createdDate) as createdDate, date(bd.updatedDate) as updatedDate, member_name
+        from tbl_book_donate bd
+                 join tbl_member m on bd.member_id = m.id
+                 join tbl_personal_member pm on m.id = pm.id
+        where bd.id = #{id}
+    </select>
+
+    <update id="updateStatus">
+        update tbl_book_donate
+        set book_received_status = '수취완료'
+        where id = #{id}
+    </update>
+    <update id="cancelStatus">
+        update tbl_book_donate
+        set book_received_status = '수취대기'
+        where id = #{id}
+    </update>
 </mapper>

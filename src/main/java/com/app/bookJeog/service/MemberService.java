@@ -61,5 +61,7 @@ public interface MemberService {
     public void updateMemberStatus(Long memberId);
 
     public MemberVO getById(Long id);
+
+    public PersonalMemberVO getPersonalMember(Long memberId);
 }
 

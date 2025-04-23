@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/css/admin/comment_report.css">
     <link rel="stylesheet" href="/css/admin/normal_inquiry.css">
     <link rel="stylesheet" href="/css/admin/notice.css">
-    <link rel="stylesheet" href="/css/admin/personal_sponsor.css">
+    <link rel="stylesheet" href="/css/admin/book_donate.css">
     <link rel="stylesheet" href="/css/admin/receiver.css">
     <link rel="stylesheet" href="/css/admin/report.css">
     <link rel="stylesheet" href="/css/admin/sponsor_inquiry.css">
@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="/css/admin/bookpost_report_modal.css"/>
     <link rel="stylesheet" href="/css/admin/comment_report_modal.css"/>
     <link rel="stylesheet" href="/css/admin/sponsor_inquiry_modal.css"/>
+    <link rel="stylesheet" href="/css/admin/book_donate_modal.css"/>
     <link rel="stylesheet" href="/css/admin/notice_modal.css" />
     <link rel="shortcut icon" href="/images/admin/favicon.ico" type="image/x-icon">
 </head>
@@ -144,7 +145,7 @@
                                             </span>
                                         </a>
                                         <div class="submenu-container">
-                                            <a class="submenu-item personal-sponsor-link" href="#">개인후원목록</a>
+                                            <a class="submenu-item book-donate-link" href="#">개인후원목록</a>
                                         </div>
                                     </div>
                                     <!--  후원대상 관리 섹션 -->
@@ -321,7 +322,7 @@
                                                                 <div class="menu-name">
                                                                     개인후원 관리
                                                                 </div>
-                                                                <a class="menu-btn personal-sponsor-link" href="#">
+                                                                <a class="menu-btn book-donate-link" href="#">
                                                                     <span>바로가기</span>
                                                                 </a>
                                                             </div>
@@ -820,25 +821,31 @@
                         </div>
                     </div>
                     <!-- 개인후원 컨텐츠 -->
-                    <div class="personal-sponsor-management" style="display: none">
+                    <div class="book-donate-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="personal-sponsor-search-filter-container personal-sponsor-filter">
-                            <div class="search-box personal-sponsor-search">
+                        <div class="book-donate-search-filter-container book-donate-filter">
+                            <div class="search-box book-donate-search">
                                 <input type="text" placeholder="검색어를 입력하세요"
-                                    class="search-input personal-sponsor-search-input" />
-                                <button type="button" class="search-btn personal-sponsor-search-btn">
+                                    class="search-input book-donate-search-input" />
+                                <button type="button" class="search-btn book-donate-search-btn">
                                     검색
                                 </button>
+                                <button type="button" class="search-btn donate-ok">
+                                    받음
+                                </button>
+                                <button type="button" class="search-btn donate-fail">
+                                    안받음
+                                </button>
                             </div>
-                            <div class="filter-box personal-sponsor-filter-box">
-                                <select class="status-filter personal-sponsor-status-filter">
+                            <div class="filter-box book-donate-filter-box">
+                                <select class="status-filter book-donate-status-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">심사중</option>
                                     <option value="hold">보류</option>
                                     <option value="approved">승인</option>
                                     <option value="rejected">반려</option>
                                 </select>
-                                <select class="date-filter personal-sponsor-date-filter">
+                                <select class="date-filter book-donate-date-filter">
                                     <option value="week">최근 1주일</option>
                                     <option value="month">
                                         최근 1개월
@@ -852,13 +859,15 @@
 
                         <!-- 개인 후원 목록 테이블  -->
                         <!-- 상세보기에서 기부한 도서 목록이 보이도록 하기 -->
-                        <div class="personal-sponsor-table-container">
-                            <table class="personal-sponsor-table">
+                        <div class="book-donate-table-container">
+                            <table class="book-donate-table">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>기부번호</th>
                                         <th>기부자</th>
                                         <th>도서명</th>
+                                        <th>ISBN</th>
                                         <th>기부일</th>
                                         <th>수취여부</th>
                                         <th>기부관리</th>
@@ -883,6 +892,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="book-donate-pagination"></div>
                     </div>
                     <!-- 후원대상 컨텐츠 -->
                     <div class="receiver-management" style="display: none">
@@ -1446,9 +1456,9 @@
     <script src="/js/admin/book_event.js"></script>
     <script src="/js/admin/book_layout.js"></script>
     <script src="/js/admin/book_service.js"></script>
-    <script src="/js/admin/bookpost_event.js"></script>
-    <script src="/js/admin/bookpost_layout.js"></script>
-    <script src="/js/admin/bookpost_service.js"></script>
+    <script src="/js/admin/book_post_event.js"></script>
+    <script src="/js/admin/book_post_layout.js"></script>
+    <script src="/js/admin/book_post_service.js"></script>
     <script src="/js/admin/discussion_event.js"></script>
     <script src="/js/admin/discussion_layout.js"></script>
     <script src="/js/admin/discussion_service.js"></script>
@@ -1464,6 +1474,9 @@
     <script src="/js/admin/notice_event.js"></script>
     <script src="/js/admin/notice_layout.js"></script>
     <script src="/js/admin/notice_service.js"></script>
+    <script src="/js/admin/book_donate_event.js"></script>
+    <script src="/js/admin/book_donate_layout.js"></script>
+    <script src="/js/admin/book_donate_service.js"></script>
 
 </body>
 
