@@ -504,7 +504,7 @@ label .input input::placeholder{
 }
 
 .slide-wrapper{
-    overflow-x: auto;
+    /*overflow-x: auto;*/
     scroll-snap-type: x mandatory;
     width: max-content;
 }
@@ -1088,7 +1088,7 @@ div.book-image{
 }
 
 .organization-text .content{
-    margin-top: 10px;
+    margin-top: 22px;
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;

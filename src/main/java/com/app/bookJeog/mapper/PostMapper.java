@@ -3,6 +3,7 @@ package com.app.bookJeog.mapper;
 
 import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.DiscussionPostDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
@@ -41,5 +42,14 @@ public interface PostMapper {
 
     // 검색한 검색어에 맞는 독후감 전체 개수
     public int selectAllBooksCount(String keyword);
+
+    // 검색한 검색어에 맞는 토론글 통합검색 조회
+    public List<DiscussionPostDTO> searchDiscussions(String keyword);
+
+    // 검색한 검색어에 맞는 토론글 통합검색 개수 조회
+    public int selectAllDiscussionCount(String keyword);
+
+    // 검색한 검색어에 맞는 토론글 무한스크롤로 출력
+    public List<DiscussionPostDTO> selectAllDiscussion(String keyword, int offset, String sortType);
 }
 

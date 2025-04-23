@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.DiscussionPostDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.repository.MemberDAO;
 import com.app.bookJeog.repository.PostDAO;
@@ -79,7 +80,7 @@ public class SearchServiceImpl implements SearchService {
 
     // 통합 독후감 검색결과(최신순 3개)
     public List<BookPostMemberDTO> searchBookPosts(String keyword) {
-        int totalCount = postDAO.selectBookPostsCount(keyword); // 독후감 개수
+        int totalCount = postDAO.findBookPostsCount(keyword); // 독후감 개수
         List<BookPostMemberDTO> posts = postDAO.searchBookPosts(keyword); // 독후감 내용
 
         // 각 DTO에 count 값을 추가로 세팅
@@ -91,8 +92,8 @@ public class SearchServiceImpl implements SearchService {
 
     // 독후감 전체목록 조회(무한스크롤)
     public Map<String, Object> getAllBooksWithCount(String keyword, int offset, String sortType) {
-        List<BookPostMemberDTO> posts = postDAO.selectAllBooks(keyword, offset, sortType); // 목록
-        int totalCount = postDAO.selectAllBooksCount(keyword); // 개수
+        List<BookPostMemberDTO> posts = postDAO.findAllBooks(keyword, offset, sortType); // 목록
+        int totalCount = postDAO.findAllBooksCount(keyword); // 개수
 
         Map<String, Object> result = new HashMap<>();
         result.put("posts", posts);
@@ -115,4 +116,19 @@ public class SearchServiceImpl implements SearchService {
     public List<SponsorMemberProfileDTO> findAllSponsorMembers(String keyword, int offset, String sortType){
         return memberDAO.findAllSponsorMembers(keyword, offset, sortType);
     }
+
+    // 검색한 검색어에 맞는 토론글 통합검색 조회
+    public List<DiscussionPostDTO> searchDiscussions(String keyword){
+        return postDAO.searchDiscussions(keyword);
+    };
+
+    // 검색한 검색어에 맞는 토론글 통합검색 개수 조회
+    public int findAllDiscussionCount(String keyword){
+        return postDAO.findAllDiscussionCount(keyword);
+    };
+
+    // 검색한 검색어에 맞는 토론글 무한스크롤로 출력
+    public List<DiscussionPostDTO> findAllDiscussion(String keyword, int offset, String sortType){
+        return postDAO.findAllDiscussion(keyword, offset, sortType);
+    };
 }
