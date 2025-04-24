@@ -44,16 +44,22 @@ document.addEventListener("click", (e) => {
         e.target.classList.contains("cancel-btn") ||
         e.target.classList.contains("save-btn") ||
         e.target.classList.contains("close-btn") ||
-        e.target.classList.contains("modal-backdrop")
+        e.target.classList.contains("modal-backdrop") ||
+        e.target.classList.contains("close-button")
     ) {
         closeModal(commonModal);
         closeModal(monthlyBookListModal);
+        closeModal(sponsorRegisterModal);
+        closeModal(adminModal)
     }
 });
 
 document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && commonModal.style.display === "block") {
         closeModal(commonModal);
+        closeModal(monthlyBookListModal);
+        closeModal(sponsorRegisterModal);
+        closeModal(adminModal)
     }
 });
 
