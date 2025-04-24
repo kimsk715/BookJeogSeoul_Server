@@ -14,6 +14,8 @@
                 )
             </if>
         </where>
+        limit #{rowCount}
+        offset #{offset}
     </select>
     <select id="countAllDonation" resultType="_int">
         select count(*)

@@ -2,9 +2,13 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.ReceiverDTO;
+import com.app.bookJeog.domain.dto.ReceiverInfoDTO;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
 import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
+import com.app.bookJeog.domain.vo.ReceiverVO;
+import com.app.bookJeog.repository.MemberDAO;
 import com.app.bookJeog.repository.PostDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor @Transactional(rollbackFor = Exception.class)
 public class PostServiceImpl implements PostService {
     private final PostDAO postDAO;
+    private final MemberDAO memberDAO;
 
     @Override
     public List<BookPostVO> getAllBookPost(Pagination pagination) {
@@ -97,6 +102,49 @@ public class PostServiceImpl implements PostService {
     @Override
     public void updateBookPostStatus(Long postId) {
         postDAO.updateBookPostStatus(postId);
+    }
+
+    @Override
+    public List<ReceiverInfoDTO> getAllReceiverPost(Pagination pagination) {
+        List<ReceiverVO> tempList = postDAO.findAllReceiverPost(pagination);
+        List<ReceiverInfoDTO> receiverInfoDTOList = new ArrayList<>();
+        for (ReceiverVO receiver : tempList) {
+            ReceiverInfoDTO receiverInfoDTO = new ReceiverInfoDTO();
+            ReceiverDTO receiverDTO = new ReceiverDTO();
+            receiverDTO.setId(receiver.getId());
+            receiverDTO.setReceiverText(receiver.getReceiverText());
+            receiverDTO.setReceiverTitle(receiver.getReceiverTitle());
+            receiverDTO.setReceiverStatus(receiver.getReceiverStatus());
+            receiverDTO.setCreatedDate(receiver.getCreatedDate());
+            receiverDTO.setUpdatedDate(receiver.getUpdatedDate());
+            receiverInfoDTO.setReceiverDTO(receiverDTO);
+            Long sponsorId = postDAO.findPostById(receiver.getId()).getMemberId();
+            String sponsorName = memberDAO.findSponsorMemberById(sponsorId).getSponsorName();
+            receiverInfoDTO.setSponsorName(sponsorName);
+            receiverInfoDTO.setReceiverLikeCount(1); // 임시값;
+            receiverInfoDTOList.add(receiverInfoDTO);
+        }
+
+        return receiverInfoDTOList;
+    }
+
+    @Override
+    public int countAllReceiverPost(Pagination pagination) {
+        return postDAO.countAllReceiverPost(pagination);
+    }
+
+    @Override
+    public ReceiverDTO getReceiverById(Long id) {
+        ReceiverVO receiverVO = postDAO.findReceiverById(id);
+        ReceiverDTO receiverDTO = new ReceiverDTO();
+        receiverDTO.setId(receiverVO.getId());
+        receiverDTO.setReceiverText(receiverVO.getReceiverText());
+        receiverDTO.setReceiverTitle(receiverVO.getReceiverTitle());
+        receiverDTO.setReceiverStatus(receiverVO.getReceiverStatus());
+        receiverDTO.setCreatedDate(receiverVO.getCreatedDate());
+        receiverDTO.setUpdatedDate(receiverVO.getUpdatedDate());
+
+        return receiverDTO;
     }
 
 

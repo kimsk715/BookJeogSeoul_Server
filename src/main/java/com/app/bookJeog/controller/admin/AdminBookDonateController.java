@@ -31,6 +31,7 @@ public class AdminBookDonateController {
         AdminBookDonateDTO adminBookDonateDTO = new AdminBookDonateDTO();
         pagination.create(bookDonateService.countAllDonation(pagination));
         adminBookDonateDTO.setPagination(pagination);
+        log.info(pagination.toString());
         adminBookDonateDTO.setBookDonateMemberDTOList(bookDonateService.getAllDonation(pagination));
         return adminBookDonateDTO;
     }

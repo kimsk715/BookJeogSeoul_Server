@@ -3,7 +3,7 @@ const donateLayout = (() =>{
         const donationTBody = document.querySelector(".book-donate-table tbody");
         let text = ``;
         const pagination = donationList.pagination;
-        const pageWrap = document.querySelector(".discussion-pagination")
+        const pageWrap = document.querySelector(".book-donate-pagination")
         let className = "";
 
         donationList.bookDonateMemberDTOList.forEach((donation) => {
