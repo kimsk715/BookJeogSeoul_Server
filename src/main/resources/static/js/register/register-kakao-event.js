@@ -4,7 +4,6 @@ const emailInput = document.querySelector("#bjs-email");
 const nameInput = document.querySelector("#bjs-name");
 const birthInput = document.querySelector("#bjs-birth");
 const genderInput = document.querySelector("#bjs-gender");
-const pwInput = document.querySelector("#bjs-pw");
 const phoneInput = document.querySelector("#bjs-phone");
 const nickNameInput = document.querySelector("#bjs-nickname");
 
@@ -29,7 +28,6 @@ const checkInput = () => {
         nameInput.value !== "" &&
         emailInput.value !== "" &&
         phoneInput.value !== "" &&
-        pwInput.value !== "" &&
         nickNameInput.value !== ""
     ) {
         checkBtn.style.opacity = "1";
@@ -68,14 +66,7 @@ phoneInput.addEventListener("input", () => {
     checkInput();
 });
 
-pwInput.addEventListener("input", () => {
-    if (pwInput.value !== "") {
-        pwclrBtn.style.display = "block";
-    } else {
-        pwclrBtn.style.display = "none";
-    }
-    checkInput();
-});
+
 
 nameInput.addEventListener("input", () => {
     if (nameInput.value !== "") {
@@ -119,11 +110,7 @@ phoneInput.addEventListener("focus", () => {
     }
 });
 
-pwInput.addEventListener("focus", () => {
-    if (pwInput.value !== "") {
-        pwclrBtn.style.display = "block";
-    }
-});
+
 
 
 
@@ -168,13 +155,7 @@ phoneInput.addEventListener("blur", () => {
     }
 });
 
-pwInput.addEventListener("blur", () => {
-    if (pwInput.value !== "") {
-        pwclrBtn.style.display = "block";
-    } else {
-        pwclrBtn.style.display = "none";
-    }
-});
+
 
 emailInput.addEventListener("blur", () => {
     if (emailInput.value !== "") {
@@ -228,12 +209,7 @@ nameclrBtn.addEventListener("mousedown", (e) => {
     checkInput();
 });
 
-pwclrBtn.addEventListener("mousedown", (e) => {
-    e.preventDefault();
-    pwInput.value = "";
-    pwclrBtn.style.display = "none";
-    checkInput();
-});
+
 
 phoneclrBtn.addEventListener("mousedown", (e) => {
     e.preventDefault();
