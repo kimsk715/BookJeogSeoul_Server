@@ -185,8 +185,6 @@ public class PersonalController {
     public String changePasswd(String newPasswd, HttpServletRequest request, HttpSession session) {
             session = request.getSession();
             String memberEmail = (String) session.getAttribute("email");
-            log.info("memberEmail {}",memberEmail);
-            log.info("newPasswd {}", newPasswd);
 
             if(memberEmail != null) {
                 memberServiceImpl.changePassword(memberEmail, newPasswd);
@@ -202,12 +200,9 @@ public class PersonalController {
     public String login(@RequestParam String code, HttpSession session) {
         // 1. 전달받은 인가 코드(code)를 이용해 액세스 토큰 요청
         String token = memberServiceImpl.getKakaoAccessToken(code);
-        log.info("token {}", token);
-        log.info("code {}", code);
 
         // 2. 액세스 토큰을 사용해 카카오로부터 사용자 정보 조회
         Optional<PersonalMemberDTO> foundInfo = memberServiceImpl.getKakaoInfo(token);
-        log.info("foundInfo {}", foundInfo);
 
 
         // 3. 사용자 정보가 없을 경우 예외 발생

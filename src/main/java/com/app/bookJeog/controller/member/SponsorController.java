@@ -1,13 +1,18 @@
 package com.app.bookJeog.controller.member;
 
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.dto.SponsormemberDTO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.mapper.SponsorMapper;
 import com.app.bookJeog.service.SponsorServiceImpl;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +28,7 @@ public class SponsorController {
 
     private final SponsorServiceImpl sponsorServiceImpl;
     private final SponsorMapper sponsorMapper;
+    private final SponsormemberDTO sponsormemberDTO;
     private HttpSession session;
 
     // 단체 마이페이지 조회
@@ -103,9 +109,16 @@ public class SponsorController {
         return "login/findpasswd-sponsor-input";
     }
     @PostMapping("send-mail")
-    public String sendMail() {
-        return "redirect:/sponsor/input-code";
+    public String sendMail(SponsormemberDTO sponsormemberDTO, HttpServletResponse response, HttpSession session) throws MessagingException {
+        Optional<SponsorMemberVO> foundEmail = sponsorServiceImpl.selectEmailForPassword(sponsormemberDTO);
+            if(foundEmail.isPresent()) {
+                sponsorServiceImpl.sendMail(sponsormemberDTO, response, session);
+                return "redirect:/sponsor/input-code";
+            }
+        return "redirect:/sponsor/send-mail?result=fail";
     }
+
+
 
     // 이메일에서 코드확인
     @GetMapping("input-code")
@@ -113,8 +126,16 @@ public class SponsorController {
         return "login/findpasswd-sponsor-certi";
     }
     @PostMapping("check-sponsor-code")
-    public String checkSponsorCode() {
-        return "redirect:/sponsor/change-passwd";
+    public String checkSponsorCode(@CookieValue(name = "token", required = false) String token, String code, HttpServletRequest request) {
+
+        if(token == null) {
+            return "redirect:/personal/login?result=tokken-lose";
+        }
+        if (token.equals(code)) {
+            return "redirect:/sponsor/change-passwd"; // 비밀번호 재설정 페이지로 리디렉션
+        } else {
+            return "redirect:/sponsor/input-code?result=fail";
+        }
     }
 
 
@@ -124,6 +145,20 @@ public class SponsorController {
     public String goToChangePasswd() {
         return "login/set-sponsor-passwd";
     }
+
+    @PostMapping("sponsor-change-passwd")
+    public String changePasswd (String newPasswd, HttpServletRequest request, HttpSession session){
+        session = request.getSession();
+        sponsormemberDTO.setSponsorEmail((String) session.getAttribute("email"));
+        String memberEmail = (String) session.getAttribute("email");
+
+        if(memberEmail != null) {
+            sponsorServiceImpl.changePassword(sponsormemberDTO, newPasswd);
+            session.invalidate();
+            return "redirect:/personal/login";
+        }
+        return "/personal/login?result=tokken-lose";}
+
 }
 
 

@@ -23,6 +23,7 @@ public class SponsormemberDTO {
     private String sponsorName;
     private String sponsorPhone;
     private String sponsorMainAddress;
+    private String sponsorEmail;
     private String sponsorSubAddress;
     private SponsorMemberStatus sponsorMemberStatus;
 
@@ -32,6 +33,7 @@ public class SponsormemberDTO {
                 .sponsorId(sponsorId)
                 .sponsorPassword(sponsorPassword)
                 .sponsorName(sponsorName)
+                .sponsorEmail(sponsorEmail)
                 .sponsorPhone(sponsorPhone)
                 .sponsorMainAddress(sponsorMainAddress)
                 .sponsorSubAddress(sponsorSubAddress)

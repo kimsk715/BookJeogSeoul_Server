@@ -5,6 +5,7 @@ const inputId = document.getElementById("bjs-passwd");
 const idLabel = document.querySelector(".input-label-passwd");
 const clearBtn = document.querySelector("#clear-button-passwd");
 const checkBtn = document.querySelector("#check-btn");
+const changePasswdForm = document.querySelector("#change-passwd")
 
 inputId.addEventListener("focus", () => {
     idLabel.style.borderColor = "rgba(0, 221, 109)";
@@ -89,7 +90,7 @@ inputPw.addEventListener("input", activeLoginBtn);
 // 모달 테스트
 // 모달 창을 띄우기 위한 코드
 // 안쓸거면 주석 하면됨
-const modal = document.querySelector(".modal");
+const modal = document.querySelector("#modal");
 const modalCloseBtn = document.querySelector(
     "#modal-wrap > .modal-footer > button"
 );
@@ -108,7 +109,11 @@ checkBtn.addEventListener("click", () => {
     modal.classList.remove("fade-out");
     modal.style.display = "flex";
     modal.classList.add("fade-in");
+    modalHeader.innerText = "변경완료!"
+    changePasswdForm.submit();
 });
+
+
 
 
 

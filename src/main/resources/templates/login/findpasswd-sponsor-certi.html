@@ -24,18 +24,20 @@
                     <div class="bjs-input-name">
                         <label class="input-label-name" style="cursor: text">
                             <div class="inner">
-                                <div class="input">
-                                    <span class="input-certi-label">번호입력</span>
-                                    <input
-                                        autocomplete="off"
-                                        name=""
-                                        id="bjs-certi-code"
-                                        type="text"
-                                        maxlength="5"
-                                        placeholder="번호입력"
-                                        style="outline: none; border: none; cursor: text"
-                                    />
-                                </div>
+                                <form action="/sponsor/check-sponsor-code" id="code-form" method="post">
+                                    <div class="input">
+                                        <span class="input-certi-label">번호입력</span>
+                                        <input
+                                            autocomplete="off"
+                                            name="code"
+                                            id="bjs-certi-code"
+                                            type="text"
+                                            maxlength="5"
+                                            placeholder="번호입력"
+                                            style="outline: none; border: none; cursor: text"
+                                        />
+                                    </div>
+                                </form>
                                 <button
                                     type="button"
                                     class="clear-button"
@@ -45,12 +47,7 @@
                         </label>
                     </div>
                 </div>
-                <!-- 체크버튼 -->
-                <div class="check-btn-area check-button">
-                    <button id="check-btn">
-                        <span class="login-btn-tag">확인하기</span>
-                    </button>
-                </div>
+
                 <!-- 다음 버튼 -->
                 <div class="next-btn-area">
                     <button id="next-btn">
