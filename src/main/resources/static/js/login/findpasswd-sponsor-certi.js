@@ -1,10 +1,11 @@
+const checkBtn = document.querySelector("#check-btn");
 const certiCode = document.querySelector("#bjs-certi-code")
-const checkBtn = document.querySelector("#next-btn")
+const nextbtn = document.querySelector("#next-btn")
 
 certiCode.addEventListener("input", () => {
     console.log("입력됨");
 
-    if (certiCode.value.length > 4) {
+    if (certiCode.value.length === 5) {
         console.log("조건문입장");
         checkBtn.style.opacity = "1";
         checkBtn.style.cursor = "pointer";
@@ -16,8 +17,9 @@ certiCode.addEventListener("input", () => {
 
 
 checkBtn.addEventListener("click", (e) => {
-    if (certiCode.value.length > 4) {
+    if (certiCode.value.length === 5) {
         modalHeader.innerText = "확인되었습니다!";
+        modalBody.innerText = "다음 버튼을 눌러주세요.";
         modal.classList.remove("fade-out");
         modal.style.display = "flex";
         modal.classList.add("fade-in");
@@ -54,14 +56,3 @@ modalCloseBtn.addEventListener("click", () => {
         modal.style.display = "none";
     }, 500);
 });
-
-
-// 확인 버튼
-const codeForm = document.querySelector("#code-form")
-
-checkBtn.addEventListener('click', () => {
-    codeForm.submit()
-})
-
-
-

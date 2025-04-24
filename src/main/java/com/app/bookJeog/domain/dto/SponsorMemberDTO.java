@@ -22,9 +22,9 @@ public class SponsorMemberDTO {
     private String sponsorName;
     private String sponsorPhoneNumber;
     private String sponsorMainAddress;
+    private String sponsorEmail;
     private String sponsorSubAddress;
     private SponsorMemberStatus sponsorMemberStatus;
-    private String sponsorEmail;
     private String createdDate;
     private String updatedDate;
 

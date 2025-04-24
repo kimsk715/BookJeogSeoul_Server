@@ -28,7 +28,7 @@ public interface MemberMapper {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> selectByEmail(String memberEmail);
+    public Optional<PersonalMemberVO> selectByEmail(PersonalMemberVO personalMemberVO);
 
 
     // 일반 로그인
@@ -52,6 +52,7 @@ public interface MemberMapper {
     // 단체 회원 활동 상태 변경(신고)
     public void updateSponsorMemberStatus(Long sponsorId);
 
+
     public List<SponsorMemberVO> selectAllSponsor(Pagination pagination);
 
     public int countAllSponsor(Pagination pagination);
@@ -63,4 +64,8 @@ public interface MemberMapper {
     public int countAllAdmin(Pagination pagination);
 
     public void insertAdmin(AdminVO adminVO);
+
+    // 비밀번호 변경
+    public void updatePassword(String memberEmail, String newPasswd);
+
 }

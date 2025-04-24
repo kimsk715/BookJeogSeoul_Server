@@ -1,11 +1,12 @@
-// 아이디 value 있으면 버트ㅜㄴ 활성화
-
-const inputId = document.querySelector("#bjs-id");
+// 아이디 입력란에 포커스가 갔을 때, label의 border 색상을 바꿔주는 코드
+// value가 0보다 클 때 clearBtn을 보여주고, 0일 때는 숨김
+// x 눌럿을때 inputId.value 사라짐
+const inputId = document.getElementById("bjs-id");
 const idLabel = document.querySelector(".input-label-id");
 const clearBtn = document.querySelector("#clear-button-id");
 
 inputId.addEventListener("focus", () => {
-    idLabel.style.borderColor = "rgba(0, 221, 109)";
+    idLabel.style.borderColor = "rgba(51, 51, 51)";
     if (inputId.value.length > 0) {
         clearBtn.style.display = "block";
     } else {
@@ -33,17 +34,16 @@ clearBtn.addEventListener("mousedown", (e) => {
 // 비밀번호 입력란에 포커스가 갔을 때, label의 border 색상을 바꿔주는 코드
 // value가 0보다 클 때 clearBtn을 보여주고, 0일 때는 숨김
 // x 눌럿을때 inputpw.value 사라짐
-const inputPw = document.querySelector("#bjs-pw");
+const inputPw = document.getElementById("bjs-pw");
 const pwLabel = document.querySelector(".input-label-pw");
 const cleartBtnPw = document.querySelector("#clear-button-pw");
 
+
 inputPw.addEventListener("focus", () => {
-    pwLabel.style.borderColor = "rgba(0, 221, 109)";
+    pwLabel.style.borderColor = "rgba(51, 51, 51)";
     if (inputPw.value.length > 0) {
         cleartBtnPw.style.display = "block";
-        activeLoginBtn()
     } else {
-        activeLoginBtn()
         cleartBtnPw.style.display = "none";
     }
 });
@@ -56,28 +56,27 @@ inputPw.addEventListener("blur", () => {
 inputPw.addEventListener("input", () => {
     if (inputPw.value.length > 0) {
         cleartBtnPw.style.display = "block";
-        activeLoginBtn()
     } else {
-        activeLoginBtn()
         cleartBtnPw.style.display = "none";
     }
 });
+
+
+
 cleartBtnPw.addEventListener("mousedown", (e) => {
-    clearBtn.style.display = "none";
-    activeLoginBtn()
+    cleartBtnPw.style.display = "none";
     e.preventDefault();
     inputPw.value = "";
     activeLoginBtn();
 });
 
-
-// 로그인 활성화
+// 아이디 비밀번호 value가 없으면 로그인 활성화 안함
+// 반대로 있으면 활성화함
 const loginBtn = document.querySelector("#login-btn");
-// form 버튼
-const loginForm = document.querySelector("#admin-login-form");
+const loginForm = document.querySelector("#admin-form")
 
 const activeLoginBtn = () => {
-    if (inputId.value.length > 0 && inputPw.value.length > 0) {
+    if (inputId.value.length > 0 && inputPw.value.length > 6) {
         loginBtn.style.opacity = "1";
         loginBtn.style.cursor = "pointer";
     } else {
@@ -85,10 +84,8 @@ const activeLoginBtn = () => {
         loginBtn.style.cursor = "not-allowed";
     }
 };
-
-
-
-
+inputId.addEventListener("input", activeLoginBtn);
+inputPw.addEventListener("input", activeLoginBtn);
 
 // 모달 테스트
 // 모달 창을 띄우기 위한 코드
@@ -106,17 +103,23 @@ modalCloseBtn.addEventListener("click", () => {
     }, 500);
 });
 
-window.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("result") === "fail") {
-        modal.style.display = "flex";
-        modal.classList.add("fade-in");
-    }
-});
+// 실패 모달 소스코드임
 
-loginBtn.addEventListener('click', () => {
+// loginBtn.addEventListener("click", () => {
+//     modal.classList.remove("fade-out");
+//     modal.style.display = "flex";
+//     modal.classList.add("fade-in");
+// });
+
+// form submit
+loginBtn.addEventListener('click' , () => {
     loginForm.submit()
 })
 
-
-
+// 실패 모달 띄우기
+const params = new URLSearchParams(window.location.search);
+if (params.get("result") === "fail"){
+    modal.classList.remove("fade-out");
+    modal.style.display = "flex";
+    modal.classList.add("fade-in");
+}
