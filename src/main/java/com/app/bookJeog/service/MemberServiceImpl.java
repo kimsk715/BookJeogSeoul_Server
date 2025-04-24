@@ -170,13 +170,19 @@ public class MemberServiceImpl implements MemberService {
 
 
     // 로그인
-    public Optional<PersonalMemberDTO> loginPersonalMember(PersonalMemberDTO personalMemberDTO) {
+    public PersonalMemberDTO loginPersonalMember(PersonalMemberDTO personalMemberDTO) {
 
         PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
-
         Optional<PersonalMemberVO> foundMember = memberDAO.findPersonalMember(personalMemberVO);
 
-        return  foundMember.map(this::toPersonalMemberDTO);
+
+        // 로그인 실패 시 null 반환
+        if (foundMember == null) {
+            return null;
+        }
+
+        // VO를 DTO로 다시 변환 후 반환
+        return foundMember.map(this::toPersonalMemberDTO).orElse(null);
     }
 
 

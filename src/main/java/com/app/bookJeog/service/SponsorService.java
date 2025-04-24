@@ -8,16 +8,16 @@ import java.util.Optional;
 public interface SponsorService {
 
     // 단체 로그인
-    public Optional<SponsorMemberVO> loginSponsorMember (SponsorMemberDTO sponsorMemberDTO);
+    Optional<SponsorMemberVO> loginSponsorMember (SponsorMemberDTO sponsorMemberDTO);
 
-    public default SponsorMemberVO toSponsorMemberVO (SponsorMemberDTO sponsorMemberDTO) {
+    default SponsorMemberVO toSponsorMemberVO (SponsorMemberDTO sponsorMemberDTO) {
         return  SponsorMemberVO.builder()
                 .id(sponsorMemberDTO.getId())
                 .sponsorId(sponsorMemberDTO.getSponsorId())
                 .sponsorPassword(sponsorMemberDTO.getSponsorPassword())
                 .sponsorEmail(sponsorMemberDTO.getSponsorEmail())
                 .sponsorName(sponsorMemberDTO.getSponsorName())
-                .sponsorPhone(sponsorMemberDTO.getSponsorPhone())
+                .sponsorPhoneNumber(sponsorMemberDTO.getSponsorPhoneNumber())
                 .sponsorMainAddress(sponsorMemberDTO.getSponsorMainAddress())
                 .sponsorMemberStatus(sponsorMemberDTO.getSponsorMemberStatus())
                 .sponsorSubAddress(sponsorMemberDTO.getSponsorSubAddress())
@@ -26,10 +26,10 @@ public interface SponsorService {
 
 
     // 비밀번호 변경
-    public void changePassword(SponsorMemberDTO sponsorMemberDTO, String newPasswd);
+    void changePassword(SponsorMemberDTO sponsorMemberDTO, String newPasswd);
 
 
 
     // 이메일 중복검사
-    public Optional<SponsorMemberVO> selectEmailForPassword(SponsorMemberDTO sponsorMemberDTO);
+    Optional<SponsorMemberVO> selectEmailForPassword(SponsorMemberDTO sponsorMemberDTO);
 }
