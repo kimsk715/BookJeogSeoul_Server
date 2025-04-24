@@ -16,7 +16,7 @@
 
 /* 헤더(임시) */
 .top-header {
-    position: -webkit-sticky;
+    /*position: -webkit-sticky;*/
     position: sticky;
     top: 0;
     left: 0;
@@ -78,7 +78,7 @@ header .util-wrap{
 }
 
 .agent-tab-wrapper .segment-tab-list{
-    background-color: var(--ui-02);
+    /*background-color: var(--ui-02);*/
     border-radius: 100px;
     align-items: center;
     padding: 2px;
@@ -104,13 +104,14 @@ header .util-wrap{
 
 .tab-wrapper{
     position: sticky;
-    top: 65px;
+    top: 0px;
     z-index: 2;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-    justify-content: center;
     height: 64px;
-    background-color: var(--ui-background);
+    /*background-color: var(--ui-background);*/
+    transform: translateX(-50px);
 }
 
 .search-container .search-input-wrap{
@@ -217,6 +218,10 @@ header .util-wrap{
     font-size: 17px;
     color: var(--ui-06);
     line-height: 16px;
+}
+
+.prev-button{
+    background: none;
 }
 
 .inner .input{
