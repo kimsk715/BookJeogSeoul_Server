@@ -198,4 +198,43 @@
         from tbl_post
         where id = #{id}
     </select>
+
+    <!-- 후원 대상 리스트 -->
+    <select id="selectAllReceiverPost" resultType="receiverVO">
+        select r.id, receiver_title, receiver_text, receiver_status, date(createdDate) as createdDate, date(updatedDate) as updatedDate, member_id
+            from tbl_post p
+                join tbl_receiver r
+                    on r.id = p.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                receiver_title like concat('%', #{keyword}, '%') or
+                receiver_text like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+        limit #{rowCount}
+        offset #{offset}
+    </select>
+
+    <!-- 후원 대상 페이징 처리-->
+    <select id="countAllReceiverPost" resultType="_int">
+        select count(*)
+        from tbl_receiver
+        <where>
+            <if test="keyword != null and keyword != ''">
+                receiver_title like concat('%', #{keyword}, '%') or
+                receiver_text like concat('%', #{keyword}, '%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 후원 대상-->
+    <select id="selectReceiverById" resultType="receiverVO">
+        select r.id, receiver_title, receiver_text, receiver_status, date(createdDate) as createdDate, date(updatedDate) as updatedDate, member_id
+        from tbl_post p
+            join tbl_receiver r
+                on r.id = p.id
+                    where r.id = #{id}
+    </select>
+
+
 </mapper>

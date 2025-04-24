@@ -3,10 +3,7 @@ package com.app.bookJeog.mapper;
 
 import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.domain.dto.Pagination;
-import com.app.bookJeog.domain.vo.BookPostVO;
-import com.app.bookJeog.domain.vo.DiscussionVO;
-import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
-import com.app.bookJeog.domain.vo.PostVO;
+import com.app.bookJeog.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
@@ -49,5 +46,11 @@ public interface PostMapper {
     public void updateBookPostStatus(Long postId);
 
     public PostVO selectPostById(Long id);
+
+    public List<ReceiverVO> selectAllReceiverPost(Pagination pagination);
+
+    public int countAllReceiverPost(Pagination pagination);
+
+    public ReceiverVO selectReceiverById(Long id);
 }
 

@@ -24,11 +24,12 @@
         <typeAlias type="com.app.bookJeog.domain.vo.PostVO" alias="postVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.NoticeVO" alias="noticeVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.BookDonateVO" alias="bookDonateVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.ReceiverVO" alias="receiverVO"/>
     </typeAliases>
 <!---->
     <typeHandlers>
         <typeHandler handler="com.app.bookJeog.mybatis.MemberTypeHandler"/>
         <typeHandler handler="com.app.bookJeog.mybatis.BookReceivedStatusHandler"/>
-
+        <typeHandler handler="com.app.bookJeog.mybatis.ReceiverStatusHandler"/>
     </typeHandlers>
 </configuration>

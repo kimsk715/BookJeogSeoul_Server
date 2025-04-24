@@ -7,7 +7,7 @@
         date(createdDate) as createdDate, date(updatedDate) as updatedDate
         from tbl_personal_member pm
         join tbl_member m
-        on pm.id = m.id and m.member_type = 'PERSONAL'
+        on pm.id = m.id and m.member_type = '개인'
         <where>
             <if test="keyword != null and keyword != ''">
                 member_name like concat('%', #{keyword}, '%')
