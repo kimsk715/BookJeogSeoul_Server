@@ -97,10 +97,10 @@ public class PersonalController {
     // 로그인 기능
     @PostMapping("/personal/login-check")
     public String loginSuccess(PersonalMemberDTO personalMemberDTO, HttpSession session) {
-        Optional<PersonalMemberDTO> foundMember = memberServiceImpl.loginPersonalMember(personalMemberDTO);
-        log.info("found member : {}", foundMember);
 
-        if(foundMember.isPresent()) {
+        PersonalMemberDTO foundMember = memberServiceImpl.loginPersonalMember(personalMemberDTO);
+
+        if(foundMember != null) {
             session.setAttribute("member", foundMember);
             return "redirect:/main/main";
         } else {
