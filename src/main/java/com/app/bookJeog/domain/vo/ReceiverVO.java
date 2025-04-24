@@ -1,6 +1,7 @@
 package com.app.bookJeog.domain.vo;
 
 import com.app.bookJeog.domain.enumeration.BookPostStatus;
+import com.app.bookJeog.domain.enumeration.ReceiverStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
@@ -16,5 +17,6 @@ public class ReceiverVO extends Period {
     private Long id;
     private String receiverTitle;
     private String receiverText;
+    private ReceiverStatus receiverStatus;
 
 }
