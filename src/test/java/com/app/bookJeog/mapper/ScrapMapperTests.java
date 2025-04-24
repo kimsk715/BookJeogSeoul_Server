@@ -16,7 +16,7 @@ public class ScrapMapperTests {
     @Test
     public void insertScrap() {
         Long memberId = 1L;
-        String isbn = "9788984374423";
+        Long isbn = 9788984374423L;
 
         favoriteMapper.insertBookScrap(memberId, isbn);
     }
@@ -25,7 +25,7 @@ public class ScrapMapperTests {
     @Test
     public void findBookScrap() {
         Long memberId = 1L;
-        String isbn = "9788984374423";
+        Long isbn = 9788984374423L;
 
         boolean alreadyScrapped =  favoriteMapper.isBookScrapped(memberId, isbn) > 0;
     
@@ -39,7 +39,7 @@ public class ScrapMapperTests {
     // 특정 책의 스크랩 개수 조회
     @Test
     public void findMemberScrap() {
-        String isbn = "9788984374423";
+        Long isbn = 9788984374423L;
         int scrapCount = favoriteMapper.selectThisScrapCount(isbn);
         log.info("이 책의 스크랩 수: " + scrapCount);
     }
@@ -48,7 +48,7 @@ public class ScrapMapperTests {
     @Test
     public void deleteScrap() {
         Long memberId = 1L;
-        String isbn = "9788984374423";
+        Long isbn = 9788984374423L;
 
         favoriteMapper.deleteBookScrap(memberId, isbn);
     }

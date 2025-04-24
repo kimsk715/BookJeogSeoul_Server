@@ -90,7 +90,7 @@ public class BookServiceImpl implements BookService {
 
                 // \u003E를 실제 '>' 기호로 변환
                 if (categoryName != null) {
-                    log.info(categoryName);
+//                    log.info(categoryName);
                     categoryName = categoryName.replace("\u003E", ">");
 
                     // 카테고리 구분 처리

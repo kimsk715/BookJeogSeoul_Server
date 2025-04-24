@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>독후감 제목 | 북적서울</title>
+        <title th:text="${post.bookPostTitle} + ' | 북적서울'">독후감 제목 | 북적서울</title>
         <link
             rel="shortcut icon"
             href="/images/common/favicon.ico"
@@ -44,7 +44,7 @@
                                     <li class="like-item">
                                         <button type="button">
                                             <i class="editor-icon-heart"></i>
-                                            <span>1</span>
+                                            <span th:text="${post.likeCount}">0</span>
                                         </button>
                                     </li>
                                     <li class="share-item">
@@ -72,7 +72,8 @@
                     <div class="view-expand diary">
                         <div class="title">
                             <div class="title-inner container">
-                                <h1>어른의 행복은 조용하다</h1>
+                                <input type="hidden" id="book-isbn" th:value="${post.bookIsbn}" />
+                                <h1 th:text="${post.bookPostTitle}">어른의 행복은 조용하다</h1>
                                 <div class="flex-container space-between">
                                     <a
                                         href=""
@@ -88,11 +89,12 @@
                                             <div class="nickname-wrapper">
                                                 <p
                                                     class="name mds-font-caption"
+                                                    th:text="${post.memberName}"
                                                 >
                                                     야무진책군
                                                 </p>
                                             </div>
-                                            <p class="date">2025. 04. 02</p>
+                                            <p class="date" id="create-date">2025. 04. 02</p>
                                         </div>
                                     </a>
                                     <button
@@ -110,18 +112,18 @@
                                     <div
                                         class="book-container"
                                         style="
-                                            --background-image: url(/static/images/book/post_book_example.jpg);
+                                            --background-image: url(/images/common/default-book-cover.png);
                                         "
                                     >
                                         <span class="background"></span>
-                                        <p class="book-name">
+                                        <p class="book-name" th:text="${post.bookTitle}">
                                             어른의 행복은 조용하다
                                         </p>
-                                        <a href="" class="book-picture">
+                                        <a th:href="@{/book/detail/{isbn}(isbn=${post.bookIsbn})}" class="book-picture">
                                             <div class="book-picture book">
                                                 <picture>
                                                     <img
-                                                        src="/images/book/post_book_example.jpg"
+                                                        src="/images/common/default-book-cover.png"
                                                         alt="도서 썸네일"
                                                         width="184"
                                                         style="min-height: 0"
@@ -133,152 +135,88 @@
                                             태수 · 페이지2북스
                                         </p>
                                         <p class="book-info">
-                                            2024.11.04 출간 · 288P
+                                            2024.11.04 출간
                                         </p>
                                     </div>
                                     <div class="date-container">
                                         <p class="title">독서 기간</p>
                                         <p class="text">
                                             <svg
-                                                data-v-67942c66=""
-                                                width="24"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
+                                                    data-v-67942c66=""
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg"
                                             >
                                                 <rect
-                                                    data-v-67942c66=""
-                                                    x="5"
-                                                    y="6"
-                                                    width="14"
-                                                    height="13"
-                                                    rx="1"
-                                                    stroke="var(--text-03)"
-                                                    stroke-width="2"
+                                                        data-v-67942c66=""
+                                                        x="5"
+                                                        y="6"
+                                                        width="14"
+                                                        height="13"
+                                                        rx="1"
+                                                        stroke="var(--text-03)"
+                                                        stroke-width="2"
                                                 ></rect>
                                                 <rect
-                                                    data-v-67942c66=""
-                                                    x="4.5"
-                                                    y="8.5"
-                                                    width="15"
-                                                    height="1"
-                                                    fill="var(--text-03)"
-                                                    stroke="var(--text-03)"
+                                                        data-v-67942c66=""
+                                                        x="4.5"
+                                                        y="8.5"
+                                                        width="15"
+                                                        height="1"
+                                                        fill="var(--text-03)"
+                                                        stroke="var(--text-03)"
                                                 ></rect>
                                                 <rect
-                                                    data-v-67942c66=""
-                                                    x="8"
-                                                    y="3"
-                                                    width="2"
-                                                    height="3"
-                                                    rx="1"
-                                                    fill="var(--text-03)"
+                                                        data-v-67942c66=""
+                                                        x="8"
+                                                        y="3"
+                                                        width="2"
+                                                        height="3"
+                                                        rx="1"
+                                                        fill="var(--text-03)"
                                                 ></rect>
                                                 <rect
-                                                    data-v-67942c66=""
-                                                    x="14"
-                                                    y="3"
-                                                    width="2"
-                                                    height="3"
-                                                    rx="1"
-                                                    fill="var(--text-03)"
+                                                        data-v-67942c66=""
+                                                        x="14"
+                                                        y="3"
+                                                        width="2"
+                                                        height="3"
+                                                        rx="1"
+                                                        fill="var(--text-03)"
                                                 ></rect>
                                             </svg>
-                                            2025.03.17 ~ 2025.03.20
+                                            <span class="start-end">2025.03.17 ~ 2025.03.20</span>
                                         </p>
                                     </div>
                                     <div class="diary-title-container">
                                         <div class="title">독후감 제목</div>
-                                        <div class="text">
+                                        <div class="text" th:text="${post.bookPostTitle}">
                                             조용한 행복의 온도
                                         </div>
                                     </div>
                                     <div class="reading-diary-container">
                                         <div class="title">독후감 내용</div>
-                                        <div class="text">
-                                            어릴 적엔 행복이 크고 눈부신 것이라
-                                            믿었다.<br />
-                                            높은 성적, 원하는 장난감, 친구들과의
-                                            웃음처럼 외부에서 얻을 수 있는 눈에
-                                            띄는 성과가 곧 행복이었다.<br />
-                                            하지만 『어른의 행복은 조용하다』를
-                                            읽으며, 삶의 흐름 속에서 ‘조용한
-                                            행복’이라는 개념을 처음으로 깊이
-                                            생각하게 되었다.<br /><br />
+                                        <div class="text" th:text="${post.bookPostText}">
 
-                                            이 책은 화려하거나 자극적인 문장이
-                                            없다.<br />
-                                            그러나 그 담백함 속에 오히려 더 큰
-                                            울림이 있다.<br />
-                                            저자는 소소한 일상 속에서 진짜
-                                            행복을 발견하며, 어른이 된다는 건
-                                            떠들썩한 행복이 아닌 ‘조용한 만족’을
-                                            받아들이는 일임을 이야기한다.<br />
-                                            따뜻한 차 한 잔, 익숙한 거리의 산책,
-                                            스스로를 다독이는 밤.<br />
-                                            어쩌면 지금 내 삶에도 이미 조용한
-                                            행복이 흐르고 있었는데, 나는
-                                            그것들을 지나치고 있었는지도
-                                            모른다.<br /><br />
-
-                                            책을 읽으며 문득 부모님 생각이
-                                            났다.<br />
-                                            큰 꿈을 말하진 않지만 매일 반복되는
-                                            하루 속에서 차분히 삶을 살아가는
-                                            모습.<br />
-                                            그 조용함 속에 얼마나 많은 안정과
-                                            평화가 있었는지를 이제서야 조금은
-                                            이해하게 된다.<br /><br />
-
-                                            행복은 커다란 박수 속에 있지
-                                            않다.<br />
-                                            누군가 알아주지 않아도, SNS에
-                                            자랑하지 않아도, 혼자만 알고 누릴 수
-                                            있는 그런 감정.<br />
-                                            ‘조용한 행복’은 스스로를 충분히
-                                            사랑하고 삶을 있는 그대로 받아들일
-                                            수 있을 때 비로소 다가오는 선물
-                                            같았다.<br /><br />
-
-                                            어른이 된다는 건 분명 쉽지 않은
-                                            일이다.<br />
-                                            하지만 이 책은 말해준다.<br />
-                                            조용하다고 해서 부족한 것이 아니며,
-                                            평범하다고 해서 초라한 것이
-                                            아니라고.<br />
-                                            그렇게 나는 오늘도 내가 느끼는
-                                            작지만 따뜻한 행복을 감사히
-                                            안아본다.
                                         </div>
                                     </div>
                                     <div class="images-container">
                                         <p class="title">이미지</p>
                                         <ul class="list">
-                                            <li>
-                                                <img
-                                                    src="/images/post/post-memo-image.jpg"
-                                                />
-                                                <p class="text">
-                                                    커피 한 잔 마시면서 쉴 수
-                                                    있는 것도 행복이지
-                                                </p>
-                                                <span class="nickname"
-                                                    >ⓒ 야무진책군</span
-                                                >
-                                            </li>
-                                            <li>
-                                                <img
-                                                    src="/images/post/post-memo-image.jpg"
-                                                />
-                                                <p class="text">
-                                                    커피 한 잔 마시면서 쉴 수
-                                                    있는 것도 행복이지
-                                                </p>
-                                                <span class="nickname"
-                                                    >ⓒ 야무진책군</span
-                                                >
-                                            </li>
+<!--                                            <li>-->
+<!--                                                <img-->
+<!--                                                    src="/images/post/post-memo-image.jpg"-->
+<!--                                                />-->
+<!--                                                <p class="text">-->
+<!--                                                    커피 한 잔 마시면서 쉴 수-->
+<!--                                                    있는 것도 행복이지-->
+<!--                                                </p>-->
+<!--                                                <span class="nickname"-->
+<!--                                                    >ⓒ 야무진책군</span-->
+<!--                                                >-->
+<!--                                            </li>-->
                                         </ul>
                                     </div>
                                 </div>
@@ -286,14 +224,14 @@
                         </div>
                     </div>
                     <!-- // 독후감 컨테이너 -->
-                    <p class="view-author mds-font-subhead01">ⓒ 야무진책군</p>
+                    <p class="view-author mds-font-subhead01" th:text="'ⓒ ' + ${post.memberName}">ⓒ 야무진책군</p>
                     <div class="like">
                         <div class="like-inner container">
                             <button
                                 type="button"
                                 class="like-btn on mds-button"
                             >
-                                <span><i class="editor-icon-heart"></i> 1</span>
+                                <i class="editor-icon-heart"></i><span th:text=" ${post.likeCount}" style="margin-left: 4px;">0</span>
                             </button>
                         </div>
                     </div>
@@ -306,7 +244,7 @@
                                     <ul class="slide-wrapper">
                                         <li class="slide-item">
                                             <div class="bookjeog-book books">
-                                                <a href="" class="book-image">
+                                                <a th:href="@{/book/detail/{isbn}(isbn=${post.bookIsbn})}" class="book-image">
                                                     <div class="thumbnail">
                                                         <div
                                                             class="thumbnail-inner"
@@ -315,8 +253,8 @@
                                                                 class="book-picture"
                                                             >
                                                                 <picture>
-                                                                    <img
-                                                                        src="/images/book/post_book_example.jpg"
+                                                                    <img class="connected-book"
+                                                                        src="/images/common/default-book-cover.png"
                                                                         alt="도서 썸네일"
                                                                         style="
                                                                             min-height: 0;
@@ -327,9 +265,9 @@
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <a href="" class="book-data">
+                                                <a th:href="@{/book/detail/{isbn}(isbn=${post.bookIsbn})}" class="book-data">
                                                     <div class="metadata">
-                                                        <p class="title">
+                                                        <p class="title" id="connect-title">
                                                             어른의 행복은
                                                             조용하다
                                                         </p>
@@ -409,7 +347,6 @@
                         <div class="popup-inner-body">
                             <div class="report-list">
                                 <label
-                                    for=""
                                     class="mds-radio mds-radio-secondary"
                                 >
                                     <input
@@ -426,7 +363,6 @@
                                     </span>
                                 </label>
                                 <label
-                                    for=""
                                     class="mds-radio mds-radio-secondary"
                                 >
                                     <input
@@ -442,7 +378,6 @@
                                     </span></label
                                 >
                                 <label
-                                    for=""
                                     class="mds-radio mds-radio-secondary"
                                 >
                                     <input
@@ -459,7 +394,6 @@
                                     </span></label
                                 >
                                 <label
-                                    for=""
                                     class="mds-radio mds-radio-secondary"
                                 >
                                     <input
@@ -475,7 +409,6 @@
                                     </span></label
                                 >
                                 <label
-                                    for=""
                                     class="mds-radio mds-radio-secondary"
                                 >
                                     <input
@@ -502,6 +435,22 @@
                 </div>
             <!-- // 신고하기 모달 -->
         </div>
+        </div>
     </body>
-    <script src="/js/post/post-detail.js"></script>
+    <script th:inline="javascript">
+        window.post = {
+            title: [[${post.bookPostTitle}]],
+            createdDate: [[${post.createdDate}]],
+            memberName: [[${post.memberName}]],
+            bookPostStartDate: [[${post.bookPostStartDate}]],
+            bookPostEndDate: [[${post.bookPostEndDate}]],
+            bookTitle: [[${post.bookTitle}]],
+            bookIsbn: [[${post.bookIsbn}]],
+            writerId: [[${post.memberId}]],
+            fileList: [[${post.fileList}]]
+        };
+    </script>
+    <script src="/js/post/post-detail-service.js"></script>
+    <script src="/js/post/post-detail-layout.js"></script>
+    <script src="/js/post/post-detail-event.js"></script>
 </html>

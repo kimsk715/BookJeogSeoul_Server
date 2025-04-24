@@ -1,6 +1,8 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookPostDTO;
+import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.ReceiverDTO;
 import com.app.bookJeog.domain.dto.ReceiverInfoDTO;
@@ -42,18 +44,25 @@ public class PostServiceImpl implements PostService {
 
 
     //   이 책으로 작성한 독후감 일부 조회
-    public ArrayList<BookPostDTO> selectThisBookPosts(Long isbn){
-        return postDAO.selectThisBookPosts(isbn);
+    public ArrayList<BookPostMemberDTO> selectThisBookPosts(Long isbn){
+        return postDAO.findThisBookPosts(isbn);
     };
 
     //   이 책으로 작성한 독후감 전체 조회
-    public ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn){
-        return postDAO.selectThisBookAllPosts(isbn);
+    public ArrayList<BookPostMemberDTO> selectThisBookAllPosts(Long isbn, int offset){
+        return postDAO.findThisBookAllPosts(isbn, offset);
     };
 
     //   이 책으로 작성한 독후감 전체 개수 조회
     public int selectBookAllPostsCount(Long isbn) {
-        return postDAO.selectBookAllPostsCount(isbn);
+        return postDAO.findBookAllPostsCount(isbn);
+    }
+
+    //   특정 독후감 상세정보 조회(회원 프로필, 첨부파일 포함)
+    public FileBookPostDTO getPostWithFiles(Long id) {
+        FileBookPostDTO fileBookPostDTO = postDAO.findPostDetail(id);
+        fileBookPostDTO.setFileList(postDAO.findPostFiles(id));
+        return fileBookPostDTO;
     }
 
     // top20 독후감 선정

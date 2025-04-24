@@ -60,6 +60,65 @@
         where member_email = #{memberEmail} and member_password = #{memberPassword}
     </select>
 
+    <!--  기업회원 통합검색 조회  -->
+    <select id="selectSponsorMembersWithProfile" resultType="sponsorMemberProfileDTO">
+        select
+            sm.id,
+            sm.sponsor_name,
+            f.file_name,
+            f.file_path,
+            m.createdDate as created_date,
+            sm.sponsor_main_address,
+            sm.sponsor_sub_address,
+            sm.sponsor_phone_number
+        from tbl_sponsor_member sm
+                 join tbl_member m on sm.id = m.id
+                 join tbl_member_profile mp on mp.member_id = m.id
+                 join tbl_file f on f.id = mp.id
+        where sm.sponsor_name like concat('%', #{keyword}, '%')
+          and m.member_type = 'SPONSOR'
+        limit 3
+    </select>
+
+    <!--  기업회원 검색 결과 개수 조회  -->
+    <select id="selectSponsorMembersTotal" resultType="_int">
+        select
+            count(*)
+        from tbl_sponsor_member sm
+                 join tbl_member m on sm.id = m.id
+                 join tbl_member_profile mp on mp.member_id = m.id
+                 join tbl_file f on f.id = mp.id
+        where sm.sponsor_name like concat('%', #{keyword}, '%')
+          and m.member_type = 'SPONSOR'
+    </select>
+
+    <!--  기업회원 전체페이지 조회(무한스크롤)  -->
+    <select id="selectAllSponsorMembers" resultType="sponsorMemberProfileDTO">
+        select
+            sm.id,
+            sm.sponsor_name,
+            f.file_name,
+            f.file_path,
+            m.createdDate as created_date,
+            sm.sponsor_main_address,
+            sm.sponsor_sub_address,
+            sm.sponsor_phone_number
+        from tbl_sponsor_member sm
+                 join tbl_member m on sm.id = m.id
+                 join tbl_member_profile mp on mp.member_id = m.id
+                 join tbl_file f on f.id = mp.id
+        where sm.sponsor_name like concat('%', #{keyword}, '%')
+        and m.member_type = 'SPONSOR'
+        <choose>
+            <when test="sortType == 'name'">
+                order by sm.sponsor_name collate utf8mb4_unicode_ci asc
+            </when>
+            <otherwise>
+                order by m.createdDate desc
+            </otherwise>
+        </choose>
+        limit 8 offset #{offset}
+    </select>
 
     <!--비밀번호 찾기-->
     <select id="searchPassword" resultType="personalMemberVO">
