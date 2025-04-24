@@ -137,7 +137,7 @@ const inquiryLayout = (() =>{
                 </div>
 
                 <!-- 모달 푸터 -->
-                <div class="modal-footer">
+                <div class="modal-footer normal-inquiry-footer">
                     <button type="button" class="cancel-btn close-button">취소</button>
                     <button type="button" class="save-btn close-button" value="${memberInquiry.id}">저장</button>
                 </div>
@@ -281,7 +281,7 @@ const inquiryLayout = (() =>{
                 </div>
 
                 <!-- 모달 푸터 -->
-                <div class="modal-footer">
+                <div class="modal-footer sponsor-inquiry-footer">
                     <button type="button" class="cancel-btn close-button">취소</button>
                     <button type="button" class="save-btn close-button" value="${sponsorInquiry.id}">저장</button>
                 </div>

@@ -1,7 +1,6 @@
 package com.app.bookJeog.domain.vo;
 
-import com.app.bookJeog.domain.enumeration.AdminMemberStatus;
-import com.app.bookJeog.domain.enumeration.BookPostStatus;
+import com.app.bookJeog.domain.enumeration.BookReceivedStatus;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
@@ -17,5 +16,6 @@ public class BookDonateVO extends Period {
     private Long id;
     private Long memberId;
     private Long bookIsbn;
-    private BookPostStatus postStatus;
+    private BookReceivedStatus bookReceivedStatus;
+    private String bookTitle;
 }

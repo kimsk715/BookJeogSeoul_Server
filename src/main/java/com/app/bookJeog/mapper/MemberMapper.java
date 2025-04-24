@@ -2,6 +2,7 @@ package com.app.bookJeog.mapper;
 
 
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.vo.AdminVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
@@ -45,11 +46,26 @@ public interface MemberMapper {
 
     SponsorMemberVO selectSponsorMemberById(Long id);
 
-    // 개인 회원 활동 상태 변경
+    // 개인 회원 활동 상태 변경(신고)
     public void updatePersonalMemberStatus(Long memberId);
 
+    // 단체 회원 활동 상태 변경(신고)
     public void updateSponsorMemberStatus(Long sponsorId);
+
+
+    public List<SponsorMemberVO> selectAllSponsor(Pagination pagination);
+
+    public int countAllSponsor(Pagination pagination);
+
+    public void insertSponsorMember(SponsorMemberVO sponsorMemberVO);
+
+    public List<AdminVO> selectAllAdmin(Pagination pagination);
+
+    public int countAllAdmin(Pagination pagination);
+
+    public void insertAdmin(AdminVO adminVO);
 
     // 비밀번호 변경
     public void updatePassword(String memberEmail, String newPasswd);
+
 }

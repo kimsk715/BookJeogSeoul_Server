@@ -29,8 +29,7 @@ normalInquiryWrapper.addEventListener("click",(e) =>{
 document.addEventListener("click",(e) =>{
     console.log("이벤트 확인")
     const inquiryAnswerArea = commonModalContainer.querySelector("#normal-inquiry-answer")
-    if(e.target.classList.contains("save-btn")){
-        console.log("이벤트 확인")
+    if(e.target.classList.contains("save-btn") && e.target.parentElement.classList.contains("normal-inquiry-footer")){
         const inquiryAnswer = inquiryAnswerArea.value;
         const inquiryId = e.target.value;
         inquiryService.personalInquiryAnswer(inquiryId, inquiryAnswer)
@@ -67,10 +66,8 @@ sponsorInquiryWrapper.addEventListener("click",(e) =>{
 })
 
 document.addEventListener("click",(e) =>{
-    console.log("이벤트 확인")
     const inquiryAnswerArea = commonModalContainer.querySelector("#sponsor-inquiry-answer")
-    if(e.target.classList.contains("save-btn")){
-        console.log("이벤트 확인")
+    if(e.target.classList.contains("save-btn") && e.target.classList.contains("sponsor-inquiry-footer")){
         const inquiryAnswer = inquiryAnswerArea.value;
         const inquiryId = e.target.value;
         inquiryService.sponsorInquiryAnswer(inquiryId, inquiryAnswer)
