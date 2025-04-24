@@ -17,7 +17,7 @@ public interface SponsorService {
                 .sponsorPassword(sponsorMemberDTO.getSponsorPassword())
                 .sponsorEmail(sponsorMemberDTO.getSponsorEmail())
                 .sponsorName(sponsorMemberDTO.getSponsorName())
-                .sponsorPhone(sponsorMemberDTO.getSponsorPhone())
+                .sponsorPhoneNumber(sponsorMemberDTO.getSponsorPhoneNumber())
                 .sponsorMainAddress(sponsorMemberDTO.getSponsorMainAddress())
                 .sponsorMemberStatus(sponsorMemberDTO.getSponsorMemberStatus())
                 .sponsorSubAddress(sponsorMemberDTO.getSponsorSubAddress())

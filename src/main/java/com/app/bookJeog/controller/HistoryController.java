@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Optional;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/history/*")
@@ -22,14 +24,15 @@ public class HistoryController {
     @PostMapping("save")
     @ResponseBody
     public void saveHistoryIfNotExists(@RequestBody HistoryDTO historyDTO) {
-        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
-        if (member == null) {
+        Optional<PersonalMemberDTO> optionalMember = (Optional<PersonalMemberDTO>) session.getAttribute("member");
+
+        if (optionalMember.isEmpty()) {
             // 로그인이 안 된 경우 아무 동작도 하지 않고 리턴
             return;
+        } else{
+            PersonalMemberDTO member = optionalMember.get();
+            historyDTO.setMemberId(member.getId()); // 세션에서 memberId 추가 주입
+            historyService.saveHistoryIfNotExists(historyDTO); // DTO 통째로 넘김
         }
-
-        historyDTO.setMemberId(member.getId()); // 세션에서 memberId 추가 주입
-        historyService.saveHistoryIfNotExists(historyDTO); // DTO 통째로 넘김
-
     }
 }
