@@ -4,7 +4,7 @@
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
-<!---->
+
     <typeAliases>
         <typeAlias type="com.app.bookJeog.domain.vo.BookInfoVO" alias="bookInfoVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.TempSelectedBookVO" alias="tempSelectedBookVO"/>
@@ -26,8 +26,9 @@
         <typeAlias type="com.app.bookJeog.domain.vo.BookDonateVO" alias="bookDonateVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.ReceiverVO" alias="receiverVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.AdminVO" alias="adminVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.SponsorMemberVO" alias="SponsorMemberVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.AdminVO" alias="AdminVO"/>
     </typeAliases>
-<!---->
     <typeHandlers>
         <typeHandler handler="com.app.bookJeog.mybatis.MemberTypeHandler"/>
         <typeHandler handler="com.app.bookJeog.mybatis.BookReceivedStatusHandler"/>

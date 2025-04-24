@@ -1,5 +1,6 @@
 package com.app.bookJeog.domain.vo;
 
+import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import com.app.bookJeog.domain.enumeration.SponsorMemberStatus;
 import lombok.*;
@@ -19,10 +20,9 @@ public class SponsorMemberVO extends MemberVO {
     private String sponsorPassword;
     private String sponsorName;
     private String sponsorPhoneNumber;
+    private String sponsorEmail;
     private String sponsorMainAddress;
     private String sponsorSubAddress;
     private SponsorMemberStatus sponsorMemberStatus;
-    private String sponsorEmail;
-
 
 }
