@@ -20,9 +20,11 @@ public class AdminDTO {
     private String adminId;
     private String adminPassword;
     private String adminName;
-    private String adminDepartMent;
+    private String adminDepartment;
     private String adminGrade;
     private AdminMemberStatus adminMemberStatus;
+    private String createdDate;
+    private String updatedDate;
 
     public AdminVO toVO() {
         return AdminVO.builder()
@@ -30,9 +32,11 @@ public class AdminDTO {
                 .adminId(adminId)
                 .adminPassword(adminPassword)
                 .adminName(adminName)
-                .adminDepartMent(adminDepartMent)
+                .adminDepartment(adminDepartment)
                 .adminGrade(adminGrade)
                 .adminMemberStatus(adminMemberStatus)
+                .createdDate(createdDate)
+                .updatedDate(updatedDate)
                 .build();
     }
 

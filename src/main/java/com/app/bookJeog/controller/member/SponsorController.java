@@ -1,5 +1,9 @@
 package com.app.bookJeog.controller.member;
 
+<<<<<<< HEAD
+=======
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+>>>>>>> master
 import com.app.bookJeog.domain.dto.SponsorMemberDTO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.mapper.SponsorMapper;
@@ -27,8 +31,13 @@ public class SponsorController {
 
     private final SponsorServiceImpl sponsorServiceImpl;
     private final SponsorMapper sponsorMapper;
+<<<<<<< HEAD
     private final SponsorMemberDTO sponsormemberDTO;
+=======
+    private final SponsorMemberDTO sponsorMemberDTO;
+>>>>>>> master
     private HttpSession session;
+    private SponsorMemberDTO sponsorMemberDTO;
 
     // 단체 마이페이지 조회
     @GetMapping("mypage")
@@ -148,11 +157,11 @@ public class SponsorController {
     @PostMapping("sponsor-change-passwd")
     public String changePasswd (String newPasswd, HttpServletRequest request, HttpSession session){
         session = request.getSession();
-        sponsormemberDTO.setSponsorEmail((String) session.getAttribute("email"));
+        sponsorMemberDTO.setSponsorEmail((String) session.getAttribute("email"));
         String memberEmail = (String) session.getAttribute("email");
 
         if(memberEmail != null) {
-            sponsorServiceImpl.changePassword(sponsormemberDTO, newPasswd);
+            sponsorServiceImpl.changePassword(sponsorMemberDTO, newPasswd);
             session.invalidate();
             return "redirect:/personal/login";
         }
