@@ -30,7 +30,6 @@ public class SponsorController {
     private final SponsorMapper sponsorMapper;
     private final SponsorMemberDTO sponsorMemberDTO;
     private HttpSession session;
-    private SponsorMemberDTO sponsorMemberDTO;
 
     // 단체 마이페이지 조회
     @GetMapping("mypage")

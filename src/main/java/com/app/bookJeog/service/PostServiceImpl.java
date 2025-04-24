@@ -8,6 +8,7 @@ import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
 import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 import com.app.bookJeog.domain.vo.ReceiverVO;
+import com.app.bookJeog.repository.FavoriteDAO;
 import com.app.bookJeog.repository.MemberDAO;
 import com.app.bookJeog.repository.PostDAO;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
     private final PostDAO postDAO;
     private final MemberDAO memberDAO;
+    private final FavoriteDAO favoriteDAO;
 
     @Override
     public List<BookPostVO> getAllBookPost(Pagination pagination) {
@@ -121,7 +123,9 @@ public class PostServiceImpl implements PostService {
             Long sponsorId = postDAO.findPostById(receiver.getId()).getMemberId();
             String sponsorName = memberDAO.findSponsorMemberById(sponsorId).getSponsorName();
             receiverInfoDTO.setSponsorName(sponsorName);
-            receiverInfoDTO.setReceiverLikeCount(1); // 임시값;
+            int voteCount = favoriteDAO.receiverVote(receiver.getId());
+            receiverInfoDTO.setReceiverLikeCount(voteCount);
+
             receiverInfoDTOList.add(receiverInfoDTO);
         }
 

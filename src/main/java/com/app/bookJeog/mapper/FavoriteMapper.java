@@ -15,5 +15,9 @@ public interface FavoriteMapper {
 
     //    책 스크랩 취소
     public void deleteBookScrap(Long memberId, String bookIsbn);
+
+    public int receiverVote(Long receiverId);
+
+    public Long topReceiver();
 }
 

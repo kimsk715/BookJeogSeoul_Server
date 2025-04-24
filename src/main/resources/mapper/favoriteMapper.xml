@@ -24,4 +24,41 @@
         delete from tbl_book_like
         where member_id = #{memberId} and book_isbn = #{bookIsbn}
     </delete>
+
+    <!-- 후원 대상 투표 집계 -->
+    <select id="receiverVote" resultType="_int">
+        select ifnull(sum(receiver_like_point),0)
+        from tbl_receiver_like
+        where receiver_id = #{receiverId}
+    </select>
+
+    <!--투표 결과 1등.-->
+    <select id="topReceiver" resultType="_Long">
+        select receiver_id
+        from tbl_receiver_like
+        group by receiver_id
+        order by sum(receiver_like_point) desc
+        limit 1
+
+    </select>
+
+    <!-- 투표 결과 저장-->
+    <insert id="voteToReceiver">
+        insert into tbl_receiver_like (receiver_id, member_id, receiver_like_point)
+        values (#{receiverId}, #{memberId}, #{receiverLikePoint})
+    </insert>
+
+    <!-- 투표 시 카운트 저장-->
+    <update id="updateVoteCount">
+        update tbl_receiver
+        set receiver_vote_count = receiver_vote_count + #{receiverLikePoint}
+    </update>
+
+    <!--단일 투표 결과 조회-->
+    <select id="selectReceiverVote" resultType="_int">
+        select receiver_like_point
+        from tbl_receiver_like
+        where member_id = #{memberId} and receiver_id = #{receiverId}
+    </select>
+
 </mapper>

@@ -236,5 +236,15 @@
                     where r.id = #{id}
     </select>
 
+    <!-- 토론 주제 등록 -->
+    <insert id="insertDiscussionPost">
+        insert into tbl_discussion (id, discussion_title, discussion_text, book_isbn, book_title)
+        values (#{id}, #{discussionTitle}, #{discussionText}, #{bookIsbn}, #{bookTitle})
+    </insert>
 
+    <select id="selectDonatedBooks" resultType="bookDonateVO">
+        select *
+        from tbl_book_donate
+        where book_received_status = '수취완료'
+    </select>
 </mapper>
