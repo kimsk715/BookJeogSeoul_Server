@@ -19,7 +19,7 @@ public class SponsorMemberVO extends MemberVO {
     private String sponsorId;
     private String sponsorPassword;
     private String sponsorName;
-    private String sponsorPhone;
+    private String sponsorPhoneNumber;
     private String sponsorEmail;
     private String sponsorMainAddress;
     private String sponsorSubAddress;
@@ -35,7 +35,7 @@ public class SponsorMemberVO extends MemberVO {
         this.sponsorMemberStatus = sponsorMemberStatus;
         this.sponsorName = sponsorName;
         this.sponsorPassword = sponsorPassword;
-        this.sponsorPhone = sponsorPhone;
+        this.sponsorPhoneNumber = sponsorPhoneNumber;
         this.sponsorSubAddress = sponsorSubAddress;
     }
 
