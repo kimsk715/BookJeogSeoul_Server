@@ -72,7 +72,7 @@
     </select>
 
     <!--  이 책으로 작성한 독후감 일부 조회  -->
-    <select id="selectThisBookPosts" resultType="bookPostDTO">
+    <select id="selectThisBookPosts" resultType="bookPostMemberDTO">
         select
             bp.id,
             bp.book_post_title,
@@ -91,8 +91,8 @@
         limit 5
     </select>
 
-    <!--  이 책으로 작성한 독후감 전체 조회  -->
-    <select id="selectThisAllBookPosts" resultType="bookPostDTO">
+    <!--  이 책으로 작성한 독후감 전체 조회(무한스크롤 6개씩)  -->
+    <select id="selectThisAllBookPosts" resultType="bookPostMemberDTO">
         select
             bp.id,
             bp.book_post_title,
@@ -108,6 +108,7 @@
         where bp.book_post_is_public = 'PUBLIC'
           and bp.book_isbn = #{bookIsbn}
         order by p.createdDate desc
+        limit 6 offset #{offset}
     </select>
 
     <!--  이 책으로 작성한 독후감 전체 개수 조회  -->
@@ -199,6 +200,296 @@
         where id = #{id}
     </select>
 
+    <!--  검색한 검색어에 맞는 독후감 통합검색 조회  -->
+    <select id="searchBookPosts" resultType="bookPostMemberDTO">
+        SELECT
+            p.member_id,
+            bp.book_post_title,
+            bp.book_post_text,
+            pm.member_nickname,
+            f.file_path,
+            f.file_name,
+            DATE_FORMAT(p.createdDate, '%Y.%m.%d') AS createdDate,
+            bp.book_isbn
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
+        WHERE bp.book_post_is_public = 'PUBLIC'
+          AND (
+            bp.book_post_title LIKE concat('%', #{keyword}, '%')
+                OR bp.book_post_text LIKE concat('%', #{keyword}, '%')
+                or bp.book_title like concat('%', #{keyword}, '%')
+                OR pm.member_nickname LIKE concat('%', #{keyword}, '%')
+            )
+        ORDER BY p.createdDate DESC
+        LIMIT 3
+    </select>
+    <!--  검색한 검색어에 맞는 독후감 통합검색 개수 조회  -->
+    <select id="selectBookPostsCount" resultType="_int">
+        SELECT
+            count(*)
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
+        WHERE bp.book_post_is_public = 'PUBLIC'
+          AND (
+            bp.book_post_title LIKE concat('%', #{keyword}, '%')
+                OR bp.book_post_text LIKE concat('%', #{keyword}, '%')
+                or bp.book_title like concat('%', #{keyword}, '%')
+                OR pm.member_nickname LIKE concat('%', #{keyword}, '%')
+            )
+        ORDER BY p.createdDate DESC
+    </select>
+    <!--  검색한 검색어에 맞는 독후감 무한스크롤로 출력  -->
+    <select id="selectAllBooks" resultType="bookPostMemberDTO">
+        select
+        bp.id,
+        bp.book_post_title,
+        bp.book_post_text,
+        bp.book_isbn,
+        p.createdDate as createdDate,
+        pm.member_nickname,
+        pm.id as member_id,
+        count(bpl.id) as like_count,
+        f.file_name,
+        f.file_path
+        from tbl_book_post bp
+        join tbl_post p on p.id = bp.id
+        left join tbl_book_post_like bpl on bpl.book_post_id = bp.id
+        join tbl_personal_member pm on pm.id = p.member_id
+        join tbl_member_profile mp on mp.member_id = pm.id
+        join tbl_file f on f.id = mp.id
+        where bp.book_post_is_public = 'PUBLIC'
+        and (
+        bp.book_post_title like concat('%', #{keyword}, '%')
+        or bp.book_post_text like concat('%', #{keyword}, '%')
+        or bp.book_title like concat('%', #{keyword}, '%')
+        or pm.member_nickname like concat('%', #{keyword}, '%')
+        )
+        group by bp.id, bp.book_post_title, bp.book_post_text,
+        pm.member_nickname, pm.id,
+        f.file_name, f.file_path
+        <choose>
+            <when test="sortType == 'like'">
+                order by like_count desc
+            </when>
+            <when test="sortType == 'name'">
+                order by bp.book_post_title collate utf8mb4_unicode_ci asc
+            </when>
+            <otherwise>
+                order by p.createddate desc
+            </otherwise>
+        </choose>
+        limit 8 offset #{offset}
+    </select>
+    <!--  검색한 검색어에 맞는 독후감 전체 개수  -->
+    <select id="selectAllBooksCount" resultType="_int">
+        select
+            count(*)
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
+        where bp.book_post_is_public = 'PUBLIC'
+          and (
+                bp.book_post_title like concat('%', #{keyword}, '%')
+                or bp.book_post_text like concat('%', #{keyword}, '%')
+                    or bp.book_title like concat('%', #{keyword}, '%')
+                or pm.member_nickname like concat('%', #{keyword}, '%')
+            )
+    </select>
+    <!--  검색한 검색어에 맞는 토론글 통합검색 조회  -->
+    <select id="searchDiscussions" resultType="discussionPostDTO">
+        select p.id, d.discussion_title, d.discussion_text, d.book_isbn, d.book_title, p.createdDate
+        from tbl_discussion d
+                 join tbl_post p on d.id = p.id
+        where (
+                  d.discussion_title like concat('%', #{keyword}, '%')
+                  or d.discussion_text like concat('%', #{keyword}, '%')
+                  or d.book_title like concat('%', #{keyword}, '%')
+              )
+        order by p.createddate desc
+        limit 3
+    </select>
+    <!--  검색한 검색어에 맞는 토론글 통합검색 개수 조회  -->
+    <select id="selectAllDiscussionCount" resultType="_int">
+        select count(*)
+        from tbl_discussion d
+                 join tbl_post p on d.id = p.id
+        where (
+                  d.discussion_title like concat('%', #{keyword}, '%')
+                  or d.discussion_text like concat('%', #{keyword}, '%')
+                  or d.book_title like concat('%', #{keyword}, '%')
+              )
+    </select>
+    <!--  검색한 검색어에 맞는 토론글 무한스크롤로 출력  -->
+    <select id="selectAllDiscussion" resultType="discussionPostDTO">
+        select
+        p.id,
+        d.discussion_title,
+        d.discussion_text,
+        d.book_isbn,
+        d.book_title,
+        p.createdDate,
+        (select count(*) from tbl_comment c where c.post_id = p.id) as comment_count
+        from tbl_discussion d
+        join tbl_post p on d.id = p.id
+        where (
+                d.discussion_title like concat('%', #{keyword}, '%')
+                or d.discussion_text like concat('%', #{keyword}, '%')
+                or d.book_title like concat('%', #{keyword}, '%')
+        )
+        <choose>
+            <when test="sortType == 'comment'">
+                order by comment_count desc
+            </when>
+            <when test="sortType == 'name'">
+                order by d.discussion_title collate utf8mb4_unicode_ci asc
+            </when>
+            <otherwise>
+                order by p.createdDate desc
+            </otherwise>
+        </choose>
+        limit 8 offset #{offset}
+    </select>
+    <!--  검색한 검색어에 맞는 기부글 통합검색 조회  -->
+    <select id="searchReceivers" resultType="receiverPostDTO">
+        select
+            p.id,
+            r.receiver_title,
+            r.receiver_text,
+            rf_file.file_name as receiver_file_name,
+            rf_file.file_path as receiver_file_path,
+            mp_file.file_name as profile_file_name,
+            mp_file.file_path as profile_file_path,
+            p.createdDate,
+            sm.sponsor_name
+        from tbl_receiver r
+                 join tbl_post p on r.id = p.id
+                 join tbl_receiver_file rf on rf.receiver_id = r.id
+                 join tbl_file rf_file on rf.id = rf_file.id
+                 join tbl_sponsor_member sm on p.member_id = sm.id
+                 join tbl_member_profile mp on mp.member_id = sm.id
+                 join tbl_file mp_file on mp.id = mp_file.id
+        where (
+                  r.receiver_title like concat('%', #{keyword}, '%')
+                      or r.receiver_text like concat('%', #{keyword}, '%')
+                      or sm.sponsor_name like concat('%', #{keyword}, '%')
+                  )
+        order by p.createddate desc
+        limit 3
+    </select>
+    <!--  검색한 검색어에 맞는 기부글 통합검색 개수 조회  -->
+    <select id="selectAllReceiverCount" resultType="_int">
+        select
+            count(*)
+        from tbl_receiver r
+                 join tbl_post p on r.id = p.id
+                 join tbl_receiver_file rf on rf.receiver_id = r.id
+                 join tbl_file rf_file on rf.id = rf_file.id
+                 join tbl_sponsor_member sm on p.member_id = sm.id
+                 join tbl_member_profile mp on mp.member_id = sm.id
+                 join tbl_file mp_file on mp.id = mp_file.id
+        where (
+                  r.receiver_title like concat('%', #{keyword}, '%')
+                      or r.receiver_text like concat('%', #{keyword}, '%')
+                      or sm.sponsor_name like concat('%', #{keyword}, '%')
+                  )
+    </select>
+    <!--  검색한 검색어에 맞는 기부글 무한스크롤로 출력  -->
+    <!--  coalesce = 값이 하나도 없어서 null일 때 null 대신 지정한 값 반환  -->
+    <select id="selectAllReceivers" resultType="receiverPostDTO">
+        select
+        p.id,
+        r.receiver_title,
+        r.receiver_text,
+        rf_file.file_name as receiver_file_name,
+        rf_file.file_path as receiver_file_path,
+        mp_file.file_name as profile_file_name,
+        mp_file.file_path as profile_file_path,
+        p.createdDate,
+        sm.sponsor_name,
+        (select coalesce(sum(rl.receiver_like_point), 0) from tbl_receiver_like rl where rl.receiver_id = r.id) as like_score
+        from tbl_receiver r
+        join tbl_post p on r.id = p.id
+        join tbl_receiver_file rf on rf.receiver_id = r.id
+        join tbl_file rf_file on rf.id = rf_file.id
+        join tbl_sponsor_member sm on p.member_id = sm.id
+        join tbl_member_profile mp on mp.member_id = sm.id
+        join tbl_file mp_file on mp.id = mp_file.id
+        where (
+        r.receiver_title like concat('%', #{keyword}, '%')
+        or r.receiver_text like concat('%', #{keyword}, '%')
+        or sm.sponsor_name like concat('%', #{keyword}, '%')
+        )
+        <choose>
+            <when test="sortType == 'like'">
+                order by like_score desc
+            </when>
+            <when test="sortType == 'name'">
+                order by r.receiver_title collate utf8mb4_unicode_ci asc
+            </when>
+            <otherwise>
+                order by p.createdDate desc
+            </otherwise>
+        </choose>
+        limit 8 offset #{offset}
+    </select>
+
+    <!-- 특정 독후감 + 작성자 프로필 포함 상세정보 조회 -->
+    <select id="selectBookPostWithFiles" resultType="fileBookPostDTO">
+        select
+            bp.id,
+            bp.book_title,
+            bp.book_isbn,
+            count(bpl.id) as like_count,
+            pm.member_name,
+            pm.id as member_id,
+            f.file_path,
+            f.file_name,
+            bp.book_post_title,
+            bp.book_post_text,
+            bp.book_post_start_date,
+            bp.book_post_end_date,
+            p.createdDate
+        from tbl_book_post bp
+                 join tbl_post p on bp.id = p.id
+                 join tbl_personal_member pm on pm.id = p.member_id
+                 join tbl_member_profile mp on mp.member_id = pm.id
+                 join tbl_file f on f.id = mp.id
+                 left join tbl_book_post_like bpl on bpl.book_post_id = bp.id
+        where bp.book_post_is_public = 'PUBLIC'
+          and bp.id = #{id}
+        group by
+            bp.id,
+            bp.book_title,
+            bp.book_isbn,
+            pm.member_name,
+            f.file_path,
+            f.file_name,
+            f.file_text,
+            bp.book_post_start_date,
+            bp.book_post_end_date,
+            p.createdDate
+    </select>
+
+    <!-- 특정 독후감의 첨부파일 목록 -->
+    <select id="selectBookPostFiles" resultType="bookPostFileDTO">
+        select
+            f.id,
+            f.file_name,
+            f.file_path,
+            f.file_text
+        from tbl_book_post_file bpf
+        join tbl_file f on f.id = bpf.id
+        where bpf.book_post_id = #{bookPostId}
+    </select>
+
     <!-- 후원 대상 리스트 -->
     <select id="selectAllReceiverPost" resultType="receiverVO">
         select r.id, receiver_title, receiver_text, receiver_status, date(createdDate) as createdDate, date(updatedDate) as updatedDate, member_id
@@ -242,9 +533,13 @@
         values (#{id}, #{discussionTitle}, #{discussionText}, #{bookIsbn}, #{bookTitle})
     </insert>
 
+
     <select id="selectDonatedBooks" resultType="bookDonateVO">
         select *
         from tbl_book_donate
         where book_received_status = '수취완료'
     </select>
 </mapper>
+
+
+

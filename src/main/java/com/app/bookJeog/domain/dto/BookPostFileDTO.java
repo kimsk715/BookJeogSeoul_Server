@@ -18,6 +18,10 @@ public class BookPostFileDTO {
     private Long id;
     private Long bookPostId;
 
+    private String fileName;
+    private String filePath;
+    private String fileText;
+
     public BookLikeVO toVO() {
         return BookLikeVO.builder()
                 .id(id)
