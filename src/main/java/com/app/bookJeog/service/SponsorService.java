@@ -12,9 +12,15 @@ public interface SponsorService {
 
     public default SponsorMemberVO toSponsorMemberVO (SponsorMemberDTO sponsorMemberDTO) {
         return  SponsorMemberVO.builder()
+                .id(sponsorMemberDTO.getId())
                 .sponsorId(sponsorMemberDTO.getSponsorId())
                 .sponsorPassword(sponsorMemberDTO.getSponsorPassword())
                 .sponsorEmail(sponsorMemberDTO.getSponsorEmail())
+                .sponsorName(sponsorMemberDTO.getSponsorName())
+                .sponsorPhone(sponsorMemberDTO.getSponsorPhone())
+                .sponsorMainAddress(sponsorMemberDTO.getSponsorMainAddress())
+                .sponsorMemberStatus(sponsorMemberDTO.getSponsorMemberStatus())
+                .sponsorSubAddress(sponsorMemberDTO.getSponsorSubAddress())
                 .build();
     }
 

@@ -34,6 +34,7 @@ public class SponsorMemberDTO {
                 .sponsorId(sponsorId)
                 .sponsorPassword(sponsorPassword)
                 .sponsorName(sponsorName)
+                .sponsorEmail(sponsorEmail)
                 .sponsorPhoneNumber(sponsorPhoneNumber)
                 .sponsorMainAddress(sponsorMainAddress)
                 .sponsorSubAddress(sponsorSubAddress)
