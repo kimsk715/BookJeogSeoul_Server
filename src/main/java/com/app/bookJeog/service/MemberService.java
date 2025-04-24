@@ -52,17 +52,23 @@ public interface MemberService {
     // 로그인 ( 화면에서 입력받은 DTO 를 VO로 )
     public default PersonalMemberVO toPersonalMemberVO(PersonalMemberDTO personalMemberDTO) {
         return PersonalMemberVO.builder()
+                .id(personalMemberDTO.getId())
+                .memberNickName(personalMemberDTO.getMemberNickName())
+                .memberMileage(personalMemberDTO.getMemberMileage())
                 .memberEmail(personalMemberDTO.getMemberEmail())
                 .memberPassword(personalMemberDTO.getMemberPassword())
                 .memberName(personalMemberDTO.getMemberName())
                 .memberGender(personalMemberDTO.getMemberGender())
                 .memberBirth(personalMemberDTO.getMemberBirth())
+                .memberPhone(personalMemberDTO.getMemberPhone())
                 .build();
     }
     
 
     public default PersonalMemberDTO toPersonalMemberDTO(PersonalMemberVO personalMemberVO) {
         PersonalMemberDTO personalMemberDTO = new PersonalMemberDTO();
+        personalMemberDTO.setId(personalMemberVO.getId());
+        personalMemberDTO.setMemberBirth(personalMemberVO.getMemberBirth());
         personalMemberDTO.setMemberEmail(personalMemberVO.getMemberEmail());
         personalMemberDTO.setMemberPassword(personalMemberVO.getMemberPassword());
         personalMemberDTO.setMemberName(personalMemberVO.getMemberName());

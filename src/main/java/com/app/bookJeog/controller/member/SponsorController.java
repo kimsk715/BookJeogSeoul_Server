@@ -28,6 +28,7 @@ public class SponsorController {
 
     private final SponsorServiceImpl sponsorServiceImpl;
     private final SponsorMapper sponsorMapper;
+    private final SponsorMemberDTO sponsorMemberDTO;
     private HttpSession session;
     private SponsorMemberDTO sponsorMemberDTO;
 
