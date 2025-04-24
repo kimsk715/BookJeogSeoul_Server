@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>로그인 | 북적북적</title>
+        <link
+            rel="stylesheet"
+            href="/css/login/findpasswd-member.css"
+        />
+        <link
+            rel="shortcut icon"
+            href="/images/admin/favicon.ico"
+            type="image/x-icon"
+        />
+    </head>
+    <body>
+        <div class="login-container">
+            <div class="login-content">
+                <h3 class="title">단체/비밀번호 찾기 서비스</h3>
+                <p class="sub-title">가입할 때 입력했던 정보를 확인합니다</p>
+                    <!-- 이름 -->
+                <form action="/sponsor/send-mail" method="POST" id="info-check">
+                    <!-- 이메일 -->
+                    <div class="input-item">
+                        <div class="bjs-input-email">
+                            <label class="input-label-email">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-email-label"
+                                            >이메일</span
+                                        >
+                                        <input
+                                            autocomplete="off"
+                                            type="text"
+                                            name="sponsorEmail"
+                                            id="bjs-email"
+                                            placeholder="이메일 입력"
+                                            style="outline: none; border: none"
+                                        />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        class="clear-button"
+                                        id="clear-button-email"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+                <!-- 다음 버튼 -->
+                <div class="login-btn-area">
+                    <button id="login-btn">
+                        <span class="login-btn-tag" style="color: #dee2e6">확인</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 로그인 fail 모달 -->
+        <div id="modal">
+            <div id="modal-wrap">
+                <div class="modal-inner">
+                    <div class="modal-header">
+                        <strong>정보를 오류</strong>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <p>정보를 다시 확인해주세요.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button>
+                        <span>확인</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="/js/login/findpasswd-sponsor.js"></script>
+</html>
