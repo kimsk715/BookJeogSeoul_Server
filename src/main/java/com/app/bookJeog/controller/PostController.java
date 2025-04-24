@@ -1,9 +1,10 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
-import com.app.bookJeog.domain.dto.BookPostDTO;
-import com.app.bookJeog.domain.dto.BookPostMemberDTO;
-import com.app.bookJeog.domain.dto.FileBookPostDTO;
+import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.service.AladinService;
+import com.app.bookJeog.service.BookDonateService;
+import com.app.bookJeog.service.BookService;
 import com.app.bookJeog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -24,6 +26,9 @@ import java.util.ArrayList;
 @RequestMapping("/post/*")
 public class PostController {
     private final PostService postService;
+    private final BookDonateService bookDonateService;
+    private final AladinService aladinService;
+    private final BookService bookService;
 
     // 토론게시판 이동
     @GetMapping("discussion")
@@ -92,7 +97,26 @@ public class PostController {
 
     // 후원 대상 게시판
     @GetMapping("receiver")
-    public String goToReceiver(){
+    public String goToReceiver(Model model){
+        // 기부 도서 조회
+        List<BookDonateInfoDTO> donateList = new ArrayList<>();
+        List<BookDonateDTO> tempList = postService.getDonateBooks();
+        log.info(tempList.toString());
+        for(BookDonateDTO bookDonateDTO : tempList){
+            BookDonateInfoDTO donateInfoDTO = new BookDonateInfoDTO();
+            donateInfoDTO.setBookDonateDTO(bookDonateDTO);
+            donateInfoDTO.setImageUrl(aladinService.getBookCover(bookDonateDTO.getBookIsbn()));
+            donateInfoDTO.setAuthor(bookService.getBookByIsbn(bookDonateDTO.getBookIsbn()).get(0).getAuthor());
+            donateList.add(donateInfoDTO);
+        }
+        log.info(donateList.toString());
+        model.addAttribute("donateList", donateList);
+
+        // 후원 대상 조회
+        List<ReceiverInfoDTO> receiverList = new ArrayList<>();
+
+
+
         return "donation/receiver_main";
     }
 

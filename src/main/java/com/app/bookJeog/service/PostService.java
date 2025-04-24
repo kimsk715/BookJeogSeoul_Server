@@ -1,10 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.*;
-import com.app.bookJeog.domain.vo.BookPostVO;
-import com.app.bookJeog.domain.vo.DiscussionVO;
-import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
-import com.app.bookJeog.domain.vo.ReceiverVO;
+import com.app.bookJeog.domain.vo.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,5 +84,11 @@ public interface PostService {
     public int countAllReceiverPost(Pagination pagination);
 
     public ReceiverDTO getReceiverById(Long id);
+
+    public List<BookDonateDTO> getDonateBooks();
+
+    public List<BookDonateDTO> getAllDonateBooks();
+
+    public List<ReceiverPostDTO> getReceiverPost();
 }
 
