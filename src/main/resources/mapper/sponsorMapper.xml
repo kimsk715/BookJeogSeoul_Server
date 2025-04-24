@@ -12,12 +12,21 @@
 
 
     <!--단체 비밀번호 찾기전 정보조회 -->
-    <select id="selectSponsorMember">
+    <select id="selectSponsorMember" resultType="SponsorMemberVO">
         select *
         from tbl_sponsor_member
-        where sponsor_password = #{sponsorPassword}
+        where sponsor_email = #{sponsorEmail}
     </select>
 
-
+    
+    
+    
+    
     <!--단체 비밀번호 변경-->
+    <update id="updateSponsorPasswd">
+        update tbl_sponsor_member
+        set sponsor_password = #{newPasswd}
+        where sponsor_email = #{sponsorEmail}
+
+    </update>
 </mapper>

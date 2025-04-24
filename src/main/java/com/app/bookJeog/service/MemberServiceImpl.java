@@ -271,6 +271,7 @@ public class MemberServiceImpl implements MemberService {
                     // DTO 객체 생성 및 값 주입
                     personalMemberDTO = new PersonalMemberDTO();
                     personalMemberDTO.setMemberEmail(kakaoAccount.getAsJsonObject().get("email").getAsString()); // 이메일 추출
+                    log.info("personalMemberDTO {}", personalMemberDTO);
                     personalMemberDTO.setMemberName(profile.getAsJsonObject().get("nickname").getAsString());    // 닉네임 추출
                     log.info("personalMemberDTO {}", personalMemberDTO);
 

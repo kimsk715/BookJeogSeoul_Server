@@ -18,4 +18,16 @@ public class SponsorDAO {
     public Optional<SponsorMemberVO> findSponsorMember (SponsorMemberVO sponsorMemberVO) {
        return sponsorMapper.loginSponsorMember(sponsorMemberVO);
     };
+
+
+    // 이메일 중복검사
+    public Optional<SponsorMemberVO> findSponsorMemberEmail(SponsorMemberVO sponsorMemberVO) {
+       return sponsorMapper.selectSponsorMember(sponsorMemberVO);
+    }
+
+
+    // 비밀번호 변경
+    public void updateSponsorMember(SponsorMemberVO sponsorMemberVO, String newPasswd) {
+        sponsorMapper.updatePassword(sponsorMemberVO, newPasswd);
+    }
 }
