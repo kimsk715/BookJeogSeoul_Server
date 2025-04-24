@@ -47,19 +47,19 @@
     <!--  특정 회원 팔로우하기  -->
     <insert id="insertMemberFollow">
         insert into tbl_follow (follow_receiver_id, follow_sender_id)
-        values (#{followReceiverId}, #{followSenderId})
+        values (#{receiverId}, #{senderId})
     </insert>
 
     <!--  내 특정 회원 팔로우여부 조회  -->
     <select id="isMemberFollowed" resultType="_int">
         select count(*)
         from tbl_follow
-        where follow_receiver_id = #{followReceiverId} and follow_sender_id = #{followSenderId}
+        where follow_receiver_id = #{receiverId} and follow_sender_id = #{senderId}
     </select>
 
     <!--  팔로우 취소  -->
     <delete id="deleteMemberFollow">
         delete from tbl_follow
-        where follow_receiver_id = #{followReceiverId} and follow_sender_id = #{followSenderId}
+        where follow_receiver_id = #{receiverId} and follow_sender_id = #{senderId}
     </delete>
 </mapper>
