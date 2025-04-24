@@ -1,13 +1,12 @@
 package com.app.bookJeog.controller.admin;
 
 
-<<<<<<< HEAD
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.AdminMemberStatus;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
-=======
+
 import com.app.bookJeog.domain.dto.AdminDTO;
 import com.app.bookJeog.domain.dto.AdminPersonalMemberDTO;
 import com.app.bookJeog.domain.dto.Pagination;
@@ -16,7 +15,7 @@ import com.app.bookJeog.domain.vo.AdminVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.service.AdminServiceImpl;
->>>>>>> 13d07a803c93b8113c950140ca4da15fc122cc96
+
 import com.app.bookJeog.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -41,9 +40,7 @@ import java.util.Optional;
 public class AdminMemberController {
 
     private final MemberService memberService;
-<<<<<<< HEAD
     private final SponsorMemberDTO sponsorMemberDTO;
-=======
     private final AdminServiceImpl adminServiceImpl;
     private HttpSession session;
 
@@ -66,7 +63,6 @@ public class AdminMemberController {
     }
 
 
->>>>>>> 13d07a803c93b8113c950140ca4da15fc122cc96
 
     @GetMapping("admin/personal-members")
     @ResponseBody
@@ -101,7 +97,7 @@ public class AdminMemberController {
 
         return adminPersonalMemberDTO;
     }
-<<<<<<< HEAD
+
 
     // 단체 회원 목록 조회
     @GetMapping("admin/sponsor-members")
@@ -153,6 +149,4 @@ public class AdminMemberController {
         log.info(adminDTO.toString());
         memberService.insertAdmin(adminDTO);
     }
-=======
->>>>>>> 13d07a803c93b8113c950140ca4da15fc122cc96
 }

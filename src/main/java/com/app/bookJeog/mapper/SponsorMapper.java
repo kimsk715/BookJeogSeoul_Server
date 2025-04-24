@@ -1,7 +1,6 @@
 package com.app.bookJeog.mapper;
 
 
-import com.app.bookJeog.domain.dto.SponsormemberDTO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import org.apache.ibatis.annotations.Mapper;
 

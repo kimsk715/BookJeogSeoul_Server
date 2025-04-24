@@ -1,7 +1,8 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
-import com.app.bookJeog.domain.dto.SponsormemberDTO;
+import com.app.bookJeog.domain.dto.SponsorMemberDTO;
+
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.mapper.MemberMapper;
@@ -36,13 +37,13 @@ public class SponsorServiceImpl implements SponsorService {
     private final JavaMailSender javaMailSender;
     // 단체 로그인
     @Override
-    public Optional<SponsorMemberVO> loginSponsorMember(SponsormemberDTO sponsorMemberDTO) {
+    public Optional<SponsorMemberVO> loginSponsorMember(SponsorMemberDTO sponsorMemberDTO) {
         SponsorMemberVO sponsorMemberVO = toSponsorMemberVO(sponsorMemberDTO);
         return sponsorDAO.findSponsorMember(sponsorMemberVO);
     }
 
     @Override
-    public void changePassword(SponsormemberDTO sponsorMemberDTO, String newPasswd) {
+    public void changePassword(SponsorMemberDTO sponsorMemberDTO, String newPasswd) {
         SponsorMemberVO sponsorMemberVO = toSponsorMemberVO(sponsorMemberDTO);
         sponsorDAO.findSponsorMemberEmail(sponsorMemberVO);
     }
@@ -50,14 +51,14 @@ public class SponsorServiceImpl implements SponsorService {
 
     // 이메일 중복검사
     @Override
-    public Optional<SponsorMemberVO> selectEmailForPassword(SponsormemberDTO sponsorMemberDTO) {
+    public Optional<SponsorMemberVO> selectEmailForPassword(SponsorMemberDTO sponsorMemberDTO) {
         SponsorMemberVO sponsorMemberVO = toSponsorMemberVO(sponsorMemberDTO);
         return sponsorDAO.findSponsorMemberEmail(sponsorMemberVO);
     }
 
 
     // 이메일 인증 발송
-    public void sendMail(SponsormemberDTO sponsormemberDTO, HttpServletResponse response, HttpSession session) throws MessagingException {
+    public void sendMail(SponsorMemberDTO sponsormemberDTO, HttpServletResponse response, HttpSession session) throws MessagingException {
         String code = createCode();
 
         // 1. 쿠키로 인증 코드 저장
