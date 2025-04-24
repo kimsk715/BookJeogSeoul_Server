@@ -1,3 +1,10 @@
+document.addEventListener("DOMContentLoaded", async () => {
+    const book = await postDetailService.getBookInfo(); // 알라딘 API fetch
+    await postDetailLayout.showBookDetail(book);
+    postDetailLayout.showPostDetail();
+    postDetailLayout.showFileImages();
+});
+
 // 좋아요 누르면 아이콘 변경
 const likeButton = document.querySelector(".editor-icon-heart");
 const miniLikeBtn = document.querySelector(".like-inner .like-btn");

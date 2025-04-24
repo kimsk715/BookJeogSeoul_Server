@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Controller
 @Slf4j
 @RequestMapping("/book/*")
@@ -55,5 +57,13 @@ public class BookController implements BookControllerDocs {
     @ResponseBody
     public String getBookCover(@RequestParam Long isbn) {
         return aladinService.getBookCover(isbn);
+    }
+
+    // 알라딘 api로 단일 도서 정보 받기
+    @GetMapping("/api/{isbn}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getBookInfo(@PathVariable Long isbn) {
+        Map<String, Object> result = aladinService.getBookInfoAsMap(isbn);
+        return ResponseEntity.ok(result);
     }
 }

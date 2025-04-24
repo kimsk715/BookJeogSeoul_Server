@@ -20,4 +20,7 @@ public interface AladinService {
 
     // 검색 키워드로 알라딘 API에서 도서 정보와 총 결과 수를 받아와 Map<String, Object> 형태로 반환
     public Map<String, Object> searchBooksToMap(String keyword, int startIndex, int maxResults, String sort) throws JSONException;
+
+    // 단일 도서 정보를 isbn으로 가져와 Map 타입으로 반환
+    public Map<String, Object> getBookInfoAsMap(Long isbn);
 }

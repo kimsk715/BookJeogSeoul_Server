@@ -572,6 +572,14 @@ h1 {
     letter-spacing: -.6px;
 }
 
+.view .title h1 {
+    font-weight: 700;
+    font-size: 2.25em;
+    line-height: 52px;
+    color: var(--text-strong);
+    word-break: break-word;
+}
+
 .view .title-inner {
     max-width: 700px;
     min-width: 320px;
@@ -737,6 +745,24 @@ h1 {
     margin-bottom: 32px;
 }
 
+.book-container::before{
+    height: 100%;
+    opacity: .15;
+    background-image: var(--background-image);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: inherit;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
 .book-container .background{
     -webkit-filter: blur(16px);
     filter: blur(16px);
@@ -751,6 +777,18 @@ h1 {
     bottom: 0;
     z-index: -1;
     opacity: .15;
+}
+
+.book-picture.book>picture::before{
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 20px;
+    background: linear-gradient(90deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) .01%, rgba(0, 0, 0, .05) 5.97%, hsla(0, 0%, 100%, .3) 15.89%, hsla(0, 0%, 100%, 0) 28.19%, rgba(0, 0, 0, .05) 0, rgba(0, 0, 0, .0277927) 46.96%, hsla(0, 0%, 100%, 0) 47.51%, hsla(0, 0%, 100%, .1) 54.14%, hsla(0, 0%, 100%, 0));
 }
 
 .book-container .book-name{
@@ -980,7 +1018,7 @@ h1 {
     text-decoration: underline;
 }
 
-.like-btn.on.filled>span>i:before {
+.like-btn.on.filled i:before {
     content: "\e809";
 }
 

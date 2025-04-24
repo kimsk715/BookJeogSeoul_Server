@@ -157,4 +157,24 @@ public class PostController {
         // 응답 반환
         return new ResponseEntity<>(imageBytes, HttpStatus.OK);
     }
+
+    // 기부글 이미지 출력
+    @GetMapping("post-image")
+    @ResponseBody
+    public ResponseEntity<byte[]> getPostImage(@RequestParam("path") String path,
+                                                  @RequestParam("name") String name) throws IOException {
+        // 이미지 파일 경로 설정
+        File imageFile = new File("C:/upload/" + path.replace("/", File.separator) + "/" + name);
+
+        // 파일이 없으면 기본 이미지 사용
+        if (!imageFile.exists()) {
+            imageFile = new File("src/main/resources/static/images/common/default-book-cover.png");
+        }
+
+        // 이미지 파일을 바이트 배열로 읽기
+        byte[] imageBytes = FileCopyUtils.copyToByteArray(imageFile);
+
+        // 응답 반환
+        return new ResponseEntity<>(imageBytes, HttpStatus.OK);
+    }
 }

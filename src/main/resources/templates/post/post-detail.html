@@ -94,7 +94,7 @@
                                                     야무진책군
                                                 </p>
                                             </div>
-                                            <p class="date" th:text="${post.createdDate}">2025. 04. 02</p>
+                                            <p class="date" id="create-date">2025. 04. 02</p>
                                         </div>
                                     </a>
                                     <button
@@ -112,18 +112,18 @@
                                     <div
                                         class="book-container"
                                         style="
-                                            --background-image: url(/static/images/book/post_book_example.jpg);
+                                            --background-image: url(/images/common/default-book-cover.png);
                                         "
                                     >
                                         <span class="background"></span>
                                         <p class="book-name" th:text="${post.bookTitle}">
                                             어른의 행복은 조용하다
                                         </p>
-                                        <a href="" class="book-picture">
+                                        <a th:href="@{/book/detail/{isbn}(isbn=${post.bookIsbn})}" class="book-picture">
                                             <div class="book-picture book">
                                                 <picture>
                                                     <img
-                                                        src="/images/book/post_book_example.jpg"
+                                                        src="/images/common/default-book-cover.png"
                                                         alt="도서 썸네일"
                                                         width="184"
                                                         style="min-height: 0"
@@ -187,7 +187,7 @@
                                                         fill="var(--text-03)"
                                                 ></rect>
                                             </svg>
-                                            <span th:text="${post.bookPostStartDate} + ' ~ ' + ${post.bookPostEndDate}">2025.03.17 ~ 2025.03.20</span>
+                                            <span class="start-end">2025.03.17 ~ 2025.03.20</span>
                                         </p>
                                     </div>
                                     <div class="diary-title-container">
@@ -205,30 +205,18 @@
                                     <div class="images-container">
                                         <p class="title">이미지</p>
                                         <ul class="list">
-                                            <li>
-                                                <img
-                                                    src="/images/post/post-memo-image.jpg"
-                                                />
-                                                <p class="text">
-                                                    커피 한 잔 마시면서 쉴 수
-                                                    있는 것도 행복이지
-                                                </p>
-                                                <span class="nickname"
-                                                    >ⓒ 야무진책군</span
-                                                >
-                                            </li>
-                                            <li>
-                                                <img
-                                                    src="/images/post/post-memo-image.jpg"
-                                                />
-                                                <p class="text">
-                                                    커피 한 잔 마시면서 쉴 수
-                                                    있는 것도 행복이지
-                                                </p>
-                                                <span class="nickname"
-                                                    >ⓒ 야무진책군</span
-                                                >
-                                            </li>
+<!--                                            <li>-->
+<!--                                                <img-->
+<!--                                                    src="/images/post/post-memo-image.jpg"-->
+<!--                                                />-->
+<!--                                                <p class="text">-->
+<!--                                                    커피 한 잔 마시면서 쉴 수-->
+<!--                                                    있는 것도 행복이지-->
+<!--                                                </p>-->
+<!--                                                <span class="nickname"-->
+<!--                                                    >ⓒ 야무진책군</span-->
+<!--                                                >-->
+<!--                                            </li>-->
                                         </ul>
                                     </div>
                                 </div>
@@ -256,7 +244,7 @@
                                     <ul class="slide-wrapper">
                                         <li class="slide-item">
                                             <div class="bookjeog-book books">
-                                                <a href="" class="book-image">
+                                                <a th:href="@{/book/detail/{isbn}(isbn=${post.bookIsbn})}" class="book-image">
                                                     <div class="thumbnail">
                                                         <div
                                                             class="thumbnail-inner"
@@ -265,8 +253,8 @@
                                                                 class="book-picture"
                                                             >
                                                                 <picture>
-                                                                    <img
-                                                                        src="/images/book/post_book_example.jpg"
+                                                                    <img class="connected-book"
+                                                                        src="/images/common/default-book-cover.png"
                                                                         alt="도서 썸네일"
                                                                         style="
                                                                             min-height: 0;
@@ -277,9 +265,9 @@
                                                         </div>
                                                     </div>
                                                 </a>
-                                                <a href="" class="book-data">
+                                                <a th:href="@{/book/detail/{isbn}(isbn=${post.bookIsbn})}" class="book-data">
                                                     <div class="metadata">
-                                                        <p class="title">
+                                                        <p class="title" id="connect-title">
                                                             어른의 행복은
                                                             조용하다
                                                         </p>
@@ -447,7 +435,20 @@
                 </div>
             <!-- // 신고하기 모달 -->
         </div>
-        </div>>
+        </div>
     </body>
-    <script src="/js/post/post-detail.js"></script>
+    <script th:inline="javascript">
+        window.post = {
+            title: [[${post.bookPostTitle}]],
+            createdDate: [[${post.createdDate}]],
+            memberName: [[${post.memberName}]],
+            bookPostStartDate: [[${post.bookPostStartDate}]],
+            bookPostEndDate: [[${post.bookPostEndDate}]],
+            bookIsbn: [[${post.bookIsbn}]],
+            fileList: [[${post.fileList}]]
+        };
+    </script>
+    <script src="/js/post/post-detail-service.js"></script>
+    <script src="/js/post/post-detail-layout.js"></script>
+    <script src="/js/post/post-detail-event.js"></script>
 </html>

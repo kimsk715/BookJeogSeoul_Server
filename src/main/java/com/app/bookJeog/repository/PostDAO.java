@@ -112,6 +112,7 @@ public class PostDAO {
     //  특정 독후감의 첨부파일 목록 조회
     public List<BookPostFileDTO> findPostFiles(Long postId) {
         return postMapper.selectBookPostFiles(postId);
+    }
 
     public List<BookPostVO> findTopPosts(){
         return postMapper.selectTopPosts();
