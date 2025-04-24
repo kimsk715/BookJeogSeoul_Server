@@ -1,15 +1,7 @@
 package com.app.bookJeog.service;
 
-import com.app.bookJeog.domain.dto.BookPostDTO;
-import com.app.bookJeog.domain.dto.BookPostMemberDTO;
-import com.app.bookJeog.domain.dto.FileBookPostDTO;
-import com.app.bookJeog.domain.dto.Pagination;
-import com.app.bookJeog.domain.dto.ReceiverDTO;
-import com.app.bookJeog.domain.dto.ReceiverInfoDTO;
-import com.app.bookJeog.domain.vo.BookPostVO;
-import com.app.bookJeog.domain.vo.DiscussionVO;
-import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
-import com.app.bookJeog.domain.vo.ReceiverVO;
+import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.repository.FavoriteDAO;
 import com.app.bookJeog.repository.MemberDAO;
 import com.app.bookJeog.repository.PostDAO;
@@ -158,6 +150,56 @@ public class PostServiceImpl implements PostService {
         receiverDTO.setUpdatedDate(receiverVO.getUpdatedDate());
 
         return receiverDTO;
+    }
+
+    @Override
+    public List<BookDonateDTO> getDonateBooks() {
+        List<BookDonateVO> tempList = postDAO.findDonatedBooks();
+        List<BookDonateDTO> bookDonateDTOList = new ArrayList<>();
+        for (BookDonateVO bookDonateVO : tempList) {
+            BookDonateDTO bookDonateDTO = new BookDonateDTO();
+            bookDonateDTO.setId(bookDonateVO.getId());
+            bookDonateDTO.setBookReceivedStatus(bookDonateVO.getBookReceivedStatus());
+            bookDonateDTO.setBookIsbn(bookDonateVO.getBookIsbn());
+            bookDonateDTO.setBookTitle(bookDonateVO.getBookTitle());
+            bookDonateDTO.setMemberId(bookDonateVO.getMemberId());
+            bookDonateDTO.setCreatedDate(bookDonateVO.getCreatedDate());
+            bookDonateDTO.setUpdatedDate(bookDonateVO.getUpdatedDate());
+            bookDonateDTOList.add(bookDonateDTO);
+        }
+        return bookDonateDTOList;
+    }
+
+    @Override
+    public List<BookDonateDTO> getAllDonateBooks() {
+        List<BookDonateVO> tempList = postDAO.findAllDonatedBooks();
+        List<BookDonateDTO> bookDonateDTOList = new ArrayList<>();
+        for (BookDonateVO bookDonateVO : tempList) {
+            BookDonateDTO bookDonateDTO = new BookDonateDTO();
+            bookDonateDTO.setId(bookDonateVO.getId());
+            bookDonateDTO.setBookReceivedStatus(bookDonateVO.getBookReceivedStatus());
+            bookDonateDTO.setBookIsbn(bookDonateVO.getBookIsbn());
+            bookDonateDTO.setBookTitle(bookDonateVO.getBookTitle());
+            bookDonateDTO.setMemberId(bookDonateVO.getMemberId());
+            bookDonateDTO.setCreatedDate(bookDonateVO.getCreatedDate());
+            bookDonateDTO.setUpdatedDate(bookDonateVO.getUpdatedDate());
+            bookDonateDTOList.add(bookDonateDTO);
+        }
+        return bookDonateDTOList;
+    }
+
+    @Override
+    public List<ReceiverPostDTO> getReceiverPost() {
+        List<ReceiverVO> tempList = postDAO.findAllReceivers();
+        List<ReceiverPostDTO> receiverPostDTOList = new ArrayList<>();
+        for (ReceiverVO receiverVO : tempList) {
+            ReceiverPostDTO receiverPostDTO = new ReceiverPostDTO();
+            receiverPostDTO.setId(receiverVO.getId());
+            receiverPostDTO.setReceiverText(receiverVO.getReceiverText());
+            receiverPostDTO.setReceiverTitle(receiverVO.getReceiverTitle());
+            receiverPostDTOList.add(receiverPostDTO);
+        }
+        return receiverPostDTOList;
     }
 
 

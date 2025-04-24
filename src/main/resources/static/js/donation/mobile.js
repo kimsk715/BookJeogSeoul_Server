@@ -1,5 +1,6 @@
 // 피드 단위 리스트
-const cardList = `<div class ="card-wrapper">
+const cardList = `
+<div class ="card-wrapper" th:each="">
                                 <div class="card-item">
                                     <div class="user post-theme"><a href=""
                                             class="profile-image gtm-feed-recommend-post-tem-library"

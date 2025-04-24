@@ -95,5 +95,15 @@ public interface PostMapper {
     public int countAllReceiverPost(Pagination pagination);
 
     public ReceiverVO selectReceiverById(Long id);
+
+//    게시판에 나올 10개의 기부 기록
+    public List<BookDonateVO> selectDonatedBooks();
+
+    // 전체 보기에 나올 전체 기부 목록
+    public List<BookDonateVO> selectAllDonatedBooks();
+
+    // 도네 게시판 목록
+    public List<ReceiverVO> selectAllReceiverPosts();
+
 }
 

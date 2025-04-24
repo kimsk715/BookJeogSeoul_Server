@@ -173,7 +173,7 @@
                         <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
                             <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
                                 <!-- 여기가 1권 단위 -->
-                                <div class="swiper-slide swiper-slide-active slide-item" style="margin-right: 12px;">
+                                <div class="swiper-slide swiper-slide-active slide-item" th:each=" book : ${donateList}" style="margin-right: 12px;">
                                     <div class="book-wrapper">
                                         <div class="book-inner">
                                             <div class="book-picture">
@@ -190,9 +190,9 @@
                                                         <picture
                                                             class="book-picture-frame">
                                                             <source
-                                                                srcset="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
+                                                                th:srcset="${book.imageUrl}"
                                                                 type="image/webp"><img
-                                                                src="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
+                                                                th:src="${book.imageUrl}"
                                                                 alt="뇌를 위한 최소한의 습관 도서 이미지" loading="lazy"
                                                                 class="book-picture-image">
                                                         </picture>
@@ -202,9 +202,8 @@
                                                 <button
                                                 class="book-text-button">
                                                 <div class="book-text-wrapper">
-                                                    <p class="book-title">뇌를 위한 최소한의
-                                                        습관</p>
-                                                    <p class="book-author">피터 홀린스
+                                                    <p class="book-title" th:text="${book.bookDonateDTO.bookTitle}"></p>
+                                                    <p class="book-author" th:text="${book.author}">
                                                     </p>
                                                 </div>
                                             </button>
@@ -212,272 +211,7 @@
                                     </div>
                                 </div>
                                 <!-- 여기가 1권 단위 -->
-                                <div class="swiper-slide swiper-slide-active slide-item" style="margin-right: 12px;">
-                                    <div class="book-wrapper">
-                                        <div class="book-inner">
-                                            <div class="book-picture">
-                                                <button class="book-picture-button">
-                                                    <div class="book-badge-wrapper">
-                                                        <div class="book-badge-inner">
-                                                            <img src="https://d1miajbjsyro89.cloudfront.net/v4/_next/static/media/badge-fav.c3feb861.png"
-                                                                alt="인생책"
-                                                                class="book-badge-image"><span
-                                                                class="book-badge-text">인생책</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="book-picture-inner">
-                                                        <picture
-                                                            class="book-picture-frame">
-                                                            <source
-                                                                srcset="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                type="image/webp"><img
-                                                                src="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                alt="뇌를 위한 최소한의 습관 도서 이미지" loading="lazy"
-                                                                class="book-picture-image">
-                                                        </picture>
-                                                    </div>
-                                                </button>
-                                                </div>
-                                                <button
-                                                class="book-text-button">
-                                                <div class="book-text-wrapper">
-                                                    <p class="book-title">뇌를 위한 최소한의
-                                                        습관</p>
-                                                    <p class="book-author">피터 홀린스
-                                                    </p>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-active slide-item" style="margin-right: 12px;">
-                                    <div class="book-wrapper">
-                                        <div class="book-inner">
-                                            <div class="book-picture">
-                                                <button class="book-picture-button">
-                                                    <div class="book-badge-wrapper">
-                                                        <div class="book-badge-inner">
-                                                            <img src="https://d1miajbjsyro89.cloudfront.net/v4/_next/static/media/badge-fav.c3feb861.png"
-                                                                alt="인생책"
-                                                                class="book-badge-image"><span
-                                                                class="book-badge-text">인생책</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="book-picture-inner">
-                                                        <picture
-                                                            class="book-picture-frame">
-                                                            <source
-                                                                srcset="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                type="image/webp"><img
-                                                                src="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                alt="뇌를 위한 최소한의 습관 도서 이미지" loading="lazy"
-                                                                class="book-picture-image">
-                                                        </picture>
-                                                    </div>
-                                                </button>
-                                                </div>
-                                                <button
-                                                class="book-text-button">
-                                                <div class="book-text-wrapper">
-                                                    <p class="book-title">뇌를 위한 최소한의
-                                                        습관</p>
-                                                    <p class="book-author">피터 홀린스
-                                                    </p>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-active slide-item" style="margin-right: 12px;">
-                                    <div class="book-wrapper">
-                                        <div class="book-inner">
-                                            <div class="book-picture">
-                                                <button class="book-picture-button">
-                                                    <div class="book-badge-wrapper">
-                                                        <div class="book-badge-inner">
-                                                            <img src="https://d1miajbjsyro89.cloudfront.net/v4/_next/static/media/badge-fav.c3feb861.png"
-                                                                alt="인생책"
-                                                                class="book-badge-image"><span
-                                                                class="book-badge-text">인생책</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="book-picture-inner">
-                                                        <picture
-                                                            class="book-picture-frame">
-                                                            <source
-                                                                srcset="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                type="image/webp"><img
-                                                                src="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                alt="뇌를 위한 최소한의 습관 도서 이미지" loading="lazy"
-                                                                class="book-picture-image">
-                                                        </picture>
-                                                    </div>
-                                                </button>
-                                                </div>
-                                                <button
-                                                class="book-text-button">
-                                                <div class="book-text-wrapper">
-                                                    <p class="book-title">뇌를 위한 최소한의
-                                                        습관</p>
-                                                    <p class="book-author">피터 홀린스
-                                                    </p>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-active slide-item" style="margin-right: 12px;">
-                                    <div class="book-wrapper">
-                                        <div class="book-inner">
-                                            <div class="book-picture">
-                                                <button class="book-picture-button">
-                                                    <div class="book-badge-wrapper">
-                                                        <div class="book-badge-inner">
-                                                            <img src="https://d1miajbjsyro89.cloudfront.net/v4/_next/static/media/badge-fav.c3feb861.png"
-                                                                alt="인생책"
-                                                                class="book-badge-image"><span
-                                                                class="book-badge-text">인생책</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="book-picture-inner">
-                                                        <picture
-                                                            class="book-picture-frame">
-                                                            <source
-                                                                srcset="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                type="image/webp"><img
-                                                                src="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                alt="뇌를 위한 최소한의 습관 도서 이미지" loading="lazy"
-                                                                class="book-picture-image">
-                                                        </picture>
-                                                    </div>
-                                                </button>
-                                                </div>
-                                                <button
-                                                class="book-text-button">
-                                                <div class="book-text-wrapper">
-                                                    <p class="book-title">뇌를 위한 최소한의
-                                                        습관</p>
-                                                    <p class="book-author">피터 홀린스
-                                                    </p>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-active slide-item" style="margin-right: 12px;">
-                                    <div class="book-wrapper">
-                                        <div class="book-inner">
-                                            <div class="book-picture">
-                                                <button class="book-picture-button">
-                                                    <div class="book-badge-wrapper">
-                                                        <div class="book-badge-inner">
-                                                            <img src="https://d1miajbjsyro89.cloudfront.net/v4/_next/static/media/badge-fav.c3feb861.png"
-                                                                alt="인생책"
-                                                                class="book-badge-image"><span
-                                                                class="book-badge-text">인생책</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="book-picture-inner">
-                                                        <picture
-                                                            class="book-picture-frame">
-                                                            <source
-                                                                srcset="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                type="image/webp"><img
-                                                                src="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                alt="뇌를 위한 최소한의 습관 도서 이미지" loading="lazy"
-                                                                class="book-picture-image">
-                                                        </picture>
-                                                    </div>
-                                                </button>
-                                                </div>
-                                                <button
-                                                class="book-text-button">
-                                                <div class="book-text-wrapper">
-                                                    <p class="book-title">뇌를 위한 최소한의
-                                                        습관</p>
-                                                    <p class="book-author">피터 홀린스
-                                                    </p>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-active slide-item" style="margin-right: 12px;">
-                                    <div class="book-wrapper">
-                                        <div class="book-inner">
-                                            <div class="book-picture">
-                                                <button class="book-picture-button">
-                                                    <div class="book-badge-wrapper">
-                                                        <div class="book-badge-inner">
-                                                            <img src="https://d1miajbjsyro89.cloudfront.net/v4/_next/static/media/badge-fav.c3feb861.png"
-                                                                alt="인생책"
-                                                                class="book-badge-image"><span
-                                                                class="book-badge-text">인생책</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="book-picture-inner">
-                                                        <picture
-                                                            class="book-picture-frame">
-                                                            <source
-                                                                srcset="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                type="image/webp"><img
-                                                                src="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                alt="뇌를 위한 최소한의 습관 도서 이미지" loading="lazy"
-                                                                class="book-picture-image">
-                                                        </picture>
-                                                    </div>
-                                                </button>
-                                                </div>
-                                                <button
-                                                class="book-text-button">
-                                                <div class="book-text-wrapper">
-                                                    <p class="book-title">뇌를 위한 최소한의
-                                                        습관</p>
-                                                    <p class="book-author">피터 홀린스
-                                                    </p>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide swiper-slide-active slide-item" style="margin-right: 12px;">
-                                    <div class="book-wrapper">
-                                        <div class="book-inner">
-                                            <div class="book-picture">
-                                                <button class="book-picture-button">
-                                                    <div class="book-badge-wrapper">
-                                                        <div class="book-badge-inner">
-                                                            <img src="https://d1miajbjsyro89.cloudfront.net/v4/_next/static/media/badge-fav.c3feb861.png"
-                                                                alt="인생책"
-                                                                class="book-badge-image"><span
-                                                                class="book-badge-text">인생책</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="book-picture-inner">
-                                                        <picture
-                                                            class="book-picture-frame">
-                                                            <source
-                                                                srcset="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                type="image/webp"><img
-                                                                src="https://cover.millie.co.kr/service/cover/179653428/1026e6f5579246d7a36edb1ea5a34929.jpg?w=NaN&amp;q=80&amp;f=webp"
-                                                                alt="뇌를 위한 최소한의 습관 도서 이미지" loading="lazy"
-                                                                class="book-picture-image">
-                                                        </picture>
-                                                    </div>
-                                                </button>
-                                                </div>
-                                                <button
-                                                class="book-text-button">
-                                                <div class="book-text-wrapper">
-                                                    <p class="book-title">뇌를 위한 최소한의
-                                                        습관</p>
-                                                    <p class="book-author">피터 홀린스
-                                                    </p>
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </section>

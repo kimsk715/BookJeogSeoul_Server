@@ -166,4 +166,17 @@ public class PostDAO {
     public ReceiverVO findReceiverById(Long id){
         return postMapper.selectReceiverById(id);
     }
+
+    public List<BookDonateVO> findDonatedBooks(){
+        return postMapper.selectDonatedBooks();
+    }
+
+    public List<BookDonateVO> findAllDonatedBooks(){
+        return postMapper.selectAllDonatedBooks();
+    }
+
+    public List<ReceiverVO> findAllReceivers(){
+        return postMapper.selectAllReceiverPosts();
+    }
+
 }

@@ -490,7 +490,7 @@
         where bpf.book_post_id = #{bookPostId}
     </select>
 
-    <!-- 후원 대상 리스트 -->
+    <!-- 후원 대상 리스트(관리자) -->
     <select id="selectAllReceiverPost" resultType="receiverVO">
         select r.id, receiver_title, receiver_text, receiver_status, date(createdDate) as createdDate, date(updatedDate) as updatedDate, member_id
             from tbl_post p
@@ -533,11 +533,27 @@
         values (#{id}, #{discussionTitle}, #{discussionText}, #{bookIsbn}, #{bookTitle})
     </insert>
 
-
+    <!--이 주의 기부 도서-->
     <select id="selectDonatedBooks" resultType="bookDonateVO">
         select *
         from tbl_book_donate
         where book_received_status = '수취완료'
+        limit 10
+    </select>
+
+    <select id="selectAllDonatedBooks" resultType="bookDonateVO">
+        select *
+        from tbl_book_donate
+        where book_received_status = '수취완료'
+    </select>
+
+    <!--게시판 조회용-->
+    <select id="selectAllReceiverPosts" resultType="receiverVO">
+        select r.id, receiver_title, receiver_text, receiver_status,  ceil((current_timestamp-date(createdDate))) as createdDate, date(updatedDate) as updatedDate, member_id
+        from tbl_post p
+        join tbl_receiver r
+        on r.id = p.id
+
     </select>
 </mapper>
 
