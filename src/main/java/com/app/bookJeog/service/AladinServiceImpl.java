@@ -166,5 +166,21 @@ public class AladinServiceImpl implements AladinService {
 
         return result;
     }
-
+    // 단일 도서 정보를 isbn으로 가져와 Map 타입으로 반환
+    public Map<String, Object> getBookInfoAsMap(Long isbn) {
+        try {
+            JSONObject json = getBookInfo(isbn);
+            Map<String, Object> result = new HashMap<>();
+            result.put("isbn", json.optLong("isbn"));
+            result.put("title", json.optString("title"));
+            result.put("author", json.optString("author"));
+            result.put("publisher", json.optString("publisher"));
+            result.put("description", json.optString("description"));
+            result.put("cover", json.optString("cover"));
+            return result;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
