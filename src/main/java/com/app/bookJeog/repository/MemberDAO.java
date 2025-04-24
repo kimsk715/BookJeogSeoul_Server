@@ -39,8 +39,8 @@ public class MemberDAO {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> findByEmail(String memberEmail) {
-        return memberMapper.selectByEmail(memberEmail);
+    public Optional<PersonalMemberVO> findByEmail(PersonalMemberVO personalMemberVO) {
+        return memberMapper.selectByEmail(personalMemberVO);
     }
 
 
@@ -53,6 +53,12 @@ public class MemberDAO {
     // 일반 비밀번호 찾기
     public Optional<PersonalMemberVO> findPersonalMemberPassword(PersonalMemberVO personalMemberVO) {
         return memberMapper.searchPassword(personalMemberVO);
+    }
+
+
+    // 비밀번호 변경
+    public void setPassword(String memberEmail, String newPasswd) {
+        memberMapper.updatePassword(memberEmail, newPasswd);
     }
 
 }
