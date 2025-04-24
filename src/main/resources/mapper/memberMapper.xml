@@ -34,7 +34,7 @@
 
     <!--이메일 중복검사-->
     <select id="selectByEmail" resultType="personalMemberVO">
-        select *
+        select id, member_email, member_password, member_name, member_mileage, member_status, member_birth, member_gender, member_phone, member_nickname
         from tbl_personal_member
         where member_email = #{memberEmail}
     </select>
@@ -46,15 +46,24 @@
         from tbl_personal_member
         where member_email = #{memberEmail} and member_password = #{memberPassword}
     </select>
-    
-    
-    
+
+
     <!--비밀번호 찾기-->
     <select id="searchPassword" resultType="PersonalMemberVO">
         select id, member_email, member_password, member_name, member_mileage, member_status, member_birth, member_gender, member_phone, member_nickname
         from tbl_personal_member
         where member_email = #{memberEmail} and member_name = #{memberName} and member_birth = #{memberBirth} and member_gender = #{memberGender};
     </select>
+
+
+    <!--비밀번호 변경-->
+    <update id="updatePassword">
+        update tbl_personal_member
+        set member_password = #{newPasswd}
+        where member_email = #{memberEmail}
+    </update>
+
+
 </mapper>
 
 

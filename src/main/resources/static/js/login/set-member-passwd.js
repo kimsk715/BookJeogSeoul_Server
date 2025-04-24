@@ -21,8 +21,10 @@ inputId.addEventListener("blur", () => {
 inputId.addEventListener("input", () => {
     if (inputId.value.length > 0) {
         clearBtn.style.display = "block";
+        activeLoginBtn()
     } else {
         clearBtn.style.display = "none";
+        activeLoginBtn()
     }
 });
 clearBtn.addEventListener("mousedown", (e) => {
@@ -58,8 +60,10 @@ inputPw.addEventListener("blur", () => {
 inputPw.addEventListener("input", () => {
     if (inputPw.value.length > 0) {
         cleartBtnPw.style.display = "block";
+        activeLoginBtn()
     } else {
         cleartBtnPw.style.display = "none";
+        activeLoginBtn()
     }
 });
 
@@ -75,13 +79,14 @@ cleartBtnPw.addEventListener("mousedown", (e) => {
 const nextBtn = document.querySelector("#login-btn");
 
 const activeLoginBtn = () => {
-    if (inputId.value.length > 0 && inputPw.value.length > 0) {
+    if (inputId.value.length > 0 && inputPw.value.length > 0 && inputId.value.length === inputPw.value.length) {
         checkBtn.style.opacity = "1";
         checkBtn.style.cursor = "pointer";
     } else {
         checkBtn.style.opacity = ".4";
         checkBtn.style.cursor = "not-allowed";
     }
+
 };
 inputId.addEventListener("input", activeLoginBtn);
 inputPw.addEventListener("input", activeLoginBtn);
@@ -89,14 +94,16 @@ inputPw.addEventListener("input", activeLoginBtn);
 // 모달 테스트
 // 모달 창을 띄우기 위한 코드
 // 안쓸거면 주석 하면됨
-const modal = document.querySelector(".modal");
+const modal = document.querySelector("#modal");
 const modalCloseBtn = document.querySelector(
     "#modal-wrap > .modal-footer > button"
 );
 const modalHeader = document.querySelector(".modal-header > strong");
-const modalBody = document.querySelector(".modal-body > p");
+const modalBody = document.querySelector(".modal-body > div > p");
+const changeForm = document.querySelector("#change-passwd-form")
 
 modalCloseBtn.addEventListener("click", () => {
+    changeForm.submit();
     modal.classList.add("fade-out");
     modal.classList.remove("fade-in");
     setTimeout(() => {
@@ -104,8 +111,10 @@ modalCloseBtn.addEventListener("click", () => {
     }, 500);
 });
 
+console.log(changeForm)
+
 checkBtn.addEventListener("click", () => {
-    modal.classList.remove("fade-out");
+    modalBody.innerText = "변경성공!"
     modal.style.display = "flex";
     modal.classList.add("fade-in");
 });

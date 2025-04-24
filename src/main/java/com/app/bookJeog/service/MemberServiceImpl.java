@@ -8,13 +8,28 @@ import com.app.bookJeog.domain.dto.MemberPersonalMemberDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.mapper.MemberMapper;
 import com.app.bookJeog.repository.MemberDAO;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Optional;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor @Transactional(rollbackFor = Exception.class)
@@ -25,6 +40,7 @@ public class MemberServiceImpl implements MemberService {
     private final PersonalMemberDTO personalMemberDTO;
     private final HttpSession session;
     private final PersonalMemberVO personalMemberVO;
+    private final JavaMailSender javaMailSender;
 
 
     @Override
@@ -41,7 +57,9 @@ public class MemberServiceImpl implements MemberService {
     // 이메일 중복검사
     @Override
     public Optional<PersonalMemberVO> checkEmail(String email) {
-        return memberDAO.findByEmail(email);
+        personalMemberDTO.setMemberEmail(email);
+        PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
+        return memberDAO.findByEmail(personalMemberVO);
     }
 
 
@@ -70,14 +88,202 @@ public class MemberServiceImpl implements MemberService {
     }
 
 
-    // 비밀번호 찾기
+    // 비밀번호 찾기에서 먼저 등록되어있는지 확인
     public Optional<PersonalMemberDTO> searchPassword (PersonalMemberDTO personalMemberDTO) {
 
         PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
-        log.info("searchPassword: personalMemberVO={}", personalMemberVO);
 
         Optional<PersonalMemberVO> foundMember = memberDAO.findPersonalMemberPassword(personalMemberVO);
 
         return foundMember.map(this::toPersonalMemberDTO);
     }
+
+
+    // 비밀번호 찾기에서 등록되어있다면 인증메일발송
+    public void sendMail(String email, HttpServletResponse response, HttpSession session) throws MessagingException {
+        String code = createCode();
+
+        // 1. 쿠키로 인증 코드 저장
+        Cookie cookie = new Cookie("token", code);
+        cookie.setMaxAge(60 * 5); // 30분 유효
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        // 1-2 세션에 이메일 담음
+       session.setAttribute("email", email);
+
+        // 2. 메일 내용 구성
+        String receiver = email; // 사용자 이메일로 전송
+        String sender = "rksel0712@gmail.com";
+        String title = "북적북적에서 비밀번호변경!";
+
+        StringBuilder body = new StringBuilder();
+
+        body.append("<body>");
+        body.append("<div style=\"width: 600px; margin: 0 auto; background-color: #f8f9fa; border: 1px solid #ddd; border-radius: 8px; padding: 20px;\">");
+        body.append("<div style=\"background-color: #fff; border: 1px solid #ccc; width: 70%; margin: 30px auto; padding: 60px 30px; text-align: center; border-radius: 8px;\">");
+        body.append("<img src='cid:logoImage' alt=\"로고 이미지\" style=\"max-width: 100px; margin-bottom: 20px;\" />");
+        body.append("<h2 style=\"margin: 40px 0 20px; font-size: 40px; font-weight: 400; letter-spacing: -2px; color: #333;\">");
+        body.append("비밀번호 찾기");
+        body.append("</h2>");
+        body.append("<p style=\"font-size: 14px; line-height: 22px; color: #555; margin-bottom: 20px;\">");
+        body.append("본 메일은 비밀번호 변경을 위해<br />발송되는 메일입니다.");
+        body.append("</p>");
+        body.append("<p style=\"font-size: 18px; line-height: 24px; color: #000; font-weight: bold; background-color: #f0f0f0; display: inline-block; padding: 10px 20px; border: 1px solid #ddd; border-radius: 5px;\">");
+        body.append('"'+code+'"');
+        body.append("</p>");
+        body.append("<div style=\"margin-top: 40px;\">");
+        body.append("<p style=\"font-size: 11px; line-height: 14px; color: #888;\">");
+        body.append("본 이메일은 발송된 지 5분이 지나면 만료됩니다.<br />");
+        body.append("문의사항은 <a href=\"mailto:rksel0712@gmail.com\" style=\"color: #007bff; text-decoration: none;\">rksel0712@gmail.com</a>으로 보내주세요.");
+        body.append("</p>");
+        body.append("</div>");
+        body.append("</div>");
+        body.append("</div>");
+        body.append("</body>");
+
+
+        String emailBody = body.toString();
+
+        // 3. 메일 발송 설정
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+
+        helper.setFrom(sender);
+        helper.setTo(receiver);
+        helper.setSubject(title);
+        helper.setText(body.toString(), true);
+
+        FileSystemResource fileSystemResource = new FileSystemResource(new File("src/main/resources/static/images/common/Logo.png"));
+        helper.addInline("logoImage", fileSystemResource);
+
+        // 4. 메일 발송
+        javaMailSender.send(mimeMessage);
+    }
+    public String createCode() {
+        String codes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String code = "";
+        Random random = new Random();
+
+        for(int i=0; i<5; i++) {
+            code += codes.charAt(random.nextInt(codes.length()));
+        }
+        return code;
+    }
+
+
+    // 비밀번호 변경하기
+    public void changePassword(String memberEmail, String newPasswd) {
+        memberMapper.updatePassword(memberEmail, newPasswd);
+    }
+
+
+    // 카카오 accces토큰 가져오기
+    public  String getKakaoAccessToken(String code){
+        String accessToken = null;
+        String requestURI = "https://kauth.kakao.com/oauth/token";
+
+        try {
+            URL url = new URL(requestURI);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            StringBuilder stringBuilder = new StringBuilder();
+            BufferedWriter bufferedWriter = null;
+            String redirectURI = "http://localhost:10000/personal/kakao/login";
+
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+
+            stringBuilder.append("grant_type=authorization_code");
+            stringBuilder.append("&client_id=c3aac24d973a36402998e7772742f80c");
+            stringBuilder.append("&redirect_uri=" + redirectURI);
+            stringBuilder.append("&code=" + code);
+
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+            bufferedWriter.write(stringBuilder.toString());
+            bufferedWriter.close();
+
+            if(connection.getResponseCode() == 200){
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line = null;
+                String result = "";
+
+                while((line = bufferedReader.readLine()) != null){
+                    result += line;
+                }
+
+                JsonElement jsonElement = JsonParser.parseString(result);
+                accessToken = jsonElement.getAsJsonObject().get("access_token").getAsString();
+
+                bufferedReader.close();
+            }
+
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return accessToken;
+    }
+
+
+
+    // 카카오 info 가져오기
+        public Optional<PersonalMemberDTO> getKakaoInfo(String token) {
+            String accessToken = null;
+            String requestURI = "https://kapi.kakao.com/v2/user/me";
+            PersonalMemberDTO personalMemberDTO = null;
+
+            try {
+                // URL 객체 생성
+                URL url = new URL(requestURI);
+
+                // HTTP 연결 생성
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+                // 요청 방식 설정: POST
+                connection.setRequestMethod("POST");
+                connection.setDoOutput(true); // output 사용 가능하도록 설정
+
+                // Authorization 헤더에 Bearer 타입의 토큰 설정
+                connection.setRequestProperty("Authorization", "Bearer " + token);
+
+                // 응답 코드가 200 OK일 때만 응답 처리
+                if (connection.getResponseCode() == 200) {
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    String line;
+                    String result = "";
+
+                    // 응답 JSON 문자열을 한 줄씩 읽어서 합침
+                    while ((line = bufferedReader.readLine()) != null) {
+                        result += line;
+                    }
+
+                    // 응답 JSON 문자열 파싱
+                    JsonElement jsonElement = JsonParser.parseString(result);
+
+                    // "kakao_account" 항목 추출
+                    JsonElement kakaoAccount = jsonElement.getAsJsonObject().get("kakao_account").getAsJsonObject();
+
+                    // 그 안의 "profile" 항목 추출
+                    JsonElement profile = kakaoAccount.getAsJsonObject().get("profile");
+
+                    // DTO 객체 생성 및 값 주입
+                    personalMemberDTO = new PersonalMemberDTO();
+                    personalMemberDTO.setMemberEmail(kakaoAccount.getAsJsonObject().get("email").getAsString()); // 이메일 추출
+                    personalMemberDTO.setMemberName(profile.getAsJsonObject().get("nickname").getAsString());    // 닉네임 추출
+                    log.info("personalMemberDTO {}", personalMemberDTO);
+
+                    bufferedReader.close();
+                }
+
+            } catch (MalformedURLException e) {
+                // URL 형식 오류
+                throw new RuntimeException("잘못된 URL입니다: " + e.getMessage(), e);
+            } catch (IOException e) {
+                // 입출력 에러 처리
+                throw new RuntimeException("연결 중 오류가 발생했습니다: " + e.getMessage(), e);
+            }
+            return Optional.ofNullable(personalMemberDTO);
+        };
 }
