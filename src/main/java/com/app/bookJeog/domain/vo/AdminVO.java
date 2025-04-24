@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class AdminVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long adminId;
+    private String adminId;
     private String adminPassword;
     private String adminName;
     private String adminDepartMent;

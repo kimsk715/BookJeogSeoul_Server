@@ -27,7 +27,7 @@ public interface MemberMapper {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> selectByEmail(String memberEmail);
+    public Optional<PersonalMemberVO> selectByEmail(PersonalMemberVO personalMemberVO);
 
 
     // 일반 로그인
@@ -49,4 +49,7 @@ public interface MemberMapper {
     public void updatePersonalMemberStatus(Long memberId);
 
     public void updateSponsorMemberStatus(Long sponsorId);
+
+    // 비밀번호 변경
+    public void updatePassword(String memberEmail, String newPasswd);
 }
