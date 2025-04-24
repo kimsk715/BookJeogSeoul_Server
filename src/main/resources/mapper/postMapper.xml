@@ -448,6 +448,7 @@
             bp.book_isbn,
             count(bpl.id) as like_count,
             pm.member_name,
+            pm.id as member_id,
             f.file_path,
             f.file_name,
             bp.book_post_title,

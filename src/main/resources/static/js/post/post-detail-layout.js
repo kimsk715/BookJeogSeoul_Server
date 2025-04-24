@@ -23,6 +23,8 @@ const postDetailLayout = (() => {
         if (bookContainer) {
             bookContainer.style.setProperty("--background-image", `url(${bookCover})`);
         }
+
+        window.bookInfo = book;
     };
 
 

@@ -747,7 +747,8 @@ h1 {
 
 .book-container::before{
     height: 100%;
-    opacity: .15;
+    /*opacity: .15;*/
+    opacity: 0;
     background-image: var(--background-image);
     background-repeat: no-repeat;
     background-position: 0 0;
