@@ -6,6 +6,13 @@ import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,5 +68,57 @@ public interface MemberService {
     public void updateMemberStatus(Long memberId);
 
     public MemberVO getById(Long id);
+
+
+    public default String getKakaoAccessToken(String code){
+        String accessToken = null;
+        String requestURI = "https://kauth.kakao.com/oauth/token";
+
+        try {
+            URL url = new URL(requestURI);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            StringBuilder stringBuilder = new StringBuilder();
+            BufferedWriter bufferedWriter = null;
+
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+
+            stringBuilder.append("grant_type=authorization_code");
+            stringBuilder.append("&client_id=c87c26c641832d92e09c529afe085195");
+            stringBuilder.append("&redirect_uri=http://localhost:10000/kakao/login");
+            stringBuilder.append("&code=" + code);
+
+            bufferedWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));
+            bufferedWriter.write(stringBuilder.toString());
+            bufferedWriter.close();
+
+            if(connection.getResponseCode() == 200){
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String line = null;
+                String result = "";
+
+                while((line = bufferedReader.readLine()) != null){
+                    result += line;
+                }
+
+                JsonElement jsonElement = JsonParser.parseString(result);
+                accessToken = jsonElement.getAsJsonObject().get("access_token").getAsString();
+
+                bufferedReader.close();
+            }
+
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return accessToken;
+    }
+
+
+
+
+
 }
 
