@@ -47,7 +47,7 @@
 
     <!--이메일 중복검사-->
     <select id="selectByEmail" resultType="personalMemberVO">
-        select *
+        select id, member_email, member_password, member_name, member_mileage, member_status, member_birth, member_gender, member_phone, member_nickname
         from tbl_personal_member
         where member_email = #{memberEmail}
     </select>
@@ -120,8 +120,6 @@
         limit 8 offset #{offset}
     </select>
 
-    
-    
     <!--비밀번호 찾기-->
     <select id="searchPassword" resultType="personalMemberVO">
         select id, member_email, member_password, member_name, member_mileage, member_status, member_birth, member_gender, member_phone, member_nickname
@@ -159,6 +157,15 @@
         set sponsor_member_status = 'SUSPENDED'
         where id = #{sponsorId}
     </update>
+
+    <!--비밀번호 변경-->
+    <update id="updatePassword">
+        update tbl_personal_member
+        set member_password = #{newPasswd}
+        where member_email = #{memberEmail}
+    </update>
+
+
 </mapper>
 
 

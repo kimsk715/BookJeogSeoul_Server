@@ -1,16 +1,21 @@
 package com.app.bookJeog.controller.admin;
 
 
+import com.app.bookJeog.domain.dto.AdminDTO;
 import com.app.bookJeog.domain.dto.AdminPersonalMemberDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.vo.AdminVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.service.AdminServiceImpl;
 import com.app.bookJeog.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +24,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -27,6 +33,28 @@ import java.util.List;
 public class AdminMemberController {
 
     private final MemberService memberService;
+    private final AdminServiceImpl adminServiceImpl;
+    private HttpSession session;
+
+
+    // 어드민 로그인
+    @GetMapping("admin/login")
+    public String goToAdmin() {
+        return "login/admin";
+    }
+
+    @PostMapping("admin/login-admin")
+    public String loginAdmin (AdminDTO adminDTO) {
+        Optional<AdminVO> foundAdmin = adminServiceImpl.loginAdmin(adminDTO);
+        if(foundAdmin.isPresent()) {
+            session.setAttribute("admin", foundAdmin);
+            return "redirect:/admin-page";
+        } else {
+            return "redirect:/admin/login?result=fail";
+        }
+    }
+
+
 
     @GetMapping("admin/personal-members")
     @ResponseBody
@@ -61,6 +89,4 @@ public class AdminMemberController {
 
         return adminPersonalMemberDTO;
     }
-
-
 }

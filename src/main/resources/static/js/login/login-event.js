@@ -99,7 +99,7 @@ const modalCloseBtn = document.querySelector(
     "#modal-wrap > .modal-footer > button"
 );
 const modalHeader = document.querySelector(".modal-header > strong");
-const modalBody = document.querySelector(".modal-body > p");
+const modalBody = document.querySelector(".modal-body > div > p");
 
 modalCloseBtn.addEventListener("click", () => {
     modal.classList.add("fade-out");
@@ -112,6 +112,16 @@ modalCloseBtn.addEventListener("click", () => {
 window.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("result") === "fail") {
+        modal.style.display = "flex";
+        modal.classList.add("fade-in");
+    }
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("result") === "tokken-lose") {
+        modalHeader.innerText = "오류"
+        modalBody.innerText = "토큰을 받아오지못하여 5분후에 시도해주세요."
         modal.style.display = "flex";
         modal.classList.add("fade-in");
     }
