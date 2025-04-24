@@ -1,6 +1,12 @@
 package com.app.bookJeog.controller.admin;
 
 
+import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.AdminMemberStatus;
+import com.app.bookJeog.domain.vo.MemberVO;
+import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.domain.vo.SponsorMemberVO;
+
 import com.app.bookJeog.domain.dto.AdminDTO;
 import com.app.bookJeog.domain.dto.AdminPersonalMemberDTO;
 import com.app.bookJeog.domain.dto.Pagination;
@@ -9,6 +15,7 @@ import com.app.bookJeog.domain.vo.AdminVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.service.AdminServiceImpl;
+
 import com.app.bookJeog.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +40,7 @@ import java.util.Optional;
 public class AdminMemberController {
 
     private final MemberService memberService;
+    private final SponsorMemberDTO sponsorMemberDTO;
     private final AdminServiceImpl adminServiceImpl;
     private HttpSession session;
 
@@ -88,5 +96,57 @@ public class AdminMemberController {
         adminPersonalMemberDTO.setPersonalMemberDTOList(memberDTOS);
 
         return adminPersonalMemberDTO;
+    }
+
+
+    // 단체 회원 목록 조회
+    @GetMapping("admin/sponsor-members")
+    @ResponseBody
+    public AdminSponsorMemberDTO getAllSponsorMembers(Pagination pagination, @RequestParam(value = "keyword", required = false) String keyword) {
+        AdminSponsorMemberDTO adminSponsorMemberDTO = new AdminSponsorMemberDTO();
+        pagination.create(memberService.countAllSponsor(pagination));
+        adminSponsorMemberDTO.setPagination(pagination);
+        adminSponsorMemberDTO.setSponsorMemberDTOList(memberService.getAllSponsor(pagination));
+        return adminSponsorMemberDTO;
+    }
+
+    // 단체 회원 등록하기
+    @GetMapping("admin/insert-sponsor")
+    @ResponseBody
+    public void insertSponsorMember(@RequestParam("info") List<String> infoArray){
+        SponsorMemberDTO sponsorMemberDTO = new SponsorMemberDTO();
+        sponsorMemberDTO.setSponsorId(infoArray.get(0));
+        sponsorMemberDTO.setSponsorPassword(infoArray.get(1));
+        sponsorMemberDTO.setSponsorEmail(infoArray.get(2));
+        sponsorMemberDTO.setSponsorPhoneNumber(infoArray.get(3));
+        sponsorMemberDTO.setSponsorName(infoArray.get(4));
+        sponsorMemberDTO.setSponsorMainAddress(infoArray.get(5));
+        sponsorMemberDTO.setSponsorSubAddress(infoArray.get(6));
+        memberService.insertSponsorMember(sponsorMemberDTO);
+    }
+
+    @GetMapping("admin/admin-members")
+    @ResponseBody
+    public AdminInfoDTO getAllAdmin(Pagination pagination, @RequestParam(value = "keyword", required = false) String keyword) {
+        AdminInfoDTO adminInfoDTO = new AdminInfoDTO();
+        pagination.create(memberService.countAllAdmin(pagination));
+        adminInfoDTO.setPagination(pagination);
+        adminInfoDTO.setAdminDTOList(memberService.getAllAdmin(pagination));
+        log.info(adminInfoDTO.toString());
+        return adminInfoDTO;
+    }
+
+    @GetMapping("admin/insert-admin")
+    @ResponseBody
+    public void insertAdmin(@RequestParam("info") List<String> infoArray){
+        AdminDTO adminDTO = new AdminDTO();
+        adminDTO.setAdminId(infoArray.get(0));
+        adminDTO.setAdminPassword(infoArray.get(1));
+        adminDTO.setAdminName(infoArray.get(2));
+        adminDTO.setAdminDepartment(infoArray.get(3));
+        adminDTO.setAdminGrade(infoArray.get(4));
+        adminDTO.setAdminMemberStatus(AdminMemberStatus.ACTIVE);
+        log.info(adminDTO.toString());
+        memberService.insertAdmin(adminDTO);
     }
 }

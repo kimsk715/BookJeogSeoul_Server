@@ -17,7 +17,7 @@ public class AdminVO extends Period {
     private String adminId;
     private String adminPassword;
     private String adminName;
-    private String adminDepartMent;
+    private String adminDepartment;
     private String adminGrade;
     private AdminMemberStatus adminMemberStatus;
 
