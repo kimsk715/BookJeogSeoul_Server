@@ -98,6 +98,7 @@ public class PersonalController {
     @PostMapping("/personal/login-check")
     public String loginSuccess(PersonalMemberDTO personalMemberDTO, HttpSession session) {
         Optional<PersonalMemberDTO> foundMember = memberServiceImpl.loginPersonalMember(personalMemberDTO);
+        log.info("found member : {}", foundMember);
 
         if(foundMember.isPresent()) {
             session.setAttribute("member", foundMember);

@@ -25,6 +25,8 @@ public class SponsorMemberDTO {
     private String sponsorEmail;
     private String sponsorSubAddress;
     private SponsorMemberStatus sponsorMemberStatus;
+    private String createdDate;
+    private String updatedDate;
 
     public SponsorMemberVO toVO() {
         return SponsorMemberVO.builder()
@@ -37,6 +39,9 @@ public class SponsorMemberDTO {
                 .sponsorMainAddress(sponsorMainAddress)
                 .sponsorSubAddress(sponsorSubAddress)
                 .sponsorMemberStatus(sponsorMemberStatus)
+                .sponsorEmail(sponsorEmail)
+                .createdDate(createdDate)
+                .updatedDate(updatedDate)
                 .build();
     }
 

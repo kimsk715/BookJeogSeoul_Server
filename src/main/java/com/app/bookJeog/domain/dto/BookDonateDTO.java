@@ -1,7 +1,6 @@
 package com.app.bookJeog.domain.dto;
 
-import com.app.bookJeog.domain.enumeration.BookPostStatus;
-import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
+import com.app.bookJeog.domain.enumeration.BookReceivedStatus;
 import com.app.bookJeog.domain.vo.BookDonateVO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,14 +18,20 @@ public class BookDonateDTO {
     private Long id;
     private Long memberId;
     private Long bookIsbn;
-    private BookPostStatus postStatus;
+    private BookReceivedStatus bookReceivedStatus;
+    private String bookTitle;
+    private String createdDate;
+    private String updatedDate;
 
     public BookDonateVO toVO() {
         return BookDonateVO.builder()
                 .id(id)
                 .memberId(memberId)
                 .bookIsbn(bookIsbn)
-                .postStatus(postStatus)
+                .bookReceivedStatus(bookReceivedStatus)
+                .bookTitle(bookTitle)
+                .createdDate(createdDate)
+                .updatedDate(updatedDate)
                 .build();
     }
 
