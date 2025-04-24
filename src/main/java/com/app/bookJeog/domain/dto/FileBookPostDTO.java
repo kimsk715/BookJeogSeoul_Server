@@ -24,6 +24,7 @@ public class FileBookPostDTO {
     private String bookPostText;
 
     private String memberName;
+    private String memberId;
     private String filePath;
     private String fileName;
 

@@ -15,5 +15,23 @@ public interface FavoriteMapper {
 
     //    책 스크랩 취소
     public void deleteBookScrap(Long memberId, Long bookIsbn);
+
+    //    독후감 좋아요하기
+    public void insertBookPostLike(Long memberId, Long bookPostId);
+
+    //    특정 독후감의 내 좋아요 여부 조회
+    public int isBookPostLiked(Long memberId, Long bookPostId);
+
+    //    독후감 좋아요 취소하기
+    public void deleteBookPostLike(Long memberId, Long bookPostId);
+
+    //    특정 회원 팔로우하기
+    public void insertMemberFollow(Long followReceiverId, Long followSenderId);
+
+    //    내 특정 회원 팔로우여부 조회
+    public int isMemberFollowed(Long followReceiverId, Long followSenderId);
+
+    //    팔로우 취소
+    public void deleteMemberFollow(Long followReceiverId, Long followSenderId);
 }
 

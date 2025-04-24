@@ -54,10 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         ".diary-title-container>.text"
                     ).innerText,
                     description:
-                        document.querySelector(".title-inner>h1").innerText,
+                        post.bookTitle,
                     // 샘플, 나중에 책 이미지로 바꿔야함
-                    imageUrl:
-                        "https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png",
+                    imageUrl: window.bookInfo?.cover || "/images/common/default-book-cover.png",
                     link: {
                         mobileWebUrl: window.location.href,
                         webUrl: window.location.href,
