@@ -172,7 +172,7 @@
 
     <insert id="insertAdmin">
         insert into tbl_admin (id, admin_id, admin_password, admin_name, admin_department, admin_grade)
-        values (#{id}, #{adminId}, #{adminPassword}, #{adminName}, #{adminDepartMent}, #{adminGrade})
+        values (#{id}, #{adminId}, #{adminPassword}, #{adminName}, #{adminDepartment}, #{adminGrade})
     </insert>
 
     <!--비밀번호 변경-->
