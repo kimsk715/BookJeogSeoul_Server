@@ -26,7 +26,6 @@ public class AdminReceiverController {
         pagination.create(postService.countAllReceiverPost(pagination));
         adminReceiverDTO.setPagination(pagination);
         adminReceiverDTO.setReceiverInfoDTOList(postService.getAllReceiverPost(pagination));
-        log.info(adminReceiverDTO.getReceiverInfoDTOList().get(0).getReceiverDTO().getReceiverStatus().getCode());
         return adminReceiverDTO;
     }
 

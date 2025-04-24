@@ -1,11 +1,11 @@
 package com.app.bookJeog.service;
 
-import com.app.bookJeog.domain.dto.MemberPersonalMemberDTO;
-import com.app.bookJeog.domain.dto.Pagination;
-import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.domain.vo.SponsorMemberVO;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +17,14 @@ public interface MemberService {
     // 회원가입
     public default MemberVO toMemberVO  () {
         return MemberVO.builder().memberType(MemberType.PERSONAL).build();
+    }
+
+    public default MemberVO toSponsorMember() {
+        return MemberVO.builder().memberType(MemberType.SPONSOR).build();
+    }
+
+    public default MemberVO toAdmin() {
+        return MemberVO.builder().memberType(MemberType.ADMIN).build();
     }
     public default PersonalMemberVO toPersonalMemberVO(MemberPersonalMemberDTO memberPersonalMemberDTO) {
         return PersonalMemberVO.builder()
@@ -63,5 +71,35 @@ public interface MemberService {
     public MemberVO getById(Long id);
 
     public PersonalMemberVO getPersonalMember(Long memberId);
+
+    public List<SponsorMemberDTO> getAllSponsor(Pagination pagination);
+
+    public default SponsorMemberDTO toSponsorMemberDTO(SponsorMemberVO sponsorMemberVO) {
+        SponsorMemberDTO sponsorMemberDTO = new SponsorMemberDTO();
+        sponsorMemberDTO.setId(sponsorMemberVO.getId());
+        sponsorMemberDTO.setSponsorId(sponsorMemberVO.getSponsorId());
+        sponsorMemberDTO.setSponsorEmail(sponsorMemberVO.getSponsorEmail());
+        sponsorMemberDTO.setSponsorName(sponsorMemberVO.getSponsorName());
+        sponsorMemberDTO.setSponsorPassword(sponsorMemberVO.getSponsorPassword());
+        sponsorMemberDTO.setSponsorMemberStatus(sponsorMemberVO.getSponsorMemberStatus());
+        sponsorMemberDTO.setSponsorPhoneNumber(sponsorMemberVO.getSponsorPhoneNumber());
+        sponsorMemberDTO.setSponsorMainAddress(sponsorMemberVO.getSponsorMainAddress());
+        sponsorMemberDTO.setSponsorSubAddress(sponsorMemberVO.getSponsorSubAddress());
+        sponsorMemberDTO.setCreatedDate(sponsorMemberVO.getCreatedDate());
+        sponsorMemberDTO.setUpdatedDate(sponsorMemberVO.getUpdatedDate());
+
+        return sponsorMemberDTO;
+
+    }
+
+    public int countAllSponsor(Pagination pagination);
+
+    public void insertSponsorMember(SponsorMemberDTO sponsorMemberDTO);
+
+    public List<AdminDTO> getAllAdmin(Pagination pagination);
+
+    public int countAllAdmin(Pagination pagination);
+
+    public void insertAdmin(AdminDTO adminDTO);
 }
 

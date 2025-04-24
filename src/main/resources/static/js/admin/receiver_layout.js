@@ -8,8 +8,10 @@ const receiverLayout = (() =>{
         receiverList.receiverInfoDTOList.forEach((post) => {
             let className = "";
             let classText = "";
-            let statusText = post.receiverDTO.receiverStatus ;
-
+            let statusText = post.receiverDTO.receiverStatus;
+            console.log(statusText.code);
+            console.log(statusText.name);
+            console.log(statusText)
             switch(statusText){
                 case("WAITING"):
                     className = "suspended"

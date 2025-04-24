@@ -7,10 +7,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 // 각 상수들은 인스턴스로 만들어지며, 각 인스턴스는 모두 해당 enum 타입이다.
 // 각 상수는 모두 static으로 처리되고, enum Heap 메모리에 할당된다.
 public enum AdminMemberStatus {
-    ACTIVE("활성"),
-    DORMANCY("휴면"),
-    SUSPENDED("정지"),
-    DELETE("정지");
+    ACTIVE("재직"),
+    DORMANCY("휴직"),
+    DELETE("퇴직");
 
 
     private final String code;
@@ -30,15 +29,12 @@ public enum AdminMemberStatus {
 //    RESTful API에서 json형식으로 enum을 받아야할 때,
 //    직접 작성한 code 혹은 label이 있을 경우 재정의해야한다.
     @JsonCreator
-    public static AdminMemberStatus forCode(String code){
-//        화면에서 전달받은 문자열(code)을
-        for(AdminMemberStatus adminMemberStatus  : AdminMemberStatus.values()){
-//            전체 code와 비교하여 같다면
-            if(adminMemberStatus.getCode().equals(code)){
-//                해당 code의 memberType 객체를 리턴한다.
+    public static AdminMemberStatus forCode(String code) {
+        for (AdminMemberStatus adminMemberStatus : values()) {
+            if (adminMemberStatus.getCode().equals(code) || adminMemberStatus.name().equalsIgnoreCase(code)) {
                 return adminMemberStatus;
             }
         }
-        throw new IllegalArgumentException("존재하지 않는 값");
+        throw new IllegalArgumentException("존재하지 않는 값: " + code);
     }
 }
