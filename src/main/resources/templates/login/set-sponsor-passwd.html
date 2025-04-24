@@ -37,31 +37,31 @@
                     </div>
                 </div>
                 <!-- 비밀번호 입력란 -->
-                <div class="input-item">
-                    <div class="bjs-input-pw">
-                        <label class="input-label-pw">
-                            <div class="inner">
-                                <div class="input">
-                                    <form action="/personal/member-change-passwd" id="change-passwd-form" method="post">
+                <form action="/sponsor/sponsor-change-passwd" id="change-passwd" method="post">
+                    <div class="input-item">
+                        <div class="bjs-input-pw">
+                            <label class="input-label-pw">
+                                <div class="inner">
+                                    <div class="input">
                                         <span class="input-pw-label">비밀번호 확인</span>
                                         <input
                                             autocomplete="off"
-                                            type="password"
+                                            type="text"
                                             name="newPasswd"
                                             id="bjs-pw"
                                             placeholder="비밀번호 확인"
                                             style="outline: none; border: none"
                                         />
-                                    </form>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        id="clear-button-pw"
+                                    ></button>
                                 </div>
-                                <button
-                                    type="button"
-                                    id="clear-button-pw"
-                                ></button>
-                            </div>
-                        </label>
+                            </label>
+                        </div>
                     </div>
-                </div>
+                </form>
                 <!-- 로그인 버튼 -->
                 <div class="login-btn-area">
                     <button type="button" id="check-btn">
@@ -91,5 +91,5 @@
             </div>
         </div>
     </body>
-    <script src="/js/login/set-member-passwd.js"></script>
+    <script src="/js/login/set-sponsor-passwd.js"></script>
 </html>

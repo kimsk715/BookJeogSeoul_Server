@@ -20,58 +20,60 @@
         <div class="admin-login">
             <div class="login-container">
                 <div class="login-wrap">
-                    <!-- 아이디 입력란 -->
-                    <div class="input-item">
-                        <div class="bjs-input-id">
-                            <label class="input-label-id">
-                                <div class="inner">
-                                    <div class="input">
-                                        <span class="input-id-label"
-                                            >아이디</span
-                                        >
-                                        <input
-                                            autocomplete="off"
-                                            type="text"
-                                            name=""
-                                            id="bjs-id"
-                                            placeholder="아이디를 입력해주세요."
-                                            style="outline: none; border: none"
-                                        />
+                    <form action="/admin/login-admin" method="post" id="admin-login-form">
+                        <!-- 아이디 입력란 -->
+                        <div class="input-item">
+                            <div class="bjs-input-id">
+                                <label class="input-label-id">
+                                    <div class="inner">
+                                        <div class="input">
+                                            <span class="input-id-label"
+                                                >아이디</span
+                                            >
+                                            <input
+                                                autocomplete="off"
+                                                type="text"
+                                                name="adminId"
+                                                id="bjs-id"
+                                                placeholder="아이디를 입력해주세요."
+                                                style="outline: none; border: none"
+                                            />
+                                        </div>
+                                        <button
+                                            type="button"
+                                            id="clear-button-id"
+                                        ></button>
                                     </div>
-                                    <button
-                                        type="button"
-                                        id="clear-button-id"
-                                    ></button>
-                                </div>
-                            </label>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <!-- 비밀번호 입력란 -->
-                    <div class="input-item">
-                        <div class="bjs-input-pw">
-                            <label class="input-label-pw">
-                                <div class="inner">
-                                    <div class="input">
-                                        <span class="input-pw-label"
-                                            >비밀번호</span
-                                        >
-                                        <input
-                                            autocomplete="off"
-                                            type="password"
-                                            name=""
-                                            id="bjs-pw"
-                                            placeholder="비밀번호를 입력해주세요."
-                                            style="outline: none; border: none"
-                                        />
+                        <!-- 비밀번호 입력란 -->
+                        <div class="input-item">
+                            <div class="bjs-input-pw">
+                                <label class="input-label-pw">
+                                    <div class="inner">
+                                        <div class="input">
+                                            <span class="input-pw-label"
+                                                >비밀번호</span
+                                            >
+                                            <input
+                                                autocomplete="off"
+                                                type="password"
+                                                name="adminPassword"
+                                                id="bjs-pw"
+                                                placeholder="비밀번호를 입력해주세요."
+                                                style="outline: none; border: none"
+                                            />
+                                        </div>
+                                        <button
+                                            type="button"
+                                            id="clear-button-pw"
+                                        ></button>
                                     </div>
-                                    <button
-                                        type="button"
-                                        id="clear-button-pw"
-                                    ></button>
-                                </div>
-                            </label>
+                                </label>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <!-- 로그인 버튼 -->
                     <div class="login-btn-area">
                         <button id="login-btn">

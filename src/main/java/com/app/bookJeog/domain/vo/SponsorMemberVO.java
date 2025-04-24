@@ -1,5 +1,6 @@
 package com.app.bookJeog.domain.vo;
 
+import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.enumeration.PersonalMemberStatus;
 import com.app.bookJeog.domain.enumeration.SponsorMemberStatus;
 import lombok.*;
@@ -19,12 +20,16 @@ public class SponsorMemberVO extends MemberVO {
     private String sponsorPassword;
     private String sponsorName;
     private String sponsorPhone;
+    private String sponsorEmail;
     private String sponsorMainAddress;
     private String sponsorSubAddress;
     private SponsorMemberStatus sponsorMemberStatus;
 
-    public SponsorMemberVO(Long id, String sponsorId, String sponsorMainAddress, SponsorMemberStatus sponsorMemberStatus, String sponsorName, String sponsorPassword, String sponsorPhone, String sponsorSubAddress) {
+
+    public SponsorMemberVO(MemberVOBuilder<?, ?> b, Long id, String sponsorEmail, String sponsorId, String sponsorMainAddress, SponsorMemberStatus sponsorMemberStatus, String sponsorName, String sponsorPassword, String sponsorPhone, String sponsorSubAddress) {
+        super(b);
         this.id = id;
+        this.sponsorEmail = sponsorEmail;
         this.sponsorId = sponsorId;
         this.sponsorMainAddress = sponsorMainAddress;
         this.sponsorMemberStatus = sponsorMemberStatus;
@@ -33,4 +38,6 @@ public class SponsorMemberVO extends MemberVO {
         this.sponsorPhone = sponsorPhone;
         this.sponsorSubAddress = sponsorSubAddress;
     }
+
+
 }
