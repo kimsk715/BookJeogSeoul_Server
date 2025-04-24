@@ -52,3 +52,20 @@
     max-width: 800px;
 }
 
+.sponsorship-modal .modal-container{
+    overflow: scroll !important;
+    height: auto;
+}
+
+.sponsorship-modal .detail-content{
+    min-height: 10px !important;
+}
+
+.admin-modal .modal-container{
+    overflow: scroll !important;
+    height: auto;
+}
+
+.admin-modal .detail-content{
+    min-height: 10px !important;
+}

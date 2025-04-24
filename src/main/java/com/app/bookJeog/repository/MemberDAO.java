@@ -1,6 +1,7 @@
 package com.app.bookJeog.repository;
 
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.vo.AdminVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
@@ -79,4 +80,30 @@ public class MemberDAO {
     public void updateSponsorMemberStatus(Long sponsorId) {
         memberMapper.updateSponsorMemberStatus(sponsorId);
     }
+
+    public List<SponsorMemberVO> findAllSponsor(Pagination pagination) {
+        return memberMapper.selectAllSponsor(pagination);
+    }
+
+    public int countAllSponsor(Pagination pagination) {
+        return memberMapper.countAllSponsor(pagination);
+    }
+
+    public void insertSponsorMember(SponsorMemberVO sponsorMemberVO) {
+        memberMapper.insertSponsorMember(sponsorMemberVO);
+    }
+
+    public List<AdminVO> findAllAdmin(Pagination pagination) {
+        return memberMapper.selectAllAdmin(pagination);
+    }
+
+    public int countAllAdmin(Pagination pagination) {
+        return memberMapper.countAllAdmin(pagination);
+    }
+
+    public void setAdmin(AdminVO adminVO) {
+        log.info(adminVO.toString());
+        memberMapper.insertAdmin(adminVO);
+    }
 }
+

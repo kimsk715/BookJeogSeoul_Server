@@ -6,10 +6,17 @@ document.addEventListener(('click'),(e) => {
         console.log("독후감 조회 버튼 클릭")
     }
 })
-
+const receiverKeywordWrap = document.querySelector(".receiver-search-input")
 receiverPageWrap.addEventListener(('click'),(e) =>{
     if(e.target.classList.contains("page-btn")){
-        const param = {page : e.target.id}
+        const param = {page : e.target.id, search : {keyword : receiverKeywordWrap.value}}
         receiverService.getAllReceiverPost(receiverLayout.showReceiverList, param)
     }
+})
+
+
+
+receiverKeywordWrap.addEventListener('change',(e)=>{
+    const param = {search : {keyword : e.target.value}}
+    receiverService.getAllReceiverPost(receiverLayout.showReceiverList, param);
 })

@@ -18,19 +18,11 @@ public class SponsorMemberVO extends MemberVO {
     private String sponsorId;
     private String sponsorPassword;
     private String sponsorName;
-    private String sponsorPhone;
+    private String sponsorPhoneNumber;
     private String sponsorMainAddress;
     private String sponsorSubAddress;
     private SponsorMemberStatus sponsorMemberStatus;
+    private String sponsorEmail;
 
-    public SponsorMemberVO(Long id, String sponsorId, String sponsorMainAddress, SponsorMemberStatus sponsorMemberStatus, String sponsorName, String sponsorPassword, String sponsorPhone, String sponsorSubAddress) {
-        this.id = id;
-        this.sponsorId = sponsorId;
-        this.sponsorMainAddress = sponsorMainAddress;
-        this.sponsorMemberStatus = sponsorMemberStatus;
-        this.sponsorName = sponsorName;
-        this.sponsorPassword = sponsorPassword;
-        this.sponsorPhone = sponsorPhone;
-        this.sponsorSubAddress = sponsorSubAddress;
-    }
+
 }

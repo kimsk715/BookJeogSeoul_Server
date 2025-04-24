@@ -760,6 +760,9 @@
                                 <button type="button" class="search-btn sponsorship-search-btn">
                                     검색
                                 </button>
+                                <button type="button" class="search-btn sponsorship-register-btn">
+                                    단체 등록(관리자)
+                                </button>
                             </div>
                             <div class="filter-box sponsorship-filter-box">
                                 <select class="status-filter sponsorship-status-filter">
@@ -788,7 +791,8 @@
                                     <tr>
                                         <th>단체번호</th>
                                         <th>단체명</th>
-                                        <th>주요사업</th>
+                                        <th>대표이메일</th>
+                                        <th>대표전화</th>
                                         <th>주소</th>
                                         <th>가입일</th>
                                         <th>최근접속일</th>
@@ -819,6 +823,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="sponsorship-pagination"></div>
                     </div>
                     <!-- 개인후원 컨텐츠 -->
                     <div class="book-donate-management" style="display: none">
@@ -855,6 +860,7 @@
                                     </option>
                                 </select>
                             </div>
+
                         </div>
 
                         <!-- 개인 후원 목록 테이블  -->
@@ -1300,7 +1306,7 @@
                                 <button type="button" class="search-btn admin-search-btn">
                                     검색
                                 </button>
-                                <button type="button" class="search-btn admin-choose-btn">
+                                <button type="button" class="search-btn admin-register-btn">
                                     신규 관리자 등록하기
                                 </button>
                             </div>
@@ -1373,6 +1379,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="admin-pagination"></div>
                     </div>
 
 
@@ -1441,9 +1448,111 @@
         </div>
     </div>
 
+    <div class="sponsorship-modal" style="display: none">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>공지 상세정보</h3>
+                <button type="button" class="close-btn">
+                    <img
+                            class="close-button"
+                            src="/images/admin/cross.png"
+                            alt="닫기"
+                    />
+                </button>
+            </div>
 
-    
-   
+            <!-- 모달 본문 -->
+            <div class="modal-body">
+
+                <!-- 공지 상세 내용 -->
+                <div class="sponsorship-detail">
+                    <h4><span>아이디</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-sponsorship-id"></textarea>
+                </div>
+                <div class="sponsorship-detail">
+                    <h4><span>비밀번호</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-sponsorship-password"></textarea>
+                </div>
+                <div class="sponsorship-detail">
+                    <h4><span>이메일</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-sponsorship-email" placeholder="비밀번호 찾기 때 사용되는 이메일입니다"></textarea>
+                </div>
+                <div class="sponsorship-detail">
+                    <h4><span>전화번호</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-sponsorship-phone"></textarea>
+                </div>
+                <div class="sponsorship-detail">
+                    <h4><span>단체명</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-sponsorship-name"></textarea>
+                </div>
+                <div class="sponsorship-detail">
+                    <h4><span>기본주소</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-sponsorship-address"></textarea>
+                </div>
+                <div class="sponsorship-detail">
+                    <h4><span>상세주소</span></h4>
+                    <textarea class="detail-content" id="new-sponsorship-sub-address"></textarea>
+                </div>
+
+
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn close-button">취소</button>
+                <button type="button" class="sponsorship-confirm-btn save-btn close-button" value="${sponsorship.id}">저장</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-modal" style="display: none">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>공지 상세정보</h3>
+                <button type="button" class="close-btn">
+                    <img
+                            class="close-button"
+                            src="/images/admin/cross.png"
+                            alt="닫기"
+                    />
+                </button>
+            </div>
+
+            <!-- 모달 본문 -->
+            <div class="modal-body">
+
+                <!-- 공지 상세 내용 -->
+                <div class="admin-detail">
+                    <h4><span>아이디</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-admin-id"></textarea>
+                </div>
+                <div class="admin-detail">
+                    <h4><span>비밀번호</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-admin-password"></textarea>
+                </div>
+                <div class="admin-detail">
+                    <h4><span>이름</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-admin-name"></textarea>
+                </div>
+                <div class="admin-detail">
+                    <h4><span>부서명</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-admin-department"></textarea>
+                </div>
+                <div class="admin-detail">
+                    <h4><span>직급</span><span style="color: red">*</span></h4>
+                    <textarea class="detail-content" id="new-admin-grade"></textarea>
+                </div>
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn close-button">취소</button>
+                <button type="button" class="admin-confirm-btn save-btn close-button" value="${admin.id}">저장</button>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -1463,9 +1572,9 @@
     <script src="/js/admin/discussion_event.js"></script>
     <script src="/js/admin/discussion_layout.js"></script>
     <script src="/js/admin/discussion_service.js"></script>
-    <script src="/js/admin/personal_event.js"></script>
-    <script src="/js/admin/personal_layout.js"></script>
-    <script src="/js/admin/personal_service.js"></script>
+    <script src="/js/admin/member_event.js"></script>
+    <script src="/js/admin/member_layout.js"></script>
+    <script src="/js/admin/member_service.js"></script>
     <script src="/js/admin/inquiry_event.js"></script>
     <script src="/js/admin/inquiry_layout.js"></script>
     <script src="/js/admin/inquiry_service.js"></script>
