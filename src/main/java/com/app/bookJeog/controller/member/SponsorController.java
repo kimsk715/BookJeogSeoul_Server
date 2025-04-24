@@ -1,7 +1,6 @@
 package com.app.bookJeog.controller.member;
 
-import com.app.bookJeog.domain.dto.PersonalMemberDTO;
-import com.app.bookJeog.domain.dto.SponsormemberDTO;
+import com.app.bookJeog.domain.dto.SponsorMemberDTO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.mapper.SponsorMapper;
 import com.app.bookJeog.service.SponsorServiceImpl;
@@ -28,7 +27,7 @@ public class SponsorController {
 
     private final SponsorServiceImpl sponsorServiceImpl;
     private final SponsorMapper sponsorMapper;
-    private final SponsormemberDTO sponsormemberDTO;
+    private final SponsorMemberDTO sponsorMemberDTO;
     private HttpSession session;
 
     // 단체 마이페이지 조회
@@ -87,7 +86,7 @@ public class SponsorController {
     }
 
     @PostMapping("login-sponsorship-login")
-    public String loginSponsor(SponsormemberDTO sponsorMemberDTO) {
+    public String loginSponsor(SponsorMemberDTO sponsorMemberDTO) {
         Optional<SponsorMemberVO> foundMember = sponsorServiceImpl.loginSponsorMember(sponsorMemberDTO);
         if(foundMember.isPresent()) {
             session.setAttribute("sponsorMember", foundMember);
@@ -109,7 +108,7 @@ public class SponsorController {
         return "login/findpasswd-sponsor-input";
     }
     @PostMapping("send-mail")
-    public String sendMail(SponsormemberDTO sponsormemberDTO, HttpServletResponse response, HttpSession session) throws MessagingException {
+    public String sendMail(SponsorMemberDTO sponsormemberDTO, HttpServletResponse response, HttpSession session) throws MessagingException {
         Optional<SponsorMemberVO> foundEmail = sponsorServiceImpl.selectEmailForPassword(sponsormemberDTO);
             if(foundEmail.isPresent()) {
                 sponsorServiceImpl.sendMail(sponsormemberDTO, response, session);
@@ -149,11 +148,11 @@ public class SponsorController {
     @PostMapping("sponsor-change-passwd")
     public String changePasswd (String newPasswd, HttpServletRequest request, HttpSession session){
         session = request.getSession();
-        sponsormemberDTO.setSponsorEmail((String) session.getAttribute("email"));
+        sponsorMemberDTO.setSponsorEmail((String) session.getAttribute("email"));
         String memberEmail = (String) session.getAttribute("email");
 
         if(memberEmail != null) {
-            sponsorServiceImpl.changePassword(sponsormemberDTO, newPasswd);
+            sponsorServiceImpl.changePassword(sponsorMemberDTO, newPasswd);
             session.invalidate();
             return "redirect:/personal/login";
         }
