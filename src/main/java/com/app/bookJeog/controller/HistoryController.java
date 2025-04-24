@@ -1,6 +1,7 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.domain.dto.HistoryDTO;
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.service.HistoryService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -21,15 +22,13 @@ public class HistoryController {
     @PostMapping("save")
     @ResponseBody
     public void saveHistoryIfNotExists(@RequestBody HistoryDTO historyDTO) {
-//        MemberDTO member = (MemberDTO) session.getAttribute("member");
-//        if (member == null) {
-//            // 로그인이 안 된 경우 아무 동작도 하지 않고 리턴
-//            return;
-//        }
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            // 로그인이 안 된 경우 아무 동작도 하지 않고 리턴
+            return;
+        }
 
-        Long memberId = 1L;
-//        historyDTO.setMemberId(member.getId()); // 세션에서 memberId 추가 주입
-        historyDTO.setMemberId(memberId);
+        historyDTO.setMemberId(member.getId()); // 세션에서 memberId 추가 주입
         historyService.saveHistoryIfNotExists(historyDTO); // DTO 통째로 넘김
 
     }
