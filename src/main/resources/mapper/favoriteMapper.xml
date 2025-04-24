@@ -24,4 +24,42 @@
         delete from tbl_book_like
         where member_id = #{memberId} and book_isbn = #{bookIsbn}
     </delete>
+
+    <!--  독후감 좋아요하기  -->
+    <insert id="insertBookPostLike">
+        insert into tbl_book_post_like (member_id, book_post_id)
+        values (#{memberId}, #{bookPostId})
+    </insert>
+
+    <!--  특정 독후감의 내 좋아요 여부 조회  -->
+    <select id="isBookPostLiked" resultType="_int">
+        select count(*)
+        from tbl_book_post_like
+        where member_id = #{memberId} and book_post_id = #{bookPostId}
+    </select>
+
+    <!--  독후감 좋아요 취소하기  -->
+    <delete id="deleteBookPostLike">
+        delete from tbl_book_post_like
+        where member_id = #{memberId} and book_post_id = #{bookPostId}
+    </delete>
+
+    <!--  특정 회원 팔로우하기  -->
+    <insert id="insertMemberFollow">
+        insert into tbl_follow (follow_receiver_id, follow_sender_id)
+        values (#{receiverId}, #{senderId})
+    </insert>
+
+    <!--  내 특정 회원 팔로우여부 조회  -->
+    <select id="isMemberFollowed" resultType="_int">
+        select count(*)
+        from tbl_follow
+        where follow_receiver_id = #{receiverId} and follow_sender_id = #{senderId}
+    </select>
+
+    <!--  팔로우 취소  -->
+    <delete id="deleteMemberFollow">
+        delete from tbl_follow
+        where follow_receiver_id = #{receiverId} and follow_sender_id = #{senderId}
+    </delete>
 </mapper>

@@ -1,6 +1,8 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
+import com.app.bookJeog.service.AladinService;
+import com.app.bookJeog.service.AladinServiceImpl;
 import com.app.bookJeog.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,13 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Controller
 @Slf4j
 @RequestMapping("/book/*")
 @RequiredArgsConstructor
 public class BookController implements BookControllerDocs {
-
     private final BookService bookService;
+    private final AladinService aladinService;
 
 
     // 도서 상세 페이지로 이동
@@ -28,9 +32,6 @@ public class BookController implements BookControllerDocs {
         } else {
             throw new ResourceNotFoundException(isbn);
         }
-
-        // 디버그 로그로 확인
-        log.info("Model contains 'title': " + model.getAttribute("title"));
 
         return "book/book-detail";
     }
@@ -47,7 +48,22 @@ public class BookController implements BookControllerDocs {
 
     // 이 책의 모든 독후감 목록
     @GetMapping("post-list/{isbn}")
-    public String gotoPostList(@PathVariable String isbn) {
+    public String gotoPostList(@PathVariable Long isbn) {
         return "book/book-detail-post"; // HTML 페이지 반환
+    }
+
+    // 커버 이미지 링크만 반환
+    @GetMapping("cover")
+    @ResponseBody
+    public String getBookCover(@RequestParam Long isbn) {
+        return aladinService.getBookCover(isbn);
+    }
+
+    // 알라딘 api로 단일 도서 정보 받기
+    @GetMapping("/api/{isbn}")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> getBookInfo(@PathVariable Long isbn) {
+        Map<String, Object> result = aladinService.getBookInfoAsMap(isbn);
+        return ResponseEntity.ok(result);
     }
 }

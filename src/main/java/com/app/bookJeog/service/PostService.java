@@ -53,13 +53,16 @@ public interface PostService {
     public int countAllDiscussionPost(Pagination pagination);
 
     //   이 책으로 작성한 독후감 일부 조회
-    ArrayList<BookPostDTO> selectThisBookPosts(Long isbn);
+    ArrayList<BookPostMemberDTO> selectThisBookPosts(Long isbn);
 
     //   이 책으로 작성한 독후감 전체 조회
-    ArrayList<BookPostDTO> selectThisBookAllPosts(Long isbn);
+    ArrayList<BookPostMemberDTO> selectThisBookAllPosts(Long isbn, int offset);
 
     //   이 책으로 작성한 독후감 전체 개수 조회
     int selectBookAllPostsCount(Long isbn);
+
+    //   특정 독후감 상세정보 조회(회원 프로필, 첨부파일 포함)
+    FileBookPostDTO getPostWithFiles(Long id);
 
     public List<BookPostVO> getTopPosts();
 

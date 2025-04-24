@@ -1045,7 +1045,8 @@ span .hidden-text{
 }
 
 .report-container .slide-container{
-    overflow: hidden;
+    overflow-x: auto; /* 스크롤 가능하게 */
+    -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
     cursor: grab;
     scrollbar-width: none;
     margin: 0 -24px;
@@ -1066,7 +1067,9 @@ span .hidden-text{
 .slide-wrapper.report-list{
     display: inline-flex;
     padding: 16px 24px 24px;
-    padding-top: 16px
+    padding-top: 16px;
+    scroll-snap-type: x mandatory; /* 스크롤 멈춤 위치 설정(선택) */
+    -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
 }
 
 .report-list li{
@@ -1224,6 +1227,7 @@ span .hidden-text{
     min-width: 145px;
     margin-left: 16px;
     max-width: 145px;
+    scroll-snap-align: start; /* snap 옵션 썼을 경우 */
 }
 
 .book-shelf .slide-wrapper .slide-item:first-child{

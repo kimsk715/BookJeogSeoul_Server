@@ -1,3 +1,10 @@
+document.addEventListener("DOMContentLoaded", async () => {
+    const book = await postDetailService.getBookInfo(); // 알라딘 API fetch
+    await postDetailLayout.showBookDetail(book);
+    postDetailLayout.showPostDetail();
+    postDetailLayout.showFileImages();
+});
+
 // 좋아요 누르면 아이콘 변경
 const likeButton = document.querySelector(".editor-icon-heart");
 const miniLikeBtn = document.querySelector(".like-inner .like-btn");
@@ -47,10 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         ".diary-title-container>.text"
                     ).innerText,
                     description:
-                        document.querySelector(".title-inner>h1").innerText,
+                        post.bookTitle,
                     // 샘플, 나중에 책 이미지로 바꿔야함
-                    imageUrl:
-                        "https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png",
+                    imageUrl: window.bookInfo?.cover || "/images/common/default-book-cover.png",
                     link: {
                         mobileWebUrl: window.location.href,
                         webUrl: window.location.href,

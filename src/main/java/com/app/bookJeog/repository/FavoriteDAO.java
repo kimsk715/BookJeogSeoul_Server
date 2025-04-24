@@ -10,19 +10,23 @@ public class FavoriteDAO {
     private final FavoriteMapper favoriteMapper;
 
     //    책 찜하기
-    public void setBookScrap(Long memberId, String bookIsbn){;};
+    public void setBookScrap(Long memberId, Long bookIsbn){
+        favoriteMapper.insertBookScrap(memberId, bookIsbn);
+    };
 
     //    특정 회원의 스크랩 여부 조회
-    public int findMemberScrap(Long memberId, String bookIsbn) {
+    public int findMemberScrap(Long memberId, Long bookIsbn) {
         return favoriteMapper.isBookScrapped(memberId, bookIsbn);
     }
 
     //    특정 책의 찜 개수 조회
-    public int findThisScrapCount(String bookIsbn){
+    public int findThisScrapCount(Long bookIsbn){
         return favoriteMapper.selectThisScrapCount(bookIsbn);
     };
 
     //    책 스크랩 취소
-    public void deleteBookScrap(Long memberId, String bookIsbn){;};
+    public void deleteBookScrap(Long memberId, Long bookIsbn){
+        favoriteMapper.deleteBookScrap(memberId, bookIsbn);
+    };
 
 }
