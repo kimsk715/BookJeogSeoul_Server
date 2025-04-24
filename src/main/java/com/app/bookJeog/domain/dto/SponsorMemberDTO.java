@@ -2,7 +2,6 @@ package com.app.bookJeog.domain.dto;
 
 
 import com.app.bookJeog.domain.enumeration.SponsorMemberStatus;
-import com.app.bookJeog.domain.vo.MemberInquiryFileVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class SponsormemberDTO {
+public class SponsorMemberDTO {
     @EqualsAndHashCode.Include
     private Long id;
     private String sponsorId;
