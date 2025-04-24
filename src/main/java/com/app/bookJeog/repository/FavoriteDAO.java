@@ -25,4 +25,11 @@ public class FavoriteDAO {
     //    책 스크랩 취소
     public void deleteBookScrap(Long memberId, String bookIsbn){;};
 
+    public int receiverVote(Long receiverId){
+        return favoriteMapper.receiverVote(receiverId);
+    }
+
+    public Long topReceiver(){
+        return favoriteMapper.topReceiver();
+    }
 }
