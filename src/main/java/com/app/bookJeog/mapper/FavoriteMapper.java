@@ -26,12 +26,12 @@ public interface FavoriteMapper {
     public void deleteBookPostLike(Long memberId, Long bookPostId);
 
     //    특정 회원 팔로우하기
-    public void insertMemberFollow(Long followReceiverId, Long followSenderId);
+    public void insertMemberFollow(Long receiverId, Long senderId);
 
     //    내 특정 회원 팔로우여부 조회
-    public int isMemberFollowed(Long followReceiverId, Long followSenderId);
+    public int isMemberFollowed(Long receiverId, Long senderId);
 
     //    팔로우 취소
-    public void deleteMemberFollow(Long followReceiverId, Long followSenderId);
+    public void deleteMemberFollow(Long receiverId, Long senderId);
 }
 
