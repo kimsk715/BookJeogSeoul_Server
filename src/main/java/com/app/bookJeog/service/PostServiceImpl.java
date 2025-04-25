@@ -1,11 +1,6 @@
 package com.app.bookJeog.service;
 
-import com.app.bookJeog.domain.dto.BookPostDTO;
-import com.app.bookJeog.domain.dto.BookPostMemberDTO;
-import com.app.bookJeog.domain.dto.FileBookPostDTO;
-import com.app.bookJeog.domain.dto.Pagination;
-import com.app.bookJeog.domain.dto.ReceiverDTO;
-import com.app.bookJeog.domain.dto.ReceiverInfoDTO;
+import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
 import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
@@ -61,7 +56,13 @@ public class PostServiceImpl implements PostService {
     //   특정 독후감 상세정보 조회(회원 프로필, 첨부파일 포함)
     public FileBookPostDTO getPostWithFiles(Long id) {
         FileBookPostDTO fileBookPostDTO = postDAO.findPostDetail(id);
-        fileBookPostDTO.setFileList(postDAO.findPostFiles(id));
+
+        if (fileBookPostDTO != null) {
+            // 첨부파일이 없어도 null이 아닌 빈 리스트를 넣어주는 게 안전
+            List<BookPostFileDTO> fileList = postDAO.findPostFiles(id);
+            fileBookPostDTO.setFileList(fileList != null ? fileList : new ArrayList<>());
+        }
+
         return fileBookPostDTO;
     }
 

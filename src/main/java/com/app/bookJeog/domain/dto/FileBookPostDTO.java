@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class FileBookPostDTO {
     @EqualsAndHashCode.Include
-    private Long id;
+    private Long bookPostId;
     private String bookTitle;
     private String bookIsbn;
     private int likeCount;

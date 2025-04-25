@@ -4,7 +4,9 @@ import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
 import com.app.bookJeog.domain.dto.FileBookPostDTO;
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.service.PostService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -48,9 +50,19 @@ public class PostController {
 
     // 독후감 게시글
     @GetMapping("bookpost/{id}")
-    public String goToBookPostPost(@PathVariable Long id, Model model) {
+    public String goToBookPostPost(@PathVariable Long id, Model model, HttpSession session) {
         FileBookPostDTO post = postService.getPostWithFiles(id);
+        if (post == null) {
+            throw new ResourceNotFoundException("게시글이 존재하지 않습니다.");
+        }
         model.addAttribute("post", post);
+
+        // 세션의 회원 id도 같이 저장
+        PersonalMemberDTO member = (PersonalMemberDTO)session.getAttribute("member");
+        if (member != null) {
+            Long loginId = member.getId();
+            model.addAttribute("loginId", loginId);
+        }
 
         return "post/post-detail";
     }

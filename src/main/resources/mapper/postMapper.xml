@@ -444,7 +444,7 @@
     <!-- 특정 독후감 + 작성자 프로필 포함 상세정보 조회 -->
     <select id="selectBookPostWithFiles" resultType="fileBookPostDTO">
         select
-            bp.id,
+            bp.id as book_post_id,
             bp.book_title,
             bp.book_isbn,
             count(bpl.id) as like_count,
@@ -460,8 +460,8 @@
         from tbl_book_post bp
                  join tbl_post p on bp.id = p.id
                  join tbl_personal_member pm on pm.id = p.member_id
-                 join tbl_member_profile mp on mp.member_id = pm.id
-                 join tbl_file f on f.id = mp.id
+                 left join tbl_member_profile mp on mp.member_id = pm.id
+                 left join tbl_file f on f.id = mp.id
                  left join tbl_book_post_like bpl on bpl.book_post_id = bp.id
         where bp.book_post_is_public = 'PUBLIC'
           and bp.id = #{id}

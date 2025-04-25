@@ -447,8 +447,12 @@
             bookTitle: [[${post.bookTitle}]],
             bookIsbn: [[${post.bookIsbn}]],
             writerId: [[${post.memberId}]],
+            bookPostId: [[${post.bookPostId}]],
             fileList: [[${post.fileList}]]
         };
+    </script>
+    <script th:inline="javascript">
+        window.loggedInMemberId = [[${loginId}]];
     </script>
     <script src="/js/post/post-detail-service.js"></script>
     <script src="/js/post/post-detail-layout.js"></script>
