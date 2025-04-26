@@ -563,6 +563,76 @@ h1 {
     background-color: var(--cancel);
     color: var(--text-01);
 }
+
+.mds-input:not(.mds-input-editor) label {
+    border-color: var(--ui-06);
+    border-radius: 4px;
+}
+
+.mds-input>label {
+    display: block;
+    height: 56px;
+    padding: 8px 12px;
+    border: 1px solid;
+}
+
+.mds-input .label {
+    display: block;
+    margin-bottom: 1px;
+    font-size: 10px;
+    color: var(--text-04);
+}
+
+.mds-input .message-wrap {
+    overflow: hidden;
+    display: flex;
+    width: 100%;
+    padding: 0 8px;
+}
+
+.mds-input .inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 8px;
+}
+
+.mds-input .input {
+    flex: 1;
+}
+
+.mds-input input {
+    width: 100%;
+    height: 24px;
+    font-size: 16px;
+    text-align: left;
+    color: var(--text-01);
+}
+
+.mds-input input::placeholder{
+    color: var(--text-04);
+}
+
+.mds-input .message-wrap .length, .mds-input .message-wrap .message {
+    padding-top: 2px;
+    font-size: 12px;
+    color: var(--text-04);
+}
+
+.mds-input .message-wrap .length {
+    margin-left: auto;
+}
+
+.mds-input .clear-button:before {
+    font-size: 17px;
+    color: var(--ui-06);
+    line-height: 16px;
+    content: "\e84e";
+}
+
+.police-popup .review-police:disabled {
+    opacity: .4;
+}
 /* 메뉴 버튼(신고하기) */
 
 /* 본문 상단 */

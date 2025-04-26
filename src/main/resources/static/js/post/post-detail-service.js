@@ -79,7 +79,31 @@ const postDetailService = (() => {
         if (!response.ok) throw response;
     };
 
+// 해당 독후감 신고하기
+    const addBookPostReport = async (reportType, bookPostId, memberId, bookPostReportText) => {
+        const response = await fetch(`/post/report-add`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset-utf-8"
+            },
+            body: JSON.stringify({
+                bookPostReportType: reportType,
+                bookPostId: bookPostId,
+                bookPostReporterId: memberId,
+                bookPostReportText: bookPostReportText
+            })
+        });
+        console.log("신고 타입(reportType):", reportType);
+
+        if (!response.ok) {
+            throw new Error('신고 요청 실패');
+        }
+
+        const result = await response.text();
+        return result;
+    }
+
     return { getBookInfo : getBookInfo, checkPostLike : checkPostLike, addPostLike : addPostLike,
         deletePostLike : deletePostLike, checkMemberFollow : checkMemberFollow, addMemberFollow : addMemberFollow,
-        deleteMemberFollow : deleteMemberFollow }
+        deleteMemberFollow : deleteMemberFollow, addBookPostReport : addBookPostReport }
 })();

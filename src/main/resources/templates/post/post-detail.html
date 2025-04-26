@@ -351,8 +351,8 @@
                                 >
                                     <input
                                         type="radio"
-                                        name="report-kind"
-                                        value="1"
+                                        name="reportType"
+                                        value="욕설"
                                     />
                                     <span class="mds-radio-view">
                                         <span class="check"></span>
@@ -367,8 +367,8 @@
                                 >
                                     <input
                                         type="radio"
-                                        name="report-kind"
-                                        value="2"
+                                        name="reportType"
+                                        value="음란성"
                                     />
                                     <span class="mds-radio-view">
                                         <span class="check"></span>
@@ -382,8 +382,8 @@
                                 >
                                     <input
                                         type="radio"
-                                        name="report-kind"
-                                        value="3"
+                                        name="reportType"
+                                        value="광고성"
                                     />
                                     <span class="mds-radio-view">
                                         <span class="check"></span>
@@ -398,8 +398,8 @@
                                 >
                                     <input
                                         type="radio"
-                                        name="report-kind"
-                                        value="4"
+                                        name="reportType"
+                                        value="스포일러"
                                     />
                                     <span class="mds-radio-view">
                                         <span class="check"></span>
@@ -413,14 +413,33 @@
                                 >
                                     <input
                                         type="radio"
-                                        name="report-kind"
-                                        value="5"
+                                        name="reportType"
+                                        value="기타"
                                     />
                                     <span class="mds-radio-view">
                                         <span class="check"></span>
                                         <span class="label">기타</span>
-                                    </span></label
+                                    </span>
+                                </label
                                 >
+                                <div class="mds-input mds-input-default" style="display: none">
+                                    <label>
+                                        <div class="inner">
+                                            <div class="input">
+                                                <span id="etcLabel" class="label">
+                                                    신고사유
+                                                    <sup>*</sup>
+                                                </span>
+                                                <input type="text" autocomplete="off" id="etcInput" aria-labelledby="etcLabel"
+                                                placeholder="신고 사유 입력" class="mds-input-field" maxlength="50">
+                                            </div>
+                                            <button type="button" class="mds-icon-input-delete clear-button" style="display: none"></button>
+                                        </div>
+                                    </label>
+                                    <div class="message-wrap">
+                                        <span class="length">0/50</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -448,6 +467,8 @@
             bookIsbn: [[${post.bookIsbn}]],
             writerId: [[${post.memberId}]],
             bookPostId: [[${post.bookPostId}]],
+            profileFilePath: [[${post.filePath}]],
+            profileFileName: [[${post.fileName}]],
             fileList: [[${post.fileList}]]
         };
     </script>
