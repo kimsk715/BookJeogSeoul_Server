@@ -1,4 +1,7 @@
-// ✅ 페이지 로드시 책 정보, 독후감 정보, 파일 목록 렌더링 및 좋아요/팔로우 상태 초기화
+// 페이지 로드시 도서 및 게시글 정보 초기화
+// 책 상세정보, 독후감 상세내용, 첨부 이미지 목록 출력
+// 좋아요, 팔로우 상태도 동기화
+
 document.addEventListener("DOMContentLoaded", async () => {
     const book = await postDetailService.getBookInfo();
     window.bookInfo = book;
@@ -8,25 +11,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     postDetailLayout.showFileImages();
 
     try {
-        // 좋아요 상태 초기화
         const liked = await postDetailService.checkPostLike();
         if (liked) {
             document.querySelector(".editor-icon-heart").classList.add("filled");
             document.querySelector(".like-inner .like-btn").classList.add("filled");
         }
 
-        // 팔로우 상태 초기화 + 작성자 본인일 경우 버튼 숨김
         const followButton = document.querySelector(".button-follow");
         const myId = window.loggedInMemberId;
         const writerId = post.writerId;
 
-        console.log("내 ID:", window.loggedInMemberId);
-        console.log("작성자 ID:", post.writerId);
-
-
         if (String(myId) === String(writerId)) {
             followButton.style.display = "none";
-            console.log("팔로우 버튼 숨김 완료");
         } else {
             const followed = await postDetailService.checkMemberFollow();
             if (followed) {
@@ -41,20 +37,59 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // 공유 모달 초기 숨김
     const shareModal = document.querySelector(".popup-sns-share");
     if (shareModal) {
         shareModal.style.display = "none";
     }
 
-    // 카카오 초기화
     if (window.Kakao && !Kakao.isInitialized()) {
         Kakao.init("16c74ba60369da3eb1ee0b92f425d32e");
-        console.log("Kakao 초기화 완료");
     }
+
+    const etcRadio = document.querySelector('input[type="radio"][value="기타"]');
+    const etcInput = document.getElementById("etcInput");
+    const etcInputWrap = document.querySelector(".mds-input.mds-input-default");
+    const clearButton = document.querySelector(".clear-button");
+    const lengthDisplay = document.querySelector(".length");
+    const confirmReportBtn = document.querySelector(".review-police");
+
+    // 기타 사유 선택 시 텍스트 입력창 보이기 및 제출 제한
+    document.querySelectorAll('input[name="reportType"]').forEach(radio => {
+        radio.addEventListener("change", () => {
+            if (etcRadio.checked) {
+                etcInputWrap.style.display = "block";
+                confirmReportBtn.disabled = true;
+            } else {
+                etcInputWrap.style.display = "none";
+                confirmReportBtn.disabled = false;
+            }
+        });
+    });
+
+    // 기타 입력창 제어 - 글자수 표시, 입력시 버튼 활성화, X버튼 노출
+    etcInput.addEventListener("input", () => {
+        const length = etcInput.value.length;
+        lengthDisplay.innerText = `${length}/50`;
+
+        if (length > 0) {
+            confirmReportBtn.disabled = false;
+            clearButton.style.display = "flex";
+        } else {
+            confirmReportBtn.disabled = true;
+            clearButton.style.display = "none";
+        }
+    });
+
+    // X 버튼 클릭 시 입력값 초기화
+    clearButton.addEventListener("click", () => {
+        etcInput.value = "";
+        lengthDisplay.innerText = "0/50";
+        clearButton.style.display = "none";
+        confirmReportBtn.disabled = true;
+    });
 });
 
-// 좋아요 버튼 클릭 시 서버에 좋아요 반영 및 UI 토글
+// 좋아요 버튼 토글 처리
 const likeButton = document.querySelector(".editor-icon-heart");
 const miniLikeBtn = document.querySelector(".like-inner .like-btn");
 
@@ -82,7 +117,7 @@ async function handleLikeToggle() {
 likeButton.addEventListener("click", handleLikeToggle);
 miniLikeBtn.addEventListener("click", handleLikeToggle);
 
-// 팔로우 버튼 클릭 시 서버에 반영 및 UI 토글
+// 팔로우 버튼 토글 처리
 const followButton = document.querySelector(".button-follow");
 
 followButton.addEventListener("click", async () => {
@@ -107,7 +142,7 @@ followButton.addEventListener("click", async () => {
     }
 });
 
-// 공유하기 기능 - 모달 열기/닫기 + 카카오, 페북, 트위터, 링크 복사
+// 공유 모달 열기/닫기
 const openShareBtn = document.querySelector(".share-item > button");
 const shareModal = document.querySelector(".popup-sns-share");
 const closeShareBtn = document.querySelector(".share-close-button");
@@ -120,6 +155,7 @@ closeShareBtn?.addEventListener("click", () => {
     shareModal.style.display = "none";
 });
 
+// 공유: 카카오톡
 const kakaoBtn = document.getElementById("kakao-share-btn");
 kakaoBtn?.addEventListener("click", (e) => {
     e.preventDefault();
@@ -137,14 +173,18 @@ kakaoBtn?.addEventListener("click", (e) => {
     });
 });
 
-document.getElementById("share-facebook-btn")?.addEventListener("click", (e) => {
+// 공유: 페이스북
+const facebookBtn = document.getElementById("share-facebook-btn");
+facebookBtn?.addEventListener("click", (e) => {
     e.preventDefault();
     const url = encodeURIComponent(window.location.href);
     const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
     window.open(shareUrl, "_blank", "width=600,height=400");
 });
 
-document.getElementById("twitter-share-btn")?.addEventListener("click", (e) => {
+// 공유: 트위터
+const twitterBtn = document.getElementById("twitter-share-btn");
+twitterBtn?.addEventListener("click", (e) => {
     e.preventDefault();
     const pageUrl = encodeURIComponent(window.location.href);
     const text = encodeURIComponent("독서는 북적서울과 함께 😄");
@@ -152,15 +192,16 @@ document.getElementById("twitter-share-btn")?.addEventListener("click", (e) => {
     window.open(twitterUrl, "_blank", "width=600,height=400");
 });
 
+// 공유: 링크 복사
 const copyBtn = document.querySelector(".btn-url-copy");
 copyBtn?.addEventListener("click", () => {
     const url = window.location.href;
     navigator.clipboard.writeText(url)
-        .then(() => showToast("링크가 복사되었습니다!"))
+        .then(() => showToast("링크가 복사되었습니다."))
         .catch(() => showToast("복사에 실패했습니다."));
 });
 
-// 신고하기 관련 기능 (버튼 클릭, 메뉴 열기, 모달 열기, 등록/취소 처리)
+// 신고 메뉴 및 모달 제어
 const reportButton = document.querySelector(".more-item > button");
 const reportMenu = document.querySelector(".more-ul");
 const reportModal = document.querySelector(".police-popup");
@@ -182,6 +223,7 @@ window.addEventListener("click", (e) => {
     }
 });
 
+// 신고 라디오 버튼 선택 표시
 const radios = document.querySelectorAll(".mds-radio");
 radios.forEach((label) => {
     label.addEventListener("click", () => {
@@ -198,13 +240,26 @@ cancelReport?.addEventListener("click", () => {
     reportMenu.style.display = "none";
 });
 
-confirmReport?.addEventListener("click", () => {
+confirmReport?.addEventListener("click", async () => {
+    console.log("확인버튼 눌림");
+    const etcInput = document.querySelector(".mds-input.mds-input-default input");
+
+    const reportType = document.querySelector('input[name="reportType"]:checked').value;
+    const bookPostId = post.bookPostId;
+    const memberId = window.loggedInMemberId;
+    const bookPostReportText = etcInput.value;
+    console.log("reportType: " + reportType);
+    console.log("bookPostId: " + bookPostId);
+    console.log("memberId: " + memberId);
+    console.log("bookPostReportText: " + bookPostReportText);
+
+    await postDetailService.addBookPostReport(reportType, bookPostId, memberId, bookPostReportText);
     showToast("신고가 완료되었습니다.");
     reportModal.style.display = "none";
     reportMenu.style.display = "none";
 });
 
-// 토스트 메시지 출력 함수
+// 공통 토스트 메시지 출력 함수
 function showToast(message) {
     const toast = document.createElement("div");
     toast.className = "toast";

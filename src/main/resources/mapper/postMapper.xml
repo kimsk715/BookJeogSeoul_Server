@@ -204,6 +204,7 @@
     <select id="searchBookPosts" resultType="bookPostMemberDTO">
         SELECT
             p.member_id,
+            p.id,
             bp.book_post_title,
             bp.book_post_text,
             pm.member_nickname,
