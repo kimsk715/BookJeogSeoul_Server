@@ -102,8 +102,27 @@ public interface PostMapper {
     // 전체 보기에 나올 전체 기부 목록
     public List<BookDonateVO> selectAllDonatedBooks();
 
-    // 도네 게시판 목록
+    // 후원대상 게시판 목록
     public List<ReceiverVO> selectAllReceiverPosts();
 
+    // 후원대상 게시글
+    public ReceiverVO selectReceiverPostById(Long id);
+
+    // 후원 인증 게시판 조회
+    public List<DonateCertVO> selectAllDonateCerts();
+
+    // 후원 인증 게시글
+    public DonateCertVO selectDonateCertById(Long id);
+
+    // 토론 게시판 조회
+    public List<DiscussionVO> selectAllDiscussions();
+
+    // 토론 게시글
+    public DiscussionVO selectDiscussionById(Long id);
+
+    // 토론 등록
+    public void insertDiscussionPost(DiscussionVO discussionVO);
+
+    public void insertPost(PostVO postVO);
 }
 

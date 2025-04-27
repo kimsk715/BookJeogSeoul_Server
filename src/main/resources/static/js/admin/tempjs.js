@@ -51,6 +51,7 @@ document.addEventListener("click", (e) => {
         closeModal(monthlyBookListModal);
         closeModal(sponsorRegisterModal);
         closeModal(adminModal)
+        closeModal(discussionModal)
     }
 });
 
@@ -60,6 +61,7 @@ document.addEventListener("keydown", (e) => {
         closeModal(monthlyBookListModal);
         closeModal(sponsorRegisterModal);
         closeModal(adminModal)
+        closeModal(discussionModal)
     }
 });
 

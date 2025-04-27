@@ -2,6 +2,7 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.*;
+import com.app.bookJeog.repository.CommentDAO;
 import com.app.bookJeog.repository.FavoriteDAO;
 import com.app.bookJeog.repository.MemberDAO;
 import com.app.bookJeog.repository.PostDAO;
@@ -19,6 +20,8 @@ public class PostServiceImpl implements PostService {
     private final PostDAO postDAO;
     private final MemberDAO memberDAO;
     private final FavoriteDAO favoriteDAO;
+    private final CommentDAO commentDAO;
+
 
     @Override
     public List<BookPostVO> getAllBookPost(Pagination pagination) {
@@ -188,19 +191,121 @@ public class PostServiceImpl implements PostService {
         return bookDonateDTOList;
     }
 
+//  게시판 조회용 후원 대상
     @Override
-    public List<ReceiverPostDTO> getReceiverPost() {
+    public List<ReceiverPostDTO> getReceiverPosts() {
         List<ReceiverVO> tempList = postDAO.findAllReceivers();
         List<ReceiverPostDTO> receiverPostDTOList = new ArrayList<>();
         for (ReceiverVO receiverVO : tempList) {
+            Long memberId = postDAO.findPostById(receiverVO.getId()).getMemberId();
             ReceiverPostDTO receiverPostDTO = new ReceiverPostDTO();
             receiverPostDTO.setId(receiverVO.getId());
+            receiverPostDTO.setSponsorName(memberDAO.findSponsorMemberById(memberId).getSponsorName());
+            receiverPostDTO.setCreatedDate(receiverVO.getCreatedDate());
+            receiverPostDTO.setReceiverText(receiverVO.getReceiverText());
+            receiverPostDTO.setLikeScore(favoriteDAO.receiverVote(receiverVO.getId()));
             receiverPostDTO.setReceiverText(receiverVO.getReceiverText());
             receiverPostDTO.setReceiverTitle(receiverVO.getReceiverTitle());
             receiverPostDTOList.add(receiverPostDTO);
         }
+        log.info(receiverPostDTOList.toString());
         return receiverPostDTOList;
+    }
+
+    @Override
+    public ReceiverPostDTO getReceiverPostById(Long id) {
+        ReceiverPostDTO receiverPostDTO = new ReceiverPostDTO();
+        ReceiverVO receiverVO = postDAO.findReceiverPostById(id);
+        log.info(receiverVO.toString());
+        Long memberId = postDAO.findPostById(receiverVO.getId()).getMemberId();
+        receiverPostDTO.setId(id);
+        receiverPostDTO.setReceiverText(receiverVO.getReceiverText());
+        receiverPostDTO.setReceiverTitle(receiverVO.getReceiverTitle());
+        receiverPostDTO.setSponsorName(memberDAO.findSponsorMemberById(memberId).getSponsorName());
+        receiverPostDTO.setCreatedDate(receiverVO.getCreatedDate());
+        receiverPostDTO.setUpdatedDate(receiverVO.getUpdatedDate());
+        receiverPostDTO.setLikeScore(favoriteDAO.receiverVote(receiverVO.getId()));
+
+        return receiverPostDTO;
+    }
+
+    @Override
+    public List<DonateCertPostDTO> getAllDonateCerts() {
+        List<DonateCertVO> tempList = postDAO.findAllDonatedCerts();
+        List<DonateCertPostDTO> donateCertPostDTOList = new ArrayList<>();
+        for(DonateCertVO donateCertVO : tempList) {
+            DonateCertPostDTO donateCertPostDTO = new DonateCertPostDTO();
+            donateCertPostDTO.setId(donateCertVO.getId());
+            donateCertPostDTO.setMemberId(donateCertVO.getMemberId());
+            donateCertPostDTO.setCreatedDate(donateCertVO.getCreatedDate());
+            donateCertPostDTO.setUpdatedDate(donateCertVO.getUpdatedDate());
+            donateCertPostDTO.setDonateCertTitle(donateCertVO.getDonateCertTitle());
+            donateCertPostDTO.setDonateCertText(donateCertVO.getDonateCertText());
+            donateCertPostDTOList.add(donateCertPostDTO);
+        }
+//        log.info(donateCertPostDTOList.toString());
+        return donateCertPostDTOList;
+    }
+
+    @Override
+    public DonateCertPostDTO getDonateCertById(Long id) {
+        DonateCertPostDTO donateCertPostDTO = new DonateCertPostDTO();
+        DonateCertVO donateCertVO = postDAO.findDonateCertById(id);
+        donateCertPostDTO.setId(id);
+        donateCertPostDTO.setMemberId(donateCertVO.getMemberId());
+        donateCertPostDTO.setCreatedDate(donateCertVO.getCreatedDate());
+        donateCertPostDTO.setUpdatedDate(donateCertVO.getUpdatedDate());
+        donateCertPostDTO.setDonateCertTitle(donateCertVO.getDonateCertTitle());
+        donateCertPostDTO.setDonateCertText(donateCertVO.getDonateCertText());
+        donateCertPostDTO.setCommentCount(commentDAO.countAllCommentByPostId(id));
+        donateCertPostDTO.setSponsorName(memberDAO.findSponsorMemberById(donateCertVO.getMemberId()).getSponsorName());
+
+        return donateCertPostDTO;
+    }
+
+    @Override
+    public List<DiscussionPostDTO> getAllDiscussions() {
+        List<DiscussionVO> tempList = postDAO.findAllDiscussions();
+        List<DiscussionPostDTO> discussionPostDTOList = new ArrayList<>();
+        for(DiscussionVO discussionVO : tempList) {
+            DiscussionPostDTO discussionPostDTO = new DiscussionPostDTO();
+            discussionPostDTO.setId(discussionVO.getId());
+            discussionPostDTO.setCreatedDate(discussionVO.getCreatedDate());
+            discussionPostDTO.setBookIsbn(discussionVO.getBookIsbn());
+
+            discussionPostDTO.setDiscussionTitle(discussionVO.getDiscussionTitle());
+            discussionPostDTO.setDiscussionText(discussionVO.getDiscussionText());
+            discussionPostDTO.setCommentCount(commentDAO.countAllCommentByPostId(discussionVO.getId()));
+            discussionPostDTOList.add(discussionPostDTO);
+        }
+        return discussionPostDTOList;
+    }
+
+    @Override
+    public DiscussionPostDTO getDiscussionById(Long id) {
+        DiscussionPostDTO discussionPostDTO = new DiscussionPostDTO();
+        DiscussionVO discussionVO = postDAO.findDiscussionById(id);
+        discussionPostDTO.setId(id);
+        discussionPostDTO.setCreatedDate(discussionVO.getCreatedDate());
+        discussionPostDTO.setBookIsbn(discussionVO.getBookIsbn());
+
+        discussionPostDTO.setDiscussionTitle(discussionVO.getDiscussionTitle());
+        discussionPostDTO.setDiscussionText(discussionVO.getDiscussionText());
+        discussionPostDTO.setCommentCount(commentDAO.countAllCommentByPostId(discussionVO.getId()));
+        return discussionPostDTO;
+    }
+
+    @Override
+    public void insertDiscussion(DiscussionDTO discussionDTO) {
+
+        postDAO.insertDiscussion(discussionDTO.toVO());
+    }
+
+    @Override
+    public void insertPost(PostVO postVO) {
+        postDAO.insertPost(postVO);
     }
 
 
 }
+

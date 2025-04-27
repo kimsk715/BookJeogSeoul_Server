@@ -8,7 +8,7 @@ import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 import com.app.bookJeog.domain.vo.PostVO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.*;
-import com.app.bookJeog.mapper.BookMapper;
+
 
 import com.app.bookJeog.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
@@ -179,4 +179,31 @@ public class PostDAO {
         return postMapper.selectAllReceiverPosts();
     }
 
+    public ReceiverVO findReceiverPostById(Long id){
+        return postMapper.selectReceiverPostById(id);
+    }
+
+    public List<DonateCertVO> findAllDonatedCerts(){
+        return postMapper.selectAllDonateCerts();
+    }
+
+    public DonateCertVO findDonateCertById(Long id){
+        return postMapper.selectDonateCertById(id);
+    }
+
+    public List<DiscussionVO> findAllDiscussions(){
+        return postMapper.selectAllDiscussions();
+    }
+
+    public DiscussionVO findDiscussionById(Long id){
+        return postMapper.selectDiscussionById(id);
+    }
+
+    public void insertDiscussion(DiscussionVO discussionVO){
+        postMapper.insertDiscussionPost(discussionVO);
+    }
+
+    public void insertPost(PostVO postVO){
+        postMapper.insertPost(postVO);
+    }
 }

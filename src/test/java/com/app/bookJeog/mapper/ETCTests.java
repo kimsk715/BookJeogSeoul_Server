@@ -5,6 +5,7 @@ import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PostVO;
 import com.app.bookJeog.repository.PostDAO;
+import com.app.bookJeog.service.PostService;
 import com.app.bookJeog.service.ReportService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,9 @@ public class ETCTests {
     @Autowired
     private PostDAO postDAO;
 
+    @Autowired
+    private PostService postService;
+
 //  댓글 신고 조회 테스트
     @Test
     public void test(){
@@ -37,6 +41,11 @@ public class ETCTests {
     public void test2(){
         PostVO postVO = postDAO.findPostById(1010L);
         log.info(postVO.toString());
+    }
+
+    @Test
+    public void test3(){
+        log.info(postService.getReceiverPosts().toString());
     }
 
 }

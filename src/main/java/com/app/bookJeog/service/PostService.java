@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.PostType;
 import com.app.bookJeog.domain.vo.*;
 
 import java.util.ArrayList;
@@ -89,6 +90,24 @@ public interface PostService {
 
     public List<BookDonateDTO> getAllDonateBooks();
 
-    public List<ReceiverPostDTO> getReceiverPost();
+    public List<ReceiverPostDTO> getReceiverPosts();
+
+    public ReceiverPostDTO getReceiverPostById(Long id);
+
+    public List<DonateCertPostDTO> getAllDonateCerts();
+
+    public DonateCertPostDTO getDonateCertById(Long id);
+
+    public List<DiscussionPostDTO> getAllDiscussions();
+
+    public DiscussionPostDTO getDiscussionById(Long id);
+
+    public void insertDiscussion(DiscussionDTO discussionDTO);
+
+    public default PostVO toDiscussionVO(Long memberId){
+        return PostVO.builder().postType(PostType.DISCUSSION).memberId(memberId).build();
+    }
+
+    public void insertPost(PostVO postVO);
 }
 
