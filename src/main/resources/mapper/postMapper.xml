@@ -528,5 +528,40 @@
                     where r.id = #{id}
     </select>
 
+    <!--  독후감 피드 전체조회(무한스크롤)  -->
+    <select id="selectAllBookPostFeed" resultType="fileBookPostDTO">
+        select bp.id as book_post_id, bp.book_post_title, bp.book_post_text, pm.member_name, bp.book_isbn, p.member_id, f.file_name, f.file_path, p.createdDate,
+               (select count(*)
+                from tbl_book_post_like l
+                where l.book_post_id = bp.id) as like_count
+        from tbl_book_post bp
+        join tbl_post p on p.id = bp.id
+        join tbl_member m on p.member_id = m.id
+        join tbl_personal_member pm on pm.id = m.id
+        join tbl_member_profile mp on mp.member_id = m.id
+        join tbl_file f on f.id = mp.id
+        where bp.book_post_is_public = 'PUBLIC'
+        order by p.createdDate desc
+        limit 12 offset #{offset}
+    </select>
+
+    <!--  독후감 팔로잉 전체조회(무한스크롤)  -->
+    <select id="selectFollowBookPostFeed" resultType="fileBookPostDTO">
+        select bp.id as book_post_id, bp.book_post_title, bp.book_post_text, bp.book_isbn, pm.member_name,
+               p.member_id, f.file_name, f.file_path, p.createdDate,
+               (select count(*)
+                from tbl_book_post_like l
+                where l.book_post_id = bp.id) as like_count
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_member m on p.member_id = m.id
+                 join tbl_personal_member pm on pm.id = m.id
+                 join tbl_member_profile mp on mp.member_id = m.id
+                 join tbl_file f on f.id = mp.id
+                 join tbl_follow fl on fl.follow_receiver_id = m.id
+        where bp.book_post_is_public = 'PUBLIC' and fl.follow_sender_id = #{loginMemberId}
+        order by p.createdDate desc
+        limit 12 offset #{offset}
+    </select>
 
 </mapper>

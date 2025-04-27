@@ -157,5 +157,15 @@ public class PostServiceImpl implements PostService {
         return receiverDTO;
     }
 
+    // 독후감 피드 전체조회(무한스크롤)
+    @Override
+    public List<FileBookPostDTO> findAllBookPostFeed(int offset){
+        return postDAO.findAllBookPostFeed(offset);
+    };
 
+    // 독후감 팔로잉 전체조회(무한스크롤)
+    @Override
+    public List<FileBookPostDTO> findFollowBookPostFeed(Long loginMemberId, int offset){
+        return postDAO.findFollowBookPostFeed(loginMemberId, offset);
+    };
 }

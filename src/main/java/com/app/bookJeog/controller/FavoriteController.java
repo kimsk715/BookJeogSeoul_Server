@@ -86,4 +86,11 @@ public class FavoriteController {
     public void unfollow(@RequestParam Long memberId){
         favoriteService.deleteMemberFollow(memberId);
     }
+
+    // 특정 독후감 좋아요 개수 조회
+    @GetMapping("/post/like-count")
+    @ResponseBody
+    public int getLikeCount(@RequestParam Long bookPostId){
+        return favoriteService.countBookPostLike(bookPostId);
+    }
 }

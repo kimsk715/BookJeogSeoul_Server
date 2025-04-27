@@ -18,17 +18,17 @@ public interface PostService {
     //  화면에 나올 정보를 모아놓은 DTO 로 변환하는 메소드
     public default BookPostDTO toBookPostDTO(BookPostVO bookPostVO) {
         BookPostDTO bookPostDTO = new BookPostDTO();
-        if(bookPostVO != null) {
+        if (bookPostVO != null) {
             bookPostDTO.setId(bookPostVO.getId());
             bookPostDTO.setBookPostTitle(bookPostVO.getBookPostTitle());
             bookPostDTO.setBookPostText(bookPostVO.getBookPostText());
             bookPostDTO.setBookPostIsPublic(bookPostVO.getBookPostIsPublic());
             bookPostDTO.setBookPostStartDate(bookPostVO.getBookPostStartDate());
             bookPostDTO.setBookPostEndDate(bookPostVO.getBookPostEndDate());
-            if(bookPostVO.getBookId() != null) {
+            if (bookPostVO.getBookId() != null) {
                 bookPostDTO.setBookId(bookPostVO.getBookId());
             }
-            if(bookPostVO.getBookIsbn() != null) {
+            if (bookPostVO.getBookIsbn() != null) {
                 bookPostDTO.setBookIsbn(bookPostVO.getBookIsbn());
             }
             bookPostDTO.setCreatedDate(bookPostVO.getCreatedDate());
@@ -42,7 +42,7 @@ public interface PostService {
 
     public default DiscussionDTO toDiscussionDTO(DiscussionVO discussionVO) {
         DiscussionDTO discussionDTO = new DiscussionDTO();
-        if(discussionVO != null) {
+        if (discussionVO != null) {
             discussionDTO.setId(discussionVO.getId());
             discussionDTO.setDiscussionTitle(discussionVO.getDiscussionTitle());
             discussionDTO.setDiscussionText(discussionVO.getDiscussionText());
@@ -87,5 +87,11 @@ public interface PostService {
     public int countAllReceiverPost(Pagination pagination);
 
     public ReceiverDTO getReceiverById(Long id);
+
+    // 독후감 피드 전체조회(무한스크롤)
+    public List<FileBookPostDTO> findAllBookPostFeed(int offset);
+
+    // 독후감 팔로잉 전체조회(무한스크롤)
+    public List<FileBookPostDTO> findFollowBookPostFeed(Long loginMemberId, int offset);
 }
 
