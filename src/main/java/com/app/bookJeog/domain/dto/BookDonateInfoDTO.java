@@ -12,9 +12,8 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+
 public class BookDonateInfoDTO {
-    @EqualsAndHashCode.Include
     private BookDonateDTO bookDonateDTO;
     private String imageUrl;
     private String author;

@@ -12,4 +12,17 @@
         set comment_status = 'INACTIVE'
         where id = #{id}
     </update>
+
+    <select id="countAllCommentByPostId" resultType="_int">
+        select count(*)
+        from tbl_comment
+        where post_id = #{postId}
+    </select>
+
+    <select id="selectAllCommentByPostId" resultType="commentVO">
+        select *
+        from tbl_comment
+        where post_id = #{postId}
+    </select>
+
 </mapper>

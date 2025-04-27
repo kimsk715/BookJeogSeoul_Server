@@ -168,7 +168,7 @@
                     <section class="weekly-book-section">
                         <div class="weekly-title-wrapper">
                             <h3 class="weekly-title">이 주의 기부도서</h3>
-                            <a class="weekly-total-books" href="">전체보기</a>
+                            <a class="weekly-total-books" href="/post/weekly">전체보기</a>
                         </div>
                         <div class="swiper swiper-initialized swiper-horizontal swiper-backface-hidden">
                             <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
@@ -218,7 +218,7 @@
                 </div>
                 <div mode="out-in" class="receiver">
                     <div class="card-container">
-                        <div class="card-list" style="display: flex; margin-left: -16px">
+                        <div class="card-list" style="display: flex; margin-left: -16px; flex-wrap: wrap;">
 
 
                         </div>
@@ -237,6 +237,9 @@
 
     </footer>
 </body>
+<script th:inline="javascript">
+    const Posts = /*[[${Posts}]]*/ [];
+</script>
 <script src="/js/donation/main.js"></script>
 <script src="/js/donation/mobile.js"></script>
 

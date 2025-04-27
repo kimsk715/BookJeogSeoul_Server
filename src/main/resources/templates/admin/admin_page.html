@@ -1554,6 +1554,54 @@
         </div>
     </div>
 
+    <div class="discussion-modal" style="display: none">
+        <div class="modal-backdrop"></div>
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>공지 상세정보</h3>
+                <button type="button" class="close-btn">
+                    <img
+                            class="close-button"
+                            src="/images/admin/cross.png"
+                            alt="닫기"
+                    />
+                </button>
+            </div>
+
+            <!-- 모달 본문 -->
+            <div class="modal-body">
+
+                <!-- 공지 상세 내용 -->
+                <div class="discussion-detail">
+                    <h4>토론 제목</h4>
+                    <textarea class="detail-content" id="new-discussion-title"></textarea>
+                </div>
+                <div class="discussion-detail">
+                    <h4>토론 내용</h4>
+                    <textarea class="detail-content" id="new-discussion-text"></textarea>
+                </div>
+                <div class="discussion-detail">
+                    <h4>ISBN</h4>
+                    <textarea class="detail-content" id="new-discussion-book-isbn"></textarea>
+                </div>
+                <div class="discussion-detail">
+                    <h4>도서명</h4>
+                    <textarea class="detail-content" id="new-discussion-book-title"></textarea>
+                </div>
+                <div class="discussion-detail">
+                    <h4>첨부 파일</h4>
+                    <input type="file">
+                </div>
+
+            </div>
+
+            <!-- 모달 푸터 -->
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn close-button">취소</button>
+                <button type="button" class="discussion-confirm-btn save-btn close-button" value="${discussion.id}">저장</button>
+            </div>
+        </div>
+    </div>
 
 
 
