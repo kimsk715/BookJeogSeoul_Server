@@ -166,4 +166,14 @@ public class PostDAO {
     public ReceiverVO findReceiverById(Long id){
         return postMapper.selectReceiverById(id);
     }
+
+    // 독후감 피드 전체조회(무한스크롤)
+    public List<FileBookPostDTO> findAllBookPostFeed(int offset){
+        return postMapper.selectAllBookPostFeed(offset);
+    };
+
+    // 독후감 팔로잉 전체조회(무한스크롤)
+    public List<FileBookPostDTO> findFollowBookPostFeed(Long loginMemberId, int offset){
+        return postMapper.selectFollowBookPostFeed(loginMemberId, offset);
+    };
 }

@@ -38,6 +38,13 @@
         where member_id = #{memberId} and book_post_id = #{bookPostId}
     </select>
 
+    <!--  특정 독후감의 좋아요 개수 조회  -->
+    <select id="countBookPostLike" resultType="_int">
+        select count(*)
+        from tbl_book_post_like
+        where book_post_id = #{bookPostId}
+    </select>
+
     <!--  독후감 좋아요 취소하기  -->
     <delete id="deleteBookPostLike">
         delete from tbl_book_post_like

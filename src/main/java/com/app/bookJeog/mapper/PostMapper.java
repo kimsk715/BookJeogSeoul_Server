@@ -95,5 +95,11 @@ public interface PostMapper {
     public int countAllReceiverPost(Pagination pagination);
 
     public ReceiverVO selectReceiverById(Long id);
+
+    // 독후감 피드 전체조회(무한스크롤)
+    public List<FileBookPostDTO> selectAllBookPostFeed(int offset);
+
+    // 독후감 팔로잉 전체조회(무한스크롤)
+    public List<FileBookPostDTO> selectFollowBookPostFeed(Long loginMemberId, int offset);
 }
 

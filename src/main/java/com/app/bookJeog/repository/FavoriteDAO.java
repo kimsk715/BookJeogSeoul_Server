@@ -58,4 +58,9 @@ public class FavoriteDAO {
     public void deleteMemberFollow(Long receiverId, Long senderId){
         favoriteMapper.deleteMemberFollow(receiverId, senderId);
     };
+
+    // 특정 독후감의 좋아요 개수 조회
+    public int countBookPostLike(Long bookPostId){
+        return favoriteMapper.countBookPostLike(bookPostId);
+    };
 }

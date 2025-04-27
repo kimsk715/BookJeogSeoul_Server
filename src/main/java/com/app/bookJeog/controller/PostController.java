@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -47,6 +48,24 @@ public class PostController {
         return "post/post-list";
     }
 
+    // 전체 피드 조회
+    @GetMapping("/all-book-post")
+    @ResponseBody
+    public List<FileBookPostDTO> goToAllBookPost(@RequestParam(value = "offset", defaultValue = "0") int offset) {
+        return postService.findAllBookPostFeed(offset);
+    }
+
+    // 팔로잉 피드 조회
+    @GetMapping("/following-book-post")
+    @ResponseBody
+    public List<FileBookPostDTO> goToFollowingBookPost(@RequestParam(value = "offset", defaultValue = "0") int offset, HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if(member != null) {
+            Long loginMemberId = member.getId();
+            return postService.findFollowBookPostFeed(loginMemberId, offset);
+        }
+        return List.of();
+    }
 
     // 독후감 게시글
     @GetMapping("bookpost/{id}")
