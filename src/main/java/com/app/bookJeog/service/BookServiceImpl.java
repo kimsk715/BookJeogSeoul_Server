@@ -1,9 +1,6 @@
 package com.app.bookJeog.service;
 
-import com.app.bookJeog.domain.vo.MemberHistoryVO;
-import com.app.bookJeog.domain.vo.TopBookVO;
-import com.app.bookJeog.domain.vo.SelectedBookVO;
-import com.app.bookJeog.domain.vo.TempSelectedBookVO;
+import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.repository.BookDAO;
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -153,9 +150,14 @@ public class BookServiceImpl implements BookService {
     }
 
 
-    public List<TopBookVO> getBestBooks() throws IOException {
-           return getPopularBooks();
-        };
+    // 인기 독후감 조회
+    @Override
+    public List<BookPostVO> selectTopBookPost() {
+        return bookDAO.findTopBookPost();
+    }
+
+
+
 };
 
 

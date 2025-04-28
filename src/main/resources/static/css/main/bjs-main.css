@@ -999,6 +999,9 @@ em {
     word-wrap: break-word;
     white-space: normal;
 }
+.slide-container {
+    display:flex;
+}
 
 
 

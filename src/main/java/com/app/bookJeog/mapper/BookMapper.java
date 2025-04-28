@@ -1,9 +1,6 @@
 package com.app.bookJeog.mapper;
 
-import com.app.bookJeog.domain.vo.BookInfoVO;
-import com.app.bookJeog.domain.vo.MemberHistoryVO;
-import com.app.bookJeog.domain.vo.SelectedBookVO;
-import com.app.bookJeog.domain.vo.TempSelectedBookVO;
+import com.app.bookJeog.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -23,4 +20,8 @@ public interface BookMapper {
 
     // 관리자 선정도서
     public List<SelectedBookVO> selectAdminSuggestBooks();
+
+
+    // 인기 독후감
+    public List<BookPostVO> selectTopBookPost();
 }
