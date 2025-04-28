@@ -564,4 +564,59 @@
         limit 12 offset #{offset}
     </select>
 
+    <!--  일반도서 독후감 작성  -->
+    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_post (post_type, member_id)
+        values ('BOOK_POST', #{memberId})
+    </insert>
+
+    <insert id="insertBookPost">
+        insert into tbl_book_post (id, book_post_title, book_post_text, book_post_is_public, book_post_start_date, book_post_end_date, book_isbn, book_title)
+        values (#{id}, #{bookPostTitle}, #{bookPostText}, #{bookPostIsPublic}, #{bookPostStartDate}, #{bookPostEndDate}, #{bookIsbn}, #{bookTitle})
+    </insert>
+
+    <!--  선정도서 독후감 작성  -->
+    <insert id="insertSelectedBookPost">
+        insert into tbl_selected_book_post(id, book_id, book_post_status)
+        values (#{id}, #{bookId}, #{bookPostStatus})
+    </insert>
+
+    <!--  독후감 첨부파일 넣기, 수정(삭제)  -->
+    <insert id="insertFiles" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_file (file_name, file_path, file_text)
+        values (#{fileName}, #{filePath}, #{fileText})
+    </insert>
+
+    <insert id="insertBookPostFiles">
+        insert into tbl_book_post_file (id, book_post_id)
+        values (#{id}, #{bookPostId})
+    </insert>
+
+    <delete id="deleteFiles">
+        delete from tbl_file
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteBookPostFiles">
+        delete from tbl_book_post_file
+        where id = #{id}
+    </delete>
+
+    <!--  독후감 수정  -->
+    <update id="updatePost">
+        update tbl_post set updatedDate = current_timestamp
+        where id = #{id}
+    </update>
+
+    <update id="updateBookPost">
+        update tbl_book_post set book_post_title = #{bookPostTitle},
+                                 book_post_text = #{bookPostText} ,
+                                book_post_is_public = #{bookPostIsPublic}
+        where id = #{id}
+    </update>
+
+    <update id="updateSelectedBookPost">
+        update tbl_selected_book_post set book_post_status = #{bookPostStatus}
+        where id = #{id}
+    </update>
 </mapper>

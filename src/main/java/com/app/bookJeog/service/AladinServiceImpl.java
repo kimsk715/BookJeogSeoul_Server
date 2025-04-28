@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Transactional(rollbackFor = Exception.class)
 public class AladinServiceImpl implements AladinService {
     // 알라딘 API Key
-    private static final String ALADIN_API_KEY = "ttbsuehanh1551001";
+    private static final String ALADIN_API_KEY = "ttbkimsk7151659001";
 
     // 알라딘 API 요청 경로
     private static final String API_URL = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";

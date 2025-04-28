@@ -8,6 +8,7 @@ import com.app.bookJeog.domain.vo.BookTempVO;
 import com.app.bookJeog.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,5 +75,23 @@ public class BookController implements BookControllerDocs {
     public List<BookTempVO> getPopularBooks() throws IOException {
         log.info(bookService.getPopularBooks().toString());
         return bookService.getPopularBooks();
+    }
+
+    // 검색어로 책 목록 띄우기
+    @GetMapping("search")
+    @ResponseBody
+    public Map<String, Object> searchBooks(@RequestParam("keyword") String keyword,
+                                        @RequestParam(value = "start", defaultValue = "1") int startIndex,
+                                        @RequestParam(value = "max", defaultValue = "20") int maxResults,
+                                        @RequestParam(value = "sort", defaultValue = "Accuracy") String sort) throws JSONException {
+        Map<String, Object> result = aladinService.searchBooksToMap(keyword, startIndex, maxResults, sort);
+        return result;
+    }
+
+    // isbn으로 선정도서 여부 조회
+    @GetMapping("find-selected")
+    @ResponseBody
+    public boolean findSelectedBooks(Long bookIsbn) {
+        return bookService.findSelectedBooks(bookIsbn);
     }
 }

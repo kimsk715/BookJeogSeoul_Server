@@ -176,4 +176,11 @@ public class PostDAO {
     public List<FileBookPostDTO> findFollowBookPostFeed(Long loginMemberId, int offset){
         return postMapper.selectFollowBookPostFeed(loginMemberId, offset);
     };
+
+    // 일반도서 독후감 작성
+    public void insertPost(PostVO postVO){postMapper.insertPost(postVO);};
+    public void insertBookPost(BookPostVO bookPostVO){postMapper.insertBookPost(bookPostVO);};
+
+    // 선정도서 독후감 작성
+    public void insertSelectedBookPost(SelectedBookPostVO selectedBookPostVO){postMapper.insertSelectedBookPost(selectedBookPostVO);};
 }

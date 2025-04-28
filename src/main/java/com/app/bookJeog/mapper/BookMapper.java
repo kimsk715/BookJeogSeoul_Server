@@ -14,4 +14,7 @@ public interface BookMapper {
     public List<TempSelectedBookVO> selectTempSelectedBook();
 
     public void insertSelectedBook(SelectedBookVO selectedBookVO);
+
+     // 선정 도서 여부 조회
+    public int selectSelectedBooks(Long bookIsbn);
 }

@@ -15,4 +15,10 @@
         insert into tbl_selected_book (book_isbn, book_image_url)
         values (${bookIsbn}, ${bookImageUrl})
     </insert>
+
+    <!--  선정 도서 여부 조회  -->
+    <select id="selectSelectedBooks" resultType="_int">
+        select count(*) from tbl_selected_book
+        where book_isbn = #{bookIsbn}
+    </select>
 </mapper>

@@ -5,6 +5,7 @@ import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.DiscussionVO;
 import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 import com.app.bookJeog.domain.vo.ReceiverVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,5 +94,8 @@ public interface PostService {
 
     // 독후감 팔로잉 전체조회(무한스크롤)
     public List<FileBookPostDTO> findFollowBookPostFeed(Long loginMemberId, int offset);
+
+    // 독후감 작성...
+    public Long write(FileBookPostDTO fileBookPostDTO, List<MultipartFile> files);
 }
 

@@ -1,4 +1,64 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // 도서페이지에서 isbn을 받아왔으면 검색 스킵
+    const urlParams = new URLSearchParams(window.location.search);
+    const preSelectedIsbn = urlParams.get('isbn');
+
+    if (preSelectedIsbn) {
+        (async () => {
+            try {
+                const books = await postWriteService.searchBooks(preSelectedIsbn);
+                if (books.length > 0) {
+                    const book = books[0]; // 첫 번째 결과를 선택
+
+                    // 책 선택 처리 (아까 만든 book layout에 넣기)
+                    postWriteLayout.showPreSelectedBook(book);
+
+                    // 독후감 입력폼 열기 (숨겨진 것들 표시)
+                    noSelectedBook.style.display = "none";
+                    selectedBook.style.display = "flex";
+                    components.forEach((component) => {
+                        component.style.display = "block";
+                    });
+
+                    // isSelected 여부 조회해서 출품 스위치 표시/숨기기
+                    const selected = await postWriteService.isSelected(book.isbn);
+                    const selectedInputHidden = document.querySelector("input#selectedInput");
+                    selectedInputHidden.value = selected;
+
+                    const selectedCheck = document.querySelector("li.selectedCheck");
+                    selectedCheck.style.display = selected ? "flex" : "none";
+
+                } else {
+                    console.warn("해당 ISBN으로 책을 찾을 수 없습니다.");
+                }
+            } catch (error) {
+                console.error("책 자동 선택 실패", error);
+            }
+        })();
+    }
+
+    // input에 입력할 때마다 그 검색어로 도서 검색
+    const searchInput = document.querySelector("#input-search");
+
+    let searchTimeout;
+
+    searchInput.addEventListener("input", (e) => {
+        clearTimeout(searchTimeout);
+
+        const keyword = e.target.value.trim();
+        if (keyword === "") return; // 아무것도 없으면 검색 안 함
+
+        searchTimeout = setTimeout(async () => {
+            try {
+                const books = await postWriteService.searchBooks(keyword);
+                await postWriteLayout.showBookList(books); // 리스트 렌더링
+                setUpBookClickEvents();
+            } catch (error) {
+                console.error("책 검색 실패", error);
+            }
+        }, 300); // 0.3초 딜레이 후 검색
+    });
+
     // 요소들 가져오기
     const dateInput = document.getElementById("dateInput");
     const dateDisplay = document.querySelector(".date");
@@ -27,6 +87,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 // 숨겨진 input에도 값 저장 (필요 시 활용)
                 dateInput.value = rangeText;
 
+                // 시작일/종료일 hidden input에 각각 저장
+                document.getElementById("hiddenStartDate").value = start;
+                document.getElementById("hiddenEndDate").value = end;
+
                 // 캘린더 닫고 오버레이 숨김
                 fp.close();
                 calendarOverlay.style.display = "none";
@@ -50,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     calendarOverlay.addEventListener("click", function () {
         calendarOverlay.style.display = "none";
     });
-});
+
 
 // 독후감 제목 input에 입력하면 글자수가 갱신됨
 const titleInput = document.querySelector("input#textarea-title");
@@ -69,26 +133,29 @@ contentInput.addEventListener("input", (e) => {
 });
 
 // 책 선택 모달창에서 책 고르면 클래스, 스타일 변경
-const books = document.querySelectorAll(".user-booklist.books-item");
-const addButton = document.querySelector(".add-btn");
+    const setUpBookClickEvents = () => {
+        const books = document.querySelectorAll(".user-booklist.books-item");
+        const addButton = document.querySelector(".add-btn");
 
-books.forEach((book) => {
-    book.addEventListener("click", () => {
-        const isActive = book.classList.contains("active");
+        books.forEach((book) => {
+            book.addEventListener("click", () => {
+                const isActive = book.classList.contains("active");
 
-        // 이미 선택된 걸 다시 클릭한 경우엔 해제
-        if (isActive) {
-            console.log("해제");
-            book.classList.remove("active");
-            addButton.disabled = true;
-        } else {
-            // 다른 거 선택된 경우에 모두 해제 후 현재만 활성화
-            books.forEach((b) => b.classList.remove("active"));
-            book.classList.add("active");
-            addButton.disabled = false;
-        }
-    });
-});
+                // 이미 선택된 걸 다시 클릭한 경우엔 해제
+                if (isActive) {
+                    console.log("해제");
+                    book.classList.remove("active");
+                    addButton.disabled = true;
+                } else {
+                    // 다른 거 선택된 경우에 모두 해제 후 현재만 활성화
+                    books.forEach((b) => b.classList.remove("active"));
+                    book.classList.add("active");
+                    addButton.disabled = false;
+                }
+            });
+        });
+    }
+
 
 // 검색된 책이 없으면 없다는 페이지 보여짐
 const searchList = document.querySelector(".search-list");
@@ -140,15 +207,76 @@ const components = document.querySelectorAll(".component:not(.add-book)");
 const noSelectedBook = document.querySelector(".add-book>.box");
 const selectedBook = document.querySelector(".book-container");
 
-modalSaveButton.addEventListener("click", (e) => {
-    modal.style.display = "none";
-    modalOverlay.style.display = "none";
-    noSelectedBook.style.display = "none";
-    selectedBook.style.display = "flex";
-    components.forEach((component) => {
-        component.style.display = "block";
+// 숨겨진 input (선정도서 여부 저장할 곳)
+    const selectedCheck = document.querySelector("li.selectedCheck");
+
+    modalSaveButton.addEventListener("click", async (e) => {
+        const selectedBookItem = document.querySelector(".user-booklist.books-item.active");
+
+        if (!selectedBookItem) {
+            alert("책을 선택해 주세요.");
+            return;
+        }
+
+        const isbn = selectedBookItem.dataset.isbn; // ✅ 선택한 책의 ISBN 가져오기
+        if (!isbn) {
+            alert("선택한 책에 ISBN 정보가 없습니다.");
+            return;
+        }
+
+        try {
+            const selected = await postWriteService.isSelected(isbn); // ✅ 선정도서 여부 조회
+            const selectedInputHidden = document.querySelector("input#selectedInput"); // ✅ 숨겨진 input
+            selectedInputHidden.value = selected; // ✅ 숨겨진 input에 true/false 저장
+
+            if(selected){
+                selectedCheck.style.display = "flex";
+            } else{
+                selectedCheck.style.display = "none";
+            }
+            console.log("선정도서 여부:", selected);
+
+        } catch (error) {
+            console.error("선정도서 여부 조회 실패", error);
+        }
+
+        // ✅ 기존 모달 닫기 동작들
+        modal.style.display = "none";
+        modalOverlay.style.display = "none";
+        noSelectedBook.style.display = "none";
+        selectedBook.style.display = "flex";
+        components.forEach((component) => {
+            component.style.display = "block";
+        });
+
+        const titleElementTop = document.querySelector(".title.book-name .book-title");
+        const titleElementBottom = document.querySelector(".book-container .book-name");
+        const produceElement = document.querySelector(".book-container .book-produce");
+        const infoElement = document.querySelector(".book-container .book-info");
+        const coverImgElement = document.querySelector(".book-container img");
+        const bookContainer = document.querySelector(".book-container");
+
+        // insert용 hidden input
+        const bookIsbnInput = document.getElementById("hiddenIsbn");
+        const hiddenBookTitle = document.getElementById("hiddenBookTitle");
+
+        // 선택한 책 item에서 데이터 꺼내기
+        const title = selectedBookItem.querySelector(".metadata .title").innerText;
+        const author = selectedBookItem.querySelector(".metadata .author").innerText;
+        const cover = selectedBookItem.querySelector(".book-picture img").src;
+
+        const publishDate = `${selectedBookItem.dataset.publishDate} 출간` || "출간일 정보 없음";
+
+        // 책 상세 정보 영역 반영
+        titleElementTop.innerText = title;
+        titleElementBottom.innerText = title;
+        produceElement.innerText = `${author} 지음 · ${selectedBookItem.dataset.publisher || "출판사 없음"}`;
+        infoElement.innerText = `${publishDate}`;
+        coverImgElement.src = cover;
+        bookContainer.style.setProperty("--background-image", `url('${cover}')`);
+        bookIsbnInput.value = selectedBookItem.dataset.isbn;
+        hiddenBookTitle.value = title;
     });
-});
 
 // 모달창 검색어가 있으면 x버튼이 뜸
 // 일단 input에 입력해야 버튼이 뜸
@@ -234,7 +362,7 @@ imageInput.addEventListener("change", (e) => {
     imagesBox.style.display = "block";
 
     // 유효한 파일들을 이미지 리스트로 추가
-    validFiles.forEach((file) => {
+    validFiles.forEach((file, index) => {
         const imageUrl = URL.createObjectURL(file);
 
         const li = document.createElement("li");
@@ -245,7 +373,12 @@ imageInput.addEventListener("change", (e) => {
             <label>
                 <div class="inner">
                     <div class="input">
-                        <input type="text" autocomplete="off" placeholder="나만의 메모를 남겨보세요" class="mds-input-field" maxlength="50" />
+                        <input type="text" autocomplete="off" placeholder="나만의 메모를 남겨보세요" class="mds-input-field" maxlength="50" data-index="${index}"/>
+                        <input 
+                            type="hidden" 
+                            name="fileList[${index}].fileText" 
+                            class="hidden-file-text" 
+                        />
                     </div>
                     <button type="button" class="mds-icon-input-delete clear-button" style="display: none;"></button>
                 </div>
@@ -267,12 +400,19 @@ imageInput.addEventListener("change", (e) => {
         </div>
     `;
 
+        // 메모 입력할 때 숨은 input에도 같이 값 반영
+        const memoInput = li.querySelector(".mds-input-field");
+        const hiddenInput = li.querySelector(".hidden-file-text");
+
+        memoInput.addEventListener("input", (e) => {
+            hiddenInput.value = e.target.value; // 메모 내용 -> hidden input에 저장
+        });
+
         // 이미지 안의 요소들
         const img = li.querySelector("img");
         const inputFile = li.querySelector(".input-file");
         const changeBtn = li.querySelector(".change-image");
         const deleteBtn = li.querySelector(".delete");
-        const memoInput = li.querySelector(".mds-input-field");
         const clearBtn = li.querySelector(".clear-button");
         const lengthSpan = li.querySelector(".length");
 
@@ -384,19 +524,65 @@ postQuestion.addEventListener("click", (e) => {
 
 // 포스트 공개 버튼을 눌러서 껐다 킴
 const postPublicButton = document.querySelector("label.mds-switch");
+const postSubmitButton = document.querySelector("label.mds-switch.submit")
 const checkbox = document.querySelector("input#publicInput");
+const submitCheckbox = document.querySelector("input#selectedInput")
 
 postPublicButton.addEventListener("click", (e) => {
     const label = e.currentTarget;
 
     // 토글 상태 반영
     setTimeout(() => {
+        const hiddenPublicInput = document.getElementById("hiddenPublicInput");
+        const hiddenSelectedInput = document.getElementById("hiddenSelectedInput");
+        const selectedCheckbox = document.getElementById("selectedInput");
+        const postSubmitLabel = document.querySelector("label.mds-switch.submit");
+
         if (checkbox.checked) {
+            // 공개 ON
             label.classList.add("checked");
             checkbox.value = "true";
+            hiddenPublicInput.value = "PUBLIC"; // ⭐️
         } else {
+            // 공개 OFF
             label.classList.remove("checked");
             checkbox.value = "false";
+            hiddenPublicInput.value = "PRIVATE"; // ⭐️
+
+            // 공개 끄면 출품도 강제 OFF
+            selectedCheckbox.checked = false;
+            hiddenSelectedInput.value = "PRIVATE"; // ⭐️
+            postSubmitLabel.classList.remove("checked");
+        }
+    }, 0);
+});
+
+postSubmitButton.addEventListener("click", (e) => {
+    const label = e.currentTarget;
+
+    // 토글 상태 반영
+    setTimeout(() => {
+        const hiddenPublicInput = document.getElementById("hiddenPublicInput");
+        const hiddenSelectedInput = document.getElementById("hiddenSelectedInput");
+        const selectedCheckbox = document.getElementById("selectedInput");
+
+        if (hiddenPublicInput.value !== "PUBLIC") {
+            // 공개 OFF 상태면 출품 못 켜게 하고 무조건 끔
+            selectedCheckbox.checked = false;
+            hiddenSelectedInput.value = "PRIVATE"; // ⭐️
+            label.classList.remove("checked");
+            showToast("공개 설정을 켜야 출품할 수 있습니다.");
+            return;
+        }
+
+        if (selectedCheckbox.checked) {
+            // 출품 ON
+            label.classList.add("checked");
+            hiddenSelectedInput.value = "PUBLIC"; // ⭐️
+        } else {
+            // 출품 OFF
+            label.classList.remove("checked");
+            hiddenSelectedInput.value = "PRIVATE"; // ⭐️
         }
     }, 0);
 });
@@ -411,6 +597,7 @@ confirmButton.addEventListener("click", (e) => {
 
     // 하나라도 입력이 덜 되어있으면
     if (!date || !title || !content) {
+        e.preventDefault();
         console.log("입력 덜 됨");
         showToast("날짜, 제목, 내용을 모두 입력해주세요.");
         e.preventDefault(); // form 제출 방지
@@ -418,4 +605,5 @@ confirmButton.addEventListener("click", (e) => {
     }
     // 입력을 다 하고 누르면
     console.log("통과");
+    });
 });
