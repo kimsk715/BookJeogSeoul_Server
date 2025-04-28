@@ -4,6 +4,7 @@ package com.app.bookJeog.controller.admin;
 import com.app.bookJeog.domain.dto.AdminReceiverDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.mapper.PostMapper;
+import com.app.bookJeog.service.FavoriteService;
 import com.app.bookJeog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class AdminReceiverController {
     private final PostService postService;
+    private final FavoriteService favoriteService;
 
     @GetMapping("admin/receiver-posts")
     @ResponseBody
@@ -29,4 +31,10 @@ public class AdminReceiverController {
         return adminReceiverDTO;
     }
 
+    @GetMapping("admin/top-receiver")
+    @ResponseBody
+    public void setTopReceiver() {
+        Long receiverId = favoriteService.topReceiver();
+        postService.setTopReceiver(receiverId);
+    }
 }

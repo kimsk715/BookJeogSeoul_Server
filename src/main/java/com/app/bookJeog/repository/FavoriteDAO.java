@@ -29,4 +29,11 @@ public class FavoriteDAO {
         favoriteMapper.deleteBookScrap(memberId, bookIsbn);
     };
 
+    public int receiverVote(Long receiverId){
+        return favoriteMapper.receiverVote(receiverId);
+    }
+
+    public Long topReceiver(){
+        return favoriteMapper.topReceiver();
+    }
 }

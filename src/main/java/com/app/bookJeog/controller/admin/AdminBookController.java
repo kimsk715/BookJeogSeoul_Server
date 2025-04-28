@@ -47,6 +47,7 @@ public class AdminBookController {
         List<TempSelectedBookDTO> newList = tempList.stream().map(bookService::toTempSelectedBookDTO).toList();
         newList.forEach( book -> book.setTitle(bookService.getBookByIsbn(book.getBookIsbn()).get(0).getTitle()));
         newList.forEach( book -> book.setClassNo(bookService.getBookByIsbn(book.getBookIsbn()).get(0).getClassNo()));
+        log.info("newList : {}",  newList);
         return newList;
     }
 }

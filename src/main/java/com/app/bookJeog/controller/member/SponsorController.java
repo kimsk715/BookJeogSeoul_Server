@@ -1,6 +1,9 @@
 package com.app.bookJeog.controller.member;
 
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+
 import com.app.bookJeog.domain.dto.SponsorMemberDTO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.mapper.SponsorMapper;

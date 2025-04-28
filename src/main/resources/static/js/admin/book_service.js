@@ -40,6 +40,7 @@ const bookService= (() => {
         let path = `admin/temp-lists`;
         const response = await fetch(path)
         const tempList =  await response.json()
+        console.log(tempList)
         if(callback){
             callback(tempList)
         }
