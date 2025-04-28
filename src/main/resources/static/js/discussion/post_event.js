@@ -22,25 +22,34 @@ commentButton.addEventListener('click', ( ) => {
 
 const addComment = document.querySelector(".post-btn");
 const commentArea = document.querySelector(".register-box-inner textarea");
-
+const mentionedId = document.querySelector(".mention-value");
 addComment.addEventListener("click",(e) => {
     const postId = addComment.value;
     const commentText = commentArea.value;
-    commentService.addComment(postId,commentText,commentLayout.addedLayout);
-    alert("댓글이 등록되었습니다.")
+    const mentionId = mentionedId.value;
+    if(mentionId != null) {
+        commentService.addComment(postId, commentText, commentLayout.addedLayout, mentionId);
+        alert("댓글이 등록되었습니다.")
+    }
+    else{
+        commentService.addComment(postId, commentText, commentLayout.addedLayout);
+        alert("댓글이 등록되었습니다.")
+    }
     commentArea.value = "";
 })
 const commentWrapper = document.querySelector(".comment-list");
 
 const commentService = (() =>{
-
-    const addComment = async(postId,commentText, callback) => {
-        await fetch(`/post-comment?id=${postId}&text=${commentText}`);
+    const addComment = async(postId,commentText, callback, mentionId) => {
+        let path=`/post-comment?id=${postId}&text=${commentText}`;
+        if(mentionId != null){
+            path += `&mention-id=${mentionId}`
+        }
+        await fetch(path);
         if(callback){
             callback(commentText)
         }
     }
-
     return {addComment : addComment}
 })();
 
@@ -90,77 +99,53 @@ const commentLayout =(() =>{
     return { addedLayout : addedLayout}
 })();
 
+
+const mentionMenu = document.querySelector("#mention-menu");
+const mentionWrapper = mentionMenu.querySelector("#mention-inner")
+document.addEventListener("DOMContentLoaded",(e)=>{
+
+    const memberCount =  mentionWrapper.querySelectorAll('li').length;
+    if(memberCount < 5) {
+        mentionMenu.style.overflowY = "none";
+        console.log("DOM 감지")
+    }
+})
+
+mentionWrapper.addEventListener("click",(e)=>{
+    const mentionButton = document.createElement("div")
+    mentionButton.innerHTML = `<button type="button" class="mention-button" value="${e.target.value}">${e.target.innerText}</button>`
+    commentArea.after(mentionButton);
+    hideMentionMenu();
+})
+
+
 commentArea.addEventListener("input", (e) => {
     if(e.target.value.trim() !== "") {
         addComment.disabled = false;
     } else {
         addComment.disabled = true;
     }
+    const cursorPosition = commentArea.selectionStart;
+    const text = commentArea.value.substring(0, cursorPosition)
+    const lastWord = text.split(/\s/).pop();
+    console.log(lastWord)
+    if(lastWord.startsWith(`@`)){
+        showMentionMenu(cursorPosition);
+    }
+    else{
+        hideMentionMenu();
+    }
 });
 
-// const giveBookMarkButton = document.querySelector(".like-btn")
-// const bookMarkModal = document.querySelector(".unload-popup")
-// const closeBookMarkModal = document.querySelector(".close")
+const showMentionMenu = (cursorPosition) => {
+    mentionMenu.removeAttribute("style");
+    mentionMenu.style.left = `${cursorPosition*5+90}px`
+    mentionMenu.style.top = `-80px`;
+}
 
-// giveBookMarkButton.addEventListener('click',() => {
-//     document.body.style.overflow = "hidden";
-//     document.documentElement.style.overflow = "hidden";
-//     bookMarkModal.removeAttribute("style")
-// })
-
-// closeBookMarkModal.addEventListener('click',() =>{
-//     document.body.style.overflow = "";
-//     document.documentElement.style.overflow = "";
-//     bookMarkModal.style.display = "none"
-// })
-
-// const bookMarkInput = document.querySelector(".dialog-content");
-
-// bookMarkInput.addEventListener('input',() =>{
-//     let numberLength = bookMarkInput.value.length;
-//     let numberValue = bookMarkInput.value;
-//     console.log(numberLength)
-//     console.log(numberValue)
-//     if(numberLength > 12){
-//         bookMarkInput.value = bookMarkInput.value.slice(0,12);
-//     }
-//     if(numberValue > 6000){
-//         alert("최대 6000개까지만 줄 수 있습니다.")
-//         bookMarkInput.value = 6000
-//     }
-// })
-
-
-// const imageModal = document.querySelector(".full-image")
-// const thumbnailWrappers = document.querySelectorAll(".list li")
-// const imageCloseButton = document.querySelector(".img-close")
-
-// thumbnailWrappers.forEach((image) =>{
-//     image.addEventListener('click',(e) => {
-//         document.body.style.overflow = "hidden";
-//         document.documentElement.style.overflow = "hidden";
-//         let imageSource = image.querySelector("img").getAttribute("src");
-//         // console.log(imageSource)
-//         imageModal.removeAttribute("style")
-//         imageModal.querySelector("img").setAttribute("src",imageSource)
-//     })
-// })
-
-// // 클릭 또는 ESC키로 Modal 닫기.
-// imageCloseButton.addEventListener('click',() =>{
-//     document.body.style.overflow = "";
-//     document.documentElement.style.overflow = "";
-//     imageModal.style.display = "none";
-// })
-
-// document.addEventListener("keyup",(e) =>{
-//     if(e.key === "Escape"){
-//         document.body.style.overflow = "";
-//         document.documentElement.style.overflow = "";
-//         imageModal.style.display = "none";
-//     }
-// })
-
+const hideMentionMenu = () => {
+    mentionMenu.style.display = "none";
+}
 const moreButton = document.querySelectorAll(".more-btn");
 
 moreButton.forEach((button) => {

@@ -17,13 +17,13 @@ import org.springframework.stereotype.Component;
 public class CommentMentionDTO {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long memberId;
+    private Long commentId;
     private Long mentionMemberId;
 
     public CommentMentionVO toVO() {
         return CommentMentionVO.builder()
                 .id(id)
-                .memberId(memberId)
+                .commentId(commentId)
                 .mentionMemberId(mentionMemberId)
                 .build();
     }

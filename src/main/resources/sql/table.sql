@@ -16,3 +16,5 @@ create table tbl_admin(
 
 /* tbl_normal_book_post 테이블 */
 /* book_id 컬럼 --> book_isbn 이름 수정하기. */
+
+desc tbl_comment;
