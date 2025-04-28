@@ -1,11 +1,8 @@
 package com.app.bookJeog.repository;
 
-<<<<<<< HEAD
 import com.app.bookJeog.domain.vo.*;
-=======
 import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.domain.vo.TempSelectedBookVO;
->>>>>>> hjs/book
 import com.app.bookJeog.mapper.BookMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
