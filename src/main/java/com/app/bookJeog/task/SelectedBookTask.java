@@ -7,6 +7,7 @@ import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
 import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.domain.vo.TempSelectedBookVO;
+import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.BookService;
 import com.app.bookJeog.service.PostService;
 import lombok.NoArgsConstructor;
@@ -26,10 +27,11 @@ import java.util.stream.Collectors;
 public class SelectedBookTask {
     private final BookService bookService;
     private final PostService postService;
+    private final AladinService aladinService;
 
     /*
      *   0 * * * * * : 매 분 0초마다
-     *   0/5 * * * * * : 매 5초 간격
+     *   0/30 * * * * * : 매 30초 간격
      *   0 0/1 * * * : 매 1분 간격
      *   0 0/5 * ? : 매 5분 간격
      *   0 0 0/1 * * * : 매 1시간 간격
@@ -37,7 +39,7 @@ public class SelectedBookTask {
      *   0 0 0 1 * ? : 매월 1일 마다
      *   * 10-13 * * * * : 매 10, 11, 12, 13분에 동작한다.
      * */
-// 매 달 1일 마다 임시 선정 도서를 실제 선정 도서
+// 매 달 1일 마다 임시 선정 도서를 실제 선정 도서로
     @Scheduled(cron = "0 0 0 1 * *")
     public void insertSelectedBook() {
         List<TempSelectedBookVO> tempList = bookService.getTempSelectedBook();
@@ -47,7 +49,7 @@ public class SelectedBookTask {
             SelectedBookDTO selectedDTO = new SelectedBookDTO();
             selectedDTO.setId(temp.getId());
             selectedDTO.setBookIsbn(temp.getBookIsbn());
-            selectedDTO.setBookImageUrl("1"); // 임시 테스트용 여기 자리에 표지 이미지 가져올 수 있는 API 연결.
+            selectedDTO.setBookImageUrl("'" + aladinService.getBookCover(temp.getBookIsbn()) + "'"); // 임시 테스트용 여기 자리에 표지 이미지 가져올 수 있는 API 연결.
             SelectedBookVO selectedVO = selectedDTO.toSelectedBookVO();
             log.info(selectedVO.toString());
             selectedList.add(selectedVO);

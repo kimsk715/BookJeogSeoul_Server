@@ -52,11 +52,11 @@ public class AdminMemberController {
     }
 
     @PostMapping("admin/login-admin")
-    public String loginAdmin (AdminDTO adminDTO) {
+    public String loginAdmin (AdminDTO adminDTO, HttpSession session) {
         Optional<AdminVO> foundAdmin = adminServiceImpl.loginAdmin(adminDTO);
         if(foundAdmin.isPresent()) {
             session.setAttribute("admin", foundAdmin);
-            return "redirect:/admin-page";
+            return "redirect:/admin";
         } else {
             return "redirect:/admin/login?result=fail";
         }
