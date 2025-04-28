@@ -15,101 +15,7 @@
     <body>
         <div>
             <!-- 헤더 시작 -->
-            <div class="top-header background on">
-                <div class="inner">
-                    <header>
-                        <h1>
-                            <a href="" class="logo">
-                                <img
-                                    src="/images/common/Logo.png"
-                                    alt="북적서울"
-                                    class="bookjeog-logo"
-                                    style="scale: 1.5"
-                                />
-                            </a>
-                        </h1>
-                        <nav>
-                            <ul class="gnb">
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="book-report"
-                                        class="book-report"
-                                        >독후감</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="donation"
-                                        class="donation"
-                                        >기부</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a th:href="@{/search/window}"
-                                        data-content-type="search"
-                                        class="search"
-                                        >검색</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="book-shelf"
-                                        class="book-shelf"
-                                        >내서재</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="manage"
-                                        class="manage"
-                                        >관리</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="discussion"
-                                        class="discussion"
-                                        >북적북적</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        type="button"
-                                        data-content-type="self-donation"
-                                        class="self-donation"
-                                        >개인기부</a
-                                    >
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="util-wrap">
-                            <!-- data-count가 알람 개수 -->
-                            <a
-                                href=""
-                                class="alarm-button"
-                                data-content-type="alarmCenter"
-                                data-count="10"
-                            >
-                                <span class="mds-icon-alarm">
-                                    <span class="ir">알림센터</span>
-                                </span>
-                            </a>
-                            <ul class="util">
-                                <li class="sign sign-in">
-                                    <a href="" data-content-type="login"
-                                        >로그아웃</a
-                                    >
-                                </li>
-                            </ul>
-                        </div>
-                    </header>
-                </div>
-            </div>
+            <div th:replace="~{main/header :: header-sc}"></div>
             <!-- 헤더끝 -->
             <section class="content">
                 <div class="bjs-home">
@@ -176,7 +82,7 @@
                         </section>
                         <!-- 메인 컨텐츠들 -->
                         <div class="section-divide-area">
-                            <!-- ai색션 -->
+                            <!-- 서울도서관 최다대출 도서 -->
                             <section class="home-content">
                                 <div class="home-inner">
                                     <h3 class="section-title">
@@ -188,102 +94,23 @@
                                             <div class="swiper-container">
                                                 <div class="swiper-wrapper" id="slider">
                                                     <!-- 카드 목록 시작 *5개이상* -->
-                                                    <div class="book-card" style="margin-right: 12px;">
+                                                    <div th:each="book : ${topBookDTOS}" class="book-card" style="margin-right: 12px;">
                                                         <div class="content-data">
                                                             <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드1</span>
-                                                                <span>메인 타이틀</span>
+                                                            <h3 class="title" >
+                                                                <span th:text="${book.topBookVO.getTitle()}"></span>
+                                                                <span th:text="${book.topBookVO.getAuthor()}"></span>
                                                             </h3>
                                                         </div>
-                                                        <a href="">
+                                                        <a th:href="|/book/detail/${book.topBookVO.getIsbn()}|">
                                                             <!-- 이미지, 책 썸네일 -->
                                                             <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
+                                                                    <img th:src="${book.imageUrl}" alt="">
                                                             </div>
                                                         </a>
                                                         <button></button>
                                                     </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드2</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드3</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드4</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드5</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드6</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
+
                                                     <!-- 카드 목록 끝 -->
                                                 </div>
                                             </div>
@@ -295,7 +122,7 @@
                             <section class="home-content">
                                 <div class="home-inner">
                                     <h3 class="title">
-                                        <a style="cursor: none;">북적 랭킹</a>
+                                        <a style="pointer-events: none">북적 랭킹</a>
                                     </h3>
                                     <!-- 카테고리 분류 버튼들 -->
                                     <div class="category-list">
@@ -584,6 +411,345 @@
                                     </div>
                                 </div>
                             </section>
+                            <!--관리자 추천-->
+                            <section class="home-content">
+                                <div class="home-inner">
+                                    <h3 class="section-title">
+                                        <a style="pointer-events: none" class="book-many-view">책과 예술의 만남</a>
+                                    </h3>
+                                    <p class="section-sub-title">서울시가 추천하는 책들!</p>
+                                    <div class="book-shelf">
+                                        <div class="slide-container">
+                                            <!--여기서부터 추천책-->
+                                            <ul class="slide-wrapper" style="padding-top: 16px" th:each="adminBooks : ${suggestBooks}">
+                                                <li>
+                                                    <div class="bookjeog-book">
+                                                        <a>
+                                                            <div class="thumbnail">
+                                                                <p class="badge"></p>
+                                                                <div class="thumbnail-liner">
+                                                                    <div class="book-picture" style="margin-bottom: 10px">
+                                                                        <picture>
+                                                                            <img th:src="${adminBooks.getImageUrl()}">
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a class="book-data">
+                                                            <div class="view-book-data">
+                                                                <p class="title" th:text="${adminBooks.getTitle()}">여긴 타이틀</p>                                                                <p class="title"></p>
+                                                                <p class="author" th:text="${adminBooks.getAuthor()}"></p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--인기도서 최다 조회-->
+                            <section class="home-content overflow">
+                                <div class="home-inner">
+                                    <h3 class="section-title">
+                                        <a class="gtm-yourbooks-2depth dark-img-after"
+                                        >인기 도서 최다조회</a
+                                        >
+                                    </h3>
+                                    <div
+                                            class="feed-section book-shelf overflow not-dark"
+                                    >
+                                        <div
+                                                class="swiper-container swiper-container-initialized swiper-container-horizontal"
+                                        >
+                                            <div
+                                                    class="swiper-wrapper"
+                                                    style="
+                                            transition-duration: 0ms;
+                                            transform: translate3d(
+                                                0px,
+                                                0px,
+                                                0px
+                                            );
+                                        "
+                                            >
+                                                <div
+                                                        class="swiper-item swiper-slide"
+                                                        style="margin-right: 8px"
+                                                >
+                                                    <article th:each="topViewBook : ${topViewBooks}"
+                                                            class="feed-article"
+                                                            style="
+                                                    background-image: url('https://d3udu241ivsax2.cloudfront.net/common/images/common/background-gradient-07.jpg');
+                                                "
+                                                    >
+                                                        <h4 class="feed-title" th:text="${topViewBook.getTitle()}">
+                                                            <br />
+                                                        </h4>
+                                                        <div class="feed-body">
+                                                            <div
+                                                                    class="millie-book books ratio-book feed-body-book"
+                                                            >
+                                                                <a
+                                                                        class="book-image gtm-yourbooks-bookdetail"
+                                                                ><div
+                                                                        class="thumbnail"
+                                                                >
+                                                                    <!---->
+                                                                    <!---->
+                                                                    <div
+                                                                            class="thumbnail-inner"
+                                                                    >
+                                                                        <div
+                                                                                class="book-picture imageLoaded"
+                                                                                style=""
+                                                                                data-observe="true"
+                                                                        >
+                                                                            <picture>
+                                                                                <img th:src="${topViewBook.getImageUrl()}"
+                                                                                        width="145"
+                                                                                        style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                                /></picture>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!---->
+                                                                </div></a
+                                                                >
+                                                                <!---->
+                                                            </div>
+                                                            <div class="sub-title">
+                                                                <p
+                                                                        class="sub-title-inner"
+                                                                        th:text="${topViewBook.getAuthor()}"
+                                                                >
+                                                                    <br />
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                                class="bottom-sheet feed-statistics mds-shadow--card round"
+                                                        ></div>
+                                                    </article>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="btn-wrap"></div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--인기도서 최고 독후감-->
+                            <section class="home-content">
+                                <div class="home-inner">
+                                    <h3 class="section-title">
+                                        <a style="pointer-events: none" class="book-many-view">독후감 쓰기좋은책들</a>
+                                    </h3>
+                                    <p class="section-sub-title">예쁜 독후감이된 책들</p>
+                                    <div class="book-shelf">
+                                        <div class="slide-container">
+                                            <!--여기서부터 추천책-->
+                                            <ul class="slide-wrapper" style="padding-top: 16px" th:each="topBookPost : ${topBookPostDTOS}">
+                                                <li>
+                                                    <div class="bookjeog-book">
+                                                        <a>
+                                                            <div class="thumbnail">
+                                                                <p class="badge"></p>
+                                                                <div class="thumbnail-liner">
+                                                                    <div class="book-picture" style="margin-bottom: 10px">
+                                                                        <picture>
+                                                                            <img th:src="${topBookPost.getImageUrl()}">
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a class="book-data">
+                                                            <div class="view-book-data">
+                                                                <p class="title" th:text="${topBookPost.getTitle()}"></p>                                                                <p class="title"></p>
+                                                                <p class="author" th:text="${topBookPost.getAuthor()}"></p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--독후감 많이쓴 사람-->
+                            <section
+                                    class="home-content overflow bookstore-content"
+                            >
+                                <div class="home-inner bookstore-frm">
+                                    <h3 class="section-title">
+                                        <a
+                                                class="gtm-bookstoretravel"
+                                        >동네책방 즐겨찾기</a
+                                        >
+                                    </h3>
+                                    <p class="section-sub-title">
+                                        책 냄새 가득한 나만의 공간을 찾아봐요
+                                    </p>
+                                    <div class="bookstore-section">
+                                        <div
+                                                class="swiper-container no-swiper swiper-container-initialized swiper-container-horizontal"
+                                        >
+                                            <div
+                                                    class="swiper-wrapper"
+                                                    style="
+                                            transform: translate3d(
+                                                0px,
+                                                0px,
+                                                0px
+                                            );
+                                        "
+                                            >
+                                                <div
+                                                        class="slide-item mds-shadow--card02 swiper-slide swiper-slide-active"
+                                                        style="margin-right: 16px"
+                                                >
+                                                    <a
+                                                            href="/v3/post/1154931"
+                                                    ><div class="img-box">
+                                                        <img
+                                                                alt="동네책방즐겨찾기 포스트 대표 이미지"
+                                                                src="https://cover.millie.co.kr/service/post/1154931/6807635320074.jpg?f=webp&amp;w=652&amp;q=80"
+                                                        />
+                                                    </div>
+                                                        <div class="info-box">
+                                                            <a
+                                                                    class="profile-img"
+                                                            ><span
+                                                            ><img
+                                                                    src="https://d3uz7kn1zskbbz.cloudfront.net/profile/76cef109614b4ebb82948a6c8a481c13.png"
+                                                                    alt="동네책방즐겨찾기 프로필 이미지" /></span
+                                                            ></a>
+                                                            <div class="info-blk">
+                                                                <div class="inner-blk">
+                                                                    <a
+                                                                            class="info-tit mds-font mds-font--subhead02"
+                                                                    >동네책방
+                                                                        즐겨찾기</a
+                                                                    >
+                                                                    <a
+                                                                            class="info-msg mds-font mds-font--caption"
+                                                                    >우리 동네
+                                                                        책방과 즐거운
+                                                                        일을 만들고
+                                                                        있어요!</a
+                                                                    >
+                                                                    <button
+                                                                            type="button"
+                                                                            class="mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4"
+                                                                    >
+                                                                <span
+                                                                >팔로우</span
+                                                                >
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="post-blk">
+                                                                <div
+                                                                        class="post-tit mds-font mds-font--subhead03"
+                                                                >
+                                                                    🌏 지구에 불시착한
+                                                                    사람들이 모이는
+                                                                    책방, 지구불시착
+                                                                </div>
+                                                                <div
+                                                                        class="post-summary mds-font mds-font--body01"
+                                                                >
+                                                                    위 사진을 누르면
+                                                                    지구불시착에 대해 더
+                                                                    자세히 알 수 있어요.
+                                                                    📌오늘의
+                                                                    책방지구불시착서울특별시
+                                                                    노원구 공릉로32길 13
+                                                                    (공릉동) 1층 독립
+                                                                    서점을
+                                                                    추천하는&nbsp;동네책방
+                                                                    즐겨찾기!🚩서울 뿐
+                                                                    아니라&nbsp;전국
+                                                                    곳곳으로 지역
+                                                                    확대🧑&nbsp;단골들의
+                                                                    이야기, 독립 서점엔
+                                                                    누가 올까?🍽️
+                                                                    책방지기의
+                                                                    즐겨찾기!&nbsp;동네
+                                                                    명소 추천 뿐만
+                                                                    아니라 독서 모임,
+                                                                    북토크 등다양한 행사
+                                                                    소식도 담을
+                                                                    예정이니앞으로 많은
+                                                                    기대 부탁드려요!
+                                                                    벌써 5년째
+                                                                    ‘지구불시착'에
+                                                                    다니고 있는 미하
+                                                                    님은 어릴 때부터
+                                                                    책을 좋아했어요.
+                                                                    처음 지구불시착에
+                                                                    들어온 순간부터
+                                                                    책방이 지닌 매력에
+                                                                    푹 빠졌고요. 서점
+                                                                    투어를 좋아하는 유진
+                                                                    님은 책방이 많은
+                                                                    동네로 멀리 놀러가곤
+                                                                    했는데, 자신이 사는
+                                                                    동네에
+                                                                    지구불시착이라는
+                                                                    책방이 존재한다는
+                                                                    사실을 알고 바로
+                                                                    방문해 보았어요.
+                                                                    책방지기의 수줍은 듯
+                                                                    예측불가한 응대를
+                                                                    보며 특이하다고
+                                                                    생각했지만, 점점 그
+                                                                    매력에 빠져들게
+                                                                    되었죠. 지금은
+                                                                    거리낌 없이 농담을
+                                                                    주고받을 정도로 친한
+                                                                    사이가 되었습니다.
+                                                                    유진 님이
+                                                                    지구불시착에 두
+                                                                    번째로 방문한 날이
+                                                                    가장 기억에
+                                                                    남습니다. 해고를
+                                                                    당한 날이었는데
+                                                                    책방지기가 조용히
+                                                                    맥주를 내주었거든요.
+                                                                    무심한 듯 속 깊은
+                                                                    위로가 유진 님의
+                                                                    마음에 따뜻한 온기를
+                                                                    더해주었습니다.&nbsp;
+                                                                    오프라인 책방을 찾는
+                                                                    이유에 대해 미하
+                                                                    님은 도서관,
+                                                                    오프라인 책방,
+                                                                    온라인 서점이 모두
+                                                                    연계해서 발전해야
+                                                                    좋은 사회가 될 수
+                                                                    있다고 말했어요.
+                                                                    특히 온라인
+                                                                    서점에서는 내 관심사
+                                                                    안에서만 책을 찾게
+                                                                    되는데 오프라인
+                                                                    책방에서는 내가
+                                                                    몰랐던 책도 발견할
+                                                                    수 있는 큐레이션이
+                                                                    있다는 점이 좋다고
+                                                                    덧
+                                                                </div>
+                                                            </div>
+                                                        </div></a
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                         </div>
                     </div>
@@ -703,5 +869,5 @@
         </div>
     </body>
     <script src="/js/main/main.js"></script>
-    <script src="/js/main/main-category.js"></script>
+    <script src="/js/main/main-category-event.js"></script>
 </html>

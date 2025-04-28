@@ -2,9 +2,6 @@ package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.app.bookJeog.service.AladinService;
-import com.app.bookJeog.service.AladinServiceImpl;
-import com.app.bookJeog.domain.vo.BookInfoVO;
-import com.app.bookJeog.domain.vo.BookTempVO;
 import com.app.bookJeog.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.io.IOException;
-import java.util.List;
 
 @Controller
 @Slf4j
@@ -69,10 +64,7 @@ public class BookController implements BookControllerDocs {
     public ResponseEntity<Map<String, Object>> getBookInfo(@PathVariable Long isbn) {
         Map<String, Object> result = aladinService.getBookInfoAsMap(isbn);
         return ResponseEntity.ok(result);}
-    // 최다 대출 도서
-    @GetMapping("popular")
-    public List<BookTempVO> getPopularBooks() throws IOException {
-        log.info(bookService.getPopularBooks().toString());
-        return bookService.getPopularBooks();
-    }
+
+
+
 }

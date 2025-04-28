@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/main/header.css" />
+    <title>헤더</title>
+</head>
+<body>
+    <div class="top-header background on" th:fragment="header-sc">
+    <div class="inner">
+        <header>
+            <h1>
+                <a href="" class="logo">
+                    <img
+                            src="/images/common/Logo.png"
+                            alt="북적서울"
+                            class="bookjeog-logo"
+                            style="scale: 1.5"
+                    />
+                </a>
+            </h1>
+            <nav>
+                <ul class="gnb">
+                    <li class="">
+                        <a
+                                href=""
+                                data-content-type="book-report"
+                                class="book-report"
+                        >독후감</a
+                        >
+                    </li>
+                    <li class="">
+                        <a
+                                href=""
+                                data-content-type="donation"
+                                class="donation"
+                        >기부</a
+                        >
+                    </li>
+                    <li class="">
+                        <a th:href="@{/search/window}"
+                           data-content-type="search"
+                           class="search"
+                        >검색</a
+                        >
+                    </li>
+                    <li class="">
+                        <a
+                                href=""
+                                data-content-type="book-shelf"
+                                class="book-shelf"
+                        >내서재</a
+                        >
+                    </li>
+                    <li class="">
+                        <a
+                                href=""
+                                data-content-type="manage"
+                                class="manage"
+                        >관리</a
+                        >
+                    </li>
+                    <li class="">
+                        <a
+                                href=""
+                                data-content-type="discussion"
+                                class="discussion"
+                        >북적북적</a
+                        >
+                    </li>
+                    <li class="">
+                        <a
+                                type="button"
+                                data-content-type="self-donation"
+                                class="self-donation"
+                        >개인기부</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+            <div class="util-wrap">
+                <!-- data-count가 알람 개수 -->
+                <a
+                        href=""
+                        class="alarm-button"
+                        data-content-type="alarmCenter"
+                        data-count="10"
+                >
+                                <span class="mds-icon-alarm">
+                                    <span class="ir">알림센터</span>
+                                </span>
+                </a>
+                <ul class="util">
+                    <li class="sign sign-in">
+                        <a href="" data-content-type="login"
+                        >로그아웃</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </header>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    const memberData = /*[[${session.member}]]*/ null;
+</script>
+</html>

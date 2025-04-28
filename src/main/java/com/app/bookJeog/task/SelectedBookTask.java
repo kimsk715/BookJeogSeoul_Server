@@ -40,7 +40,7 @@ public class SelectedBookTask {
      *   * 10-13 * * * * : 매 10, 11, 12, 13분에 동작한다.
      * */
 // 매 달 1일 마다 임시 선정 도서를 실제 선정 도서로
-    @Scheduled(cron = "0 0 0 1 * *")
+    @Scheduled(cron = "0 0 0 1 * ?")
     public void insertSelectedBook() {
         List<TempSelectedBookVO> tempList = bookService.getTempSelectedBook();
         log.info(tempList.toString());

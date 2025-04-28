@@ -15,4 +15,35 @@
         insert into tbl_selected_book (book_isbn, book_image_url)
         values (${bookIsbn}, ${bookImageUrl})
     </insert>
+
+
+    <!--인기도서 최다조회-->
+    <select id="selectTopViewBook" resultType="memberHistoryVO">
+        SELECT  id, member_id, book_isbn, count(*) as count
+        FROM tbl_member_history
+        GROUP BY book_isbn
+        order by count desc
+        LIMIT 10;
+    </select>
+
+
+    <!--관리자 추천 도서-->
+    <select id="selectAdminSuggestBooks" resultType="selectedBookVO">
+        select id, book_isbn, book_image_url, createdDate, updatedDate
+        from tbl_selected_book
+        LIMIT 6
+    </select>
+
+
+    <!--인기독후감 도서-->
+    <select id="selectTopBookPost" resultType="bookPostVO">
+        select  member_id, book_post_title, book_isbn, count(*) as count
+        from tbl_book_post_like bpl
+        join tbl_book_post bp
+        on bpl.book_post_id = bp.id
+        group by book_isbn
+        order by count desc
+        limit 10
+    </select>
+
 </mapper>

@@ -1,14 +1,11 @@
 package com.app.bookJeog.service;
-import com.app.bookJeog.domain.dto.BookInfoDTO;
-import com.app.bookJeog.domain.dto.Pagination;
-import com.app.bookJeog.domain.dto.TempSelectedBookDTO;
-import com.app.bookJeog.domain.vo.BookInfoVO;
-import com.app.bookJeog.domain.vo.BookTempVO;
-import com.app.bookJeog.domain.vo.SelectedBookVO;
-import com.app.bookJeog.domain.vo.TempSelectedBookVO;
+import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.vo.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.awt.print.Book;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
+import org.springframework.web.client.RestTemplate;
+
 
 public interface BookService {
 
@@ -47,6 +46,7 @@ public interface BookService {
                 rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
             }
             StringBuilder response = new StringBuilder();
+
             String line;
             while ((line = rd.readLine()) != null) {
                 response.append(line);
@@ -257,14 +257,14 @@ public interface BookService {
     String getBooksByAuthor(String authorName);
 
     // 서울 도서관 최다 대출
-    public default List<BookTempVO> getPopularBooks() throws IOException {
+    public default List<TopBookVO> getPopularBooks() throws IOException {
         try {
             StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
             urlBuilder.append("/").append(URLEncoder.encode("5a51544c6d6b696d3739455a645457", "UTF-8")); // 인증키
             urlBuilder.append("/").append(URLEncoder.encode("json", "UTF-8")); // 타입
             urlBuilder.append("/").append(URLEncoder.encode("SeoulLibraryBookRentNumInfo", "UTF-8")); // 서비스명
             urlBuilder.append("/").append(URLEncoder.encode("1", "UTF-8")); // 시작위치
-            urlBuilder.append("/").append(URLEncoder.encode("5", "UTF-8")); // 종료위치
+            urlBuilder.append("/").append(URLEncoder.encode("7", "UTF-8")); // 종료위치
 
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -287,7 +287,7 @@ public interface BookService {
             JsonNode node = objectMapper.readTree(response.toString());
 
             JsonNode rowNode = node.path("SeoulLibraryBookRentNumInfo").path("row");
-            List<BookTempVO> foundBooks = objectMapper.readValue(rowNode.toString(), new TypeReference<List<BookTempVO>>() {});
+            List<TopBookVO> foundBooks = objectMapper.readValue(rowNode.toString(), new TypeReference<List<TopBookVO>>() {});
 
             return foundBooks;
         }
@@ -297,4 +297,57 @@ public interface BookService {
         }
     }
 
+
+    // 서울 새로들어오는 도서 목록조회
+    public default List<NewBookDTO> getNewBooks() throws IOException {
+        try {
+            StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
+            urlBuilder.append("/").append(URLEncoder.encode("5a51544c6d6b696d3739455a645457", "UTF-8")); // 인증키
+            urlBuilder.append("/").append(URLEncoder.encode("json", "UTF-8")); // 타입
+            urlBuilder.append("/").append(URLEncoder.encode("SeoulLibNewArrivalInfo", "UTF-8")); // 서비스명
+            urlBuilder.append("/").append(URLEncoder.encode("1", "UTF-8")); // 시작위치
+            urlBuilder.append("/").append(URLEncoder.encode("20", "UTF-8")); // 종료위치
+
+            URL url = new URL(urlBuilder.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type", "application/json");
+            BufferedReader rd;
+            if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+            }
+            rd.close();
+            conn.disconnect();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode node = objectMapper.readTree(response.toString());
+
+            JsonNode rowNode = node.path("SeoulLibNewArrivalInfo").path("row");
+            List<NewBookDTO> foundNewBooks = objectMapper.readValue(rowNode.toString(), new TypeReference<List<NewBookDTO>>() {});
+
+            return foundNewBooks;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    // 인기도서 최다조회
+    public List<MemberHistoryVO> selectTopViewBooks();
+
+
+    // 관리자 추천도서
+    public List<SelectedBookVO> selectAdminSuggestBooks();
+
+
+    // 인기 독후감 조회
+    public List<BookPostVO> selectTopBookPost();
 }

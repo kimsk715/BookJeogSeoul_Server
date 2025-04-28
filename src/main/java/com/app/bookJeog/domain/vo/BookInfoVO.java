@@ -1,5 +1,6 @@
 package com.app.bookJeog.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 // 서울도서관 책 정보 VO 여기는 절대 건들지 말아야 함.
