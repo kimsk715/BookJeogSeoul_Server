@@ -6,15 +6,15 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0" />
     <title>토론 제목 | 북적 서울</title>
-    <link rel="stylesheet" href="/static/css/discussion/post.css" />
+    <link rel="stylesheet" href="/css/discussion/post.css" />
     <link rel="stylesheet"
-        href="/static/css/discussion/feed_common.css" />
-    <link rel="shortcut icon" href="/static/images/admin/favicon.ico"
+        href="/css/discussion/feed_common.css" />
+    <link rel="shortcut icon" href="/images/admin/favicon.ico"
         type="image/x-icon" />
 </head>
 
 <body>
-    <div id="wrap" class="web-mount pcv-mount">
+    <div id="wrap" class="web-mount pcv-mount" th:object = "${discussion}">
         <!---->
         <!---->
         <!---->
@@ -83,9 +83,8 @@
                 <div class="view-expand diary">
                     <div class="title">
                         <div class="title-inner container">
-                            <h1>
-                                토론 주제가 길어지면 ...으로 요약만
-                                나타나....
+                            <h1 th:text="*{discussionTitle}">
+
                             </h1>
                             <div class="flex-container space-between">
                                 <a href="/v4/library/5949440"
@@ -119,37 +118,37 @@
                                             --background-image: url(https://img.millie.co.kr/500x/service/cover/179523051/8bfcc035cef1445ca60c37bc1e3110d2.jpg);
                                         ">
                                     <span class="background"></span>
-                                    <p class="book-name">사춘기 부모수업</p>
+                                    <p class="book-name" th:text="*{bookTitle}"></p>
                                     <p class="book-sub-name">
                                         대화법, 행동과 감정 코칭, 마인드
                                         컨트롤까지 사춘기 앞에 막막하기만 한
                                         부모님을 위한 베스트 솔루션!
                                     </p>
-                                    <a href="/v3/bookDetail/dc31bd53cd9c4d15"
+                                    <a href=""
                                         class="book-picture">
                                         <div class="book-picture book imageLoaded"
                                             style=""
                                             data-observe="true">
                                             <picture>
-                                                <source srcset="
-                                                            https://cover.millie.co.kr/service/cover/179523051/8bfcc035cef1445ca60c37bc1e3110d2.jpg?w=184&amp;f=webp&amp;q=80,
-                                                            https://cover.millie.co.kr/service/cover/179523051/8bfcc035cef1445ca60c37bc1e3110d2.jpg?w=368&amp;f=webp&amp;q=80 2x
-                                                        "
+                                                <source th:srcset="
+                                                            |*{imageUrl}?w=184&amp;f=webp&amp;q=80,
+                                                            *{imageUrl}?w=368&amp;f=webp&amp;q=80 2x
+                                                        |"
                                                     type="image/webp" />
-                                                <img src="https://cover.millie.co.kr/service/cover/179523051/8bfcc035cef1445ca60c37bc1e3110d2.jpg?w=184&amp;q=80"
+                                                <img th:src="|*{imageUrl}?w=184&amp;q=80|"
                                                     alt=" 도서 썸네일"
                                                     width="184"
                                                     style="min-height: 0px" />
                                             </picture>
                                         </div>
                                     </a>
-                                    <p class="book-produce">
-                                        장희윤 지음 ·
+                                    <p class="book-produce" th:text="*{author}">
+
                                         <a
-                                            href="/v3/search/result/보랏빛소?type=publisher&amp;category=1&amp;toapp=stop">보랏빛소</a>
+                                            href="">보랏빛소</a>
                                     </p>
                                     <p class="book-info">
-                                        2019.01.05 출간 · 296P
+                                        출판일
                                     </p>
                                 </div>
                                 <div class="date-container">
@@ -185,152 +184,9 @@
                                     </p>
                                 </div>
                                 <div class="reading-diary-container">
-                                    <p class="title">토론 주제</p>
-                                    <p class="text-post">
-                                        토론 주제로 적합한 내용을 AI가
-                                        생성해주는 시대가 되었다.<br />토론
-                                        주제로 적합한 내용을 AI가 생성해주는
-                                        시대가 되었다.<br />토론 주제로
-                                        적합한 내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />토론 주제로 적합한
-                                        내용을 AI가 생성해주는 시대가
-                                        되었다.<br />
+                                    <p class="title" th:text="*{discussionTitle}"></p>
+                                    <p class="text-post" th:text="*{discussionText}">
+
                                     </p>
                                 </div>
                                 <!---->
@@ -347,7 +203,7 @@
                                     class="editor-icon--heart"></i>좋아요</span>
                         </button>
                         <span class="like-list">
-                            가장 먼저 이 토론 주제에 반응을 남겨보세요.
+                            가장 먼저 이 토론 주제에 의견을 남겨보세요.
                         </span>
                     </div>
                 </div>
@@ -410,98 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="meta">
-                    <div class="meta-contents container">
-                        <div class="top-row flex-container">
-                            <div class="top-row-info">
-                                <div class="owner flex-container">
-                                    <a href="/v4/library/5949440"
-                                        class="owner-img" style="
-                                                background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/cffcc17f5c95881b480ff2e87187c0ea.png');
-                                            "></a>
-                                    <div class="owner-info">
-                                        <h3 class="owner-name">
-                                            <a
-                                                href="/v4/library/5949440">북적북적한도서관님의
-                                                서재</a>
-                                        </h3>
-                                        <div class="owner-sub-count">
-                                            <a href=""
-                                                class="following">팔로잉<span>0</span></a>
-                                            <a href=""
-                                                class="follower">팔로워<span>15</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="top-row-btn">
-                                <button type="button"
-                                    class="mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4">
-                                    <span>팔로우</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="post-card">
-                            <a href="" class="post-card-before">
-                                <div class="post-img">
-                                    <div class="post-img-content">
-                                        <div class="block-tool-book"
-                                            style="
-                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/179629201/1aaf5876839740a1a1a0db328f9c35d2.jpg);
-                                                ">
-                                            <div class="book-inner">
-                                                <div
-                                                    class="book-cover">
-                                                    <div
-                                                        class="book-thumb">
-                                                        <img src="https://img.millie.co.kr/200x/service/cover/179629201/1aaf5876839740a1a1a0db328f9c35d2.jpg"
-                                                            alt="작은 빛을 따라서"
-                                                            class="book-image" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="prev-post"
-                                    style="color: rgb(139, 139, 139)">
-                                    이전글
-                                </p>
-                                <p class="post-author">작은 빛을 따라서</p>
-                            </a>
-                            <a href="/v3/post/1146335?nav_hidden=y"
-                                class="post-card-after">
-                                <div class="post-img">
-                                    <div class="post-img-content">
-                                        <div class="block-tool-book"
-                                            style="
-                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/180061007/998a7748131540c4bce8b6f526d9df36.jpg);
-                                                ">
-                                            <div class="book-inner">
-                                                <div
-                                                    class="book-cover">
-                                                    <div
-                                                        class="book-thumb">
-                                                        <img src="https://img.millie.co.kr/200x/service/cover/180061007/998a7748131540c4bce8b6f526d9df36.jpg"
-                                                            alt="간소한 삶에 관한 작은 책"
-                                                            class="book-image" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="prev-post"
-                                    style="color: rgb(139, 139, 139)">
-                                    다음글
-                                </p>
-                                <p class="post-author">
-                                    간소한 삶에 관한 작은 책
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="comment">
                     <div class="comment-inner container">
                         <div class="register flex-container">
@@ -512,12 +277,14 @@
                             <div class="register-box">
                                 <div class="register-box-inner">
                                     <span>댓글</span>
-                                    <p contenteditable="plaintext-only"
-                                        data-placeholder="내용 입력"></p>
+                                    <label>
+<textarea contenteditable="plaintext-only"
+    data-placeholder="내용 입력"></textarea>
+                                    </label>
                                 </div>
                             </div>
-                            <button type="button" disabled="disabled"
-                                class="post-btn flex-container mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
+                            <button type="button" disabled
+                                class="post-btn flex-container mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4" th:value="*{id}">
                                 <span>등록</span>
                             </button>
                         </div>
@@ -525,15 +292,15 @@
                             댓글 <span
                                 class="comment-title-length">0</span>
                         </h3>
-                        <ul class="comment-list">
-                            <li class="comment-item">
+                        <ul class="comment-list" >
+                            <li class="comment-item" th:each = "comment : ${comments}">
                                 <div
                                     class="comment-item-inner flex-container">
                                     <div class="user-img" style="
                                                 background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
                                             ">
                                         <a
-                                            href="/v4/library/8942404"></a>
+                                            href="#"></a>
                                     </div>
                                     <div class="com-contents">
                                         <div
@@ -542,22 +309,22 @@
                                                 class="com-contents-top flex-container">
                                                 <p class="nickname">
                                                     <a
-                                                        href="#">북적북적한선술집</a>
+                                                        href="#" th:text="${comment.memberName}"></a>
                                                 </p>
                                             </div>
                                             <span
-                                                class="com-contents-date">2025.04.06</span>
+                                                class="com-contents-date" th:text="${comment.commentDTO.createdDate}"></span>
                                         </div>
                                         <div
                                             class="com-contents-body">
                                             <p
-                                                class="comment-text show">
-                                                ㅁㄴㅁㄴㅁㄴㅁㄴㅁㄴ
+                                                class="comment-text show" th:text="${comment.commentDTO.commentText}">
+
                                             </p>
                                             <div class="comment-text">
                                                 <p
-                                                    contenteditable="plaintext-only">
-                                                    ㅁㄴㅁㄴㅁㄴㅁㄴㅁㄴ
+                                                    contenteditable="plaintext-only" th:text="${comment.commentDTO.commentText}">
+
                                                 </p>
                                                 <button type="button"
                                                     class="mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
@@ -580,74 +347,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="reply-container">
-                                    <ul class="reply-list">
-                                        <li class="reply-item">
-                                            <div
-                                                class="reply-item-inner flex-container">
-                                                <div class="user-img"
-                                                    style="
-                                                            background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
-                                                        ">
-                                                    <a
-                                                        href="/v4/library/8942404"></a>
-                                                </div>
-                                                <div
-                                                    class="com-contents">
-                                                    <div
-                                                        class="com-contents-head">
-                                                        <div
-                                                            class="com-contents-top">
-                                                            <p
-                                                                class="nickname">
-                                                                <a
-                                                                    href="#">북적북적한선술집</a>
-                                                            </p>
-                                                            <span
-                                                                class="com-contents-date">2025.04.07</span>
-                                                        </div>
-                                                        <div
-                                                            class="reply-setting">
-                                                            <button
-                                                                type="button"
-                                                                class="more-btn">
-                                                                <img src="https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/more-icon.df2e02aec2252c2847fbe9e490cd4354.png"
-                                                                    alt="더보기" />
-                                                            </button>
-                                                            <div class="more-area"
-                                                                style="display: none;">
-                                                                <button
-                                                                    type="button">답글달기</button>
-                                                                <button
-                                                                    type="button">신고하기</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="com-contents-body">
-                                                        <p
-                                                            class="comment-text show">
-                                                            답글 테스트 1
-                                                        </p>
-                                                        <div
-                                                            class="comment-text">
-                                                            <p
-                                                                contenteditable="plaintext-only">
-                                                                답글 테스트
-                                                                1
-                                                            </p>
-                                                            <button
-                                                                type="button"
-                                                                class="mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
-                                                                <span>등록</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
                                 </div>
                                 <!---->
                             </li>
@@ -675,6 +374,6 @@
         <!---->
     </div>
 </body>
-<script src="/static/js/discussion/post_event.js"></script>
+<script src="/js/discussion/post_event.js"></script>
 
 </html>

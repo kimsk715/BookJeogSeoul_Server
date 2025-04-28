@@ -490,7 +490,7 @@
         where bpf.book_post_id = #{bookPostId}
     </select>
 
-    <!-- 후원 대상 리스트 -->
+    <!-- 후원 대상 리스트(관리자) -->
     <select id="selectAllReceiverPost" resultType="receiverVO">
         select r.id, receiver_title, receiver_text, receiver_status, date(createdDate) as createdDate, date(updatedDate) as updatedDate, member_id
             from tbl_post p
@@ -527,6 +527,11 @@
                     where r.id = #{id}
     </select>
 
+    <!-- 토론 주제 등록 -->
+    <insert id="insertDiscussionPost">
+        insert into tbl_discussion (id, discussion_title, discussion_text, book_isbn, book_title)
+        values (#{id}, #{discussionTitle}, #{discussionText}, #{bookIsbn}, #{bookTitle})
+    </insert>
 
     <!--인기 독후감작성-->
     <select id="selectTopReview" resultType="BookPostVO">
@@ -535,4 +540,90 @@
     </select>
 
 
+    <!--이 주의 기부 도서-->
+    <select id="selectDonatedBooks" resultType="bookDonateVO">
+        select *
+        from tbl_book_donate
+        where book_received_status = '수취완료'
+        limit 10
+    </select>
+
+    <!--전체 기부 도서 -->
+    <select id="selectAllDonatedBooks" resultType="bookDonateVO">
+        select *
+        from tbl_book_donate
+        where book_received_status = '수취완료'
+    </select>
+
+    <!--후원 대상 게시판 조회용-->
+    <select id="selectAllReceiverPosts" resultType="receiverVO">
+        select
+            r.id, p.member_id,
+            r.receiver_title,
+            r.receiver_text,
+            r.receiver_status, (date(current_timestamp) - date(p.createdDate)) as createdDate, date(p.updatedDate) as updatedDate
+            from tbl_receiver r
+            join tbl_post p on r.id = p.id
+            order by r.id desc
+    </select>
+
+    <!-- 후원 대상 게시글 상세보기 -->
+    <select id="selectReceiverPostById" resultType="receiverVO">
+        select
+            r.id, p.member_id,
+            r.receiver_title,
+            r.receiver_text,
+            r.receiver_status, (date(current_timestamp) - date(p.createdDate)) as createdDate, date(p.updatedDate) as updatedDate
+        from tbl_receiver r
+            join tbl_post p on r.id = p.id
+                where r.id = #{postId}
+    </select>
+
+
+    <!-- 후원 인증 게시판 조회용 -->
+    <select id="selectAllDonateCerts" resultType="donateCertVO">
+        select dc.id, donate_cert_title, donate_cert_text, post_type, member_id, (date(current_timestamp) - date(p.createdDate)) as createdDate, p.updatedDate
+        from tbl_donate_cert dc
+        join tbl_post p on dc.id = p.id
+    </select>
+
+    <!-- 후원 인증 게시글 상세보기 -->
+    <select id="selectDonateCertById" resultType="donateCertVO">
+        select dc.id, donate_cert_title, donate_cert_text, post_type, member_id, (date(current_timestamp) - date(p.createdDate)) as createdDate, p.updatedDate
+        from tbl_donate_cert dc
+                 join tbl_post p on dc.id = p.id
+                    where dc.id = #{postId}
+    </select>
+
+    <!--토론 게시판 조회용-->
+    <select id="selectAllDiscussions" resultType="discussionVO">
+        select d.id, discussion_title, discussion_text, book_isbn, p.member_id, p.createdDate, p.updatedDate
+        from tbl_discussion d
+                 join tbl_post p
+                      on d.id = p.id
+    </select>
+
+    <!--토론 게시판 게시글 상세보기 -->
+    <select id="selectDiscussionById" resultType="discussionVO">
+        select d.id, discussion_title, discussion_text, book_isbn, p.member_id, p.createdDate, p.updatedDate
+        from tbl_discussion d
+                 join tbl_post p
+                      on d.id = p.id
+                        where d.id = #{id};
+    </select>
+
+    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_post (post_type, member_id)
+        values (#{postType}, #{memberId})
+    </insert>
+
+    <!-- 후원 대상 선정 여부 결정. -->
+    <update id="updateTopReceiver">
+        update tbl_receiver
+        set receiver_status = '선정완료'
+        where id = #{receiverId}
+    </update>
 </mapper>
+
+
+

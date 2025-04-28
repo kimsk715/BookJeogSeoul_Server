@@ -48,6 +48,7 @@ public interface MemberService {
     // 이메일 중복검사
     public Optional<PersonalMemberVO> checkEmail(String email);
 
+    public SponsorMemberVO getSponsorMemberById(Long id);
 
     // 로그인 ( 화면에서 입력받은 DTO 를 VO로 )
     public default PersonalMemberVO toPersonalMemberVO(PersonalMemberDTO personalMemberDTO) {
@@ -103,6 +104,8 @@ public interface MemberService {
         return sponsorMemberDTO;
 
     }
+
+
 
     public int countAllSponsor(Pagination pagination);
 

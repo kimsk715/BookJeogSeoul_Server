@@ -17,6 +17,7 @@ public class DiscussionVO extends Period {
     private String discussionTitle;
     private String discussionText;
     private Long bookIsbn;
+    private String bookTitle;
 
 
 }

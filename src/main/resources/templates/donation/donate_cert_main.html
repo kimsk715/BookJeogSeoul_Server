@@ -19,7 +19,7 @@
             <div class="inner">
                 <header>
                     <h1>
-                        <a href="/" data-content-type="logo"><img src="/static/images/admin/logo.png" alt="북적서울"
+                        <a href="/" data-content-type="logo"><img src="/images/admin/logo.png" alt="북적서울"
                                 class="millie-logo" /></a>
                     </h1>
                     <nav>
@@ -166,7 +166,7 @@
                
                 <div mode="out-in" class="receiver">
                     <div class="card-container">
-                        <div class="card-list" style="display: flex; margin-left: -16px"> 
+                        <div class="card-list" style="display: flex; margin-left: -16px; flex-wrap : wrap">
                         </div>
                     </div>
                 </div>
@@ -183,7 +183,10 @@
 
     </footer>
 </body>
+<script th:inline="javascript">
+    const donateCerts = /*[[${DonateCerts}]]*/ [];
+</script>
 <script src="/js/donation/main.js"></script>
-<script src="/js/donation/mobile.js"></script>
+<script src="/js/donation/donate_cert_mobile.js"></script>
 
 </html>
