@@ -528,9 +528,9 @@
     </select>
 
     <!-- 토론 주제 등록 -->
-    <insert id="insertDiscussionPost" useGeneratedKeys="true" keyProperty="id">
-        insert into tbl_discussion (discussion_title, discussion_text, book_isbn, book_title)
-        values ( #{discussionTitle}, #{discussionText}, #{bookIsbn}, #{bookTitle})
+    <insert id="insertDiscussionPost">
+        insert into tbl_discussion (id, discussion_title, discussion_text, book_isbn, book_title)
+        values (#{id}, #{discussionTitle}, #{discussionText}, #{bookIsbn}, #{bookTitle})
     </insert>
 
     <!--이 주의 기부 도서-->
@@ -608,8 +608,14 @@
     <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_post (post_type, member_id)
         values (#{postType}, #{memberId})
-
     </insert>
+
+    <!-- 후원 대상 선정 여부 결정. -->
+    <update id="updateTopReceiver">
+        update tbl_receiver
+        set receiver_status = '선정완료'
+        where id = #{receiverId}
+    </update>
 </mapper>
 
 

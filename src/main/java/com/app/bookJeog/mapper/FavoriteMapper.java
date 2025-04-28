@@ -39,5 +39,7 @@ public interface FavoriteMapper {
 
     //    팔로우 취소
     public void deleteMemberFollow(Long receiverId, Long senderId);
+
+
 }
 

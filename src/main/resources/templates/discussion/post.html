@@ -266,98 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="meta">
-                    <div class="meta-contents container">
-                        <div class="top-row flex-container">
-                            <div class="top-row-info">
-                                <div class="owner flex-container">
-                                    <a href="/v4/library/5949440"
-                                        class="owner-img" style="
-                                                background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/cffcc17f5c95881b480ff2e87187c0ea.png');
-                                            "></a>
-                                    <div class="owner-info">
-                                        <h3 class="owner-name">
-                                            <a
-                                                href="/v4/library/5949440">북적북적한도서관님의
-                                                서재</a>
-                                        </h3>
-                                        <div class="owner-sub-count">
-                                            <a href=""
-                                                class="following">팔로잉<span>0</span></a>
-                                            <a href=""
-                                                class="follower">팔로워<span>15</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="top-row-btn">
-                                <button type="button"
-                                    class="mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4">
-                                    <span>팔로우</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="post-card">
-                            <a href="" class="post-card-before">
-                                <div class="post-img">
-                                    <div class="post-img-content">
-                                        <div class="block-tool-book"
-                                            style="
-                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/179629201/1aaf5876839740a1a1a0db328f9c35d2.jpg);
-                                                ">
-                                            <div class="book-inner">
-                                                <div
-                                                    class="book-cover">
-                                                    <div
-                                                        class="book-thumb">
-                                                        <img src="https://img.millie.co.kr/200x/service/cover/179629201/1aaf5876839740a1a1a0db328f9c35d2.jpg"
-                                                            alt="작은 빛을 따라서"
-                                                            class="book-image" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="prev-post"
-                                    style="color: rgb(139, 139, 139)">
-                                    이전글
-                                </p>
-                                <p class="post-author">작은 빛을 따라서</p>
-                            </a>
-                            <a href="/v3/post/1146335?nav_hidden=y"
-                                class="post-card-after">
-                                <div class="post-img">
-                                    <div class="post-img-content">
-                                        <div class="block-tool-book"
-                                            style="
-                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/180061007/998a7748131540c4bce8b6f526d9df36.jpg);
-                                                ">
-                                            <div class="book-inner">
-                                                <div
-                                                    class="book-cover">
-                                                    <div
-                                                        class="book-thumb">
-                                                        <img src="https://img.millie.co.kr/200x/service/cover/180061007/998a7748131540c4bce8b6f526d9df36.jpg"
-                                                            alt="간소한 삶에 관한 작은 책"
-                                                            class="book-image" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="prev-post"
-                                    style="color: rgb(139, 139, 139)">
-                                    다음글
-                                </p>
-                                <p class="post-author">
-                                    간소한 삶에 관한 작은 책
-                                </p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="comment">
                     <div class="comment-inner container">
                         <div class="register flex-container">
@@ -368,12 +277,14 @@
                             <div class="register-box">
                                 <div class="register-box-inner">
                                     <span>댓글</span>
-                                    <p contenteditable="plaintext-only"
-                                        data-placeholder="내용 입력"></p>
+                                    <label>
+<textarea contenteditable="plaintext-only"
+    data-placeholder="내용 입력"></textarea>
+                                    </label>
                                 </div>
                             </div>
-                            <button type="button" disabled="disabled"
-                                class="post-btn flex-container mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
+                            <button type="button" disabled
+                                class="post-btn flex-container mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4" th:value="*{id}">
                                 <span>등록</span>
                             </button>
                         </div>
@@ -381,8 +292,8 @@
                             댓글 <span
                                 class="comment-title-length">0</span>
                         </h3>
-                        <ul class="comment-list" th:each = "comment : ${comments}">
-                            <li class="comment-item">
+                        <ul class="comment-list" >
+                            <li class="comment-item" th:each = "comment : ${comments}">
                                 <div
                                     class="comment-item-inner flex-container">
                                     <div class="user-img" style="

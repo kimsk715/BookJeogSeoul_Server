@@ -24,5 +24,9 @@ const receiverService= (() => {
         }
     }
 
-    return {getAllReceiverPost : getAllReceiverPost};
+    const chooseTopReceiver = async () => {
+        await fetch(`/admin/top-receiver`);
+    }
+
+    return {getAllReceiverPost : getAllReceiverPost, chooseTopReceiver:chooseTopReceiver};
 })();

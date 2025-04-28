@@ -33,6 +33,10 @@ public class CommentServiceImpl implements CommentService {
         return commentDAO.findAllCommentByPostId(postId);
     }
 
+    @Override
+    public void insertComment(CommentVO commentVO) {
+        commentDAO.insertCommentByPostId(commentVO);
+    }
 
 
 }

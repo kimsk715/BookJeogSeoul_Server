@@ -297,13 +297,17 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void insertDiscussion(DiscussionDTO discussionDTO) {
-
         postDAO.insertDiscussion(discussionDTO.toVO());
     }
 
     @Override
     public void insertPost(PostVO postVO) {
         postDAO.insertPost(postVO);
+    }
+
+    @Override
+    public void setTopReceiver(Long receiverId) {
+        postDAO.setTopReceiver(receiverId);
     }
 
 

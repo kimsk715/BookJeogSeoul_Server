@@ -14,4 +14,6 @@ public interface CommentMapper {
     public int countAllCommentByPostId(Long postId);
 
     public List<CommentVO> selectAllCommentByPostId(Long postId);
+
+    public void insertCommentByPostId(CommentVO commentVO);
 }

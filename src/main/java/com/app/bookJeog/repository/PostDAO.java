@@ -206,4 +206,8 @@ public class PostDAO {
     public void insertPost(PostVO postVO){
         postMapper.insertPost(postVO);
     }
+
+    public void setTopReceiver(Long receiverId){
+        postMapper.updateTopReceiver(receiverId);
+    }
 }

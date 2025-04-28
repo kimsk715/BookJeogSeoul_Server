@@ -19,7 +19,7 @@ Posts.forEach( post => {
                                         <div class="more"><button type="button" tabindex="0"><i
                                                     class="mds-icon--more-24-1"></i></button> <!----></div> <!---->
                                     </div>
-                                    <div class="post"><a href="/receiver/post/${post.id}"
+                                    <div class="post"><a href="/post/receiver/post/${post.id}"
                                             class="box post-image gtm-feed-recommend-post-tem-detail">
                                             <div class="img-wrap"><img
                                                     src="${post.filePath}" alt="이미지를 찾을 수 없습니다.">

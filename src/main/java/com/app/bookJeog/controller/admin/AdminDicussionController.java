@@ -67,10 +67,11 @@ public class AdminDicussionController {
     public void insertDiscussion(@RequestParam String title, @RequestParam String text, @RequestParam Long isbn, @RequestParam("book-title") String bookTitle, HttpSession session) {
       Optional<AdminVO> admin = (Optional<AdminVO>) session.getAttribute("admin");
       PostVO postVO = postService.toDiscussionVO(admin.get().getId());
-        log.info(postVO.toString());
+        log.info("Before : {} ",  postVO);
           postService.insertPost(postVO);
-
+        log.info("After : {} ",  postVO);
         DiscussionDTO discussionDTO = new DiscussionDTO();
+        discussionDTO.setId(postVO.getId());
        discussionDTO.setDiscussionTitle(title);
        discussionDTO.setDiscussionText(text);
        discussionDTO.setBookIsbn(isbn);
