@@ -1,8 +1,6 @@
 package com.app.bookJeog.repository;
 
-import com.app.bookJeog.domain.vo.BookInfoVO;
-import com.app.bookJeog.domain.vo.SelectedBookVO;
-import com.app.bookJeog.domain.vo.TempSelectedBookVO;
+import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.mapper.BookMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,5 +23,23 @@ public class BookDAO {
 
     public void insertSelectedBook(SelectedBookVO SelectedBookVO) {
         bookMapper.insertSelectedBook(SelectedBookVO);
+    }
+
+
+    // 인기도서 최다조회
+    public List<MemberHistoryVO> findTopViewBook () {
+        return bookMapper.selectTopViewBook();
+    }
+
+
+    // 관리자 추천도서
+    public List<SelectedBookVO> findAdminSuggestBook() {
+        return bookMapper.selectAdminSuggestBooks();
+    }
+
+
+    // 인기 독후감
+    public List<BookPostVO> findTopBookPost(){
+        return bookMapper.selectTopBookPost();
     }
 }

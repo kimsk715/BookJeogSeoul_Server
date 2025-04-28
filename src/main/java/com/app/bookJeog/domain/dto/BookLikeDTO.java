@@ -29,7 +29,5 @@ public class BookLikeDTO {
                 .bookIsbn(bookIsbn)
                 .alarmStatus(alarmStatus)
                 .build();
-
     }
-
 }

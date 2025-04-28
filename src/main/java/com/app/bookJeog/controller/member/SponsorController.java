@@ -1,5 +1,6 @@
 package com.app.bookJeog.controller.member;
 
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 
@@ -30,6 +31,7 @@ public class SponsorController {
 
     private final SponsorServiceImpl sponsorServiceImpl;
     private final SponsorMapper sponsorMapper;
+    private final SponsorMemberDTO sponsormemberDTO;
     private final SponsorMemberDTO sponsorMemberDTO;
     private HttpSession session;
 

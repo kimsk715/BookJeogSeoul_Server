@@ -1,12 +1,28 @@
+// // 사용 예시: 책 한 권의 모든 정보 가져오기
+// seoulApiService.getSeoulBooksInfo((books) => {
+//     // books는 전체 책 정보가 담겨 있는 배열
+//     books.forEach(book => {
+//         console.log('책 제목:', book.TITLE);
+//         console.log('저자:', book.AUTHOR);
+//         console.log('출판사:', book.PUBLISHER);
+//         console.log('ISBN:', book.ISBN);
+//         // 책의 전체 정보를 콘솔에 출력
+//     });
+// });
+
+
+
+
+
 // 카테고리 버튼 이벤트
 const categoryBtn = document.querySelectorAll(".bjs-tab-item");
-console.log(categoryBtn);
+
+
 
 categoryBtn.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         // 모든 탭에서 active 제거
         categoryBtn.forEach((btn) => btn.classList.remove("active"));
-        console.log("click");
         btn.classList.add("active");
     });
 });
