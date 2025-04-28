@@ -17,6 +17,7 @@ public class DiscussionDTO extends Period {
     private String discussionTitle;
     private String discussionText;
     private Long bookIsbn;
+    private String bookTitle;
 
 
     public DiscussionVO toVO() {
@@ -25,6 +26,7 @@ public class DiscussionDTO extends Period {
                 .discussionTitle(discussionTitle)
                 .discussionText(discussionText)
                 .bookIsbn(bookIsbn)
+                .bookTitle(bookTitle)
                 .build();
     }
 

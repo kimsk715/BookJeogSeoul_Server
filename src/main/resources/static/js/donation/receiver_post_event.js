@@ -56,9 +56,9 @@ bookMarkInput.addEventListener('input',() =>{
     if(numberLength > 12){
         bookMarkInput.value = bookMarkInput.value.slice(0,12);
     }
-    if(numberValue > 6000){
-        alert("최대 6000개까지만 줄 수 있습니다.")
-        bookMarkInput.value = 6000
+    if(numberValue > 1000){
+        alert("최대 1000개까지만 줄 수 있습니다.")
+        bookMarkInput.value = 1000
     }
 })
 

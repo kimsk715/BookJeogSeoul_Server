@@ -1205,7 +1205,9 @@ html:not(.ie) .slide-container .slide-wrapper {
     user-select: text;
 }
 
-.comment .register-box-inner p {
+.comment .register-box-inner textarea {
+    width: 100%;
+    appearance: none;
     padding: 0 0 8px 12px;
     font-size: 1em;
     line-height: 24px;

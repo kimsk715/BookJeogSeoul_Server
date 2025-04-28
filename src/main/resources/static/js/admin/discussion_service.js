@@ -24,6 +24,14 @@ const discussionService= (() => {
         }
     }
 
+    const addDiscussionPost = async (param) => {
+        let title = param.title;
+        let text = param.text;
+        let isbn = param.isbn;
+        let bookTitle = param.bookTitle;
+        await fetch(`/admin/insert-discussion?title=${title}&text=${text}&isbn=${isbn}&book-title=${bookTitle}`);
 
-    return {getAllDiscussion : getAllDiscussion};
+    }
+
+    return {getAllDiscussion : getAllDiscussion, addDiscussionPost : addDiscussionPost};
 })();

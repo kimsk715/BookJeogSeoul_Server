@@ -3,7 +3,7 @@
 <mapper namespace="com.app.bookJeog.mapper.AdminMapper">
     <!--관리자 로그인-->
     <select id="selectLoginAdmin" resultType="AdminVO">
-        select id, admin_id, admin_password, admin_name, admin_department, admin_status, admin_grade
+        select id, admin_id, admin_password, admin_name, admin_department, admin_member_status, admin_grade
         from tbl_admin
         where admin_id = #{adminId} and admin_password = #{adminPassword}
     </select>
