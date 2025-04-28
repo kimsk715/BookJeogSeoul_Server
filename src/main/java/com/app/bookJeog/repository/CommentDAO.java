@@ -26,4 +26,8 @@ public class CommentDAO {
     public List<CommentVO> findAllCommentByPostId(Long postId) {
         return commentMapper.selectAllCommentByPostId(postId);
     }
+
+    public void insertCommentByPostId(CommentVO commentVO) {
+        commentMapper.insertCommentByPostId(commentVO);
+    }
 }

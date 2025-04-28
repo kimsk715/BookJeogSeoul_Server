@@ -1,18 +1,6 @@
 // 이곳은 임시로 구상한 js를 모아놓은 곳, 적절한 js 파일들에 옮겨쓰자
 
-const receiverChooseButton = document.querySelector(".receiver-choose-btn");
 
-receiverChooseButton.addEventListener("click", (e) => {
-    if (
-        confirm(
-            "후원대상을 선정 및 확정하시겠습니까? 해당 단체에 선정 결과를 이메일로 안내하게 됩니다."
-        )
-    ) {
-        return;
-    } else {
-        e.preventDefault();
-    }
-});
 
 const openModal = (modal) => {
     if (modal) {

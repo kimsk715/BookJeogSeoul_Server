@@ -25,5 +25,7 @@ public interface CommentService {
         return commentDTO;
     }
 
+    public void insertComment(CommentVO commentVO);
+
 
 }

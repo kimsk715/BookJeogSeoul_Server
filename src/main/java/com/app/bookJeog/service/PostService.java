@@ -109,5 +109,7 @@ public interface PostService {
     }
 
     public void insertPost(PostVO postVO);
+
+    public void setTopReceiver(Long receiverId);
 }
 

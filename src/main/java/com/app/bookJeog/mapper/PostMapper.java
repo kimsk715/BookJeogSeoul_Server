@@ -124,5 +124,7 @@ public interface PostMapper {
     public void insertDiscussionPost(DiscussionVO discussionVO);
 
     public void insertPost(PostVO postVO);
+
+    public void updateTopReceiver(Long receiverId);
 }
 
