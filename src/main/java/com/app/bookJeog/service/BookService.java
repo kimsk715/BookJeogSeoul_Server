@@ -296,5 +296,6 @@ public interface BookService {
             return null;
         }
     }
-
+    // 선정 도서 여부 조회
+    public boolean findSelectedBooks(Long bookIsbn);
 }

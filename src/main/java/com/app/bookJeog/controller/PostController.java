@@ -1,6 +1,7 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
+import com.app.bookJeog.controller.exception.UnauthenticatedException;
 import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
 import com.app.bookJeog.domain.dto.FileBookPostDTO;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
 import java.io.IOException;
@@ -89,8 +93,22 @@ public class PostController {
 
     // 독후감 작성
     @GetMapping("bookpost/write")
-    public String goToBookPostWrite() {
-        return "post/post-write";
+    public String goToBookPostWrite(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+        PersonalMemberDTO member = (PersonalMemberDTO)session.getAttribute("member");
+        if(member == null) {
+            throw new UnauthenticatedException("로그인이 필요한 서비스입니다.");
+        } else{
+            model.addAttribute("memberName", member.getMemberName());
+            return "post/post-write";
+        }
+    }
+
+    @PostMapping("bookpost/write")
+    public String writeBookPost(@ModelAttribute("post") FileBookPostDTO fileBookPostDTO,
+                                @RequestParam("file") List<MultipartFile> files, RedirectAttributes redirectAttributes) {
+        Long newBookPostId = postService.write(fileBookPostDTO, files);
+        redirectAttributes.addFlashAttribute("message", "독후감 작성 완료!");
+        return "redirect:/post/bookpost/" + newBookPostId;
     }
 
     // 독후감 수정

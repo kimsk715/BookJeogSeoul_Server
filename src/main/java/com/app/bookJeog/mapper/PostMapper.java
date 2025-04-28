@@ -101,5 +101,12 @@ public interface PostMapper {
 
     // 독후감 팔로잉 전체조회(무한스크롤)
     public List<FileBookPostDTO> selectFollowBookPostFeed(Long loginMemberId, int offset);
+
+    // 일반도서 독후감 작성
+    public void insertPost(PostVO postVO);
+    public void insertBookPost(BookPostVO bookPostVO);
+
+    // 선정도서 독후감 작성
+    public void insertSelectedBookPost(SelectedBookPostVO selectedBookPostVO);
 }
 

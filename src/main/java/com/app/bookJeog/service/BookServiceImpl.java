@@ -1,5 +1,6 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.domain.vo.TempSelectedBookVO;
 import com.app.bookJeog.repository.BookDAO;
@@ -133,6 +134,9 @@ public class BookServiceImpl implements BookService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(apiUrl, String.class);
     }
+
+    // 선정 도서 여부 조회
+    public boolean findSelectedBooks(Long bookIsbn){ return bookDAO.findSelectedBooks(bookIsbn) > 0; };
 };
 
 
