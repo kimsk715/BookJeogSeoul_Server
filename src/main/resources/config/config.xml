@@ -37,6 +37,7 @@
         <typeAlias type="com.app.bookJeog.domain.vo.MemberHistoryVO" alias="memberHistoryVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.BookPostVO" alias="bookPostVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.SelectedBookVO" alias="selectedBookVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.DonateCertVO" alias="donateCertVO"/>
 
     </typeAliases>
     <typeHandlers>

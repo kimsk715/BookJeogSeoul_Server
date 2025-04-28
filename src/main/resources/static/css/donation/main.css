@@ -315,6 +315,7 @@ html:not(.ie) .slide-container .slide-wrapper {
 
 .card-container{
     overflow-x: hidden;
+    flex-wrap: wrap;
 }
 
 @media (min-width: 1000px) {

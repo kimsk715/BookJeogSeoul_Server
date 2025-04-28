@@ -12,4 +12,6 @@ public interface FavoriteService {
 
     // 책 스크랩 취소
     void deleteScrap(Long isbn);
+
+    public Long topReceiver();
 }

@@ -14,6 +14,12 @@ public interface FavoriteMapper {
     public int selectThisScrapCount(Long bookIsbn);
 
     //    책 스크랩 취소
+    public void deleteBookScrap(Long memberId, String bookIsbn);
+
+    public int receiverVote(Long receiverId);
+
+    public Long topReceiver();
+
     public void deleteBookScrap(Long memberId, Long bookIsbn);
 
     //    독후감 좋아요하기
@@ -33,5 +39,7 @@ public interface FavoriteMapper {
 
     //    팔로우 취소
     public void deleteMemberFollow(Long receiverId, Long senderId);
+
+
 }
 

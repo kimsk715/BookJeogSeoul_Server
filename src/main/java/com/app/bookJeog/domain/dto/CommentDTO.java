@@ -23,6 +23,8 @@ public class CommentDTO {
     private Long postId;
     private Long memberId;
     private CommentStatus commentStatus;
+    private String createdDate;
+    private String updatedDate;
 
     public CommentVO toVO() {
         return CommentVO.builder()
@@ -31,6 +33,8 @@ public class CommentDTO {
                 .postId(postId)
                 .memberId(memberId)
                 .commentStatus(commentStatus)
+                .createdDate(createdDate)
+                .updatedDate(updatedDate)
                 .build();
     }
 

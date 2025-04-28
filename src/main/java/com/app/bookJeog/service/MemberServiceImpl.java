@@ -63,6 +63,11 @@ public class MemberServiceImpl implements MemberService {
         return memberDAO.findByEmail(personalMemberVO);
     }
 
+    @Override
+    public SponsorMemberVO getSponsorMemberById(Long id) {
+        return memberDAO.findSponsorMemberById(id);
+    }
+
     // 회원 타입에 따라 상태 변경(개인 회원이면 개인 회원 테이블에 영향
     @Override
     public void updateMemberStatus(Long memberId) {
