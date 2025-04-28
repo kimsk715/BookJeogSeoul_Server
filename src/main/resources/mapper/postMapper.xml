@@ -528,4 +528,11 @@
     </select>
 
 
+    <!--인기 독후감작성-->
+    <select id="selectTopReview" resultType="BookPostVO">
+        select id, book_post_title, book_post_text, book_post_is_public, book_post_start_date, book_post_end_date
+        from tbl_book_post
+    </select>
+
+
 </mapper>

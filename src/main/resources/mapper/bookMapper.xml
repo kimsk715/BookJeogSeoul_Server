@@ -18,9 +18,18 @@
 
 
     <!--인기도서 최다조회-->
-    <select id="selectTopViewBook" resultType="bookPostVO">
-        select *
-        from tbl_member_history
-        group by book_isbn desc
+    <select id="selectTopViewBook" resultType="memberHistoryVO">
+        SELECT book_isbn,count(*) as count
+        FROM tbl_member_history
+        GROUP BY book_isbn
+        order by count desc
+        LIMIT 10;
+    </select>
+
+
+    <!--관리자 추천 도서-->
+    <select id="selectAdminSuggestBooks" resultType="selectedBookVO">
+        select id, book_isbn, book_image_url, createdDate, updatedDate
+        from tbl_selected_book
     </select>
 </mapper>
