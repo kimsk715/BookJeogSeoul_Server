@@ -204,6 +204,7 @@
     <select id="searchBookPosts" resultType="bookPostMemberDTO">
         SELECT
             p.member_id,
+            p.id,
             bp.book_post_title,
             bp.book_post_text,
             pm.member_nickname,
@@ -444,7 +445,7 @@
     <!-- 특정 독후감 + 작성자 프로필 포함 상세정보 조회 -->
     <select id="selectBookPostWithFiles" resultType="fileBookPostDTO">
         select
-            bp.id,
+            bp.id as book_post_id,
             bp.book_title,
             bp.book_isbn,
             count(bpl.id) as like_count,
@@ -460,8 +461,8 @@
         from tbl_book_post bp
                  join tbl_post p on bp.id = p.id
                  join tbl_personal_member pm on pm.id = p.member_id
-                 join tbl_member_profile mp on mp.member_id = pm.id
-                 join tbl_file f on f.id = mp.id
+                 left join tbl_member_profile mp on mp.member_id = pm.id
+                 left join tbl_file f on f.id = mp.id
                  left join tbl_book_post_like bpl on bpl.book_post_id = bp.id
         where bp.book_post_is_public = 'PUBLIC'
           and bp.id = #{id}
@@ -622,6 +623,98 @@
         update tbl_receiver
         set receiver_status = '선정완료'
         where id = #{receiverId}
+    </update>
+
+    <!--  독후감 피드 전체조회(무한스크롤)  -->
+    <select id="selectAllBookPostFeed" resultType="fileBookPostDTO">
+        select bp.id as book_post_id, bp.book_post_title, bp.book_post_text, pm.member_name, bp.book_isbn, p.member_id, f.file_name, f.file_path, p.createdDate,
+               (select count(*)
+                from tbl_book_post_like l
+                where l.book_post_id = bp.id) as like_count
+        from tbl_book_post bp
+        join tbl_post p on p.id = bp.id
+        join tbl_member m on p.member_id = m.id
+        join tbl_personal_member pm on pm.id = m.id
+        join tbl_member_profile mp on mp.member_id = m.id
+        join tbl_file f on f.id = mp.id
+        where bp.book_post_is_public = 'PUBLIC'
+        order by p.createdDate desc
+        limit 12 offset #{offset}
+    </select>
+
+    <!--  독후감 팔로잉 전체조회(무한스크롤)  -->
+    <select id="selectFollowBookPostFeed" resultType="fileBookPostDTO">
+        select bp.id as book_post_id, bp.book_post_title, bp.book_post_text, bp.book_isbn, pm.member_name,
+               p.member_id, f.file_name, f.file_path, p.createdDate,
+               (select count(*)
+                from tbl_book_post_like l
+                where l.book_post_id = bp.id) as like_count
+        from tbl_book_post bp
+                 join tbl_post p on p.id = bp.id
+                 join tbl_member m on p.member_id = m.id
+                 join tbl_personal_member pm on pm.id = m.id
+                 join tbl_member_profile mp on mp.member_id = m.id
+                 join tbl_file f on f.id = mp.id
+                 join tbl_follow fl on fl.follow_receiver_id = m.id
+        where bp.book_post_is_public = 'PUBLIC' and fl.follow_sender_id = #{loginMemberId}
+        order by p.createdDate desc
+        limit 12 offset #{offset}
+    </select>
+
+    <!--  일반도서 독후감 작성  -->
+    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_post (post_type, member_id)
+        values ('BOOK_POST', #{memberId})
+    </insert>
+
+    <insert id="insertBookPost">
+        insert into tbl_book_post (id, book_post_title, book_post_text, book_post_is_public, book_post_start_date, book_post_end_date, book_isbn, book_title)
+        values (#{id}, #{bookPostTitle}, #{bookPostText}, #{bookPostIsPublic}, #{bookPostStartDate}, #{bookPostEndDate}, #{bookIsbn}, #{bookTitle})
+    </insert>
+
+    <!--  선정도서 독후감 작성  -->
+    <insert id="insertSelectedBookPost">
+        insert into tbl_selected_book_post(id, book_id, book_post_status)
+        values (#{id}, #{bookId}, #{bookPostStatus})
+    </insert>
+
+    <!--  독후감 첨부파일 넣기, 수정(삭제)  -->
+    <insert id="insertFiles" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_file (file_name, file_path, file_text)
+        values (#{fileName}, #{filePath}, #{fileText})
+    </insert>
+
+    <insert id="insertBookPostFiles">
+        insert into tbl_book_post_file (id, book_post_id)
+        values (#{id}, #{bookPostId})
+    </insert>
+
+    <delete id="deleteFiles">
+        delete from tbl_file
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteBookPostFiles">
+        delete from tbl_book_post_file
+        where id = #{id}
+    </delete>
+
+    <!--  독후감 수정  -->
+    <update id="updatePost">
+        update tbl_post set updatedDate = current_timestamp
+        where id = #{id}
+    </update>
+
+    <update id="updateBookPost">
+        update tbl_book_post set book_post_title = #{bookPostTitle},
+                                 book_post_text = #{bookPostText} ,
+                                book_post_is_public = #{bookPostIsPublic}
+        where id = #{id}
+    </update>
+
+    <update id="updateSelectedBookPost">
+        update tbl_selected_book_post set book_post_status = #{bookPostStatus}
+        where id = #{id}
     </update>
 </mapper>
 

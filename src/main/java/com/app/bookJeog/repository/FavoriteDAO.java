@@ -36,4 +36,39 @@ public class FavoriteDAO {
     public Long topReceiver(){
         return favoriteMapper.topReceiver();
     }
+
+    //    독후감 좋아요하기
+    public void setBookPostLike(Long memberId, Long bookPostId){
+        favoriteMapper.insertBookPostLike(memberId, bookPostId);
+    };
+
+    //    특정 독후감의 내 좋아요 여부 조회
+    public int isBookPostLiked(Long memberId, Long bookPostId){
+        return favoriteMapper.isBookPostLiked(memberId, bookPostId);
+    };
+
+    //    독후감 좋아요 취소하기
+    public void deleteBookPostLike(Long memberId, Long bookPostId){
+        favoriteMapper.deleteBookPostLike(memberId, bookPostId);
+    };
+
+    //    특정 회원 팔로우하기
+    public void setMemberFollow(Long receiverId, Long senderId){
+        favoriteMapper.insertMemberFollow(receiverId, senderId);
+    };
+
+    //    내 특정 회원 팔로우여부 조회
+    public int isMemberFollowed(Long receiverId, Long senderId){
+        return favoriteMapper.isMemberFollowed(receiverId, senderId);
+    };
+
+    //    팔로우 취소
+    public void deleteMemberFollow(Long receiverId, Long senderId){
+        favoriteMapper.deleteMemberFollow(receiverId, senderId);
+    };
+
+    // 특정 독후감의 좋아요 개수 조회
+    public int countBookPostLike(Long bookPostId){
+        return favoriteMapper.countBookPostLike(bookPostId);
+    };
 }

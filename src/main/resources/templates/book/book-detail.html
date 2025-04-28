@@ -67,7 +67,7 @@
                                 </li>
                                 <li class="">
                                     <a
-                                        href=""
+                                        href="/search/window"
                                         data-content-type="search"
                                         class="search"
                                         >검색</a
@@ -234,21 +234,23 @@
                                         type="button"
                                         class="button-report mds-button"
                                     >
-                                        <span
-                                            ><i class="mds-icon-write"></i>
+                                        <a th:href="@{/post/bookpost/write(isbn=${isbn})}"><span
+                                        ><i class="mds-icon-write"></i>
                                             <span>&nbsp;&nbsp;독후감 작성</span>
-                                        </span>
+                                        </span></a>
                                     </button>
                                     <button
                                         type="button"
                                         class="button-discussion mds-button"
                                     >
                                         <span>
-                                            <i class="mds-icon-discussion"></i>
+                                            <a th:href="@{/search/result/discussions(keyword=${title})}">
+                                                <i class="mds-icon-discussion"></i>
                                             토론방&nbsp;
                                             <span class="hidden-text"
-                                                >이동</span
+                                            >이동</span
                                             >
+                                            </a>
                                         </span>
                                     </button>
                                     <button

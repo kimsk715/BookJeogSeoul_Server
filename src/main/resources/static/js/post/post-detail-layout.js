@@ -33,10 +33,25 @@ const postDetailLayout = (() => {
         const formattedDate = (post.createdDate || "").split(" ")[0].trim();
         const startDate = (post.bookPostStartDate || "").split(" ")[0].trim();
         const endDate = (post.bookPostEndDate || "").split(" ")[0].trim();
-        console.log(formattedDate, startDate, endDate);
 
         document.querySelector("p#create-date").innerText = formattedDate;
         document.querySelector("span.start-end").innerText = `${startDate} ~ ${endDate}`;
+
+        // 작성자 프로필 이미지 처리
+        const userImgDiv = document.querySelector(".writer .user-img");
+        if (userImgDiv) {
+            if (post.profileFilePath && post.profileFileName) {
+                let relativePath = post.profileFilePath
+                    .replaceAll("\\", "/")
+                    .replace(/^C:\/upload\//i, "");
+
+                const profileUrl = `/member/profile?path=${encodeURIComponent(relativePath)}&name=${encodeURIComponent(post.profileFileName)}`;
+                userImgDiv.style.backgroundImage = `url('${profileUrl}')`;
+            } else {
+                console.log("데이터 없음")
+                userImgDiv.style.backgroundImage = "url('/images/post/user_profile_example.png')";
+            }
+        }
     };
 
     // 첨부파일 이미지 출력
