@@ -130,6 +130,7 @@ public class AladinServiceImpl implements AladinService {
             return null;
         }
     }
+
     // json을 Map<String, Object> 형태로 반환
     public Map<String, Object> searchBooksToMap(String keyword, int startIndex, int maxResults, String sort) throws JSONException {
         // 알라딘 API에서 응답 JSON 받아오기

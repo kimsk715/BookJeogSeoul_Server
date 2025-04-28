@@ -15,4 +15,12 @@
         insert into tbl_selected_book (book_isbn, book_image_url)
         values (${bookIsbn}, ${bookImageUrl})
     </insert>
+
+
+    <!--인기도서 최다조회-->
+    <select id="selectTopViewBook" resultType="bookPostVO">
+        select *
+        from tbl_member_history
+        group by book_isbn desc
+    </select>
 </mapper>
