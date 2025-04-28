@@ -188,102 +188,23 @@
                                             <div class="swiper-container">
                                                 <div class="swiper-wrapper" id="slider">
                                                     <!-- 카드 목록 시작 *5개이상* -->
-                                                    <div class="book-card" style="margin-right: 12px;">
+                                                    <div th:each="book : ${topBookDTOS}" class="book-card" style="margin-right: 12px;">
                                                         <div class="content-data">
                                                             <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드1</span>
-                                                                <span>메인 타이틀</span>
+                                                            <h3 class="title" >
+                                                                <span th:text="${book.topBookVO.getTitle()}"></span>
+                                                                <span th:text="${book.topBookVO.getAuthor()}"></span>
                                                             </h3>
                                                         </div>
-                                                        <a href="">
+                                                        <a th:href="|/book/detail/${book.topBookVO.getIsbn()}|">
                                                             <!-- 이미지, 책 썸네일 -->
                                                             <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
+                                                                    <img th:src="${book.imageUrl}" alt="">
                                                             </div>
                                                         </a>
                                                         <button></button>
                                                     </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드2</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드3</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드4</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드5</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
-                                                    <div class="book-card" style="margin-right: 12px;">
-                                                        <div class="content-data">
-                                                            <!-- 카드 제목 -->
-                                                            <h3 class="title">
-                                                                <span>ai 가 뿌릴 카드6</span>
-                                                                <span>메인 타이틀</span>
-                                                            </h3>
-                                                        </div>
-                                                        <a href="">
-                                                            <!-- 이미지, 책 썸네일 -->
-                                                            <div class="book-picture">
-                                                                    <img src="/images/404/404.png" alt="">
-                                                            </div>
-                                                        </a>
-                                                        <button></button>
-                                                    </div>
+
                                                     <!-- 카드 목록 끝 -->
                                                 </div>
                                             </div>
@@ -295,7 +216,7 @@
                             <section class="home-content">
                                 <div class="home-inner">
                                     <h3 class="title">
-                                        <a style="cursor: none;">북적 랭킹</a>
+                                        <a style="pointer-events: none">북적 랭킹</a>
                                     </h3>
                                     <!-- 카테고리 분류 버튼들 -->
                                     <div class="category-list">
@@ -584,6 +505,43 @@
                                     </div>
                                 </div>
                             </section>
+                            <!--인기도서 최다조회-->
+                            <section class="home-content">
+                                <div class="home-inner">
+                                    <h3 class="section-title">
+                                        <a style="pointer-events: none" class="book-many-view">책과 예술의 만남, 오브제북</a>
+                                    </h3>
+                                    <p class="section-sub-title">책에서 영감을 받아 탄생한 예술 작품을 감상해 보세요</p>
+                                    <div class="book-shelf">
+                                        <div class="slide-container">
+                                            <ul class="slide-wrapper" style="padding-top: 16px">
+                                                <li>
+                                                    <div class="bookjeog-book">
+                                                        <a>
+                                                            <div class="thumbnail">
+                                                                <p class="badge"></p>
+                                                                <div class="thumbnail-liner">
+                                                                    <div class="book-picture" style="margin-bottom: 10px">
+                                                                        <picture>
+                                                                            <img >
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a class="book-data">
+                                                            <div class="view-book-data">
+                                                                <p class="title">여긴 타이틀</p>                                                                <p class="title"></p>
+                                                                <p class="author">여긴 책쓴사람</p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                         </div>
                     </div>
@@ -703,5 +661,5 @@
         </div>
     </body>
     <script src="/js/main/main.js"></script>
-    <script src="/js/main/main-category.js"></script>
+    <script src="/js/main/main-category-event.js"></script>
 </html>

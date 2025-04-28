@@ -1,5 +1,6 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.vo.TopBookVO;
 import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.domain.vo.TempSelectedBookVO;
 import com.app.bookJeog.repository.BookDAO;
@@ -9,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
@@ -133,6 +136,14 @@ public class BookServiceImpl implements BookService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(apiUrl, String.class);
     }
+
+
+
+
+
+        public List<TopBookVO> getBestBooks() throws IOException {
+           return getPopularBooks();
+        };
 };
 
 
