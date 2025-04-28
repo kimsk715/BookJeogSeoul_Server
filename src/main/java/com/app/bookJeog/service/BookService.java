@@ -3,12 +3,14 @@ import com.app.bookJeog.domain.dto.BookInfoDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.TempSelectedBookDTO;
 import com.app.bookJeog.domain.vo.BookInfoVO;
+import com.app.bookJeog.domain.vo.BookTempVO;
 import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.domain.vo.TempSelectedBookVO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 
 public interface BookService {
@@ -254,5 +256,45 @@ public interface BookService {
     // 이 작가의 다른 책
     String getBooksByAuthor(String authorName);
 
+    // 서울 도서관 최다 대출
+    public default List<BookTempVO> getPopularBooks() throws IOException {
+        try {
+            StringBuilder urlBuilder = new StringBuilder("http://openapi.seoul.go.kr:8088");
+            urlBuilder.append("/").append(URLEncoder.encode("5a51544c6d6b696d3739455a645457", "UTF-8")); // 인증키
+            urlBuilder.append("/").append(URLEncoder.encode("json", "UTF-8")); // 타입
+            urlBuilder.append("/").append(URLEncoder.encode("SeoulLibraryBookRentNumInfo", "UTF-8")); // 서비스명
+            urlBuilder.append("/").append(URLEncoder.encode("1", "UTF-8")); // 시작위치
+            urlBuilder.append("/").append(URLEncoder.encode("5", "UTF-8")); // 종료위치
+
+            URL url = new URL(urlBuilder.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type", "application/json");
+            BufferedReader rd;
+            if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                response.append(line);
+            }
+            rd.close();
+            conn.disconnect();
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode node = objectMapper.readTree(response.toString());
+
+            JsonNode rowNode = node.path("SeoulLibraryBookRentNumInfo").path("row");
+            List<BookTempVO> foundBooks = objectMapper.readValue(rowNode.toString(), new TypeReference<List<BookTempVO>>() {});
+
+            return foundBooks;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
