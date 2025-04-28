@@ -15,101 +15,7 @@
     <body>
         <div>
             <!-- 헤더 시작 -->
-            <div class="top-header background on">
-                <div class="inner">
-                    <header>
-                        <h1>
-                            <a href="" class="logo">
-                                <img
-                                    src="/images/common/Logo.png"
-                                    alt="북적서울"
-                                    class="bookjeog-logo"
-                                    style="scale: 1.5"
-                                />
-                            </a>
-                        </h1>
-                        <nav>
-                            <ul class="gnb">
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="book-report"
-                                        class="book-report"
-                                        >독후감</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="donation"
-                                        class="donation"
-                                        >기부</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a th:href="@{/search/window}"
-                                        data-content-type="search"
-                                        class="search"
-                                        >검색</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="book-shelf"
-                                        class="book-shelf"
-                                        >내서재</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="manage"
-                                        class="manage"
-                                        >관리</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="discussion"
-                                        class="discussion"
-                                        >북적북적</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        type="button"
-                                        data-content-type="self-donation"
-                                        class="self-donation"
-                                        >개인기부</a
-                                    >
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="util-wrap">
-                            <!-- data-count가 알람 개수 -->
-                            <a
-                                href=""
-                                class="alarm-button"
-                                data-content-type="alarmCenter"
-                                data-count="10"
-                            >
-                                <span class="mds-icon-alarm">
-                                    <span class="ir">알림센터</span>
-                                </span>
-                            </a>
-                            <ul class="util">
-                                <li class="sign sign-in">
-                                    <a href="" data-content-type="login"
-                                        >로그아웃</a
-                                    >
-                                </li>
-                            </ul>
-                        </div>
-                    </header>
-                </div>
-            </div>
+            <div th:replace="~{main/header :: header-sc}"></div>
             <!-- 헤더끝 -->
             <section class="content">
                 <div class="bjs-home">
@@ -544,29 +450,17 @@
                                 </div>
                             </section>
                             <!--인기도서 최다 조회-->
-                            <section
-                                    data-v-5d23d0f6=""
-                                    data-v-3b57c374=""
-                                    data-section-type="yourbooks"
-                                    data-section-name="이번 주 주목할 신간"
-                                    class="home-content overflow"
-                            >
-                                <div data-v-5d23d0f6="" class="home-inner">
-                                    <h3 data-v-5d23d0f6="" class="section-title">
-                                        <a
-                                                data-v-5d23d0f6=""
-                                                href="/v3/today/more/personalList/"
-                                                data-content-type="2depth"
-                                                class="gtm-yourbooks-2depth dark-img-after"
-                                        >이번 주 카페에서 읽을 만화책</a
+                            <section class="home-content overflow">
+                                <div class="home-inner">
+                                    <h3 class="section-title">
+                                        <a class="gtm-yourbooks-2depth dark-img-after"
+                                        >인기 도서 최다조회</a
                                         >
                                     </h3>
                                     <div
-                                            data-v-5d23d0f6=""
                                             class="feed-section book-shelf overflow not-dark"
                                     >
                                         <div
-                                                data-v-5d23d0f6=""
                                                 class="swiper-container swiper-container-initialized swiper-container-horizontal"
                                         >
                                             <div
@@ -581,68 +475,39 @@
                                         "
                                             >
                                                 <div
-                                                        data-v-5d23d0f6=""
-                                                        class="swiper-item swiper-slide swiper-slide-active"
+                                                        class="swiper-item swiper-slide"
                                                         style="margin-right: 8px"
                                                 >
-                                                    <article
-                                                            data-v-24edd622=""
-                                                            data-v-5d23d0f6=""
-                                                            class="feed-article mds-radius--12"
-                                                            data-article-type="curation"
-                                                            data-article-kind="1"
-                                                            data-article-index="1"
+                                                    <article th:each="topViewBook : ${topViewBooks}"
+                                                            class="feed-article"
                                                             style="
                                                     background-image: url('https://d3udu241ivsax2.cloudfront.net/common/images/common/background-gradient-07.jpg');
                                                 "
                                                     >
-                                                        <h4
-                                                                data-v-24edd622=""
-                                                                class="feed-title"
-                                                        >
-                                                            이 시대의 고길동들을 위한<br />고소한
-                                                            라떼 한잔
+                                                        <h4 class="feed-title" th:text="${topViewBook.getTitle()}">
+                                                            <br />
                                                         </h4>
-                                                        <div
-                                                                data-v-24edd622=""
-                                                                class="feed-body"
-                                                        >
+                                                        <div class="feed-body">
                                                             <div
-                                                                    data-v-24edd622=""
                                                                     class="millie-book books ratio-book feed-body-book"
                                                             >
                                                                 <a
-                                                                        data-content-type="book"
-                                                                        href="/v3/bookDetail/a46de2b4a7244600"
-                                                                        data-book-seq="a46de2b4a7244600"
-                                                                        data-content-seq="a46de2b4a7244600"
                                                                         class="book-image gtm-yourbooks-bookdetail"
                                                                 ><div
                                                                         class="thumbnail"
                                                                 >
                                                                     <!---->
                                                                     <!---->
-                                                                    <!---->
-                                                                    <!---->
-                                                                    <!---->
-                                                                    <!---->
-                                                                    <!---->
                                                                     <div
                                                                             class="thumbnail-inner"
                                                                     >
                                                                         <div
-                                                                                data-v-60254492=""
                                                                                 class="book-picture imageLoaded"
                                                                                 style=""
                                                                                 data-observe="true"
                                                                         >
-                                                                            <picture
-                                                                                    data-v-60254492=""
-                                                                            >
-                                                                                <img
-                                                                                        data-v-60254492=""
-                                                                                        src="https://cover.millie.co.kr/service/cover/179612564/5f005bd7f7f143d88b811cb8a3e96b7b.jpg?w=145&amp;q=80"
-                                                                                        alt="둘리, 고길동을 부탁해 도서 썸네일"
+                                                                            <picture>
+                                                                                <img th:src="${topViewBook.getImageUrl()}"
                                                                                         width="145"
                                                                                         style="
                                                                                     min-height: 0px;
@@ -655,45 +520,232 @@
                                                                 >
                                                                 <!---->
                                                             </div>
-                                                            <div
-                                                                    data-v-24edd622=""
-                                                                    class="sub-title"
-                                                            >
+                                                            <div class="sub-title">
                                                                 <p
-                                                                        data-v-24edd622=""
                                                                         class="sub-title-inner"
+                                                                        th:text="${topViewBook.getAuthor()}"
                                                                 >
-                                                                    둘리와 고길동이
-                                                                    돌아왔다!<br />오리지널
-                                                                    일러스트 에세이
+                                                                    <br />
                                                                 </p>
                                                             </div>
                                                         </div>
                                                         <div
-                                                                data-v-24edd622=""
                                                                 class="bottom-sheet feed-statistics mds-shadow--card round"
                                                         ></div>
                                                     </article>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div data-v-5d23d0f6="" class="btn-wrap">
-                                            <button
-                                                    data-v-5d23d0f6=""
-                                                    class="swiper-button-prev-millie swiper-btn mds-icon--arrow-left swiper-button-disabled"
-                                                    tabindex="0"
-                                                    role="button"
-                                                    aria-label="Previous slide"
-                                                    aria-disabled="true"
-                                            ></button>
-                                            <button
-                                                    data-v-5d23d0f6=""
-                                                    class="swiper-button-next-millie swiper-btn mds-icon--arrow-right"
-                                                    tabindex="0"
-                                                    role="button"
-                                                    aria-label="Next slide"
-                                                    aria-disabled="false"
-                                            ></button>
+                                        <div class="btn-wrap"></div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--인기도서 최고 독후감-->
+                            <section class="home-content">
+                                <div class="home-inner">
+                                    <h3 class="section-title">
+                                        <a style="pointer-events: none" class="book-many-view">독후감 쓰기좋은책들</a>
+                                    </h3>
+                                    <p class="section-sub-title">예쁜 독후감이된 책들</p>
+                                    <div class="book-shelf">
+                                        <div class="slide-container">
+                                            <!--여기서부터 추천책-->
+                                            <ul class="slide-wrapper" style="padding-top: 16px" th:each="topBookPost : ${topBookPostDTOS}">
+                                                <li>
+                                                    <div class="bookjeog-book">
+                                                        <a>
+                                                            <div class="thumbnail">
+                                                                <p class="badge"></p>
+                                                                <div class="thumbnail-liner">
+                                                                    <div class="book-picture" style="margin-bottom: 10px">
+                                                                        <picture>
+                                                                            <img th:src="${topBookPost.getImageUrl()}">
+                                                                        </picture>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <a class="book-data">
+                                                            <div class="view-book-data">
+                                                                <p class="title" th:text="${topBookPost.getTitle()}"></p>                                                                <p class="title"></p>
+                                                                <p class="author" th:text="${topBookPost.getAuthor()}"></p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--독후감 많이쓴 사람-->
+                            <section
+                                    class="home-content overflow bookstore-content"
+                            >
+                                <div class="home-inner bookstore-frm">
+                                    <h3 class="section-title">
+                                        <a
+                                                class="gtm-bookstoretravel"
+                                        >동네책방 즐겨찾기</a
+                                        >
+                                    </h3>
+                                    <p class="section-sub-title">
+                                        책 냄새 가득한 나만의 공간을 찾아봐요
+                                    </p>
+                                    <div class="bookstore-section">
+                                        <div
+                                                class="swiper-container no-swiper swiper-container-initialized swiper-container-horizontal"
+                                        >
+                                            <div
+                                                    class="swiper-wrapper"
+                                                    style="
+                                            transform: translate3d(
+                                                0px,
+                                                0px,
+                                                0px
+                                            );
+                                        "
+                                            >
+                                                <div
+                                                        class="slide-item mds-shadow--card02 swiper-slide swiper-slide-active"
+                                                        style="margin-right: 16px"
+                                                >
+                                                    <a
+                                                            href="/v3/post/1154931"
+                                                    ><div class="img-box">
+                                                        <img
+                                                                alt="동네책방즐겨찾기 포스트 대표 이미지"
+                                                                src="https://cover.millie.co.kr/service/post/1154931/6807635320074.jpg?f=webp&amp;w=652&amp;q=80"
+                                                        />
+                                                    </div>
+                                                        <div class="info-box">
+                                                            <a
+                                                                    class="profile-img"
+                                                            ><span
+                                                            ><img
+                                                                    src="https://d3uz7kn1zskbbz.cloudfront.net/profile/76cef109614b4ebb82948a6c8a481c13.png"
+                                                                    alt="동네책방즐겨찾기 프로필 이미지" /></span
+                                                            ></a>
+                                                            <div class="info-blk">
+                                                                <div class="inner-blk">
+                                                                    <a
+                                                                            class="info-tit mds-font mds-font--subhead02"
+                                                                    >동네책방
+                                                                        즐겨찾기</a
+                                                                    >
+                                                                    <a
+                                                                            class="info-msg mds-font mds-font--caption"
+                                                                    >우리 동네
+                                                                        책방과 즐거운
+                                                                        일을 만들고
+                                                                        있어요!</a
+                                                                    >
+                                                                    <button
+                                                                            type="button"
+                                                                            class="mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4"
+                                                                    >
+                                                                <span
+                                                                >팔로우</span
+                                                                >
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="post-blk">
+                                                                <div
+                                                                        class="post-tit mds-font mds-font--subhead03"
+                                                                >
+                                                                    🌏 지구에 불시착한
+                                                                    사람들이 모이는
+                                                                    책방, 지구불시착
+                                                                </div>
+                                                                <div
+                                                                        class="post-summary mds-font mds-font--body01"
+                                                                >
+                                                                    위 사진을 누르면
+                                                                    지구불시착에 대해 더
+                                                                    자세히 알 수 있어요.
+                                                                    📌오늘의
+                                                                    책방지구불시착서울특별시
+                                                                    노원구 공릉로32길 13
+                                                                    (공릉동) 1층 독립
+                                                                    서점을
+                                                                    추천하는&nbsp;동네책방
+                                                                    즐겨찾기!🚩서울 뿐
+                                                                    아니라&nbsp;전국
+                                                                    곳곳으로 지역
+                                                                    확대🧑&nbsp;단골들의
+                                                                    이야기, 독립 서점엔
+                                                                    누가 올까?🍽️
+                                                                    책방지기의
+                                                                    즐겨찾기!&nbsp;동네
+                                                                    명소 추천 뿐만
+                                                                    아니라 독서 모임,
+                                                                    북토크 등다양한 행사
+                                                                    소식도 담을
+                                                                    예정이니앞으로 많은
+                                                                    기대 부탁드려요!
+                                                                    벌써 5년째
+                                                                    ‘지구불시착'에
+                                                                    다니고 있는 미하
+                                                                    님은 어릴 때부터
+                                                                    책을 좋아했어요.
+                                                                    처음 지구불시착에
+                                                                    들어온 순간부터
+                                                                    책방이 지닌 매력에
+                                                                    푹 빠졌고요. 서점
+                                                                    투어를 좋아하는 유진
+                                                                    님은 책방이 많은
+                                                                    동네로 멀리 놀러가곤
+                                                                    했는데, 자신이 사는
+                                                                    동네에
+                                                                    지구불시착이라는
+                                                                    책방이 존재한다는
+                                                                    사실을 알고 바로
+                                                                    방문해 보았어요.
+                                                                    책방지기의 수줍은 듯
+                                                                    예측불가한 응대를
+                                                                    보며 특이하다고
+                                                                    생각했지만, 점점 그
+                                                                    매력에 빠져들게
+                                                                    되었죠. 지금은
+                                                                    거리낌 없이 농담을
+                                                                    주고받을 정도로 친한
+                                                                    사이가 되었습니다.
+                                                                    유진 님이
+                                                                    지구불시착에 두
+                                                                    번째로 방문한 날이
+                                                                    가장 기억에
+                                                                    남습니다. 해고를
+                                                                    당한 날이었는데
+                                                                    책방지기가 조용히
+                                                                    맥주를 내주었거든요.
+                                                                    무심한 듯 속 깊은
+                                                                    위로가 유진 님의
+                                                                    마음에 따뜻한 온기를
+                                                                    더해주었습니다.&nbsp;
+                                                                    오프라인 책방을 찾는
+                                                                    이유에 대해 미하
+                                                                    님은 도서관,
+                                                                    오프라인 책방,
+                                                                    온라인 서점이 모두
+                                                                    연계해서 발전해야
+                                                                    좋은 사회가 될 수
+                                                                    있다고 말했어요.
+                                                                    특히 온라인
+                                                                    서점에서는 내 관심사
+                                                                    안에서만 책을 찾게
+                                                                    되는데 오프라인
+                                                                    책방에서는 내가
+                                                                    몰랐던 책도 발견할
+                                                                    수 있는 큐레이션이
+                                                                    있다는 점이 좋다고
+                                                                    덧
+                                                                </div>
+                                                            </div>
+                                                        </div></a
+                                                    >
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -16,8 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
+
 
 public interface BookService {
 
@@ -44,6 +46,7 @@ public interface BookService {
                 rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
             }
             StringBuilder response = new StringBuilder();
+
             String line;
             while ((line = rd.readLine()) != null) {
                 response.append(line);
@@ -339,6 +342,12 @@ public interface BookService {
 
     // 인기도서 최다조회
     public List<MemberHistoryVO> selectTopViewBooks();
+
+
     // 관리자 추천도서
     public List<SelectedBookVO> selectAdminSuggestBooks();
+
+
+    // 인기 독후감 조회
+    public List<BookPostVO> selectTopBookPost();
 }
