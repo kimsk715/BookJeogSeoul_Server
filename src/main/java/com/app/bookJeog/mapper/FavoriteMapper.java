@@ -40,6 +40,7 @@ public interface FavoriteMapper {
     //    팔로우 취소
     public void deleteMemberFollow(Long receiverId, Long senderId);
 
-
+    // 특정 독후감의 좋아요 개수 조회
+    public int countBookPostLike(Long bookPostId);
 }
 

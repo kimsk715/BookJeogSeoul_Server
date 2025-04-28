@@ -350,4 +350,7 @@ public interface BookService {
 
     // 인기 독후감 조회
     public List<BookPostVO> selectTopBookPost();
+
+    // 선정 도서 여부 조회
+    public boolean findSelectedBooks(Long bookIsbn);
 }

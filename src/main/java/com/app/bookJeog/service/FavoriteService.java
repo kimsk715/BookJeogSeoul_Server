@@ -1,6 +1,9 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+
 public interface FavoriteService {
+
     // 책 스크랩하기 버튼
     void scrap(Long bookIsbn);
 
@@ -14,4 +17,25 @@ public interface FavoriteService {
     void deleteScrap(Long isbn);
 
     public Long topReceiver();
+
+    //    독후감 좋아요하기
+    public void setBookPostLike(Long bookPostId);
+
+    //    특정 독후감의 내 좋아요 여부 조회
+    public boolean isBookPostLiked(Long bookPostId);
+
+    //    독후감 좋아요 취소하기
+    public void deleteBookPostLike(Long bookPostId);
+
+    //    특정 회원 팔로우하기
+    public void setMemberFollow(Long receiverId);
+
+    //    내 특정 회원 팔로우여부 조회
+    public boolean isMemberFollowed(Long receiverId);
+
+    //    팔로우 취소
+    public void deleteMemberFollow(Long receiverId);
+
+    // 특정 독후감의 좋아요 개수 조회
+    public int countBookPostLike(Long bookPostId);
 }

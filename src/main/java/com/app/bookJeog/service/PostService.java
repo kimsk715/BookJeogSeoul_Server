@@ -3,6 +3,11 @@ package com.app.bookJeog.service;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.PostType;
 import com.app.bookJeog.domain.vo.*;
+import com.app.bookJeog.domain.vo.BookPostVO;
+import com.app.bookJeog.domain.vo.DiscussionVO;
+import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
+import com.app.bookJeog.domain.vo.ReceiverVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +21,17 @@ public interface PostService {
     //  화면에 나올 정보를 모아놓은 DTO 로 변환하는 메소드
     public default BookPostDTO toBookPostDTO(BookPostVO bookPostVO) {
         BookPostDTO bookPostDTO = new BookPostDTO();
-        if(bookPostVO != null) {
+        if (bookPostVO != null) {
             bookPostDTO.setId(bookPostVO.getId());
             bookPostDTO.setBookPostTitle(bookPostVO.getBookPostTitle());
             bookPostDTO.setBookPostText(bookPostVO.getBookPostText());
             bookPostDTO.setBookPostIsPublic(bookPostVO.getBookPostIsPublic());
             bookPostDTO.setBookPostStartDate(bookPostVO.getBookPostStartDate());
             bookPostDTO.setBookPostEndDate(bookPostVO.getBookPostEndDate());
-            if(bookPostVO.getBookId() != null) {
+            if (bookPostVO.getBookId() != null) {
                 bookPostDTO.setBookId(bookPostVO.getBookId());
             }
-            if(bookPostVO.getBookIsbn() != null) {
+            if (bookPostVO.getBookIsbn() != null) {
                 bookPostDTO.setBookIsbn(bookPostVO.getBookIsbn());
             }
             bookPostDTO.setCreatedDate(bookPostVO.getCreatedDate());
@@ -40,7 +45,7 @@ public interface PostService {
 
     public default DiscussionDTO toDiscussionDTO(DiscussionVO discussionVO) {
         DiscussionDTO discussionDTO = new DiscussionDTO();
-        if(discussionVO != null) {
+        if (discussionVO != null) {
             discussionDTO.setId(discussionVO.getId());
             discussionDTO.setDiscussionTitle(discussionVO.getDiscussionTitle());
             discussionDTO.setDiscussionText(discussionVO.getDiscussionText());
@@ -111,5 +116,13 @@ public interface PostService {
     public void insertPost(PostVO postVO);
 
     public void setTopReceiver(Long receiverId);
+    // 독후감 피드 전체조회(무한스크롤)
+    public List<FileBookPostDTO> findAllBookPostFeed(int offset);
+
+    // 독후감 팔로잉 전체조회(무한스크롤)
+    public List<FileBookPostDTO> findFollowBookPostFeed(Long loginMemberId, int offset);
+
+    // 독후감 작성...
+    public Long write(FileBookPostDTO fileBookPostDTO, List<MultipartFile> files);
 }
 

@@ -13,10 +13,9 @@ public class GlobalExceptionHandler {
     
     // 로그인 안 했는데 회원 서비스를 시도할 때
     @ExceptionHandler(UnauthenticatedException.class)
-    @ResponseBody
-    protected ResponseEntity<String> handleUnauthenticatedException(UnauthenticatedException e) {
+    protected String UnauthenticatedException(UnauthenticatedException e) {
         log.error(e.getMessage());
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        return "/login/login";
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

@@ -493,7 +493,7 @@ button, input {
 .post .metadata .inner{
     text-align: left;
     padding: 16px;
-    min-height: 78px;
+    min-height: 118px;
     display: block;
 }
 
@@ -503,7 +503,7 @@ button, input {
     font-weight: 700;
     margin-bottom: 4px;
     line-height: 22px;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
 }
 
 .post .metadata .sub-title, .post .metadata .title{
@@ -552,6 +552,10 @@ button, input {
 
 /* 좋아요 눌렀을 때 */
 .mds-icon-heart::before{
+    content: "\e820";
+}
+
+.filled.mds-icon-heart::before{
     content: "\e821";
 }
 
@@ -711,3 +715,39 @@ button, input {
     color: var(--text-01);
 }
 /* 메뉴 버튼(신고하기) */
+
+/* 잠깐 뜨는 창(토스트) */
+#wrap .toast{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 1001;
+    width: 280px;
+    min-height: 52px;
+    padding: 16px;
+    background: rgba(54, 54, 54, .9);
+    box-sizing: border-box;
+    border-radius: 3px;
+    text-align: center;
+    color: #fff;
+    pointer-events: none;
+    word-break: keep-all;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#wrap .toast p{
+    word-break: break-all;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -60%); }
+    10% { opacity: 1; transform: translate(-50%, -50%); }
+    90% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -40%); }
+}
+
+.toast {
+    animation: fadeInOut 2.5s ease-in-out;
+}
+/* // 잠깐 뜨는 창(토스트) */

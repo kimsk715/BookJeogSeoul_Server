@@ -403,6 +403,7 @@ textarea {
     overflow: hidden;
     width: 100%;
     border-bottom: 1px solid var(--ui-06);
+    background: white;
 }
 
 .mds-input>label {
@@ -506,6 +507,7 @@ textarea {
     padding: 6px;
     margin: 6px;
     cursor: pointer;
+    z-index: 6;
 }
 
 .modal-content.no-list{
