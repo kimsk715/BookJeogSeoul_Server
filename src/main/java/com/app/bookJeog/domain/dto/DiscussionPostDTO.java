@@ -20,4 +20,6 @@ public class DiscussionPostDTO {
     private String bookTitle;
     private String createdDate;
     private int commentCount;
+    private String author;
+    private String imageUrl;
 }

@@ -55,5 +55,12 @@ public class FavoriteServiceImpl implements FavoriteService {
         Long memberId = 1L;
 
         favoriteDAO.deleteBookScrap(memberId, isbn);
-    };
+    }
+
+    @Override
+    public Long topReceiver() {
+        return favoriteDAO.topReceiver();
+    }
+
+    ;
 }

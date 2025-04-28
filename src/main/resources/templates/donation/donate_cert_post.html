@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <div id="wrap" class="web-mount pcv-mount">
+    <div id="wrap" class="web-mount pcv-mount" th:object="${DonateCert}">
         <!---->
         <!---->
         <!---->
@@ -83,8 +83,8 @@
                 <div class="view-expand diary">
                     <div class="title">
                         <div class="title-inner container">
-                            <h1>
-                                후원 인증 게시글 페이지
+                            <h1 th:text="*{donateCertTitle}">
+
                             </h1>
                             <div class="flex-container space-between">
                                 <a href="/v4/library/5949440"
@@ -95,8 +95,8 @@
                                     <div class="writer-info">
                                         <div class="nickname-wrapper">
                                             <p
-                                                class="name mds-font--caption">
-                                                강남구대표후원단체에서올린글
+                                                class="name mds-font--caption" th:text="*{sponsorName}">
+
                                             </p>
                                             <!---->
                                         </div>
@@ -125,15 +125,9 @@
                                 </div>
 
                                 <div class="reading-diary-container">
-                                    <p class="title">여러분의 성원에 힘입어
-                                        아이들에게 많은 책을 전달했습니다.</p>
-                                    <p class="text-post">
-                                        어린이날을 맞아 여러분들의 따뜻한 마음이 담긴 책이
-                                        저희 센터에 잘 도착헀습니다<br>
-                                        아이들이 책을 읽으며 즐거워하는 모습을 보며 함께
-                                        기뻐해주세요!<br>
-                                        여러분의 많은 관심에 감사드리며, 앞으로도 많은 관심
-                                        주세요!
+                                    <p class="title" th:text="*{donateCertTitle}"></p>
+                                    <p class="text-post" th:text="*{donateCertText}">
+
                                     </p>
                                 </div>
                                 <div class="images-container">
@@ -144,24 +138,22 @@
                                             <p class="text"> 후원대상 이미지
                                                 1
                                             </p> <span
-                                                class="nickname">ⓒ
-                                                후원단체명</span>
+                                                class="nickname" th:text="|ⓒ*{sponsorName}|"></span>
                                         </li>
                                         <li><img
                                                 src="https://happybean-phinf.pstatic.net/20250319_98/1742376246885hvkTB_JPEG/%EB%AA%A8%EA%B8%88%ED%95%A8_%EC%82%AC%EC%A7%84.jpg?type=w720">
                                             <p class="text"> 후원대상 이미지
                                                 2
                                             </p> <span
-                                                class="nickname">ⓒ
-                                                후원단체명</span>
+                                                class="nickname" th:text="|ⓒ*{sponsorName}|"></span>
                                         </li>
                                         <li><img
                                                 src="https://happybean-phinf.pstatic.net/20250319_208/1742376073512va7n0_JPEG/%EC%95%94%EC%9D%84_%EC%9D%B4%EA%B2%A8%EB%82%B4%EB%8A%94_%EC%9A%B8%ED%8A%B8%EB%9D%BC%EB%A7%A8.jpg?type=w720">
                                             <p class="text"> 후원대상 이미지
                                                 3
                                             </p> <span
-                                                class="nickname">ⓒ
-                                                후원단체명</span>
+                                                class="nickname" th:text="|ⓒ*{sponsorName}|">
+                                                </span>
                                         </li>
                                     </ul>
 
@@ -194,8 +186,7 @@
                                             "></a>
                                     <div class="owner-info">
                                         <h3 class="owner-name">
-                                            <a href="">"가상의기부단체"님의
-                                                게시글</a>
+                                            <a href="" th:text="|*{sponsorName}님의 게시글|"></a>
                                         </h3>
                                         <div class="owner-sub-count">
                                             <a href=""
@@ -299,7 +290,7 @@
                                 class="comment-title-length">0</span>
                         </h3>
                         <ul class="comment-list">
-                            <li class="comment-item">
+                            <li class="comment-item" th:each="comment : ${comments}">
                                 <div
                                     class="comment-item-inner flex-container">
                                     <div class="user-img" style="
@@ -315,22 +306,22 @@
                                                 class="com-contents-top flex-container">
                                                 <p class="nickname">
                                                     <a
-                                                        href="#">북적북적한선술집</a>
+                                                        href="#" th:text="${comment.memberName}"></a>
                                                 </p>
                                             </div>
                                             <span
-                                                class="com-contents-date">2025.04.06</span>
+                                                class="com-contents-date" th:text="${comment.commentDTO.createdDate}"></span>
                                         </div>
                                         <div
                                             class="com-contents-body">
                                             <p
-                                                class="comment-text show">
-                                                댓글은 혹시 몰라서 남겨둠
+                                                class="comment-text show" th:text="${comment.commentDTO.commentText}">
+
                                             </p>
                                             <div class="comment-text">
                                                 <p
-                                                    contenteditable="plaintext-only">
-                                                    댓글은 혹시 몰라서 남겨둠
+                                                    contenteditable="plaintext-only" th:text="${comment.commentDTO.commentText}">
+
                                                 </p>
                                                 <button type="button"
                                                     class="mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
@@ -354,76 +345,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="reply-container">
-                                    <ul class="reply-list">
-                                        <li class="reply-item">
-                                            <div
-                                                class="reply-item-inner flex-container">
-                                                <div class="user-img"
-                                                    style="
-                                                            background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
-                                                        ">
-                                                    <a
-                                                        href="/v4/library/8942404"></a>
-                                                </div>
-                                                <div
-                                                    class="com-contents">
-                                                    <div
-                                                        class="com-contents-head">
-                                                        <div
-                                                            class="com-contents-top">
-                                                            <p
-                                                                class="nickname">
-                                                                <a
-                                                                    href="#">북적북적한선술집</a>
-                                                            </p>
-                                                            <span
-                                                                class="com-contents-date">2025.04.07</span>
-                                                        </div>
-                                                        <div
-                                                            class="reply-setting">
-                                                            <button
-                                                                type="button"
-                                                                class="more-btn">
-                                                                <img src="https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/more-icon.df2e02aec2252c2847fbe9e490cd4354.png"
-                                                                    alt="더보기" />
-                                                            </button>
-                                                            <div class="more-area"
-                                                                style="display: none;">
-                                                                <button
-                                                                    type="button">답글달기</button>
-                                                                <button
-                                                                    type="button">신고하기</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="com-contents-body">
-                                                        <p
-                                                            class="comment-text show">
-                                                            답글도 혹시 몰라
-                                                            남겨둠.
-                                                        </p>
-                                                        <div
-                                                            class="comment-text">
-                                                            <p
-                                                                contenteditable="plaintext-only">
-                                                                답글도 혹시
-                                                                몰라
-                                                                남겨둠.
-                                                            </p>
-                                                            <button
-                                                                type="button"
-                                                                class="mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
-                                                                <span>등록</span>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+
                                 <!---->
                             </li>
                         </ul>

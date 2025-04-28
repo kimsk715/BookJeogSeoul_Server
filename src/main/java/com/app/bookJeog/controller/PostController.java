@@ -1,10 +1,11 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
-import com.app.bookJeog.domain.dto.BookPostDTO;
-import com.app.bookJeog.domain.dto.BookPostMemberDTO;
-import com.app.bookJeog.domain.dto.FileBookPostDTO;
-import com.app.bookJeog.service.PostService;
+import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.MemberType;
+import com.app.bookJeog.domain.vo.CommentVO;
+import com.app.bookJeog.domain.vo.MemberVO;
+import com.app.bookJeog.service.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -24,17 +26,52 @@ import java.util.ArrayList;
 @RequestMapping("/post/*")
 public class PostController {
     private final PostService postService;
+    private final BookDonateService bookDonateService;
+    private final AladinService aladinService;
+    private final BookService bookService;
+    private final CommentService commentService;
+    private final MemberService memberService;
 
     // 토론게시판 이동
     @GetMapping("discussion")
-    public String goToDiscussion() {
+    public String goToDiscussion(Model model) {
+        List<DiscussionPostDTO> postList = postService.getAllDiscussions();
+        for (DiscussionPostDTO post : postList) {
+            post.setImageUrl(aladinService.getBookCover(post.getBookIsbn()));
+        }
+        model.addAttribute("discussions", postList);
         return "discussion/main";
     }
 
 
     // 토론 게시글
-    @GetMapping("discussion/post")
-    public String goToDiscussionPost() {
+    @GetMapping("discussion/post/{id}")
+    public String goToDiscussionPost(@PathVariable Long id, Model model) {
+
+        DiscussionPostDTO post = postService.getDiscussionById(id);
+        post.setImageUrl(aladinService.getBookCover(post.getBookIsbn()));
+
+        model.addAttribute("discussion", post);
+        List<CommentInfoDTO> commentList = new ArrayList<>();
+        List<CommentVO> tempList = commentService.getAllCommentByPostId(id);
+        for(CommentVO commentVO : tempList) {
+            CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
+            CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
+            commentInfoDTO.setCommentDTO(commentDTO);
+            log.info(commentDTO.toString());
+            String memberName = "";
+            MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
+
+            switch (memberType) {
+                case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
+
+                case SPONSOR -> memberName = memberService.getSponsorMemberById(commentDTO.getMemberId()).getSponsorName();
+                }
+                commentInfoDTO.setMemberName(memberName);
+                commentList.add(commentInfoDTO);
+            }
+        model.addAttribute("comments", commentList);
+
         return "discussion/post";
     }
 
@@ -71,14 +108,44 @@ public class PostController {
 
     // 후원 인증 게시판
     @GetMapping("donate")
-    public String goToDonateCert(){
+    public String goToDonateCert(Model model){
+        List<DonateCertPostDTO> postList = postService.getAllDonateCerts();
+        for (DonateCertPostDTO post : postList) {
+            post.setSponsorName(memberService.getSponsorMemberById(post.getMemberId()).getSponsorName());
+            post.setCommentCount(commentService.getAllCommentByPostId(post.getId()).size());
+
+//          // 이미지 추가하면 좀 더 추가
+        }
+//        log.info(postList.toString());
+        model.addAttribute("DonateCerts",postList);
+//        log.info(model.getAttribute("DonateCerts").toString());
         return "donation/donate_cert_main";
     }
 
 
     // 후원 인증 게시글    
-    @GetMapping("donate/post")
-    public String goTODonateCertPost(){
+    @GetMapping("donate/post/{postId}")
+    public String goTODonateCertPost(@PathVariable Long postId, Model model){
+        model.addAttribute("DonateCert",postService.getDonateCertById(postId));
+        List<CommentInfoDTO> commentList = new ArrayList<>();
+        List<CommentVO> tempList = commentService.getAllCommentByPostId(postId);
+        for(CommentVO commentVO : tempList) {
+            CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
+            CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
+            commentInfoDTO.setCommentDTO(commentDTO);
+            log.info(commentDTO.toString());
+            String memberName = "";
+            MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
+
+            switch (memberType) {
+                case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
+
+                case SPONSOR -> memberName = memberService.getSponsorMemberById(commentDTO.getMemberId()).getSponsorName();
+            }
+            commentInfoDTO.setMemberName(memberName);
+            commentList.add(commentInfoDTO);
+        }
+        model.addAttribute("comments", commentList);
         return "donation/donate_cert_post";
     }
 
@@ -92,14 +159,53 @@ public class PostController {
 
     // 후원 대상 게시판
     @GetMapping("receiver")
-    public String goToReceiver(){
+    public String goToReceiver(Model model){
+        // 기부 도서 조회
+        List<BookDonateInfoDTO> donateList = new ArrayList<>();
+        List<BookDonateDTO> tempList = postService.getDonateBooks();
+        log.info(tempList.toString());
+        for(BookDonateDTO bookDonateDTO : tempList){
+            BookDonateInfoDTO donateInfoDTO = new BookDonateInfoDTO();
+            donateInfoDTO.setBookDonateDTO(bookDonateDTO);
+            donateInfoDTO.setImageUrl(aladinService.getBookCover(bookDonateDTO.getBookIsbn()));
+            donateInfoDTO.setAuthor(bookService.getBookByIsbn(bookDonateDTO.getBookIsbn()).get(0).getAuthor());
+            donateList.add(donateInfoDTO);
+        }
+        log.info(donateList.toString());
+        model.addAttribute("donateList", donateList);
+        //  게시글 조회
+        List<ReceiverPostDTO> receiverPostDTOList = postService.getReceiverPosts();
+
+        model.addAttribute("Posts", receiverPostDTOList);
+        log.info(receiverPostDTOList.toString());
         return "donation/receiver_main";
     }
 
 
     // 후원 대상 게시글
-    @GetMapping("receiver/post")
-    public String goToReceiverPost(){
+    @GetMapping("receiver/post/{postId}")
+    public String goToReceiverPost(Model model, @PathVariable Long postId){
+        model.addAttribute("post", postService.getReceiverPostById(postId));
+        List<CommentInfoDTO> commentList = new ArrayList<>();
+        List<CommentVO> tempList = commentService.getAllCommentByPostId(postId);
+        for(CommentVO commentVO : tempList) {
+            CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
+            CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
+            commentInfoDTO.setCommentDTO(commentDTO);
+            log.info(commentDTO.toString());
+            String memberName = "";
+            MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
+
+            switch (memberType) {
+                case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
+
+                case SPONSOR -> memberName = memberService.getSponsorMemberById(commentDTO.getMemberId()).getSponsorName();
+            }
+            commentInfoDTO.setMemberName(memberName);
+            commentList.add(commentInfoDTO);
+        }
+        model.addAttribute("comments", commentList);
+
         return "donation/receiver_post";
     }
 
@@ -113,7 +219,20 @@ public class PostController {
 
     // 이 주의 기부도서
     @GetMapping("weekly")
-    public String goToWeekly(){
+    public String goToWeekly(Model model){
+        List<BookDonateInfoDTO> donateList = new ArrayList<>();
+        List<BookDonateDTO> tempList = postService.getDonateBooks();
+        log.info(tempList.toString());
+        for(BookDonateDTO bookDonateDTO : tempList){
+            BookDonateInfoDTO donateInfoDTO = new BookDonateInfoDTO();
+            donateInfoDTO.setBookDonateDTO(bookDonateDTO);
+            donateInfoDTO.setImageUrl(aladinService.getBookCover(bookDonateDTO.getBookIsbn()));
+            donateInfoDTO.setAuthor(bookService.getBookByIsbn(bookDonateDTO.getBookIsbn()).get(0).getAuthor());
+            donateList.add(donateInfoDTO);
+        }
+
+        model.addAttribute("donateList", donateList);
+
         return "donation/weekly_book";
     }
 
