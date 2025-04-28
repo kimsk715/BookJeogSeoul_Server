@@ -58,7 +58,7 @@ public class PostController {
             CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
             CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
             commentInfoDTO.setCommentDTO(commentDTO);
-            log.info(commentDTO.toString());
+//            log.info(commentDTO.toString());
             String memberName = "";
             MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
 
@@ -72,6 +72,25 @@ public class PostController {
             }
         model.addAttribute("comments", commentList);
 
+        List<CommentVO> comments = commentService.getAllMembersByPostId(id);
+        List<CommentInfoDTO> mentionList = new ArrayList<>();
+        for(CommentVO comment : comments) {
+            CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
+            CommentDTO commentDTO = commentService.toCommentDTO(comment);
+            commentInfoDTO.setCommentDTO(commentDTO);
+            String memberName = "";
+            MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
+
+            switch (memberType) {
+                case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
+
+                case SPONSOR -> memberName = memberService.getSponsorMemberById(commentDTO.getMemberId()).getSponsorName();
+            }
+            commentInfoDTO.setMemberName(memberName);
+            mentionList.add(commentInfoDTO);
+        }
+
+        model.addAttribute("mentions", mentionList);
         return "discussion/post";
     }
 

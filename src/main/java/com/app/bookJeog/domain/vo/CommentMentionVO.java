@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class CommentMentionVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long memberId;
+    private Long commentId;
     private Long mentionMemberId;
 
 
