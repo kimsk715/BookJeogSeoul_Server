@@ -34,6 +34,10 @@
         <typeAlias type="com.app.bookJeog.domain.vo.AdminVO" alias="adminVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.SponsorMemberVO" alias="SponsorMemberVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.AdminVO" alias="AdminVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.MemberHistoryVO" alias="memberHistoryVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.BookPostVO" alias="bookPostVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.SelectedBookVO" alias="selectedBookVO"/>
+
     </typeAliases>
     <typeHandlers>
         <typeHandler handler="com.app.bookJeog.mybatis.MemberTypeHandler"/>

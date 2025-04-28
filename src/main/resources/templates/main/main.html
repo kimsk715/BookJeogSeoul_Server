@@ -176,7 +176,7 @@
                         </section>
                         <!-- 메인 컨텐츠들 -->
                         <div class="section-divide-area">
-                            <!-- ai색션 -->
+                            <!-- 서울도서관 최다대출 도서 -->
                             <section class="home-content">
                                 <div class="home-inner">
                                     <h3 class="section-title">
@@ -505,16 +505,17 @@
                                     </div>
                                 </div>
                             </section>
-                            <!--인기도서 최다조회-->
+                            <!--관리자 추천-->
                             <section class="home-content">
                                 <div class="home-inner">
                                     <h3 class="section-title">
-                                        <a style="pointer-events: none" class="book-many-view">책과 예술의 만남, 오브제북</a>
+                                        <a style="pointer-events: none" class="book-many-view">책과 예술의 만남</a>
                                     </h3>
-                                    <p class="section-sub-title">책에서 영감을 받아 탄생한 예술 작품을 감상해 보세요</p>
+                                    <p class="section-sub-title">서울시가 추천하는 책들!</p>
                                     <div class="book-shelf">
                                         <div class="slide-container">
-                                            <ul class="slide-wrapper" style="padding-top: 16px">
+                                            <!--여기서부터 추천책-->
+                                            <ul class="slide-wrapper" style="padding-top: 16px" th:each="adminBooks : ${suggestBooks}">
                                                 <li>
                                                     <div class="bookjeog-book">
                                                         <a>
@@ -523,7 +524,7 @@
                                                                 <div class="thumbnail-liner">
                                                                     <div class="book-picture" style="margin-bottom: 10px">
                                                                         <picture>
-                                                                            <img >
+                                                                            <img th:src="${adminBooks.getImageUrl()}">
                                                                         </picture>
                                                                     </div>
                                                                 </div>
@@ -531,13 +532,168 @@
                                                         </a>
                                                         <a class="book-data">
                                                             <div class="view-book-data">
-                                                                <p class="title">여긴 타이틀</p>                                                                <p class="title"></p>
-                                                                <p class="author">여긴 책쓴사람</p>
+                                                                <p class="title" th:text="${adminBooks.getTitle()}">여긴 타이틀</p>                                                                <p class="title"></p>
+                                                                <p class="author" th:text="${adminBooks.getAuthor()}"></p>
                                                             </div>
                                                         </a>
                                                     </div>
                                                 </li>
                                             </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--인기도서 최다 조회-->
+                            <section
+                                    data-v-5d23d0f6=""
+                                    data-v-3b57c374=""
+                                    data-section-type="yourbooks"
+                                    data-section-name="이번 주 주목할 신간"
+                                    class="home-content overflow"
+                            >
+                                <div data-v-5d23d0f6="" class="home-inner">
+                                    <h3 data-v-5d23d0f6="" class="section-title">
+                                        <a
+                                                data-v-5d23d0f6=""
+                                                href="/v3/today/more/personalList/"
+                                                data-content-type="2depth"
+                                                class="gtm-yourbooks-2depth dark-img-after"
+                                        >이번 주 카페에서 읽을 만화책</a
+                                        >
+                                    </h3>
+                                    <div
+                                            data-v-5d23d0f6=""
+                                            class="feed-section book-shelf overflow not-dark"
+                                    >
+                                        <div
+                                                data-v-5d23d0f6=""
+                                                class="swiper-container swiper-container-initialized swiper-container-horizontal"
+                                        >
+                                            <div
+                                                    class="swiper-wrapper"
+                                                    style="
+                                            transition-duration: 0ms;
+                                            transform: translate3d(
+                                                0px,
+                                                0px,
+                                                0px
+                                            );
+                                        "
+                                            >
+                                                <div
+                                                        data-v-5d23d0f6=""
+                                                        class="swiper-item swiper-slide swiper-slide-active"
+                                                        style="margin-right: 8px"
+                                                >
+                                                    <article
+                                                            data-v-24edd622=""
+                                                            data-v-5d23d0f6=""
+                                                            class="feed-article mds-radius--12"
+                                                            data-article-type="curation"
+                                                            data-article-kind="1"
+                                                            data-article-index="1"
+                                                            style="
+                                                    background-image: url('https://d3udu241ivsax2.cloudfront.net/common/images/common/background-gradient-07.jpg');
+                                                "
+                                                    >
+                                                        <h4
+                                                                data-v-24edd622=""
+                                                                class="feed-title"
+                                                        >
+                                                            이 시대의 고길동들을 위한<br />고소한
+                                                            라떼 한잔
+                                                        </h4>
+                                                        <div
+                                                                data-v-24edd622=""
+                                                                class="feed-body"
+                                                        >
+                                                            <div
+                                                                    data-v-24edd622=""
+                                                                    class="millie-book books ratio-book feed-body-book"
+                                                            >
+                                                                <a
+                                                                        data-content-type="book"
+                                                                        href="/v3/bookDetail/a46de2b4a7244600"
+                                                                        data-book-seq="a46de2b4a7244600"
+                                                                        data-content-seq="a46de2b4a7244600"
+                                                                        class="book-image gtm-yourbooks-bookdetail"
+                                                                ><div
+                                                                        class="thumbnail"
+                                                                >
+                                                                    <!---->
+                                                                    <!---->
+                                                                    <!---->
+                                                                    <!---->
+                                                                    <!---->
+                                                                    <!---->
+                                                                    <!---->
+                                                                    <div
+                                                                            class="thumbnail-inner"
+                                                                    >
+                                                                        <div
+                                                                                data-v-60254492=""
+                                                                                class="book-picture imageLoaded"
+                                                                                style=""
+                                                                                data-observe="true"
+                                                                        >
+                                                                            <picture
+                                                                                    data-v-60254492=""
+                                                                            >
+                                                                                <img
+                                                                                        data-v-60254492=""
+                                                                                        src="https://cover.millie.co.kr/service/cover/179612564/5f005bd7f7f143d88b811cb8a3e96b7b.jpg?w=145&amp;q=80"
+                                                                                        alt="둘리, 고길동을 부탁해 도서 썸네일"
+                                                                                        width="145"
+                                                                                        style="
+                                                                                    min-height: 0px;
+                                                                                "
+                                                                                /></picture>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!---->
+                                                                </div></a
+                                                                >
+                                                                <!---->
+                                                            </div>
+                                                            <div
+                                                                    data-v-24edd622=""
+                                                                    class="sub-title"
+                                                            >
+                                                                <p
+                                                                        data-v-24edd622=""
+                                                                        class="sub-title-inner"
+                                                                >
+                                                                    둘리와 고길동이
+                                                                    돌아왔다!<br />오리지널
+                                                                    일러스트 에세이
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                                data-v-24edd622=""
+                                                                class="bottom-sheet feed-statistics mds-shadow--card round"
+                                                        ></div>
+                                                    </article>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-v-5d23d0f6="" class="btn-wrap">
+                                            <button
+                                                    data-v-5d23d0f6=""
+                                                    class="swiper-button-prev-millie swiper-btn mds-icon--arrow-left swiper-button-disabled"
+                                                    tabindex="0"
+                                                    role="button"
+                                                    aria-label="Previous slide"
+                                                    aria-disabled="true"
+                                            ></button>
+                                            <button
+                                                    data-v-5d23d0f6=""
+                                                    class="swiper-button-next-millie swiper-btn mds-icon--arrow-right"
+                                                    tabindex="0"
+                                                    role="button"
+                                                    aria-label="Next slide"
+                                                    aria-disabled="false"
+                                            ></button>
                                         </div>
                                     </div>
                                 </div>

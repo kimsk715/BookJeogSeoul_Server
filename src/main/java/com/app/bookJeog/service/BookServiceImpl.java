@@ -1,5 +1,6 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.vo.MemberHistoryVO;
 import com.app.bookJeog.domain.vo.TopBookVO;
 import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.domain.vo.TempSelectedBookVO;
@@ -138,10 +139,21 @@ public class BookServiceImpl implements BookService {
     }
 
 
+    // 인기도서 최다조회
+    @Override
+    public List<MemberHistoryVO> selectTopViewBooks() {
+        return bookDAO.findTopViewBook();
+    }
 
 
+    // 관리자 추천도서
+    @Override
+    public List<SelectedBookVO> selectAdminSuggestBooks() {
+        return bookDAO.findAdminSuggestBook();
+    }
 
-        public List<TopBookVO> getBestBooks() throws IOException {
+
+    public List<TopBookVO> getBestBooks() throws IOException {
            return getPopularBooks();
         };
 };

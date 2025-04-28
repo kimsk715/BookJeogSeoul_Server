@@ -337,5 +337,8 @@ public interface BookService {
     }
 
 
-    // 개
+    // 인기도서 최다조회
+    public List<MemberHistoryVO> selectTopViewBooks();
+    // 관리자 추천도서
+    public List<SelectedBookVO> selectAdminSuggestBooks();
 }
