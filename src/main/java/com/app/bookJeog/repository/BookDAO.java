@@ -1,9 +1,13 @@
 package com.app.bookJeog.repository;
 
+<<<<<<< HEAD
 import com.app.bookJeog.domain.vo.*;
+=======
+import com.app.bookJeog.domain.vo.SelectedBookVO;
+import com.app.bookJeog.domain.vo.TempSelectedBookVO;
+>>>>>>> hjs/book
 import com.app.bookJeog.mapper.BookMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,7 +29,6 @@ public class BookDAO {
         bookMapper.insertSelectedBook(SelectedBookVO);
     }
 
-
     // 인기도서 최다조회
     public List<MemberHistoryVO> findTopViewBook () {
         return bookMapper.selectTopViewBook();
@@ -42,4 +45,7 @@ public class BookDAO {
     public List<BookPostVO> findTopBookPost(){
         return bookMapper.selectTopBookPost();
     }
+
+    // 선정 도서 여부 조회
+    public int findSelectedBooks(Long bookIsbn){ return bookMapper.selectSelectedBooks(bookIsbn); };
 }

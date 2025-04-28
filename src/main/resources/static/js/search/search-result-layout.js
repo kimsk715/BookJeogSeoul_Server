@@ -94,7 +94,7 @@ const searchResultLayout = (() => {
 
             li.innerHTML = `
             <div class="search-book-report-list">
-                <a href="" class="book-report-inner">
+                <a href="/post/bookpost/${post.id}" class="book-report-inner">
                     <div class="book-report-data">
                         <div class="book-image">
                             <div class="book-container books">

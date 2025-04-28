@@ -84,4 +84,23 @@
         set comment_report_status = 'DONE'
         where id = #{reportId}
     </update>
+
+    <!--  독후감 신고 작성하기(기타 선택때만 추가 설명 입력)  -->
+    <insert id="insertBookPostReport">
+        insert into tbl_book_post_report (
+        book_post_report_type,
+        book_post_id,
+        book_post_reporter_id,
+        book_post_report_text,
+        book_post_report_status
+        )
+        values (
+        #{bookPostReportType},  <!-- Enum의 name() 호출 -->
+        #{bookPostId},
+        #{bookPostReporterId},
+        CASE WHEN #{bookPostReportType} = 'ETC' THEN #{bookPostReportText}
+        END,
+        'WAITING'
+        )
+    </insert>
 </mapper>

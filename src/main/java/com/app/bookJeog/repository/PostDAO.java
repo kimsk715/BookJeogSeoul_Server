@@ -210,4 +210,21 @@ public class PostDAO {
     public void setTopReceiver(Long receiverId){
         postMapper.updateTopReceiver(receiverId);
     }
+
+    // 독후감 피드 전체조회(무한스크롤)
+    public List<FileBookPostDTO> findAllBookPostFeed(int offset){
+        return postMapper.selectAllBookPostFeed(offset);
+    };
+
+    // 독후감 팔로잉 전체조회(무한스크롤)
+    public List<FileBookPostDTO> findFollowBookPostFeed(Long loginMemberId, int offset){
+        return postMapper.selectFollowBookPostFeed(loginMemberId, offset);
+    };
+
+    // 일반도서 독후감 작성
+    public void insertPostBook(PostVO postVO){postMapper.insertPost(postVO);};
+    public void insertBookPost(BookPostVO bookPostVO){postMapper.insertBookPost(bookPostVO);};
+
+    // 선정도서 독후감 작성
+    public void insertSelectedBookPost(SelectedBookPostVO selectedBookPostVO){postMapper.insertSelectedBookPost(selectedBookPostVO);};
 }

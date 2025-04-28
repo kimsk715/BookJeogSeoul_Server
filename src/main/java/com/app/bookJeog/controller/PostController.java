@@ -6,6 +6,13 @@ import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.vo.CommentVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.service.*;
+import com.app.bookJeog.controller.exception.UnauthenticatedException;
+import com.app.bookJeog.domain.dto.BookPostDTO;
+import com.app.bookJeog.domain.dto.BookPostMemberDTO;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.service.PostService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,6 +21,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.File;
 import java.io.IOException;
@@ -82,12 +92,40 @@ public class PostController {
         return "post/post-list";
     }
 
+    // 전체 피드 조회
+    @GetMapping("/all-book-post")
+    @ResponseBody
+    public List<FileBookPostDTO> goToAllBookPost(@RequestParam(value = "offset", defaultValue = "0") int offset) {
+        return postService.findAllBookPostFeed(offset);
+    }
+
+    // 팔로잉 피드 조회
+    @GetMapping("/following-book-post")
+    @ResponseBody
+    public List<FileBookPostDTO> goToFollowingBookPost(@RequestParam(value = "offset", defaultValue = "0") int offset, HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if(member != null) {
+            Long loginMemberId = member.getId();
+            return postService.findFollowBookPostFeed(loginMemberId, offset);
+        }
+        return List.of();
+    }
 
     // 독후감 게시글
     @GetMapping("bookpost/{id}")
-    public String goToBookPostPost(@PathVariable Long id, Model model) {
+    public String goToBookPostPost(@PathVariable Long id, Model model, HttpSession session) {
         FileBookPostDTO post = postService.getPostWithFiles(id);
+        if (post == null) {
+            throw new ResourceNotFoundException("게시글이 존재하지 않습니다.");
+        }
         model.addAttribute("post", post);
+
+        // 세션의 회원 id도 같이 저장
+        PersonalMemberDTO member = (PersonalMemberDTO)session.getAttribute("member");
+        if (member != null) {
+            Long loginId = member.getId();
+            model.addAttribute("loginId", loginId);
+        }
 
         return "post/post-detail";
     }
@@ -95,8 +133,22 @@ public class PostController {
 
     // 독후감 작성
     @GetMapping("bookpost/write")
-    public String goToBookPostWrite() {
-        return "post/post-write";
+    public String goToBookPostWrite(HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+        PersonalMemberDTO member = (PersonalMemberDTO)session.getAttribute("member");
+        if(member == null) {
+            throw new UnauthenticatedException("로그인이 필요한 서비스입니다.");
+        } else{
+            model.addAttribute("memberName", member.getMemberName());
+            return "post/post-write";
+        }
+    }
+
+    @PostMapping("bookpost/write")
+    public String writeBookPost(@ModelAttribute("post") FileBookPostDTO fileBookPostDTO,
+                                @RequestParam("file") List<MultipartFile> files, RedirectAttributes redirectAttributes) {
+        Long newBookPostId = postService.write(fileBookPostDTO, files);
+        redirectAttributes.addFlashAttribute("message", "독후감 작성 완료!");
+        return "redirect:/post/bookpost/" + newBookPostId;
     }
 
     // 독후감 수정

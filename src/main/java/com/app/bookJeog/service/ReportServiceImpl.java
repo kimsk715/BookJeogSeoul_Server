@@ -1,13 +1,15 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.BookPostReportDTO;
 import com.app.bookJeog.domain.dto.BookPostReportInfoDTO;
 import com.app.bookJeog.domain.dto.CommentReportInfoDTO;
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.enumeration.BookPostReportType;
 import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.enumeration.PostType;
+import com.app.bookJeog.domain.enumeration.ReportType;
 import com.app.bookJeog.domain.vo.BookPostReportVO;
 import com.app.bookJeog.domain.vo.CommentReportVO;
-import com.app.bookJeog.domain.vo.PostVO;
 import com.app.bookJeog.repository.CommentDAO;
 import com.app.bookJeog.repository.MemberDAO;
 import com.app.bookJeog.repository.PostDAO;
@@ -171,4 +173,14 @@ public class ReportServiceImpl implements ReportService {
     public void updateCommentReportStatus(Long reportId) {
         reportDAO.updateCommentStatus(reportId);
     }
+
+    // 독후감 신고 작성하기(기타 선택때만 추가 설명 입력)
+    @Override
+    public void insertBookPostReport(BookPostReportDTO bookPostReportDTO){
+        if (bookPostReportDTO.getBookPostReportType() != BookPostReportType.ETC) {
+            bookPostReportDTO.setBookPostReportText(null);
+        }
+
+        reportDAO.setBookPostReport(bookPostReportDTO.toVO());
+    };
 }

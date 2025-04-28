@@ -1,6 +1,9 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.vo.*;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
+import com.app.bookJeog.domain.vo.SelectedBookVO;
+import com.app.bookJeog.domain.vo.TempSelectedBookVO;
 import com.app.bookJeog.repository.BookDAO;
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -158,6 +161,8 @@ public class BookServiceImpl implements BookService {
 
 
 
+    // 선정 도서 여부 조회
+    public boolean findSelectedBooks(Long bookIsbn){ return bookDAO.findSelectedBooks(bookIsbn) > 0; };
 };
 
 
