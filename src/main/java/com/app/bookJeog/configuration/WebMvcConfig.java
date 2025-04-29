@@ -15,7 +15,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 // /admin/으로 시작하는것만 실행해 라는뜻
                 .addPathPatterns("/admin/**");
                 // /test/ 이거 빼고 다 실행해
-//                .excludePathPatterns("/test/**");
+//                .excludePathPatterns("/test/**","/asdw/wdsw","/test/**","/asdw/wdsw");
         registry.addInterceptor(new AlarmInterceptor()).
                 addPathPatterns("/post-conmment");
     }

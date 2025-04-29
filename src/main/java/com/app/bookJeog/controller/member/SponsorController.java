@@ -91,7 +91,7 @@ public class SponsorController {
     }
 
     @PostMapping("login-sponsorship-login")
-    public String loginSponsor(SponsorMemberDTO sponsorMemberDTO) {
+    public String loginSponsor(SponsorMemberDTO sponsorMemberDTO, HttpSession session) {
         Optional<SponsorMemberVO> foundMember = sponsorServiceImpl.loginSponsorMember(sponsorMemberDTO);
         if(foundMember.isPresent()) {
             session.setAttribute("sponsorMember", foundMember);
