@@ -27,6 +27,4 @@ public class BookPostVoteDTO {
                 .bookPostId(bookPostId)
                 .build();
     }
-
-
 }

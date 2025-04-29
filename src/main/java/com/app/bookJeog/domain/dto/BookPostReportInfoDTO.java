@@ -22,5 +22,4 @@ public class BookPostReportInfoDTO {
     private String memberName; // tbl_member
     private String bookPostTitle; // tbl_book_post
     private String bookTitle; // tbl_book_post + API
-
 }

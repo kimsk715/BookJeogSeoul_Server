@@ -28,6 +28,7 @@
         </div>
         <div id="wrap">
             <section class="content">
+                <form th:action="@{/post/bookpost/write}" method="post" th:object="${fileBookPostDTO}"  enctype="multipart/form-data">
                 <div class="post-write write post">
                     <!-- 헤더 -->
                     <div id="header" class="header diary">
@@ -86,7 +87,8 @@
                                                     <input
                                                         type="checkbox"
                                                         id="publicInput"
-                                                        value="true"
+                                                        name="bookPostIsPublic"
+                                                        value="PUBLIC"
                                                     />
                                                     <span
                                                         class="mds-switch-view"
@@ -97,10 +99,32 @@
                                                     </span>
                                                 </label>
                                             </li>
+                                            <li style="display: none; margin-top: 10px" class="selectedCheck">
+                                                <span
+                                                >선정도서 독후감 출품
+                                                </span>
+                                                <label
+                                                        class="mds-switch mds-switch-large submit"
+                                                >
+                                                    <input
+                                                            type="checkbox"
+                                                            id="selectedInput"
+                                                            name="bookPostStatus"
+                                                            value="PRIVATE"
+                                                    />
+                                                    <span
+                                                            class="mds-switch-view"
+                                                    >
+                                                        <span
+                                                                class="check"
+                                                        ></span>
+                                                    </span>
+                                                </label>
+                                            </li>
                                         </ul>
                                     </div>
                                     <button
-                                        type="button"
+                                        type="submit"
                                         class="post-btn mds-button"
                                     >
                                         <span
@@ -118,9 +142,9 @@
                         <!-- 책 추가 -->
                         <div class="add-book component">
                             <p class="title flex book-name">
-                                용의자 X의 헌신
-                                <span class="library-name"
-                                    >북적북적시인의 서재</span
+                                <span class="book-title">도서명</span>
+                                <span class="library-name" th:text="|${memberName}의 서재|"
+                                    >내 서재</span
                                 >
                             </p>
                             <!-- 책을 추가하기 전에 보이는 창 -->
@@ -143,7 +167,7 @@
                             <div
                                 class="book-container"
                                 style="
-                                    --background-image: url('/static/images/book/book_thumbnail.example.png');
+                                    --background-image: url('/images/common/default-book-cover.png');
                                     display: none;
                                 "
                             >
@@ -243,7 +267,7 @@
                         <div class="post-title component" style="display: none">
                             <p class="title">독후감 제목<em>*</em></p>
                             <div class="textarea">
-                                <div class="mds-textarea" style="height: 65px">
+                                <div class="mds-textarea" style="height: 64px">
                                     <div class="inner" style="height: auto">
                                         <label for="">
                                             <span class="label"
@@ -252,6 +276,7 @@
                                             <input
                                                 type="text"
                                                 id="textarea-title"
+                                                name="bookPostText"
                                                 class="mds-textarea-field"
                                                 placeholder="책을 읽고 느꼈던 생각이나 감정을 한 줄로 적어주세요."
                                                 maxlength="40"
@@ -272,9 +297,9 @@
                         >
                             <p class="title">독후감 내용<em>*</em></p>
                             <div class="textarea">
-                                <div class="mds-textarea" style="height: 138px">
+                                <div class="mds-textarea" style="height: 900px;">
                                     <div class="inner">
-                                        <label for="">
+                                        <label>
                                             <span class="label"
                                                 >독후감 내용</span
                                             >
@@ -397,6 +422,14 @@
                             <!-- // 넣은 이미지가 있을 때 -->
                         </div>
                         <!-- // 이미지 첨부 -->
+                        <!-- 숨겨진 input들 (isbn, bookTitle 등) -->
+                        <input type="hidden" name="bookIsbn" id="hiddenIsbn" >
+                        <input type="hidden" name="bookTitle" id="hiddenBookTitle">
+                        <input type="hidden" name="bookPostIsPublic" id="hiddenPublicInput" value="PUBLIC">
+                        <input type="hidden" name="bookPostStatus" id="hiddenSelectedInput" value="PRIVATE">
+                        <input type="hidden" name="bookPostStartDate" id="hiddenStartDate">
+                        <input type="hidden" name="bookPostEndDate" id="hiddenEndDate">
+                        </form>
                     </div>
                     <!-- 책 선택 모달화면 -->
                     <div class="modal" style="display: none">
@@ -467,118 +500,62 @@
                                         <div>
                                             <div class="full-list">
                                                 <ul class="modal-content">
-                                                    <li
-                                                        class="user-booklist books-item"
-                                                    >
-                                                        <div
-                                                            class="bookjeog-book books only-books"
-                                                        >
-                                                            <a
-                                                                href=""
-                                                                class="book-image"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail"
-                                                                >
-                                                                    <div
-                                                                        class="thumbnail-inner"
-                                                                    >
-                                                                        <div
-                                                                            class="book-picture"
-                                                                        >
-                                                                            <picture>
-                                                                                <img
-                                                                                    src="/images/book/book_thumbnail.example.png"
-                                                                                    alt="도서 썸네일"
-                                                                                    width="145"
-                                                                                    style="
-                                                                                        min-height: 0;
-                                                                                    "
-                                                                                />
-                                                                            </picture>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a
-                                                                href=""
-                                                                class="book-data"
-                                                            >
-                                                                <div
-                                                                    class="metadata"
-                                                                >
-                                                                    <p
-                                                                        class="title"
-                                                                    >
-                                                                        용의자
-                                                                        X의 헌신
-                                                                    </p>
-                                                                    <p
-                                                                        class="author"
-                                                                    >
-                                                                        히가시노
-                                                                        게이고
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </li>
-                                                    <li
-                                                        class="user-booklist books-item"
-                                                    >
-                                                        <div
-                                                            class="bookjeog-book books only-books"
-                                                        >
-                                                            <a
-                                                                href=""
-                                                                class="book-image"
-                                                            >
-                                                                <div
-                                                                    class="thumbnail"
-                                                                >
-                                                                    <div
-                                                                        class="thumbnail-inner"
-                                                                    >
-                                                                        <div
-                                                                            class="book-picture"
-                                                                        >
-                                                                            <picture>
-                                                                                <img
-                                                                                    src="/images/book/book_thumbnail.example.png"
-                                                                                    alt="도서 썸네일"
-                                                                                    width="145"
-                                                                                    style="
-                                                                                        min-height: 0;
-                                                                                    "
-                                                                                />
-                                                                            </picture>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                            <a
-                                                                href=""
-                                                                class="book-data"
-                                                            >
-                                                                <div
-                                                                    class="metadata"
-                                                                >
-                                                                    <p
-                                                                        class="title"
-                                                                    >
-                                                                        용의자
-                                                                        X의 헌신
-                                                                    </p>
-                                                                    <p
-                                                                        class="author"
-                                                                    >
-                                                                        히가시노
-                                                                        게이고
-                                                                    </p>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                    </li>
+<!--                                                    <li-->
+<!--                                                        class="user-booklist books-item"-->
+<!--                                                    >-->
+<!--                                                        <div-->
+<!--                                                            class="bookjeog-book books only-books"-->
+<!--                                                        >-->
+<!--                                                            <a-->
+<!--                                                                href=""-->
+<!--                                                                class="book-image"-->
+<!--                                                            >-->
+<!--                                                                <div-->
+<!--                                                                    class="thumbnail"-->
+<!--                                                                >-->
+<!--                                                                    <div-->
+<!--                                                                        class="thumbnail-inner"-->
+<!--                                                                    >-->
+<!--                                                                        <div-->
+<!--                                                                            class="book-picture"-->
+<!--                                                                        >-->
+<!--                                                                            <picture>-->
+<!--                                                                                <img-->
+<!--                                                                                    src="/images/book/book_thumbnail.example.png"-->
+<!--                                                                                    alt="도서 썸네일"-->
+<!--                                                                                    width="145"-->
+<!--                                                                                    style="-->
+<!--                                                                                        min-height: 0;-->
+<!--                                                                                    "-->
+<!--                                                                                />-->
+<!--                                                                            </picture>-->
+<!--                                                                        </div>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                            </a>-->
+<!--                                                            <a-->
+<!--                                                                href=""-->
+<!--                                                                class="book-data"-->
+<!--                                                            >-->
+<!--                                                                <div-->
+<!--                                                                    class="metadata"-->
+<!--                                                                >-->
+<!--                                                                    <p-->
+<!--                                                                        class="title"-->
+<!--                                                                    >-->
+<!--                                                                        용의자-->
+<!--                                                                        X의 헌신-->
+<!--                                                                    </p>-->
+<!--                                                                    <p-->
+<!--                                                                        class="author"-->
+<!--                                                                    >-->
+<!--                                                                        히가시노-->
+<!--                                                                        게이고-->
+<!--                                                                    </p>-->
+<!--                                                                </div>-->
+<!--                                                            </a>-->
+<!--                                                        </div>-->
+<!--                                                    </li>-->
                                                 </ul>
                                             </div>
                                             <!-- 검색 결과가 없을 때 -->
@@ -609,5 +586,7 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <!-- flatpickr 라이브러리 -->
-    <script src="/js/post/post-write.js"></script>
+    <script src="/js/post/post-write-service.js"></script>
+    <script src="/js/post/post-write-layout.js"></script>
+    <script src="/js/post/post-write-event.js"></script>
 </html>
