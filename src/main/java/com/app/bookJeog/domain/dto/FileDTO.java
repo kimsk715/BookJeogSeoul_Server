@@ -20,6 +20,9 @@ public class FileDTO {
     private String fileName;
     private String filePath;
     private String fileText;
+    private String createdDate;
+    private String updatedDate;
+
 
     public FileVO toVO() {
         return FileVO.builder()
@@ -27,6 +30,8 @@ public class FileDTO {
                 .fileName(fileName)
                 .filePath(filePath)
                 .fileText(fileText)
+                .createdDate(createdDate)
+                .updatedDate(updatedDate)
                 .build();
     }
 

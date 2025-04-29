@@ -1292,7 +1292,7 @@ html:not(.ie) .slide-container .slide-wrapper {
 }
 
 #mention-menu li{
-    padding : 0px 10px;
+    padding : 0 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

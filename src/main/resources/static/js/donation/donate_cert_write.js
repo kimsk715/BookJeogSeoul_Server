@@ -51,7 +51,7 @@ fileInput.addEventListener("change", (e) => {
         </label>
         <div class="message-wrap"><!----> <span class="length">0 / 50</span></div> <!---->
     </div>
-    <div class="buttons"><button type="button" class="new-add-button"><input type="file" accept=".jpg, .png, .jpeg, .heic" class="new-input-file">
+    <div class="buttons"><button type="button" class="new-add-button"><input type="file" accept=".jpg, .png, .jpeg, .heic" class="new-input-file" name="files">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_5831_19518)">
                     <rect x="2.5" y="3.5" width="11" height="9" rx="1.5" stroke="var(--text-01)"></rect>
@@ -145,7 +145,7 @@ imageContainer.addEventListener("change", (e) => {
         </label>
         <div class="message-wrap"><!----> <span class="length">0 / 50</span></div> <!---->
     </div>
-    <div class="buttons"><button type="button" class="new-add-button"><input type="file" accept=".jpg, .png, .jpeg, .heic" class="new-input-file">
+    <div class="buttons"><button type="button" class="new-add-button"><input type="file" accept=".jpg, .png, .jpeg, .heic" class="new-input-file" name="files">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_5831_19518)">
                     <rect x="2.5" y="3.5" width="11" height="9" rx="1.5" stroke="var(--text-01)"></rect>

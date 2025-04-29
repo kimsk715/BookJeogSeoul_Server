@@ -13,6 +13,8 @@
 <body>
     <div id="wrap" class="web-mount pcv-mount"><!----> <!----> <!---->
         <section class="content">
+            <form action="/post/donate/write" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="postId" value="">
             <div class="post-write write diary desktop">
                 <div id="header" class="header diary">
                     <div class="header-inner">
@@ -21,7 +23,7 @@
                                         class="mds-icon--arrow-left"></i></span></button> <!---->
                         </div>
                         <div class="header-right">
-                            <div class="nav-btn"><!----> <button type="button"
+                            <div class="nav-btn"><!----> <button type="submit"
                                     class="btn publish-btn mds-font--body01 mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4"><span>게시하기</span></button>
                             </div>
                         </div>
@@ -46,7 +48,7 @@
                 </div>
                 <div class="diary-container">
 
-                    <div class="reading-diary component">
+                     <div class="reading-diary component">
                         <p class="title">게시글 제목<em>*</em></p>
                         <div class="textarea">
                             <div class="mds-textarea mds-textarea--default">
@@ -55,7 +57,7 @@
                                         <span class="label">게시글 제목 <!----></span>
                                         <textarea id="textarea-title"
                                             placeholder="여러분이 나누어 준 따뜻한 정을 잘 나타낼 수 있는 제목을 지어주세요!"
-                                            class="mds-textarea-field"></textarea>
+                                            class="mds-textarea-field" name="title"></textarea>
                                     </label>
                                     <div class="message-wrap"><!----> <span class="title-length length">0 / 100</span></div>
                                 </div>
@@ -67,19 +69,19 @@
                                 <div class="inner"><label><span class="label">게시글 내용 <!----></span> <textarea
                                             id="textarea-content"
                                             placeholder="후원에 도움을 주신 분들에게 뿌듯함을 느끼게 할 수 있는 따뜻한 내용을 적어주세요! 그리고 까먹지 말고 우상단의 발행버튼에 이벤트 넣읍시다!"
-                                            class="mds-textarea-field"></textarea></label>
+                                            class="mds-textarea-field" name="content"></textarea></label>
                                     <div class="message-wrap"><!----> <span class="content-length length">0 / 2,000</span></div>
                                 </div>
                             </div>
                         </div>
                     </div> <!---->
-                    <div class="sentence component">
+                        <div class="sentence component">
                         <div class="title flex">
                             이미지 추가
                             <p class="count"><strong>0</strong> <span>10개</span></p>
                         </div>
                         <input type="file" accept=".jpg, .png, .jpeg, .heic, .webp" multiple="multiple"
-                            class="input-file">
+                            class="input-file" name="files">
                         <div class="add-box">
                             <p>이 게시글에 추가할 이미지를 넣어보세요.<br>이미지당 최대 5MB까지 업로드 할 수
                                 있습니다.</p> <button type="button"
@@ -108,8 +110,10 @@
                                 </span></button>
                         </div>
                     </div>
+
                 </div> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!---->
             </div>
+            </form>
         </section> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!---->
     </div>
 </body>

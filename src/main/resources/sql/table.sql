@@ -35,6 +35,7 @@ FROM tbl_personal_member m
             join tbl_member_profile mp
               on mp.id = f.id) file on m.id = file.MEMBERID
                 where post_type = 'BOOK_POST'
+            group by m.id
             ORDER BY post_count DESC
                 limit 4;
 
@@ -49,5 +50,21 @@ FROM tbl_personal_member m
          join tbl_file f
               on mp.id = f.id
 where post_type = 'BOOK_POST'
+group by m.id
 ORDER BY post_count DESC
 limit 4
+
+
+
+select member_nickname, count(p.id) as post_count
+FROM tbl_personal_member m
+         JOIN tbl_post p
+              ON m.id = p.member_id
+         join tbl_member_profile mp
+              on p.member_id = mp.member_id
+         join tbl_file f
+              on mp.id = f.id
+where post_type = 'BOOK_POST'
+group by m.id
+ORDER BY post_count DESC
+limit 4;
