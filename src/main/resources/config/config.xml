@@ -38,8 +38,8 @@
         <typeAlias type="com.app.bookJeog.domain.vo.BookPostVO" alias="bookPostVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.SelectedBookVO" alias="selectedBookVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.DonateCertVO" alias="donateCertVO"/>
+<!--    <typeAlias type="com.app.bookJeog.domain.vo.CommentMentionVO" alias="commentMentionVO"/>-->
         <typeAlias type="com.app.bookJeog.domain.vo.BookPostLikeVO" alias="bookPostLikeVO"/>
-
     </typeAliases>
     <typeHandlers>
         <typeHandler handler="com.app.bookJeog.mybatis.MemberTypeHandler"/>
