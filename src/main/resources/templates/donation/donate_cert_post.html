@@ -276,12 +276,21 @@
                             <div class="register-box">
                                 <div class="register-box-inner">
                                     <span>댓글</span>
-                                    <p contenteditable="plaintext-only"
-                                        data-placeholder="내용 입력"></p>
+                                    <label>
+                                            <textarea contenteditable="plaintext-only"
+                                                      data-placeholder="내용 입력"></textarea>
+                                        <input type="hidden" value="" class="mention-value">
+                                    </label>
+                                    </label>
+                                    <div id="mention-menu" style="display:none;">
+                                        <ul id="mention-inner">
+                                            <li th:each=" mention : ${mentions}" th:text="${mention.memberName}" th:value="${mention.commentDTO.memberId}"></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                             <button type="button" disabled="disabled"
-                                class="post-btn flex-container mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
+                                class="post-btn flex-container mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4" th:value="*{id}">
                                 <span>등록</span>
                             </button>
                         </div>
@@ -373,5 +382,7 @@
     </div>
 </body>
 <script src="/js/donation/donate_cert_post_event.js"></script>
-
+<script th:inline="javascript">
+    const member = /*[[${member}]]*/ {};
+</script>
 </html>

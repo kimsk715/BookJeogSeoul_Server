@@ -15,7 +15,6 @@ public interface CommentService {
     public List<CommentVO> getAllCommentByPostId(Long postId);
 
     public default CommentDTO toCommentDTO(CommentVO commentVO) {
-
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(commentVO.getId());
         commentDTO.setPostId(commentVO.getPostId());
@@ -32,4 +31,6 @@ public interface CommentService {
     public List<CommentVO> getAllMembersByPostId(Long postId);
 
     public void setMention(CommentMentionVO commentMentionVO);
+
+    public Long getMentionedId(Long commentId);
 }

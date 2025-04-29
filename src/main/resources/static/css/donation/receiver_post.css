@@ -1269,7 +1269,30 @@ html:not(.ie) .slide-container .slide-wrapper {
     user-select: text;
 }
 
-.comment .register-box-inner p {
+#mention-menu{
+    position : absolute;
+    background : gray;
+    border : 1px solid #ccc;
+    overflow-y : auto;
+    width : 120px;
+    max-height : 100px;
+}
+
+#mention-menu li{
+    padding-bottom: 5px;
+}
+
+.mention-button{
+    font-size: 14px;
+    color: var(--ui-up);
+    padding: 6px 16px;
+    border-radius: 100px;
+    background-color: var(--ui-09) !important;
+}
+
+.comment .register-box-inner textarea {
+    width: 100%;
+    outline: none;
     padding: 0 0 8px 12px;
     font-size: 1em;
     line-height: 24px;
@@ -1278,7 +1301,7 @@ html:not(.ie) .slide-container .slide-wrapper {
     word-break: break-all;
 }
 
-.comment .register-box-inner p :empty:not(:focus):before {
+.comment .register-box-inner textarea :empty:not(:focus):before {
     content: attr(data-placeholder);
 }
 

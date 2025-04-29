@@ -16,7 +16,8 @@ import org.springframework.stereotype.Component;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class CommentInfoDTO {
     private CommentDTO commentDTO;
-    private String memberName;
+    private String memberName; // 댓글 작성자의 이름
+    private String mentionedName; // 멘션 받은 사람의 닉네임 or 실명
 
 
 
