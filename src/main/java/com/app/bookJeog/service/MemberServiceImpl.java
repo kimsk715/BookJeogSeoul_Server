@@ -60,10 +60,11 @@ public class MemberServiceImpl implements MemberService {
 
     // 이메일 중복검사
     @Override
-    public Optional<PersonalMemberVO> checkEmail(String email) {
-        personalMemberDTO.setMemberEmail(email);
-        PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
-        return memberDAO.findByEmail(personalMemberVO);
+    public Optional<PersonalMemberDTO> checkEmail(String email) {
+        Optional<PersonalMemberVO> memberVO = memberDAO.findByEmail(email);
+       PersonalMemberVO foundMemberVO = memberVO.orElseThrow(() -> new RuntimeException("Email not found"));
+        Optional<PersonalMemberDTO> foundMemberDTO = Optional.ofNullable(toPersonalMemberDTO(foundMemberVO));
+        return foundMemberDTO;
     }
 
     @Override
@@ -409,7 +410,15 @@ public class MemberServiceImpl implements MemberService {
 
                     // DTO 객체 생성 및 값 주입
                     personalMemberDTO = new PersonalMemberDTO();
+
+
                     personalMemberDTO.setMemberEmail(kakaoAccount.getAsJsonObject().get("email").getAsString()); // 이메일 추출
+
+
+                    PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
+                    Optional<PersonalMemberVO> foundMember = memberDAO.findPersonalMember(personalMemberVO);
+
+
                     log.info("personalMemberDTO {}", personalMemberDTO);
                     personalMemberDTO.setMemberName(profile.getAsJsonObject().get("nickname").getAsString());    // 닉네임 추출
                     log.info("personalMemberDTO {}", personalMemberDTO);

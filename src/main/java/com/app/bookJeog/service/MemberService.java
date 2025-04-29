@@ -47,7 +47,7 @@ public interface MemberService {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> checkEmail(String email);
+    public Optional<PersonalMemberDTO> checkEmail(String email);
 
     public SponsorMemberVO getSponsorMemberById(Long id);
 
