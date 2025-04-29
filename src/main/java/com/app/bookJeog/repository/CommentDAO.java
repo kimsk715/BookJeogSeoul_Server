@@ -40,4 +40,10 @@ public class CommentDAO {
     public void setMention(CommentMentionVO commentMentionVO) {
         commentMapper.insertMention(commentMentionVO);
     }
+
+    public Long findMentionedId(Long commentId) {
+        return commentMapper.selectMentionedId(commentId);
+    }
+
+
 }

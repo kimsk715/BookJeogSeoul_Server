@@ -2,7 +2,7 @@ const reportButton = document.querySelector(".more-item");
 const reportModal = document.querySelector(".more-ul");
 
 reportButton.addEventListener('click',() => {
-    if(reportModal.style.display == "none"){
+    if(reportModal.style.display === "none"){
         reportModal.removeAttribute("style")
     }
     else{
@@ -22,11 +22,14 @@ commentButton.addEventListener('click', ( ) => {
 
 const addComment = document.querySelector(".post-btn");
 const commentArea = document.querySelector(".register-box-inner textarea");
-const mentionedId = document.querySelector(".mention-value");
+const commentContainer = document.querySelector(".register-box");
 addComment.addEventListener("click",(e) => {
     const postId = addComment.value;
+    if(document.querySelector(".mention-button")) {
+        var mentionId = document.querySelector(".mention-button").value;
+    }
     const commentText = commentArea.value;
-    const mentionId = mentionedId.value;
+
     if(mentionId != null) {
         commentService.addComment(postId, commentText, commentLayout.addedLayout, mentionId);
         alert("댓글이 등록되었습니다.")
@@ -34,6 +37,9 @@ addComment.addEventListener("click",(e) => {
     else{
         commentService.addComment(postId, commentText, commentLayout.addedLayout);
         alert("댓글이 등록되었습니다.")
+    }
+    if(document.querySelector(".mention-button")){
+        document.querySelector(".mention-button").remove();
     }
     commentArea.value = "";
 })
@@ -45,16 +51,17 @@ const commentService = (() =>{
         if(mentionId != null){
             path += `&mention-id=${mentionId}`
         }
+        const mentionedName = document.querySelector(".mention-button").innerText;
         await fetch(path);
         if(callback){
-            callback(commentText)
+            callback(commentText, mentionedName)
         }
     }
     return {addComment : addComment}
 })();
 
 const commentLayout =(() =>{
-    const addedLayout = async(commentText) =>{
+    const addedLayout = async(commentText, mentionedName) =>{
         const addedComment = document.createElement('li');
         addedComment.classList.add("comment-item");
         addedComment.innerHTML = `
@@ -68,12 +75,13 @@ const commentLayout =(() =>{
                                         <div class="com-contents-head">
                                             <div class="com-contents-top flex-container">
                                                 <p class="nickname">
-                                                    <a href="#">김승균</a>
+                                                    <a href="#">${member.memberName}</a>
                                                 </p>
                                             </div>
                                             <span class="com-contents-date">2025-04-28 11:35:49</span>
                                         </div>
                                         <div class="com-contents-body">
+                                        <button type="button" class="tag-button" title="${mentionedName}">${mentionedName}</button>
                                             <p class="comment-text show">${commentText}</p>
                                             <div class="comment-text">
                                                 <p contenteditable="plaintext-only">${commentText}</p>
@@ -103,7 +111,6 @@ const commentLayout =(() =>{
 const mentionMenu = document.querySelector("#mention-menu");
 const mentionWrapper = mentionMenu.querySelector("#mention-inner")
 document.addEventListener("DOMContentLoaded",(e)=>{
-
     const memberCount =  mentionWrapper.querySelectorAll('li').length;
     if(memberCount < 5) {
         mentionMenu.style.overflowY = "none";
@@ -111,29 +118,49 @@ document.addEventListener("DOMContentLoaded",(e)=>{
     }
 })
 
+
+commentContainer.addEventListener("click",(e)=>{
+    if(e.target.classList.contains("mention-button")){
+        e.target.remove();
+    }
+})
+
 mentionWrapper.addEventListener("click",(e)=>{
-    const mentionButton = document.createElement("div")
-    mentionButton.innerHTML = `<button type="button" class="mention-button" value="${e.target.value}">${e.target.innerText}</button>`
-    commentArea.after(mentionButton);
-    hideMentionMenu();
+        const mentionButton = document.createElement("button")
+        mentionButton.classList.add("mention-button")
+        mentionButton.setAttribute("title", `${e.target.innerText}`)
+        mentionButton.value = `${e.target.value}`;
+        mentionButton.innerText = `${e.target.innerText}`;
+
+            // `<button type="button" class="mention-button" title="${e.target.innerText}" value="${e.target.value}"></button>`
+        commentArea.before(mentionButton);
+        const start = commentArea.selectionStart;
+        const end = commentArea.selectionEnd;
+        if (start === end && start > 0) {
+            // 커서 바로 앞 한 글자 삭제
+            commentArea.value = commentArea.value.slice(0, start - 1) + commentArea.value.slice(end);
+            commentArea.selectionStart = commentArea.selectionEnd = start - 1;
+        }
+        hideMentionMenu();
 })
 
 
 commentArea.addEventListener("input", (e) => {
-    if(e.target.value.trim() !== "") {
-        addComment.disabled = false;
-    } else {
-        addComment.disabled = true;
-    }
-    const cursorPosition = commentArea.selectionStart;
-    const text = commentArea.value.substring(0, cursorPosition)
-    const lastWord = text.split(/\s/).pop();
-    console.log(lastWord)
-    if(lastWord.startsWith(`@`)){
-        showMentionMenu(cursorPosition);
-    }
-    else{
-        hideMentionMenu();
+    if(!document.querySelector(".mention-button")) {
+        if(e.target.value.trim() !== "") {
+            addComment.disabled = false;
+        } else {
+            addComment.disabled = true;
+        }
+        const cursorPosition = commentArea.selectionStart;
+        const text = commentArea.value.substring(0, cursorPosition)
+        const lastWord = text.split(/\s/).pop();
+        console.log(lastWord)
+        if (lastWord.startsWith(`@`)) {
+            showMentionMenu(cursorPosition);
+        } else {
+            hideMentionMenu();
+        }
     }
 });
 
@@ -153,4 +180,10 @@ moreButton.forEach((button) => {
         console.log("클릭 확인")
         button.nextElementSibling.classList.toggle("more-active");
     })
+})
+
+// 댓글 작성 부분 높이 조절
+commentArea.addEventListener('input',function() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
 })

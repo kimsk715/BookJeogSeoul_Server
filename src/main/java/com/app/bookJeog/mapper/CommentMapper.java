@@ -21,4 +21,6 @@ public interface CommentMapper {
     public List<CommentVO> selectAllMembersByPostId(Long postId);
 
     public void insertMention(CommentMentionVO commentMentionVO);
+
+    public Long selectMentionedId(Long commentId);
 }
