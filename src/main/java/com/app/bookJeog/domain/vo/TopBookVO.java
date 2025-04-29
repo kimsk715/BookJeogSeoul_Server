@@ -5,7 +5,7 @@ import lombok.Data;
 
 // 서울도서관 책 정보 VO 여기는 절대 건들지 말아야 함.
 @Data
-public class BookTempVO {
+public class TopBookVO {
 
     @JsonProperty("TITLE")
     private String title;

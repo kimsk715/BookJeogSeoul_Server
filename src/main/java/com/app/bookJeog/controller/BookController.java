@@ -2,20 +2,16 @@ package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.app.bookJeog.service.AladinService;
-import com.app.bookJeog.service.AladinServiceImpl;
-import com.app.bookJeog.domain.vo.BookInfoVO;
-import com.app.bookJeog.domain.vo.BookTempVO;
 import com.app.bookJeog.service.BookService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.io.IOException;
-import java.util.List;
 
 @Controller
 @Slf4j
@@ -69,10 +65,30 @@ public class BookController implements BookControllerDocs {
     public ResponseEntity<Map<String, Object>> getBookInfo(@PathVariable Long isbn) {
         Map<String, Object> result = aladinService.getBookInfoAsMap(isbn);
         return ResponseEntity.ok(result);}
+
+
     // 최다 대출 도서
-    @GetMapping("popular")
-    public List<BookTempVO> getPopularBooks() throws IOException {
-        log.info(bookService.getPopularBooks().toString());
-        return bookService.getPopularBooks();
+//    @GetMapping("popular")
+//    public List<BookTempVO> getPopularBooks() throws IOException {
+//        log.info(bookService.getPopularBooks().toString());
+//        return bookService.getPopularBooks();
+//    }
+
+    // 검색어로 책 목록 띄우기
+    @GetMapping("search")
+    @ResponseBody
+    public Map<String, Object> searchBooks(@RequestParam("keyword") String keyword,
+                                        @RequestParam(value = "start", defaultValue = "1") int startIndex,
+                                        @RequestParam(value = "max", defaultValue = "20") int maxResults,
+                                        @RequestParam(value = "sort", defaultValue = "Accuracy") String sort) throws JSONException {
+        Map<String, Object> result = aladinService.searchBooksToMap(keyword, startIndex, maxResults, sort);
+        return result;
+    }
+
+    // isbn으로 선정도서 여부 조회
+    @GetMapping("find-selected")
+    @ResponseBody
+    public boolean findSelectedBooks(Long bookIsbn) {
+        return bookService.findSelectedBooks(bookIsbn);
     }
 }

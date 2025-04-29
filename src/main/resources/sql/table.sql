@@ -18,3 +18,36 @@ create table tbl_admin(
 /* book_id 컬럼 --> book_isbn 이름 수정하기. */
 
 desc tbl_comment;
+member_name, file_path, file_name, count(p.id) as post_count
+
+ORDER BY post_count DESC
+
+GROUP BY p.id
+
+
+select *, count(p.id) as post_count
+FROM tbl_personal_member m
+         JOIN tbl_post p
+              ON m.id = p.member_id
+       join (
+        select f.id as ID, mp.member_id as MEMBERID
+          from tbl_file f
+            join tbl_member_profile mp
+              on mp.id = f.id) file on m.id = file.MEMBERID
+                where post_type = 'BOOK_POST'
+            ORDER BY post_count DESC
+                limit 4;
+
+
+
+select member_nickname, file_path, file_name, count(p.id) as post_count
+FROM tbl_personal_member m
+         JOIN tbl_post p
+              ON m.id = p.member_id
+         join tbl_member_profile mp
+              on m.id = mp.member_id
+         join tbl_file f
+              on mp.id = f.id
+where post_type = 'BOOK_POST'
+ORDER BY post_count DESC
+limit 4

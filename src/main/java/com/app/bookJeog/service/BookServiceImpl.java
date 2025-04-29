@@ -1,5 +1,7 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.vo.*;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.domain.vo.TempSelectedBookVO;
 import com.app.bookJeog.repository.BookDAO;
@@ -9,6 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 import java.util.List;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
@@ -133,6 +137,32 @@ public class BookServiceImpl implements BookService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(apiUrl, String.class);
     }
+
+
+    // 인기도서 최다조회
+    @Override
+    public List<MemberHistoryVO> selectTopViewBooks() {
+        return bookDAO.findTopViewBook();
+    }
+
+
+    // 관리자 추천도서
+    @Override
+    public List<SelectedBookVO> selectAdminSuggestBooks() {
+        return bookDAO.findAdminSuggestBook();
+    }
+
+
+    // 인기 독후감 조회
+    @Override
+    public List<BookPostVO> selectTopBookPost() {
+        return bookDAO.findTopBookPost();
+    }
+
+
+
+    // 선정 도서 여부 조회
+    public boolean findSelectedBooks(Long bookIsbn){ return bookDAO.findSelectedBooks(bookIsbn) > 0; };
 };
 
 

@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Transactional(rollbackFor = Exception.class)
 public class AladinServiceImpl implements AladinService {
     // 알라딘 API Key
-    private static final String ALADIN_API_KEY = "ttbsuehanh1551001";
+    private static final String ALADIN_API_KEY = "ttbkimsk7151659001";
 
     // 알라딘 API 요청 경로
     private static final String API_URL = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
@@ -130,6 +130,7 @@ public class AladinServiceImpl implements AladinService {
             return null;
         }
     }
+
     // json을 Map<String, Object> 형태로 반환
     public Map<String, Object> searchBooksToMap(String keyword, int startIndex, int maxResults, String sort) throws JSONException {
         // 알라딘 API에서 응답 JSON 받아오기
