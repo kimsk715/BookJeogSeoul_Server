@@ -46,8 +46,8 @@ public class MemberDAO {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> findByEmail(PersonalMemberVO personalMemberVO) {
-        return memberMapper.selectByEmail(personalMemberVO);
+    public Optional<PersonalMemberVO> findByEmail(String email) {
+        return memberMapper.selectByEmail(email);
     }
 
 
