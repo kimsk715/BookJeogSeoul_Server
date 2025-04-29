@@ -241,6 +241,43 @@
         where member_email = #{memberEmail}
     </update>
 
+
+
+    <!--독후감 많이쓴사람-->
+    <select id="selectTopBookPostMember" resultType="personalMemberVO">
+        SELECT member_name, member_nickname, COUNT(p.id) AS post_count
+        FROM tbl_personal_member m
+                 JOIN tbl_post p
+                      ON m.id = p.member_id
+        where post_type = 'BOOK_POST'
+        GROUP BY m.id
+        ORDER BY post_count DESC
+        limit 4
+    </select>
+
+
+
+    <!--썸네일 가져오기-->
+    <select id="selectMemberInfoWithThumbnail" resultType="personalMemberPostMemberProfileDTO">
+        select member_nickname, file_path, file_name, count(p.id) as post_count
+        FROM tbl_personal_member m
+                 JOIN tbl_post p
+                      ON m.id = p.member_id
+                 join tbl_member_profile mp
+                      on m.id = mp.member_id
+                 join tbl_file f
+                      on mp.id = f.id
+        where post_type = 'BOOK_POST'
+        ORDER BY post_count DESC
+        limit 4
+    </select>
+
+
+
+    <!--댓글 알람-->
+
+
+
 </mapper>
 
 
