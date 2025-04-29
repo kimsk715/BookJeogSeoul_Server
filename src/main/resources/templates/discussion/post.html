@@ -276,11 +276,19 @@
                                     "></div>
                             <div class="register-box">
                                 <div class="register-box-inner">
-                                    <span>댓글</span>
+                                    <div class="mention-wrapper" style="display: none;"></div>
                                     <label>
-<textarea contenteditable="plaintext-only"
-    data-placeholder="내용 입력"></textarea>
+                                            <textarea contenteditable="plaintext-only"
+                                                data-placeholder="내용 입력">
+                                            </textarea>
+                                        <input type="hidden" value="" class="mention-value">
+                                        </label>
                                     </label>
+                                    <div id="mention-menu" style="display:none;">
+                                        <ul id="mention-inner">
+                                            <li th:each=" mention : ${mentions}" th:text="${mention.memberName}" th:value="${mention.commentDTO.memberId}"></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                             <button type="button" disabled
@@ -317,6 +325,7 @@
                                         </div>
                                         <div
                                             class="com-contents-body">
+                                            <button type="button" class="tag-button" th:if="${comment.mentionedName} != null" th:text="${comment.mentionedName}" th:title="${comment.mentionedName}"></button>
                                             <p
                                                 class="comment-text show" th:text="${comment.commentDTO.commentText}">
 
@@ -375,5 +384,7 @@
     </div>
 </body>
 <script src="/js/discussion/post_event.js"></script>
-
+<script th:inline="javascript">
+    const member = /*[[${member}]]*/ {};
+</script>
 </html>

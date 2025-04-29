@@ -176,5 +176,8 @@ public interface MemberService {
     // 독후감 많이쓴 사람 썸넬 까지
     public List<PersonalMemberPostMemberProfileDTO> selectTopBookPostMemberProfile();
 
+    public MemberType getMemberType(Long memberId);
+
+    public String getMemberName(Long memberId);
 }
 

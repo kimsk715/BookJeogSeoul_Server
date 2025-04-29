@@ -26,8 +26,29 @@
         order by id desc
     </select>
 
-    <insert id="insertCommentByPostId">
+    <select id="selectAllMembersByPostId" resultType="commentVO">
+        select distinct member_id
+        from tbl_comment
+        where post_id = #{postId}
+        order by id desc
+    </select>
+
+    <insert id="insertCommentByPostId" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_comment (comment_text, post_id, member_id)
         values (#{commentText}, #{postId}, #{memberId})
     </insert>
+
+    <insert id="insertMention">
+        insert into tbl_comment_mention (comment_id, mentioned_member_id)
+        values (#{commentId}, #{mentionMemberId})
+    </insert>
+
+    <select id="selectMentionedId" resultType="_Long">
+        select cm.mentioned_member_id
+        from tbl_comment c
+                 left join tbl_comment_mention cm
+                           on c.id = cm.comment_id
+        where c.id = #{id}
+        order by c.id desc
+    </select>
 </mapper>

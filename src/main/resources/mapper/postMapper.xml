@@ -19,7 +19,7 @@
                  group by book_post_id) vote
                   on vote.book_post_id = bp.id
                      )
-        order by bp.id desc
+        order by p.id desc
             limit #{rowCount}
                 offset #{offset}
 
@@ -282,7 +282,7 @@
                 order by bp.book_post_title collate utf8mb4_unicode_ci asc
             </when>
             <otherwise>
-                order by p.createddate desc
+                order by p.createdDate desc
             </otherwise>
         </choose>
         limit 8 offset #{offset}
@@ -314,7 +314,7 @@
                   or d.discussion_text like concat('%', #{keyword}, '%')
                   or d.book_title like concat('%', #{keyword}, '%')
               )
-        order by p.createddate desc
+        order by p.createdDate desc
         limit 3
     </select>
     <!--  검색한 검색어에 맞는 토론글 통합검색 개수 조회  -->
@@ -382,7 +382,7 @@
                       or r.receiver_text like concat('%', #{keyword}, '%')
                       or sm.sponsor_name like concat('%', #{keyword}, '%')
                   )
-        order by p.createddate desc
+        order by p.createdDate desc
         limit 3
     </select>
     <!--  검색한 검색어에 맞는 기부글 통합검색 개수 조회  -->
@@ -617,6 +617,11 @@
 <!--        insert into tbl_post (post_type, member_id)-->
 <!--        values (#{postType}, #{memberId})-->
 <!--    </insert>-->
+    <!-- 슈퍼키 작성용 -->
+    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_post (post_type, member_id)
+        values (#{postType}, #{memberId})
+    </insert>
 
     <!-- 후원 대상 선정 여부 결정. -->
     <update id="updateTopReceiver">
@@ -662,7 +667,7 @@
     </select>
 
     <!--  일반도서 독후감 작성  -->
-    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertPostBook" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_post (post_type, member_id)
         values ('BOOK_POST', #{memberId})
     </insert>
