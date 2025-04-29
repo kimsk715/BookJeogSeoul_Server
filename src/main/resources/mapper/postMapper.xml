@@ -586,6 +586,7 @@
         select dc.id, donate_cert_title, donate_cert_text, post_type, member_id, (date(current_timestamp) - date(p.createdDate)) as createdDate, p.updatedDate
         from tbl_donate_cert dc
         join tbl_post p on dc.id = p.id
+            order by dc.id desc
     </select>
 
     <!-- 후원 인증 게시글 상세보기 -->
@@ -708,7 +709,7 @@
 
     <update id="updateBookPost">
         update tbl_book_post set book_post_title = #{bookPostTitle},
-                                 book_post_text = #{bookPostText} ,
+                                 book_post_text = #{bookPostText},
                                 book_post_is_public = #{bookPostIsPublic}
         where id = #{id}
     </update>
@@ -717,6 +718,11 @@
         update tbl_selected_book_post set book_post_status = #{bookPostStatus}
         where id = #{id}
     </update>
+
+    <insert id="insertDonateCertPost" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_donate_cert (id, donate_cert_title, donate_cert_text)
+        values (#{id}, #{donateCertTitle}, #{donateCertText})
+    </insert>
 </mapper>
 
 

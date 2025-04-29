@@ -32,7 +32,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentVO> getAllCommentByPostId(Long postId) {
-        log.info(commentDAO.findAllCommentByPostId(postId).toString());
         return commentDAO.findAllCommentByPostId(postId);
     }
 

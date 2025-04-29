@@ -113,7 +113,7 @@ public interface PostService {
         return PostVO.builder().postType(PostType.DISCUSSION).memberId(memberId).build();
     }
 
-    public void insertPost(PostVO postVO);
+    public PostVO insertPost(PostVO postVO);
 
     public void setTopReceiver(Long receiverId);
     // 독후감 피드 전체조회(무한스크롤)
@@ -124,5 +124,7 @@ public interface PostService {
 
     // 독후감 작성...
     public Long write(FileBookPostDTO fileBookPostDTO, List<MultipartFile> files);
+
+    public void setDonateCertPost(DonateCertVO donateCertVO);
 }
 

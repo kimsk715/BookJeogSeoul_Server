@@ -1,5 +1,6 @@
 let cardList = "";
 donateCerts.forEach( post => {
+
         cardList += `
                         <div class ="card-wrapper">
                                 <div class="card-item">
@@ -20,7 +21,7 @@ donateCerts.forEach( post => {
                                     <div class="post"><a href="/post/donate/post/${post.id}"
                                             class="box post-image gtm-feed-recommend-post-tem-detail">
                                             <div class="img-wrap"><img
-                                                    src="${post.filePath}" alt="이미지를 찾을 수 없습니다.">
+                                                    src="/images/${post.donateCertFilePath}/${post.donateCertFileName}" alt="이미지를 찾을 수 없습니다.">
                                             </div>
                                         </a>
                                         <div class="metadata"><a href=""
