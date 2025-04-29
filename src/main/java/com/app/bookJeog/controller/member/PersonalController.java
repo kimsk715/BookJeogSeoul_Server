@@ -119,7 +119,7 @@ public class PersonalController {
     // 이메일 중복검사
     @ResponseBody
     @PostMapping("check-email")
-    public Optional<PersonalMemberVO> checkEmail(@RequestParam String memberEmail) {
+    public Optional<PersonalMemberDTO> checkEmail(@RequestParam String memberEmail) {
         return memberServiceImpl.checkEmail(memberEmail);
     }
 
@@ -210,7 +210,8 @@ public class PersonalController {
         PersonalMemberDTO personalMemberDTO = foundInfo.orElseThrow(RuntimeException::new);
 
         // 4. 사용자 이메일로 기존 가입 여부 확인
-        Optional<PersonalMemberVO> foundMember = memberServiceImpl.checkEmail(personalMemberDTO.getMemberEmail());
+        Optional<PersonalMemberDTO> foundMember = memberServiceImpl.checkEmail(personalMemberDTO.getMemberEmail());
+        log.info("foundMember: {}", foundMember);
         // 5. 가입된 회원이 없으면 회원가입 처리
         if (foundMember.isEmpty()) {
             session.setAttribute("tempMemberInfo", personalMemberDTO);
@@ -219,7 +220,7 @@ public class PersonalController {
 
         // 6. 세션에 회원 정보 저장 (로그인 상태 유지 목적)
         session.setAttribute("member", foundMember.orElseThrow(RuntimeException::new));
-
+        log.info(session.getAttribute("member").toString());
         // 7. 게시글 목록 페이지로 리다이렉트
         return "redirect:/main/main";
     }

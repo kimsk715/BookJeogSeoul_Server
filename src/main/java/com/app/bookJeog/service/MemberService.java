@@ -11,6 +11,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public interface MemberService {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> checkEmail(String email);
+    public Optional<PersonalMemberDTO> checkEmail(String email);
 
     public SponsorMemberVO getSponsorMemberById(Long id);
 
@@ -77,6 +78,8 @@ public interface MemberService {
         personalMemberDTO.setMemberPhone(personalMemberVO.getMemberBirth());
         return personalMemberDTO;
     }
+
+
 
     public void updateMemberStatus(Long memberId);
 
@@ -163,6 +166,15 @@ public interface MemberService {
 
         return accessToken;
     }
+
+
+    // 독후감 많이쓴 사람 조회
+    public List<PersonalMemberDTO> selectTopBookPostMember();
+
+
+
+    // 독후감 많이쓴 사람 썸넬 까지
+    public List<PersonalMemberPostMemberProfileDTO> selectTopBookPostMemberProfile();
 
     public MemberType getMemberType(Long memberId);
 
