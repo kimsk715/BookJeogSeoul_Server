@@ -164,5 +164,8 @@ public interface MemberService {
         return accessToken;
     }
 
+    public MemberType getMemberType(Long memberId);
+
+    public String getMemberName(Long memberId);
 }
 

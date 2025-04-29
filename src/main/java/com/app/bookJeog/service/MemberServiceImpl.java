@@ -2,6 +2,7 @@ package com.app.bookJeog.service;
 
 
 import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.vo.AdminVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
@@ -329,6 +330,24 @@ public class MemberServiceImpl implements MemberService {
         return accessToken;
     }
 
+    @Override
+    public MemberType getMemberType(Long memberId) {
+        MemberVO memberVO = memberDAO.findById(memberId);
+        return memberVO.getMemberType();
+    }
+
+    @Override
+    public String getMemberName(Long memberId) {
+        MemberVO memberVO = memberDAO.findById(memberId);
+        String memberName = "";
+        if(memberVO.getMemberType().equals(MemberType.PERSONAL)){
+            memberName = memberDAO.findPersonalMemberById(memberId).getMemberName();
+        }
+        else if(memberVO.getMemberType().equals(MemberType.SPONSOR)){
+            memberName = memberDAO.findSponsorMemberById(memberId).getSponsorName();
+        }
+        return memberName;
+    }
 
 
     // 카카오 info 가져오기
