@@ -1192,7 +1192,6 @@ html:not(.ie) .slide-container .slide-wrapper {
 .comment .register-box-inner label {
     display: flex;
     min-height: 80px;
-    padding: 10px 5px;
 }
 .comment .register-box-inner span {
     padding: 8px 0 0 12px;
@@ -1209,7 +1208,9 @@ html:not(.ie) .slide-container .slide-wrapper {
     user-select: text;
 }
 
-
+.mention-wrapper{
+    padding: 10px 0 10px 10px;
+}
 
 #mention-menu{
     position : absolute;
@@ -1217,7 +1218,7 @@ html:not(.ie) .slide-container .slide-wrapper {
     border : 1px solid #ccc;
     overflow-y : auto;
     width : 120px;
-    height : 90px;
+    max-height : 90px;
     border-radius: 10px;
     color : white;
 }
@@ -1256,7 +1257,7 @@ html:not(.ie) .slide-container .slide-wrapper {
 .comment .register-box-inner textarea {
     width: 100%;
     outline: none;
-    padding: 0 0 8px 12px;
+    padding: 10px;
     font-size: 1em;
     line-height: 24px;
     letter-spacing: -.6px;

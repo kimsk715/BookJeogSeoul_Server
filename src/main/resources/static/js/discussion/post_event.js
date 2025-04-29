@@ -42,6 +42,7 @@ addComment.addEventListener("click",(e) => {
         document.querySelector(".mention-button").remove();
     }
     commentArea.value = "";
+    mentionWrapper.style.display = "none";
 })
 const commentWrapper = document.querySelector(".comment-list");
 
@@ -50,11 +51,15 @@ const commentService = (() =>{
         let path=`/post-comment?id=${postId}&text=${commentText}`;
         if(mentionId != null){
             path += `&mention-id=${mentionId}`
+            var mentionedName = document.querySelector(".mention-button").innerText;
         }
-        const mentionedName = document.querySelector(".mention-button").innerText;
+
         await fetch(path);
-        if(callback){
+        if(callback && mentionedName != null){
             callback(commentText, mentionedName)
+        }
+        else{
+            callback(commentText)
         }
     }
     return {addComment : addComment}
@@ -109,23 +114,25 @@ const commentLayout =(() =>{
 
 
 const mentionMenu = document.querySelector("#mention-menu");
-const mentionWrapper = mentionMenu.querySelector("#mention-inner")
+const mentionInner = mentionMenu.querySelector("#mention-inner")
 document.addEventListener("DOMContentLoaded",(e)=>{
-    const memberCount =  mentionWrapper.querySelectorAll('li').length;
-    if(memberCount < 5) {
+    const memberCount =  mentionInner.querySelectorAll('li').length;
+    if(memberCount < 4) {
         mentionMenu.style.overflowY = "none";
+        mentionMenu.style.height = `${30*memberCount}` + "px";
         console.log("DOM 감지")
     }
 })
 
-
+const mentionWrapper = document.querySelector(".mention-wrapper")
 commentContainer.addEventListener("click",(e)=>{
     if(e.target.classList.contains("mention-button")){
         e.target.remove();
+        mentionWrapper.style.display = "none";
     }
 })
 
-mentionWrapper.addEventListener("click",(e)=>{
+mentionInner.addEventListener("click",(e)=>{
         const mentionButton = document.createElement("button")
         mentionButton.classList.add("mention-button")
         mentionButton.setAttribute("title", `${e.target.innerText}`)
@@ -133,7 +140,8 @@ mentionWrapper.addEventListener("click",(e)=>{
         mentionButton.innerText = `${e.target.innerText}`;
 
             // `<button type="button" class="mention-button" title="${e.target.innerText}" value="${e.target.value}"></button>`
-        commentArea.before(mentionButton);
+        mentionWrapper.removeAttribute("style")
+        mentionWrapper.append(mentionButton);
         const start = commentArea.selectionStart;
         const end = commentArea.selectionEnd;
         if (start === end && start > 0) {
@@ -173,6 +181,14 @@ const showMentionMenu = (cursorPosition) => {
 const hideMentionMenu = () => {
     mentionMenu.style.display = "none";
 }
+// 댓글 작성 부분 높이 조절
+commentArea.addEventListener('input',function() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
+})
+
+//
+
 const moreButton = document.querySelectorAll(".more-btn");
 
 moreButton.forEach((button) => {
@@ -182,8 +198,3 @@ moreButton.forEach((button) => {
     })
 })
 
-// 댓글 작성 부분 높이 조절
-commentArea.addEventListener('input',function() {
-    this.style.height = 'auto';
-    this.style.height = this.scrollHeight + 'px';
-})

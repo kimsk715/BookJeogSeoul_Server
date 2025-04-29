@@ -139,8 +139,11 @@ addComment.addEventListener("click",(e) => {
         commentService.addComment(postId, commentText, commentLayout.addedLayout);
         alert("댓글이 등록되었습니다.")
     }
-    document.querySelector(".mention-wrapper").innerHTML = ``;
+    if(document.querySelector(".mention-button")){
+        document.querySelector(".mention-button").remove();
+    }
     commentArea.value = "";
+    mentionWrapper.style.display = "none";
 })
 const commentWrapper = document.querySelector(".comment-list");
 
@@ -149,9 +152,14 @@ const commentService = (() =>{
         let path=`/post-comment?id=${postId}&text=${commentText}`;
         if(mentionId != null){
             path += `&mention-id=${mentionId}`
+            var mentionedName = document.querySelector(".mention-button").innerText;
         }
+
         await fetch(path);
-        if(callback){
+        if(callback && mentionedName != null){
+            callback(commentText, mentionedName)
+        }
+        else{
             callback(commentText)
         }
     }
@@ -159,7 +167,7 @@ const commentService = (() =>{
 })();
 
 const commentLayout =(() =>{
-    const addedLayout = async(commentText) =>{
+    const addedLayout = async(commentText, mentionedName) =>{
         const addedComment = document.createElement('li');
         addedComment.classList.add("comment-item");
         addedComment.innerHTML = `
@@ -179,6 +187,7 @@ const commentLayout =(() =>{
                                             <span class="com-contents-date">2025-04-28 11:35:49</span>
                                         </div>
                                         <div class="com-contents-body">
+                                        <button type="button" class="tag-button" title="${mentionedName}">${mentionedName}</button>
                                             <p class="comment-text show">${commentText}</p>
                                             <div class="comment-text">
                                                 <p contenteditable="plaintext-only">${commentText}</p>
@@ -206,28 +215,34 @@ const commentLayout =(() =>{
 
 
 const mentionMenu = document.querySelector("#mention-menu");
-const mentionWrapper = mentionMenu.querySelector("#mention-inner")
+const mentionInner = mentionMenu.querySelector("#mention-inner")
 document.addEventListener("DOMContentLoaded",(e)=>{
-
-    const memberCount =  mentionWrapper.querySelectorAll('li').length;
-    if(memberCount < 5) {
+    const memberCount =  mentionInner.querySelectorAll('li').length;
+    if(memberCount < 4) {
         mentionMenu.style.overflowY = "none";
+        mentionMenu.style.height = `${30*memberCount}` + "px";
         console.log("DOM 감지")
     }
 })
 
-
+const mentionWrapper = document.querySelector(".mention-wrapper")
 commentContainer.addEventListener("click",(e)=>{
     if(e.target.classList.contains("mention-button")){
-        e.target.closest("div").remove();
+        e.target.remove();
+        mentionWrapper.style.display = "none";
     }
 })
 
-mentionWrapper.addEventListener("click",(e)=>{
-    const mentionButton = document.createElement("div")
-    mentionButton.classList.add("mention-wrapper")
-    mentionButton.innerHTML = `<button type="button" class="mention-button" value="${e.target.value}">${e.target.innerText}</button>`
-    commentArea.before(mentionButton);
+mentionInner.addEventListener("click",(e)=>{
+    const mentionButton = document.createElement("button")
+    mentionButton.classList.add("mention-button")
+    mentionButton.setAttribute("title", `${e.target.innerText}`)
+    mentionButton.value = `${e.target.value}`;
+    mentionButton.innerText = `${e.target.innerText}`;
+
+    // `<button type="button" class="mention-button" title="${e.target.innerText}" value="${e.target.value}"></button>`
+    mentionWrapper.removeAttribute("style")
+    mentionWrapper.append(mentionButton);
     const start = commentArea.selectionStart;
     const end = commentArea.selectionEnd;
     if (start === end && start > 0) {
@@ -241,7 +256,7 @@ mentionWrapper.addEventListener("click",(e)=>{
 
 commentArea.addEventListener("input", (e) => {
     if(!document.querySelector(".mention-button")) {
-        if (e.target.value.trim() !== "") {
+        if(e.target.value.trim() !== "") {
             addComment.disabled = false;
         } else {
             addComment.disabled = true;
@@ -267,3 +282,8 @@ const showMentionMenu = (cursorPosition) => {
 const hideMentionMenu = () => {
     mentionMenu.style.display = "none";
 }
+// 댓글 작성 부분 높이 조절
+commentArea.addEventListener('input',function() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
+})
