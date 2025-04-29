@@ -67,6 +67,13 @@ public class BookController implements BookControllerDocs {
         return ResponseEntity.ok(result);}
 
 
+    // 최다 대출 도서
+//    @GetMapping("popular")
+//    public List<BookTempVO> getPopularBooks() throws IOException {
+//        log.info(bookService.getPopularBooks().toString());
+//        return bookService.getPopularBooks();
+//    }
+
     // 검색어로 책 목록 띄우기
     @GetMapping("search")
     @ResponseBody

@@ -1253,7 +1253,10 @@ html:not(.ie) .slide-container .slide-wrapper {
     box-sizing: border-box;
     border-radius: 4px;
 }
-
+.comment .register-box-inner label {
+    display: flex;
+    min-height: 80px;
+}
 .comment .register-box-inner span {
     padding: 8px 0 0 12px;
     font-size: .625em;
@@ -1269,8 +1272,56 @@ html:not(.ie) .slide-container .slide-wrapper {
     user-select: text;
 }
 
-.comment .register-box-inner p {
-    padding: 0 0 8px 12px;
+.mention-wrapper{
+    padding: 10px 10px 0 10px;
+}
+
+#mention-menu{
+    position : absolute;
+    background : black;
+    border : 1px solid #ccc;
+    overflow-y : auto;
+    width : 120px;
+    max-height : 90px;
+    border-radius: 10px;
+    color : white;
+}
+
+#mention-menu::-webkit-scrollbar { /* Chrome, Safari */
+    display: none;
+}
+
+#mention-menu li{
+    padding : 0px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 30px;
+    height : 30px;
+    font-size: 13px;
+}
+
+.mention-button,
+.tag-button
+{
+    height : 28px;
+    min-width : 80px;
+    max-width: 150px;
+    overflow: hidden;
+    width : max-content;
+    font-size: 14px;
+    color: var(--ui-up);
+    padding: 6px 16px;
+    border-radius: 100px;
+    background-color: var(--ui-09) !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.comment .register-box-inner textarea {
+    width: 100%;
+    outline: none;
+    padding: 10px;
     font-size: 1em;
     line-height: 24px;
     letter-spacing: -.6px;
@@ -1278,7 +1329,7 @@ html:not(.ie) .slide-container .slide-wrapper {
     word-break: break-all;
 }
 
-.comment .register-box-inner p :empty:not(:focus):before {
+.comment .register-box-inner textarea :empty:not(:focus):before {
     content: attr(data-placeholder);
 }
 
@@ -1357,6 +1408,11 @@ html:not(.ie) .slide-container .slide-wrapper {
     font-size: 1em;
     line-height: 24px;
     padding-top: 16px;
+    display: flex;
+}
+
+.comment .com-contents-body button{
+    margin-right: 10px;
 }
 
 .comment .com-contents-body p {
