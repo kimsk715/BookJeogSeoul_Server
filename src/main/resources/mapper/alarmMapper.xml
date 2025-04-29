@@ -2,4 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.AlarmMapper">
 
+    <!--슈퍼키-->
+    <insert id="insertCommentMention" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_alarm (alarm_receiver_id, alarm_status)
+        values (#{alarmReceiverId}, #{alarmStatus})
+    </insert>
+
+    <!--내가 작성한 게시글댓글알람-->
+
+
+    <!--누군가 맨션알람-->
+
+
+    <!--팔로잉한사람의 게시글 알림-->
+
+
+    <!--팔로우 한사람-->
+
+    <!--안읽은 알림의 개수 표시-->
+    <!--알림 조회-->
 </mapper>
