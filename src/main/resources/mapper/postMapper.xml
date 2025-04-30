@@ -614,6 +614,10 @@
                         where d.id = #{id};
     </select>
 
+<!--    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into tbl_post (post_type, member_id)-->
+<!--        values (#{postType}, #{memberId})-->
+<!--    </insert>-->
     <!-- 슈퍼키 작성용 -->
     <insert id="insertPost" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_post (post_type, member_id)

@@ -51,4 +51,6 @@
         select count(*) from tbl_selected_book
         where book_isbn = #{bookIsbn}
     </select>
+
+
 </mapper>
