@@ -324,8 +324,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void insertPost(PostVO postVO) {
+    public PostVO insertPost(PostVO postVO) {
         postDAO.insertPost(postVO);
+        return postVO;
     }
 
     @Override
@@ -398,6 +399,10 @@ public class PostServiceImpl implements PostService {
     // 오늘 날짜로 경로 반환
     private String getPath(){
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+    }
+
+    public void setDonateCertPost(DonateCertVO donateCertVO) {
+        postDAO.insertDonateCertPost(donateCertVO);
     }
 }
 

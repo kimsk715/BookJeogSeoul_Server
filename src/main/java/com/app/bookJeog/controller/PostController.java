@@ -3,11 +3,12 @@ package com.app.bookJeog.controller;
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.MemberType;
+import com.app.bookJeog.domain.enumeration.PostType;
 import com.app.bookJeog.domain.vo.CommentVO;
-import com.app.bookJeog.domain.vo.MemberVO;
+import com.app.bookJeog.domain.vo.PostVO;
+import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.service.*;
 import com.app.bookJeog.controller.exception.UnauthenticatedException;
-import com.app.bookJeog.domain.dto.BookPostDTO;
 import com.app.bookJeog.domain.dto.BookPostMemberDTO;
 import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
@@ -36,11 +37,11 @@ import java.util.List;
 @RequestMapping("/post/*")
 public class PostController {
     private final PostService postService;
-    private final BookDonateService bookDonateService;
     private final AladinService aladinService;
     private final BookService bookService;
     private final CommentService commentService;
     private final MemberService memberService;
+    private final FIleService fileService;
 
     // 토론게시판 이동
     @GetMapping("discussion")
@@ -56,21 +57,26 @@ public class PostController {
 
     // 토론 게시글
     @GetMapping("discussion/post/{id}")
-    public String goToDiscussionPost(@PathVariable Long id, Model model) {
+    public String goToDiscussionPost(@PathVariable Long id, Model model, HttpSession session) {
 
         DiscussionPostDTO post = postService.getDiscussionById(id);
         post.setImageUrl(aladinService.getBookCover(post.getBookIsbn()));
-
+        model.addAttribute("member", session.getAttribute("member"));
         model.addAttribute("discussion", post);
         List<CommentInfoDTO> commentList = new ArrayList<>();
         List<CommentVO> tempList = commentService.getAllCommentByPostId(id);
         for(CommentVO commentVO : tempList) {
             CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
             CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
+            if(commentService.getMentionedId(commentDTO.getId()) != null){
+                Long mentionedId = commentService.getMentionedId(commentDTO.getId());
+                commentInfoDTO.setMentionedName(memberService.getMemberName(mentionedId));
+            }
+
             commentInfoDTO.setCommentDTO(commentDTO);
-            log.info(commentDTO.toString());
+//
             String memberName = "";
-            MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
+            MemberType memberType = memberService.getMemberType(commentDTO.getMemberId());
 
             switch (memberType) {
                 case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
@@ -80,8 +86,28 @@ public class PostController {
                 commentInfoDTO.setMemberName(memberName);
                 commentList.add(commentInfoDTO);
             }
+        log.info(commentList.toString());
         model.addAttribute("comments", commentList);
 
+        List<CommentVO> comments = commentService.getAllMembersByPostId(id);
+        List<CommentInfoDTO> mentionList = new ArrayList<>();
+        for(CommentVO comment : comments) {
+            CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
+            CommentDTO commentDTO = commentService.toCommentDTO(comment);
+            commentInfoDTO.setCommentDTO(commentDTO);
+            String memberName = "";
+            MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
+
+            switch (memberType) {
+                case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
+
+                case SPONSOR -> memberName = memberService.getSponsorMemberById(commentDTO.getMemberId()).getSponsorName();
+            }
+            commentInfoDTO.setMemberName(memberName);
+            mentionList.add(commentInfoDTO);
+        }
+
+        model.addAttribute("mentions", mentionList);
         return "discussion/post";
     }
 
@@ -167,6 +193,10 @@ public class PostController {
         for (DonateCertPostDTO post : postList) {
             post.setSponsorName(memberService.getSponsorMemberById(post.getMemberId()).getSponsorName());
             post.setCommentCount(commentService.getAllCommentByPostId(post.getId()).size());
+            if(fileService.getDonateCertFileByPostId(post.getId()) != null){
+                post.setDonateCertFileName(fileService.getDonateCertFileByPostId(post.getId()).getFileName());
+                post.setDonateCertFilePath(fileService.getDonateCertFileByPostId(post.getId()).getFilePath());
+            }
 
 //          // 이미지 추가하면 좀 더 추가
         }
@@ -179,8 +209,9 @@ public class PostController {
 
     // 후원 인증 게시글    
     @GetMapping("donate/post/{postId}")
-    public String goTODonateCertPost(@PathVariable Long postId, Model model){
+    public String goTODonateCertPost(@PathVariable Long postId, Model model, HttpSession session){
         model.addAttribute("DonateCert",postService.getDonateCertById(postId));
+        model.addAttribute("member", session.getAttribute("member"));
         List<CommentInfoDTO> commentList = new ArrayList<>();
         List<CommentVO> tempList = commentService.getAllCommentByPostId(postId);
         for(CommentVO commentVO : tempList) {
@@ -200,6 +231,27 @@ public class PostController {
             commentList.add(commentInfoDTO);
         }
         model.addAttribute("comments", commentList);
+
+        List<CommentVO> comments = commentService.getAllMembersByPostId(postId);
+        List<CommentInfoDTO> mentionList = new ArrayList<>();
+        for(CommentVO comment : comments) {
+            CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
+            CommentDTO commentDTO = commentService.toCommentDTO(comment);
+            commentInfoDTO.setCommentDTO(commentDTO);
+            String memberName = "";
+            MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
+
+            switch (memberType) {
+                case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
+
+                case SPONSOR -> memberName = memberService.getSponsorMemberById(commentDTO.getMemberId()).getSponsorName();
+            }
+            commentInfoDTO.setMemberName(memberName);
+            mentionList.add(commentInfoDTO);
+        }
+
+        model.addAttribute("mentions", mentionList);
+
         return "donation/donate_cert_post";
     }
 
@@ -207,9 +259,34 @@ public class PostController {
     // 후원 인증 게시글 작성
     @GetMapping("donate/write")
     public String goToDonateCertWrite(){
+
         return "donation/donate_cert_write";
     }
 
+    @PostMapping("donate/write")
+    public RedirectView write(@RequestParam String title, @RequestParam String content, @RequestParam(required = false) List<MultipartFile> files, HttpSession session) {
+        log.info(title);
+        log.info(content);
+        log.info(files.toString());
+        DonateCertDTO donateCertDTO = new DonateCertDTO();
+        SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+        PostDTO postDTO = new PostDTO();
+
+        postDTO.setPostType(PostType.DONATE_CERT);
+        postDTO.setMemberId(foundMember.getId());
+        PostVO postVO = postDTO.toVO();
+        postService.insertPost(postVO);
+        Long postId = postVO.getId();
+        donateCertDTO.setId(postId);
+        donateCertDTO.setDonateCertTitle(title);
+        donateCertDTO.setDonateCertText(content);
+        log.info(postVO.toString());
+        log.info(donateCertDTO.toString());
+        postService.setDonateCertPost(donateCertDTO.toVO());
+        fileService.uploadDonateCertFiles(postId, files);
+
+        return new RedirectView("/post/donate");
+    }
 
     // 후원 대상 게시판
     @GetMapping("receiver")
@@ -238,8 +315,10 @@ public class PostController {
 
     // 후원 대상 게시글
     @GetMapping("receiver/post/{postId}")
-    public String goToReceiverPost(Model model, @PathVariable Long postId){
+    public String goToReceiverPost(Model model, @PathVariable Long postId, HttpSession session){
+
         model.addAttribute("post", postService.getReceiverPostById(postId));
+        model.addAttribute("member", session.getAttribute("member"));
         List<CommentInfoDTO> commentList = new ArrayList<>();
         List<CommentVO> tempList = commentService.getAllCommentByPostId(postId);
         for(CommentVO commentVO : tempList) {
@@ -259,7 +338,25 @@ public class PostController {
             commentList.add(commentInfoDTO);
         }
         model.addAttribute("comments", commentList);
+        List<CommentVO> comments = commentService.getAllMembersByPostId(postId);
+        List<CommentInfoDTO> mentionList = new ArrayList<>();
+        for(CommentVO comment : comments) {
+            CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
+            CommentDTO commentDTO = commentService.toCommentDTO(comment);
+            commentInfoDTO.setCommentDTO(commentDTO);
+            String memberName = "";
+            MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
 
+            switch (memberType) {
+                case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
+
+                case SPONSOR -> memberName = memberService.getSponsorMemberById(commentDTO.getMemberId()).getSponsorName();
+            }
+            commentInfoDTO.setMemberName(memberName);
+            mentionList.add(commentInfoDTO);
+        }
+
+        model.addAttribute("mentions", mentionList);
         return "donation/receiver_post";
     }
 

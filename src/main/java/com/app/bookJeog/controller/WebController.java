@@ -5,6 +5,7 @@ import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.BookService;
 import com.app.bookJeog.service.BookServiceImpl;
+import com.app.bookJeog.service.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class WebController {
     private final BookServiceImpl bookServiceImpl;
     private final MemberHistoryVO memberHistoryVO;
     private final SelectedBookVO selectedBookVO;
+    private final MemberServiceImpl memberServiceImpl;
     private BookInfoDTO bookInfoDTO;
 
     // 메인으로 이동
@@ -117,6 +119,9 @@ public class WebController {
           log.error("책 데이터 변환 중 오류 발생: ISBN = {}, error = {}", selectedBookVO.getBookIsbn(), e.getMessage());
       }
         model.addAttribute("topBookPostDTOS", topBookPostDTOS);
+
+
+      model.addAttribute("bookPostMember", memberServiceImpl.selectTopBookPostMemberProfile());
 
 
 

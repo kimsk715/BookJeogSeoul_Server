@@ -1,6 +1,7 @@
 package com.app.bookJeog.repository;
 
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.PersonalMemberPostMemberProfileDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.domain.vo.AdminVO;
 import com.app.bookJeog.domain.vo.MemberVO;
@@ -45,8 +46,8 @@ public class MemberDAO {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> findByEmail(PersonalMemberVO personalMemberVO) {
-        return memberMapper.selectByEmail(personalMemberVO);
+    public Optional<PersonalMemberVO> findByEmail(String email) {
+        return memberMapper.selectByEmail(email);
     }
 
 
@@ -128,5 +129,17 @@ public class MemberDAO {
     }
 
 
+
+    // 독후감 많이 쓴 사람
+    public List<PersonalMemberVO> findTopBookPostMember(){
+        return memberMapper.selectTopBookPostMember();
+    }
+
+
+
+    // 독후감 많이 쓴 사람
+    public List<PersonalMemberPostMemberProfileDTO> findMemberInfoWithThumbnail(){
+        return memberMapper.selectMemberInfoWithThumbnail();
+    }
 }
 
