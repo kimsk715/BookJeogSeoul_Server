@@ -15,6 +15,7 @@
         join tbl_donate_cert_file dc
         on f.id = dc.id
         where donate_cert_id = #{postId}
+        limit 1
     </select>
     <insert id="insertMemberInquiryFile">
         insert into tbl_member_inquiry_file (id, member_inquiry_id)
