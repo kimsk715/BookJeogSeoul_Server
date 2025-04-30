@@ -13,7 +13,7 @@
 <body>
     <div id="wrap" class="web-mount pcv-mount"><!----> <!----> <!---->
         <section class="content">
-            <form action="/post/donate/write" method="post" enctype="multipart/form-data">
+            <form action="/post/donate/confirm" method="post" enctype="multipart/form-data" class="donate-form">
             <input type="hidden" name="postId" value="">
             <div class="post-write write diary desktop">
                 <div id="header" class="header diary">
@@ -80,8 +80,8 @@
                             이미지 추가
                             <p class="count"><strong>0</strong> <span>10개</span></p>
                         </div>
-                        <input type="file" accept=".jpg, .png, .jpeg, .heic, .webp" multiple="multiple"
-                            class="input-file" name="files">
+                        <input type="file" accept=".jpg, .png, .jpeg, .heic, .webp"
+                            class="input-file" multiple name="files[]">
                         <div class="add-box">
                             <p>이 게시글에 추가할 이미지를 넣어보세요.<br>이미지당 최대 5MB까지 업로드 할 수
                                 있습니다.</p> <button type="button"

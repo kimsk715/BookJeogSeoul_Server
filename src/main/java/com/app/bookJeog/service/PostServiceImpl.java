@@ -231,7 +231,7 @@ public class PostServiceImpl implements PostService {
             receiverPostDTO.setReceiverTitle(receiverVO.getReceiverTitle());
             receiverPostDTOList.add(receiverPostDTO);
         }
-        log.info(receiverPostDTOList.toString());
+//        log.info(receiverPostDTOList.toString());
         return receiverPostDTOList;
     }
 
@@ -239,7 +239,7 @@ public class PostServiceImpl implements PostService {
     public ReceiverPostDTO getReceiverPostById(Long id) {
         ReceiverPostDTO receiverPostDTO = new ReceiverPostDTO();
         ReceiverVO receiverVO = postDAO.findReceiverPostById(id);
-        log.info(receiverVO.toString());
+//        log.info(receiverVO.toString());
         Long memberId = postDAO.findPostById(receiverVO.getId()).getMemberId();
         receiverPostDTO.setId(id);
         receiverPostDTO.setReceiverText(receiverVO.getReceiverText());

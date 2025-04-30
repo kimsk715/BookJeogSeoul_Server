@@ -195,12 +195,10 @@ public class PostController {
                 post.setDonateCertFileName(fileService.getDonateCertFileByPostId(post.getId()).getFileName());
                 post.setDonateCertFilePath(fileService.getDonateCertFileByPostId(post.getId()).getFilePath());
             }
-
-//          // 이미지 추가하면 좀 더 추가
         }
-//        log.info(postList.toString());
+
         model.addAttribute("DonateCerts",postList);
-//        log.info(model.getAttribute("DonateCerts").toString());
+
         return "donation/donate_cert_main";
     }
 
@@ -216,7 +214,6 @@ public class PostController {
             CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
             CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
             commentInfoDTO.setCommentDTO(commentDTO);
-            log.info(commentDTO.toString());
             String memberName = "";
             MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
 
@@ -261,15 +258,12 @@ public class PostController {
         return "donation/donate_cert_write";
     }
 
-    @PostMapping("donate/write")
-    public RedirectView write(@RequestParam String title, @RequestParam String content, @RequestParam(required = false) List<MultipartFile> files, HttpSession session) {
-        log.info(title);
-        log.info(content);
-        log.info(files.toString());
+    @PostMapping("donate/confirm")
+    public RedirectView write(@RequestParam String title, @RequestParam String content, @RequestParam(name = "files[]", required = false) List<MultipartFile> files, HttpSession session) {
+        log.info("첨부 파일 배열 : {}",files);
         DonateCertDTO donateCertDTO = new DonateCertDTO();
         SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
         PostDTO postDTO = new PostDTO();
-
         postDTO.setPostType(PostType.DONATE_CERT);
         postDTO.setMemberId(foundMember.getId());
         PostVO postVO = postDTO.toVO();
@@ -284,7 +278,9 @@ public class PostController {
         fileService.uploadDonateCertFiles(postId, files);
 
         return new RedirectView("/post/donate");
+
     }
+
 
     // 후원 대상 게시판
     @GetMapping("receiver")

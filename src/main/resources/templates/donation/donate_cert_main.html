@@ -15,57 +15,7 @@
 
 <body>
     <div id="wrap" class="show-top-header show-header web-mount pcv-mount">
-        <div class="top-header feed floating background gray-ui on">
-            <div class="inner">
-                <header>
-                    <h1>
-                        <a href="/" data-content-type="logo"><img src="/images/admin/logo.png" alt="북적서울"
-                                class="millie-logo" /></a>
-                    </h1>
-                    <nav>
-                        <ul class="gnb">
-                            <li class="">
-                                <a href="" class="gtm-search visit dark-img-before">통합검색</a>
-                            </li>
-                            <li class="">
-                                <a href="/" class="gtm-book-post visit dark-img-before">독후감</a>
-                            </li>
-                            <li class="">
-                                <a href="" class="gtm-feed">북적북적</a>
-                            </li>
-                            <li class="on">
-                                <a href="" class="gtm-donate">기부하기</a>
-                            </li>
-                            <li class="">
-                                <a href="" class="gtm-my visit dark-img-before">내서재</a>
-                            </li>
-                            <li class="">
-                                <a href="" class="gtm-setting visit dark-img-before">관리</a>
-                            </li>
-                            <li class="">
-                                <a href="/" class="gtm-notice visit dark-img-before">공지</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="util-wrap">
-                        <a href="" data-content-type="search" class="search-btn"><span
-                                class="mds-icon--gnb_search"><span class="ir">검색</span></span></a>
-                        <a href="" data-content-type="alarmCenter" data-count="2" class="alarm-btn count"><span
-                                class="mds-icon--alarm-2"><span class="ir">알림센터</span></span></a>
-                        <ul class="util">
-                            <!---->
-                            <li class="sign sign-in" style="display: none;">
-                                <a data-content-type="login" href="" class="">로그인</a>
-                            </li>
-                            <!-- 당연하지만 로그아웃된 상태에서 로그인 버튼을, 로그인된 상태에서 로그아웃 버튼을 보여줘야 함. -->
-                            <li class="sign sign-in" style="display: block;">
-                                <a data-content-type="login" href="" class="">로그아웃</a>
-                            </li>
-                        </ul>
-                    </div>
-                </header>
-            </div>
-        </div>
+        <div th:replace="~{main/header :: header-sc}"></div>
         <section class="content">
             <div class="feed">
                 <div class="feed-header">
@@ -73,10 +23,10 @@
                         <div class="menu-list">
                             <ul id="select-board">
                                 <li class="">
-                                    <a href="" class="menu-button tab-receiver"><span>후원 대상</span></a>
+                                    <a href="/post/receiver" class="menu-button tab-receiver"><span>후원 대상</span></a>
                                 </li>
                                 <li class="active">
-                                    <a href="" class="menu-button tab-donate-cert"><span>후원 인증</span></a>
+                                    <a href="#" class="menu-button tab-donate-cert"><span>후원 인증</span></a>
                                 </li>
                             </ul>
                             <ul>
