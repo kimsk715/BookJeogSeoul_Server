@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -44,5 +45,5 @@ public class BookDAO {
     }
 
     // 선정 도서 여부 조회
-    public int findSelectedBooks(Long bookIsbn){ return bookMapper.selectSelectedBooks(bookIsbn); };
+    public Optional<SelectedBookVO> findSelectedBooks(Long bookIsbn){ return bookMapper.selectSelectedBooks(bookIsbn); };
 }

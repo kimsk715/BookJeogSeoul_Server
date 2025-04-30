@@ -4,6 +4,7 @@ import com.app.bookJeog.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface BookMapper {
@@ -25,5 +26,5 @@ public interface BookMapper {
     // 인기 독후감
     public List<BookPostVO> selectTopBookPost();
      // 선정 도서 여부 조회
-    public int selectSelectedBooks(Long bookIsbn);
+    public Optional<SelectedBookVO> selectSelectedBooks(Long bookIsbn);
 }

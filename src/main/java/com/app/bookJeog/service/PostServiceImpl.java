@@ -350,22 +350,24 @@ public class PostServiceImpl implements PostService {
         String rootPath = "C:/upload/" + todayPath; // 실제 저장할 경로
 
         // 일반 독후감 글 작성 (tbl_post)
-        postDAO.insertPostBook(fileBookPostDTO.toPostVO());
+        PostVO postVO = fileBookPostDTO.toPostVO();
+        postDAO.insertPostBook(postVO);
 
         // 일반 독후감 세부 정보 작성 (tbl_book_post)
+        fileBookPostDTO.setBookPostId(postVO.getId());
         postDAO.insertBookPost(fileBookPostDTO.toBookPostVO());
 
         // 선정도서 독후감 작성 (tbl_selected_book_post)
-        // 일반 독후감은 없으니까 optional 사용
-        Optional.ofNullable(fileBookPostDTO.toSelectedBookPostVO())
-                .ifPresent(postDAO::insertSelectedBookPost);
+        SelectedBookPostVO selectedBookPostVO = fileBookPostDTO.toSelectedBookPostVO();
+        if (selectedBookPostVO.getBookId() != null) {
+            postDAO.insertSelectedBookPost(selectedBookPostVO);
+        }
 
         // 첨부파일이 있을 경우
         if (files != null && !files.isEmpty()) {
-            // stream을 쓰면 file 객체 하나만 가져오기 때문에 여러개의 files를 가져오려면 IntStream
             IntStream.range(0, files.size())
-                    .filter(i -> !files.get(i).isEmpty()) // 파일이 비어있지 않은 것만
-                    .forEach(i -> { // 반복
+                    .filter(i -> !files.get(i).isEmpty())
+                    .forEach(i -> {
                         MultipartFile file = files.get(i);
                         BookPostFileDTO dto = fileBookPostDTO.getFileList().get(i);
 
@@ -373,6 +375,7 @@ public class PostServiceImpl implements PostService {
 
                         dto.setFileName(fileName);
                         dto.setFilePath(todayPath);
+                        dto.setBookPostId(fileBookPostDTO.getBookPostId()); // 독후감 ID 설정
 
                         try {
                             new File(rootPath).mkdirs();
@@ -384,12 +387,13 @@ public class PostServiceImpl implements PostService {
                         // 파일 insert
                         FileVO fileVO = dto.toFileVO();
                         fileDAO.insertFiles(fileVO);
+                        dto.setId(fileVO.getId());
 
-                        // 파일-독후감 매핑 insert
-                        fileDAO.insertBookPostFiles(bookPostFileDTO.toBookPostFileVO());
+                        // 파일-독후감 매핑 insert (각 dto 기반)
+                        fileDAO.insertBookPostFiles(dto.toBookPostFileVO());
                     });
         }
-        return fileBookPostDTO.getBookPostId(); // 이동을 위해 독후감 id 리턴
+        return fileBookPostDTO.getBookPostId();
     }
     // 오늘 날짜로 경로 반환
     private String getPath(){

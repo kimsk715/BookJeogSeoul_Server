@@ -162,7 +162,11 @@ public class BookServiceImpl implements BookService {
 
 
     // 선정 도서 여부 조회
-    public boolean findSelectedBooks(Long bookIsbn){ return bookDAO.findSelectedBooks(bookIsbn) > 0; };
+    public Long findSelectedBooks(Long bookIsbn){
+        return bookDAO.findSelectedBooks(bookIsbn)
+                .map(SelectedBookVO::getId)
+                .orElse(null);
+    };
 };
 
 
