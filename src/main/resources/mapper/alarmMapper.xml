@@ -9,12 +9,22 @@
     </insert>
 
     <!--내가 작성한 게시글댓글알람-->
-
+    <insert id="insertCommentAlarm">
+        insert into tbl_comment_alarm(id, comment_id,)
+        values (${alarmId}, ${commentId})
+    </insert>
 
     <!--누군가 맨션알람-->
-
+    <insert id="selectMentionAlarm">
+        insert into tbl_comment_mention (id, comment_id, mentioned_member_id)
+        values (${alarmId}, ${commentId}, ${mentionMemberId})
+    </insert>
 
     <!--팔로잉한사람의 게시글 알림-->
+    <insert id="selectFollowAlarm">
+        insert into tbl_follow_alarm (id, alarm_sender_id)
+        values (${alarmId}, ${alarmSenderId})
+    </insert>
 
 
     <!--팔로우 한사람-->
