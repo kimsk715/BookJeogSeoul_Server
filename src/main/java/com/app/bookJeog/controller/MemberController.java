@@ -45,4 +45,8 @@ public class MemberController implements MemberControllerDocs {
         // 응답 반환
         return new ResponseEntity<>(imageBytes, HttpStatus.OK);
     }
+
+
+
+
 }

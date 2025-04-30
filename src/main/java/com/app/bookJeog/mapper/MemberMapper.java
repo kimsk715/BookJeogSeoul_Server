@@ -2,6 +2,8 @@ package com.app.bookJeog.mapper;
 
 
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.dto.PersonalMemberPostMemberProfileDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.domain.vo.AdminVO;
 import com.app.bookJeog.domain.vo.MemberVO;
@@ -29,7 +31,7 @@ public interface MemberMapper {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> selectByEmail(PersonalMemberVO personalMemberVO);
+    public Optional<PersonalMemberVO> selectByEmail(String email);
 
     // 기업회원 통합검색 조회
     public List<SponsorMemberProfileDTO> selectSponsorMembersWithProfile(String keyword);
@@ -77,4 +79,11 @@ public interface MemberMapper {
     // 비밀번호 변경
     public void updatePassword(String memberEmail, String newPasswd);
 
+
+    // 독후감 많이쓴 멤버 조회
+    public List<PersonalMemberVO> selectTopBookPostMember ();
+
+
+    // 독후감 많이쓴 멤버 조회 썸넬 포함
+    public List<PersonalMemberPostMemberProfileDTO> selectMemberInfoWithThumbnail ();
 }

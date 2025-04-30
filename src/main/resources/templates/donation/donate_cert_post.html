@@ -275,13 +275,23 @@
                                     "></div>
                             <div class="register-box">
                                 <div class="register-box-inner">
-                                    <span>댓글</span>
-                                    <p contenteditable="plaintext-only"
-                                        data-placeholder="내용 입력"></p>
+                                    <div class="mention-wrapper" style="display: none;"></div>
+                                    <label>
+                                            <textarea contenteditable="plaintext-only"
+                                                      data-placeholder="내용 입력">
+                                            </textarea>
+                                        <input type="hidden" value="" class="mention-value">
+                                    </label>
+                                    </label>
+                                    <div id="mention-menu" style="display:none;">
+                                        <ul id="mention-inner">
+                                            <li th:each=" mention : ${mentions}" th:text="${mention.memberName}" th:value="${mention.commentDTO.memberId}"></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                            <button type="button" disabled="disabled"
-                                class="post-btn flex-container mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
+                            <button type="button" disabled
+                                    class="post-btn flex-container mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4" th:value="*{id}">
                                 <span>등록</span>
                             </button>
                         </div>
@@ -289,63 +299,63 @@
                             댓글 <span
                                 class="comment-title-length">0</span>
                         </h3>
-                        <ul class="comment-list">
-                            <li class="comment-item" th:each="comment : ${comments}">
+                        <ul class="comment-list" >
+                            <li class="comment-item" th:each = "comment : ${comments}">
                                 <div
-                                    class="comment-item-inner flex-container">
+                                        class="comment-item-inner flex-container">
                                     <div class="user-img" style="
                                                 background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
                                             ">
                                         <a
-                                            href="/v4/library/8942404"></a>
+                                                href="#"></a>
                                     </div>
                                     <div class="com-contents">
                                         <div
-                                            class="com-contents-head">
+                                                class="com-contents-head">
                                             <div
-                                                class="com-contents-top flex-container">
+                                                    class="com-contents-top flex-container">
                                                 <p class="nickname">
                                                     <a
-                                                        href="#" th:text="${comment.memberName}"></a>
+                                                            href="#" th:text="${comment.memberName}"></a>
                                                 </p>
                                             </div>
                                             <span
-                                                class="com-contents-date" th:text="${comment.commentDTO.createdDate}"></span>
+                                                    class="com-contents-date" th:text="${comment.commentDTO.createdDate}"></span>
                                         </div>
                                         <div
-                                            class="com-contents-body">
+                                                class="com-contents-body">
+                                            <button type="button" class="tag-button" th:if="${comment.mentionedName} != null" th:text="${comment.mentionedName}" th:title="${comment.mentionedName}"></button>
                                             <p
-                                                class="comment-text show" th:text="${comment.commentDTO.commentText}">
+                                                    class="comment-text show" th:text="${comment.commentDTO.commentText}">
 
                                             </p>
                                             <div class="comment-text">
                                                 <p
-                                                    contenteditable="plaintext-only" th:text="${comment.commentDTO.commentText}">
+                                                        contenteditable="plaintext-only" th:text="${comment.commentDTO.commentText}">
 
                                                 </p>
                                                 <button type="button"
-                                                    class="mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
+                                                        class="mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
                                                     <span>등록</span>
                                                 </button>
                                             </div>
                                         </div>
                                         <div class="reply-setting">
                                             <button type="button"
-                                                class="more-btn">
+                                                    class="more-btn">
                                                 <img src="https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/more-icon.df2e02aec2252c2847fbe9e490cd4354.png"
-                                                    alt="더보기" />
+                                                     alt="더보기" />
                                             </button>
                                             <div class="more-area"
-                                                style="display: none;">
+                                                 style="display: none;">
                                                 <button
-                                                    type="button">답글달기</button>
+                                                        type="button">답글달기</button>
                                                 <button
-                                                    type="button">신고하기</button>
+                                                        type="button">신고하기</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 <!---->
                             </li>
                         </ul>
@@ -373,5 +383,7 @@
     </div>
 </body>
 <script src="/js/donation/donate_cert_post_event.js"></script>
-
+<script th:inline="javascript">
+    const member = /*[[${member}]]*/ {};
+</script>
 </html>

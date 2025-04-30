@@ -108,4 +108,5 @@
         where follow_receiver_id = #{receiverId} and follow_sender_id = #{senderId}
     </delete>
 
+
 </mapper>

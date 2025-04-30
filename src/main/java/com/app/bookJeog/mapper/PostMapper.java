@@ -138,5 +138,8 @@ public interface PostMapper {
 
     // 선정도서 독후감 작성
     public void insertSelectedBookPost(SelectedBookPostVO selectedBookPostVO);
+
+    public void insertDonateCertPost(DonateCertVO donateCertVO);
+
 }
 

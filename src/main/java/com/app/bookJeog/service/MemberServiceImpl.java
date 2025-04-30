@@ -2,6 +2,7 @@ package com.app.bookJeog.service;
 
 
 import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.vo.AdminVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
@@ -31,6 +32,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor @Transactional(rollbackFor = Exception.class)
@@ -42,6 +44,7 @@ public class MemberServiceImpl implements MemberService {
     private final HttpSession session;
     private final PersonalMemberVO personalMemberVO;
     private final JavaMailSender javaMailSender;
+
 
 
     @Override
@@ -57,10 +60,11 @@ public class MemberServiceImpl implements MemberService {
 
     // 이메일 중복검사
     @Override
-    public Optional<PersonalMemberVO> checkEmail(String email) {
-        personalMemberDTO.setMemberEmail(email);
-        PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
-        return memberDAO.findByEmail(personalMemberVO);
+    public Optional<PersonalMemberDTO> checkEmail(String email) {
+        Optional<PersonalMemberVO> memberVO = memberDAO.findByEmail(email);
+       PersonalMemberVO foundMemberVO = memberVO.orElseThrow(() -> new RuntimeException("Email not found"));
+        Optional<PersonalMemberDTO> foundMemberDTO = Optional.ofNullable(toPersonalMemberDTO(foundMemberVO));
+        return foundMemberDTO;
     }
 
     @Override
@@ -329,6 +333,39 @@ public class MemberServiceImpl implements MemberService {
         return accessToken;
     }
 
+    @Override
+    public MemberType getMemberType(Long memberId) {
+        MemberVO memberVO = memberDAO.findById(memberId);
+        return memberVO.getMemberType();
+    }
+
+    @Override
+    public String getMemberName(Long memberId) {
+        MemberVO memberVO = memberDAO.findById(memberId);
+        String memberName = "";
+        if(memberVO.getMemberType().equals(MemberType.PERSONAL)){
+            memberName = memberDAO.findPersonalMemberById(memberId).getMemberName();
+        }
+        else if(memberVO.getMemberType().equals(MemberType.SPONSOR)){
+            memberName = memberDAO.findSponsorMemberById(memberId).getSponsorName();
+        }
+        return memberName;
+    }
+
+    // 독후감 많이쓴 사람 조회
+    @Override
+    public List<PersonalMemberDTO> selectTopBookPostMember() {
+        List<PersonalMemberVO> temp = memberDAO.findTopBookPostMember();
+        List<PersonalMemberDTO> personalMemberDTOS = new ArrayList<>();
+        for(PersonalMemberVO personalMemberVO : temp){
+            PersonalMemberDTO personalMemberDTO = toPersonalMemberDTO(personalMemberVO);
+            personalMemberDTOS.add(personalMemberDTO);
+        }
+
+
+
+        return personalMemberDTOS;
+    }
 
 
     // 카카오 info 가져오기
@@ -373,7 +410,15 @@ public class MemberServiceImpl implements MemberService {
 
                     // DTO 객체 생성 및 값 주입
                     personalMemberDTO = new PersonalMemberDTO();
+
+
                     personalMemberDTO.setMemberEmail(kakaoAccount.getAsJsonObject().get("email").getAsString()); // 이메일 추출
+
+
+                    PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
+                    Optional<PersonalMemberVO> foundMember = memberDAO.findPersonalMember(personalMemberVO);
+
+
                     log.info("personalMemberDTO {}", personalMemberDTO);
                     personalMemberDTO.setMemberName(profile.getAsJsonObject().get("nickname").getAsString());    // 닉네임 추출
                     log.info("personalMemberDTO {}", personalMemberDTO);
@@ -390,4 +435,11 @@ public class MemberServiceImpl implements MemberService {
             }
             return Optional.ofNullable(personalMemberDTO);
         };
+
+
+
+    // 독후감 많이쓴 사람
+    public List<PersonalMemberPostMemberProfileDTO> selectTopBookPostMemberProfile() {
+        return memberDAO.findMemberInfoWithThumbnail();
+    }
 }
