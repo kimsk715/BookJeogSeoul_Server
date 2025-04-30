@@ -33,3 +33,11 @@ modalConfirmButton.addEventListener('click', () => {
     filterModal.style.display = "none";
 })
 
+
+const goToDonateForm = () => {
+    window.location.href = `/post/donate/write`;
+}
+
+const goToReceiverForm = () => {
+    window.location.href = `/post/receiver/write`;
+}
