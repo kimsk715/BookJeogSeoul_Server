@@ -15,11 +15,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new TestInterceptor())
                 .addPathPatterns("/admin/**");
         registry.addInterceptor(new ImageInterceptor()) // 인터셉터 클래스 등록
-                .addPathPatterns("/images/**");
+                .addPathPatterns("/image/**");
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**")
+        registry.addResourceHandler("/image/**")
                 .addResourceLocations("file:///c:/upload/");
     }
 }
