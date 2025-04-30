@@ -222,7 +222,7 @@ public class PostDAO {
     };
 
     // 일반도서 독후감 작성
-    public void insertPostBook(PostVO postVO){postMapper.insertPost(postVO);};
+    public void insertPostBook(PostVO postVO){postMapper.insertPostBook(postVO);};
     public void insertBookPost(BookPostVO bookPostVO){postMapper.insertBookPost(bookPostVO);};
 
     // 선정도서 독후감 작성

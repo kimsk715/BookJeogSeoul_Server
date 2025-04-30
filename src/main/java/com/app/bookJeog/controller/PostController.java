@@ -145,7 +145,9 @@ public class PostController {
 
     @PostMapping("bookpost/write")
     public String writeBookPost(@ModelAttribute("post") FileBookPostDTO fileBookPostDTO,
-                                @RequestParam("file") List<MultipartFile> files, RedirectAttributes redirectAttributes) {
+                                @RequestParam("file") List<MultipartFile> files, RedirectAttributes redirectAttributes,
+                                HttpSession session) {
+        fileBookPostDTO.setMemberId(((PersonalMemberDTO)session.getAttribute("member")).getId());
         Long newBookPostId = postService.write(fileBookPostDTO, files);
         redirectAttributes.addFlashAttribute("message", "독후감 작성 완료!");
         return "redirect:/post/bookpost/" + newBookPostId;

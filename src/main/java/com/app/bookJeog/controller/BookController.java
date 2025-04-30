@@ -1,6 +1,7 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
+import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 @Controller
@@ -68,11 +70,11 @@ public class BookController implements BookControllerDocs {
 
 
     // 최다 대출 도서
-    @GetMapping("popular")
-    public List<BookTempVO> getPopularBooks() throws IOException {
-        log.info(bookService.getPopularBooks().toString());
-        return bookService.getPopularBooks();
-    }
+//    @GetMapping("popular")
+//    public List<BookTempVO> getPopularBooks() throws IOException {
+//        log.info(bookService.getPopularBooks().toString());
+//        return bookService.getPopularBooks();
+//    }
 
     // 검색어로 책 목록 띄우기
     @GetMapping("search")
@@ -88,7 +90,7 @@ public class BookController implements BookControllerDocs {
     // isbn으로 선정도서 여부 조회
     @GetMapping("find-selected")
     @ResponseBody
-    public boolean findSelectedBooks(Long bookIsbn) {
+    public Long findSelectedBooks(Long bookIsbn) {
         return bookService.findSelectedBooks(bookIsbn);
     }
 }

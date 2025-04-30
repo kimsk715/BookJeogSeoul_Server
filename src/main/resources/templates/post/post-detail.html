@@ -456,6 +456,9 @@
         </div>
         </div>
     </body>
+    <div th:if="${message}" class="alert alert-success">
+        <p th:text="${message}"></p>
+    </div>
     <script th:inline="javascript">
         window.post = {
             title: [[${post.bookPostTitle}]],
