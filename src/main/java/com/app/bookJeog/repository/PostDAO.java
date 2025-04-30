@@ -227,4 +227,8 @@ public class PostDAO {
 
     // 선정도서 독후감 작성
     public void insertSelectedBookPost(SelectedBookPostVO selectedBookPostVO){postMapper.insertSelectedBookPost(selectedBookPostVO);};
+
+    public void insertDonateCertPost(DonateCertVO donateCertVO){
+        postMapper.insertDonateCertPost(donateCertVO);
+    }
 }
