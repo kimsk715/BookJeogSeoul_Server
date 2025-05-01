@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @Slf4j
@@ -103,6 +104,16 @@ public class FileServiceImpl implements FIleService {
             return null;
         }
 
+    }
+
+    @Override
+    public List<FileDTO> getDonateCertFilesByPostId(Long postId) {
+        List<FileVO> tempList = fileDAO.findDonateCertFilesByPostId(postId);
+        List<FileDTO> fileDTOList = new ArrayList<>();
+        for(FileVO fileVO : tempList){
+            fileDTOList.add(toFileDTO(fileVO));
+        }
+        return fileDTOList;
     }
 
 }

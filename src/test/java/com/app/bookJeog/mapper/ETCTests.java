@@ -2,6 +2,7 @@ package com.app.bookJeog.mapper;
 
 
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.vo.ChatGPTRequest;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PostVO;
 import com.app.bookJeog.repository.PostDAO;
@@ -31,6 +32,9 @@ public class ETCTests {
     @Autowired
     private PostService postService;
 
+
+
+
 //  댓글 신고 조회 테스트
     @Test
     public void test(){
@@ -56,5 +60,10 @@ public class ETCTests {
     @Test
     public void test4(){
         log.info(bookService.getBookByIsbn(9788993968460L).toString());
+    }
+
+    @Test
+    public void openAITest(){
+
     }
 }

@@ -17,6 +17,16 @@
         where donate_cert_id = #{postId}
         limit 1
     </select>
+
+    <select id="selectDonateCertFilesByPostId" resultType="fileVO">
+        select f.id, file_name, file_path, file_text, donate_cert_id
+        from tbl_file f
+                 join tbl_donate_cert_file dc
+                      on f.id = dc.id
+        where donate_cert_id = #{postId}
+    </select>
+
+
     <insert id="insertMemberInquiryFile">
         insert into tbl_member_inquiry_file (id, member_inquiry_id)
         values (#{id}, #{memberInquiryId})

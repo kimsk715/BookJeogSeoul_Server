@@ -206,6 +206,16 @@ public class PostController {
     // 후원 인증 게시글    
     @GetMapping("donate/post/{postId}")
     public String goTODonateCertPost(@PathVariable Long postId, Model model, HttpSession session){
+
+        List<FileDTO> postFiles = fileService.getDonateCertFilesByPostId(postId);
+        for(int i=0 ; i<postFiles.size() ; i++){
+            FileDTO fileDTO = postFiles.get(i);
+            fileDTO.setId((long) i+1);
+        }
+        model.addAttribute("files", postFiles);
+
+
+
         model.addAttribute("DonateCert",postService.getDonateCertById(postId));
         model.addAttribute("member", session.getAttribute("member"));
         List<CommentInfoDTO> commentList = new ArrayList<>();
