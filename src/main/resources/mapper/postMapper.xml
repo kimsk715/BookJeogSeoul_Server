@@ -132,7 +132,7 @@
 
     <!-- Quartz 로 가져올 후보들 현재는 테스트라 top20 만 가져옴-->
     <select id="selectTopPosts" resultType="bookPostVO">
-        select p.id, book_post_title, book_post_text, book_post_id, bookPostLikeCount
+        select p.id, book_post_title, book_post_text, bookPostLikeCount
         from tbl_post p join tbl_book_post bp on p.id = bp.id
                         join tbl_selected_book_post sbp on bp.id = sbp.id and sbp.book_post_status = 'PUBLIC' and bp.book_post_is_public = 'PUBLIC'
                         left join (
