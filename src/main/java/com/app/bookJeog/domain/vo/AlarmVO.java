@@ -1,7 +1,7 @@
 package com.app.bookJeog.domain.vo;
 
 import com.app.bookJeog.domain.enumeration.AlarmStatus;
-import com.app.bookJeog.domain.enumeration.BookPostStatus;
+import com.app.bookJeog.domain.enumeration.AlarmType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
@@ -17,4 +17,5 @@ public class AlarmVO extends Period {
     private Long id;
     private Long alarmReceiverId;
     private AlarmStatus alarmStatus;
+    private AlarmType alarmType;
 }

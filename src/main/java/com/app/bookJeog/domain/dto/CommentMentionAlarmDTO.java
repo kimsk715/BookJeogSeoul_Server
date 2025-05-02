@@ -1,7 +1,7 @@
 package com.app.bookJeog.domain.dto;
 
-import com.app.bookJeog.domain.vo.FollowVO;
-import com.app.bookJeog.domain.vo.PostAlarmVO;
+
+import com.app.bookJeog.domain.vo.CommentMentionVO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,17 +13,19 @@ import org.springframework.stereotype.Component;
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PostAlarmDTO {
+public class CommentMentionAlarmDTO {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long postId;
+    private Long commentId;
+    private Long mentionMemberId;
 
-    public PostAlarmVO toVO() {
-        return PostAlarmVO.builder()
+    public CommentMentionVO toVO() {
+        return CommentMentionVO.builder()
                 .id(id)
-                .postId(postId)
+                .commentId(commentId)
+                .mentionMemberId(mentionMemberId)
                 .build();
-
     }
+
 
 }
