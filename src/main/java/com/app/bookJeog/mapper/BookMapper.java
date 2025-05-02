@@ -27,4 +27,10 @@ public interface BookMapper {
     public List<BookPostVO> selectTopBookPost();
      // 선정 도서 여부 조회
     public Optional<SelectedBookVO> selectSelectedBooks(Long bookIsbn);
+
+    // 전체 도서 isbn과 줄거리 가져오기
+    public List<BookVO> selectIsbnAndSummary();
+
+    // 최근 조회한 도서 10개 줄거리와 함께
+    public String selectBookSummaryToString(Long memberId);
 }

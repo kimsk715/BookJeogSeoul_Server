@@ -1,5 +1,6 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.BookDTO;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.app.bookJeog.domain.vo.SelectedBookVO;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.transaction.annotation.Transactional;
@@ -166,6 +169,19 @@ public class BookServiceImpl implements BookService {
         return bookDAO.findSelectedBooks(bookIsbn)
                 .map(SelectedBookVO::getId)
                 .orElse(null);
+    };
+
+
+    // 전체 도서 isbn과 줄거리 가져오기
+    public List<BookDTO> findIsbnAndSummary() {
+        return bookDAO.findIsbnAndSummary().stream()
+                .map(this::toBookDTO) // 여기서 this는 BookService
+                .collect(Collectors.toList()); // List로 변환
+    }
+
+    // 최근 조회한 도서 10개 줄거리와 함께
+    public String findBookSummaryToString(Long memberId){
+        return bookDAO.findBookSummaryToString(memberId);
     };
 };
 

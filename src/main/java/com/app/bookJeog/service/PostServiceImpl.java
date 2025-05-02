@@ -404,5 +404,78 @@ public class PostServiceImpl implements PostService {
     public void setDonateCertPost(DonateCertVO donateCertVO) {
         postDAO.insertDonateCertPost(donateCertVO);
     }
+
+    // 독후감 수정을 위한 데이터 조회
+    public FileBookPostDTO findWrittenBookPost(Long bookPostId) {
+        FileBookPostDTO fileBookPostDTO = postDAO.findWrittenBookPost(bookPostId);
+        FileBookPostDTO selected = postDAO.findWrittenSelectedPost(bookPostId);
+
+        // 선정도서 독후감이면 추가정보 조회
+        if (selected != null) {
+            fileBookPostDTO.setBookPostStatus(selected.getBookPostStatus());
+        }
+
+        return fileBookPostDTO;
+    }
+
+    // 독후감 수정을 위한 첨부파일 조회
+    public List<BookPostFileDTO> findWrittenBookPostFiles(Long bookPostId) {
+        return fileDAO.findWrittenBookPostFiles(bookPostId);
+    }
+
+    // 독후감 수정
+    public void setBookPost(FileBookPostDTO fileBookPostDTO, List<MultipartFile> files, List<Long> deletedFileIds){
+        String todayPath = getPath(); // 오늘 날짜 폴더 경로 생성
+        String rootPath = "C:/upload/" + todayPath; // 실제 저장할 경로
+
+        // 게시글 내용 수정
+        PostVO postVO = fileBookPostDTO.toPostVO();
+        postDAO.setPost(postVO);
+        fileBookPostDTO.setBookPostId(postVO.getId());
+
+        postDAO.setBookPost(fileBookPostDTO.toBookPostVO());
+
+        if(fileBookPostDTO.getBookId() != null) {
+            postDAO.setSelectedBookPost(fileBookPostDTO.toSelectedBookPostVO());
+        }
+
+        // 삭제할 파일 처리
+        if(deletedFileIds != null && !deletedFileIds.isEmpty()) {
+            for(Long fileId : deletedFileIds) {
+                fileDAO.deleteBookPostFiles(fileId);
+                fileDAO.deleteFiles(fileId);
+            }
+        }
+
+        // 새로 첨부된 파일 처리
+        if (files != null && !files.isEmpty()) {
+            IntStream.range(0, files.size())
+                    .filter(i -> !files.get(i).isEmpty())
+                    .forEach(i -> {
+                        MultipartFile file = files.get(i);
+                        BookPostFileDTO fileDTO = fileBookPostDTO.getFileList().get(i);
+
+                        String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+
+                        fileDTO.setFileName(fileName);
+                        fileDTO.setFilePath(todayPath);
+                        fileDTO.setBookPostId(fileBookPostDTO.getBookPostId()); // 독후감 ID
+
+                        try {
+                            new File(rootPath).mkdirs();
+                            file.transferTo(new File(rootPath, fileName));
+                        } catch (IOException e) {
+                            throw new RuntimeException("파일 저장 실패", e);
+                        }
+
+                        // DB insert
+                        FileVO fileVO = fileDTO.toFileVO();
+                        fileDAO.insertFiles(fileVO);
+                        fileDTO.setId(fileVO.getId());
+
+                        fileDAO.insertBookPostFiles(fileDTO.toBookPostFileVO());
+            });
+        }
+    };
 }
 

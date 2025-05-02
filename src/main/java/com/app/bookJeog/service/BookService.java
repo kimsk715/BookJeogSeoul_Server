@@ -353,4 +353,20 @@ public interface BookService {
 
     // 선정 도서 여부 조회
     public Long findSelectedBooks(Long bookIsbn);
+
+    public default BookDTO toBookDTO(BookVO bookVO){
+        BookDTO bookDTO = new BookDTO();
+        if (bookVO != null) {
+            bookDTO.setId(bookVO.getId());
+            bookDTO.setBookIsbn(bookVO.getBookIsbn());
+            bookDTO.setBookSummary(bookVO.getBookSummary());
+        }
+        return bookDTO;
+    }
+
+    // 전체 도서 isbn과 줄거리 가져오기
+    public List<BookDTO> findIsbnAndSummary();
+
+    // 최근 조회한 도서 10개 줄거리와 함께
+    public String findBookSummaryToString(Long memberId);
 }
