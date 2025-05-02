@@ -231,4 +231,8 @@ public class PostDAO {
     public void insertDonateCertPost(DonateCertVO donateCertVO){
         postMapper.insertDonateCertPost(donateCertVO);
     }
+
+    public void insertReceiverPost(ReceiverVO receiverVO){
+        postMapper.insertReceiverPost(receiverVO);
+    }
 }

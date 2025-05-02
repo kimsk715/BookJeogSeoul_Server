@@ -114,13 +114,10 @@
                     <div class="detail" style="--loader-top: 214px">
                         <div class="detail-inner container">
                             <div class="diary-container">
-                                <div class="thumbnail-container"
-                                    style="
-                                            --background-image: url(https://happybean-phinf.pstatic.net/20250319_247/17423759512082zogH_JPEG/%EC%B9%98%EB%A3%8C_%EC%A4%91_%EC%98%A5%EC%83%81%EC%97%90%EC%84%9C_%EC%97%84%EB%A7%88%EC%99%80.jpeg);
-                                        ">
+                                <div class="thumbnail-container" th:if="${thumbNail} != null"
+                                     th:style="'background-image: url(' + '\'' + '/image/' + ${thumbNail.FilePath} + '/' + ${thumbNail.FileName} + '\'' + ')'">
                                     <span class="background"
-                                        style="color: deeppink; text-align: center; font-size: 50px;">임시로
-                                        넣어놓은 이미지</span>
+                                        style="color: deeppink; text-align: center; font-size: 50px;"></span>
 
                                 </div>
 
@@ -136,7 +133,7 @@
                                         <li th:each="image : ${files}"><img
                                                 th:src="|/image/${image.filePath}/${image.fileName}|">
                                             <p class="text" th:text="${image.id}">
-                                                1
+
                                             </p> <span
                                                 class="nickname" th:text="|ⓒ*{sponsorName}|"></span>
                                         </li>

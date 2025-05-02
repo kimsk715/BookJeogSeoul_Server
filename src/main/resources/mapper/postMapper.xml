@@ -730,6 +730,11 @@
         insert into tbl_donate_cert (id, donate_cert_title, donate_cert_text)
         values (#{id}, #{donateCertTitle}, #{donateCertText})
     </insert>
+
+    <insert id="insertReceiverPost" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_receiver (id, receiver_title, receiver_text)
+        values (#{id}, #{receiverTitle}, #{receiverText})
+    </insert>
 </mapper>
 
 

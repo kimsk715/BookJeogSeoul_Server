@@ -2,7 +2,13 @@ const reportButton = document.querySelector(".more-item");
 const reportModal = document.querySelector(".more-ul");
 const reportModalOpenButton = reportModal.querySelector("a")
 const reportPopup = document.querySelector(".police-popup")
+
 reportButton.addEventListener('click',() => {
+    if(sponsorMember !== null && sponsorMember.sponsorName === document.querySelector(".name")){
+        document.querySelector(".post-edit-button").removeAttribute("style");
+    }
+
+
     if(reportModal.style.display == "none"){
         reportModal.removeAttribute("style")
     }
@@ -287,3 +293,4 @@ commentArea.addEventListener('input',function() {
     this.style.height = 'auto';
     this.style.height = this.scrollHeight + 'px';
 })
+
