@@ -684,22 +684,39 @@
         values (#{id}, #{bookId}, #{bookPostStatus})
     </insert>
 
+    <!--  독후감 수정을 위한 데이터 조회  -->
+    <select id="selectWrittenBookPost" resultType="fileBookPostDTO">
+        select p.id as book_post_id, pm.member_name, p.member_id, bp.book_isbn, bp.book_title, bp.book_post_title, bp.book_post_text,
+               bp.book_post_is_public
+        from tbl_post p
+        join tbl_book_post bp on p.id = bp.id
+        join tbl_personal_member pm on pm.id = p.member_id
+        where p.id = #{bookPostId}
+    </select>
+
+    <select id="selectWrittenSelectedPost" resultType="fileBookPostDTO">
+        select book_id, book_image_url, book_post_status
+        from tbl_selected_book sb
+        join tbl_selected_book_post sbp on sb.id = sbp.book_id
+        where sbp.id = #{bookPostId}
+    </select>
+
     <!--  독후감 수정  -->
     <update id="updatePost">
         update tbl_post set updatedDate = current_timestamp
-        where id = #{id}
+        where id = #{bookPostId}
     </update>
 
     <update id="updateBookPost">
         update tbl_book_post set book_post_title = #{bookPostTitle},
                                  book_post_text = #{bookPostText},
                                 book_post_is_public = #{bookPostIsPublic}
-        where id = #{id}
+        where id = #{bookPostId}
     </update>
 
     <update id="updateSelectedBookPost">
         update tbl_selected_book_post set book_post_status = #{bookPostStatus}
-        where id = #{id}
+        where id = #{bookPostId}
     </update>
 
     <insert id="insertDonateCertPost" useGeneratedKeys="true" keyProperty="id">

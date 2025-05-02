@@ -131,6 +131,69 @@ public class AladinServiceImpl implements AladinService {
         }
     }
 
+    // 상위 9개의 인기도서 json으로 반환
+    public JSONObject searchBestBooks(){
+        try {
+            // 알라딘 ItemSearch API 요청 URL 구성
+            String urlStr = "https://www.aladin.co.kr/ttb/api/ItemList.aspx"
+                    + "?ttbkey=" + ALADIN_API_KEY                          // API 인증 키
+                    + "&QueryType=Bestseller"                             // 인기 도서 검색
+                    + "&MaxResults=9"
+                    + "&SearchTarget=Book"                                // 검색 대상: 도서
+                    + "&output=JS"                                        // 응답 형식: JSON
+                    + "&start=1"
+                    + "&Cover=Big"
+                    + "&Version=20131101";
+
+            // HTTP 연결 생성
+            URL url = new URL(urlStr);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            // 응답 읽기
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                // 응답 내용을 문자열로 조립
+                String result = br.lines().collect(Collectors.joining());
+
+                // 문자열을 JSONObject로 변환
+                JSONObject json = new JSONObject(result);
+
+                // 응답 객체에는 총 검색 결과 수(totalResults), 도서 목록(item 배열) 등이 포함됨
+                return json;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // 에러 로그 출력
+            return null;
+        }
+    }
+
+    // 인기도서 json Map형태로 변환
+    public Map<String, Object> convertBestBooksToSimpleMap() throws JSONException {
+        JSONObject json = searchBestBooks(); // Bestseller API 호출
+
+        List<Map<String, Object>> bookList = new ArrayList<>();
+        JSONArray items = json.optJSONArray("item");
+
+        if (items != null) {
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject book = items.getJSONObject(i);
+                Map<String, Object> bookMap = new HashMap<>();
+
+                bookMap.put("title", book.optString("title"));
+                bookMap.put("author", book.optString("author"));
+                bookMap.put("cover", book.optString("cover"));
+                bookMap.put("isbn", book.optString("isbn13")); // 그대로 키 유지
+
+                bookList.add(bookMap);
+            }
+        }
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("item", bookList); // 도서 리스트만 포함
+        return result;
+    }
+
     // json을 Map<String, Object> 형태로 반환
     public Map<String, Object> searchBooksToMap(String keyword, int startIndex, int maxResults, String sort) throws JSONException {
         // 알라딘 API에서 응답 JSON 받아오기

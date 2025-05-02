@@ -1,9 +1,11 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
-import com.app.bookJeog.domain.vo.SelectedBookVO;
+import com.app.bookJeog.domain.dto.BookDTO;
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.BookService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -12,7 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -93,4 +96,41 @@ public class BookController implements BookControllerDocs {
     public Long findSelectedBooks(Long bookIsbn) {
         return bookService.findSelectedBooks(bookIsbn);
     }
-}
+
+    @GetMapping("recommend")
+    @ResponseBody
+    public Map<String, Object> getRecommendedBooks(HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        // 로그인 확인
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        Long memberId = (member != null) ? member.getId() : null;
+
+            String target = (memberId != null) ? bookService.findBookSummaryToString(memberId) : null;
+
+            try {
+                if (target == null || target.isBlank()) {
+                    // 인기 도서 반환
+                    Map<String, Object> bestBooks = aladinService.convertBestBooksToSimpleMap();
+                    response.put("type", "bestseller");
+                    response.put("books", bestBooks.get("item"));
+                } else {
+                    // AI 추천용 도서 데이터 반환
+                    List<BookDTO> feature = bookService.findIsbnAndSummary();
+
+                    response.put("type", "ai");
+                    response.put("target", target);
+                    response.put("feature", feature);
+                }
+            } catch (ResourceNotFoundException e) {
+                response.put("type", "error");
+                response.put("message", "도서를 찾을 수 없습니다.");
+            } catch (JSONException e) {
+                response.put("type", "error");
+                response.put("message", "AI 추천 처리 중 오류 발생");
+            }
+
+            return response;
+        }
+    }
+
+

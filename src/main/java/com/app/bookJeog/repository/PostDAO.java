@@ -231,4 +231,13 @@ public class PostDAO {
     public void insertDonateCertPost(DonateCertVO donateCertVO){
         postMapper.insertDonateCertPost(donateCertVO);
     }
+
+    // 독후감 수정을 위한 데이터 조회
+    public FileBookPostDTO findWrittenBookPost(Long bookPostId){ return postMapper.selectWrittenBookPost(bookPostId); };
+    public FileBookPostDTO findWrittenSelectedPost(Long bookPostId) { return postMapper.selectWrittenSelectedPost(bookPostId); };
+
+    // 독후감 내용 수정
+    public void setPost(PostVO postVO){postMapper.updatePost(postVO);};
+    public void setBookPost(BookPostVO bookPostVO){postMapper.updateBookPost(bookPostVO);};
+    public void setSelectedBookPost(SelectedBookPostVO selectedBookPostVO){postMapper.updateSelectedBookPost(selectedBookPostVO);};
 }

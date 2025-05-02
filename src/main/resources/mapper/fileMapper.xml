@@ -22,6 +22,14 @@
         where id = #{id}
     </delete>
 
+    <!--  수정을 위한 첨부파일 조회  -->
+    <select id="selectWrittenBookPostFiles" resultType="bookPostFileDTO">
+        select f.id, f.file_name, f.file_path, f.file_text
+        from tbl_file f
+        join tbl_book_post_file bpf on bpf.id = f.id
+        where bpf.book_post_id = #{bookPostId}
+    </select>
+
     <insert id="insertFile" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_file (file_name, file_path, file_text)
         values (#{fileName}, #{filePath}, #{fileText})

@@ -180,11 +180,30 @@ public class PostController {
     }
 
     // 독후감 수정
-    @GetMapping("bookpost/edit")
-    public String goToBookPostEdit() {
+    @GetMapping("bookpost/edit/{bookPostId}")
+    public String goToBookPostEdit(@PathVariable Long bookPostId, Model model, HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO)session.getAttribute("member");
+        if(member == null) {
+            return "redirect:/login/login";
+        }
+        // 독후감 정보
+        FileBookPostDTO fileBookPostDTO = postService.findWrittenBookPost(bookPostId);
+
+        // 첨부파일 목록
+        List<BookPostFileDTO> fileList = postService.findWrittenBookPostFiles(bookPostId);
+        fileBookPostDTO.setFileList(fileList);
+
+        model.addAttribute("fileBookPostDTO", fileBookPostDTO);
         return "post/post-update";
     }
 
+    @PostMapping("bookpost/edit")
+    public String editBookPost(@ModelAttribute FileBookPostDTO fileBookPostDTO,
+                               @RequestParam("files") List<MultipartFile> files,
+                               @RequestParam(value = "deleteFileIds", required = false)List<Long> deletedFileIds) {
+        postService.setBookPost(fileBookPostDTO, files, deletedFileIds);
+        return "redirect:/post/bookpost/" + fileBookPostDTO.getBookPostId(); // 수정 후 상세페이지로
+    }
 
     // 후원 인증 게시판
     @GetMapping("donate")
