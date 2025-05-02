@@ -50,6 +50,15 @@ public class FileDAO {
         fileMapper.insertReceiverFile(receiverFileVO);
     }
 
+    public FileVO findReceiverFileByPostId(Long postId){
+        return fileMapper.selectReceiverFileByPostId(postId);
+    }
+
+    public List<FileVO> findReceiverFilesByPostId(Long postId){
+        return fileMapper.selectReceiverFilesByPostId(postId);
+    }
+
+
     public void setSponsorInquiryFile(SponsorInquiryFileVO sponsorInquiryFileVO){
         fileMapper.insertSponsorInquiryFile(sponsorInquiryFileVO);
     }
