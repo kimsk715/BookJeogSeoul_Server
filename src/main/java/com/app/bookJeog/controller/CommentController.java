@@ -2,14 +2,13 @@ package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.member.MemberControllerDocs;
 import com.app.bookJeog.domain.dto.CommentDTO;
+import com.app.bookJeog.domain.dto.CommentMentionAlarmDTO;
 import com.app.bookJeog.domain.dto.CommentMentionDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.vo.CommentMentionVO;
 import com.app.bookJeog.domain.vo.CommentVO;
-import com.app.bookJeog.service.CommentService;
-import com.app.bookJeog.service.MemberService;
-import com.app.bookJeog.service.PostService;
+import com.app.bookJeog.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +27,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CommentController implements MemberControllerDocs {
     private final CommentService commentService;
+    private final AlarmServiceImpl alarmServiceImpl;
+    private final AlarmService alarmService;
+    private final CommentMentionAlarmDTO commentMentionAlarmDTO;
 
     @GetMapping("post-comment")
     @ResponseBody
@@ -38,15 +40,21 @@ public class CommentController implements MemberControllerDocs {
         if(session.getAttribute("member") != null){
             PersonalMemberDTO foundMember = (PersonalMemberDTO) session.getAttribute("member");
             commentDTO.setMemberId(foundMember.getId());
+
         }
         CommentVO commentVO = commentDTO.toVO();
         commentService.insertComment(commentVO);
 //        log.info(commentVO.toString());
+
         if(mentionId != null){
             CommentMentionDTO mentionDTO = new CommentMentionDTO();
             mentionDTO.setCommentId(commentVO.getId());
             mentionDTO.setMentionMemberId(mentionId);
             commentService.setMention(mentionDTO.toVO());
+            commentMentionAlarmDTO.setId(mentionDTO.getId());
+            alarmService.mentionAlarm(commentMentionAlarmDTO);
+        }else {
+            alarmService.commentAlarm(commentVO.getId());
         }
 
     }

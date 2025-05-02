@@ -2,33 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.AlarmMapper">
 
-    <!--슈퍼키-->
-    <insert id="insertCommentMention" useGeneratedKeys="true" keyProperty="id">
-        insert into tbl_alarm (alarm_receiver_id, alarm_status)
-        values (#{alarmReceiverId}, #{alarmStatus})
+    <!--슈퍼키 등록-->
+    <insert id="insertAlarm" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_alarm (alarm_receiver_id, alaram_type)
+        values (#{alarmReceiverId}, #{alarmType})
     </insert>
 
-    <!--내가 작성한 게시글댓글알람-->
+    <!--내가 작성한 게시글댓글알람 등록-->
     <insert id="insertCommentAlarm">
-        insert into tbl_comment_alarm(id, comment_id,)
-        values (${alarmId}, ${commentId})
+        insert into tbl_comment_alarm(id, comment_id)
+        values (#{alarmId}, #{commentId})
     </insert>
 
     <!--누군가 맨션알람-->
-    <insert id="selectMentionAlarm">
-        insert into tbl_comment_mention (id, comment_id, mentioned_member_id)
-        values (${alarmId}, ${commentId}, ${mentionMemberId})
+    <insert id="insertMentionAlarm">
+        insert into tbl_comment_metion_alarm (id, comment_id, mentioned_member_id)
+        values (#{alarmId}, #{commentId}, #{mentionMemberId})
     </insert>
 
     <!--팔로잉한사람의 게시글 알림-->
-    <insert id="selectFollowAlarm">
-        insert into tbl_follow_alarm (id, alarm_sender_id)
-        values (${alarmId}, ${alarmSenderId})
+    <insert id="insertPostAlarm">
+        insert into tbl_post_alarm (id, post_id)
+        values (#{alarmId}, #{postId})
     </insert>
 
 
     <!--팔로우 한사람-->
+    <insert id="insertFollowAlarm">
+        insert into tbl_follow_alarm (id, alarm_sender_id)
+        values (#{alarmId}, #{alarmSenderId})
+    </insert>
+
 
     <!--안읽은 알림의 개수 표시-->
-    <!--알림 조회-->
+    <select id="selectAlarmCount" resultType="int">
+        select COUNT(*)
+        from tbl_alarm
+        where alarm_status = 'UNREAD' and alarm_receiver_id = #{receiverID}
+    </select>
+
+
+    <!--읽음 표시-->
+    <update id="updateAlarmRead">
+        update tbl_alarm
+        set alarm_status = 'READ'
+        where id = #{id}
+    </update>
+
+    <!---->
+    <!---->
+
+
+
+
+
+
 </mapper>
