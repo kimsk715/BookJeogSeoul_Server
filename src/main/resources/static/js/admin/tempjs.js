@@ -40,6 +40,7 @@ document.addEventListener("click", (e) => {
         closeModal(sponsorRegisterModal);
         closeModal(adminModal)
         closeModal(discussionModal)
+        closeModal(openAIModal)
     }
 });
 
@@ -50,6 +51,7 @@ document.addEventListener("keydown", (e) => {
         closeModal(sponsorRegisterModal);
         closeModal(adminModal)
         closeModal(discussionModal)
+        closeModal(openAIModal)
     }
 });
 
