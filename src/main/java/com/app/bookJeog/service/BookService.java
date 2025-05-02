@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -34,7 +35,14 @@ public interface BookService {
             urlBuilder.append("/").append(URLEncoder.encode("SeoulLibraryBookSearchInfo", "UTF-8")); // 서비스명
             urlBuilder.append("/").append(URLEncoder.encode("1", "UTF-8")); // 시작위치
             urlBuilder.append("/").append(URLEncoder.encode("1", "UTF-8")); // 종료위치
-            urlBuilder.append("/%20").append("/%20").append("/%20").append("/").append(URLEncoder.encode(String.valueOf(bookIsbn), "UTF-8"));
+            urlBuilder.append("/")
+                    .append(URLEncoder.encode(" ", "UTF-8")) // 도서명 공백
+                    .append("/")
+                    .append(URLEncoder.encode(" ", "UTF-8")) // 저자명 공백
+                    .append("/")
+                    .append(URLEncoder.encode(" ", "UTF-8")) // 출판사명 공백
+                    .append("/")
+                    .append(URLEncoder.encode(String.valueOf(bookIsbn), "UTF-8"));
             URL url = new URL(urlBuilder.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -57,7 +65,11 @@ public interface BookService {
             JsonNode node = objectMapper.readTree(response.toString());
             JsonNode totalCounts = node.path("SeoulLibraryBookSearchInfo").path("list_total_count");
             JsonNode rowNode = node.path("SeoulLibraryBookSearchInfo").path("row");
-            List<BookInfoVO> foundBook = objectMapper.readValue(rowNode.toString(), new TypeReference<List<BookInfoVO>>() {});
+            if (totalCounts.asInt() == 0 || rowNode.isMissingNode()) {
+                return Collections.emptyList();
+            }
+            List<BookInfoVO> foundBook = objectMapper.readValue(rowNode.toString(), new TypeReference<>() {
+            });
             return foundBook;
     }
         catch (Exception e) {

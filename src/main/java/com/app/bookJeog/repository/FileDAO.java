@@ -5,6 +5,8 @@ import com.app.bookJeog.mapper.FileMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class FileDAO {
@@ -26,6 +28,10 @@ public class FileDAO {
 
     public FileVO findDonateCertFileByPostId(Long postId){
         return fileMapper.selectDonateCertFileByPostId(postId);
+    }
+
+    public List<FileVO> findDonateCertFilesByPostId(Long postId){
+        return fileMapper.selectDonateCertFilesByPostId(postId);
     }
 
     public void setMemberInquiryFile(MemberInquiryFileVO memberInquiryFileVO){

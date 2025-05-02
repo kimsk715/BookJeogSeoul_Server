@@ -86,7 +86,7 @@ public class PostController {
                 commentInfoDTO.setMemberName(memberName);
                 commentList.add(commentInfoDTO);
             }
-        log.info(commentList.toString());
+//        log.info(commentList.toString());
         model.addAttribute("comments", commentList);
 
         List<CommentVO> comments = commentService.getAllMembersByPostId(id);
@@ -195,12 +195,10 @@ public class PostController {
                 post.setDonateCertFileName(fileService.getDonateCertFileByPostId(post.getId()).getFileName());
                 post.setDonateCertFilePath(fileService.getDonateCertFileByPostId(post.getId()).getFilePath());
             }
-
-//          // 이미지 추가하면 좀 더 추가
         }
-//        log.info(postList.toString());
+
         model.addAttribute("DonateCerts",postList);
-//        log.info(model.getAttribute("DonateCerts").toString());
+
         return "donation/donate_cert_main";
     }
 
@@ -208,6 +206,16 @@ public class PostController {
     // 후원 인증 게시글    
     @GetMapping("donate/post/{postId}")
     public String goTODonateCertPost(@PathVariable Long postId, Model model, HttpSession session){
+
+        List<FileDTO> postFiles = fileService.getDonateCertFilesByPostId(postId);
+        for(int i=0 ; i<postFiles.size() ; i++){
+            FileDTO fileDTO = postFiles.get(i);
+            fileDTO.setId((long) i+1);
+        }
+        model.addAttribute("files", postFiles);
+
+
+
         model.addAttribute("DonateCert",postService.getDonateCertById(postId));
         model.addAttribute("member", session.getAttribute("member"));
         List<CommentInfoDTO> commentList = new ArrayList<>();
@@ -216,7 +224,6 @@ public class PostController {
             CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
             CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
             commentInfoDTO.setCommentDTO(commentDTO);
-            log.info(commentDTO.toString());
             String memberName = "";
             MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
 
@@ -261,15 +268,12 @@ public class PostController {
         return "donation/donate_cert_write";
     }
 
-    @PostMapping("donate/write")
+    @PostMapping("donate/confirm")
     public RedirectView write(@RequestParam String title, @RequestParam String content, @RequestParam(required = false) List<MultipartFile> files, HttpSession session) {
-        log.info(title);
-        log.info(content);
-        log.info(files.toString());
+        log.info("첨부 파일 배열 : {}",files);
         DonateCertDTO donateCertDTO = new DonateCertDTO();
         SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
         PostDTO postDTO = new PostDTO();
-
         postDTO.setPostType(PostType.DONATE_CERT);
         postDTO.setMemberId(foundMember.getId());
         PostVO postVO = postDTO.toVO();
@@ -284,7 +288,9 @@ public class PostController {
         fileService.uploadDonateCertFiles(postId, files);
 
         return new RedirectView("/post/donate");
+
     }
+
 
     // 후원 대상 게시판
     @GetMapping("receiver")
@@ -292,7 +298,7 @@ public class PostController {
         // 기부 도서 조회
         List<BookDonateInfoDTO> donateList = new ArrayList<>();
         List<BookDonateDTO> tempList = postService.getDonateBooks();
-        log.info(tempList.toString());
+//        log.info(tempList.toString());
         for(BookDonateDTO bookDonateDTO : tempList){
             BookDonateInfoDTO donateInfoDTO = new BookDonateInfoDTO();
             donateInfoDTO.setBookDonateDTO(bookDonateDTO);
@@ -300,13 +306,13 @@ public class PostController {
             donateInfoDTO.setAuthor(bookService.getBookByIsbn(bookDonateDTO.getBookIsbn()).get(0).getAuthor());
             donateList.add(donateInfoDTO);
         }
-        log.info(donateList.toString());
+//        log.info(donateList.toString());
         model.addAttribute("donateList", donateList);
         //  게시글 조회
         List<ReceiverPostDTO> receiverPostDTOList = postService.getReceiverPosts();
 
         model.addAttribute("Posts", receiverPostDTOList);
-        log.info(receiverPostDTOList.toString());
+//        log.info(receiverPostDTOList.toString());
         return "donation/receiver_main";
     }
 
@@ -323,7 +329,7 @@ public class PostController {
             CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
             CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
             commentInfoDTO.setCommentDTO(commentDTO);
-            log.info(commentDTO.toString());
+//            log.info(commentDTO.toString());
             String memberName = "";
             MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
 
@@ -371,7 +377,7 @@ public class PostController {
     public String goToWeekly(Model model){
         List<BookDonateInfoDTO> donateList = new ArrayList<>();
         List<BookDonateDTO> tempList = postService.getDonateBooks();
-        log.info(tempList.toString());
+//        log.info(tempList.toString());
         for(BookDonateDTO bookDonateDTO : tempList){
             BookDonateInfoDTO donateInfoDTO = new BookDonateInfoDTO();
             donateInfoDTO.setBookDonateDTO(bookDonateDTO);

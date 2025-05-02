@@ -64,6 +64,40 @@ const bookLayout = (() =>{
         listBody.innerHTML = text;
         text = ``;
     }
-    return{showBookList : showBookList, showTempSelectedList:showTempSelectedList};
+
+    const showOpenAI = (topics) => {
+
+
+        topics.forEach((topic) => {
+            openAIResult.innerHTML += `
+            <div class="result${topic.index}">
+            <div class="discussion-detail">
+                    <h4>토론 제목</h4>
+                    <textarea class="detail-content" id="apiResult-title" value="${topic.topic}">${topic.topic}</textarea>
+                </div>
+                <div class="discussion-detail">
+                    <h4>토론 내용</h4>
+                    <textarea class="detail-content" id="apiResult-text" value="${topic.description}">${topic.description}</textarea>
+                </div>
+                <div class="discussion-detail">
+                    <h4>ISBN</h4>
+                    <textarea class="detail-content" id="apiResult-book-isbn" value="${topic.isbn}">${topic.isbn}</textarea>
+                </div>
+                <div class="discussion-detail">
+                    <h4>도서명</h4>
+                    <textarea class="detail-content" id="apiResult-book-title" value="${topic.bookTitle}">${topic.bookTitle}</textarea>
+                </div>
+                </div>
+            `
+
+        })
+        const result1 = openAIModal.querySelector(".result1")
+        result1.classList.add("selected")
+        const result2 = openAIModal.querySelector(".result2")
+        result2.style.display = "none";
+        const result3 = openAIModal.querySelector(".result3")
+        result3.style.display = "none";
+    }
+    return{showBookList : showBookList, showTempSelectedList:showTempSelectedList, showOpenAI:showOpenAI};
 
     })();
