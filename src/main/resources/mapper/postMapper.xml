@@ -47,6 +47,7 @@
         from tbl_discussion d
             join tbl_post p
                 on d.id = p.id
+                    order by d.id desc
         <where>
             <if test="keyword != null and keyword != ''">
                 discussion_title like concat('%', #{keyword}, '%') or
@@ -55,6 +56,7 @@
         </where>
                     limit #{rowCount}
                         offset #{offset}
+
     </select>
 
     <!-- 토론 게시글 페이징 처리 카운트-->
@@ -132,7 +134,7 @@
 
     <!-- Quartz 로 가져올 후보들 현재는 테스트라 top20 만 가져옴-->
     <select id="selectTopPosts" resultType="bookPostVO">
-        select p.id, book_post_title, book_post_text, book_post_id, bookPostLikeCount
+        select p.id, book_post_title, book_post_text, bookPostLikeCount
         from tbl_post p join tbl_book_post bp on p.id = bp.id
                         join tbl_selected_book_post sbp on bp.id = sbp.id and sbp.book_post_status = 'PUBLIC' and bp.book_post_is_public = 'PUBLIC'
                         left join (
@@ -603,6 +605,7 @@
         from tbl_discussion d
                  join tbl_post p
                       on d.id = p.id
+                        order by d.id desc
     </select>
 
     <!--토론 게시판 게시글 상세보기 -->

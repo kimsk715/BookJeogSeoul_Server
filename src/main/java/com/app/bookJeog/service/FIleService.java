@@ -22,6 +22,8 @@ public interface FIleService{
 
     public FileDTO getDonateCertFileByPostId(Long postId);
 
+    public List<FileDTO> getDonateCertFilesByPostId(Long postId);
+
     public default FileDTO toFileDTO(FileVO fileVO){
         FileDTO fileDTO = new FileDTO();
         if(fileVO != null){

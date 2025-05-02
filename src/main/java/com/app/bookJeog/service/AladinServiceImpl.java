@@ -1,7 +1,7 @@
 package com.app.bookJeog.service;
 
-import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
@@ -79,6 +80,11 @@ public class AladinServiceImpl implements AladinService {
 
                 // 응답 문자열을 JSON으로 변환
                 JSONObject json = new JSONObject(result);
+                if (!json.has("item")) {
+                    log.warn("Aladin 응답에 'item' 키가 없음: {}", json);
+                    return null;
+                }
+
                 JSONArray items = json.getJSONArray("item");
 
                 // 첫 번째 아이템이 존재하면 반환
