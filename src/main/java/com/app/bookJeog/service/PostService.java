@@ -126,5 +126,7 @@ public interface PostService {
     public Long write(FileBookPostDTO fileBookPostDTO, List<MultipartFile> files);
 
     public void setDonateCertPost(DonateCertVO donateCertVO);
+
+    public void setReceiverPost(ReceiverVO receiverVO);
 }
 

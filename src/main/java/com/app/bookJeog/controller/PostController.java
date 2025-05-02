@@ -213,7 +213,7 @@ public class PostController {
             fileDTO.setId((long) i+1);
         }
         model.addAttribute("files", postFiles);
-
+        model.addAttribute("thumbNail", fileService.getDonateCertFileByPostId(postId));
 
 
         model.addAttribute("DonateCert",postService.getDonateCertById(postId));
@@ -310,6 +310,10 @@ public class PostController {
         model.addAttribute("donateList", donateList);
         //  게시글 조회
         List<ReceiverPostDTO> receiverPostDTOList = postService.getReceiverPosts();
+        for(ReceiverPostDTO receiverPostDTO : receiverPostDTOList){
+            receiverPostDTO.setCommentCount(commentService.getAllCommentByPostId(receiverPostDTO.getId()).size());
+        }
+
 
         model.addAttribute("Posts", receiverPostDTOList);
 //        log.info(receiverPostDTOList.toString());
@@ -320,9 +324,17 @@ public class PostController {
     // 후원 대상 게시글
     @GetMapping("receiver/post/{postId}")
     public String goToReceiverPost(Model model, @PathVariable Long postId, HttpSession session){
-
         model.addAttribute("post", postService.getReceiverPostById(postId));
+        model.addAttribute("thumbNail", fileService.getReceiverFileByPostId(postId));
+        List<FileDTO> postFiles = fileService.getReceiverFilesByPostId(postId);
+        for(int i=0 ; i<postFiles.size() ; i++){
+            FileDTO fileDTO = postFiles.get(i);
+            fileDTO.setId((long) i+1);
+        }
+        model.addAttribute("files", postFiles);
+
         model.addAttribute("member", session.getAttribute("member"));
+        model.addAttribute("sponsorMember", session.getAttribute("sponsorMember"));
         List<CommentInfoDTO> commentList = new ArrayList<>();
         List<CommentVO> tempList = commentService.getAllCommentByPostId(postId);
         for(CommentVO commentVO : tempList) {
@@ -370,6 +382,30 @@ public class PostController {
     public String goToReceiverWrite(){
         return "donation/receiver_write";
     }
+
+    @PostMapping("receiver/confirm")
+    public RedirectView writeReceiverPost(@RequestParam String title, @RequestParam String content, @RequestParam(required = false) List<MultipartFile> files, HttpSession session) {
+        log.info("첨부 파일 배열 : {}",files);
+        ReceiverDTO receiverDTO = new ReceiverDTO();
+        SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+        PostDTO postDTO = new PostDTO();
+        postDTO.setPostType(PostType.RECEIVER);
+        postDTO.setMemberId(foundMember.getId());
+        PostVO postVO = postDTO.toVO();
+        postService.insertPost(postVO);
+        Long postId = postVO.getId();
+        receiverDTO.setId(postId);
+        receiverDTO.setReceiverTitle(title);
+        receiverDTO.setReceiverText(content);
+        log.info(postVO.toString());
+        log.info(receiverDTO.toString());
+        postService.setReceiverPost(receiverDTO.toVO());
+        fileService.uploadReceiverFiles(postId, files);
+
+        return new RedirectView("/post/receiver");
+
+    }
+
 
 
     // 이 주의 기부도서
