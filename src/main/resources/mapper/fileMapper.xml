@@ -15,6 +15,7 @@
         join tbl_donate_cert_file dc
         on f.id = dc.id
         where donate_cert_id = #{postId}
+        order by f.id
         limit 1
     </select>
 
@@ -44,8 +45,25 @@
 
     <insert id="insertReceiverFile">
         insert into tbl_receiver_file(id, receiver_id)
-            values (#{id}, #{postId})
+            values (#{id}, #{receiverId})
     </insert>
+
+    <select id="selectReceiverFileByPostId" resultType="fileVO">
+        select f.id, file_name, file_path, file_text, receiver_id
+        from tbl_file f
+                 join tbl_receiver_file dc
+                      on f.id = dc.id
+        where receiver_id = #{postId}
+        limit 1
+    </select>
+
+    <select id="selectReceiverFilesByPostId" resultType="fileVO">
+        select f.id, file_name, file_path, file_text, receiver_id
+        from tbl_file f
+                 join tbl_receiver_file dc
+                      on f.id = dc.id
+        where receiver_id = #{postId}
+    </select>
 
     <insert id="insertSponsorInquiryFile">
         insert into tbl_sponsor_inquiry_file (id, sponsor_inquiry_id)

@@ -22,12 +22,14 @@ bookTable.addEventListener('change',()=> {
         }
     })
     console.log(chosenBookList)
+
 })
 
 
 // 책 배열을 임시로 저장하도록 하는 배열이 필요.
 bookChooseButton.addEventListener("click", () => {
     checkedCount = chosenBookList.length;
+    console.log(checkedCount)
     if(checkedCount === 0){
         alert("선택된 도서가 없습니다.");
     }
@@ -41,7 +43,7 @@ bookChooseButton.addEventListener("click", () => {
     }
     console.log(checkedCount)
 
-    checkedCount = 0;
+
 });
 //  서버와의 연동
 const pageButtons = document.querySelectorAll(".page-btn");
@@ -83,15 +85,67 @@ monthlyBookButton.addEventListener("click", () => {
     bookService.tempLists(bookLayout.showTempSelectedList)
 });
 
-// const submitListButton = document.querySelector(".submit-list");
-//
-// submitListButton.addEventListener("click", () => {
-//     if (
-//         confirm(
-//             "아래 목록에 있는 도서들이 이 달의 독후감 지정 도서로 결정됩니다. 결정하시려면 '확인'을, 다시 확인하시려면 '취소'를 눌러주세요"
-//         )
-//     ) {
-//         closeModal(monthlyBookListModal);
-//         // 여기에는 나중에 서버와 연동
-//     }
-// });
+const openAIButton = document.querySelector(".openAPI-btn");
+
+const openAIModal = document.querySelector(".openAI-modal");
+const openAIResult = openAIModal.querySelector(".modal-body");
+
+openAIButton.addEventListener('click',(e) => {
+    checkedCount = chosenBookList.length;
+    console.log(checkedCount)
+    if(checkedCount === 1) {
+        let isbn = chosenBookList[0];
+        bookService.openAI(bookLayout.showOpenAI, isbn);
+        openModal(openAIModal);
+
+    }
+    else{
+        e.preventDefault();
+        alert("한 번에 선택할 수 있는 도서는 1개 입니다.")
+    }
+
+})
+
+openAIModal.addEventListener("click",(e) =>{
+    const result1 = openAIModal.querySelector(".result1")
+    const result2 = openAIModal.querySelector(".result2")
+    const result3 = openAIModal.querySelector(".result3")
+    if(e.target.classList.contains("result-1")){
+        result1.classList.add("selected")
+        result2.classList.remove("selected")
+        result3.classList.remove("selected")
+        result1.removeAttribute("style");
+        result2.style.display = "none";
+        result3.style.display = "none";
+    }
+    else if(e.target.classList.contains("result-2")){
+        result1.classList.remove("selected")
+        result2.classList.add("selected")
+        result3.classList.remove("selected")
+        result1.style.display = "none";
+        result2.removeAttribute("style");
+        result3.style.display = "none";
+    }
+    else if(e.target.classList.contains("result-3")){
+        result1.classList.remove("selected")
+        result2.classList.remove("selected")
+        result3.classList.add("selected")
+        result1.style.display = "none";
+        result2.style.display = "none";
+        result3.removeAttribute("style");
+    }
+})
+
+const openAIConfirmButton = document.querySelector(".openAI-confirm-btn");
+
+openAIConfirmButton.addEventListener("click",() => {
+    const title = document.querySelector("div.selected #apiResult-title").value;
+    const text= document.querySelector("div.selected #apiResult-text").value;
+    const isbn = document.querySelector("div.selected #apiResult-book-isbn").value;
+    const bookTitle = document.querySelector("div.selected #apiResult-book-title").value;
+    const param = {title : title, text : text, isbn : isbn, bookTitle : bookTitle};
+    console.log(param);
+    discussionService.addDiscussionPost(param);
+})
+
+

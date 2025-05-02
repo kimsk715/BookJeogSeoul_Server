@@ -1,44 +1,49 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.OpenAPIResult;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+@Slf4j
+@Service
+@RequiredArgsConstructor
+@Transactional(rollbackFor = Exception.class)
 public class ChatResponseParser {
-    public static OpenAPIResult parseResponse(Long isbn, String content) {
-        String bookTitle = null;
-        String topic = null;
-        String description = null;
 
-        // 책 제목 추출: 『제목』 형태
-        Matcher titleMatcher = Pattern.compile("『(.*?)』").matcher(content);
-        if (titleMatcher.find()) {
-            bookTitle = titleMatcher.group(1).trim();
+    private final BookService bookService;
+
+
+    public List<OpenAPIResult> parseResponse(Long isbn, String content) {
+        List<OpenAPIResult> results = new ArrayList<>();
+
+        String bookTitle = bookService.getBookByIsbn(isbn).get(0).getTitle(); // 책 제목이 포함되지 않으면 ISBN 사용
+
+        // 정규식: 번호. "주제" - 설명
+        Pattern pattern = Pattern.compile("(\\d+)\\.\\s*\"(.*?)\"\\s*-\\s*(.*?)(?=\\n\\d+\\.|\\z)", Pattern.DOTALL);
+        Matcher matcher = pattern.matcher(content);
+
+        while (matcher.find()) {
+            Long index = Long.parseLong(matcher.group(1).trim());
+            String topic = matcher.group(2).trim();
+            String description = matcher.group(3).trim();
+
+            OpenAPIResult result = OpenAPIResult.builder()
+                    .index(index)
+                    .isbn(isbn)
+                    .bookTitle(bookTitle)
+                    .topic(topic)
+                    .description(description)
+                    .build();
+
+            results.add(result);
         }
 
-        // 토론 주제 추출
-        Matcher topicMatcher = Pattern.compile("토론 주제[:\\s]*[\"“]?(.*?)[\"”]?\\n").matcher(content);
-        if (topicMatcher.find()) {
-            topic = topicMatcher.group(1).trim();
-        } else {
-            // '**토론 주제 추천:**' 형태 대응
-            topicMatcher = Pattern.compile("\\*\\*토론 주제.*?\\*\\*[:\\s]*[\"“]?(.*?)[\"”]?\\n").matcher(content);
-            if (topicMatcher.find()) {
-                topic = topicMatcher.group(1).trim();
-            }
-        }
-
-        // 설명 추출 (주제 이후 텍스트 전체)
-        if (topic != null) {
-            int idx = content.indexOf(topic);
-            if (idx != -1) {
-                description = content.substring(idx + topic.length())
-                        .replaceAll("^[\\s:\\-\\n\\*]+", "")
-                        .trim();
-            }
-        }
-
-        return new OpenAPIResult(isbn, bookTitle, topic, description);
+        return results;
     }
 }

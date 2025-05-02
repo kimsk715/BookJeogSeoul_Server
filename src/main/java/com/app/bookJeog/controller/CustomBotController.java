@@ -23,8 +23,8 @@ public class CustomBotController {
     private CustomBotService customBotService;
 
     @GetMapping("chat")
-    public List<OpenAPIResult> chat(@RequestParam List<Long> isbnList){
-        return customBotService.getDiscussionTopics(isbnList);
+    public List<OpenAPIResult> chat(@RequestParam Long isbn){
+        return customBotService.getDiscussionTopics(isbn);
     }
 
 //    http://localhost:10000/bot/chat?isbnList=9788936433598&isbnList=9788954682237 출력 예시
