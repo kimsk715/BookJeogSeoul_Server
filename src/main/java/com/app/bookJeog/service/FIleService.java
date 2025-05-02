@@ -37,4 +37,11 @@ public interface FIleService{
 
         return fileDTO;
     }
+
+    public void uploadReceiverFiles(Long postId, List<MultipartFile> files);
+
+    public FileDTO getReceiverFileByPostId(Long postId);
+
+    public List<FileDTO> getReceiverFilesByPostId(Long postId);
+
 }

@@ -116,4 +116,62 @@ public class FileServiceImpl implements FIleService {
         return fileDTOList;
     }
 
+//    후원 대상 게시글 이미지 첨부
+    @Override
+    public void uploadReceiverFiles(Long postId, List<MultipartFile> files) {
+        String todayPath = getPath();
+        String rootPath = "C:/upload/" + todayPath;
+        File directory = new File(rootPath);
+        if(!directory.exists()){
+            directory.mkdirs();
+        }
+        files.forEach((file) -> {
+            try {
+                if(file.getOriginalFilename().equals("")){
+                    return;
+                }
+                UUID uuid = UUID.randomUUID();
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setFileName(uuid.toString() + "_" + file.getOriginalFilename());
+                fileDTO.setFilePath(todayPath);
+                FileVO fileVO = fileDTO.toVO();
+                fileDAO.setFile(fileVO);
+                ReceiverFileDTO receiverFileDTO = new ReceiverFileDTO();
+                receiverFileDTO.setId(fileVO.getId());
+                receiverFileDTO.setReceiverId(postId);
+                fileDAO.setReceiverFile(receiverFileDTO.toVO());
+                file.transferTo(new File(rootPath, uuid.toString() + "_" + file.getOriginalFilename()));
+                if(file.getContentType().startsWith("image")){
+                    FileOutputStream out = new FileOutputStream(new File(rootPath, "t_" + uuid.toString() + "_" + file.getOriginalFilename()));
+                    Thumbnailator.createThumbnail(file.getInputStream(), out, 100, 100);
+                    out.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+    }
+
+    @Override
+    public FileDTO getReceiverFileByPostId(Long postId) {
+        FileVO fileVO = fileDAO.findReceiverFileByPostId(postId);
+        if(fileVO != null){
+            return toFileDTO(fileVO);
+        }
+        else{
+            return null;
+        }
+    }
+
+    @Override
+    public List<FileDTO> getReceiverFilesByPostId(Long postId) {
+        List<FileVO> tempList = fileDAO.findReceiverFilesByPostId(postId);
+        List<FileDTO> fileDTOList = new ArrayList<>();
+        for(FileVO fileVO : tempList){
+            fileDTOList.add(toFileDTO(fileVO));
+        }
+        return fileDTOList;
+    }
+
 }
