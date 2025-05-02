@@ -4,13 +4,21 @@ package com.app.bookJeog.configuration;
 import com.app.bookJeog.interceptor.ImageInterceptor;
 import com.app.bookJeog.interceptor.AlarmInterceptor;
 import com.app.bookJeog.interceptor.TestInterceptor;
+import com.app.bookJeog.service.AlarmService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
+
+
+    private final AlarmInterceptor alarmInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 어디 인터셉터로 가는지!
@@ -20,8 +28,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(new ImageInterceptor()) // 인터셉터 클래스 등록
                 .addPathPatterns("/image/**");
-        registry.addInterceptor(new AlarmInterceptor()).
-                addPathPatterns("/post-conmment");
+        registry.addInterceptor(alarmInterceptor).
+                addPathPatterns("/post/**", "/main/**");
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

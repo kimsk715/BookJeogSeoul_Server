@@ -1,7 +1,9 @@
 package com.app.bookJeog.domain.vo;
 
-import com.app.bookJeog.domain.enumeration.AlarmStatus;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
@@ -11,9 +13,11 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PostAlarmVO extends AlarmVO {
+public class CommentMentionAlarmVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long postId;
+    private Long commentId;
+    private Long mentionMemberId;
+
 
 }
