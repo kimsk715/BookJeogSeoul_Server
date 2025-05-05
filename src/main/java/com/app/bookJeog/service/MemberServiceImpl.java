@@ -1,13 +1,12 @@
 package com.app.bookJeog.service;
 
 
+import com.app.bookJeog.controller.exception.UnauthenticatedException;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.MemberType;
-import com.app.bookJeog.domain.vo.AdminVO;
-import com.app.bookJeog.domain.vo.MemberVO;
-import com.app.bookJeog.domain.vo.PersonalMemberVO;
-import com.app.bookJeog.domain.vo.SponsorMemberVO;
+import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.mapper.MemberMapper;
+import com.app.bookJeog.repository.FavoriteDAO;
 import com.app.bookJeog.repository.MemberDAO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -23,15 +22,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Optional;
-import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +41,8 @@ public class MemberServiceImpl implements MemberService {
     private final HttpSession session;
     private final PersonalMemberVO personalMemberVO;
     private final JavaMailSender javaMailSender;
+    private final FavoriteDAO favoriteDAO;
+    private final AladinService aladinService;
 
 
 
@@ -441,5 +440,63 @@ public class MemberServiceImpl implements MemberService {
     // 독후감 많이쓴 사람
     public List<PersonalMemberPostMemberProfileDTO> selectTopBookPostMemberProfile() {
         return memberDAO.findMemberInfoWithThumbnail();
+    }
+
+    // 개인 마이페이지 데이터
+    @Override
+    public Map<String, Object> getMyPageData(HttpSession session, Model model) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if(member == null){
+            throw new UnauthenticatedException("로그인이 필요한 서비스입니다.");
+        }
+
+        Long memberId = member.getId();
+        String memberNickname = member.getMemberNickName();
+
+        Map<String, Object> result = new HashMap<>();
+
+        // 1. 내가 쓴 전체 독후감 수
+        int totalPosts = memberDAO.findMyBookPostCount(memberId);
+
+        // 2. 이번 달 쓴 독후감 수
+        int monthlyPosts = memberDAO.findMyMonthlyBookPostCount(memberId);
+
+        // 3. 이번 달 평균 독후감 수
+        int averagePosts = memberDAO.findAverageBookPostCount();
+
+        // 4. 내 마일리지
+        int mileage = memberDAO.findMyMileage(memberId);
+
+        // 5. 팔로워 수
+        int followers = favoriteDAO.findMyFollowers(memberId);
+
+        // 6. 팔로우 수
+        int following = favoriteDAO.findMyFollowing(memberId);
+
+        // 7. 찜한 도서 정보 (isbn만 가져와서 API 조회)
+        List<Long> isbnList = favoriteDAO.findMyScrappedBooks(memberId);
+        List<AladinBookDTO> scrappedBooks = aladinService.getBooksByIsbnList(isbnList);
+
+        // 결과 담기
+        result.put("totalPosts", totalPosts);
+        result.put("monthlyPosts", monthlyPosts);
+        result.put("averagePosts", averagePosts);
+        result.put("mileage", mileage);
+        result.put("followers", followers);
+        result.put("following", following);
+        result.put("scrappedBooks", scrappedBooks);
+        result.put("memberNickName", memberNickname);
+
+        // 프사
+        FileDTO profileImage = toFileDTO(memberDAO.findMyProfile(memberId));
+
+        if (profileImage == null) {
+            profileImage = new FileDTO();
+            profileImage.setFilePath("images/common");
+            profileImage.setFileName("user_profile_example.png");
+        }
+        model.addAttribute("file", profileImage);
+
+        return result;
     }
 }

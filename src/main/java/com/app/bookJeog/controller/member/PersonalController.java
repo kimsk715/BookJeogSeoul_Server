@@ -11,10 +11,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -32,7 +38,16 @@ public class PersonalController {
 
     // 개인 마이페이지 조회
     @GetMapping("mypage")
-    public String personalMypage() {
+    public String personalMypage(HttpSession session, Model model) {
+
+        Map<String, Object> myPageData = memberService.getMyPageData(session, model);
+
+        // Map 데이터를 모델에 추가
+        model.addAllAttributes(myPageData);
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        model.addAttribute("member", member);
+
+        log.info(member.toString());
         return "member/mypage";
     }
 
@@ -239,4 +254,26 @@ public class PersonalController {
         memberServiceImpl.insertPersonalMember(memberPersonalMemberDTO);
         return "redirect:/personal/login";
     };
+
+    // 내 프사
+    @GetMapping("profile")
+    @ResponseBody
+    public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,
+                                                  @RequestParam("name") String name) throws IOException {
+        // 이미지 파일 경로 설정
+        File imageFile = new File("C:/upload/" + path.replace("/", File.separator) + "/" + name);
+
+        // 파일이 없으면 기본 이미지 사용
+        if (!imageFile.exists()) {
+            imageFile = new File("src/main/resources/static/images/common/user_profile_example.png");
+        }
+
+        // 이미지 파일을 바이트 배열로 읽기
+        byte[] imageBytes = FileCopyUtils.copyToByteArray(imageFile);
+        log.info("📷 이미지 path:", path, "파일명:", name);
+
+        // 응답 반환
+        return new ResponseEntity<>(imageBytes, HttpStatus.OK);
+
+    }
 }

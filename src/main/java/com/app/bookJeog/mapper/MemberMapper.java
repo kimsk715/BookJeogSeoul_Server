@@ -5,10 +5,7 @@ import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberPostMemberProfileDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
-import com.app.bookJeog.domain.vo.AdminVO;
-import com.app.bookJeog.domain.vo.MemberVO;
-import com.app.bookJeog.domain.vo.PersonalMemberVO;
-import com.app.bookJeog.domain.vo.SponsorMemberVO;
+import com.app.bookJeog.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Optional;
@@ -86,4 +83,19 @@ public interface MemberMapper {
 
     // 독후감 많이쓴 멤버 조회 썸넬 포함
     public List<PersonalMemberPostMemberProfileDTO> selectMemberInfoWithThumbnail ();
+
+    // 내가 쓴 전체 독후감 개수 조회
+    public int selectMyBookPostCount(Long memberId);
+
+    // 내 이번 달 쓴 독후감 수
+    public int selectMyMonthlyBookPostCount(Long memberId);
+
+    // 이번 달 독후감 쓴 회원들의 평균 독후감
+    public int selectAverageBookPostCount();
+
+    // 내 마일리지 조회
+    public int selectMyMileage(Long memberId);
+
+    // 내 프로필 이미지 조회
+    public FileVO selectMyProfile(Long memberId);
 }

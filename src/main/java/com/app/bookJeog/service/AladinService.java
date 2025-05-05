@@ -1,8 +1,11 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.AladinBookDTO;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 
+import java.util.List;
 import java.util.Map;
 
 public interface AladinService {
@@ -29,4 +32,7 @@ public interface AladinService {
 
     // 인기 도서 정보를 Map 타입으로 반환
     Map<String, Object> convertBestBooksToSimpleMap() throws JSONException;
+
+    // 여러개의 도서 정보를 isbn으로 가져와 List로 반환
+    public List<AladinBookDTO> getBooksByIsbnList(List<Long> isbnList);
 }
