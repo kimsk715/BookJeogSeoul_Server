@@ -1,7 +1,10 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.AladinBookDTO;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
+@Slf4j
 public class AladinServiceImpl implements AladinService {
     // 알라딘 API Key
     private static final String ALADIN_API_KEY = "ttbkimsk7151659001";
@@ -247,5 +251,31 @@ public class AladinServiceImpl implements AladinService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    // 여러개의 도서 정보를 isbn으로 가져와 List로 반환
+    public List<AladinBookDTO> getBooksByIsbnList(List<Long> isbnList) {
+        List<AladinBookDTO> result = new ArrayList<>();
+
+        for (Long isbn : isbnList) {
+            try {
+                JSONObject item = fetchItem(isbn);
+                if (item == null) continue;
+
+                AladinBookDTO dto = new AladinBookDTO();
+                dto.setBookIsbn(isbn);
+                dto.setBookTitle(item.optString("title"));
+                dto.setBookAuthor(item.optString("author"));
+                dto.setBookPublisher(item.optString("publisher"));
+                dto.setBookCover(item.optString("cover"));
+
+                result.add(dto);
+            } catch (Exception e) {
+                // 실패한 ISBN은 무시하고 계속 진행
+                continue;
+            }
+        }
+
+        return result;
     }
 }

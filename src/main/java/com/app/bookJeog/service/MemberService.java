@@ -2,17 +2,22 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.MemberType;
+import com.app.bookJeog.domain.vo.FileVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface MemberService {
@@ -179,5 +184,16 @@ public interface MemberService {
     public MemberType getMemberType(Long memberId);
 
     public String getMemberName(Long memberId);
+
+    // 개인 마이페이지 데이터
+    public Map<String, Object> getMyPageData(HttpSession session, Model model);
+
+    public default FileDTO toFileDTO(FileVO fileVO) {
+        FileDTO fileDTO = new FileDTO();
+        fileDTO.setId(fileVO.getId());
+        fileDTO.setFileName(fileVO.getFileName());
+        fileDTO.setFilePath(fileVO.getFilePath());
+        return fileDTO;
+    }
 }
 

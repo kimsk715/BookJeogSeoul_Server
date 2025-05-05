@@ -121,11 +121,11 @@
                                 <div class="profile-info-wrapper">
                                     <div class="profile-info">
                                         <div class="profile-image-wrapper">
-                                            <img
-                                                src="/images/post/user_profile_example.png"
-                                                alt="프로필 이미지"
-                                                class="profile-image"
-                                            />
+                                            <img class="profile-image"
+                                                 th:src="@{/personal/profile(path=${file.filePath}, name=${file.fileName})}"
+                                                 alt="프로필 이미지"
+                                                 onerror="this.src='/images/common/user_profile_example.png'" />
+                                            <a href="/personal/mypage/password-check">
                                             <button class="edit-button">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -147,13 +147,15 @@
                                                     >프로필 이미지 편집</span
                                                 >
                                             </button>
+                                            </a>
                                         </div>
                                         <div class="profile-metainfo">
                                             <div
                                                 class="profile-nickname-wrapper"
                                             >
                                                 <span class="profile-nickname"
-                                                    >고양이집사알파카</span
+                                                      th:text="${member.memberName}"
+                                                    >북적이</span
                                                 >
                                             </div>
                                             <div class="follow-info">
@@ -162,6 +164,7 @@
                                                         >팔로워</span
                                                     >
                                                     <span class="count-text"
+                                                          th:text="${followers}"
                                                         >0</span
                                                     ></span
                                                 >
@@ -170,7 +173,8 @@
                                                         >팔로잉</span
                                                     >
                                                     <span class="count-text"
-                                                        >2</span
+                                                          th:text="${following}"
+                                                        >0</span
                                                     >
                                                 </span>
                                             </div>
@@ -178,21 +182,21 @@
                                     </div>
                                 </div>
                                 <div class="content-count-wrapper">
-                                    <a href="" class="posts-button">
+                                    <a href="/personal/mypage/book-post" class="posts-button">
                                         <dl class="content-count-info">
                                             <dt class="content-label">
                                                 독후감
                                             </dt>
-                                            <dd class="content-count">2</dd>
+                                            <dd class="content-count" th:text="${totalPosts}">0</dd>
                                         </dl>
                                     </a>
                                     <hr class="separater" />
-                                    <a href="" class="mileage-button">
+                                    <a href="/personal/mypage/mileage" class="mileage-button">
                                         <dl class="content-count-info">
                                             <dt class="content-label">
                                                 책갈피
                                             </dt>
-                                            <dd class="content-count">89</dd>
+                                            <dd class="content-count" th:text="${mileage}">0</dd>
                                         </dl>
                                     </a>
                                 </div>
@@ -200,6 +204,7 @@
                                     <button
                                         type="button"
                                         class="writing-button"
+                                        onclick="location.href='/post/bookpost/write'"
                                     >
                                         <span>
                                             <svg
@@ -221,7 +226,7 @@
                                             글쓰기
                                         </span>
                                     </button>
-                                    <a href="" class="add-book">
+                                    <a href="/post/discussion" class="add-book">
                                         <span>&nbsp;북적북적</span>
                                     </a>
                                 </div>
@@ -232,250 +237,35 @@
                             <section class="scrap-book-list">
                                 <div class="title-wrapper">
                                     <h3 class="title-text">도서</h3>
-                                    <a href="" class="books-button">전체보기</a>
+                                    <a href="/personal/mypage/scrap" class="books-button">전체보기</a>
                                 </div>
                                 <div class="swiper swiper-horizontal">
                                     <div class="swiper-wrapper">
-                                        <div
-                                            class="swiper-slide slide-item"
-                                            style="margin-right: 12px"
-                                        >
-                                            <div class="book-wrapper">
-                                                <div class="book-wrapper-inner">
-                                                    <div
-                                                        class="book-picture-wrapper"
-                                                    >
-                                                        <button
-                                                            class="book-picture-link"
-                                                        >
-                                                            <div
-                                                                class="book-badges"
-                                                            >
-                                                                <div
-                                                                    class="book-badges-box"
-                                                                >
-                                                                    <img
-                                                                        src="/images/member/book-like-badge.png"
-                                                                        alt="찜한책"
-                                                                        class="book-badge-image"
-                                                                    />
+                                        <th:block th:each="book : ${scrappedBooks}">
+                                            <div class="swiper-slide slide-item" style="margin-right: 12px">
+                                                <div class="book-wrapper">
+                                                    <div class="book-wrapper-inner">
+                                                        <div class="book-picture-wrapper">
+                                                            <button class="book-picture-link" data-isbn="[[${book.bookIsbn}]]">
+                                                                <div class="book-picture">
+                                                                    <picture class="styled-picture">
+                                                                        <img th:src="${book.bookCover}"
+                                                                             alt="도서 이미지"
+                                                                             onerror="this.src='/images/common/default-book-cover.png'" />
+                                                                    </picture>
                                                                 </div>
-                                                            </div>
-                                                            <div
-                                                                class="book-picture"
-                                                            >
-                                                                <picture
-                                                                    class="styled-picture"
-                                                                >
-                                                                    <img
-                                                                        src="/images/book/book_thumbnail.example.png"
-                                                                        alt="도서 이미지"
-                                                                    />
-                                                                </picture>
+                                                            </button>
+                                                        </div>
+                                                        <button type="button" class="book-metalink" data-isbn="[[${book.bookIsbn}]]">
+                                                            <div class="book-meta">
+                                                                <p class="styled-book-name" th:text="${book.bookTitle}">도서 제목</p>
+                                                                <p class="styled-book-author" th:text="${book.bookAuthor + ' 지음'}">작가</p>
                                                             </div>
                                                         </button>
                                                     </div>
-                                                    <button
-                                                        type="button"
-                                                        class="book-metalink"
-                                                    >
-                                                        <div class="book-meta">
-                                                            <p
-                                                                class="styled-book-name"
-                                                            >
-                                                                용의자 X의 헌신
-                                                            </p>
-                                                            <p
-                                                                class="styled-book-author"
-                                                            >
-                                                                히가시노 게이고
-                                                                지음
-                                                            </p>
-                                                        </div>
-                                                        </div>
-                                                    </button>
                                                 </div>
                                             </div>
-                                            <div
-                                            class="swiper-slide slide-item"
-                                            style="margin-right: 12px"
-                                        >
-                                            <div class="book-wrapper">
-                                                <div class="book-wrapper-inner">
-                                                    <div
-                                                        class="book-picture-wrapper"
-                                                    >
-                                                        <button
-                                                            class="book-picture-link"
-                                                        >
-                                                            <div
-                                                                class="book-badges"
-                                                            >
-                                                                <div
-                                                                    class="book-badges-box"
-                                                                >
-                                                                    <img
-                                                                        src="/images/member/book-like-badge.png"
-                                                                        alt="찜한책"
-                                                                        class="book-badge-image"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="book-picture"
-                                                            >
-                                                                <picture
-                                                                    class="styled-picture"
-                                                                >
-                                                                    <img
-                                                                        src="/images/book/book_thumbnail.example.png"
-                                                                        alt="도서 이미지"
-                                                                    />
-                                                                </picture>
-                                                            </div>
-                                                        </button>
-                                                    </div>
-                                                    <button
-                                                        type="button"
-                                                        class="book-metalink"
-                                                    >
-                                                        <div class="book-meta">
-                                                            <p
-                                                                class="styled-book-name"
-                                                            >
-                                                                용의자 X의 헌신
-                                                            </p>
-                                                            <p
-                                                                class="styled-book-author"
-                                                            >
-                                                                히가시노 게이고
-                                                                지음
-                                                            </p>
-                                                        </div>
-                                                        </div>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div
-                                            class="swiper-slide slide-item"
-                                            style="margin-right: 12px"
-                                        >
-                                            <div class="book-wrapper">
-                                                <div class="book-wrapper-inner">
-                                                    <div
-                                                        class="book-picture-wrapper"
-                                                    >
-                                                        <button
-                                                            class="book-picture-link"
-                                                        >
-                                                            <div
-                                                                class="book-badges"
-                                                            >
-                                                                <div
-                                                                    class="book-badges-box"
-                                                                >
-                                                                    <img
-                                                                        src="/images/member/book-like-badge.png"
-                                                                        alt="찜한책"
-                                                                        class="book-badge-image"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="book-picture"
-                                                            >
-                                                                <picture
-                                                                    class="styled-picture"
-                                                                >
-                                                                    <img
-                                                                        src="/images/book/book_thumbnail.example.png"
-                                                                        alt="도서 이미지"
-                                                                    />
-                                                                </picture>
-                                                            </div>
-                                                        </button>
-                                                    </div>
-                                                    <button
-                                                        type="button"
-                                                        class="book-metalink"
-                                                    >
-                                                        <div class="book-meta">
-                                                            <p
-                                                                class="styled-book-name"
-                                                            >
-                                                                용의자 X의 헌신
-                                                            </p>
-                                                            <p
-                                                                class="styled-book-author"
-                                                            >
-                                                                히가시노 게이고
-                                                                지음
-                                                            </p>
-                                                        </div>
-                                                        </div>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div
-                                            class="swiper-slide slide-item"
-                                            style="margin-right: 12px"
-                                        >
-                                            <div class="book-wrapper">
-                                                <div class="book-wrapper-inner">
-                                                    <div
-                                                        class="book-picture-wrapper"
-                                                    >
-                                                        <button
-                                                            class="book-picture-link"
-                                                        >
-                                                            <div
-                                                                class="book-badges"
-                                                            >
-                                                                <div
-                                                                    class="book-badges-box"
-                                                                >
-                                                                    <img
-                                                                        src="/images/member/book-like-badge.png"
-                                                                        alt="찜한책"
-                                                                        class="book-badge-image"
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                            <div
-                                                                class="book-picture"
-                                                            >
-                                                                <picture
-                                                                    class="styled-picture"
-                                                                >
-                                                                    <img
-                                                                        src="/images/book/book_thumbnail.example.png"
-                                                                        alt="도서 이미지"
-                                                                    />
-                                                                </picture>
-                                                            </div>
-                                                        </button>
-                                                    </div>
-                                                    <button
-                                                        type="button"
-                                                        class="book-metalink"
-                                                    >
-                                                        <div class="book-meta">
-                                                            <p
-                                                            class="styled-book-name"
-                                                        >
-                                                            용의자 X의 헌신
-                                                        </p>
-                                                        <p
-                                                            class="styled-book-author"
-                                                        >
-                                                            히가시노 게이고
-                                                            지음
-                                                        </p>
-                                                        </div>
-                                                        </div>
-                                                    </button>
-                                                </div>
-                                            </div>
+                                        </th:block>
                                         </div>
                                     </div>
                             </section>
@@ -483,36 +273,38 @@
                                 <div class="post-title-wrapper">
                                     <h3 class="post-title-text">
                                         이번 달
-                                        <strong class="average">2개</strong>
+                                        <strong class="average" th:text="${monthlyPosts} + '개'">0개</strong>
                                         독후감 썼어요
                                     </h3>
-                                    <p class="title-caption">북적 회원들은 한 달 평균 2개 써요</p>
+                                    <p class="title-caption">북적 회원들은 한 달 평균 <span th:text="${averagePosts} + '개'">0개</span> 써요</p>
                                 </div>
                                 <div>
                                     <ul class="report-list">
                                         <li>
                                             <span class="target">나</span>
                                             <div class="progress-bg">
-                                                <div class="progress-state" style="width: 40%;"></div>
+                                                <div class="progress-state mine" style="width: 40%;"
+                                                     th:data-monthly-posts="${monthlyPosts}"
+                                                     th:data-average-posts="${averagePosts}"></div>
                                             </div>
-                                            <span class="count">2개</span>
+                                            <span class="count" th:text="${monthlyPosts} + '개'">0개</span>
                                         </li>
                                         <li>
                                             <span class="target">북적</span>
                                             <div class="progress-bg">
                                                 <div class="progress-state" style="width: 40%"></div>
                                             </div>
-                                            <span class="count">2개</span>
+                                            <span class="count" th:text="${averagePosts + '개'}">0개</span>
                                         </li>
                                     </ul>
                                 </div>
                             </section>
-                        </div>
                         </div>
                     </div>
                 </div>
             </main>
         </div>
     </body>
-    <script src="/js/member/mypage.js"></script>
+    <script src="/js/member/mypage-layout.js"></script>
+    <script src="/js/member/mypage-event.js"></script>
 </html>
