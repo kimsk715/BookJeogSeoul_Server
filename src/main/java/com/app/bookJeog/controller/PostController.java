@@ -184,10 +184,11 @@ public class PostController {
     public String goToBookPostEdit(@PathVariable Long bookPostId, Model model, HttpSession session) {
         PersonalMemberDTO member = (PersonalMemberDTO)session.getAttribute("member");
         if(member == null) {
-            return "redirect:/login/login";
+            return "redirect:/personal/login";
         }
         // 독후감 정보
         FileBookPostDTO fileBookPostDTO = postService.findWrittenBookPost(bookPostId);
+        log.info("fileBookPostDTO = {}", fileBookPostDTO);
 
         // 첨부파일 목록
         List<BookPostFileDTO> fileList = postService.findWrittenBookPostFiles(bookPostId);
@@ -199,9 +200,9 @@ public class PostController {
 
     @PostMapping("bookpost/edit")
     public String editBookPost(@ModelAttribute FileBookPostDTO fileBookPostDTO,
-                               @RequestParam("files") List<MultipartFile> files,
                                @RequestParam(value = "deleteFileIds", required = false)List<Long> deletedFileIds) {
-        postService.setBookPost(fileBookPostDTO, files, deletedFileIds);
+        log.info("📥 DTO 값 확인: " + fileBookPostDTO);
+        postService.setBookPost(fileBookPostDTO, deletedFileIds);
         return "redirect:/post/bookpost/" + fileBookPostDTO.getBookPostId(); // 수정 후 상세페이지로
     }
 

@@ -59,4 +59,10 @@ public class FileDAO {
     // 독후감 첨부파일 삭제(수정용)
     public void deleteFiles(Long id){fileMapper.deleteFiles(id);};
     public void deleteBookPostFiles(Long id){fileMapper.deleteBookPostFiles(id);};
+
+    // 독후감 첨부파일 메모만 변경
+    public void setFileText(String fileText, Long id){fileMapper.updateFileText(fileText, id);};
+
+    // 독후감 첨부파일 이미지만 변경
+    public void updateFile(FileVO fileVO){fileMapper.updateFile(fileVO);}
 }

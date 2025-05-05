@@ -235,10 +235,11 @@ public class AladinServiceImpl implements AladinService {
         try {
             JSONObject json = getBookInfo(isbn);
             Map<String, Object> result = new HashMap<>();
-            result.put("isbn", json.optLong("isbn"));
+            result.put("isbn", json.optLong("isbn13"));
             result.put("title", json.optString("title"));
             result.put("author", json.optString("author"));
             result.put("publisher", json.optString("publisher"));
+            result.put("pubDate", json.optString("pubDate"));
             result.put("description", json.optString("description"));
             result.put("cover", json.optString("cover"));
             return result;

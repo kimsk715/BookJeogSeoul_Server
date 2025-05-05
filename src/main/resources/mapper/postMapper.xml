@@ -704,19 +704,19 @@
     <!--  독후감 수정  -->
     <update id="updatePost">
         update tbl_post set updatedDate = current_timestamp
-        where id = #{bookPostId}
+        where id = #{id}
     </update>
 
     <update id="updateBookPost">
         update tbl_book_post set book_post_title = #{bookPostTitle},
                                  book_post_text = #{bookPostText},
                                 book_post_is_public = #{bookPostIsPublic}
-        where id = #{bookPostId}
+        where id = #{id}
     </update>
 
     <update id="updateSelectedBookPost">
         update tbl_selected_book_post set book_post_status = #{bookPostStatus}
-        where id = #{bookPostId}
+        where id = #{id}
     </update>
 
     <insert id="insertDonateCertPost" useGeneratedKeys="true" keyProperty="id">

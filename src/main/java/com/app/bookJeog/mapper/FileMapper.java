@@ -19,6 +19,12 @@ public interface FileMapper {
     public void deleteFiles(Long id);
     public void deleteBookPostFiles(Long id);
 
+    // 독후감 첨부파일 메모만 변경
+    public void updateFileText(String fileText, Long id);
+
+    // 첨부파일 이미지만 수정
+    public void updateFile(FileVO fileVO);
+
     public void insertFile(FileVO fileVO);
 
     public void insertDonateCertFile(DonateCertFileVO donateCertFileVO);
