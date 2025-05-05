@@ -3,8 +3,20 @@
 <mapper namespace="com.app.bookJeog.mapper.FileMapper">
     <!--  독후감 첨부파일 넣기, 수정(삭제)  -->
     <insert id="insertFiles" useGeneratedKeys="true" keyProperty="id">
-        insert into tbl_file (file_name, file_path, file_text)
-        values (#{fileName}, #{filePath}, #{fileText})
+        insert into tbl_file (
+        file_name,
+        file_path
+        <if test="fileText != null and fileText != ''">
+            , file_text
+        </if>
+        )
+        values (
+        #{fileName},
+        #{filePath}
+        <if test="fileText != null and fileText != ''">
+            , #{fileText}
+        </if>
+        )
     </insert>
 
     <insert id="insertBookPostFiles">
@@ -22,6 +34,12 @@
         where id = #{id}
     </delete>
 
+    <update id="updateFileText">
+        update tbl_file
+        set file_text = #{fileText}
+        where id = #{id}
+    </update>
+
     <!--  수정을 위한 첨부파일 조회  -->
     <select id="selectWrittenBookPostFiles" resultType="bookPostFileDTO">
         select f.id, f.file_name, f.file_path, f.file_text
@@ -34,6 +52,14 @@
         insert into tbl_file (file_name, file_path, file_text)
         values (#{fileName}, #{filePath}, #{fileText})
     </insert>
+
+    <!--  이미지 수정만  -->
+    <update id="updateFile">
+        update tbl_file
+        set file_name = #{fileName}, file_path = #{filePath}
+        WHERE id = #{id}
+    </update>
+
     <insert id="insertDonateCertFile">
         insert into tbl_donate_cert_file (id, donate_cert_id)
         values (#{id}, #{donateCertId})

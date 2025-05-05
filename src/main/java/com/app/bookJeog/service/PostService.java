@@ -128,7 +128,7 @@ public interface PostService {
     public void setDonateCertPost(DonateCertVO donateCertVO);
 
     // 독후감 수정
-    public void setBookPost(FileBookPostDTO fileBookPostDTO, List<MultipartFile> files, List<Long> deletedFileIds);
+    public void setBookPost(FileBookPostDTO fileBookPostDTO, List<Long> deletedFileIds);
 
     // 독후감 수정을 위한 정보 조회
     FileBookPostDTO findWrittenBookPost(Long bookPostId);

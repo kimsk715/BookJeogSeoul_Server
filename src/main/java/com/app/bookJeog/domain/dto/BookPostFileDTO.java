@@ -25,7 +25,7 @@ public class BookPostFileDTO {
     private String filePath;
     private String fileText;
 
-    private MultipartFile multipartFile; // ✅ 실제 업로드용 파일 추가
+    private MultipartFile multipartFile; // 실제 업로드용 파일 추가
 
     // 파일 자체 insert용
     public FileVO toFileVO() {
