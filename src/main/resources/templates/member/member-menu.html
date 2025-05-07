@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>관리 | 북적서울</title>
+    <link
+            rel="shortcut icon"
+            href="/images/common/favicon.ico"
+            type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/css/main/header.css" />
+    <link
+            rel="stylesheet"
+            href="/css/main/global-settings.css"
+    />
+    <link rel="stylesheet" href="/css/member/member-menu.css">
+</head>
+<body>
+    <div id="wrap">
+        <!-- 헤더 시작 -->
+        <div th:replace="~{main/header :: header-sc}"></div>
+        <!-- 헤더끝 -->
+        <section class="content">
+            <div class="inner-content">
+                <div class="product">
+                    <p class="nickname mds-font-headline" th:text="${session.member.memberNickName}">닉네임</p>
+                </div>
+                <div class="menu-list">
+                    <p class="menu-title">서비스 설정</p>
+                    <ul>
+                        <li>
+                            <a href="/personal/mypage/password-check">내 정보 관리</a>
+                        </li>
+                        <li>
+                            <a href="/personal/leave">탈퇴하기</a>
+                        </li>
+                    </ul>
+                    <p class="menu-title">서비스 관리</p>
+                    <ul>
+                        <li>
+                            <a href="/personal/mypage/mileage">책갈피 / 마일리지 관리</a>
+                        </li>
+                    </ul>
+                    <p class="menu-title" style="display: none">서비스 안내</p>
+                    <ul style="display: none">
+                        <li>
+                            <a href="/">문의하기</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btn-area">
+                    <button data-v-f682a1da="" type="button" class="logout">로그아웃</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

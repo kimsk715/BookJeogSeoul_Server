@@ -658,4 +658,34 @@ public class PostController {
         // 응답 반환
         return new ResponseEntity<>(imageBytes, HttpStatus.OK);
     }
+
+    // 개인 마이페이지 - 내 독후감(데이터)
+    @GetMapping("my-book-post")
+    @ResponseBody
+    public List<FileBookPostDTO> getMyBookPosts(
+            HttpSession session,
+            @RequestParam(value = "sort", defaultValue = "recent") String sort,
+            @RequestParam(value = "offset", defaultValue = "0") int offset) {
+
+        PersonalMemberDTO member = (PersonalMemberDTO)session.getAttribute("member");
+        Long memberId = member.getId();
+        if (memberId == null) {
+            throw new IllegalStateException("로그인 정보가 없습니다.");
+        }
+
+        return postService.getMyBookPosts(memberId, sort, offset);
+    }
+
+    // 독후감 삭제
+    @DeleteMapping("/delete/{postId}")
+    @ResponseBody
+    public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
+        try {
+            postService.deleteBookPost(postId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }

@@ -1,0 +1,162 @@
+* {
+    letter-spacing: -.6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    vertical-align: top;
+    border-style: none;
+    pointer-events: none;
+}
+
+i {
+    font-style: normal;
+}
+
+b, em, strong {
+    font-weight: 700;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0;
+}
+
+button{
+    background: transparent;
+}
+
+button, input {
+    background-color: transparent;
+    border: 0;
+}
+
+#wrap{
+    height: 100%;
+}
+
+[class*=" mds-"], [class^=mds-] {
+    font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
+    border: 0;
+    letter-spacing: -.6px;
+}
+
+[class*=" mds-icon"]:before, [class^=mds-icon]:before {
+    font-family: icon;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[type=button], [type=reset], [type=submit], button {
+    cursor: pointer;
+    border: 0;
+    background-color: transparent;
+    -webkit-appearance: button;
+    outline: 0;
+}
+
+@media(max-width: 999px){
+    .top-header{
+        display: none;
+    }
+}
+
+.inner-content {
+    position: relative;
+    margin: 0 auto;
+    max-width: var(--management-width);
+    background-size: cover;
+    background-position: 50%;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--ui-background);
+}
+
+.product {
+    padding: 24px 16px 0;
+    position: relative;
+    margin-bottom: 24px;
+}
+
+.btn-area{
+    padding: 16px 16px 66px;
+    background: var(--ui-02);
+}
+
+.mds-font-headline {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.product .nick-name {
+    margin-bottom: 20px;
+}
+
+.menu-title {
+    color: var(--text-04);
+    font-weight: 700;
+    font-size: 13px;
+    background: var(--ui-02);
+    height: 32px;
+    line-height: 32px;
+    padding-left: 16px;
+}
+
+.menu-list li{
+    height: 48px;
+    line-height: 48px;
+    border-bottom: 1px solid var(--GTrans-02);
+    font-size: 16px;
+    padding-left: 16px;
+    position: relative;
+}
+
+.menu-list li a {
+    display: block;
+    position: relative;
+    color: var(--text-01);
+}
+
+.menu-list li a[data-v-f682a1da]:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: url(/static/images/member/right-arrow.svg) 0 0 no-repeat;
+    background-size: cover;
+}
+
+.btn-area button{
+    background: var(--cancel-press);
+    font-size: 16px;
+    height: 48px;
+    line-height: 48px;
+    display: block;
+    width: 100%;
+    border-radius: 4px;
+    color: var(--ui-02);
+}
