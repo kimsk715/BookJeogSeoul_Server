@@ -1,7 +1,10 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.controller.exception.UnauthenticatedException;
+import com.app.bookJeog.domain.dto.FollowAlarmDTO;
 import com.app.bookJeog.domain.dto.MemberDTO;
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.service.AlarmService;
 import com.app.bookJeog.service.FavoriteService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class FavoriteController {
     private final FavoriteService favoriteService;
+    private final AlarmService alarmService;
 
     // 특정 회원의 스크랩 여부 조회
     @GetMapping("/book/scrap-check")
@@ -76,8 +80,12 @@ public class FavoriteController {
     // 특정 회원 팔로우하기
     @PostMapping("/member/follow-add")
     @ResponseBody
-    public void follow(@RequestParam Long memberId){
+    public void follow(@RequestParam Long memberId, HttpSession session){
+        FollowAlarmDTO followAlarmDTO = new FollowAlarmDTO();
+        PersonalMemberDTO personalMemberDTO = (PersonalMemberDTO) session.getAttribute("member");
         favoriteService.setMemberFollow(memberId);
+        followAlarmDTO.setAlarmSenderId(memberId);
+        alarmService.followAlarm(personalMemberDTO.getId(), followAlarmDTO);
     }
 
     // 특정 회원 팔로우 취소

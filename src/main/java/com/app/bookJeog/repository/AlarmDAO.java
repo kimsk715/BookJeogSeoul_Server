@@ -1,12 +1,12 @@
 package com.app.bookJeog.repository;
 
-import com.app.bookJeog.domain.dto.MyAlarmDTO;
-import com.app.bookJeog.domain.enumeration.AlarmStatus;
+import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.mapper.AlarmMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -60,6 +60,30 @@ public class AlarmDAO {
     // 읽은 알람
     public void findAlarmRead(Long receiverId) {
         alarmMapper.updateAlarmRead(receiverId);
+    }
+
+
+    // 팔로우 조회
+    public List<AlarmFollowAlarmDTO> findFollowAlarms(Long memberId) {
+        return alarmMapper.selectFollowAlarms(memberId);
+    }
+
+
+    // 게시글에 댓글 조회
+    public List<AlarmCommentAlarmDTO> findCommentAlarm(Long memberId) {
+        return alarmMapper.selectCommentAlarm(memberId);
+    }
+
+
+    // 멘션 조회
+    public List<AlarmMentionAlarmDTO> findMentionAlarm(Long memberId) {
+        return alarmMapper.selectMention(memberId);
+    }
+
+
+    // 팔로우한사람의 게시글 조회
+    public List<PostAlarmPersonalMemberDTO> findPostAlarms(Long memberId) {
+        return alarmMapper.selectPostAlarms(memberId);
     }
 
 }
