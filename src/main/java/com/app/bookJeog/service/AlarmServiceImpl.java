@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.AlarmType;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.repository.AlarmDAO;
 import com.app.bookJeog.repository.MemberDAO;
@@ -108,6 +109,7 @@ public class AlarmServiceImpl implements AlarmService {
 
 
         alarmDTO.setAlarmReceiverId(memberId);
+        alarmDTO.setAlarmType(AlarmType.FOLLOW);
         alarmVO = toAlarmVO(alarmDTO);
 
         alarmDAO.setAlarm(alarmVO);

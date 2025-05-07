@@ -71,6 +71,7 @@
                                             type="text"
                                             placeholder="필명 입력"
                                             class="input-text"
+                                            th:value="${member.memberNickName}"
                                         />
                                     </div>
                                     <button type="button" class="button">
@@ -93,9 +94,11 @@
                                                 type="text"
                                                 placeholder="이메일 주소 입력"
                                                 class="input-text"
+                                                th:value="${member.memberEmail}"
+                                                disabled
                                             />
                                         </div>
-                                        <button type="button" class="button">
+                                        <button type="button" class="button" style="display: none">
                                             변경하기
                                         </button>
                                     </div>
@@ -115,6 +118,7 @@
                                                 placeholder="휴대폰 번호 입력( '-' 제외)"
                                                 disabled="disabled"
                                                 class="input-text"
+                                                th:value="${member.memberPhone}"
                                             />
                                         </div>
                                     </div>
@@ -126,5 +130,6 @@
             </section>
         </div>
     </body>
+    <script src="/js/member/my-profile-service.js"></script>
     <script src="/js/member/my-profile-event.js"></script>
 </html>
