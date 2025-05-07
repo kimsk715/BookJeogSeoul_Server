@@ -1,6 +1,9 @@
 package com.app.bookJeog.domain.vo;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +13,11 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class BookPostLikeVO extends Period {
+public class CommentMentionAlarmVO extends Period {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long bookPostId;
-    private Long memberId;
+    private Long commentId;
+    private Long mentionMemberId;
+
+
 }

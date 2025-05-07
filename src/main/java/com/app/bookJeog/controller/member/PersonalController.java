@@ -231,7 +231,7 @@ public class PersonalController {
 
     // 회원가입
     @GetMapping("register-member")
-    public String goToRegisterMember(PersonalMemberVO personalMemberVO) {
+    public String goToRegisterMember() {
         return "register/register-member";
     }
 

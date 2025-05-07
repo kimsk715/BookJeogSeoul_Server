@@ -1,9 +1,7 @@
 package com.app.bookJeog.domain.dto;
 
-import com.app.bookJeog.domain.enumeration.BookPostReportStatus;
-import com.app.bookJeog.domain.enumeration.BookPostReportType;
-import com.app.bookJeog.domain.vo.BookPostReportVO;
-import com.app.bookJeog.domain.vo.CommentAlarmVO;
+
+import com.app.bookJeog.domain.vo.CommentMentionVO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,15 +13,19 @@ import org.springframework.stereotype.Component;
 @Setter
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class CommentAlarmDTO {
+public class CommentMentionAlarmDTO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long commentId;
+    private Long mentionMemberId;
 
-    public CommentAlarmVO toVO() {
-        return CommentAlarmVO.builder()
+    public CommentMentionVO toVO() {
+        return CommentMentionVO.builder()
                 .id(id)
                 .commentId(commentId)
+                .mentionMemberId(mentionMemberId)
                 .build();
     }
+
+
 }

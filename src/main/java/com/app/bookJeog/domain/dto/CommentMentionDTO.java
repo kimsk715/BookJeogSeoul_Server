@@ -18,13 +18,13 @@ public class CommentMentionDTO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long commentId;
-    private Long mentionMemberId;
+    private Long mentionedMemberId;
 
     public CommentMentionVO toVO() {
         return CommentMentionVO.builder()
                 .id(id)
                 .commentId(commentId)
-                .mentionMemberId(mentionMemberId)
+                .mentionMemberId(mentionedMemberId)
                 .build();
     }
 

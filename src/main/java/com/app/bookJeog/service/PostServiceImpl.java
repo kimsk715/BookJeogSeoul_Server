@@ -40,10 +40,19 @@ public class PostServiceImpl implements PostService {
     private final FileDAO fileDAO;
     private final BookPostFileDTO bookPostFileDTO;
 
+    
+    // 게시물 id 로 memberID 가져옴
+    @Override
+    public Optional<PostVO> selectMemberIdByPostId(Long postId) {
+        return Optional.ofNullable(postDAO.findMemberIdByPostId(postId));
+    }
+
     @Override
     public List<BookPostVO> getAllBookPost(Pagination pagination) {
         return postDAO.findAllBookPost(pagination);
     }
+
+
 
     @Override
     public List<DiscussionVO> getAllDiscussionPost(Pagination pagination) {
@@ -416,7 +425,6 @@ public class PostServiceImpl implements PostService {
         postDAO.insertDonateCertPost(donateCertVO);
     }
 
-<<<<<<< HEAD
     // 독후감 수정을 위한 데이터 조회
     public FileBookPostDTO findWrittenBookPost(Long bookPostId) {
         FileBookPostDTO fileBookPostDTO = postDAO.findWrittenBookPost(bookPostId);
@@ -540,9 +548,6 @@ public class PostServiceImpl implements PostService {
         log.info("📦 파일 처리 또는 메모 업데이트 종료");
     }
 
-    };
-
-=======
     @Override
     public void setReceiverPost(ReceiverVO receiverVO) {
         postDAO.insertReceiverPost(receiverVO);
@@ -558,7 +563,7 @@ public class PostServiceImpl implements PostService {
         postDAO.updateDonateCertPost(donateCertDTO.toVO());
     }
 
+    };
 
-}
->>>>>>> master
+
 

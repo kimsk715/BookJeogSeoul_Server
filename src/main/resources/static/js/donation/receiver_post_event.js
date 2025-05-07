@@ -102,7 +102,6 @@ const moreButton = document.querySelectorAll(".more-btn");
 
 moreButton.forEach((button) => {
     button.addEventListener("click",() =>{
-        console.log("클릭 확인")
         button.nextElementSibling.classList.toggle("more-active");
     })
 })
@@ -129,28 +128,53 @@ reportCancelButton.addEventListener('click',() =>{
 const addComment = document.querySelector(".post-btn");
 const commentArea = document.querySelector(".register-box-inner textarea");
 const commentContainer = document.querySelector(".register-box");
-addComment.addEventListener("click",(e) => {
+addComment.addEventListener("click", async (e) => {
     const postId = addComment.value;
-    if(document.querySelector(".mention-button")) {
-        var mentionId = document.querySelector(".mention-button").value;
-    }
+    const mentionButton = document.querySelector(".mention-button");
+    const mentionId = mentionButton ? mentionButton.value : null;
     const commentText = commentArea.value;
 
-    if(mentionId != null) {
+    // 비속어 검사
+    const isClean = await commentService.checkComment(commentText);
+    if (!isClean) {
+        alert("댓글에 비속어가 포함되어 있습니다.");
+        console.log("이건 말도안됀다")
+        return; // 중지
+    }
+
+    // 댓글 등록
+    if (mentionId) {
         commentService.addComment(postId, commentText, commentLayout.addedLayout, mentionId);
-        alert("댓글이 등록되었습니다.")
-    }
-    else{
+    } else {
         commentService.addComment(postId, commentText, commentLayout.addedLayout);
-        alert("댓글이 등록되었습니다.")
     }
+
+    alert("댓글이 등록되었습니다.");
+
+    commentArea.value = "";
+    if (mentionButton) mentionButton.remove();
+    mentionWrapper.style.display = "none";
     if(document.querySelector(".mention-button")){
         document.querySelector(".mention-button").remove();
     }
     commentArea.value = "";
     mentionWrapper.style.display = "none";
-})
+});
+
+
+
 const commentWrapper = document.querySelector(".comment-list");
+
+
+// CommentService.js
+e// CommentService.js
+
+
+
+
+
+
+
 
 const commentService = (() =>{
     const addComment = async(postId,commentText, callback, mentionId) => {
@@ -168,7 +192,29 @@ const commentService = (() =>{
             callback(commentText)
         }
     }
-    return {addComment : addComment}
+
+    const checkComment = async (content) => {
+        try {
+            const response = await fetch('http://localhost:8000/api/reply-check', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ content })
+            });
+
+            const result = await response.json();
+            console.log(result); //  isBadWord: true
+
+            // 비속어가 없으면 true 반환, 있으면 false
+            return result.isBadWord;
+        } catch (error) {
+            console.error('댓글 검사 실패', error);
+            return false;
+        }
+    };
+
+    return {addComment : addComment, checkComment:checkComment}
 })();
 
 const commentLayout =(() =>{
