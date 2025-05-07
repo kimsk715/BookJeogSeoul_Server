@@ -29,7 +29,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new ImageInterceptor()) // 인터셉터 클래스 등록
                 .addPathPatterns("/image/**");
         registry.addInterceptor(new AlarmInterceptor(alarmService)).
-                addPathPatterns("/post/**", "/main/**");
+                addPathPatterns("/post/**", "/main/**", "/main/header");
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

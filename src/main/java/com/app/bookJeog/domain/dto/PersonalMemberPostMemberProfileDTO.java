@@ -18,6 +18,7 @@ public class PersonalMemberPostMemberProfileDTO {
     private Long id;
     private String memberName;
     private String memberNickName;
+    private Long memberId;
     private String fileName;
     private String filePath;
 }

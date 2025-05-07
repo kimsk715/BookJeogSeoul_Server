@@ -37,8 +37,8 @@ public class WebController {
 
     // 메인으로 이동
     @GetMapping("main/main")
-    public String goToMain(Model model) throws IOException {
-            if(session.getAttribute("member") == null && session.getAttribute("sponsor") == null) {
+    public String goToMain(Model model, HttpSession session) throws IOException {
+            if(session.getAttribute("member") == null && session.getAttribute("sponsorMember") == null) {
                 throw new LoginFailException("로그인 실패");
             }
 
@@ -127,9 +127,9 @@ public class WebController {
           log.error("책 데이터 변환 중 오류 발생: ISBN = {}, error = {}", selectedBookVO.getBookIsbn(), e.getMessage());
       }
         model.addAttribute("topBookPostDTOS", topBookPostDTOS);
+        List<PersonalMemberPostMemberProfileDTO> PersonalMemberPostMemberProfileDTO = memberServiceImpl.selectTopBookPostMemberProfile();
 
-
-      model.addAttribute("bookPostMember", memberServiceImpl.selectTopBookPostMemberProfile());
+      model.addAttribute("bookPostMember", PersonalMemberPostMemberProfileDTO);
 
 
 

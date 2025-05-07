@@ -82,9 +82,9 @@
                     </li>
                 </ul>
             </nav>
-            <div class="util-wrap">
+            <div class="util-wrap" >
                 <!-- data-count가 알람 개수 -->
-                <a
+                <a th:style="${userType == 'sponsor'} ? 'display:none;' : ''"
                         href="/post-alarm"
                         class="alarm-button"
                         data-content-type="alarmCenter"

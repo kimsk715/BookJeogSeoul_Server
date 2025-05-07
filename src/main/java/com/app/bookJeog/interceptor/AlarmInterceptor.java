@@ -24,15 +24,28 @@ public class AlarmInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         HttpSession session = request.getSession(false);
-        if (session != null && modelAndView != null) {
-           PersonalMemberDTO personalMemberDTO = (PersonalMemberDTO) session.getAttribute("member");
 
+        if (session != null && modelAndView != null) {
+            Object member = session.getAttribute("member");
+            Object sponsorMember = session.getAttribute("sponsorMember");
+
+            // userType 설정
+            if (sponsorMember != null) {
+                modelAndView.addObject("userType", "sponsor");
+            } else if (member != null) {
+                modelAndView.addObject("userType", "member");
+            }
+
+            // 알람 개수 설정 (member에 대해서만)
+            if (member != null) {
+                PersonalMemberDTO personalMemberDTO = (PersonalMemberDTO) member;
 
                 int unreadCount = alarmService.unreadAlarmCount(personalMemberDTO.getId());
                 log.info("unread count: {}", unreadCount);
 
                 modelAndView.addObject("unreadAlarmCount", unreadCount);
-
+            }
         }
-   }
+    }
+
 }

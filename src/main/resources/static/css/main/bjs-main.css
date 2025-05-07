@@ -1352,6 +1352,7 @@ em {
     font-size: 16px;
     max-height: 3em;
     -webkit-line-clamp: 2;
+    text-align: center;
 }
 .v-b-author {
     overflow: hidden;
