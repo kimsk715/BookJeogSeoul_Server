@@ -319,11 +319,15 @@ sub,sup {
 
 img {
     max-width: 100%;
+    max-height: 100%;
     vertical-align: top;
     border-style: none;
-    pointer-events: none
-}
+    pointer-events: none;
 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 fieldset {
     border: 0;
     padding: 0
