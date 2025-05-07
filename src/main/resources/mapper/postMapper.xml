@@ -644,7 +644,7 @@
 
     <!--  독후감 피드 전체조회(무한스크롤)  -->
     <select id="selectAllBookPostFeed" resultType="fileBookPostDTO">
-        select bp.id as book_post_id, bp.book_post_title, bp.book_post_text, pm.member_name, bp.book_isbn, p.member_id, f.file_name, f.file_path, p.createdDate,
+        select bp.id as book_post_id, bp.book_post_title, bp.book_post_text, pm.member_name, pm.member_nickname, bp.book_isbn, p.member_id, f.file_name, f.file_path, p.createdDate,
                (select count(*)
                 from tbl_book_post_like l
                 where l.book_post_id = bp.id) as like_count
