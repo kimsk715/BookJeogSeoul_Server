@@ -384,6 +384,13 @@
         update tbl_personal_member set member_status = 'DELETE'
         where id = #{memberId}
     </update>
+
+    <!--  닉네임 조회  -->
+    <select id="selectMemberNickname" resultType="String">
+        select member_nickname
+        from tbl_personal_member
+        where id = #{memberId}
+    </select>
 </mapper>
 
 
