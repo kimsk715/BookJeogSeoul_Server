@@ -89,4 +89,4 @@ where c.id = ${commentId};
 
 
 select *
-from tbl_follow
+from tbl_follow;

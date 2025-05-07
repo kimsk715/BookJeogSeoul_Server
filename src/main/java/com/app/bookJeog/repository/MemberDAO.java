@@ -181,5 +181,8 @@ public class MemberDAO {
 
     // 개인회원 탈퇴
     public void updateDeletedMemberStatus(Long memberId){memberMapper.updateDeletedMemberStatus(memberId);};
+
+    // id로 닉네임 조회
+    public String findMemberNickname(Long memberId){return memberMapper.selectMemberNickname(memberId);};
 }
 

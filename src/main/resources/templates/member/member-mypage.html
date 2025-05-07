@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>내 서재 | 북적서울</title>
+  <link
+          rel="shortcut icon"
+          href="/images/common/favicon.ico"
+          type="image/x-icon"
+  />
+  <link
+          rel="stylesheet"
+          href="/css/main/global-settings.css"
+  />
+  <link rel="stylesheet" href="/css/main/header.css" />
+  <link rel="stylesheet" href="/css/member/mypage.css" />
+</head>
+<body>
+<div id="wrap">
+  <!-- 헤더 시작 -->
+  <div th:replace="~{main/header :: header-sc}"></div>
+  <!-- 헤더끝 -->
+  <main class="library-main">
+    <div class="library-main-wrapper">
+      <div class="back-wrapper">
+        <div class="back-inner">
+          <h2 class="inner-title">내서재</h2>
+        </div>
+      </div>
+      <div class="inner">
+        <div class="content-top">
+          <section class="profile-view-wrapper">
+            <div class="profile-info-wrapper">
+              <div class="profile-info">
+                <div class="profile-image-wrapper">
+                  <img class="profile-image"
+                       th:src="@{/personal/profile(path=${file.filePath}, name=${file.fileName})}"
+                       alt="프로필 이미지"
+                       onerror="this.src='/images/common/user_profile_example.png'" />
+                  <a href="/personal/mypage/password-check">
+                    <button class="edit-button" style="display: none">
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="none"
+                              viewBox="0 0 16 16"
+                              class="mds-icon"
+                              color="var(--text-01)"
+                      >
+                        <path
+                                fill-rule="evenodd"
+                                d="M10.864 1.97a.75.75 0 0 0-1.061 0L2.47 9.303a.75.75 0 0 0-.22.53V13.5c0 .414.336.75.75.75h3.667a.75.75 0 0 0 .53-.22l7.333-7.333a.75.75 0 0 0 0-1.06zM3.75 12.75v-2.606l4.383-4.383 2.606 2.606-4.383 4.383zm8.05-5.444 1.14-1.14-2.607-2.605-1.14 1.14z"
+                                clip-rule="evenodd"
+                                fill="currentColor"
+                        ></path>
+                      </svg>
+                      <span class="ir"
+                      >프로필 이미지 편집</span
+                      >
+                    </button>
+                  </a>
+                </div>
+                <div class="profile-metainfo">
+                  <div
+                          class="profile-nickname-wrapper"
+                  >
+                                                <span class="profile-nickname"
+                                                      th:text="${nickname}"
+                                                >북적이</span
+                                                >
+                  </div>
+                  <div class="follow-info">
+                                                <span class="followers"
+                                                ><span class="label-text"
+                                                >팔로워</span
+                                                >
+                                                    <span class="count-text"
+                                                          th:text="${followers}"
+                                                    >0</span
+                                                    ></span
+                                                >
+                    <span class="following">
+                                                    <span class="label-text"
+                                                    >팔로잉</span
+                                                    >
+                                                    <span class="count-text"
+                                                          th:text="${following}"
+                                                    >0</span
+                                                    >
+                                                </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-count-wrapper">
+              <a href="" class="posts-button">
+                <dl class="content-count-info">
+                  <dt class="content-label">
+                    독후감
+                  </dt>
+                  <dd class="content-count" th:text="${totalPosts}">0</dd>
+                </dl>
+              </a>
+              <hr class="separater" />
+              <a href="" class="mileage-button" style="display: none">
+                <dl class="content-count-info">
+                  <dt class="content-label">
+                    책갈피
+                  </dt>
+                  <dd class="content-count" th:text="${mileage}">0</dd>
+                </dl>
+              </a>
+            </div>
+            <div class="my-button-wrapper">
+              <button
+                      type="button"
+                      class="writing-button"
+                      onclick="location.href='/post/bookpost/write'"
+                      style="display: none"
+              >
+                                        <span>
+                                            <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="none"
+                                                    viewBox="0 0 16 16"
+                                                    class="mds-icon"
+                                                    color="var(--ui-background)"
+                                            >
+                                                <path
+                                                        fill-rule="evenodd"
+                                                        d="M8.5 4a.5.5 0 0 0-1 0v3.5H4a.5.5 0 0 0 0 1h3.5V12a.5.5 0 0 0 1 0V8.5H12a.5.5 0 0 0 0-1H8.5z"
+                                                        clip-rule="evenodd"
+                                                        fill="currentColor"
+                                                ></path>
+                                            </svg>
+                                            글쓰기
+                                        </span>
+              </button>
+              <span class="add-book" th:attr="data-id=${memberId}">
+                <span>&nbsp;팔로우</span>
+              </span>
+            </div>
+          </section>
+          <hr class="divide-line" />
+        </div>
+        <div class="content-bottom">
+          <section class="scrap-book-list">
+            <div class="title-wrapper">
+              <h3 class="title-text">도서</h3>
+              <a href="/personal/mypage/scrap" class="books-button" style="display: none">전체보기</a>
+            </div>
+            <div class="swiper swiper-horizontal">
+              <div class="swiper-wrapper">
+                <th:block th:each="book : ${scrappedBooks}">
+                  <div class="swiper-slide slide-item" style="margin-right: 12px">
+                    <div class="book-wrapper">
+                      <div class="book-wrapper-inner">
+                        <div class="book-picture-wrapper">
+                          <button class="book-picture-link" th:attr="data-isbn=${book.bookIsbn}">
+                            <div class="book-picture">
+                              <picture class="styled-picture">
+                                <img th:src="${book.bookCover}"
+                                     alt="도서 이미지"
+                                     onerror="this.src='/images/common/default-book-cover.png'" />
+                              </picture>
+                            </div>
+                          </button>
+                        </div>
+                        <button type="button" class="book-metalink" th:attr="data-isbn=${book.bookIsbn}">
+                          <div class="book-meta">
+                            <p class="styled-book-name" th:text="${book.bookTitle}">도서 제목</p>
+                            <p class="styled-book-author" th:text="${book.bookAuthor + ' 지음'}">작가</p>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </th:block>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+<script src="/js/member/member-mypage-service.js"></script>
+<script src="/js/member/member-mypage-layout.js"></script>
+<script src="/js/member/member-mypage-event.js"></script>
+</html>

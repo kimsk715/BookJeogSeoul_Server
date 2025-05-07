@@ -652,4 +652,58 @@ public class MemberServiceImpl implements MemberService {
 
     // 내가 쓴 전체 독후감 개수 조회
     public int findMyBookPostCount(Long memberId){return memberDAO.findMyBookPostCount(memberId);};
+
+    // 마일리지 조회
+    public int findMyMileage(Long memberId){return memberDAO.findMyMileage(memberId);};
+
+    // 개인 마이페이지 데이터 (남의 페이지 조회)
+    @Override
+    public Map<String, Object> getPersonalPageData(Long memberId, Model model) {
+        if (memberId == null) {
+            throw new IllegalArgumentException("memberId가 필요합니다.");
+        }
+
+        Map<String, Object> result = new HashMap<>();
+
+        // 1. 내가 쓴 전체 독후감 수
+        int totalPosts = memberDAO.findMyBookPostCount(memberId);
+
+        // 닉네임 조회
+        String nickname = memberDAO.findMemberNickname(memberId);
+
+        // 4. 내 마일리지
+        int mileage = memberDAO.findMyMileage(memberId);
+
+        // 5. 팔로워 수
+        int followers = favoriteDAO.findMyFollowers(memberId);
+
+        // 6. 팔로우 수
+        int following = favoriteDAO.findMyFollowing(memberId);
+
+        // 7. 찜한 도서 정보 (isbn만 가져와서 API 조회)
+        List<Long> isbnList = favoriteDAO.findMyScrappedBooks(memberId);
+        List<AladinBookDTO> scrappedBooks = aladinService.getBooksByIsbnList(isbnList);
+
+        // 결과 담기
+        result.put("totalPosts", totalPosts);
+        result.put("mileage", mileage);
+        result.put("followers", followers);
+        result.put("following", following);
+        result.put("scrappedBooks", scrappedBooks);
+        result.put("nickname", nickname);
+        result.put("memberId", memberId);
+
+        // 프사
+        FileDTO profileImage = toFileDTO(memberDAO.findMyProfile(memberId));
+
+        if (profileImage == null) {
+            profileImage = new FileDTO();
+            profileImage.setFilePath("images/common");
+            profileImage.setFileName("user_profile_example.png");
+        }
+        model.addAttribute("file", profileImage);
+
+        log.info(result.toString());
+        return result;
+    }
 }
