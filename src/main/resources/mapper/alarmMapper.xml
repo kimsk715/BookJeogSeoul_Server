@@ -4,33 +4,33 @@
 
     <!--슈퍼키 등록-->
     <insert id="insertAlarm" useGeneratedKeys="true" keyProperty="id">
-        insert into tbl_alarm (alarm_receiver_id, alaram_type)
+        insert into tbl_alarm (alarm_receiver_id, alarm_type)
         values (#{alarmReceiverId}, #{alarmType})
     </insert>
 
     <!--내가 작성한 게시글댓글알람 등록-->
     <insert id="insertCommentAlarm">
         insert into tbl_comment_alarm(id, comment_id)
-        values (#{alarmId}, #{commentId})
+        values (#{id}, #{commentId})
     </insert>
 
     <!--누군가 맨션알람-->
     <insert id="insertMentionAlarm">
         insert into tbl_comment_metion_alarm (id, comment_id, mentioned_member_id)
-        values (#{alarmId}, #{commentId}, #{mentionMemberId})
+        values (#{id}, #{commentId}, #{mentionMemberId})
     </insert>
 
     <!--팔로잉한사람의 게시글 알림-->
     <insert id="insertPostAlarm">
         insert into tbl_post_alarm (id, post_id)
-        values (#{alarmId}, #{postId})
+        values (#{id}, #{postId})
     </insert>
 
 
     <!--팔로우 한사람-->
     <insert id="insertFollowAlarm">
         insert into tbl_follow_alarm (id, alarm_sender_id)
-        values (#{alarmId}, #{alarmSenderId})
+        values (#{id}, #{alarmSenderId})
     </insert>
 
 
@@ -38,7 +38,7 @@
     <select id="selectAlarmCount" resultType="int">
         select COUNT(*)
         from tbl_alarm
-        where alarm_status = 'UNREAD' and alarm_receiver_id = #{receiverID}
+        where alarm_status = 'unread' and alarm_receiver_id = #{receiverID}
     </select>
 
 

@@ -15,6 +15,10 @@ import java.util.Optional;
 
 public interface PostService {
 
+    // 게시물 id 로 memberId 찾기
+    Optional<PostVO> selectMemberIdByPostId(Long postId);
+
+
     //  전체 독후감 목록
     public List<BookPostVO> getAllBookPost(Pagination pagination);
 

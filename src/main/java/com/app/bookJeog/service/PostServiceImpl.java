@@ -40,10 +40,19 @@ public class PostServiceImpl implements PostService {
     private final FileDAO fileDAO;
     private final BookPostFileDTO bookPostFileDTO;
 
+    
+    // 게시물 id 로 memberID 가져옴
+    @Override
+    public Optional<PostVO> selectMemberIdByPostId(Long postId) {
+        return Optional.ofNullable(postDAO.findMemberIdByPostId(postId));
+    }
+
     @Override
     public List<BookPostVO> getAllBookPost(Pagination pagination) {
         return postDAO.findAllBookPost(pagination);
     }
+
+
 
     @Override
     public List<DiscussionVO> getAllDiscussionPost(Pagination pagination) {

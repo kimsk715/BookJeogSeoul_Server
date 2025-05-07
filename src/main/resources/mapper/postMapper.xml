@@ -41,6 +41,14 @@
     </select>
 
 
+    <!--게시물 id 로 memberId 조회-->
+    <select id="selectMemberIdByPostId" resultType="postVO">
+        select member_id
+        from tbl_post
+        where id = #{postId}
+    </select>
+
+
     <!-- 토론 게시글 조회(관리자)-->
     <select id="selectAllDiscussionPost" resultType="discussionVO">
         select d.id, discussion_title, discussion_text, book_isbn, p.member_id, p.createdDate, p.updatedDate

@@ -103,9 +103,18 @@ const commentService = (() =>{
         else{
             callback(commentText)
         }
+
+
     }
-    return {addComment : addComment}
+    const commentCheck = async (commentText) => {
+        let path = `http://localhost:8000/api/reply-check?text=${commentText}`;
+        const response =  await fetch(path);
+        console.log(response);
+    }
+    return {addComment : addComment, commentCheck:commentCheck};
 })();
+
+
 
 const commentLayout =(() =>{
     const addedLayout = async(commentText, mentionedName) =>{

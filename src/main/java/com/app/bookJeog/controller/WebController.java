@@ -1,11 +1,13 @@
 package com.app.bookJeog.controller;
 
+import com.app.bookJeog.controller.exception.LoginFailException;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.BookService;
 import com.app.bookJeog.service.BookServiceImpl;
 import com.app.bookJeog.service.MemberServiceImpl;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -28,11 +30,16 @@ public class WebController {
     private final BookServiceImpl bookServiceImpl;
     private final SelectedBookVO selectedBookVO;
     private final MemberServiceImpl memberServiceImpl;
+    private final HttpSession session;
     private BookInfoDTO bookInfoDTO;
+
 
     // 메인으로 이동
     @GetMapping("main/main")
     public String goToMain(Model model) throws IOException {
+            if(session.getAttribute("member") != null && session.getAttribute("sponsor") != null) {
+                throw new LoginFailException("로그인 정보가없음");
+            }
 
             model.addAttribute("bookInfoDTO",bookService.getPopularBooks());
             List<TopBookVO> bookInfoDTOList = bookService.getPopularBooks();
