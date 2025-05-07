@@ -29,6 +29,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -58,10 +59,11 @@ public class PostController {
     // 토론 게시글
     @GetMapping("discussion/post/{id}")
     public String goToDiscussionPost(@PathVariable Long id, Model model, HttpSession session) {
-
+        model.addAttribute("member", session.getAttribute("member"));
+        model.addAttribute("sponsorMember", session.getAttribute("sponsorMember"));
         DiscussionPostDTO post = postService.getDiscussionById(id);
         post.setImageUrl(aladinService.getBookCover(post.getBookIsbn()));
-        model.addAttribute("member", session.getAttribute("member"));
+        model.addAttribute("postId", id );
         model.addAttribute("discussion", post);
         List<CommentInfoDTO> commentList = new ArrayList<>();
         List<CommentVO> tempList = commentService.getAllCommentByPostId(id);
@@ -86,7 +88,7 @@ public class PostController {
                 commentInfoDTO.setMemberName(memberName);
                 commentList.add(commentInfoDTO);
             }
-        log.info(commentList.toString());
+//        log.info(commentList.toString());
         model.addAttribute("comments", commentList);
 
         List<CommentVO> comments = commentService.getAllMembersByPostId(id);
@@ -217,12 +219,10 @@ public class PostController {
                 post.setDonateCertFileName(fileService.getDonateCertFileByPostId(post.getId()).getFileName());
                 post.setDonateCertFilePath(fileService.getDonateCertFileByPostId(post.getId()).getFilePath());
             }
-
-//          // 이미지 추가하면 좀 더 추가
         }
-//        log.info(postList.toString());
+
         model.addAttribute("DonateCerts",postList);
-//        log.info(model.getAttribute("DonateCerts").toString());
+
         return "donation/donate_cert_main";
     }
 
@@ -230,18 +230,31 @@ public class PostController {
     // 후원 인증 게시글    
     @GetMapping("donate/post/{postId}")
     public String goTODonateCertPost(@PathVariable Long postId, Model model, HttpSession session){
+
+        List<FileDTO> postFiles = fileService.getDonateCertFilesByPostId(postId);
+        for(int i=0 ; i<postFiles.size() ; i++){
+            FileDTO fileDTO = postFiles.get(i);
+            fileDTO.setId((long) i+1);
+        }
+        model.addAttribute("files", postFiles);
+        model.addAttribute("thumbNail", fileService.getDonateCertFileByPostId(postId));
+
+
         model.addAttribute("DonateCert",postService.getDonateCertById(postId));
         model.addAttribute("member", session.getAttribute("member"));
+        model.addAttribute("sponsorMember", session.getAttribute("sponsorMember"));
         List<CommentInfoDTO> commentList = new ArrayList<>();
         List<CommentVO> tempList = commentService.getAllCommentByPostId(postId);
         for(CommentVO commentVO : tempList) {
             CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
             CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
             commentInfoDTO.setCommentDTO(commentDTO);
-            log.info(commentDTO.toString());
             String memberName = "";
             MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
-
+            if(commentService.getMentionedId(commentDTO.getId()) != null){
+                Long mentionedId = commentService.getMentionedId(commentDTO.getId());
+                commentInfoDTO.setMentionedName(memberService.getMemberName(mentionedId));
+            }
             switch (memberType) {
                 case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
 
@@ -283,15 +296,12 @@ public class PostController {
         return "donation/donate_cert_write";
     }
 
-    @PostMapping("donate/write")
+    @PostMapping("donate/confirm")
     public RedirectView write(@RequestParam String title, @RequestParam String content, @RequestParam(required = false) List<MultipartFile> files, HttpSession session) {
-        log.info(title);
-        log.info(content);
-        log.info(files.toString());
+        log.info("첨부 파일 배열 : {}",files);
         DonateCertDTO donateCertDTO = new DonateCertDTO();
         SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
         PostDTO postDTO = new PostDTO();
-
         postDTO.setPostType(PostType.DONATE_CERT);
         postDTO.setMemberId(foundMember.getId());
         PostVO postVO = postDTO.toVO();
@@ -306,15 +316,74 @@ public class PostController {
         fileService.uploadDonateCertFiles(postId, files);
 
         return new RedirectView("/post/donate");
+
     }
 
+
+    // 후원 대상 게시글 수정 페이지
+    @GetMapping("donate/edit/{postId}")
+    public String goToDonateEdit(@PathVariable Long postId, Model model, HttpSession session) {
+        model.addAttribute("post", postService.getDonateCertById(postId));
+        model.addAttribute("images", fileService.getDonateCertFilesByPostId(postId));
+        session.setAttribute("postId", postId);
+        return "donation/donate_cert_edit";
+    }
+
+
+    // 후원 인증 게시글 수정
+    @PostMapping("donate/edit-confirm")
+    public RedirectView editDonatePost(@RequestParam String title,
+                                         @RequestParam String content,
+                                         @RequestParam(required = false) List<MultipartFile> files,
+                                         @RequestParam(value = "remainingImageUrls", required = false) String remainingImageUrls,HttpSession session, Model model) {
+        log.info("첨부 파일 배열 : {}",files);
+        log.info("기존 파일 배열 : {}",remainingImageUrls);
+        List<String> existingImageUrls = (remainingImageUrls != null && !remainingImageUrls.isEmpty())
+                ? Arrays.asList(remainingImageUrls.split(","))
+                : new ArrayList<>();
+        Long postId = (Long) session.getAttribute("postId");
+        session.removeAttribute("postId");
+        fileService.deleteDonateCertFileByPostId(postId);
+        fileService.deleteFile(postId);
+        for (String imageUrl : existingImageUrls) {
+            // "/image" 부분을 제외하고 실제 경로를 분리
+            if (imageUrl.startsWith("/image")) {
+                String relativePath = imageUrl.substring(7); // "/image"를 제외한 나머지 경로
+                String[] pathParts = relativePath.split("/"); // 경로를 슬래시로 나눔
+
+                String filePath = String.join("/", Arrays.copyOfRange(pathParts, 0, pathParts.length - 1)); // 마지막 부분 제외한 경로
+                String fileName = pathParts[pathParts.length - 1]; // 마지막 부분은 파일명
+
+                log.info("분리된 filePath: {}, fileName: {}", filePath, fileName);
+
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setFileName(fileName);
+                fileDTO.setFilePath(filePath);
+                fileService.insertExistingDonateCertFile(fileDTO, postId);
+
+            }
+        }
+
+        DonateCertDTO donateCertDTO = new DonateCertDTO();
+        SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+        PostDTO postDTO = new PostDTO();
+        donateCertDTO.setId(postId);
+        donateCertDTO.setDonateCertTitle(title);
+        donateCertDTO.setDonateCertText(content);
+        postService.updateDonateCertPost(donateCertDTO);
+
+        fileService.uploadDonateCertFiles(postId, files);
+
+        return new RedirectView("/post/donate");
+
+    }
     // 후원 대상 게시판
     @GetMapping("receiver")
     public String goToReceiver(Model model){
         // 기부 도서 조회
         List<BookDonateInfoDTO> donateList = new ArrayList<>();
         List<BookDonateDTO> tempList = postService.getDonateBooks();
-        log.info(tempList.toString());
+//        log.info(tempList.toString());
         for(BookDonateDTO bookDonateDTO : tempList){
             BookDonateInfoDTO donateInfoDTO = new BookDonateInfoDTO();
             donateInfoDTO.setBookDonateDTO(bookDonateDTO);
@@ -322,13 +391,17 @@ public class PostController {
             donateInfoDTO.setAuthor(bookService.getBookByIsbn(bookDonateDTO.getBookIsbn()).get(0).getAuthor());
             donateList.add(donateInfoDTO);
         }
-        log.info(donateList.toString());
+//        log.info(donateList.toString());
         model.addAttribute("donateList", donateList);
         //  게시글 조회
         List<ReceiverPostDTO> receiverPostDTOList = postService.getReceiverPosts();
+        for(ReceiverPostDTO receiverPostDTO : receiverPostDTOList){
+            receiverPostDTO.setCommentCount(commentService.getAllCommentByPostId(receiverPostDTO.getId()).size());
+        }
+
 
         model.addAttribute("Posts", receiverPostDTOList);
-        log.info(receiverPostDTOList.toString());
+//        log.info(receiverPostDTOList.toString());
         return "donation/receiver_main";
     }
 
@@ -336,25 +409,38 @@ public class PostController {
     // 후원 대상 게시글
     @GetMapping("receiver/post/{postId}")
     public String goToReceiverPost(Model model, @PathVariable Long postId, HttpSession session){
-
         model.addAttribute("post", postService.getReceiverPostById(postId));
+        model.addAttribute("thumbNail", fileService.getReceiverFileByPostId(postId));
+        List<FileDTO> postFiles = fileService.getReceiverFilesByPostId(postId);
+        for(int i=0 ; i<postFiles.size() ; i++){
+            FileDTO fileDTO = postFiles.get(i);
+            fileDTO.setId((long) i+1);
+        }
+        model.addAttribute("files", postFiles);
+
         model.addAttribute("member", session.getAttribute("member"));
+        model.addAttribute("sponsorMember", session.getAttribute("sponsorMember"));
         List<CommentInfoDTO> commentList = new ArrayList<>();
         List<CommentVO> tempList = commentService.getAllCommentByPostId(postId);
         for(CommentVO commentVO : tempList) {
             CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
             CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
             commentInfoDTO.setCommentDTO(commentDTO);
-            log.info(commentDTO.toString());
+//            log.info(commentDTO.toString());
             String memberName = "";
             MemberType memberType = memberService.getById(commentDTO.getMemberId()).getMemberType();
-
+            if(commentService.getMentionedId(commentDTO.getId()) != null){
+                Long mentionedId = commentService.getMentionedId(commentDTO.getId());
+                commentInfoDTO.setMentionedName(memberService.getMemberName(mentionedId));
+            }
             switch (memberType) {
                 case PERSONAL -> memberName = memberService.getPersonalMember(commentDTO.getMemberId()).getMemberName();
 
                 case SPONSOR -> memberName = memberService.getSponsorMemberById(commentDTO.getMemberId()).getSponsorName();
             }
             commentInfoDTO.setMemberName(memberName);
+
+            log.info(memberName);
             commentList.add(commentInfoDTO);
         }
         model.addAttribute("comments", commentList);
@@ -381,11 +467,96 @@ public class PostController {
     }
 
 
-    // 후원 대상 게시글 작성
+    // 후원 대상 게시글 작성 페이지
     @GetMapping("receiver/write")
     public String goToReceiverWrite(){
         return "donation/receiver_write";
     }
+
+    // 후원 대상 게시글 작성 완료 기능
+    @PostMapping("receiver/confirm")
+    public RedirectView writeReceiverPost(@RequestParam String title, @RequestParam String content, @RequestParam(required = false) List<MultipartFile> files, HttpSession session) {
+        log.info("첨부 파일 배열 : {}",files);
+        ReceiverDTO receiverDTO = new ReceiverDTO();
+        SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+        PostDTO postDTO = new PostDTO();
+        postDTO.setPostType(PostType.RECEIVER);
+        postDTO.setMemberId(foundMember.getId());
+        PostVO postVO = postDTO.toVO();
+        postService.insertPost(postVO);
+        Long postId = postVO.getId();
+        receiverDTO.setId(postId);
+        receiverDTO.setReceiverTitle(title);
+        receiverDTO.setReceiverText(content);
+        log.info(postVO.toString());
+        log.info(receiverDTO.toString());
+        postService.setReceiverPost(receiverDTO.toVO());
+        fileService.uploadReceiverFiles(postId, files);
+
+        return new RedirectView("/post/receiver");
+
+    }
+
+    // 후원 대상 게시글 수정 페이지
+    @GetMapping("receiver/edit/{postId}")
+    public String goToReceiverEdit(@PathVariable Long postId, Model model, HttpSession session) {
+        model.addAttribute("post", postService.getReceiverPostById(postId));
+        model.addAttribute("images", fileService.getReceiverFilesByPostId(postId));
+        session.setAttribute("postId", postId);
+        return "donation/receiver_edit";
+    }
+
+
+    @PostMapping("receiver/edit-confirm")
+    public RedirectView editReceiverPost(@RequestParam String title,
+                                         @RequestParam String content,
+                                         @RequestParam(required = false) List<MultipartFile> files,
+                                         @RequestParam(value = "remainingImageUrls", required = false) String remainingImageUrls,HttpSession session, Model model) {
+        log.info("첨부 파일 배열 : {}",files);
+        log.info("기존 파일 배열 : {}",remainingImageUrls);
+        List<String> existingImageUrls = (remainingImageUrls != null && !remainingImageUrls.isEmpty())
+                ? Arrays.asList(remainingImageUrls.split(","))
+                : new ArrayList<>();
+        Long postId = (Long) session.getAttribute("postId");
+        session.removeAttribute("postId");
+        fileService.deleteReceiverFileByPostId(postId);
+        fileService.deleteFile(postId);
+        log.info(postId.toString());
+        for (String imageUrl : existingImageUrls) {
+            // "/image" 부분을 제외하고 실제 경로를 분리
+            if (imageUrl.startsWith("/image")) {
+                String relativePath = imageUrl.substring(7); // "/image"를 제외한 나머지 경로
+                String[] pathParts = relativePath.split("/"); // 경로를 슬래시로 나눔
+
+                String filePath = String.join("/", Arrays.copyOfRange(pathParts, 0, pathParts.length - 1)); // 마지막 부분 제외한 경로
+                String fileName = pathParts[pathParts.length - 1]; // 마지막 부분은 파일명
+
+                log.info("분리된 filePath: {}, fileName: {}", filePath, fileName);
+
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setFileName(fileName);
+                fileDTO.setFilePath(filePath);
+                fileService.insertExistingReceiverFile(fileDTO, postId);
+
+            }
+        }
+
+        ReceiverDTO receiverDTO = new ReceiverDTO();
+        SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+        PostDTO postDTO = new PostDTO();
+
+
+        receiverDTO.setId(postId);
+        receiverDTO.setReceiverTitle(title);
+        receiverDTO.setReceiverText(content);
+        postService.updateReceiverPost(receiverDTO);
+
+        fileService.uploadReceiverFiles(postId, files);
+
+        return new RedirectView("/post/receiver");
+
+    }
+
 
 
     // 이 주의 기부도서
@@ -393,7 +564,7 @@ public class PostController {
     public String goToWeekly(Model model){
         List<BookDonateInfoDTO> donateList = new ArrayList<>();
         List<BookDonateDTO> tempList = postService.getDonateBooks();
-        log.info(tempList.toString());
+//        log.info(tempList.toString());
         for(BookDonateDTO bookDonateDTO : tempList){
             BookDonateInfoDTO donateInfoDTO = new BookDonateInfoDTO();
             donateInfoDTO.setBookDonateDTO(bookDonateDTO);

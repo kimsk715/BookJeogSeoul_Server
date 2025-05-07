@@ -60,7 +60,7 @@ public class SelectedBookTask {
     }
 
 //    매달 N 일에 좋아요 수를 기준으로 이 달의 독후감 후보 선정
-    @Scheduled(cron = "0 0 0 1 * *")
+    @Scheduled(cron = "0 0 0 1 * ?")
     public void insertTopPosts() {
         List<BookPostVO> tempList = postService.getTopPosts();
         log.info(tempList.toString());

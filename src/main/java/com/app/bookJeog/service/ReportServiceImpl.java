@@ -1,13 +1,7 @@
 package com.app.bookJeog.service;
 
-import com.app.bookJeog.domain.dto.BookPostReportDTO;
-import com.app.bookJeog.domain.dto.BookPostReportInfoDTO;
-import com.app.bookJeog.domain.dto.CommentReportInfoDTO;
-import com.app.bookJeog.domain.dto.Pagination;
-import com.app.bookJeog.domain.enumeration.BookPostReportType;
-import com.app.bookJeog.domain.enumeration.MemberType;
-import com.app.bookJeog.domain.enumeration.PostType;
-import com.app.bookJeog.domain.enumeration.ReportType;
+import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.*;
 import com.app.bookJeog.domain.vo.BookPostReportVO;
 import com.app.bookJeog.domain.vo.CommentReportVO;
 import com.app.bookJeog.repository.CommentDAO;
@@ -182,5 +176,15 @@ public class ReportServiceImpl implements ReportService {
         }
 
         reportDAO.setBookPostReport(bookPostReportDTO.toVO());
-    };
+    }
+
+    @Override
+    public void insertCommentReport(CommentReportDTO commentReportDTO) {
+        if(commentReportDTO.getCommentReportType().equals(CommentReportType.ETC)){
+            commentReportDTO.setCommentReportText(null);
+        }
+        reportDAO.setCommentReport(commentReportDTO.toVO());
+    }
+
+
 }

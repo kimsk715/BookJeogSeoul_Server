@@ -13,7 +13,9 @@
 <body>
     <div id="wrap" class="web-mount pcv-mount"><!----> <!----> <!---->
         <section class="content">
-            <div class="post-write write diary desktop">
+            <form action="/post/receiver/confirm" method="post" enctype="multipart/form-data" class="donate-form">
+                <input type="hidden" name="postId" value="">
+                <div class="post-write write diary desktop">
                 <div id="header" class="header diary">
                     <div class="header-inner">
                         <div class="header-left"><button type="button"
@@ -21,7 +23,7 @@
                                         class="mds-icon--arrow-left"></i></span></button> <!---->
                         </div>
                         <div class="header-right">
-                            <div class="nav-btn"><!----> <button type="button"
+                            <div class="nav-btn"><!----> <button type="submit"
                                     class="btn publish-btn mds-font--body01 mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4"><span>게시하기</span></button>
                             </div>
                         </div>
@@ -55,7 +57,7 @@
                                         <span class="label">게시글 제목 <!----></span>
                                         <textarea id="textarea-title"
                                             placeholder="여러분의 후원대상이 좋은 인상을 심어줄 수 있도록 좋은 제목을 적어주세요. 기부하시는 분들의 기억에 오래 남을 거에요."
-                                            class="mds-textarea-field"></textarea>
+                                            class="mds-textarea-field" name="title"></textarea>
                                     </label>
                                     <div class="message-wrap"><!----> <span class="title-length length">0 / 100</span>
                                     </div>
@@ -68,7 +70,7 @@
                                 <div class="inner"><label><span class="label">게시글 내용 <!----></span> <textarea
                                             id="textarea-content"
                                             placeholder="후원대상인 분들에게 도서가 필요한 이유를 정성껏 적어주세요! 후원자님들이 맘에 들어하실 거에요! 그리고 까먹지 말고 우상단의 게시버튼에 이벤트 넣읍시다!"
-                                            class="mds-textarea-field"></textarea></label>
+                                            class="mds-textarea-field" name="content"></textarea></label>
                                     <div class="message-wrap"><!----> <span class="content-length length">0 /
                                             2,000</span></div>
                                 </div>
@@ -80,7 +82,7 @@
                             이미지 추가
                             <p class="count"><strong>0</strong> <span>10개</span></p>
                         </div>
-                        <input type="file" accept=".jpg, .png, .jpeg, .heic, .webp" multiple="multiple"
+                        <input type="file" accept=".jpg, .png, .jpeg, .heic, .webp" multiple name="files[]"
                             class="input-file">
                         <div class="add-box">
                             <p>이 게시글에 추가할 이미지를 넣어보세요.<br>이미지당 최대 5MB까지 업로드 할 수
@@ -112,6 +114,7 @@
                     </div>
                 </div> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!---->
             </div>
+            </form>
         </section> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!---->
     </div>
 </body>

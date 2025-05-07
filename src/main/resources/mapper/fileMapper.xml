@@ -53,12 +53,19 @@
         values (#{fileName}, #{filePath}, #{fileText})
     </insert>
 
+<<<<<<< HEAD
     <!--  이미지 수정만  -->
     <update id="updateFile">
         update tbl_file
         set file_name = #{fileName}, file_path = #{filePath}
         WHERE id = #{id}
     </update>
+=======
+    <delete id="deleteFile">
+        delete from tbl_file
+        where id = #{id}
+    </delete>
+>>>>>>> master
 
     <insert id="insertDonateCertFile">
         insert into tbl_donate_cert_file (id, donate_cert_id)
@@ -70,7 +77,24 @@
         join tbl_donate_cert_file dc
         on f.id = dc.id
         where donate_cert_id = #{postId}
+        order by f.id
+        limit 1
     </select>
+
+    <select id="selectDonateCertFilesByPostId" resultType="fileVO">
+        select f.id, file_name, file_path, file_text, donate_cert_id
+        from tbl_file f
+                 join tbl_donate_cert_file dc
+                      on f.id = dc.id
+        where donate_cert_id = #{postId}
+    </select>
+
+    <delete id="deleteDonateCertFileByPostId">
+        delete from tbl_donate_cert_file
+        where donate_cert_id = #{donateCertId}
+    </delete>
+
+
     <insert id="insertMemberInquiryFile">
         insert into tbl_member_inquiry_file (id, member_inquiry_id)
         values (#{id}, #{memberInquiryId})
@@ -88,8 +112,32 @@
 
     <insert id="insertReceiverFile">
         insert into tbl_receiver_file(id, receiver_id)
-            values (#{id}, #{postId})
+            values (#{id}, #{receiverId})
     </insert>
+
+
+
+    <select id="selectReceiverFileByPostId" resultType="fileVO">
+        select f.id, file_name, file_path, file_text, receiver_id
+        from tbl_file f
+                 join tbl_receiver_file dc
+                      on f.id = dc.id
+        where receiver_id = #{postId}
+        limit 1
+    </select>
+
+    <select id="selectReceiverFilesByPostId" resultType="fileVO">
+        select f.id, file_name, file_path, file_text, receiver_id
+        from tbl_file f
+                 join tbl_receiver_file dc
+                      on f.id = dc.id
+        where receiver_id = #{postId}
+    </select>
+
+    <delete id="deleteReceiverFileByPostId">
+        delete from tbl_receiver_file
+        where receiver_id = #{receiverId}
+    </delete>
 
     <insert id="insertSponsorInquiryFile">
         insert into tbl_sponsor_inquiry_file (id, sponsor_inquiry_id)

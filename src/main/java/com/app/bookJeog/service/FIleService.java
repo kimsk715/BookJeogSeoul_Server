@@ -3,6 +3,7 @@ package com.app.bookJeog.service;
 import com.app.bookJeog.domain.dto.FileDTO;
 import com.app.bookJeog.domain.vo.BookPostFileVO;
 import com.app.bookJeog.domain.vo.FileVO;
+import com.app.bookJeog.domain.vo.ReceiverFileVO;
 import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +24,8 @@ public interface FIleService{
 
     public FileDTO getDonateCertFileByPostId(Long postId);
 
+    public List<FileDTO> getDonateCertFilesByPostId(Long postId);
+
     public default FileDTO toFileDTO(FileVO fileVO){
         FileDTO fileDTO = new FileDTO();
         if(fileVO != null){
@@ -36,4 +39,20 @@ public interface FIleService{
 
         return fileDTO;
     }
+
+    public void uploadReceiverFiles(Long postId, List<MultipartFile> files);
+
+    public FileDTO getReceiverFileByPostId(Long postId);
+
+    public List<FileDTO> getReceiverFilesByPostId(Long postId);
+
+    public void deleteFile(Long fileId);
+
+    public void deleteReceiverFileByPostId(Long postId);
+
+    public void deleteDonateCertFileByPostId(Long postId);
+
+    public void insertExistingReceiverFile(FileDTO fileDTO, Long postId);
+
+    public void insertExistingDonateCertFile(FileDTO fileDTO, Long postId);
 }

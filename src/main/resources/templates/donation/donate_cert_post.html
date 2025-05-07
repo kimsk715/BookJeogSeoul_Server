@@ -17,8 +17,8 @@
 <body>
     <div id="wrap" class="web-mount pcv-mount" th:object="${DonateCert}">
         <!---->
-        <!---->
-        <!---->
+        <input type="hidden" id="memberId" th:if="${member} != null" th:value="${member.id}" />
+        <input type="hidden" id="sponsorName" th:if="${sponsorMember} != null" th:value="${sponsorMember.sponsorName}" />
         <section class="content">
             <div class="view">
                 <div class="view-header">
@@ -74,6 +74,7 @@
                                     <ul class="more-ul"
                                         style="display: none">
                                         <li><a>신고하기</a></li>
+                                        <li class="post-edit-button" style="display: none;"><a th:href="|/post/donate/edit/*{id}|">수정하기</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -114,13 +115,10 @@
                     <div class="detail" style="--loader-top: 214px">
                         <div class="detail-inner container">
                             <div class="diary-container">
-                                <div class="thumbnail-container"
-                                    style="
-                                            --background-image: url(https://happybean-phinf.pstatic.net/20250319_247/17423759512082zogH_JPEG/%EC%B9%98%EB%A3%8C_%EC%A4%91_%EC%98%A5%EC%83%81%EC%97%90%EC%84%9C_%EC%97%84%EB%A7%88%EC%99%80.jpeg);
-                                        ">
+                                <div class="thumbnail-container" th:if="${thumbNail} != null"
+                                     th:style="'background-image: url(' + '\'' + '/image/' + ${thumbNail.FilePath} + '/' + ${thumbNail.FileName} + '\'' + ')'">
                                     <span class="background"
-                                        style="color: deeppink; text-align: center; font-size: 50px;">임시로
-                                        넣어놓은 이미지</span>
+                                        style="color: deeppink; text-align: center; font-size: 50px;"></span>
 
                                 </div>
 
@@ -133,28 +131,14 @@
                                 <div class="images-container">
                                     <p class="title">이미지</p>
                                     <ul class="list">
-                                        <li><img
-                                                src="https://happybean-phinf.pstatic.net/20250319_247/17423759512082zogH_JPEG/%EC%B9%98%EB%A3%8C_%EC%A4%91_%EC%98%A5%EC%83%81%EC%97%90%EC%84%9C_%EC%97%84%EB%A7%88%EC%99%80.jpeg">
-                                            <p class="text"> 후원대상 이미지
-                                                1
+                                        <li th:each="image : ${files}"><img
+                                                th:src="|/image/${image.filePath}/${image.fileName}|">
+                                            <p class="text" th:text="${image.id}">
+
                                             </p> <span
                                                 class="nickname" th:text="|ⓒ*{sponsorName}|"></span>
                                         </li>
-                                        <li><img
-                                                src="https://happybean-phinf.pstatic.net/20250319_98/1742376246885hvkTB_JPEG/%EB%AA%A8%EA%B8%88%ED%95%A8_%EC%82%AC%EC%A7%84.jpg?type=w720">
-                                            <p class="text"> 후원대상 이미지
-                                                2
-                                            </p> <span
-                                                class="nickname" th:text="|ⓒ*{sponsorName}|"></span>
-                                        </li>
-                                        <li><img
-                                                src="https://happybean-phinf.pstatic.net/20250319_208/1742376073512va7n0_JPEG/%EC%95%94%EC%9D%84_%EC%9D%B4%EA%B2%A8%EB%82%B4%EB%8A%94_%EC%9A%B8%ED%8A%B8%EB%9D%BC%EB%A7%A8.jpg?type=w720">
-                                            <p class="text"> 후원대상 이미지
-                                                3
-                                            </p> <span
-                                                class="nickname" th:text="|ⓒ*{sponsorName}|">
-                                                </span>
-                                        </li>
+
                                     </ul>
 
                                     <div class="full-image"
@@ -385,5 +369,6 @@
 <script src="/js/donation/donate_cert_post_event.js"></script>
 <script th:inline="javascript">
     const member = /*[[${member}]]*/ {};
+    const sponsorMember = /*[[${sponsorMember}]]*/ {};
 </script>
 </html>

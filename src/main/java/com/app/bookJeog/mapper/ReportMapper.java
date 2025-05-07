@@ -29,4 +29,6 @@ public interface ReportMapper {
 
     // 독후감 신고 작성하기(기타 선택때만 추가 설명 입력)
     public void insertBookPostReport(BookPostReportVO bookPostReportVO);
+
+    public void insertCommentReport(CommentReportVO commentReportVO);
 }

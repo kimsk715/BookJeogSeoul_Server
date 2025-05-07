@@ -19,8 +19,9 @@ public class FileDAO {
     };
     public void insertBookPostFiles(BookPostFileVO bookPostFileVO){fileMapper.insertBookPostFiles(bookPostFileVO);};
 
-    public void setFile(FileVO fileVO){
+    public FileVO setFile(FileVO fileVO){
         fileMapper.insertFile(fileVO);
+        return fileVO;
     }
 
     public void setDonateCertFile(DonateCertFileVO donateCertFileVO){
@@ -29,6 +30,10 @@ public class FileDAO {
 
     public FileVO findDonateCertFileByPostId(Long postId){
         return fileMapper.selectDonateCertFileByPostId(postId);
+    }
+
+    public List<FileVO> findDonateCertFilesByPostId(Long postId){
+        return fileMapper.selectDonateCertFilesByPostId(postId);
     }
 
     public void setMemberInquiryFile(MemberInquiryFileVO memberInquiryFileVO){
@@ -47,10 +52,20 @@ public class FileDAO {
         fileMapper.insertReceiverFile(receiverFileVO);
     }
 
+    public FileVO findReceiverFileByPostId(Long postId){
+        return fileMapper.selectReceiverFileByPostId(postId);
+    }
+
+    public List<FileVO> findReceiverFilesByPostId(Long postId){
+        return fileMapper.selectReceiverFilesByPostId(postId);
+    }
+
+
     public void setSponsorInquiryFile(SponsorInquiryFileVO sponsorInquiryFileVO){
         fileMapper.insertSponsorInquiryFile(sponsorInquiryFileVO);
     }
 
+<<<<<<< HEAD
     // 독후감 첨부파일 수정용 조회
     public List<BookPostFileDTO> findWrittenBookPostFiles(Long bookPostId){
         return fileMapper.selectWrittenBookPostFiles(bookPostId);
@@ -65,4 +80,18 @@ public class FileDAO {
 
     // 독후감 첨부파일 이미지만 변경
     public void updateFile(FileVO fileVO){fileMapper.updateFile(fileVO);}
+=======
+//   슈퍼 키 삭제
+    public void deleteFile(Long fileId){
+        fileMapper.deleteFile(fileId);
+    }
+//    서브 키 삭제
+    public void deleteReceiverFileByPostId(Long postId){
+        fileMapper.deleteReceiverFileByPostId(postId);
+    }
+
+    public void deleteDonateCertFileByPostId(Long postId){
+        fileMapper.deleteDonateCertFileByPostId(postId);
+    }
+>>>>>>> master
 }

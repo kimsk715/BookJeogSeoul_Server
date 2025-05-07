@@ -26,7 +26,6 @@ public class WebController {
     private final BookService bookService;
     private final AladinService aladinService;
     private final BookServiceImpl bookServiceImpl;
-    private final MemberHistoryVO memberHistoryVO;
     private final SelectedBookVO selectedBookVO;
     private final MemberServiceImpl memberServiceImpl;
     private BookInfoDTO bookInfoDTO;
@@ -41,7 +40,7 @@ public class WebController {
             for (TopBookVO topBookVO : bookInfoDTOList) {
                 TopBookDTO topBookDTO = new TopBookDTO();
                 topBookDTO.setTopBookVO(topBookVO);
-                topBookDTO.setImageUrl(aladinService.getBookCover(Long.valueOf(topBookVO.getIsbn())));
+//                topBookDTO.setImageUrl(aladinService.getBookCover(Long.valueOf(topBookVO.getIsbn())));
                 topBookDTOS.add(topBookDTO);
             }
         model.addAttribute("topBookDTOS",topBookDTOS);
@@ -49,35 +48,36 @@ public class WebController {
 
         // 가장 많이 조회된 책 리스트를 가져옴
         List<MemberHistoryVO> tempList = bookServiceImpl.selectTopViewBooks();
-
+        log.info(tempList.toString());
         // 최종 결과를 담을 TopViewBookDTO 리스트 생성
         List<TopViewBookDTO> topViewBookDTOS = new ArrayList<>();
 
        try {
            // 조회된 책 리스트를 하나씩 순회
            for (MemberHistoryVO memberHistoryVO : tempList) {
-
                // 새로운 DTO 객체 생성
                TopViewBookDTO topViewBookDTO = new TopViewBookDTO();
 
                // 알라딘 API를 통해 책 표지 이미지 URL 가져오기
-               topViewBookDTO.setImageUrl(aladinService.getBookCover(memberHistoryVO.getBookIsbn()));
+
+//               topViewBookDTO.setImageUrl(aladinService.getBookCover(memberHistoryVO.getBookIsbn()));
+
                // ISBN 저장
                topViewBookDTO.setIsbn(memberHistoryVO.getBookIsbn());
 
-
                // ISBN으로 책 정보를 조회해서 저자(author) 저장
-               topViewBookDTO.setAuthor(bookService.getBookByIsbn(memberHistoryVO.getBookIsbn()).get(0).getAuthor());
+//               topViewBookDTO.setAuthor(bookService.getBookByIsbn(topViewBookDTO.getIsbn()).get(0).getAuthor());
 
 
                // ISBN으로 책 정보를 조회해서 제목(title) 저장
-               topViewBookDTO.setTitle(bookService.getBookByIsbn(memberHistoryVO.getBookIsbn()).get(0).getTitle());
+//               topViewBookDTO.setTitle(bookService.getBookByIsbn(topViewBookDTO.getIsbn()).get(0).getTitle());
 
                // 완성된 DTO를 결과 리스트에 추가
                topViewBookDTOS.add(topViewBookDTO);
            }
+           log.info(topViewBookDTOS.toString());
        }catch (Exception e){
-           log.error("책 데이터 변환 중 오류 발생: ISBN = {}, error = {}", memberHistoryVO.getBookIsbn(), e.getMessage());
+           log.error("책 데이터 변환 중 오류 발생: ISBN, error = {}", e.getMessage());
        }
         model.addAttribute("topViewBooks", topViewBookDTOS);
         // 어드민이 선택한 책들 조회
@@ -88,7 +88,7 @@ public class WebController {
        try {
            for (SelectedBookVO selectedBookVO : templist) {
                AdminSelectBookDTO adminSelectBookDTO = new AdminSelectBookDTO();
-               adminSelectBookDTO.setImageUrl(aladinService.getBookCover(selectedBookVO.getBookIsbn()));
+//               adminSelectBookDTO.setImageUrl(aladinService.getBookCover(selectedBookVO.getBookIsbn()));
                adminSelectBookDTO.setIsbn(selectedBookVO.getBookIsbn());
                adminSelectBookDTO.setTitle(bookService.getBookByIsbn(selectedBookVO.getBookIsbn()).get(0).getTitle());
                adminSelectBookDTO.setAuthor(bookService.getBookByIsbn(selectedBookVO.getBookIsbn()).get(0).getAuthor());
@@ -108,7 +108,7 @@ public class WebController {
           for (BookPostVO bookPostVO : tempPost) {
               TopBookPostDTO topBookPostDTO = new TopBookPostDTO();
               topBookPostDTO.setIsbn(bookPostVO.getBookIsbn());
-              topBookPostDTO.setImageUrl(aladinService.getBookCover(bookPostVO.getBookIsbn()));
+//              topBookPostDTO.setImageUrl(aladinService.getBookCover(bookPostVO.getBookIsbn()));
               topBookPostDTO.setTitle(bookService.getBookByIsbn(bookPostVO.getBookIsbn()).get(0).getTitle());
               topBookPostDTO.setAuthor(bookService.getBookByIsbn(bookPostVO.getBookIsbn()).get(0).getAuthor());
               topBookPostDTOS.add(topBookPostDTO);

@@ -229,9 +229,13 @@ public class PostServiceImpl implements PostService {
             receiverPostDTO.setLikeScore(favoriteDAO.receiverVote(receiverVO.getId()));
             receiverPostDTO.setReceiverText(receiverVO.getReceiverText());
             receiverPostDTO.setReceiverTitle(receiverVO.getReceiverTitle());
+            if(fileDAO.findReceiverFileByPostId(receiverVO.getId()) != null) {
+                receiverPostDTO.setReceiverFilePath(fileDAO.findReceiverFileByPostId(receiverVO.getId()).getFilePath());
+                receiverPostDTO.setReceiverFileName(fileDAO.findReceiverFileByPostId(receiverVO.getId()).getFileName());
+            }
             receiverPostDTOList.add(receiverPostDTO);
         }
-        log.info(receiverPostDTOList.toString());
+//        log.info(receiverPostDTOList.toString());
         return receiverPostDTOList;
     }
 
@@ -239,7 +243,7 @@ public class PostServiceImpl implements PostService {
     public ReceiverPostDTO getReceiverPostById(Long id) {
         ReceiverPostDTO receiverPostDTO = new ReceiverPostDTO();
         ReceiverVO receiverVO = postDAO.findReceiverPostById(id);
-        log.info(receiverVO.toString());
+//        log.info(receiverVO.toString());
         Long memberId = postDAO.findPostById(receiverVO.getId()).getMemberId();
         receiverPostDTO.setId(id);
         receiverPostDTO.setReceiverText(receiverVO.getReceiverText());
@@ -412,6 +416,7 @@ public class PostServiceImpl implements PostService {
         postDAO.insertDonateCertPost(donateCertVO);
     }
 
+<<<<<<< HEAD
     // 독후감 수정을 위한 데이터 조회
     public FileBookPostDTO findWrittenBookPost(Long bookPostId) {
         FileBookPostDTO fileBookPostDTO = postDAO.findWrittenBookPost(bookPostId);
@@ -537,4 +542,23 @@ public class PostServiceImpl implements PostService {
 
     };
 
+=======
+    @Override
+    public void setReceiverPost(ReceiverVO receiverVO) {
+        postDAO.insertReceiverPost(receiverVO);
+    }
+
+    @Override
+    public void updateReceiverPost(ReceiverDTO receiverDTO) {
+        postDAO.updateReceiverPost(receiverDTO.toVO());
+    }
+
+    @Override
+    public void updateDonateCertPost(DonateCertDTO donateCertDTO) {
+        postDAO.updateDonateCertPost(donateCertDTO.toVO());
+    }
+
+
+}
+>>>>>>> master
 

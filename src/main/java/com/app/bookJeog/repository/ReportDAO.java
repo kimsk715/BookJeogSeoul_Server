@@ -53,5 +53,9 @@ public class ReportDAO {
     public void setBookPostReport(BookPostReportVO bookPostReportVO) {
         log.info("bookPostReportVO: {}", bookPostReportVO);
         reportMapper.insertBookPostReport(bookPostReportVO);
-    };
+    }
+
+    public void setCommentReport(CommentReportVO commentReportVO) {
+        reportMapper.insertCommentReport(commentReportVO);
+    }
 }
