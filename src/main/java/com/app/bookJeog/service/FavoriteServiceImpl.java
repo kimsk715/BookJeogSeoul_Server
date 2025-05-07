@@ -2,6 +2,7 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.controller.exception.UnauthenticatedException;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 import com.app.bookJeog.repository.FavoriteDAO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -100,5 +101,12 @@ public class FavoriteServiceImpl implements FavoriteService {
     // 특정 독후감의 좋아요 개수 조회
     public int countBookPostLike(Long bookPostId){
         return favoriteDAO.countBookPostLike(bookPostId);
-    };
+    }
+
+    @Override
+    public void voteToReceiver(ReceiverLikeVO receiverLikeVO) {
+        favoriteDAO.voteToReceiver(receiverLikeVO);
+    }
+
+    ;
 }
