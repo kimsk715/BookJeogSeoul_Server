@@ -2,6 +2,7 @@ package com.app.bookJeog.domain.dto;
 
 
 import com.app.bookJeog.domain.enumeration.CommentReportStatus;
+import com.app.bookJeog.domain.enumeration.ReportType;
 import com.app.bookJeog.domain.vo.CommentMentionVO;
 import com.app.bookJeog.domain.vo.CommentReportVO;
 import lombok.EqualsAndHashCode;
@@ -19,7 +20,7 @@ public class CommentReportDTO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long commentId;
-    private String commentReportType;
+    private ReportType commentReportType;
     private String commentReportText;
     private CommentReportStatus commentReportStatus;
 

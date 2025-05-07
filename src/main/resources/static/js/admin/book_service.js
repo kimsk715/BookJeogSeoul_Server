@@ -46,5 +46,21 @@ const bookService= (() => {
         }
 
     }
-    return {getAllBook : getAllBook, tempSelectedBooks:tempSelectedBooks, tempLists:tempLists };
+
+    const openAI = async(callback, isbn) => {
+        let path = `/bot/chat?isbn=${isbn}`;
+
+        openAIResult.innerHTML = `<div class="loader-wrapper">
+        <img src="/images/common/loading.gif" class="loading" alt="loading" />
+        </div>`
+
+        const loadingImage = document.querySelector(".loading")
+        const response = await fetch(path);
+        const topics = await response.json();
+        loadingImage.style.display = "none";
+        if(callback){
+            callback(topics);
+        }
+    }
+    return {getAllBook : getAllBook, tempSelectedBooks:tempSelectedBooks, tempLists:tempLists, openAI:openAI };
 })();

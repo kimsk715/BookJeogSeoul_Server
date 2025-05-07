@@ -68,3 +68,25 @@ where post_type = 'BOOK_POST'
 group by m.id
 ORDER BY post_count DESC
 limit 4;
+
+# 멘션당한 사람 id 조회
+select c.id, mentioned_member_id
+from tbl_comment_mention cm join tbl_comment c
+on cm.comment_id = c.id
+where c.id = ${commentId};
+
+# 멘션한 사람 id 조회
+select c.id, member_id
+from tbl_comment_mention cm join tbl_comment c
+                                 on cm.comment_id = c.id
+where c.id = ${commentId};
+
+# 멘션된 댓글이 있는 게시글 id 조회
+select c.id, post_id
+from tbl_comment_mention cm join tbl_comment c
+                                 on cm.comment_id = c.id
+where c.id = ${commentId};
+
+
+select *
+from tbl_follow

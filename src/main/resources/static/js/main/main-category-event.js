@@ -41,7 +41,6 @@ hamburgerBtn.addEventListener("click", () => {
     }
 });
 
-hamburgerBtn.addEventListener("click", )
 
 // ul 태그안에 요소 없으면 null text 출력 하는 이벤트
 const ulTag = document.querySelector(".favorites-list");
