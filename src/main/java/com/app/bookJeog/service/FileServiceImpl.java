@@ -1,5 +1,6 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.DonateCertDTO;
 import com.app.bookJeog.domain.dto.DonateCertFileDTO;
 import com.app.bookJeog.domain.dto.FileDTO;
 import com.app.bookJeog.domain.dto.ReceiverFileDTO;
@@ -172,6 +173,41 @@ public class FileServiceImpl implements FIleService {
             fileDTOList.add(toFileDTO(fileVO));
         }
         return fileDTOList;
+    }
+
+    @Override
+    public void deleteFile(Long fileId) {
+        fileDAO.deleteFile(fileId);
+    }
+
+    @Override
+    public void deleteReceiverFileByPostId(Long postId) {
+        fileDAO.deleteReceiverFileByPostId(postId);
+    }
+
+    @Override
+    public void deleteDonateCertFileByPostId(Long postId) {
+        fileDAO.deleteDonateCertFileByPostId(postId);
+    }
+
+    @Override
+    public void insertExistingReceiverFile(FileDTO fileDTO, Long postId) {
+        FileVO fileVO = fileDTO.toVO();
+        fileDAO.setFile(fileVO);
+        ReceiverFileDTO receiverFileDTO = new ReceiverFileDTO();
+        receiverFileDTO.setId(fileVO.getId());
+        receiverFileDTO.setReceiverId(postId);
+        fileDAO.setReceiverFile(receiverFileDTO.toVO());
+    }
+
+    @Override
+    public void insertExistingDonateCertFile(FileDTO fileDTO, Long postId) {
+        FileVO fileVO = fileDTO.toVO();
+        fileDAO.setFile(fileVO);
+        DonateCertFileDTO donateCertFileDTO = new DonateCertFileDTO();
+        donateCertFileDTO.setId(fileVO.getId());
+        donateCertFileDTO.setDonateCertId(postId);
+        fileDAO.setDonateCertFile(donateCertFileDTO.toVO());
     }
 
 }

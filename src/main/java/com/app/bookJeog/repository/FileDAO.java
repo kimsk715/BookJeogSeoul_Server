@@ -18,8 +18,9 @@ public class FileDAO {
     };
     public void insertBookPostFiles(BookPostFileVO bookPostFileVO){fileMapper.insertBookPostFiles(bookPostFileVO);};
 
-    public void setFile(FileVO fileVO){
+    public FileVO setFile(FileVO fileVO){
         fileMapper.insertFile(fileVO);
+        return fileVO;
     }
 
     public void setDonateCertFile(DonateCertFileVO donateCertFileVO){
@@ -61,5 +62,18 @@ public class FileDAO {
 
     public void setSponsorInquiryFile(SponsorInquiryFileVO sponsorInquiryFileVO){
         fileMapper.insertSponsorInquiryFile(sponsorInquiryFileVO);
+    }
+
+//   슈퍼 키 삭제
+    public void deleteFile(Long fileId){
+        fileMapper.deleteFile(fileId);
+    }
+//    서브 키 삭제
+    public void deleteReceiverFileByPostId(Long postId){
+        fileMapper.deleteReceiverFileByPostId(postId);
+    }
+
+    public void deleteDonateCertFileByPostId(Long postId){
+        fileMapper.deleteDonateCertFileByPostId(postId);
     }
 }

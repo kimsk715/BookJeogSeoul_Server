@@ -97,7 +97,6 @@ function appendImage(file) {
 fileInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
     if (file && file.name && file.size > 0) {
-
         appendImage(file);
     }
 });
@@ -130,11 +129,11 @@ document.addEventListener("click", (e) => {
 const imageContainer = document.querySelector("div.images"); // 부모를 잡자
 
 imageContainer.addEventListener("click", (e) => {
-    // 클릭된게 new-add-button이면
-    if (e.target.classList.contains("new-add-button")) {
-        const input = e.target.querySelector(".new-input-file"); // 자식 input을 찾고
+    const newAddBtn = e.target.closest(".new-add-button");
+    if (newAddBtn) {
+        const input = newAddBtn.querySelector(".new-input-file");
         if (input) {
-            input.click(); // input 클릭 트리거!
+            input.click();
         }
     }
 });
@@ -143,7 +142,6 @@ imageContainer.addEventListener("click", (e) => {
 imageContainer.addEventListener("change", (e) => {
     if (e.target.classList.contains("new-input-file")) {
         const file = e.target.files[0];
-
         if (!file) return;
         appendImage(file)
     }
@@ -177,14 +175,6 @@ const imageCount = document.querySelector("p.count strong");
 
 const publishButton = document.querySelector(".publish-btn")
 
-// publishButton.addEventListener('click',()=>{
-//
-//     if(confirm("게시하시겠습니까? (추가 확인문구를 넣어주세요)")){
-//
-//     }
-//
-// })
-    
 const alertModal = document.querySelector(".unload-popup"); // 뒤로 가기 누를 시 나오는 모달
 const backModalOpen = document.querySelector(".back-btn"); // 뒤로 가기 버튼
 const closeAlertModal = document.querySelector(".close"); // 모달창의 취소 버튼
@@ -202,24 +192,30 @@ closeAlertModal.addEventListener("click", () =>{
 const form = document.querySelector('.donate-form');
 
 function prepareFilesBeforeSubmit() {
-    const fileContainer = document.querySelectorAll("input[name=files]");
+    // 기존 hidden input 제거
+    document.querySelectorAll("input[name=remainingImageUrls]").forEach((i) => i.remove());
+    document.querySelectorAll("input[name=files]").forEach((i) => i.remove());
 
-    // 파일을 담고 있는 input 요소 제거
-    fileContainer.forEach((input) => {
-        input.remove();
-    });
+    // 남아있는 기존 이미지 URL 수집
+    const remainingUrls = Array.from(document.querySelectorAll("li.item[data-existing-url]"))
+        .map(li => li.dataset.existingUrl);
 
-    // 빈 파일을 제거한 후 배열을 다시 구성
-    const validFiles = fileLists.filter(file => file && file.size > 0);
-
-    // 유효한 파일만 서버에 보낼 준비
-    validFiles.forEach((file) => {
-        const fileInput = document.createElement('input');
-        fileInput.type = 'file';
-        fileInput.name = 'files'; // 서버에서 받을 이름
-        fileInput.files = createFileList(file); // 핵심: files 속성에 파일 객체 설정
-        document.querySelector('form').appendChild(fileInput);
-    });
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = "remainingImageUrls";
+    input.value = remainingUrls.join(",");
+    form.appendChild(input);
+    console.log(remainingUrls)
+    // 새로 추가된 이미지만 Multipart로 첨부
+    fileLists
+        .filter(file => file instanceof File && file.size > 0)
+        .forEach(file => {
+            const input = document.createElement("input");
+            input.type = "file";
+            input.name = "files";
+            input.files = createFileList(file);
+            form.appendChild(input);
+        });
 }
 
 function createFileList(file) {

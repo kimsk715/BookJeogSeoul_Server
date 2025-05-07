@@ -128,5 +128,9 @@ public interface PostService {
     public void setDonateCertPost(DonateCertVO donateCertVO);
 
     public void setReceiverPost(ReceiverVO receiverVO);
+
+    public void updateReceiverPost(ReceiverDTO receiverDTO);
+
+    public void updateDonateCertPost(DonateCertDTO donateCertDTO);
 }
 
