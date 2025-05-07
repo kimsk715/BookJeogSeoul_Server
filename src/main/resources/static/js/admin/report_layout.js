@@ -10,19 +10,19 @@ const reportLayout = (() =>{
         list.forEach((report) => {
 
             switch(report.bookPostReportVO.bookPostReportType){
-                case("ABUSE"):
+                case("욕설"):
                     className = "active"
                     break;
-                case("SEXUAL"):
+                case("음란성"):
                     className = "suspended"
                     break;
-                case("SPAM"):
+                case("광고성"):
                     className = "dormancy"
                     break;
-                case("SPOILER"):
+                case("스포일러"):
                     className = "withdrawn"
                     break;
-                case("ETC"):
+                case("기타"):
                     className = "active"
                     break;
             }

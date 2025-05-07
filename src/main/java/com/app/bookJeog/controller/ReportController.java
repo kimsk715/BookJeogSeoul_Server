@@ -4,6 +4,7 @@ import com.app.bookJeog.domain.dto.BookPostReportDTO;
 import com.app.bookJeog.domain.dto.CommentReportDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberDTO;
+import com.app.bookJeog.domain.enumeration.CommentReportType;
 import com.app.bookJeog.domain.enumeration.ReportType;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.service.ReportService;
@@ -30,9 +31,20 @@ public class ReportController  {
 
     @GetMapping("report-comment")
     @ResponseBody
-    public void reportComment(HttpSession session, @RequestParam Long commentId, @RequestParam ReportType reportType) {
+    public void reportComment(HttpSession session, @RequestParam Long commentId, @RequestParam CommentReportType reportType) {
         CommentReportDTO commentReportDTO = new CommentReportDTO();
         commentReportDTO.setCommentId(commentId);
+        Long memberId = 0L;
+        if(session.getAttribute("member") != null){
+            PersonalMemberDTO personalMemberDTO = (PersonalMemberDTO) session.getAttribute("member");
+            memberId = personalMemberDTO.getId();
+        }
+        else{
+            SponsorMemberVO sponsorMemberVO = (SponsorMemberVO) session.getAttribute("sponsorMember");
+            memberId = sponsorMemberVO.getId();
+        }
+        commentReportDTO.setCommentReporterId(memberId);
+
         commentReportDTO.setCommentReportType(reportType);
         log.info(commentReportDTO.toString());
         reportService.insertCommentReport(commentReportDTO);

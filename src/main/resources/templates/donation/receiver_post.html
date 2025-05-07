@@ -444,7 +444,8 @@
                                                 <button
                                                         type="button">답글달기</button>
                                                 <button
-                                                        type="button">신고하기</button>
+                                                        type="button" class="comment-report" th:value="${comment.commentDTO.id}">신고하기</button>
+                                                <input type="hidden" class="reported-id" th:value="${comment.commentDTO.memberId}">
                                             </div>
                                         </div>
                                     </div>
@@ -479,5 +480,6 @@
 <script th:inline="javascript">
     const member = /*[[${member}]]*/ {};
     const sponsorMember = /*[[${sponsorMember}]]*/ {};
+    const postId = /*[[${postId}]]*/ {};
 </script>
 </html>
