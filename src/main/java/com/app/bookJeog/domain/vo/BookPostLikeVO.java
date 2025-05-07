@@ -15,5 +15,4 @@ public class BookPostLikeVO extends Period {
     private Long id;
     private Long bookPostId;
     private Long memberId;
-
 }

@@ -85,10 +85,10 @@
             <div class="util-wrap">
                 <!-- data-count가 알람 개수 -->
                 <a
-                        href=""
+                        href="/post-alarm"
                         class="alarm-button"
                         data-content-type="alarmCenter"
-                        data-count="10"
+                        th:attr="data-count=${unreadAlarmCount}"
                 >
                                 <span class="mds-icon-alarm">
                                     <span class="ir">알림센터</span>

@@ -111,5 +111,26 @@
         where follow_receiver_id = #{receiverId} and follow_sender_id = #{senderId}
     </delete>
 
+    <!-- 내 팔로워 수 조회-->
+    <select id="selectMyFollowers" resultType="_int">
+        select count(*)
+        from tbl_follow
+        where follow_receiver_id = #{memberId}
+    </select>
 
+    <!--  내 팔로우 수 조회  -->
+    <select id="selectMyFollowings" resultType="_int">
+        select count(*)
+        from tbl_follow
+        where follow_sender_id = #{memberId}
+    </select>
+
+    <!--  내가 찜한 도서 정보  -->
+    <select id="selectMyScrappedBooks" resultType="Long">
+        select book_isbn
+        from tbl_book_like
+        where member_id = #{memberId}
+        order by createdDate desc
+        limit 8
+    </select>
 </mapper>

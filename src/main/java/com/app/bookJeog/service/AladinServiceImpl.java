@@ -1,5 +1,8 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.AladinBookDTO;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
+import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
@@ -20,10 +23,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
+@Slf4j
 public class AladinServiceImpl implements AladinService {
     // 알라딘 API Key
     private static final String ALADIN_API_KEY = "ttbkimsk7151659001";
@@ -137,6 +140,69 @@ public class AladinServiceImpl implements AladinService {
         }
     }
 
+    // 상위 9개의 인기도서 json으로 반환
+    public JSONObject searchBestBooks(){
+        try {
+            // 알라딘 ItemSearch API 요청 URL 구성
+            String urlStr = "https://www.aladin.co.kr/ttb/api/ItemList.aspx"
+                    + "?ttbkey=" + ALADIN_API_KEY                          // API 인증 키
+                    + "&QueryType=Bestseller"                             // 인기 도서 검색
+                    + "&MaxResults=9"
+                    + "&SearchTarget=Book"                                // 검색 대상: 도서
+                    + "&output=JS"                                        // 응답 형식: JSON
+                    + "&start=1"
+                    + "&Cover=Big"
+                    + "&Version=20131101";
+
+            // HTTP 연결 생성
+            URL url = new URL(urlStr);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            // 응답 읽기
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
+                // 응답 내용을 문자열로 조립
+                String result = br.lines().collect(Collectors.joining());
+
+                // 문자열을 JSONObject로 변환
+                JSONObject json = new JSONObject(result);
+
+                // 응답 객체에는 총 검색 결과 수(totalResults), 도서 목록(item 배열) 등이 포함됨
+                return json;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace(); // 에러 로그 출력
+            return null;
+        }
+    }
+
+    // 인기도서 json Map형태로 변환
+    public Map<String, Object> convertBestBooksToSimpleMap() throws JSONException {
+        JSONObject json = searchBestBooks(); // Bestseller API 호출
+
+        List<Map<String, Object>> bookList = new ArrayList<>();
+        JSONArray items = json.optJSONArray("item");
+
+        if (items != null) {
+            for (int i = 0; i < items.length(); i++) {
+                JSONObject book = items.getJSONObject(i);
+                Map<String, Object> bookMap = new HashMap<>();
+
+                bookMap.put("title", book.optString("title"));
+                bookMap.put("author", book.optString("author"));
+                bookMap.put("cover", book.optString("cover"));
+                bookMap.put("isbn", book.optString("isbn13")); // 그대로 키 유지
+
+                bookList.add(bookMap);
+            }
+        }
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("item", bookList); // 도서 리스트만 포함
+        return result;
+    }
+
     // json을 Map<String, Object> 형태로 반환
     public Map<String, Object> searchBooksToMap(String keyword, int startIndex, int maxResults, String sort) throws JSONException {
         // 알라딘 API에서 응답 JSON 받아오기
@@ -178,10 +244,11 @@ public class AladinServiceImpl implements AladinService {
         try {
             JSONObject json = getBookInfo(isbn);
             Map<String, Object> result = new HashMap<>();
-            result.put("isbn", json.optLong("isbn"));
+            result.put("isbn", json.optLong("isbn13"));
             result.put("title", json.optString("title"));
             result.put("author", json.optString("author"));
             result.put("publisher", json.optString("publisher"));
+            result.put("pubDate", json.optString("pubDate"));
             result.put("description", json.optString("description"));
             result.put("cover", json.optString("cover"));
             return result;
@@ -189,5 +256,31 @@ public class AladinServiceImpl implements AladinService {
             e.printStackTrace();
             return null;
         }
+    }
+
+    // 여러개의 도서 정보를 isbn으로 가져와 List로 반환
+    public List<AladinBookDTO> getBooksByIsbnList(List<Long> isbnList) {
+        List<AladinBookDTO> result = new ArrayList<>();
+
+        for (Long isbn : isbnList) {
+            try {
+                JSONObject item = fetchItem(isbn);
+                if (item == null) continue;
+
+                AladinBookDTO dto = new AladinBookDTO();
+                dto.setBookIsbn(isbn);
+                dto.setBookTitle(item.optString("title"));
+                dto.setBookAuthor(item.optString("author"));
+                dto.setBookPublisher(item.optString("publisher"));
+                dto.setBookCover(item.optString("cover"));
+
+                result.add(dto);
+            } catch (Exception e) {
+                // 실패한 ISBN은 무시하고 계속 진행
+                continue;
+            }
+        }
+
+        return result;
     }
 }
