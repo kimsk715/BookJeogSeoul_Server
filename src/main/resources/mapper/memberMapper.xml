@@ -272,6 +272,100 @@
         limit 4
     </select>
 
+
+
+    <!--댓글 알람-->
+
+    <!--  내가 쓴 독후감 개수 조회  -->
+    <select id="selectMyBookPostCount" resultType="_int">
+        select count(*)
+        from tbl_post p
+                 join tbl_book_post bp on p.id = bp.id
+        where member_id = #{memberId}
+    </select>
+
+    <!-- 내 이번 달 쓴 독후감 수 -->
+    <select id="selectMyMonthlyBookPostCount" resultType="_int">
+        select count(*)
+        from tbl_post p
+        join tbl_book_post bp on p.id = bp.id
+        where p.createdDate >= date_sub(now(), interval 30 day)
+          and p.member_id = #{memberId}
+    </select>
+
+    <!--  이번 달 독후감 쓴 회원들의 평균 독후감  -->
+    <select id="selectAverageBookPostCount" resultType="_int">
+        select count(*) / count(distinct p.member_id) as avg_post_count
+        from tbl_post p
+                 join tbl_book_post bp on p.id = bp.id
+        where p.createdDate >= date_sub(now(), interval 30 day)
+    </select>
+
+    <!--  내 마일리지 조회  -->
+    <select id="selectMyMileage" resultType="_int">
+        select member_mileage
+        from tbl_personal_member
+        where id = #{memberId}
+    </select>
+
+    <!--  내 프로필 이미지 조회  -->
+    <select id="selectMyProfile" resultType="fileVO">
+        select file_path, file_name
+        from tbl_file f
+        join tbl_member_profile mp on f.id = mp.id
+        where mp.member_id = #{memberId}
+    </select>
+
+    <!--  비밀번호 유효성검사  -->
+    <select id="checkPassword" resultType="_boolean">
+        select count(*) > 0
+        from tbl_personal_member
+        where id = #{memberId}
+          and member_password = #{password}
+    </select>
+
+    <!--  마이페이지 개인 회원정보 수정  -->
+    <update id="updateNickname">
+        update tbl_personal_member set member_nickname = #{memberNickName} where id = #{id}
+    </update>
+
+    <update id="updateMemberPassword">
+        update tbl_personal_member set member_password = #{memberPassword} where id = #{id}
+    </update>
+
+    <!--  회원 프사 조회, 삭제, 변경  -->
+    <select id="selectProfileFileId" resultType="Long">
+        select f.id
+        from tbl_file f
+                 join tbl_member_profile mp on f.id = mp.id
+        where mp.member_id = #{memberId}
+    </select>
+
+    <update id="updateMemberFile">
+        update tbl_file
+        set file_path = #{filePath}, file_name = #{fileName}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMemberFile">
+        delete from tbl_file where id = #{id}
+    </delete>
+
+    <delete id="deleteMemberProfile">
+        delete from tbl_member_profile where member_id = #{memberId}
+    </delete>
+
+    <!--  프사 설정하기  -->
+    <insert id="insertProfileFile" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_file (file_name, file_path)
+        values (#{fileName}, #{filePath})
+    </insert>
+
+    <insert id="insertMemberProfile">
+        insert into tbl_member_profile (id, member_id)
+        values (#{id}, #{memberId})
+    </insert>
+>>>>>>> 8bc832940d22904ff489e952b42fce5b80437c07
 </mapper>
 
 

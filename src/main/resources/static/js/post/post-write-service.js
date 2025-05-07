@@ -12,8 +12,14 @@ const postWriteService = (() => {
     // 선택한 도서가 선정도서인지 조회
     const isSelected = async (bookIsbn) => {
         const response = await fetch(`/book/find-selected?bookIsbn=${bookIsbn}`);
+        const bookId = await response.json();
 
-        return await response.json();
+        if (bookId != null) {
+            document.getElementById("hiddenBookId").value = bookId;
+            return true;
+        }
+
+        return false;
     }
     return {searchBooks : searchBooks, isSelected : isSelected};
 })();

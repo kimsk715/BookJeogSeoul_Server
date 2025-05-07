@@ -1,10 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.app.bookJeog.mapper.FileMapper">
+    <!--  독후감 첨부파일 넣기, 수정(삭제)  -->
+    <insert id="insertFiles" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_file (
+        file_name,
+        file_path
+        <if test="fileText != null and fileText != ''">
+            , file_text
+        </if>
+        )
+        values (
+        #{fileName},
+        #{filePath}
+        <if test="fileText != null and fileText != ''">
+            , #{fileText}
+        </if>
+        )
+    </insert>
+
+    <insert id="insertBookPostFiles">
+        insert into tbl_book_post_file (id, book_post_id)
+        values (#{id}, #{bookPostId})
+    </insert>
+
+    <delete id="deleteFiles">
+        delete from tbl_file
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteBookPostFiles">
+        delete from tbl_book_post_file
+        where id = #{id}
+    </delete>
+
+    <update id="updateFileText">
+        update tbl_file
+        set file_text = #{fileText}
+        where id = #{id}
+    </update>
+
+    <!--  수정을 위한 첨부파일 조회  -->
+    <select id="selectWrittenBookPostFiles" resultType="bookPostFileDTO">
+        select f.id, f.file_name, f.file_path, f.file_text
+        from tbl_file f
+        join tbl_book_post_file bpf on bpf.id = f.id
+        where bpf.book_post_id = #{bookPostId}
+    </select>
+
     <insert id="insertFile" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_file (file_name, file_path, file_text)
         values (#{fileName}, #{filePath}, #{fileText})
     </insert>
+
+<<<<<<< HEAD
+    <!--  이미지 수정만  -->
+    <update id="updateFile">
+        update tbl_file
+        set file_name = #{fileName}, file_path = #{filePath}
+        WHERE id = #{id}
+    </update>
+=======
+    <delete id="deleteFile">
+        delete from tbl_file
+        where id = #{id}
+    </delete>
+>>>>>>> master
+
     <insert id="insertDonateCertFile">
         insert into tbl_donate_cert_file (id, donate_cert_id)
         values (#{id}, #{donateCertId})
@@ -27,6 +89,11 @@
         where donate_cert_id = #{postId}
     </select>
 
+    <delete id="deleteDonateCertFileByPostId">
+        delete from tbl_donate_cert_file
+        where donate_cert_id = #{donateCertId}
+    </delete>
+
 
     <insert id="insertMemberInquiryFile">
         insert into tbl_member_inquiry_file (id, member_inquiry_id)
@@ -48,6 +115,8 @@
             values (#{id}, #{receiverId})
     </insert>
 
+
+
     <select id="selectReceiverFileByPostId" resultType="fileVO">
         select f.id, file_name, file_path, file_text, receiver_id
         from tbl_file f
@@ -64,6 +133,11 @@
                       on f.id = dc.id
         where receiver_id = #{postId}
     </select>
+
+    <delete id="deleteReceiverFileByPostId">
+        delete from tbl_receiver_file
+        where receiver_id = #{receiverId}
+    </delete>
 
     <insert id="insertSponsorInquiryFile">
         insert into tbl_sponsor_inquiry_file (id, sponsor_inquiry_id)
