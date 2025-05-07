@@ -353,6 +353,7 @@ public class PersonalController {
         model.addAttribute("tempMemberInfo", tempMemberInfo);
         return "register/register-kakao-member";
     }
+
     // 카카오 회원가입 완료
     @PostMapping("kakako-register-member")
     public String joinKakaoMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {

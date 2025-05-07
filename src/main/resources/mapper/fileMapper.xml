@@ -53,19 +53,16 @@
         values (#{fileName}, #{filePath}, #{fileText})
     </insert>
 
-<<<<<<< HEAD
     <!--  이미지 수정만  -->
     <update id="updateFile">
         update tbl_file
         set file_name = #{fileName}, file_path = #{filePath}
         WHERE id = #{id}
     </update>
-=======
     <delete id="deleteFile">
         delete from tbl_file
         where id = #{id}
     </delete>
->>>>>>> master
 
     <insert id="insertDonateCertFile">
         insert into tbl_donate_cert_file (id, donate_cert_id)
