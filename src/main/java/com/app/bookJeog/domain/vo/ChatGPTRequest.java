@@ -15,3 +15,4 @@ public class ChatGPTRequest {
         this.messages.add(new Message("user", prompt));
     }
 }
+

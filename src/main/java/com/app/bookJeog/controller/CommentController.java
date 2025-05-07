@@ -4,9 +4,11 @@ import com.app.bookJeog.controller.member.MemberControllerDocs;
 import com.app.bookJeog.domain.dto.CommentDTO;
 import com.app.bookJeog.domain.dto.CommentMentionDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.dto.SponsorMemberDTO;
 import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.vo.CommentMentionVO;
 import com.app.bookJeog.domain.vo.CommentVO;
+import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.service.CommentService;
 import com.app.bookJeog.service.MemberService;
 import com.app.bookJeog.service.PostService;
@@ -38,6 +40,13 @@ public class CommentController implements MemberControllerDocs {
         if(session.getAttribute("member") != null){
             PersonalMemberDTO foundMember = (PersonalMemberDTO) session.getAttribute("member");
             commentDTO.setMemberId(foundMember.getId());
+        }
+        else if(session.getAttribute("sponsorMember") != null){
+            SponsorMemberVO foundSponsorMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+            commentDTO.setMemberId(foundSponsorMember.getId());
+        }
+        else{
+            throw new RuntimeException();
         }
         CommentVO commentVO = commentDTO.toVO();
         commentService.insertComment(commentVO);
