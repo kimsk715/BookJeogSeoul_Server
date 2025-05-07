@@ -44,7 +44,7 @@ const postListLayout = (() => {
                 <div class="user diary-theme">
                     <a href="#" class="profile-image" style="background-image: url('${profileImg}');"></a>
                     <div class="metadata">
-                        <a href="#" class="nickname-link"><span class="nickname">${post.memberName}</span></a>
+                        <a href="#" class="nickname-link"><span class="nickname">${post.memberNickName}</span></a>
                         <div><span class="time">${formattedTime}</span></div>
                     </div>
                     <button type="button" class="button follow-btn">팔로우</button>
