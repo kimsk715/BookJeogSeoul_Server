@@ -1,11 +1,8 @@
 package com.app.bookJeog.service;
 
-<<<<<<< HEAD
 import com.app.bookJeog.domain.dto.AladinBookDTO;
 import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.google.gson.JsonObject;
-=======
->>>>>>> master
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
@@ -26,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
