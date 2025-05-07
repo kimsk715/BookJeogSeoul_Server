@@ -191,6 +191,11 @@ public interface MemberService {
     public Map<String, Object> getMyPageData(HttpSession session, Model model);
 
     public default FileDTO toFileDTO(FileVO fileVO) {
+
+        if (fileVO == null) {
+            return null;
+        }
+
         FileDTO fileDTO = new FileDTO();
         fileDTO.setId(fileVO.getId());
         fileDTO.setFileName(fileVO.getFileName());

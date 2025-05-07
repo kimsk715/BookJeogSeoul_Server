@@ -46,9 +46,7 @@
                                 <div class="inner">
                                     <div
                                         class="image-box"
-                                        style="
-                                            background-image: url(/images/post/user_profile_example.png);
-                                        "
+                                        th:style="'background-image: url(' + @{${profileUrl}} + ')'"
                                     ></div>
                                     <label class="picture-change-button">
                                         <input
