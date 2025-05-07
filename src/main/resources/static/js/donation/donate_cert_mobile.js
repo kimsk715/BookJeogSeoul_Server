@@ -3,6 +3,7 @@ donateCerts.forEach( post => {
 
         cardList += `
                         <div class ="card-wrapper">
+                             
                                 <div class="card-item">
                                     <div class="user post-theme"><a href="/post/donate/post/${post.id}"
                                             class="profile-image gtm-feed-recommend-post-tem-library"
@@ -13,7 +14,7 @@ donateCerts.forEach( post => {
                                             <div><span class="type">포스트</span>
                                                 <span class="time">${post.createdDate}일 전</span>
                                             </div>
-                                        </div> <button type="button"
+                                        </div> <button type="button" style="display: none;"
                                             class="button gtm-feed-recommend-post-tem-follow">팔로우</button>
                                         <div class="more"><button type="button" tabindex="0"><i
                                                     class="mds-icon--more-24-1"></i></button> <!----></div> <!---->
@@ -24,7 +25,7 @@ donateCerts.forEach( post => {
                                                     src="/image/${post.donateCertFilePath}/${post.donateCertFileName}" alt="이미지를 찾을 수 없습니다.">
                                             </div>
                                         </a>
-                                        <div class="metadata"><a href=""
+                                        <div class="metadata"><a href="/post/donate/post/${post.id}"
                                                 class="inner gtm-feed-recommend-post-tem-detail">
                                                 <p class="title">${post.donateCertTitle}</p>
                                                 <p class="sub-title">${post.donateCertText}</p>
@@ -36,6 +37,7 @@ donateCerts.forEach( post => {
                                             class="btn like"><i class="mds-icon--clip"></i> <span
                                                 class="label">책갈피</span> <span class="value">1</span></button></div>
                                 </div>
+                              
                             </div>`;
 }
 

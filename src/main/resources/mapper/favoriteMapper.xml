@@ -36,7 +36,10 @@
     <!--투표 결과 1등.-->
     <select id="topReceiver" resultType="_Long">
         select receiver_id
-        from tbl_receiver_like
+        from tbl_receiver_like rl
+        join tbl_receiver r
+        on r.id = rl.receiver_id
+        where r.receiver_status = '선정대기'
         group by receiver_id
         order by sum(receiver_like_point) desc
         limit 1
@@ -129,5 +132,22 @@
         where member_id = #{memberId}
         order by createdDate desc
         limit 8
+    </select>
+
+    <!--  마이페이지의 스크랩 도서 전체목록(무한스크롤)  -->
+    <select id="selectScrappedIsbnList" resultType="Long">
+        SELECT book_isbn
+        FROM tbl_book_like
+        WHERE member_id = #{memberId}
+        ORDER BY
+        <choose>
+            <when test="orderType == 'latest'">
+                createdDate desc
+            </when>
+            <otherwise>
+                createdDate desc
+            </otherwise>
+        </choose>
+        limit #{offset}, 18
     </select>
 </mapper>

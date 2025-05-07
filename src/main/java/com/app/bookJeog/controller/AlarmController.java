@@ -118,6 +118,7 @@ public class AlarmController {
             postAlarmInfoDTOS.forEach(postAlarmInfoDTO -> {
 //                postAlarmInfoDTO.setMemberName(alarmService.);
             });
+            postPaths.add(postPath);
 
         }
         log.info(postAlarmInfoDTOS.toString());

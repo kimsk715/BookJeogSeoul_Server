@@ -12,6 +12,7 @@
                 )
             </if>
         </where>
+        order by id desc
         limit #{rowCount}
         offset #{offset}
     </select>
@@ -52,6 +53,7 @@
                 )
             </if>
         </where>
+        order by cm.id desc
         limit #{rowCount}
         offset #{offset}
     </select>
@@ -104,8 +106,8 @@
         )
     </insert>
 
-    <insert id="insertCommentReport" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertCommentReport" useGeneratedKeys="true" keyProperty="id" parameterType="com.app.bookJeog.domain.dto.CommentReportDTO">
         insert into tbl_comment_report (comment_id, comment_reporter_id, comment_report_type, comment_report_text)
-        values (#{commentId}, #{commentReporterId}, #{commentReportType}, #{commentReportText} )
+        values (#{commentId}, #{commentReporterId}, #{commentReportType, typeHandler=com.app.bookJeog.mybatis.CommentReportTypeHandler}, #{commentReportText})
     </insert>
 </mapper>

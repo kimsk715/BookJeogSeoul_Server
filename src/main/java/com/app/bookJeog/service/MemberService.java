@@ -222,5 +222,14 @@ public interface MemberService {
 
     // 개인회원 비밀번호 변경
     public void updateMemberPassword(PersonalMemberVO personalMemberVO);
+
+    // 탈퇴전에 활동 조회
+    public Map<String, Object> findMyActivities(Long memberId);
+
+    // 개인회원 탈퇴
+    public void updateDeletedMemberStatus(Long memberId);
+
+    // 내가 쓴 전체 독후감 개수 조회
+    public int findMyBookPostCount(Long memberId);
 }
 
