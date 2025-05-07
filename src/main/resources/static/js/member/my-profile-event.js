@@ -22,7 +22,7 @@ const removeButton = document.querySelector(".picture-remove-button");
 const defaultImage = "../../static/images/post/user_profile_example.png";
 
 // 프사 변경
-fileInput.addEventListener("change", (e) => {
+fileInput.addEventListener("change", async (e) => {
     const file = e.target.files[0];
     const maxSize = 3 * 1024 * 1024; // 3MB
 
@@ -38,13 +38,35 @@ fileInput.addEventListener("change", (e) => {
             imageBox.style.backgroundImage = `url('${event.target.result}')`;
         };
         reader.readAsDataURL(file);
+
+
+        // 서버에 프사 업로드
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            await fetch("/personal/upload-profile", {
+                method: "POST",
+                body: formData,
+            });
+            showToast("프사 등록 완료!");
+        } catch (err) {
+            showToast("프사 등록 실패");
+        }
     }
 });
 
 // 프사 초기화 (기본 이미지로)
-removeButton.addEventListener("click", () => {
+removeButton.addEventListener("click", async () => {
     imageBox.style.backgroundImage = `url('${defaultImage}')`;
     fileInput.value = ""; // input 초기화
+
+    try {
+        await myProfileService.deleteProfileImage();
+        showToast("프사가 삭제되었습니다.");
+    } catch (e) {
+        showToast("프사 삭제 실패");
+    }
 });
 
 // 필명 변경 토스뜨
@@ -52,16 +74,22 @@ const nameChangeBtn = document.querySelector(".nickname button");
 const nameChangeInput = document.querySelector(".nickname .input-text");
 const nameInputBox = document.querySelector(".nickname .input-box");
 
-nameChangeBtn.addEventListener("click", (e) => {
-    if (nameChangeInput.value.trim() !== "") {
-        showToast("변경 되었습니다.");
-        nameInputBox.classList.remove("input-error");
+nameChangeBtn.addEventListener("click", async (e) => {
+    const nickname = nameChangeInput.value.trim();
+
+    if (nickname !== "") {
+        try {
+            await myProfileService.setNickname(nickname);
+            showToast("변경 되었습니다.");
+            nameInputBox.classList.remove("input-error");
+        } catch (err) {
+            showToast("닉네임 변경 실패");
+        }
     } else {
         showToast("필명을 입력해주세요.");
         nameInputBox.classList.add("input-error");
     }
 });
-
 // 이메일(아이디) 변경
 const emailChangeBtn = document.querySelector(".email button");
 const emailChangeInput = document.querySelector(".email .input-text");
@@ -160,15 +188,17 @@ passwordInput.addEventListener("input", () => {
 });
 
 // 통과된 저장하기 버튼을 누르면 비밀번호 변경 안내
-changeBtn.addEventListener("click", (e) => {
+changeBtn.addEventListener("click", async (e) => {
+    const password = passwordInput.value.trim();
     if (passwordInput.value.trim() !== "") {
-        // 비밀번호 변경 로직 처리
-        showToast("비밀번호가 변경되었습니다."); // 예시로 알림창을 표시
+        try {
+            await myProfileService.setPassword(password);
 
-        // 여기서 비밀번호 변경 요청을 서버로 보내거나, 필요한 작업을 처리.
-
-        // 비밀번호 변경 후 버튼 비활성화 (원래 상태로 돌아가기)
-        changeBtn.disabled = true;
-        changeBtn.innerText = "변경 완료";
+            showToast("비밀번호가 변경되었습니다.");
+            changeBtn.disabled = true;
+            changeBtn.innerText = "변경 완료";
+        } catch (err) {
+            showToast("비밀번호 변경 실패");
+        }
     }
 });

@@ -246,7 +246,7 @@
                                                 <div class="book-wrapper">
                                                     <div class="book-wrapper-inner">
                                                         <div class="book-picture-wrapper">
-                                                            <button class="book-picture-link" data-isbn="[[${book.bookIsbn}]]">
+                                                            <button class="book-picture-link" th:attr="data-isbn=${book.bookIsbn}">
                                                                 <div class="book-picture">
                                                                     <picture class="styled-picture">
                                                                         <img th:src="${book.bookCover}"
@@ -256,7 +256,7 @@
                                                                 </div>
                                                             </button>
                                                         </div>
-                                                        <button type="button" class="book-metalink" data-isbn="[[${book.bookIsbn}]]">
+                                                        <button type="button" class="book-metalink" th:attr="data-isbn=${book.bookIsbn}">
                                                             <div class="book-meta">
                                                                 <p class="styled-book-name" th:text="${book.bookTitle}">도서 제목</p>
                                                                 <p class="styled-book-author" th:text="${book.bookAuthor + ' 지음'}">작가</p>

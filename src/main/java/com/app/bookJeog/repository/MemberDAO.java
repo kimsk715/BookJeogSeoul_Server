@@ -153,5 +153,26 @@ public class MemberDAO {
 
     // 내 프로필 이미지 조회
     public FileVO findMyProfile(Long memberId){return memberMapper.selectMyProfile(memberId);};
+
+    // 비밀번호 유효성검사
+    public boolean checkPassword(Long memberId, String password){return memberMapper.checkPassword(memberId, password);};
+
+    // 회원 프사 조회, 삭제, 변경
+    public Long selectProfileFileId(Long memberId){return memberMapper.selectProfileFileId(memberId);};
+
+    public void updateMemberFile(FileVO fileVO){memberMapper.updateMemberFile(fileVO);};
+
+    public void deleteMemberFile(Long id){memberMapper.deleteMemberFile(id);};
+    public void deleteMemberProfile(Long memberId){memberMapper.deleteMemberProfile(memberId);};
+
+    // 프사 만들기
+    public void insertProfileFile(FileVO fileVO){memberMapper.insertProfileFile(fileVO);};
+    public void insertMemberProfile(MemberProfileVO memberProfileVO){memberMapper.insertMemberProfile(memberProfileVO);};
+
+    // 개인회원 닉네임 변경
+    public void updateNickname(PersonalMemberVO personalMemberVO){memberMapper.updateNickname(personalMemberVO);};
+
+    // 개인회원 비밀번호 변경
+    public void updateMemberPassword(PersonalMemberVO personalMemberVO){memberMapper.updateMemberPassword(personalMemberVO);};
 }
 
