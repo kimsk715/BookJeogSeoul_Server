@@ -101,7 +101,7 @@
                                         </a>
                                         <div class="submenu-container double-menu">
                                             <a class="submenu-item book-post-link" href="#">독후감목록</a>
-                                            <a class="submenu-item top-post-link" href="#">이달의 독후감 후보</a>
+                                            <a class="submenu-item top-post-link" href="#" >이달의 독후감 후보</a>
                                         </div>
                                     </div>
                                     <!-- 토론게시판 섹션 -->
@@ -454,7 +454,7 @@
                                         <th>가입일</th>
                                         <th>최근접속일</th>
                                         <th>회원상태</th>
-                                        <th>회원관리</th>
+<!--                                        <th>회원관리</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -579,7 +579,7 @@
                                 <button type="button" class="search-btn book-post-search-btn">
                                     검색
                                 </button>
-                                <button type="button" class="search-btn best-post-choose-btn">
+                                <button type="button" class="search-btn best-post-choose-btn" style="display: none">
                                     이달의 독후감 후보 선정
                                 </button>
                             </div>
@@ -653,7 +653,7 @@
                                 <button type="button" class="search-btn top-post-search-btn">
                                     검색
                                 </button>
-                                <button type="button" class="search-btn top-post-choose-btn">
+                                <button type="button" class="search-btn top-post-choose-btn" style="display: none">
                                     이 달의 독후감 선정
                                 </button>
                             </div>
@@ -710,7 +710,7 @@
                                 <button type="button" class="search-btn discussion-search-btn">
                                     검색
                                 </button>
-                                <button type="button" class="search-btn open-new-discussion-btn">
+                                <button type="button" class="search-btn open-new-discussion-btn" style="display: none;">
                                     토론 주제 생성하기
                                 </button>
                             </div>
@@ -741,9 +741,10 @@
                                     <tr>
                                         <th>토론번호</th>
                                         <th>토론주제</th>
+                                        <th>부연설명</th>
                                         <th>연결도서</th>
                                         <th>작성일시</th>
-                                        <th>토론관리</th>
+<!--                                        <th>토론관리</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -880,25 +881,11 @@
                                         <th>ISBN</th>
                                         <th>기부일</th>
                                         <th>수취여부</th>
-                                        <th>기부관리</th>
+<!--                                        <th style="display: none;">기부관리</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- 샘플 데이터 -->
-                                    <tr>
-                                        <td>0000001</td>
-                                        <td>허세웅</td>
-                                        <td>(차라투스트라는 이렇게 말했다) 외 2권</td>
-                                        <td>2025-02-24</td>
-                                        <td>
-                                            <span class="status active">수취완료</span>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="detail-btn">
-                                                상세보기
-                                            </button>
-                                        </td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -1669,8 +1656,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="cancel-btn">취소</button>
-                <button type="button" class="save-btn submit-list">선정하기</button>
+                <button type="button" class="cancel-btn" style="display: none;">취소</button>
+                <button type="button" class="save-btn submit-list" style="display: none;">선정하기</button>
             </div>
         </div>
     </div>

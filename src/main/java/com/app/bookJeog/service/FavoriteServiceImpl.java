@@ -2,6 +2,7 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.controller.exception.UnauthenticatedException;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 import com.app.bookJeog.repository.FavoriteDAO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -108,4 +109,11 @@ public class FavoriteServiceImpl implements FavoriteService {
     public List<Long> getScrappedIsbnList(Long memberId, int offset, String orderType) {
         return favoriteDAO.selectScrappedIsbnList(memberId, offset, orderType);
     }
+
+    @Override
+    public void voteToReceiver(ReceiverLikeVO receiverLikeVO) {
+        favoriteDAO.voteToReceiver(receiverLikeVO);
+    }
+
+    ;
 }

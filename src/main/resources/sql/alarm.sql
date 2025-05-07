@@ -1,6 +1,4 @@
-select COUNT(*)
-from tbl_alarm
-where alarm_status = 'unread' and alarm_receiver_id = 12
+
 INSERT INTO tbl_right_word (target, content)
 VALUES
     (0, '첫사진 되게 좋다'),
@@ -549,3 +547,15 @@ FROM tbl_member_history
 GROUP BY book_isbn
 order by count desc
     LIMIT 10;
+
+
+
+/* 팔로우한 사람의 게시글  */
+select post_id
+from tbl_alarm a
+         JOIN tbl_post_alarm pa ON a.id = pa.id
+         JOIN tbl_post p ON pa.post_id = p.id
+         join tbl_personal_member pm on p.member_id = pm.id
+         join tbl_follow f on f.follow_receiver_id = p.member_id
+WHERE a.alarm_receiver_id = 11;
+

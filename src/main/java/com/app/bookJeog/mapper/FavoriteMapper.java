@@ -1,5 +1,7 @@
 package com.app.bookJeog.mapper;
 
+
+import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 import com.app.bookJeog.domain.vo.BookVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -46,6 +48,9 @@ public interface FavoriteMapper {
 
     // 특정 독후감의 좋아요 개수 조회
     public int countBookPostLike(Long bookPostId);
+
+
+    public void voteToReceiver(ReceiverLikeVO receiverLikeVO);
 
     // 내 팔로워 수 조회
     public int selectMyFollowers(Long memberId);

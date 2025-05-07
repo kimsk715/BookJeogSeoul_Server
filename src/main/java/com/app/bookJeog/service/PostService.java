@@ -150,5 +150,7 @@ public interface PostService {
 
     // 독후감 삭제
     public void deleteBookPost(Long bookPostId);
+
+    public String getPostType(Long postId);
 }
 
