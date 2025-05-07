@@ -124,6 +124,7 @@
                             <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
                                 <!-- 여기가 1권 단위 -->
                                 <div class="swiper-slide swiper-slide-active slide-item" th:each=" book : ${donateList}" style="margin-right: 12px;">
+                                    <a th:href="|/book/detail/${book.bookDonateDTO.bookIsbn}|">
                                     <div class="book-wrapper">
                                         <div class="book-inner">
                                             <div class="book-picture">
@@ -159,6 +160,7 @@
                                             </button>
                                         </div>
                                     </div>
+                                    </a>
                                 </div>
                                 <!-- 여기가 1권 단위 -->
 

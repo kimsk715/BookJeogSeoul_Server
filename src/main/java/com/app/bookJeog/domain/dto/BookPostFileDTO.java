@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 @Getter
@@ -23,6 +24,8 @@ public class BookPostFileDTO {
     private String fileName;
     private String filePath;
     private String fileText;
+
+    private MultipartFile multipartFile; // 실제 업로드용 파일 추가
 
     // 파일 자체 insert용
     public FileVO toFileVO() {

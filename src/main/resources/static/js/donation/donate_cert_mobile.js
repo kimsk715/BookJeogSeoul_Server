@@ -32,7 +32,7 @@ donateCerts.forEach( post => {
                                     </div>
                                     <div class="bottom"><button type="button" class="btn comment"><i
                                                 class="mds-icon--comment"></i> <span class="label">댓글</span> <span
-                                                class="value">1</span></button> <button type="button"
+                                                class="value">${post.commentCount}</span></button> <button type="button"
                                             class="btn like"><i class="mds-icon--clip"></i> <span
                                                 class="label">책갈피</span> <span class="value">1</span></button></div>
                                 </div>

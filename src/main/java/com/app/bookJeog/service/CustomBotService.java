@@ -29,19 +29,17 @@ public class CustomBotService {
     private String model;
 
     public List<OpenAPIResult> getDiscussionTopics(Long isbn) {
-        List<OpenAPIResult> results = new ArrayList<>();
-            String bookTitle = bookService.getBookByIsbn(isbn).get(0).getTitle();
-            // 책 제목 추출
-            String prompt = "다음과 같은 ISBN" + isbn + "코드를 가진 『" + bookTitle + "』 책을 바탕으로 "
-                    + "30자 이내의 토론 주제를 3개 추천하고, 각 주제가 책의 어떤 부분에서 유래했는지 150자 이내로 설명해 주세요.\n"
-                    + "출력 패턴은( 번호. \"토론 주제\" - 설명 ) 로 해줘 ";
+        /* 책 제목은 별도로 api 이용 */
+        String bookTitle = bookService.getBookByIsbn(isbn).get(0).getTitle();
 
-            ChatGPTRequest request = new ChatGPTRequest(model, prompt);
-            ChatGPTResponse response = template.postForObject(apiURL, request, ChatGPTResponse.class);
-            String content = response.getChoices().get(0).getMessage().getContent();
-            log.info(content);
-
-
+        /* api 에 요청할 내용, isbn 을 화면에서 입력받음. */
+        String prompt = "다음과 같은 ISBN" + isbn + "코드를 가진 『" + bookTitle + "』 책을 바탕으로 "
+                + "30자 이내의 토론 주제를 3개 추천하고, 각 주제가 책의 어떤 부분에서 유래했는지 150자 이내로 설명해 주세요.\n"
+                + "출력 패턴은( 번호. \"토론 주제\" - 설명 ) 로 해줘 ";
+        /* 출력 패턴을 일정하게 해서, db 에 넣기 편하도록 변환 */
+        ChatGPTRequest request = new ChatGPTRequest(model, prompt);
+        ChatGPTResponse response = template.postForObject(apiURL, request, ChatGPTResponse.class);
+        String content = response.getChoices().get(0).getMessage().getContent();
         return chatResponseParser.parseResponse(isbn, content);
     }
 

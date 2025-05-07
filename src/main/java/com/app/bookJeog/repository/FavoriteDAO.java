@@ -1,8 +1,11 @@
 package com.app.bookJeog.repository;
 
+import com.app.bookJeog.domain.vo.BookVO;
 import com.app.bookJeog.mapper.FavoriteMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
@@ -71,4 +74,13 @@ public class FavoriteDAO {
     public int countBookPostLike(Long bookPostId){
         return favoriteMapper.countBookPostLike(bookPostId);
     };
+
+    // 내 팔로워 수 조회
+    public int findMyFollowers(Long memberId){return favoriteMapper.selectMyFollowers(memberId);};
+
+    // 내 팔로우 수 조회
+    public int findMyFollowing(Long memberId){return favoriteMapper.selectMyFollowings(memberId);};
+
+    // 내가 찜한 도서 정보
+    public List<Long> findMyScrappedBooks(Long memberId){return favoriteMapper.selectMyScrappedBooks(memberId);};
 }

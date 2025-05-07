@@ -103,4 +103,9 @@
         'WAITING'
         )
     </insert>
+
+    <insert id="insertCommentReport" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_comment_report (comment_id, comment_reporter_id, comment_report_type, comment_report_text)
+        values (#{commentId}, #{commentReporterId}, #{commentReportType}, #{commentReportText} )
+    </insert>
 </mapper>

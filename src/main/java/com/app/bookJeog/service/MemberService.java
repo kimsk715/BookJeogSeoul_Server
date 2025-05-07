@@ -2,17 +2,23 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.MemberType;
+import com.app.bookJeog.domain.vo.FileVO;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface MemberService {
@@ -75,7 +81,8 @@ public interface MemberService {
         personalMemberDTO.setMemberPassword(personalMemberVO.getMemberPassword());
         personalMemberDTO.setMemberName(personalMemberVO.getMemberName());
         personalMemberDTO.setMemberGender(personalMemberVO.getMemberGender());
-        personalMemberDTO.setMemberPhone(personalMemberVO.getMemberBirth());
+        personalMemberDTO.setMemberPhone(personalMemberVO.getMemberPhone());
+        personalMemberDTO.setMemberNickName(personalMemberVO.getMemberNickName());
         return personalMemberDTO;
     }
 
@@ -179,5 +186,41 @@ public interface MemberService {
     public MemberType getMemberType(Long memberId);
 
     public String getMemberName(Long memberId);
+
+    // 개인 마이페이지 데이터
+    public Map<String, Object> getMyPageData(HttpSession session, Model model);
+
+    public default FileDTO toFileDTO(FileVO fileVO) {
+        FileDTO fileDTO = new FileDTO();
+        fileDTO.setId(fileVO.getId());
+        fileDTO.setFileName(fileVO.getFileName());
+        fileDTO.setFilePath(fileVO.getFilePath());
+        return fileDTO;
+    }
+
+    // 비밀번호 유효성검사
+    public boolean checkPassword(Long memberId, String password);
+
+    // 회원정보 수정페이지
+    PersonalMemberDTO getCurrentMember(HttpSession session);
+    String getProfileImageUrl(Long memberId);
+
+    // 프사 수정
+    public void updateProfileImage(Long memberId, MultipartFile file);
+
+    // 프사 삭제
+    public void deleteProfileImage(Long memberId);
+
+    // 프사 생성
+    public void saveNewProfileImage(MultipartFile file, Long memberId);
+
+    // 파일 생성 또는 수정
+    public void saveOrUpdateProfileImage(MultipartFile file, Long memberId);
+
+    // 개인회원 닉네임 변경
+    public void updateNickname(PersonalMemberVO personalMemberVO);
+
+    // 개인회원 비밀번호 변경
+    public void updateMemberPassword(PersonalMemberVO personalMemberVO);
 }
 

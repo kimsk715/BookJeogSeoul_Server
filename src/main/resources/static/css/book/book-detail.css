@@ -1211,6 +1211,7 @@ span .hidden-text{
     cursor: grab;
     scrollbar-width: none;
     margin-top: -16px;
+    overflow-x: auto;
 }
 
 .book-shelf .slide-wrapper {
@@ -1220,6 +1221,7 @@ span .hidden-text{
     white-space: nowrap;
     padding-right: 24px;
     padding-top: 16px;
+    scroll-snap-type: x mandatory;
 }
 
 .book-shelf .slide-wrapper .slide-item {
