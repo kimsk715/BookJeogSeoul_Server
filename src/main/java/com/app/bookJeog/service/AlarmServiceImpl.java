@@ -45,6 +45,7 @@ public class AlarmServiceImpl implements AlarmService {
         CommentAlarmDTO commentAlarmDTO = new CommentAlarmDTO();
 
 
+        alarmDTO.setAlarmType(AlarmType.COMMENT);
         alarmDTO.setAlarmReceiverId(alarmReceiverId);
         alarmVO = insertCommentAlarm(alarmDTO);
 
@@ -68,6 +69,7 @@ public class AlarmServiceImpl implements AlarmService {
         AlarmVO alarmVO = new AlarmVO();
         AlarmDTO alarmDTO = new AlarmDTO();
 
+
         alarmDTO.setAlarmReceiverId(memberId);
         alarmVO = insertMentionAlarm(alarmDTO);
 
@@ -88,7 +90,7 @@ public class AlarmServiceImpl implements AlarmService {
         AlarmDTO alarmDTO = new AlarmDTO();
 
 
-
+        alarmDTO.setAlarmType(AlarmType.POST);
         alarmDTO.setAlarmReceiverId(memberId);
         alarmVO = toAlarmVO(alarmDTO);
 
@@ -107,7 +109,7 @@ public class AlarmServiceImpl implements AlarmService {
         AlarmDTO alarmDTO = new AlarmDTO();
 
 
-
+        alarmDTO.setAlarmType(AlarmType.FOLLOW);
         alarmDTO.setAlarmReceiverId(memberId);
         alarmDTO.setAlarmType(AlarmType.FOLLOW);
         alarmVO = toAlarmVO(alarmDTO);
@@ -120,7 +122,6 @@ public class AlarmServiceImpl implements AlarmService {
     }
 
 
-    // 알림조회
 
 
 

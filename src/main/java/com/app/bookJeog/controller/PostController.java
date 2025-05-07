@@ -477,13 +477,20 @@ public class PostController {
 
     @GetMapping("receiver/vote")
     @ResponseBody
-    public void voteToReceiver(@RequestParam int point, Model model,HttpSession session) {
+    public String voteToReceiver(@RequestParam int point,@RequestParam("receiver-id") Long receiverId , Model model,HttpSession session) {
         PersonalMemberDTO foundMember = (PersonalMemberDTO) session.getAttribute("member");
         ReceiverLikeDTO receiverLikeDTO = new ReceiverLikeDTO();
+
         receiverLikeDTO.setMemberId(foundMember.getId());
         receiverLikeDTO.setReceiverLikePoint(point);
-        receiverLikeDTO.setReceiverId((Long) model.getAttribute("postId"));
-        favoriteService.voteToReceiver(receiverLikeDTO.toVO());
+        receiverLikeDTO.setReceiverId(receiverId);
+        if(favoriteService.countAllVoteByPostId(receiverLikeDTO)+point < 1000){
+            favoriteService.voteToReceiver(receiverLikeDTO.toVO());
+            return "success";
+        }
+        else{
+            return "fail";
+        }
     }
 
 

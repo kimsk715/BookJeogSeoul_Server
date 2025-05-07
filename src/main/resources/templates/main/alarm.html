@@ -24,43 +24,43 @@
                     <div class="alarm-list-container">
                         <div class="alarm-content">
                             <ul>
-                                <li th:each = "path : ${paths}"><a
-                                        th:href="${path}">
+                                <li th:each = "comment : ${commentAlarms}"><a
+                                        th:href="${comment.commentPath}">
                                         <div class="img"><img
                                                 src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/49b7b494d18c580785ad15efa1c7eb46.jpg">
                                         </div>
                                         <div class="context"><!---->
-                                            <p class="txt">[포스트 알림]<br>팔로우 알림, 게시한 글들의 댓글 알림, 토론 대댓글 알림</p> <time class="time">2025.04.05</time>
+                                            <p class="txt" th:text="|${comment.memberNickname}님이 포스트에 댓글을 남겼습니다.|"></p> <time class="time">2025.04.05</time>
                                         </div>
                                     </a></li>
-<!--                                <li><a-->
-<!--                                        href="">-->
-<!--                                        <div class="img"><img-->
-<!--                                                src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/49b7b494d18c580785ad15efa1c7eb46.jpg">-->
-<!--                                        </div>-->
-<!--                                        <div class="context">&lt;!&ndash;&ndash;&gt;-->
-<!--                                            <p class="txt">[내서재 알림]<br>LeJulesVerne님이 회원님을 팔로우했습니다-->
-<!--                                            </p> <time class="time">2025.04.04</time>-->
-<!--                                        </div>-->
-<!--                                    </a></li>-->
-                                <li th:each="mentionedPath : ${mentionedPaths}"><a
-                                        th:href="${mentionedPath}">
+                                <li th:each="followAlarm : ${followAlarmPath}">
+                                    <a th:src="followAlarm.">
+                                        <div class="img"><img
+                                                src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/49b7b494d18c580785ad15efa1c7eb46.jpg">
+                                        </div>
+                                        <div class="context"><!---->
+                                            <p class="txt">[내서재 알림]<br>LeJulesVerne님이 회원님을 팔로우했습니다
+                                            </p> <time class="time">2025.04.04</time>
+                                        </div>
+                                    </a></li>
+                                <li th:each="mention: ${mentionAlarms}"><a
+                                        th:href="${mention.mentionedPath}">
                                         <div class="img"><img
                                                 src="https://d3uz7kn1zskbbz.cloudfront.net/profile/b58692581f8f443bafe1d1e7934d74d7.jpeg">
                                         </div>
                                         <div class="context"><!---->
-                                            <p class="txt">[내서재 알림]<br>풀떼기님이 회원님을 멘션했습니다</p> <time
+                                            <p class="txt" th:text="|[내서재 알림] ${mention.memberNickname} 님이 회원님을 멘션했습니다.|"></p> <time
                                                 class="time">2025.04.03</time>
                                         </div>
                                     </a></li>
-                                <li th:each="followPath : ${followPaths}"><a
-                                        th:href="${followPath}">
+                                <li th:each="postAlarm : ${postAlarms}"><a
+                                        th:href="${postAlarm.postPath}">
                                         <div class="img"><img
                                                 src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/9bfc374185230bdb5420a9bce38016c4.jpg">
                                         </div>
                                         <div class="context"><!---->
-                                            <p class="txt">[포스트 알림]<br>회원님이 팔로우한 짖지않는개님이 포스트를 발행했어요.
-                                                지금 바로 확인해 보세요.</p> <time class="time">2025.04.03</time>
+                                            <p class="txt" th:text="|[포스트 알림] 회원님이 팔로우한 ${postAlarm.memberNickname} 님이 포스트를 발행했어요. 지금 바로 확인해 보세요.|">
+                                                </p> <time class="time">2025.04.03</time>
                                         </div>
                                     </a></li>
                                 <li th:each="postPath : ${postPaths}">
