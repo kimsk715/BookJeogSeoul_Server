@@ -36,7 +36,10 @@
     <!--투표 결과 1등.-->
     <select id="topReceiver" resultType="_Long">
         select receiver_id
-        from tbl_receiver_like
+        from tbl_receiver_like rl
+        join tbl_receiver r
+        on r.id = rl.receiver_id
+        where r.receiver_status = '선정대기'
         group by receiver_id
         order by sum(receiver_like_point) desc
         limit 1

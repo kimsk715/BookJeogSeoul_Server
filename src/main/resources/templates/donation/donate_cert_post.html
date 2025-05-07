@@ -117,7 +117,11 @@
                         <div class="detail-inner container">
                             <div class="diary-container">
                                 <div class="thumbnail-container" th:if="${thumbNail} != null"
-                                     th:style="'background-image: url(' + '\'' + '/image/' + ${thumbNail.FilePath} + '/' + ${thumbNail.FileName} + '\'' + ')'">
+                                     th:style="|background-image: url('/image/${thumbNail.FilePath}/${thumbNail.FileName}');
+               background-repeat: no-repeat;
+               background-position: center center;
+               background-size: contain;
+               background-color: rgb(240,240,240);|">
                                     <span class="background"
                                         style="color: deeppink; text-align: center; font-size: 50px;"></span>
 

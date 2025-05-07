@@ -34,7 +34,7 @@
 
     <!-- 단일 독후감 조회 -->
     <select id="selectBookPostById" resultType="bookPostVO">
-        select bp.id, book_post_title, member_id
+        select bp.id, book_post_title, member_id, book_title
         from tbl_book_post bp
         join tbl_post p on bp.id = p.id
         where bp.id = #{id}

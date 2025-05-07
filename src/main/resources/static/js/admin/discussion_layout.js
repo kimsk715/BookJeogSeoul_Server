@@ -11,13 +11,10 @@ const discussionLayout = (() =>{
             <tr>
                 <td>${post.id}</td>
                 <td>${post.discussionTitle}</td>
+                <td>${post.discussionText}</td>
                 <td>${post.bookIsbn}</td>
                 <td>${post.createdDate}</td>
-                <td>
-                    <button type="button" class="detail-btn book-detail-btn">
-                        상세보기
-                    </button>
-                </td>
+                
             </tr>
             `
         })
