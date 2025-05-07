@@ -4,13 +4,17 @@ import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.BookPostReportType;
 import com.app.bookJeog.domain.vo.BookPostReportVO;
 import com.app.bookJeog.domain.vo.CommentReportVO;
+import com.app.bookJeog.domain.vo.PostVO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ReportService {
 
 
     public List<BookPostReportInfoDTO> getAllBookPostReportInfo(Pagination pagination);
+
+
 
     int countAllBooKPostReport(Pagination pagination);
 

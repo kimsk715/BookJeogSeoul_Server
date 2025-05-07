@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const showDatePickerButton = document.getElementById("showDatePicker");
     const calendarOverlay = document.getElementById("calendarOverlay");
     const calendarContainer = document.getElementById("calendarContainer");
+    const realCalendarSection = document.querySelector(".flatpickr-calendar")
 
     // flatpickr를 range 모드로 초기화
     // 초기 시점에 calendarContainer가 display:none 인 상태일 수 있으니,
@@ -111,10 +112,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 오버레이 클릭 시 배경만 닫기
-    calendarOverlay.addEventListener("click", function () {
-        calendarOverlay.style.display = "none";
+    calendarOverlay.addEventListener("click", function (e) {
+        if (!realCalendarSection.contains(e.target)) {
+            calendarOverlay.style.display = "none";
+        }
     });
-
 
 // 독후감 제목 input에 입력하면 글자수가 갱신됨
 const titleInput = document.querySelector("input#textarea-title");
@@ -296,188 +298,163 @@ searchEraseButton.addEventListener("click", (e) => {
     e.target.style.display = "none";
 });
 
-const imageInputButton = document.querySelector(".add-box > button");
-const imageInput = document.querySelector(".input-file");
-const noImageBox = document.querySelector(".add-box");
-const imagesBox = document.querySelector(".sentence > .images");
-const previewList = document.querySelector(".images ul"); // 이미지 리스트 영역
-const imageCountText = document.querySelector(".image-count"); // 이미지 개수 표시용 요소 (있다면)
-const imageAddButton = document.querySelector(".images .add-button");
+    const imageAddButtons = document.querySelectorAll(".add-box > button, .images .add-button");
+    const previewList = document.querySelector(".images ul");
+    const noImageBox = document.querySelector(".add-box");
+    const imagesBox = document.querySelector(".sentence > .images");
+    const maxFileSize = 5 * 1024 * 1024;
+    const maxImageCount = 10;
 
-// 파일 추가 버튼 클릭 시 input[type=file]을 강제로 열어줌
-imageInputButton.addEventListener("click", () => {
-    imageInput.click();
-});
-
-imageAddButton.addEventListener("click", () => {
-    imageInput.click();
-});
-
-// 최대 5mb의 파일까지만 올라가게 용량 제한
-const maxFileSize = 5 * 1024 * 1024; // 5MB (byte 단위)
-
-// 파일 input 값이 변경되었을 때 실행됨
-imageInput.addEventListener("change", (e) => {
-    const allowedExtensions = ["jpg", "jpeg", "png", "webp"];
-    const files = Array.from(imageInput.files);
-    const validFiles = [];
-    const currentCount = previewList.querySelectorAll("li.item").length;
-
-    for (const file of files) {
-        const ext = file.name.split(".").pop().toLowerCase();
-
-        // 지정한 이미지 형식이 아니면
-        if (!allowedExtensions.includes(ext)) {
-            alert(`.` + ext + `은(는) 지원하지 않는 형식입니다.`);
-            continue;
-        }
-
-        // 이미지가 최대 용량을 넘어가면
-        if (file.size > maxFileSize) {
-            alert("이미지 크기는 5MB 이하만 업로드할 수 있습니다.");
-            continue;
-        }
-
-        // 이미지 개수가 10개를 초과하면
-        if (currentCount + validFiles.length >= 10) {
-            alert("이미지는 최대 10개까지 등록할 수 있습니다.");
-            break;
-        }
-
-        validFiles.push(file);
-        // 개수 반영
-        document.querySelector(".count > strong").innerText = `${
-            currentCount + validFiles.length
-        }`;
-    }
-
-    // 유효한 파일이 없으면 아무것도 하지 않음
-    if (validFiles.length === 0) {
-        imageInput.value = ""; // 초기화
-        return;
-    }
-
-    // 이미지가 하나라도 있다면 영역 전환
-    noImageBox.style.display = "none";
-    imagesBox.style.display = "block";
-
-    // 유효한 파일들을 이미지 리스트로 추가
-    validFiles.forEach((file, index) => {
-        const imageUrl = URL.createObjectURL(file);
-
-        const li = document.createElement("li");
-        li.className = "item";
-        li.innerHTML = `
-        <img src="${imageUrl}">
-        <div class="mds-input memo">
-            <label>
-                <div class="inner">
-                    <div class="input">
-                        <input type="text" autocomplete="off" placeholder="나만의 메모를 남겨보세요" class="mds-input-field" maxlength="50" data-index="${index}"/>
-                        <input 
-                            type="hidden" 
-                            name="fileList[${index}].fileText" 
-                            class="hidden-file-text" 
-                        />
-                    </div>
-                    <button type="button" class="mds-icon-input-delete clear-button" style="display: none;"></button>
-                </div>
-            </label>
-            <div class="message-wrap">
-                <span class="length">0 / 50</span>
-            </div>
-        </div>
-        <div class="buttons">
-            <button type="button" class="change-image">
-                <input type="file" accept=".jpg, .jpeg, .png" class="input-file" style="display: none;" />
-                <svg data-v-a8c352e6="" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><g data-v-a8c352e6="" clip-path="url(#clip0_5831_19518)"><rect data-v-a8c352e6="" x="2.5" y="3.5" width="11" height="9" rx="1.5" stroke="var(--text-01)"></rect> <path data-v-a8c352e6="" d="M4.7002 13.0003L8.81203 6.60709C9.16249 6.06219 9.93066 5.98928 10.3774 6.45852L13.7002 9.94887" stroke="var(--text-01)"></path> <rect data-v-a8c352e6="" x="3.7998" y="5.35254" width="2.4" height="2.35294" rx="1.17647" stroke="var(--text-01)"></rect></g> <defs data-v-a8c352e6=""><clipPath data-v-a8c352e6="" id="clip0_5831_19518"><rect data-v-a8c352e6="" width="12" height="10" fill="white" transform="translate(2 3)"></rect></clipPath></defs></svg>
-                이미지 변경
-            </button>
-            <button type="button" class="delete">
-                <svg data-v-a8c352e6="" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-a8c352e6="" fill-rule="evenodd" clip-rule="evenodd" d="M6.5 1C5.67157 1 5 1.67157 5 2.5V3H3.5H2.5C2.22386 3 2 3.22386 2 3.5C2 3.77614 2.22386 4 2.5 4H3V12.5C3 13.8807 4.11929 15 5.5 15H10.5C11.8807 15 13 13.8807 13 12.5V4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H12.5H11V2.5C11 1.67157 10.3284 1 9.5 1H6.5ZM10 3H6V2.5C6 2.22386 6.22386 2 6.5 2H9.5C9.77614 2 10 2.22386 10 2.5V3ZM4 12.5V4H5.5H10.5H12V12.5C12 13.3284 11.3284 14 10.5 14H5.5C4.67157 14 4 13.3284 4 12.5ZM6.5 6C6.5 5.72386 6.27614 5.5 6 5.5C5.72386 5.5 5.5 5.72386 5.5 6V12C5.5 12.2761 5.72386 12.5 6 12.5C6.27614 12.5 6.5 12.2761 6.5 12V6ZM8 5.5C8.27614 5.5 8.5 5.72386 8.5 6V12C8.5 12.2761 8.27614 12.5 8 12.5C7.72386 12.5 7.5 12.2761 7.5 12V6C7.5 5.72386 7.72386 5.5 8 5.5ZM10.5 6C10.5 5.72386 10.2761 5.5 10 5.5C9.72386 5.5 9.5 5.72386 9.5 6V12C9.5 12.2761 9.72386 12.5 10 12.5C10.2761 12.5 10.5 12.2761 10.5 12V6Z" fill="var(--danger)"></path></svg>
-                삭제하기
-            </button>
-        </div>
-    `;
-
-        // 메모 입력할 때 숨은 input에도 같이 값 반영
-        const memoInput = li.querySelector(".mds-input-field");
-        const hiddenInput = li.querySelector(".hidden-file-text");
-
-        memoInput.addEventListener("input", (e) => {
-            hiddenInput.value = e.target.value; // 메모 내용 -> hidden input에 저장
-        });
-
-        // 이미지 안의 요소들
-        const img = li.querySelector("img");
-        const inputFile = li.querySelector(".input-file");
-        const changeBtn = li.querySelector(".change-image");
-        const deleteBtn = li.querySelector(".delete");
-        const clearBtn = li.querySelector(".clear-button");
-        const lengthSpan = li.querySelector(".length");
-
-        // 이미지 변경
-        changeBtn.addEventListener("click", () => inputFile.click());
-        inputFile.addEventListener("change", () => {
-            const file = inputFile.files[0];
-            if (!file) return;
-
-            const ext = file.name.split(".").pop().toLowerCase(); // 확장자명
-            const allowed = ["jpg", "jpeg", "png"]; // 허용된 파일형식
-            if (!allowed.includes(ext)) {
-                alert("지원하지 않는 이미지 형식입니다.");
+    imageAddButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const currentCount = previewList.querySelectorAll("li.item").length;
+            if (currentCount >= maxImageCount) {
+                alert("이미지는 최대 10개까지 등록할 수 있습니다.");
                 return;
             }
 
-            const newUrl = URL.createObjectURL(file);
-            img.src = newUrl;
+            const fileInput = document.createElement("input");
+            fileInput.type = "file";
+            fileInput.name = "file";
+            fileInput.accept = ".jpg,.jpeg,.png,.webp";
+            fileInput.style.display = "none";
+
+            fileInput.addEventListener("change", () => {
+                const file = fileInput.files[0];
+                if (!file) return;
+
+                const ext = file.name.split(".").pop().toLowerCase();
+                const allowedExtensions = ["jpg", "jpeg", "png", "webp"];
+                if (!allowedExtensions.includes(ext)) {
+                    alert("지원하지 않는 이미지 형식입니다.");
+                    return;
+                }
+
+                if (file.size > maxFileSize) {
+                    alert("이미지 크기는 5MB 이하만 업로드할 수 있습니다.");
+                    return;
+                }
+
+                const imageUrl = URL.createObjectURL(file);
+                const index = previewList.querySelectorAll("li.item").length;
+
+                const li = document.createElement("li");
+                li.className = "item";
+                li.innerHTML = `
+                <img src="${imageUrl}">
+                <div class="mds-input memo">
+                    <label>
+                        <div class="inner">
+                            <div class="input">
+                                <input type="text" autocomplete="off" placeholder="나만의 메모를 남겨보세요"
+                                       class="mds-input-field" maxlength="50" data-index="${index}" />
+                                <input type="hidden" name="fileList[${index}].fileText" class="hidden-file-text" />
+                            </div>
+                            <button type="button" class="mds-icon-input-delete clear-button" style="display: none;"></button>
+                        </div>
+                    </label>
+                    <div class="message-wrap">
+                        <span class="length">0 / 50</span>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button type="button" class="change-image">
+                        <input type="file" accept=".jpg, .jpeg, .png" class="input-file" style="display: none;" />
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0)">
+                                <rect x="2.5" y="3.5" width="11" height="9" rx="1.5" stroke="var(--text-01)"></rect>
+                                <path d="M4.7 13L8.812 6.607C9.162 6.062 9.931 5.989 10.377 6.459L13.7 9.949"
+                                      stroke="var(--text-01)"></path>
+                                <rect x="3.8" y="5.353" width="2.4" height="2.353" rx="1.176" stroke="var(--text-01)"></rect>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0"><rect width="12" height="10" fill="white" transform="translate(2 3)"/></clipPath>
+                            </defs>
+                        </svg>
+                        이미지 변경
+                    </button>
+                    <button type="button" class="delete">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M6.5 1C5.67 1 5 1.672 5 2.5V3H3.5H2.5C2.224 3 2 3.224 2 3.5C2 3.776 2.224 4 2.5 4H3V12.5C3 13.881 4.119 15 5.5 15H10.5C11.881 15 13 13.881 13 12.5V4H13.5C13.776 4 14 3.776 14 3.5C14 3.224 13.776 3 13.5 3H12.5H11V2.5C11 1.672 10.328 1 9.5 1H6.5ZM10 3H6V2.5C6 2.224 6.224 2 6.5 2H9.5C9.776 2 10 2.224 10 2.5V3ZM4 12.5V4H12V12.5C12 13.328 11.328 14 10.5 14H5.5C4.672 14 4 13.328 4 12.5ZM6.5 6V12C6.5 12.276 6.276 12.5 6 12.5C5.724 12.5 5.5 12.276 5.5 12V6C5.5 5.724 5.724 5.5 6 5.5C6.276 5.5 6.5 5.724 6.5 6ZM8 6V12C8 12.276 7.776 12.5 7.5 12.5C7.224 12.5 7 12.276 7 12V6C7 5.724 7.224 5.5 7.5 5.5C7.776 5.5 8 5.724 8 6ZM10.5 6V12C10.5 12.276 10.276 12.5 10 12.5C9.724 12.5 9.5 12.276 9.5 12V6C9.5 5.724 9.724 5.5 10 5.5C10.276 5.5 10.5 5.724 10.5 6Z"
+                                  fill="var(--danger)"/>
+                        </svg>
+                        삭제하기
+                    </button>
+                </div>
+            `;
+
+                // 내부 요소 연결
+                const memoInput = li.querySelector(".mds-input-field");
+                const hiddenInput = li.querySelector(".hidden-file-text");
+                const changeInput = li.querySelector(".change-image input");
+                const clearBtn = li.querySelector(".clear-button");
+                const changeBtn = li.querySelector(".change-image");
+                const lengthSpan = li.querySelector(".length");
+                const img = li.querySelector("img");
+
+                memoInput.addEventListener("input", () => {
+                    hiddenInput.value = memoInput.value;
+                    lengthSpan.textContent = `${memoInput.value.length} / 50`;
+                    clearBtn.style.display = memoInput.value.length > 0 ? "flex" : "none";
+                });
+
+                clearBtn.addEventListener("click", () => {
+                    memoInput.value = "";
+                    hiddenInput.value = "";
+                    lengthSpan.textContent = "0 / 50";
+                    clearBtn.style.display = "none";
+                });
+
+                changeBtn.addEventListener("click", () => {
+                    changeInput.click(); // 변경 input 클릭
+                });
+
+                changeInput.addEventListener("change", () => {
+                    const newFile = changeInput.files[0];
+                    if (!newFile) return;
+
+                    const newExt = newFile.name.split(".").pop().toLowerCase();
+                    if (!allowedExtensions.includes(newExt)) {
+                        alert("지원하지 않는 이미지 형식입니다.");
+                        return;
+                    }
+
+                    const newUrl = URL.createObjectURL(newFile);
+                    img.src = newUrl;
+
+                });
+
+                li.querySelector(".delete").addEventListener("click", () => {
+                    URL.revokeObjectURL(img.src);
+                    fileInput.remove();
+                    li.remove();
+
+                    const remaining = previewList.querySelectorAll("li.item").length;
+                    document.querySelector(".count > strong").innerText = `${remaining}`;
+
+                    if (remaining === 0) {
+                        noImageBox.style.display = "flex";
+                        imagesBox.style.display = "none";
+                    }
+                });
+
+                // 추가 및 표시 전환
+                previewList.appendChild(li);
+                previewList.appendChild(fileInput);
+                document.querySelector(".count > strong").innerText = `${index + 1}`;
+
+                noImageBox.style.display = "none";
+                imagesBox.style.display = "block";
+            });
+
+            fileInput.click();
         });
-
-        // 삭제 버튼
-        deleteBtn.addEventListener("click", () => {
-            li.remove();
-
-            // 이미지가 모두 삭제되었는지 확인
-            const remainingItems = previewList.querySelectorAll(".item");
-
-            // 개수 반영
-            document.querySelector(
-                ".count > strong"
-            ).innerText = `${remainingItems.length}`;
-
-            if (remainingItems.length === 0) {
-                // 이미지 0개일 때 창 바꾸기
-                noImageBox.style.display = "flex";
-                imagesBox.style.display = "none";
-            }
-        });
-
-        // 메모 입력 시 길이 표시 & 클리어 버튼
-        memoInput.addEventListener("input", () => {
-            lengthSpan.textContent = `${memoInput.value.length} / 50`;
-            clearBtn.style.display =
-                memoInput.value.length > 0 ? "flex" : "none";
-        });
-
-        clearBtn.addEventListener("click", () => {
-            memoInput.value = "";
-            lengthSpan.textContent = "0 / 50";
-            clearBtn.style.display = "none";
-        });
-
-        // 리스트에 추가
-        previewList.appendChild(li);
     });
 
-    // 이미지 개수 텍스트가 있다면 갱신
-    if (imageCountText) {
-        imageCountText.innerText =
-            previewList.querySelectorAll("li.item").length;
-    }
-
-    // input 초기화 (동일 파일 다시 선택 가능)
-    imageInput.value = "";
-});
+    console.log("폼 내부 input 개수:", document.querySelectorAll("form input[name='file']").length);
 
 // 토스트 기능(잠깐 나타났다가 사라지는 창)
 function showToast(message) {
@@ -541,16 +518,13 @@ postPublicButton.addEventListener("click", (e) => {
         if (checkbox.checked) {
             // 공개 ON
             label.classList.add("checked");
-            checkbox.value = "true";
             hiddenPublicInput.value = "PUBLIC"; // ⭐️
         } else {
             // 공개 OFF
             label.classList.remove("checked");
-            checkbox.value = "false";
             hiddenPublicInput.value = "PRIVATE"; // ⭐️
 
             // 공개 끄면 출품도 강제 OFF
-            selectedCheckbox.checked = false;
             hiddenSelectedInput.value = "PRIVATE"; // ⭐️
             postSubmitLabel.classList.remove("checked");
         }
@@ -568,7 +542,6 @@ postSubmitButton.addEventListener("click", (e) => {
 
         if (hiddenPublicInput.value !== "PUBLIC") {
             // 공개 OFF 상태면 출품 못 켜게 하고 무조건 끔
-            selectedCheckbox.checked = false;
             hiddenSelectedInput.value = "PRIVATE"; // ⭐️
             label.classList.remove("checked");
             showToast("공개 설정을 켜야 출품할 수 있습니다.");

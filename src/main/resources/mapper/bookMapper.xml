@@ -47,10 +47,25 @@
     </select>
 
     <!--  선정 도서 여부 조회  -->
-    <select id="selectSelectedBooks" resultType="_int">
-        select count(*) from tbl_selected_book
+    <select id="selectSelectedBooks" resultType="selectedBookVO">
+        select id, book_isbn, book_image_url from tbl_selected_book
         where book_isbn = #{bookIsbn}
     </select>
 
+    <!--  전체 도서 isbn과 줄거리 가져오기  -->
+    <select id="selectIsbnAndSummary" resultType="bookVO">
+        select id, book_isbn, book_summary from tbl_book
+    </select>
 
+    <!--  최근 조회한 도서 10개 줄거리와 함께  -->
+    <select id="selectBookSummaryToString" resultType="string">
+        select group_concat(book_summary separator ', ')
+        from (
+                 select book_summary
+                 from tbl_member_history
+                 where member_id = #{memberId}
+                 order by createdDate desc
+                 limit 10
+             ) as target
+    </select>
 </mapper>
