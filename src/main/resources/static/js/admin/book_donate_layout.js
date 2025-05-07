@@ -26,11 +26,7 @@ const donateLayout = (() =>{
                 <td>
                     <span class="status ${className}">${donation.bookDonateDTO.bookReceivedStatus}</span>
                 </td>
-                <td>
-                    <button type="button" class="detail-btn modal-detail-btn" value="${donation.bookDonateDTO.id}">
-                        상세보기
-                    </button>
-                </td>
+                
             </tr>
             `
         })
@@ -93,7 +89,7 @@ const donateLayout = (() =>{
 
                     <!-- 문의 상세 내용 -->
                     <div class="book-donate-detail">
-                        <h4>문의 상세내용</h4>
+                        <h4>기부 상세내용</h4>
                         <div class="detail-content" id="book-donate-content">
                             ${donation.donationText}
                         </div>

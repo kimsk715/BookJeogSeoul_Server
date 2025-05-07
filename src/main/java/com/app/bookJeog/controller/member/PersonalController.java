@@ -435,6 +435,7 @@ public class PersonalController {
         model.addAttribute("tempMemberInfo", tempMemberInfo);
         return "register/register-kakao-member";
     }
+
     // 카카오 회원가입 완료
     @PostMapping("kakako-register-member")
     public String joinKakaoMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
@@ -442,7 +443,15 @@ public class PersonalController {
         return "redirect:/personal/login";
     };
 
-    // 내 프사
+
+    @GetMapping("logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("member");
+        session.removeAttribute("sponsorMember");
+
+        return "redirect:/personal/login";
+    }
+// 내 프사
     @GetMapping("profile")
     @ResponseBody
     public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,

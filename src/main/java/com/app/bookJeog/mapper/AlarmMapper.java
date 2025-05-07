@@ -1,10 +1,10 @@
 package com.app.bookJeog.mapper;
 
-import com.app.bookJeog.domain.dto.MyAlarmDTO;
-import com.app.bookJeog.domain.enumeration.AlarmStatus;
+import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
@@ -43,8 +43,19 @@ public interface AlarmMapper {
     public void updateAlarmRead(Long receiverId);
 
 
+    // 팔로우 조회
+    public List<AlarmFollowAlarmDTO> selectFollowAlarms(Long memberId);
 
 
+    // 게시글에 댓글 조회
+    public List<AlarmCommentAlarmDTO> selectCommentAlarm(Long memberId);
 
+
+    // 멘션 조회
+    public List<AlarmMentionAlarmDTO> selectMention(Long memberId);
+
+
+    // 팔로우한사람의 게시글 조회
+    public List<PostAlarmPersonalMemberDTO> selectPostAlarms(Long memberId);
 
 }

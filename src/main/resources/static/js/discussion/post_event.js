@@ -240,12 +240,14 @@ moreButton.forEach((button) => {
         button.nextElementSibling.classList.toggle("more-active");
     })
 })
-
+let commentId = "";
 const commentReportButton = document.querySelectorAll(".comment-report")
 const reportPopup = document.querySelector(".popup.alert")
 commentReportButton.forEach((button) => {
     button.addEventListener('click',(e) => {
+        commentId = button.value;
         reportPopup.removeAttribute("style")
+        console.log(commentId)
     })
 })
 
@@ -286,12 +288,13 @@ reportConfirmButton.addEventListener("click",(e) => {
             break;
     }
     console.log(reportType)
-    reportService.reportComment(reportType)
+    reportPopup.style.display = "none"
+    reportService.reportComment(commentId, reportType)
 })
 
 const reportService = (() => {
-    const reportComment = async(reportType) => {
-        let path = `/report-comment?commentId=${postId}&reportType=${reportType}`;
+    const reportComment = async(commentId, reportType) => {
+        let path = `/report-comment?commentId=${commentId}&reportType=${reportType}`;
         await fetch(path);
     }
     return {reportComment: reportComment}

@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class WebController {
             for (TopBookVO topBookVO : bookInfoDTOList) {
                 TopBookDTO topBookDTO = new TopBookDTO();
                 topBookDTO.setTopBookVO(topBookVO);
-//                topBookDTO.setImageUrl(aladinService.getBookCover(Long.valueOf(topBookVO.getIsbn())));
+                topBookDTO.setImageUrl(aladinService.getBookCover(Long.valueOf(topBookVO.getIsbn())));
                 topBookDTOS.add(topBookDTO);
             }
         model.addAttribute("topBookDTOS",topBookDTOS);
@@ -67,17 +68,17 @@ public class WebController {
 
                // 알라딘 API를 통해 책 표지 이미지 URL 가져오기
 
-//               topViewBookDTO.setImageUrl(aladinService.getBookCover(memberHistoryVO.getBookIsbn()));
+               topViewBookDTO.setImageUrl(aladinService.getBookCover(memberHistoryVO.getBookIsbn()));
 
                // ISBN 저장
                topViewBookDTO.setIsbn(memberHistoryVO.getBookIsbn());
 
                // ISBN으로 책 정보를 조회해서 저자(author) 저장
-//               topViewBookDTO.setAuthor(bookService.getBookByIsbn(topViewBookDTO.getIsbn()).get(0).getAuthor());
+               topViewBookDTO.setAuthor(bookService.getBookByIsbn(topViewBookDTO.getIsbn()).get(0).getAuthor());
 
 
                // ISBN으로 책 정보를 조회해서 제목(title) 저장
-//               topViewBookDTO.setTitle(bookService.getBookByIsbn(topViewBookDTO.getIsbn()).get(0).getTitle());
+               topViewBookDTO.setTitle(bookService.getBookByIsbn(topViewBookDTO.getIsbn()).get(0).getTitle());
 
                // 완성된 DTO를 결과 리스트에 추가
                topViewBookDTOS.add(topViewBookDTO);
@@ -95,7 +96,7 @@ public class WebController {
        try {
            for (SelectedBookVO selectedBookVO : templist) {
                AdminSelectBookDTO adminSelectBookDTO = new AdminSelectBookDTO();
-//               adminSelectBookDTO.setImageUrl(aladinService.getBookCover(selectedBookVO.getBookIsbn()));
+               adminSelectBookDTO.setImageUrl(aladinService.getBookCover(selectedBookVO.getBookIsbn()));
                adminSelectBookDTO.setIsbn(selectedBookVO.getBookIsbn());
                adminSelectBookDTO.setTitle(bookService.getBookByIsbn(selectedBookVO.getBookIsbn()).get(0).getTitle());
                adminSelectBookDTO.setAuthor(bookService.getBookByIsbn(selectedBookVO.getBookIsbn()).get(0).getAuthor());
@@ -115,7 +116,7 @@ public class WebController {
           for (BookPostVO bookPostVO : tempPost) {
               TopBookPostDTO topBookPostDTO = new TopBookPostDTO();
               topBookPostDTO.setIsbn(bookPostVO.getBookIsbn());
-//              topBookPostDTO.setImageUrl(aladinService.getBookCover(bookPostVO.getBookIsbn()));
+              topBookPostDTO.setImageUrl(aladinService.getBookCover(bookPostVO.getBookIsbn()));
               topBookPostDTO.setTitle(bookService.getBookByIsbn(bookPostVO.getBookIsbn()).get(0).getTitle());
               topBookPostDTO.setAuthor(bookService.getBookByIsbn(bookPostVO.getBookIsbn()).get(0).getAuthor());
               topBookPostDTOS.add(topBookPostDTO);
@@ -133,5 +134,11 @@ public class WebController {
 
 
         return "main/main";
+    }
+    
+    // 로그아웃기능
+    @PostMapping("/main/logout")
+    public String logout(){
+        return "redirect:/personal/login";
     }
 }

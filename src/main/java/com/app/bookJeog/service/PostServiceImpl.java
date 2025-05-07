@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.PostType;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.repository.CommentDAO;
 import com.app.bookJeog.repository.FavoriteDAO;
@@ -569,9 +570,24 @@ public class PostServiceImpl implements PostService {
         postDAO.deleteBookPost(bookPostId);  // tbl_book_post 삭제
         postDAO.deletePost(bookPostId);      // tbl_post 삭제
     }
+
+
+    @Override
+    public String getPostType(Long postId) {
+        PostType postType = postDAO.findPostById(postId).getPostType();
+        String path = "/post";
+        switch (postType){
+            case RECEIVER: path += "/receiver/post/"; break;
+            case DISCUSSION: path += "/discussion/post/"; break;
+            case BOOK_POST: path += "/bookpost/"; break;
+            case DONATE_CERT: path += "/donate/post/"; break;
+        }
+
+            return path;
+
+    }
+
 };
-
-
 
 
 
