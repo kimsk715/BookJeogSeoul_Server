@@ -35,6 +35,7 @@ public class FileBookPostDTO {
     private BookPostStatus bookPostStatus;
 
     private String memberName;
+    private String memberNickName;
     private Long memberId;
     private String filePath;
     private String fileName;

@@ -8,6 +8,7 @@ import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
 import com.app.bookJeog.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -119,4 +120,10 @@ public interface MemberMapper {
 
     // 개인회원 비밀번호 변경
     public void updateMemberPassword(PersonalMemberVO personalMemberVO);
+
+    // 탈퇴전에 활동 조회
+    public Map<String, Object> selectMyActivities(Long memberId);
+
+    // 개인회원 탈퇴
+    public void updateDeletedMemberStatus(Long memberId);
 }

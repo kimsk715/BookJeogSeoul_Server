@@ -4,20 +4,16 @@ import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.repository.CommentDAO;
 import com.app.bookJeog.repository.FavoriteDAO;
-import com.app.bookJeog.domain.enumeration.BookPostStatus;
-import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.repository.FileDAO;
 import com.app.bookJeog.repository.MemberDAO;
 import com.app.bookJeog.repository.PostDAO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +22,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 @Slf4j
 @Service
@@ -561,7 +556,20 @@ public class PostServiceImpl implements PostService {
     public void updateDonateCertPost(DonateCertDTO donateCertDTO) {
         postDAO.updateDonateCertPost(donateCertDTO.toVO());
     }
-    };
+
+    // 내가 작성한 독후감 조회
+    @Override
+    public List<FileBookPostDTO> getMyBookPosts(Long memberId, String sort, int offset) {
+        return postDAO.findMyBookPosts(memberId, sort, offset);
+    }
+
+    // 독후감 삭제
+    @Override
+    public void deleteBookPost(Long bookPostId) {
+        postDAO.deleteBookPost(bookPostId);  // tbl_book_post 삭제
+        postDAO.deletePost(bookPostId);      // tbl_post 삭제
+    }
+};
 
 
 

@@ -365,7 +365,25 @@
         insert into tbl_member_profile (id, member_id)
         values (#{id}, #{memberId})
     </insert>
->>>>>>> 8bc832940d22904ff489e952b42fce5b80437c07
+
+    <!--  탈퇴페이지에서 활동 조회  -->
+    <select id="selectMyActivities" resultType="Map">
+        SELECT
+            pm.member_mileage AS mileage,
+            (SELECT COUNT(*) FROM tbl_book_like bl WHERE bl.member_id = pm.id) AS likeCount,
+            (SELECT COUNT(*) FROM tbl_book_post bp
+                                      JOIN tbl_post p ON p.id = bp.id
+             WHERE p.member_id = pm.id) AS postCount,
+            (SELECT COUNT(*) FROM tbl_book_donate bd WHERE bd.member_id = pm.id) AS donateCount
+        FROM tbl_personal_member pm
+        WHERE pm.id = #{memberId}
+    </select>
+
+    <!--  개인회원 탈퇴  -->
+    <update id="updateDeletedMemberStatus">
+        update tbl_personal_member set member_status = 'DELETE'
+        where id = #{memberId}
+    </update>
 </mapper>
 
 
