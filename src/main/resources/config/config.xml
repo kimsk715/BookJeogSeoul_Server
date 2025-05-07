@@ -43,6 +43,8 @@
         <typeAlias type="com.app.bookJeog.domain.vo.FileVO" alias="fileVO"/>
         <typeAlias type="com.app.bookJeog.domain.vo.BookVO" alias="bookVO"/>
         <typeAlias type="com.app.bookJeog.domain.dto.PersonalMemberPostMemberProfileDTO" alias="personalMemberPostMemberProfileDTO"/>
+        <typeAlias type="com.app.bookJeog.domain.dto.MyAlarmDTO" alias="myAlarmDTO"/>
+
     </typeAliases>
     <typeHandlers>
         <typeHandler handler="com.app.bookJeog.mybatis.MemberTypeHandler"/>

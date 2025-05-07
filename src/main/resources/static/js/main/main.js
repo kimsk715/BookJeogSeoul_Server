@@ -1,3 +1,6 @@
+console.log("테스트")
+
+
 // 드래그 할 대상 전체 영역 (.slider-container)
 const container = document.querySelector(".swiper-container");
 

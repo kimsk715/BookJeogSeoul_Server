@@ -40,6 +40,10 @@ public class PostDAO {
         return postMapper.countAllDiscussionPost(pagination);
     }
 
+    // 게시물 id 로 memberId 조회
+    public PostVO findMemberIdByPostId(Long postId) {
+        return postMapper.selectMemberIdByPostId(postId);
+    };
 
     //   이 책으로 작성한 독후감 일부 조회
     public ArrayList<BookPostMemberDTO> findThisBookPosts(Long isbn){
