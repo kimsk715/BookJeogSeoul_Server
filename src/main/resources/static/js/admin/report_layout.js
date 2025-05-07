@@ -94,22 +94,16 @@ const reportLayout = (() =>{
                         <table class="info-table">
                             <tbody>
                                 <tr>
-                                    <th>문의번호</th>
+                                    <th>신고번호</th>
                                     <td id="normal-report-id">${bookPostReport.bookPostReportVO.id}</td>
-                                    <th>문의일시</th>
+                                    <th>신고일시</th>
                                     <td id="normal-report-date">${bookPostReport.bookPostReportVO.createdDate}</td>
                                 </tr>
                                 <tr>
-                                    <th>문의자</th>
+                                    <th>위반 회원</th>
                                     <td id="normal-inquirer">${bookPostReport.memberName}</td>
-                                    <th>이메일</th>
-                                    <td id="normal-report-email">
-                                     
-                                    </td>
-                                </tr>
-                                <tr>
                                     <th>문의유형</th>
-                                    <td colspan="3" id="book-post-report-type">
+                                    <td  id="book-post-report-type">
                                         ${bookPostReport.bookPostReportVO.bookPostReportType}
                                     </td>
                                 </tr>
@@ -119,7 +113,7 @@ const reportLayout = (() =>{
 
                     <!-- 문의 상세 내용 -->
                     <div class="book-post-report-detail">
-                        <h4>문의 상세내용</h4>
+                        <h4>신고 상세내용</h4>
                         <div class="detail-content" id="book-post-report-content">
                             ${bookPostReport.bookPostReportVO.bookPostReportText}
                         </div>
@@ -137,16 +131,6 @@ const reportLayout = (() =>{
                             <option value="처리대기">활성화</option>
                             <option value="처리완료">비활성화</option>
                         </select>
-                    </div>
-                    
-
-                    <!-- 관리자 답변 영역 -->
-                    <div class="admin-answer">
-                        <h4>답변 내역</h4>
-                        <textarea
-                            placeholder="답변할 내용을 입력하세요"
-                            id="book-post-report-answer"
-                        ></textarea>
                     </div>
                 </div>
 
@@ -195,7 +179,7 @@ const reportLayout = (() =>{
             text += `
             <tr>
                 <td>${report.commentReportVO.id}</td>
-                <td>${report.commentReportVO.commentId}</td>
+                <td>${report.memberName}</td>
                 <td>${report.commentText}</td>
                 <td>${report.commentReportVO.createdDate}</td>
                 <td><span class="status ${className}">${report.commentReportVO.commentReportType}</span></td>
@@ -231,7 +215,7 @@ const reportLayout = (() =>{
     const showCommentReport = (commentReport) =>{
         commonModalContainer.innerHTML = `
             <div class="modal-header">
-                    <h3>문의 상세정보</h3>
+                    <h3>신고 상세정보</h3>
                     <button type="button" class="close-btn">
                         <img
                             class="close-button"
@@ -250,34 +234,29 @@ const reportLayout = (() =>{
                         <table class="info-table">
                             <tbody>
                                 <tr>
-                                    <th>문의번호</th>
+                                    <th>신고번호</th>
                                     <td id="comment-report-id">${commentReport.commentReportVO.id}</td>
-                                    <th>문의일시</th>
+                                    <th>신고일시</th>
                                     <td id="comment-report-date">${commentReport.commentReportVO.createdDate}</td>
                                 </tr>
                                 <tr>
-                                    <th>문의자</th>
+                                    <th>신고자</th>
                                     <td id="comment-inquirer">${commentReport.memberName}</td>
-                                    <th>이메일</th>
-                                    <td id="comment-report-email">
-                                        
-                                    </td>
-                                </tr>
-                                <tr>
                                     <th>문의유형</th>
-                                    <td colspan="3" id="comment-report-type">
+                                    <td id="comment-report-type">
                                         ${commentReport.commentReportVO.commentReportType}
                                     </td>
                                 </tr>
+                                
                             </tbody>
                         </table>
                     </div>
 
                     <!-- 문의 상세 내용 -->
                     <div class="comment-report-detail">
-                        <h4>문의 상세내용</h4>
+                        <h4>댓글 상세내용</h4>
                         <div class="detail-content" id="comment-report-content">
-                            ${commentReport.commentReportVO.commentReportText}
+                            ${commentReport.commentText}
                         </div>
                     </div>
 
@@ -295,14 +274,6 @@ const reportLayout = (() =>{
                         </select>
                     </div>
 
-                    <!-- 관리자 답변 영역 -->
-                    <div class="admin-answer">
-                        <h4>답변 내역</h4>
-                        <textarea
-                            placeholder="답변할 내용을 입력하세요"
-                            id="comment-report-answer"
-                        ></textarea>
-                    </div>
                 </div>
 
                 <!-- 모달 푸터 -->

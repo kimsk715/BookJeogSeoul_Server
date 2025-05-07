@@ -36,11 +36,7 @@ const memberLayout = (() =>{
                 <td>
                     <span class="status ${className}">${classText}</span>
                 </td>
-                <td>
-                    <button type="button" class="detail-btn book-detail-btn">
-                        상세보기
-                    </button>
-                </td>
+                
             </tr>
             `
         })

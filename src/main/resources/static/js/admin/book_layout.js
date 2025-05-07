@@ -18,9 +18,11 @@ const bookLayout = (() =>{
                     <span class="status active">대출중</span>
                 </td>
                 <td>
+                 <a target="_blank" href="/book/detail/${book.ISBN}">
                     <button type="button" class="detail-btn book-detail-btn">
-                        상세보기
+                       상세보기
                     </button>
+                    </a>
                 </td>
             </tr>
             `

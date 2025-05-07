@@ -12,6 +12,7 @@
                 )
             </if>
         </where>
+        order by id desc
         limit #{rowCount}
         offset #{offset}
     </select>
