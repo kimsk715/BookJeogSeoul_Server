@@ -141,7 +141,6 @@ public interface PostMapper {
 
     public void insertDonateCertPost(DonateCertVO donateCertVO);
 
-<<<<<<< HEAD
     // 독후감 수정을 위한 데이터 조회
     public FileBookPostDTO selectWrittenBookPost(Long bookPostId);
     public FileBookPostDTO selectWrittenSelectedPost(Long bookPostId);
@@ -151,12 +150,10 @@ public interface PostMapper {
     public void updateBookPost(BookPostVO bookPostVO);
     public void updateSelectedBookPost(SelectedBookPostVO selectedBookPostVO);
 
-=======
     public void insertReceiverPost(ReceiverVO receiverVO);
 
     public void updateReceiverPost(ReceiverVO receiverVO);
 
     public void updateDonateCertPost(DonateCertVO donateCertVO);
->>>>>>> master
 }
 

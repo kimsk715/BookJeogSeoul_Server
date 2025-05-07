@@ -416,7 +416,6 @@ public class PostServiceImpl implements PostService {
         postDAO.insertDonateCertPost(donateCertVO);
     }
 
-<<<<<<< HEAD
     // 독후감 수정을 위한 데이터 조회
     public FileBookPostDTO findWrittenBookPost(Long bookPostId) {
         FileBookPostDTO fileBookPostDTO = postDAO.findWrittenBookPost(bookPostId);
@@ -542,7 +541,6 @@ public class PostServiceImpl implements PostService {
 
     };
 
-=======
     @Override
     public void setReceiverPost(ReceiverVO receiverVO) {
         postDAO.insertReceiverPost(receiverVO);
@@ -557,8 +555,5 @@ public class PostServiceImpl implements PostService {
     public void updateDonateCertPost(DonateCertDTO donateCertDTO) {
         postDAO.updateDonateCertPost(donateCertDTO.toVO());
     }
-
-
 }
->>>>>>> master
 

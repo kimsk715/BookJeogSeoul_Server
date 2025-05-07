@@ -1,11 +1,8 @@
 package com.app.bookJeog.service;
 
-<<<<<<< HEAD
 import com.app.bookJeog.domain.dto.AladinBookDTO;
 import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.google.gson.JsonObject;
-=======
->>>>>>> master
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
@@ -30,7 +27,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
-@Slf4j
 public class AladinServiceImpl implements AladinService {
     // 알라딘 API Key
     private static final String ALADIN_API_KEY = "ttbkimsk7151659001";
