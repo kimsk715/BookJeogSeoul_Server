@@ -78,7 +78,7 @@ public class AlarmController {
             String postPath = postService.getPostType(postId);
             postPath += postId;
             postPaths.add(postPath);
-            postPath.add()
+
         }
 
 
