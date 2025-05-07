@@ -126,4 +126,7 @@ public interface MemberMapper {
 
     // 개인회원 탈퇴
     public void updateDeletedMemberStatus(Long memberId);
+
+    // id로 닉네임 조회
+    public String selectMemberNickname(Long memberId);
 }
