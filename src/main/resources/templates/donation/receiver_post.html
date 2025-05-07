@@ -93,7 +93,7 @@
                             <div class="flex-container space-between">
                                 <a href="/v4/library/5949440"
                                     class="writer flex-container post-writer-container">
-                                    <div class="user-img" th:if="${thumbNail} != null" th:style="'background-image: url(' + '\'' + '/image/' + ${thumbNail.FilePath} + '/' + ${thumbNail.FileName} + '\'' + ')'">
+                                    <div class="user-img" th:if="${thumbNail} != null" th:style="'background-image: url(' + '\'' + '/image/' + ${thumbNail.FilePath} + '/' + ${thumbNail.FileName} + '\'' + ')'  ">
                                     </div>
                                     <div class="writer-info">
                                         <div class="nickname-wrapper">
@@ -107,7 +107,7 @@
                                         </p>
                                     </div>
                                 </a>
-                                <button type="button"
+                                <button type="button" style="display: none;"
                                     class="button-follow mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4">
                                     <span>팔로우</span>
                                 </button>
@@ -118,7 +118,11 @@
                         <div class="detail-inner container">
                             <div class="diary-container">
                                 <div class="thumbnail-container" th:if="${thumbNail} != null"
-                                     th:style="'background-image: url(' + '\'' + '/image/' + ${thumbNail.FilePath} + '/' + ${thumbNail.FileName} + '\'' + ')'">
+                                     th:style="|background-image: url('/image/${thumbNail.FilePath}/${thumbNail.FileName}');
+               background-repeat: no-repeat;
+               background-position: center center;
+               background-size: contain;
+               background-color: rgb(240,240,240);|">
                                     <span class="background"
                                         style="color: deeppink; text-align: center; font-size: 50px;"></span>
 
@@ -218,7 +222,7 @@
                                 </div>
                             </div>
                             <div class="top-row-btn">
-                                <button type="button"
+                                <button type="button" style="display: none;"
                                     class="mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4">
                                     <span>팔로우</span>
                                 </button>
@@ -444,7 +448,8 @@
                                                 <button
                                                         type="button">답글달기</button>
                                                 <button
-                                                        type="button">신고하기</button>
+                                                        type="button" class="comment-report" th:value="${comment.commentDTO.id}">신고하기</button>
+                                                <input type="hidden" class="reported-id" th:value="${comment.commentDTO.memberId}">
                                             </div>
                                         </div>
                                     </div>
@@ -479,5 +484,6 @@
 <script th:inline="javascript">
     const member = /*[[${member}]]*/ {};
     const sponsorMember = /*[[${sponsorMember}]]*/ {};
+    const postId = /*[[${postId}]]*/ {};
 </script>
 </html>

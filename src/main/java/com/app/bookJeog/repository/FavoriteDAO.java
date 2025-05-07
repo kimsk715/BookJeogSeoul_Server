@@ -1,5 +1,7 @@
 package com.app.bookJeog.repository;
 
+
+import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 import com.app.bookJeog.domain.vo.BookVO;
 import com.app.bookJeog.mapper.FavoriteMapper;
 import lombok.RequiredArgsConstructor;
@@ -74,6 +76,11 @@ public class FavoriteDAO {
     public int countBookPostLike(Long bookPostId){
         return favoriteMapper.countBookPostLike(bookPostId);
     };
+
+
+    public void voteToReceiver(ReceiverLikeVO receiverLikeVO){
+        favoriteMapper.voteToReceiver(receiverLikeVO);
+    }
 
     // 내 팔로워 수 조회
     public int findMyFollowers(Long memberId){return favoriteMapper.selectMyFollowers(memberId);};
