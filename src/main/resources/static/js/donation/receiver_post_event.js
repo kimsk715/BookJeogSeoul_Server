@@ -1,3 +1,5 @@
+
+
 const reportButton = document.querySelector(".more-item");
 const reportModal = document.querySelector(".more-ul");
 const reportModalOpenButton = reportModal.querySelector("a")
@@ -67,9 +69,21 @@ bookMarkInput.addEventListener('input',() =>{
     }
 })
 const applyButton = document.querySelector(".apply");
-applyButton.addEventListener("click", async () => {
+applyButton.addEventListener("click", async (e) => {
     let point = document.querySelector(".dialog-content").value;
-    await fetch(`/post/receiver/vote?point=${point}`);
+    let receiverId = document.querySelector(".like-btn").value;
+    const response = await fetch(`/post/receiver/vote?point=${point}&receiver-id=${receiverId}`);
+    const result = await response.text();
+    console.log(result)
+    if(result === "fail"){
+        alert("더 이상은 책갈피를 나눠줄 수 없어요!")
+        e.preventDefault();
+    }
+    else{
+        document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
+        bookMarkModal.style.display = "none"
+    }
 })
 
 const imageModal = document.querySelector(".full-image")
@@ -209,18 +223,6 @@ addComment.addEventListener("click", async (e) => {
 
 
 const commentWrapper = document.querySelector(".comment-list");
-
-
-// CommentService.js
-e// CommentService.js
-
-
-
-
-
-
-
-
 const commentService = (() =>{
     const addComment = async(postId,commentText, callback, mentionId) => {
         let path=`/post-comment?id=${postId}&text=${commentText}`;
@@ -238,28 +240,9 @@ const commentService = (() =>{
         }
     }
 
-    const checkComment = async (content) => {
-        try {
-            const response = await fetch('http://localhost:8000/api/reply-check', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ content })
-            });
 
-            const result = await response.json();
-            console.log(result); //  isBadWord: true
 
-            // 비속어가 없으면 true 반환, 있으면 false
-            return result.isBadWord;
-        } catch (error) {
-            console.error('댓글 검사 실패', error);
-            return false;
-        }
-    };
-
-    return {addComment : addComment, checkComment:checkComment}
+    return {addComment : addComment}
 })();
 
 const commentLayout =(() =>{

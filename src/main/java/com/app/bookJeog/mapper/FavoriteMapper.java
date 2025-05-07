@@ -64,5 +64,7 @@ public interface FavoriteMapper {
     // 마이페이지의 스크랩 도서 전체목록(무한스크롤)
     public List<Long> selectScrappedIsbnList(@Param("memberId") Long memberId, @Param("offset") int offset,
                                              @Param("orderType") String orderType);
+
+    public int countAllVoteByPostId(ReceiverLikeVO receiverLikeVO);
 }
 
