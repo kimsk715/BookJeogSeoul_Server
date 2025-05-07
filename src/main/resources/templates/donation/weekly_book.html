@@ -30,6 +30,7 @@
                 <div class="book-wrapper">
                     <ul class="book-list">
                         <li class="book-inner1" th:each="book : ${donateList}">
+                            <a th:href="|/book/detail/${book.bookDonateDTO.bookIsbn}|">
                             <div class="book-inner2">
                                 <div class="book-inner3">
                                     <div class="book-image-wrapper"><button class="book-image-inner">
@@ -65,6 +66,7 @@
                                     </button>
                                 </div>
                             </div>
+                            </a>
                         </li>
 
 

@@ -239,4 +239,12 @@ public class PersonalController {
         memberServiceImpl.insertPersonalMember(memberPersonalMemberDTO);
         return "redirect:/personal/login";
     };
+
+    @GetMapping("logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("member");
+        session.removeAttribute("sponsorMember");
+
+        return "redirect:/personal/login";
+    }
 }
