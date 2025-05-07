@@ -17,12 +17,12 @@ import org.springframework.stereotype.Component;
 public class ReceiverFileDTO {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long donateCertId;
+    private Long receiverId;
 
     public ReceiverFileVO toVO() {
         return ReceiverFileVO.builder()
                 .id(id)
-                .donateCertId(donateCertId)
+                .receiverId(receiverId)
                 .build();
     }
 

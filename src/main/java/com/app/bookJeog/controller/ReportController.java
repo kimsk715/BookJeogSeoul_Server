@@ -1,15 +1,17 @@
 package com.app.bookJeog.controller;
 
 import com.app.bookJeog.domain.dto.BookPostReportDTO;
+import com.app.bookJeog.domain.dto.CommentReportDTO;
+import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.dto.SponsorMemberDTO;
 import com.app.bookJeog.domain.enumeration.ReportType;
+import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.service.ReportService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
@@ -25,4 +27,16 @@ public class ReportController  {
         log.info("받은 신고 타입: " + bookPostReportDTO.getBookPostReportType());
         reportService.insertBookPostReport(bookPostReportDTO);
     }
+
+    @GetMapping("report-comment")
+    @ResponseBody
+    public void reportComment(HttpSession session, @RequestParam Long commentId, @RequestParam ReportType reportType) {
+        CommentReportDTO commentReportDTO = new CommentReportDTO();
+        commentReportDTO.setCommentId(commentId);
+        commentReportDTO.setCommentReportType(reportType);
+        log.info(commentReportDTO.toString());
+        reportService.insertCommentReport(commentReportDTO);
+    }
+
+
 }

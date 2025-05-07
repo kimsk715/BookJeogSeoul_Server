@@ -128,12 +128,14 @@
                             </div>
                         </div>
                         <div class="inner-content">
-                            <p class="sign-up-mark idpw">아이디 계정 회원</p>
+                            <p class="sign-up-mark kakao">카카오 계정 회원</p>
                             <div class="picture-box">
                                 <div class="inner">
                                     <div
                                         class="image-box"
-                                        th:style="'background-image: url(' + @{${profileUrl}} + ')'"
+                                        style="
+                                            background-image: url(/images/post/user_profile_example.png);
+                                        "
                                     ></div>
                                     <label class="picture-change-button">
                                         <input
@@ -158,7 +160,6 @@
                                             type="text"
                                             placeholder="필명 입력"
                                             class="input-text"
-                                            th:value="${member.memberNickName}"
                                         />
                                     </div>
                                     <button type="button" class="button">
@@ -181,84 +182,11 @@
                                                 type="text"
                                                 placeholder="이메일 주소 입력"
                                                 class="input-text"
-                                                th:value="${member.memberEmail}"
-                                                disabled
                                             />
-                                        </div>
-                                        <button type="button" class="button" style="display: none">
-                                            변경하기
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="input-item" style="display: none">
-                                    <p class="title">
-                                        현재 비밀번호<span>*</span>
-                                    </p>
-                                    <div class="input-box">
-                                        <input
-                                            type="password"
-                                            id="input-currentPassword"
-                                            placeholder="현재 비밀번호 입력"
-                                            class="input-text tooltip2"
-                                        />
-                                        <button
-                                            type="button"
-                                            class="pwSecretBtn"
-                                            style="display: none"
-                                        >
-                                            <i class="icon-eye_off"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="input-item">
-                                    <p class="title">비밀번호<span>*</span></p>
-                                    <div class="input-group password">
-                                        <div class="input-box">
-                                            <input
-                                                type="password"
-                                                id="input-password"
-                                                placeholder="● ● ● ● ● ● ● ●"
-                                                disabled="disabled"
-                                                class="input-text tooltip1"
-                                            />
-                                            <button
-                                                type="button"
-                                                class="pwSecretBtn"
-                                                style="display: none"
-                                            >
-                                                <i class="icon-eye_off"></i>
-                                            </button>
                                         </div>
                                         <button type="button" class="button">
                                             변경하기
                                         </button>
-                                    </div>
-                                    <span
-                                        class="exp"
-                                        style="margin: 3px 0px 0px"
-                                    ></span>
-                                    <div
-                                        class="validation-wrap"
-                                        style="display: none"
-                                    >
-                                        <ul>
-                                            <li>
-                                                <i class="mds-icon-check"></i>
-                                                <span>영문 대/소문자</span>
-                                            </li>
-                                            <li>
-                                                <i class="mds-icon-check"></i>
-                                                <span>숫자</span>
-                                            </li>
-                                            <li>
-                                                <i class="mds-icon-check"></i>
-                                                <span>특수문자</span>
-                                            </li>
-                                            <li>
-                                                <i class="mds-icon-check"></i>
-                                                <span>8-20자</span>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -276,12 +204,8 @@
                                                 placeholder="휴대폰 번호 입력( '-' 제외)"
                                                 disabled="disabled"
                                                 class="input-text"
-                                                th:value="${member.memberPhone}"
                                             />
                                         </div>
-                                        <button type="button" class="button" style="display: none">
-                                            변경하기
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -291,6 +215,5 @@
             </section>
         </div>
     </body>
-    <script src="/js/member/my-profile-service.js"></script>
     <script src="/js/member/my-profile-event.js"></script>
 </html>

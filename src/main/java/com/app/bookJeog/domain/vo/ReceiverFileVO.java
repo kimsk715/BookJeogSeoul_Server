@@ -15,6 +15,6 @@ import java.io.File;
 public class ReceiverFileVO extends FileVO {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long donateCertId;
+    private Long receiverId;
 
 }
