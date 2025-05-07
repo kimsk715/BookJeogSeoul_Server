@@ -5,8 +5,13 @@ import com.app.bookJeog.domain.enumeration.AlarmType;
 import com.app.bookJeog.domain.vo.*;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.List;
+
 
 public interface AlarmService {
+
+    // 알람들 조회
+    AlarmListDTO selectAlarmList(Long memberId);
 
 
     //내 게시글 댓글 알람
@@ -18,11 +23,11 @@ public interface AlarmService {
 
 
     // 팔로잉한 사람의 게시글 알림
-    void postAlarm(HttpSession session, PostAlarmDTO postAlarmDTO);
+    void postAlarm(Long memberId, PostAlarmDTO postAlarmDTO);
 
 
     // 팔로잉 한 사람
-    void followAlarm(HttpSession session, FollowAlarmDTO followAlarmDTO);
+    void followAlarm(Long memberId, FollowAlarmDTO followAlarmDTO);
 
     // 알람 조회
 

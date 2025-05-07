@@ -24,8 +24,8 @@
                     <div class="alarm-list-container">
                         <div class="alarm-content">
                             <ul>
-                                <li><a
-                                        href="">
+                                <li th:each = "path : ${paths}"><a
+                                        th:href="${path}">
                                         <div class="img"><img
                                                 src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/49b7b494d18c580785ad15efa1c7eb46.jpg">
                                         </div>
@@ -33,28 +33,28 @@
                                             <p class="txt">[포스트 알림]<br>팔로우 알림, 게시한 글들의 댓글 알림, 토론 대댓글 알림</p> <time class="time">2025.04.05</time>
                                         </div>
                                     </a></li>
-                                <li><a
-                                        href="">
-                                        <div class="img"><img
-                                                src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/49b7b494d18c580785ad15efa1c7eb46.jpg">
-                                        </div>
-                                        <div class="context"><!---->
-                                            <p class="txt">[내서재 알림]<br>LeJulesVerne님이 회원님을 팔로우했습니다
-                                            </p> <time class="time">2025.04.04</time>
-                                        </div>
-                                    </a></li>
-                                <li><a
-                                        href="">
+<!--                                <li><a-->
+<!--                                        href="">-->
+<!--                                        <div class="img"><img-->
+<!--                                                src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/49b7b494d18c580785ad15efa1c7eb46.jpg">-->
+<!--                                        </div>-->
+<!--                                        <div class="context">&lt;!&ndash;&ndash;&gt;-->
+<!--                                            <p class="txt">[내서재 알림]<br>LeJulesVerne님이 회원님을 팔로우했습니다-->
+<!--                                            </p> <time class="time">2025.04.04</time>-->
+<!--                                        </div>-->
+<!--                                    </a></li>-->
+                                <li th:each="mentionedPath : ${mentionedPaths}"><a
+                                        th:href="${mentionedPath}">
                                         <div class="img"><img
                                                 src="https://d3uz7kn1zskbbz.cloudfront.net/profile/b58692581f8f443bafe1d1e7934d74d7.jpeg">
                                         </div>
                                         <div class="context"><!---->
-                                            <p class="txt">[내서재 알림]<br>풀떼기님이 회원님을 팔로우했습니다</p> <time
+                                            <p class="txt">[내서재 알림]<br>풀떼기님이 회원님을 멘션했습니다</p> <time
                                                 class="time">2025.04.03</time>
                                         </div>
                                     </a></li>
-                                <li><a
-                                        href="">
+                                <li th:each="followPath : ${followPaths}"><a
+                                        th:href="${followPath}">
                                         <div class="img"><img
                                                 src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/9bfc374185230bdb5420a9bce38016c4.jpg">
                                         </div>
@@ -63,7 +63,8 @@
                                                 지금 바로 확인해 보세요.</p> <time class="time">2025.04.03</time>
                                         </div>
                                     </a></li>
-                                <li><a href="">
+                                <li th:each="postPath : ${postPaths}">
+                                    <a th:href="${postPath}">
                                         <div class="img"><img
                                                 src="https://images.millie.co.kr/common/images/logo_for_profile.png">
                                         </div>

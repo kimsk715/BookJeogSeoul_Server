@@ -1,7 +1,6 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.*;
-import com.app.bookJeog.domain.enumeration.AlarmType;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.repository.AlarmDAO;
 import com.app.bookJeog.repository.MemberDAO;
@@ -11,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -19,6 +21,20 @@ public class AlarmServiceImpl implements AlarmService {
     private final AlarmDAO alarmDAO;
 
     private final MemberDAO memberDAO;
+    private final HttpSession session;
+
+    // 알람들 조회
+    @Override
+    public AlarmListDTO selectAlarmList(Long memberId) {
+        AlarmListDTO alarmListDTOS = new AlarmListDTO();
+
+        alarmListDTOS.setAlarmCommentAlarmDTOS(alarmDAO.findCommentAlarm(memberId));
+        alarmListDTOS.setAlarmMentionAlarmDTOS(alarmDAO.findMentionAlarm(memberId));
+        alarmListDTOS.setPostAlarmPersonalMemberDTOS(alarmDAO.findPostAlarms(memberId));
+        alarmListDTOS.setAlarmFollowAlarmDTOS(alarmDAO.findFollowAlarms(memberId));
+        log.info(alarmListDTOS.toString());
+        return alarmListDTOS;
+    }
 
     //댓글 달때 insert
     @Override
@@ -66,18 +82,17 @@ public class AlarmServiceImpl implements AlarmService {
 
     // 게시글 알림 등록
     @Override
-    public void postAlarm(HttpSession session, PostAlarmDTO postAlarmDTO) {
+    public void postAlarm(Long memberId, PostAlarmDTO postAlarmDTO) {
         AlarmVO alarmVO = new AlarmVO();
         AlarmDTO alarmDTO = new AlarmDTO();
 
-        Long userId = (Long) session.getAttribute("member");  // 세션에서 멤버 아이디값 가져옴
 
-        log.info("userId = " + userId);
 
-        alarmDTO.setAlarmReceiverId(userId);
+        alarmDTO.setAlarmReceiverId(memberId);
         alarmVO = toAlarmVO(alarmDTO);
 
         alarmDAO.setAlarm(alarmVO);
+        postAlarmDTO.setId(alarmVO.getId());
 
         PostAlarmVO postAlarmVO = toPostAlarmVO(postAlarmDTO);
         alarmDAO.setPostAlarm(postAlarmVO);
@@ -86,18 +101,18 @@ public class AlarmServiceImpl implements AlarmService {
 
     // 팔로잉 알림 등록
     @Override
-    public void followAlarm(HttpSession session, FollowAlarmDTO followAlarmDTO) {
+    public void followAlarm(Long memberId, FollowAlarmDTO followAlarmDTO) {
         AlarmVO alarmVO = new AlarmVO();
         AlarmDTO alarmDTO = new AlarmDTO();
 
-        Long userId = (Long) session.getAttribute("member");  // 세션에서 멤버 아이디값 가져옴
 
-        log.info("userId = " + userId);
 
-        alarmDTO.setAlarmReceiverId(userId);
+        alarmDTO.setAlarmReceiverId(memberId);
         alarmVO = toAlarmVO(alarmDTO);
 
         alarmDAO.setAlarm(alarmVO);
+
+        followAlarmDTO.setId(alarmVO.getId());
         FollowAlarmVO followAlarmVO = toFollowAlarmVO(followAlarmDTO);
         alarmDAO.setFollowAlarm(followAlarmVO);
     }
