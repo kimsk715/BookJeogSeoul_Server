@@ -236,5 +236,11 @@ public interface MemberService {
 
     // 내가 쓴 전체 독후감 개수 조회
     public int findMyBookPostCount(Long memberId);
+
+    // 마일리지 조회
+    public int findMyMileage(Long memberId);
+
+    // 개인 마이페이지 데이터 (남의 페이지 조회)
+    public Map<String, Object> getPersonalPageData(Long memberId, Model model);
 }
 
