@@ -1,9 +1,8 @@
 package com.app.bookJeog.domain.dto;
 
 
-import com.app.bookJeog.domain.enumeration.AdminMemberStatus;
 import com.app.bookJeog.domain.enumeration.AlarmStatus;
-import com.app.bookJeog.domain.vo.AdminVO;
+import com.app.bookJeog.domain.enumeration.AlarmType;
 import com.app.bookJeog.domain.vo.AlarmVO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,12 +20,14 @@ public class AlarmDTO {
     private Long id;
     private Long alarmReceiverId;
     private AlarmStatus alarmStatus;
+    private AlarmType alarmType;
 
-    public AlarmVO toVO() {
+    public AlarmVO toVO(AlarmDTO alarmDTO) {
         return AlarmVO.builder()
                 .id(id)
                 .alarmReceiverId(alarmReceiverId)
                 .alarmStatus(alarmStatus)
+                .alarmType(alarmType)
                 .build();
     }
 

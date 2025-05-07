@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component;
 public class PostAlarmDTO {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long commentId;
+    private Long postId;
 
     public PostAlarmVO toVO() {
         return PostAlarmVO.builder()
                 .id(id)
-                .commentId(commentId)
+                .postId(postId)
                 .build();
 
     }
