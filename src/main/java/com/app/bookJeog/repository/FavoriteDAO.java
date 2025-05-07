@@ -5,6 +5,7 @@ import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 import com.app.bookJeog.domain.vo.BookVO;
 import com.app.bookJeog.mapper.FavoriteMapper;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -90,4 +91,10 @@ public class FavoriteDAO {
 
     // 내가 찜한 도서 정보
     public List<Long> findMyScrappedBooks(Long memberId){return favoriteMapper.selectMyScrappedBooks(memberId);};
+
+    // 마이페이지의 스크랩 도서 전체목록(무한스크롤)
+    public List<Long> selectScrappedIsbnList(@Param("memberId") Long memberId, @Param("offset") int offset,
+                                             @Param("orderType") String orderType){
+        return favoriteMapper.selectScrappedIsbnList(memberId, offset, orderType);
+    }
 }

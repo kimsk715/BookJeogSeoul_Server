@@ -381,3 +381,8 @@ b, em, strong{
 .back-component .back-wrap.line {
     margin: 0;
 }
+
+.button-box .yellow.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

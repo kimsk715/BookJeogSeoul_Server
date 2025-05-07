@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -101,6 +103,11 @@ public class FavoriteServiceImpl implements FavoriteService {
     // 특정 독후감의 좋아요 개수 조회
     public int countBookPostLike(Long bookPostId){
         return favoriteDAO.countBookPostLike(bookPostId);
+    };
+
+    // 마이페이지의 스크랩 도서 전체목록(무한스크롤)
+    public List<Long> getScrappedIsbnList(Long memberId, int offset, String orderType) {
+        return favoriteDAO.selectScrappedIsbnList(memberId, offset, orderType);
     }
 
     @Override
