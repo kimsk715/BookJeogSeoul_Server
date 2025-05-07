@@ -8,6 +8,7 @@
     <title>북적 서울 | 후원 인증 게시글</title>
     <link rel="stylesheet"
         href="/css/donation/donate_cert_post.css" />
+    <link rel="stylesheet" href="/css/donation/report_popup.css">
     <link rel="stylesheet"
         href="/css/donation/feed_common.css" />
     <link rel="shortcut icon" href="/images/admin/favicon.ico"
@@ -250,6 +251,79 @@
                         </div>
                     </div>
                 </div>
+                <div class="popup alert police-popup" style="display: none;">
+                    <div class="popup_inner">
+                        <div class="popup_content">
+                            <div class="popup_inner_header">
+                                <h2>신고하기</h2>
+                            </div>
+                            <div class="popup_inner_body">
+                                <div class="report-list"><label
+                                        class="mds-radio mds-radio--secondary"><input
+                                        type="radio"
+                                        id="input-3019"
+                                        name="report-kind"
+                                        value="1"> <span
+                                        class="mds-radio-view"><span
+                                        class="check"></span>
+                                            <span class="label">단순 비방,
+                                                욕설 등 불쾌감을 주는
+                                                내용</span></span></label>
+                                    <label
+                                            class="mds-radio mds-radio--secondary"><input
+                                            type="radio"
+                                            id="input-3020"
+                                            name="report-kind"
+                                            value="2"> <span
+                                            class="mds-radio-view"><span
+                                            class="check"></span>
+                                            <span class="label">음란성 또는
+                                                청소년에게
+                                                부적합</span></span></label>
+                                    <label
+                                            class="mds-radio mds-radio--secondary"><input
+                                            type="radio"
+                                            id="input-3021"
+                                            name="report-kind"
+                                            value="3"> <span
+                                            class="mds-radio-view"><span
+                                            class="check"></span>
+                                            <span class="label">주제와 관련
+                                                없거나 부적절한 홍보
+                                            </span></span></label>
+                                    <label
+                                            class="mds-radio mds-radio--secondary"><input
+                                            type="radio"
+                                            id="input-3022"
+                                            name="report-kind"
+                                            value="4"> <span
+                                            class="mds-radio-view"><span
+                                            class="check"></span>
+                                            <span class="label">스포일러가
+                                                포함된
+                                                내용</span></span></label>
+                                    <label
+                                            class="mds-radio mds-radio--secondary"><input
+                                            type="radio"
+                                            id="input-3023"
+                                            name="report-kind"
+                                            value="0"> <span
+                                            class="mds-radio-view"><span
+                                            class="check"></span>
+                                            <span
+                                                    class="label">기타</span></span></label>
+                                    <div class="mds-input mds-input--default mds-input--required mds-input--left" style="display: none"><label><div class="inner"><!----> <div class="input"><span id="input-837-label" class="label">신고사유 <sup>*</sup></span> <input autocomplete="off" id="input-837" aria-labelledby="input-837-label" aria-errormessage="input-837-message" type="text" placeholder="신고 사유 입력" class="mds-input-field"></div> <!----> <button type="button" aria-label="내용 삭제" class="mds-icon--input-delete clear-button" style="display: none;"></button> <!----> <!----></div></label> <div class="message-wrap"><!----> <span class="length">0/50</span></div> <!----></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popup_inner_footer"><button
+                                type="button"
+                                class="gray gtm-review-police police-cancel">취소</button>
+                            <button type="button" disabled="disabled"
+                                    class="gtm-review-policecon btn-review-police">등록</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="comment">
                     <div class="comment-inner container">
                         <div class="register flex-container">
@@ -335,7 +409,8 @@
                                                 <button
                                                         type="button">답글달기</button>
                                                 <button
-                                                        type="button">신고하기</button>
+                                                        type="button" class="comment-report" th:value="${comment.commentDTO.id}">신고하기</button>
+                                                <input type="hidden" class="reported-id" th:value="${comment.commentDTO.memberId}">
                                             </div>
                                         </div>
                                     </div>
@@ -370,5 +445,6 @@
 <script th:inline="javascript">
     const member = /*[[${member}]]*/ {};
     const sponsorMember = /*[[${sponsorMember}]]*/ {};
+    const postId = /*[[${postId}]]*/ {};
 </script>
 </html>

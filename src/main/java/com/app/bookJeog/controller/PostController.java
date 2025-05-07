@@ -216,8 +216,6 @@ public class PostController {
         }
         model.addAttribute("files", postFiles);
         model.addAttribute("thumbNail", fileService.getDonateCertFileByPostId(postId));
-
-
         model.addAttribute("DonateCert",postService.getDonateCertById(postId));
         model.addAttribute("member", session.getAttribute("member"));
         model.addAttribute("sponsorMember", session.getAttribute("sponsorMember"));
@@ -395,7 +393,7 @@ public class PostController {
             fileDTO.setId((long) i+1);
         }
         model.addAttribute("files", postFiles);
-
+        model.addAttribute("postId", postId );
         model.addAttribute("member", session.getAttribute("member"));
         model.addAttribute("sponsorMember", session.getAttribute("sponsorMember"));
         List<CommentInfoDTO> commentList = new ArrayList<>();
