@@ -62,12 +62,7 @@ public class PersonalController {
     }
 
 
-    // 로그아웃
-    @PostMapping("logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/personal/login";
-    }
+
 
 
     // 프사 생성 또는 수정
