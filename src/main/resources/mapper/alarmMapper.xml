@@ -50,18 +50,20 @@
     <update id="updateAlarmRead">
         update tbl_alarm
         set alarm_status = 'READ'
-        where id = #{id}
+        where alarm_receiver_id = #{alarmReceiverId}
     </update>
 
 
     <!--게시글에 댓글 조회-->
     <select id="selectCommentAlarm" resultType="alarmCommentAlarmDTO">
-        select c.post_id
+        select c.post_id, pm.member_nickname
         from tbl_alarm a
             join tbl_comment_alarm ca
-                    on a.id = ca.id
+                on a.id = ca.id
             join tbl_comment c
-                    on ca.comment_id = c.id
+                on ca.comment_id = c.id
+            join tbl_personal_member pm
+                on c.member_id = pm.id
         where alarm_receiver_id = #{alarmReceiverId}
     </select>
 
@@ -81,25 +83,25 @@
 
     <!--팔로우 조회-->
     <select id="selectFollowAlarms" resultType="alarmFollowAlarmDTO">
-        select alarm_sender_id, member_nickname, file_path
-        from tbl_alarm a join tbl_follow_alarm fa
-        join tbl_personal_member pm
-        on fa.alarm_sender_id = pm.id
-        join tbl_member_profile mp
-        on pm.id=mp.member_id
-        join tbl_file f
-        on f.id = mp.id
-        where alarm_receiver_id = #{alarmReceiverId}
+        select member_nickname, pm.id
+        from tbl_alarm a
+            join tbl_follow_alarm fa
+                on a.id = fa.id
+            join tbl_personal_member pm
+                on fa.alarm_sender_id = pm.id
+            where alarm_receiver_id = #{alarmReceiverId}
     </select>
 
 
     <!--멘션 조회-->
     <select id="selectMention" resultType="alarmMentionAlarmDTO">
-        select c.post_id
+        select c.post_id, pm.member_nickname
         from tbl_alarm a join tbl_comment_metion_alarm cma
         on a.id = cma.id
         join tbl_comment c
         on cma.comment_id = c.id
+        join tbl_personal_member pm
+        on pm.id = cma.mentioned_member_id
         where alarm_receiver_id = #{alarmReceiverId}
     </select>
 </mapper>
