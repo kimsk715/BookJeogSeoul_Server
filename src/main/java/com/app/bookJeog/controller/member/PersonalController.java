@@ -1,9 +1,6 @@
 package com.app.bookJeog.controller.member;
 
-import com.app.bookJeog.domain.dto.AladinBookDTO;
-import com.app.bookJeog.domain.dto.FileBookPostDTO;
-import com.app.bookJeog.domain.dto.MemberPersonalMemberDTO;
-import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.FavoriteService;
@@ -49,6 +46,10 @@ public class PersonalController {
     // 개인 마이페이지 조회
     @GetMapping("mypage")
     public String personalMypage(HttpSession session, Model model) {
+        SponsorMemberDTO sponsorMemberDTO = (SponsorMemberDTO) session.getAttribute("sponsorMember");
+        if(sponsorMemberDTO != null) {
+            return "redirect:/sponsor/mypage";
+        }
 
         Map<String, Object> myPageData = memberService.getMyPageData(session, model);
 
@@ -214,7 +215,17 @@ public class PersonalController {
 
     // 개인 마이페이지 - 프로필 수정(카카오)
     @GetMapping("mypage/profile-kakao")
-    public String gotoKakaoMemberProfile() {
+    public String gotoKakaoMemberProfile(HttpSession session, Model model) {
+        PersonalMemberDTO member = memberService.getCurrentMember(session);
+
+        if (member == null) {
+            // 로그인하지 않은 경우 에러 페이지로 리다이렉트하거나 기본값 설정
+            return "redirect:/personal/login";
+        }
+
+        model.addAttribute("member", member);
+        model.addAttribute("profileUrl", memberService.getProfileImageUrl(member.getId()));
+
         return "member/my-profile-kakao";
     }
 
