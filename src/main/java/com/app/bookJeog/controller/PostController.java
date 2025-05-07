@@ -6,6 +6,7 @@ import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.enumeration.PostType;
 import com.app.bookJeog.domain.vo.CommentVO;
 import com.app.bookJeog.domain.vo.PostVO;
+import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.service.*;
 import com.app.bookJeog.controller.exception.UnauthenticatedException;
@@ -43,6 +44,7 @@ public class PostController {
     private final CommentService commentService;
     private final MemberService memberService;
     private final FIleService fileService;
+    private final FavoriteService favoriteService;
 
     // 토론게시판 이동
     @GetMapping("discussion")
@@ -439,7 +441,20 @@ public class PostController {
         }
 
         model.addAttribute("mentions", mentionList);
+
+
         return "donation/receiver_post";
+    }
+
+    @GetMapping("receiver/vote")
+    @ResponseBody
+    public void voteToReceiver(@RequestParam int point, Model model,HttpSession session) {
+        PersonalMemberDTO foundMember = (PersonalMemberDTO) session.getAttribute("member");
+        ReceiverLikeDTO receiverLikeDTO = new ReceiverLikeDTO();
+        receiverLikeDTO.setMemberId(foundMember.getId());
+        receiverLikeDTO.setReceiverLikePoint(point);
+        receiverLikeDTO.setReceiverId((Long) model.getAttribute("postId"));
+        favoriteService.voteToReceiver(receiverLikeDTO.toVO());
     }
 
 

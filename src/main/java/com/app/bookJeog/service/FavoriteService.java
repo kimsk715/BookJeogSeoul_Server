@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 
 public interface FavoriteService {
 
@@ -38,4 +39,6 @@ public interface FavoriteService {
 
     // 특정 독후감의 좋아요 개수 조회
     public int countBookPostLike(Long bookPostId);
+
+    public void voteToReceiver(ReceiverLikeVO receiverLikeVO);
 }

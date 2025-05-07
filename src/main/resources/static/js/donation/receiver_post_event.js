@@ -66,7 +66,11 @@ bookMarkInput.addEventListener('input',() =>{
         bookMarkInput.value = 1000
     }
 })
-
+const applyButton = document.querySelector(".apply");
+applyButton.addEventListener("click", async () => {
+    let point = document.querySelector(".dialog-content").value;
+    await fetch(`/post/receiver/vote?point=${point}`);
+})
 
 const imageModal = document.querySelector(".full-image")
 const thumbnailWrappers = document.querySelectorAll(".list li")
