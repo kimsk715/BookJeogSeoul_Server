@@ -144,5 +144,7 @@ public interface PostService {
     public void updateReceiverPost(ReceiverDTO receiverDTO);
 
     public void updateDonateCertPost(DonateCertDTO donateCertDTO);
+
+    public String getPostType(Long postId);
 }
 

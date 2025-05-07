@@ -43,6 +43,7 @@ public class PostController {
     private final CommentService commentService;
     private final MemberService memberService;
     private final FIleService fileService;
+    private final AlarmService alarmService;
 
     // 토론게시판 이동
     @GetMapping("discussion")
@@ -175,8 +176,11 @@ public class PostController {
     public String writeBookPost(@ModelAttribute("post") FileBookPostDTO fileBookPostDTO,
                                 @RequestParam("file") List<MultipartFile> files, RedirectAttributes redirectAttributes,
                                 HttpSession session) {
+        PostAlarmDTO postAlarmDTO = new PostAlarmDTO();
         fileBookPostDTO.setMemberId(((PersonalMemberDTO)session.getAttribute("member")).getId());
         Long newBookPostId = postService.write(fileBookPostDTO, files);
+        postAlarmDTO.setPostId(newBookPostId);
+        alarmService.postAlarm(fileBookPostDTO.getMemberId(), postAlarmDTO);
         redirectAttributes.addFlashAttribute("message", "독후감 작성 완료!");
         return "redirect:/post/bookpost/" + newBookPostId;
     }

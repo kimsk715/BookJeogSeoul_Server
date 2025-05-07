@@ -365,7 +365,6 @@
         insert into tbl_member_profile (id, member_id)
         values (#{id}, #{memberId})
     </insert>
->>>>>>> 8bc832940d22904ff489e952b42fce5b80437c07
 </mapper>
 
 
