@@ -12,6 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GlobalExceptionHandler {
     
     // 로그인 안 했는데 회원 서비스를 시도할 때
+
+    @ExceptionHandler(LoginFailException.class)
+    protected String loginFail(LoginFailException e) {
+        log.error(e.getMessage());
+        return "/login/login?result=fail";
+    }
+
     @ExceptionHandler(UnauthenticatedException.class)
     protected String UnauthenticatedException(UnauthenticatedException e) {
         log.error(e.getMessage());

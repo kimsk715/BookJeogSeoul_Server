@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
 
-    private final AlarmInterceptor alarmInterceptor;
+    private final AlarmService alarmService;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -28,7 +28,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         registry.addInterceptor(new ImageInterceptor()) // 인터셉터 클래스 등록
                 .addPathPatterns("/image/**");
-        registry.addInterceptor(alarmInterceptor).
+        registry.addInterceptor(new AlarmInterceptor(alarmService)).
                 addPathPatterns("/post/**", "/main/**");
     }
     @Override

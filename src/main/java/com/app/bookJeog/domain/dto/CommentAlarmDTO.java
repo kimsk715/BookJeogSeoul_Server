@@ -25,7 +25,5 @@ public class CommentAlarmDTO {
                 .id(id)
                 .commentId(commentId)
                 .build();
-
     }
-
 }

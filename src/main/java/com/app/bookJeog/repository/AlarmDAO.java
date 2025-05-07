@@ -16,7 +16,7 @@ public class AlarmDAO {
     private final AlarmMapper alarmMapper;
 
     // 알람 슈퍼키 등록
-    public void setAlarm(AlarmVO alarmVO ) {
+    public void setAlarm(AlarmVO alarmVO) {
         alarmMapper.insertAlarm(alarmVO);
     }
 
