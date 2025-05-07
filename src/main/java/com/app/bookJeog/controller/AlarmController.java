@@ -26,6 +26,7 @@ public class AlarmController {
 
     private final AlarmService alarmService;
     private final PostService postService;
+    private final AlarmDTO alarmDTO;
 
     // 알림 센터
     @GetMapping("/alarm-info")
@@ -39,49 +40,88 @@ public class AlarmController {
 
     @GetMapping("post-alarm")
     public String setPath(HttpSession session, Model model) {
+
         PersonalMemberDTO foundMember = (PersonalMemberDTO) session.getAttribute("member");
+
+        alarmService.readAlarm(foundMember.getId());
+
+
         List<String> paths = new ArrayList<>();
         Long memberId = foundMember.getId();
         AlarmListDTO alarmListDTO =  alarmService.selectAlarmList(memberId);
 
+        List<AlarmFollowAlarmDTO> alarmFollowAlarmDTOList = alarmListDTO.getAlarmFollowAlarmDTOS();
         List<AlarmCommentAlarmDTO> commentAlarmDTOList = alarmListDTO.getAlarmCommentAlarmDTOS();
         List<AlarmMentionAlarmDTO> mentionAlarmDTOList = alarmListDTO.getAlarmMentionAlarmDTOS();
         List<PostAlarmPersonalMemberDTO> postAlarmPersonalMemberDTOList = alarmListDTO.getPostAlarmPersonalMemberDTOS();
+        List<CommentAlarmInfoDTO> commentAlarmInfoDTOS = new ArrayList<>();
+        String followAlarmPath = "/personal/mypage/";
+
+        for (AlarmFollowAlarmDTO alarmFollowAlarmDTO : alarmFollowAlarmDTOList) {
+            FollowMemberAlarmDTO followMemberAlarmDTO = new FollowMemberAlarmDTO();
+
+            followMemberAlarmDTO.setMemberNickName(alarmFollowAlarmDTO.getMemberNickName());
+
+            Long senderId = alarmFollowAlarmDTO.getAlarmSenderId();
+            followAlarmPath += senderId;
+
+            followMemberAlarmDTO.setFollowPath(followAlarmPath);
+        }
+
+        model.addAttribute("followAlarmPath", followAlarmPath);
+
 
         for(AlarmCommentAlarmDTO commentAlarmDTO : commentAlarmDTOList){
+            CommentAlarmInfoDTO commentAlarmInfoDTO = new CommentAlarmInfoDTO();
+
            Long postId = commentAlarmDTO.getPostId();
 
             String path = postService.getPostType(postId);
             path += postId;
-            paths.add(path);
+            commentAlarmInfoDTO.setCommentPath(path);
+            commentAlarmInfoDTO.setMemberNickname(commentAlarmDTO.getMemberNickname());
+            commentAlarmInfoDTOS.add(commentAlarmInfoDTO);
         }
-        log.info("paths: " + paths);
-        List<String> mentionedPaths = new ArrayList<>();
+        model.addAttribute("commentAlarms", commentAlarmInfoDTOS);
+
+        List<MentionAlarmInfoDTO> mentionAlarmInfoDTOS = new ArrayList<>();
         for(AlarmMentionAlarmDTO mentionAlarmDTO : mentionAlarmDTOList){
+            MentionAlarmInfoDTO mentionAlarmInfoDTO = new MentionAlarmInfoDTO();
             Long postId = mentionAlarmDTO.getPostId();
             String mentionPath = postService.getPostType(postId);
             mentionPath += postId;
-            mentionedPaths.add(mentionPath);
+            mentionAlarmInfoDTO.setMentionedPath(mentionPath);
+            mentionAlarmInfoDTO.setMemberNickname(mentionAlarmDTO.getMemberNickname());
+            mentionAlarmInfoDTOS.add(mentionAlarmInfoDTO);
         }
 
+        model.addAttribute("mentionAlarms", mentionAlarmInfoDTOS);
+
         List<String> followPaths = new ArrayList<>();
+        List<PostAlarmInfoDTO> postAlarmInfoDTOS = new ArrayList<>();
         for(PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList){
+            PostAlarmInfoDTO postAlarmInfoDTO = new PostAlarmInfoDTO();
             Long postId = postAlarmPersonalMemberDTO.getPostId();
             String followPath = postService.getPostType(postId);
             followPath += postId;
-            followPaths.add(followPath);
+            postAlarmInfoDTO.setPostPath(followPath);
+            postAlarmInfoDTO.setMemberNickname(postAlarmPersonalMemberDTO.getMemberNickName());
+            postAlarmInfoDTOS.add(postAlarmInfoDTO);
         }
 
-<<<<<<< Updated upstream
         List<String> postPaths = new ArrayList<>();
+        model.addAttribute("postAlarms", postAlarmInfoDTOS);
+
         for(PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList){
             Long postId = postAlarmPersonalMemberDTO.getPostId();
             String postPath = postService.getPostType(postId);
             postPath += postId;
+            postAlarmInfoDTOS.forEach(postAlarmInfoDTO -> {
+//                postAlarmInfoDTO.setMemberName(alarmService.);
+            });
             postPaths.add(postPath);
 
         }
-=======
         model.addAttribute("postAlarms", postAlarmInfoDTOS);
 
 //        for(PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList){
@@ -95,14 +135,9 @@ public class AlarmController {
 //
 //        }
 //        log.info(postAlarmInfoDTOS.toString());
->>>>>>> Stashed changes
 
 
 
-        model.addAttribute("paths", paths);
-        model.addAttribute("mentionedPaths", mentionedPaths);
-        model.addAttribute("followPaths", followPaths);
-        model.addAttribute("postPaths", postPaths);
         return "main/alarm";
     }
 }

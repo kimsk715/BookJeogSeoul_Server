@@ -342,7 +342,9 @@ public class PersonalController {
         PersonalMemberDTO foundMember = memberServiceImpl.loginPersonalMember(personalMemberDTO);
 
         if(foundMember != null) {
+            log.info("여기들어옴");
             session.setAttribute("member", foundMember);
+            log.info("여기까지 들어옴");
             return "redirect:/main/main";
         } else {
             return "redirect:/personal/login?result=fail";

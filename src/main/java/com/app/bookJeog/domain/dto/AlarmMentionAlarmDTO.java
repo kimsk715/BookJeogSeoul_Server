@@ -15,4 +15,5 @@ public class AlarmMentionAlarmDTO {
     @EqualsAndHashCode.Include
     private Long id;
     private Long postId;
+    private String memberNickname;
 }
