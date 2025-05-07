@@ -40,7 +40,7 @@ public class WebController {
             for (TopBookVO topBookVO : bookInfoDTOList) {
                 TopBookDTO topBookDTO = new TopBookDTO();
                 topBookDTO.setTopBookVO(topBookVO);
-                topBookDTO.setImageUrl(aladinService.getBookCover(Long.valueOf(topBookVO.getIsbn())));
+//                topBookDTO.setImageUrl(aladinService.getBookCover(Long.valueOf(topBookVO.getIsbn())));
                 topBookDTOS.add(topBookDTO);
             }
         model.addAttribute("topBookDTOS",topBookDTOS);
@@ -60,7 +60,7 @@ public class WebController {
 
                // 알라딘 API를 통해 책 표지 이미지 URL 가져오기
 
-               topViewBookDTO.setImageUrl(aladinService.getBookCover(memberHistoryVO.getBookIsbn()));
+//               topViewBookDTO.setImageUrl(aladinService.getBookCover(memberHistoryVO.getBookIsbn()));
 
                // ISBN 저장
                topViewBookDTO.setIsbn(memberHistoryVO.getBookIsbn());
@@ -88,7 +88,7 @@ public class WebController {
        try {
            for (SelectedBookVO selectedBookVO : templist) {
                AdminSelectBookDTO adminSelectBookDTO = new AdminSelectBookDTO();
-               adminSelectBookDTO.setImageUrl(aladinService.getBookCover(selectedBookVO.getBookIsbn()));
+//               adminSelectBookDTO.setImageUrl(aladinService.getBookCover(selectedBookVO.getBookIsbn()));
                adminSelectBookDTO.setIsbn(selectedBookVO.getBookIsbn());
                adminSelectBookDTO.setTitle(bookService.getBookByIsbn(selectedBookVO.getBookIsbn()).get(0).getTitle());
                adminSelectBookDTO.setAuthor(bookService.getBookByIsbn(selectedBookVO.getBookIsbn()).get(0).getAuthor());
@@ -108,7 +108,7 @@ public class WebController {
           for (BookPostVO bookPostVO : tempPost) {
               TopBookPostDTO topBookPostDTO = new TopBookPostDTO();
               topBookPostDTO.setIsbn(bookPostVO.getBookIsbn());
-              topBookPostDTO.setImageUrl(aladinService.getBookCover(bookPostVO.getBookIsbn()));
+//              topBookPostDTO.setImageUrl(aladinService.getBookCover(bookPostVO.getBookIsbn()));
               topBookPostDTO.setTitle(bookService.getBookByIsbn(bookPostVO.getBookIsbn()).get(0).getTitle());
               topBookPostDTO.setAuthor(bookService.getBookByIsbn(bookPostVO.getBookIsbn()).get(0).getAuthor());
               topBookPostDTOS.add(topBookPostDTO);

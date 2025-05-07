@@ -564,7 +564,7 @@
             r.id, p.member_id,
             r.receiver_title,
             r.receiver_text,
-            r.receiver_status, (date(current_timestamp) - date(p.createdDate)) as createdDate, date(p.updatedDate) as updatedDate
+            r.receiver_status, datediff(curdate(), p.createdDate) as createdDate, datediff(curdate(), p.updatedDate) as updatedDate
             from tbl_receiver r
             join tbl_post p on r.id = p.id
             order by r.id desc
@@ -576,7 +576,7 @@
             r.id, p.member_id,
             r.receiver_title,
             r.receiver_text,
-            r.receiver_status, (date(current_timestamp) - date(p.createdDate)) as createdDate, date(p.updatedDate) as updatedDate
+            r.receiver_status, datediff(curdate(), p.createdDate) as createdDate, datediff(curdate(), p.updatedDate) as updatedDate
         from tbl_receiver r
             join tbl_post p on r.id = p.id
                 where r.id = #{postId}
@@ -585,7 +585,7 @@
 
     <!-- 후원 인증 게시판 조회용 -->
     <select id="selectAllDonateCerts" resultType="donateCertVO">
-        select dc.id, donate_cert_title, donate_cert_text, post_type, member_id, (date(current_timestamp) - date(p.createdDate)) as createdDate, p.updatedDate
+        select dc.id, donate_cert_title, donate_cert_text, post_type, member_id, datediff(curdate(), p.createdDate) as createdDate, p.updatedDate
         from tbl_donate_cert dc
         join tbl_post p on dc.id = p.id
             order by dc.id desc
@@ -593,7 +593,7 @@
 
     <!-- 후원 인증 게시글 상세보기 -->
     <select id="selectDonateCertById" resultType="donateCertVO">
-        select dc.id, donate_cert_title, donate_cert_text, post_type, member_id, (date(current_timestamp) - date(p.createdDate)) as createdDate, p.updatedDate
+        select dc.id, donate_cert_title, donate_cert_text, post_type, member_id, datediff(curdate(), p.createdDate) as createdDate, p.updatedDate
         from tbl_donate_cert dc
                  join tbl_post p on dc.id = p.id
                     where dc.id = #{postId}
@@ -601,7 +601,7 @@
 
     <!--토론 게시판 조회용-->
     <select id="selectAllDiscussions" resultType="discussionVO">
-        select d.id, discussion_title, discussion_text, book_isbn, p.member_id, p.createdDate, p.updatedDate
+        select d.id, discussion_title, discussion_text, book_isbn, p.member_id, datediff(curdate(), p.createdDate) as createdDate, p.updatedDate
         from tbl_discussion d
                  join tbl_post p
                       on d.id = p.id
@@ -610,7 +610,7 @@
 
     <!--토론 게시판 게시글 상세보기 -->
     <select id="selectDiscussionById" resultType="discussionVO">
-        select d.id, discussion_title, discussion_text, book_isbn, p.member_id, p.createdDate, p.updatedDate
+        select d.id, discussion_title, discussion_text, book_isbn, p.member_id, datediff(curdate(), p.createdDate) as createdDate, p.updatedDate
         from tbl_discussion d
                  join tbl_post p
                       on d.id = p.id
@@ -735,6 +735,19 @@
         insert into tbl_receiver (id, receiver_title, receiver_text)
         values (#{id}, #{receiverTitle}, #{receiverText})
     </insert>
+
+    <update id="updateReceiverPost">
+        update tbl_receiver
+        set receiver_title = #{receiverTitle}, receiver_text = #{receiverText}
+        where id = #{id}
+    </update>
+
+    <update id="updateDonateCertPost">
+        update tbl_donate_cert
+        set donate_cert_title = #{donateCertTitle}, donate_cert_text = #{donateCertText}
+        where id = #{id}
+    </update>
+
 </mapper>
 
 

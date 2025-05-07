@@ -4,11 +4,10 @@ const reportModalOpenButton = reportModal.querySelector("a")
 const reportPopup = document.querySelector(".police-popup")
 
 reportButton.addEventListener('click',() => {
-    if(sponsorMember !== null && sponsorMember.sponsorName === document.querySelector(".name")){
+    if(sponsorMember !== null && (sponsorMember.sponsorName === document.querySelector("#sponsorName").value)){
+        console.log("실행됨")
         document.querySelector(".post-edit-button").removeAttribute("style");
     }
-
-
     if(reportModal.style.display == "none"){
         reportModal.removeAttribute("style")
     }
@@ -176,7 +175,9 @@ const commentLayout =(() =>{
     const addedLayout = async(commentText, mentionedName) =>{
         const addedComment = document.createElement('li');
         addedComment.classList.add("comment-item");
-        addedComment.innerHTML = `
+        let name = (member !== null) ? member.memberName : sponsorMember.sponsorName;
+        if(mentionedName != null){
+            addedComment.innerHTML = `
                                 <div class="comment-item-inner flex-container">
                                     <div class="user-img" style="
                                                 background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
@@ -187,7 +188,7 @@ const commentLayout =(() =>{
                                         <div class="com-contents-head">
                                             <div class="com-contents-top flex-container">
                                                 <p class="nickname">
-                                                    <a href="#">${member.memberName}</a>
+                                                    <a href="#">${name}</a>
                                                 </p>
                                             </div>
                                             <span class="com-contents-date">2025-04-28 11:35:49</span>
@@ -214,6 +215,48 @@ const commentLayout =(() =>{
                                     </div>
                                 </div>                   
         `;
+        }
+        else{
+            addedComment.innerHTML = `
+                                <div class="comment-item-inner flex-container">
+                                    <div class="user-img" style="
+                                                background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
+                                            ">
+                                        <a href="#"></a>
+                                    </div>
+                                    <div class="com-contents">
+                                        <div class="com-contents-head">
+                                            <div class="com-contents-top flex-container">
+                                                <p class="nickname">
+                                                    <a href="#">${name}</a>
+                                                </p>
+                                            </div>
+                                            <span class="com-contents-date">2025-04-28 11:35:49</span>
+                                        </div>
+                                        <div class="com-contents-body">
+                                        
+                                            <p class="comment-text show">${commentText}</p>
+                                            <div class="comment-text">
+                                                <p contenteditable="plaintext-only">${commentText}</p>
+                                                <button type="button" class="mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
+                                                    <span>등록</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="reply-setting">
+                                            <button type="button" class="more-btn">
+                                                <img src="https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/more-icon.df2e02aec2252c2847fbe9e490cd4354.png" alt="더보기">
+                                            </button>
+                                            <div class="more-area" style="display: none;">
+                                                <button type="button">답글달기</button>
+                                                <button type="button">신고하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                   
+        `;
+        }
+
         commentWrapper.prepend(addedComment);
     }
     return { addedLayout : addedLayout}
@@ -294,3 +337,4 @@ commentArea.addEventListener('input',function() {
     this.style.height = this.scrollHeight + 'px';
 })
 
+console.log("테스트")

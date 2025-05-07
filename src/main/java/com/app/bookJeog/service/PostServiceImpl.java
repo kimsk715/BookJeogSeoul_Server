@@ -410,6 +410,16 @@ public class PostServiceImpl implements PostService {
         postDAO.insertReceiverPost(receiverVO);
     }
 
+    @Override
+    public void updateReceiverPost(ReceiverDTO receiverDTO) {
+        postDAO.updateReceiverPost(receiverDTO.toVO());
+    }
+
+    @Override
+    public void updateDonateCertPost(DonateCertDTO donateCertDTO) {
+        postDAO.updateDonateCertPost(donateCertDTO.toVO());
+    }
+
 
 }
 

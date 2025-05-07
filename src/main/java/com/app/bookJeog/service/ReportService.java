@@ -1,9 +1,6 @@
 package com.app.bookJeog.service;
 
-import com.app.bookJeog.domain.dto.BookPostReportDTO;
-import com.app.bookJeog.domain.dto.BookPostReportInfoDTO;
-import com.app.bookJeog.domain.dto.CommentReportInfoDTO;
-import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.BookPostReportType;
 import com.app.bookJeog.domain.vo.BookPostReportVO;
 import com.app.bookJeog.domain.vo.CommentReportVO;
@@ -46,4 +43,6 @@ public interface ReportService {
 
     // 독후감 신고 작성하기(기타 선택때만 추가 설명 입력)
     public void insertBookPostReport(BookPostReportDTO bookPostReportDTO);
+
+    public void insertCommentReport(CommentReportDTO commentReportDTO);
 }

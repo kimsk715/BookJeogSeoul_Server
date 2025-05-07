@@ -235,4 +235,12 @@ public class PostDAO {
     public void insertReceiverPost(ReceiverVO receiverVO){
         postMapper.insertReceiverPost(receiverVO);
     }
+
+    public void updateReceiverPost(ReceiverVO receiverVO){
+        postMapper.updateReceiverPost(receiverVO);
+    }
+
+    public void updateDonateCertPost(DonateCertVO donateCertVO){
+        postMapper.updateDonateCertPost(donateCertVO);
+    }
 }
