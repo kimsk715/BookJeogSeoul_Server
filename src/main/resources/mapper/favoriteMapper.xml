@@ -150,4 +150,10 @@
         </choose>
         limit #{offset}, 18
     </select>
+
+    <select id="countAllVoteByPostId" resultType="_int">
+        select sum(receiver_like_point)
+        from tbl_receiver_like
+        where member_id =#{memberId} and receiver_id = #{receiverId}
+    </select>
 </mapper>

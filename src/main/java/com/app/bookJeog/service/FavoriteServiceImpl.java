@@ -2,6 +2,7 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.controller.exception.UnauthenticatedException;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.dto.ReceiverLikeDTO;
 import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 import com.app.bookJeog.repository.FavoriteDAO;
 import jakarta.servlet.http.HttpSession;
@@ -113,6 +114,11 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     public void voteToReceiver(ReceiverLikeVO receiverLikeVO) {
         favoriteDAO.voteToReceiver(receiverLikeVO);
+    }
+
+    @Override
+    public int countAllVoteByPostId(ReceiverLikeDTO receiverLikeDTO) {
+        return favoriteDAO.countAllVoteByPostId(receiverLikeDTO.toVO());
     }
 
     ;
