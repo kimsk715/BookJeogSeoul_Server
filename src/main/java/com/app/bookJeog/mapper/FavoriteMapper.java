@@ -2,6 +2,7 @@ package com.app.bookJeog.mapper;
 
 import com.app.bookJeog.domain.vo.BookVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -54,5 +55,9 @@ public interface FavoriteMapper {
 
     // 내가 찜한 도서 정보
     public List<Long> selectMyScrappedBooks(Long memberId);
+
+    // 마이페이지의 스크랩 도서 전체목록(무한스크롤)
+    public List<Long> selectScrappedIsbnList(@Param("memberId") Long memberId, @Param("offset") int offset,
+                                             @Param("orderType") String orderType);
 }
 

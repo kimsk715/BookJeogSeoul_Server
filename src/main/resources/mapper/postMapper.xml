@@ -752,6 +752,53 @@
         where id = #{id}
     </update>
 
+    <!--  내가 쓴 독후감 정보 조회  -->
+    <select id="selectMyBookPosts" resultType="fileBookPostDTO">
+        SELECT
+            bp.id as bookPostId,
+            bp.book_post_title,
+            bp.book_post_text,
+            bp.book_post_is_public,
+            bp.book_isbn,
+            bp.book_title,
+            p.createdDate,
+            pm.member_nickname,
+            pm.id,
+            COUNT(bpl.id) AS likeCount,
+
+            -- 프로필 이미지
+            prf.file_path,
+            prf.file_name
+
+        FROM tbl_book_post bp
+                 JOIN tbl_post p ON bp.id = p.id
+                 LEFT JOIN tbl_book_post_like bpl ON bp.id = bpl.book_post_id
+                 JOIN tbl_personal_member pm ON p.member_id = pm.id
+
+            -- 프로필 이미지 (회원 프로필 이미지 연결)
+                 LEFT JOIN tbl_member_profile mp ON pm.id = mp.member_id
+                 LEFT JOIN tbl_file prf ON mp.id = prf.id
+
+        WHERE p.member_id = #{memberId}
+        GROUP BY
+            bp.id, bp.book_post_title, bp.book_post_text, bp.book_post_is_public,
+            bp.book_isbn, bp.book_title, bp.book_post_start_date, bp.book_post_end_date,
+            p.createdDate, pm.member_nickname, pm.id, prf.file_path, prf.file_name
+        ORDER BY
+            CASE WHEN #{sort} = 'recent' THEN p.createdDate END DESC,
+            CASE WHEN #{sort} = 'old' THEN p.createdDate END ASC,
+            CASE WHEN #{sort} = 'like' THEN likeCount END DESC
+        LIMIT 5 OFFSET #{offset};
+    </select>
+
+    <!--  독후감 삭제  -->
+    <delete id="deletePost">
+        delete from tbl_post where id = #{bookPostId}
+    </delete>
+
+    <delete id="deleteBookPost">
+        delete from tbl_book_post where id = #{bookPostId}
+    </delete>
 </mapper>
 
 

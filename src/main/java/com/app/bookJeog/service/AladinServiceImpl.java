@@ -26,9 +26,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional(rollbackFor = Exception.class)
+@Slf4j
 public class AladinServiceImpl implements AladinService {
     // 알라딘 API Key
-    private static final String ALADIN_API_KEY = "ttbkimsk7151659001";
+    private static final String ALADIN_API_KEY = "ttbsuehanh1551001";
 
     // 알라딘 API 요청 경로
     private static final String API_URL = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
@@ -83,7 +84,7 @@ public class AladinServiceImpl implements AladinService {
                 // 응답 문자열을 JSON으로 변환
                 JSONObject json = new JSONObject(result);
                 if (!json.has("item")) {
-                    log.warn("Aladin 응답에 'item' 키가 없음: {}", json);
+                    log.info("Aladin 응답에 'item' 키가 없음: {}", json);
                     return null;
                 }
 
@@ -277,6 +278,21 @@ public class AladinServiceImpl implements AladinService {
             } catch (Exception e) {
                 // 실패한 ISBN은 무시하고 계속 진행
                 continue;
+            }
+        }
+
+        return result;
+    }
+
+    // 정렬따라 isbn으로 책 정보 가져오기
+    @Override
+    public List<AladinBookDTO> getSortedBooksByIsbnList(List<Long> isbnList, String sort) {
+        List<AladinBookDTO> result = new ArrayList<>();
+
+        for (Long isbn : isbnList) {
+            AladinBookDTO book = fetchSortedBook(isbn, sort);
+            if (book != null) {
+                result.add(book);
             }
         }
 

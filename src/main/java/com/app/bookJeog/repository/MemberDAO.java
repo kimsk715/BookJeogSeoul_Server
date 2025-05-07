@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -174,5 +175,11 @@ public class MemberDAO {
 
     // 개인회원 비밀번호 변경
     public void updateMemberPassword(PersonalMemberVO personalMemberVO){memberMapper.updateMemberPassword(personalMemberVO);};
+
+    // 탈퇴전에 활동 조회
+    public Map<String, Object> findMyActivities(Long memberId){return memberMapper.selectMyActivities(memberId);};
+
+    // 개인회원 탈퇴
+    public void updateDeletedMemberStatus(Long memberId){memberMapper.updateDeletedMemberStatus(memberId);};
 }
 
