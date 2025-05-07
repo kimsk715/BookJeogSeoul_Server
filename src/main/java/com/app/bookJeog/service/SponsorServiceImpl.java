@@ -36,9 +36,11 @@ public class SponsorServiceImpl implements SponsorService {
     private final JavaMailSender javaMailSender;
     // 단체 로그인
     @Override
-    public Optional<SponsorMemberVO> loginSponsorMember(SponsorMemberDTO sponsorMemberDTO) {
-        SponsorMemberVO sponsorMemberVO = toSponsorMemberVO(sponsorMemberDTO);
-        return sponsorDAO.findSponsorMember(sponsorMemberVO);
+    public Optional<SponsorMemberDTO> loginSponsorMember(SponsorMemberDTO sponsorMemberDTO) {
+        Optional<SponsorMemberVO> sponsorMemberVO = sponsorDAO.findSponsorMember(sponsorMemberDTO.toVO());
+
+        // Optional<SponsorMemberVO> -> Optional<SponsorMemberDTO>
+        return sponsorMemberVO.map(this::toSponsorMemberDTO);
     }
 
     @Override
