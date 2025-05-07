@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.AlarmType;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.repository.AlarmDAO;
 import com.app.bookJeog.repository.MemberDAO;
@@ -44,6 +45,7 @@ public class AlarmServiceImpl implements AlarmService {
         CommentAlarmDTO commentAlarmDTO = new CommentAlarmDTO();
 
 
+        alarmDTO.setAlarmType(AlarmType.COMMENT);
         alarmDTO.setAlarmReceiverId(alarmReceiverId);
         alarmVO = insertCommentAlarm(alarmDTO);
 
@@ -67,6 +69,7 @@ public class AlarmServiceImpl implements AlarmService {
         AlarmVO alarmVO = new AlarmVO();
         AlarmDTO alarmDTO = new AlarmDTO();
 
+
         alarmDTO.setAlarmReceiverId(memberId);
         alarmVO = insertMentionAlarm(alarmDTO);
 
@@ -87,7 +90,7 @@ public class AlarmServiceImpl implements AlarmService {
         AlarmDTO alarmDTO = new AlarmDTO();
 
 
-
+        alarmDTO.setAlarmType(AlarmType.POST);
         alarmDTO.setAlarmReceiverId(memberId);
         alarmVO = toAlarmVO(alarmDTO);
 
@@ -106,7 +109,7 @@ public class AlarmServiceImpl implements AlarmService {
         AlarmDTO alarmDTO = new AlarmDTO();
 
 
-
+        alarmDTO.setAlarmType(AlarmType.FOLLOW);
         alarmDTO.setAlarmReceiverId(memberId);
         alarmVO = toAlarmVO(alarmDTO);
 
@@ -118,7 +121,6 @@ public class AlarmServiceImpl implements AlarmService {
     }
 
 
-    // 알림조회
 
 
 

@@ -30,8 +30,9 @@ public interface AlarmService {
     void followAlarm(Long memberId, FollowAlarmDTO followAlarmDTO);
 
     // 알람 조회
-
+    // 알람 읽음으로 표시
     void readAlarm(Long receiverId);
+
     int unreadAlarmCount(Long memberId);
 
 
@@ -52,6 +53,8 @@ public interface AlarmService {
                 .id(alarmDTO.getId())
                 .build();
     }
+
+
 
     public default AlarmVO toAlarmVO(AlarmDTO alarmDTO) {
         return AlarmVO.builder()
