@@ -27,5 +27,15 @@ public interface FileMapper {
 
     public void insertReceiverFile(ReceiverFileVO receiverFileVO);
 
+    public FileVO selectReceiverFileByPostId(Long postId);
+
+    public List<FileVO> selectReceiverFilesByPostId(Long postId);
+
     public void insertSponsorInquiryFile(SponsorInquiryFileVO sponsorInquiryFileVO);
+
+    public void deleteFile(Long fileId);
+
+    public void deleteReceiverFileByPostId(Long postId);
+
+    public void deleteDonateCertFileByPostId(Long postId);
 }

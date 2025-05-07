@@ -27,5 +27,5 @@ public class CustomBotController {
         return customBotService.getDiscussionTopics(isbn);
     }
 
-//    http://localhost:10000/bot/chat?isbnList=9788936433598&isbnList=9788954682237 출력 예시
+//    http://localhost:10000/bot/chat?isbn=9788936433598 출력 예시
 }

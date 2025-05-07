@@ -229,6 +229,10 @@ public class PostServiceImpl implements PostService {
             receiverPostDTO.setLikeScore(favoriteDAO.receiverVote(receiverVO.getId()));
             receiverPostDTO.setReceiverText(receiverVO.getReceiverText());
             receiverPostDTO.setReceiverTitle(receiverVO.getReceiverTitle());
+            if(fileDAO.findReceiverFileByPostId(receiverVO.getId()) != null) {
+                receiverPostDTO.setReceiverFilePath(fileDAO.findReceiverFileByPostId(receiverVO.getId()).getFilePath());
+                receiverPostDTO.setReceiverFileName(fileDAO.findReceiverFileByPostId(receiverVO.getId()).getFileName());
+            }
             receiverPostDTOList.add(receiverPostDTO);
         }
 //        log.info(receiverPostDTOList.toString());
@@ -400,5 +404,22 @@ public class PostServiceImpl implements PostService {
     public void setDonateCertPost(DonateCertVO donateCertVO) {
         postDAO.insertDonateCertPost(donateCertVO);
     }
+
+    @Override
+    public void setReceiverPost(ReceiverVO receiverVO) {
+        postDAO.insertReceiverPost(receiverVO);
+    }
+
+    @Override
+    public void updateReceiverPost(ReceiverDTO receiverDTO) {
+        postDAO.updateReceiverPost(receiverDTO.toVO());
+    }
+
+    @Override
+    public void updateDonateCertPost(DonateCertDTO donateCertDTO) {
+        postDAO.updateDonateCertPost(donateCertDTO.toVO());
+    }
+
+
 }
 

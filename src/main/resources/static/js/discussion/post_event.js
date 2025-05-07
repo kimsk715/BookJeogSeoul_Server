@@ -69,7 +69,9 @@ const commentLayout =(() =>{
     const addedLayout = async(commentText, mentionedName) =>{
         const addedComment = document.createElement('li');
         addedComment.classList.add("comment-item");
-        addedComment.innerHTML = `
+        let name = (member !== null) ? member.memberName : sponsorMember.sponsorName;
+        if(mentionedName != null){
+            addedComment.innerHTML = `
                                 <div class="comment-item-inner flex-container">
                                     <div class="user-img" style="
                                                 background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
@@ -80,7 +82,7 @@ const commentLayout =(() =>{
                                         <div class="com-contents-head">
                                             <div class="com-contents-top flex-container">
                                                 <p class="nickname">
-                                                    <a href="#">${member.memberName}</a>
+                                                    <a href="#">${name}</a>
                                                 </p>
                                             </div>
                                             <span class="com-contents-date">2025-04-28 11:35:49</span>
@@ -107,6 +109,47 @@ const commentLayout =(() =>{
                                     </div>
                                 </div>                   
         `;
+        }
+        else{
+            addedComment.innerHTML = `
+                                <div class="comment-item-inner flex-container">
+                                    <div class="user-img" style="
+                                                background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
+                                            ">
+                                        <a href="#"></a>
+                                    </div>
+                                    <div class="com-contents">
+                                        <div class="com-contents-head">
+                                            <div class="com-contents-top flex-container">
+                                                <p class="nickname">
+                                                    <a href="#">${name}</a>
+                                                </p>
+                                            </div>
+                                            <span class="com-contents-date">2025-04-28 11:35:49</span>
+                                        </div>
+                                        <div class="com-contents-body">
+                                        
+                                            <p class="comment-text show">${commentText}</p>
+                                            <div class="comment-text">
+                                                <p contenteditable="plaintext-only">${commentText}</p>
+                                                <button type="button" class="mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
+                                                    <span>등록</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="reply-setting">
+                                            <button type="button" class="more-btn">
+                                                <img src="https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/more-icon.df2e02aec2252c2847fbe9e490cd4354.png" alt="더보기">
+                                            </button>
+                                            <div class="more-area" style="display: none;">
+                                                <button type="button">답글달기</button>
+                                                <button type="button">신고하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                   
+        `;
+        }
         commentWrapper.prepend(addedComment);
     }
     return { addedLayout : addedLayout}
@@ -198,3 +241,58 @@ moreButton.forEach((button) => {
     })
 })
 
+const commentReportButton = document.querySelectorAll(".comment-report")
+const reportPopup = document.querySelector(".popup.alert")
+commentReportButton.forEach((button) => {
+    button.addEventListener('click',(e) => {
+        reportPopup.removeAttribute("style")
+    })
+})
+
+const reportConfirmButton = document.querySelector(".btn-review-police")
+document.addEventListener("change",()=>{
+    const reportType = document.querySelector(".report-list input[type=radio]:checked")
+    if(reportType){
+        reportConfirmButton.removeAttribute("disabled")
+    }
+    else{
+        reportConfirmButton.disabled = "disabled"
+    }
+})
+
+const reportCancelButton = document.querySelector(".police-cancel")
+reportCancelButton.addEventListener('click',() =>{
+    reportPopup.style.display = "none"
+})
+
+reportConfirmButton.addEventListener("click",(e) => {
+    let reportNum = parseInt(document.querySelector("input[type=radio]:checked").value);
+    let reportType = "";
+    switch (reportNum){
+        case 1:
+            reportType = "ABUSE";
+            break;
+        case 2:
+            reportType = "SEXUAL";
+            break;
+        case 3:
+            reportType = "SPAM";
+            break;
+        case 4:
+            reportType = "SPOILER";
+            break;
+        case 0:
+            reportType = "ETC";
+            break;
+    }
+    console.log(reportType)
+    reportService.reportComment(reportType)
+})
+
+const reportService = (() => {
+    const reportComment = async(reportType) => {
+        let path = `/report-comment?commentId=${postId}&reportType=${reportType}`;
+        await fetch(path);
+    }
+    return {reportComment: reportComment}
+})();

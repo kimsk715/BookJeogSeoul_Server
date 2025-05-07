@@ -22,7 +22,7 @@ Posts.forEach( post => {
                                     <div class="post"><a href="/post/receiver/post/${post.id}"
                                             class="box post-image gtm-feed-recommend-post-tem-detail">
                                             <div class="img-wrap"><img
-                                                    src="${post.filePath}" alt="이미지를 찾을 수 없습니다.">
+                                                    src="/image/${post.receiverFilePath}/${post.receiverFileName}" alt="이미지를 찾을 수 없습니다.">
                                             </div>
                                         </a>
                                         <div class="metadata"><a href=""
@@ -33,7 +33,7 @@ Posts.forEach( post => {
                                     </div>
                                     <div class="bottom"><button type="button" class="btn comment"><i
                                                 class="mds-icon--comment"></i> <span class="label">댓글</span> <span
-                                                class="value">1</span></button> <button type="button"
+                                                class="value">${post.commentCount}</span></button> <button type="button"
                                             class="btn like"><i class="mds-icon--clip"></i> <span
                                                 class="label">책갈피</span> <span class="value">${post.likeScore}</span></button></div>
                                 </div>

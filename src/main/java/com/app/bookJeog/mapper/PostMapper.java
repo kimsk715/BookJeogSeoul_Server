@@ -141,5 +141,10 @@ public interface PostMapper {
 
     public void insertDonateCertPost(DonateCertVO donateCertVO);
 
+    public void insertReceiverPost(ReceiverVO receiverVO);
+
+    public void updateReceiverPost(ReceiverVO receiverVO);
+
+    public void updateDonateCertPost(DonateCertVO donateCertVO);
 }
 
