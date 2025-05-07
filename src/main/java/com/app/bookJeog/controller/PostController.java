@@ -173,18 +173,40 @@ public class PostController {
 
     @PostMapping("bookpost/write")
     public String writeBookPost(@ModelAttribute("post") FileBookPostDTO fileBookPostDTO,
-                                @RequestParam("file") List<MultipartFile> files, RedirectAttributes redirectAttributes) {
+                                @RequestParam("file") List<MultipartFile> files, RedirectAttributes redirectAttributes,
+                                HttpSession session) {
+        fileBookPostDTO.setMemberId(((PersonalMemberDTO)session.getAttribute("member")).getId());
         Long newBookPostId = postService.write(fileBookPostDTO, files);
         redirectAttributes.addFlashAttribute("message", "독후감 작성 완료!");
         return "redirect:/post/bookpost/" + newBookPostId;
     }
 
     // 독후감 수정
-    @GetMapping("bookpost/edit")
-    public String goToBookPostEdit() {
+    @GetMapping("bookpost/edit/{bookPostId}")
+    public String goToBookPostEdit(@PathVariable Long bookPostId, Model model, HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO)session.getAttribute("member");
+        if(member == null) {
+            return "redirect:/personal/login";
+        }
+        // 독후감 정보
+        FileBookPostDTO fileBookPostDTO = postService.findWrittenBookPost(bookPostId);
+        log.info("fileBookPostDTO = {}", fileBookPostDTO);
+
+        // 첨부파일 목록
+        List<BookPostFileDTO> fileList = postService.findWrittenBookPostFiles(bookPostId);
+        fileBookPostDTO.setFileList(fileList);
+
+        model.addAttribute("fileBookPostDTO", fileBookPostDTO);
         return "post/post-update";
     }
 
+    @PostMapping("bookpost/edit")
+    public String editBookPost(@ModelAttribute FileBookPostDTO fileBookPostDTO,
+                               @RequestParam(value = "deleteFileIds", required = false)List<Long> deletedFileIds) {
+        log.info("📥 DTO 값 확인: " + fileBookPostDTO);
+        postService.setBookPost(fileBookPostDTO, deletedFileIds);
+        return "redirect:/post/bookpost/" + fileBookPostDTO.getBookPostId(); // 수정 후 상세페이지로
+    }
 
     // 후원 인증 게시판
     @GetMapping("donate")

@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.FileDTO;
+import com.app.bookJeog.domain.vo.BookPostFileVO;
 import com.app.bookJeog.domain.vo.FileVO;
 import com.app.bookJeog.domain.vo.ReceiverFileVO;
 import net.coobird.thumbnailator.Thumbnailator;

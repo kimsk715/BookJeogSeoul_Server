@@ -3,10 +3,7 @@ package com.app.bookJeog.repository;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.PersonalMemberPostMemberProfileDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
-import com.app.bookJeog.domain.vo.AdminVO;
-import com.app.bookJeog.domain.vo.MemberVO;
-import com.app.bookJeog.domain.vo.PersonalMemberVO;
-import com.app.bookJeog.domain.vo.SponsorMemberVO;
+import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -141,5 +138,41 @@ public class MemberDAO {
     public List<PersonalMemberPostMemberProfileDTO> findMemberInfoWithThumbnail(){
         return memberMapper.selectMemberInfoWithThumbnail();
     }
+
+    // 내가 쓴 전체 독후감 개수 조회
+    public int findMyBookPostCount(Long memberId){return memberMapper.selectMyBookPostCount(memberId);};
+
+    // 내 이번 달 쓴 독후감 수
+    public int findMyMonthlyBookPostCount(Long memberId){return memberMapper.selectMyMonthlyBookPostCount(memberId);};
+
+    // 이번 달 독후감 쓴 회원들의 평균 독후감
+    public int findAverageBookPostCount(){return memberMapper.selectAverageBookPostCount();};
+
+    // 내 마일리지 조회
+    public int findMyMileage(Long memberId) {return memberMapper.selectMyMileage(memberId);};
+
+    // 내 프로필 이미지 조회
+    public FileVO findMyProfile(Long memberId){return memberMapper.selectMyProfile(memberId);};
+
+    // 비밀번호 유효성검사
+    public boolean checkPassword(Long memberId, String password){return memberMapper.checkPassword(memberId, password);};
+
+    // 회원 프사 조회, 삭제, 변경
+    public Long selectProfileFileId(Long memberId){return memberMapper.selectProfileFileId(memberId);};
+
+    public void updateMemberFile(FileVO fileVO){memberMapper.updateMemberFile(fileVO);};
+
+    public void deleteMemberFile(Long id){memberMapper.deleteMemberFile(id);};
+    public void deleteMemberProfile(Long memberId){memberMapper.deleteMemberProfile(memberId);};
+
+    // 프사 만들기
+    public void insertProfileFile(FileVO fileVO){memberMapper.insertProfileFile(fileVO);};
+    public void insertMemberProfile(MemberProfileVO memberProfileVO){memberMapper.insertMemberProfile(memberProfileVO);};
+
+    // 개인회원 닉네임 변경
+    public void updateNickname(PersonalMemberVO personalMemberVO){memberMapper.updateNickname(personalMemberVO);};
+
+    // 개인회원 비밀번호 변경
+    public void updateMemberPassword(PersonalMemberVO personalMemberVO){memberMapper.updateMemberPassword(personalMemberVO);};
 }
 

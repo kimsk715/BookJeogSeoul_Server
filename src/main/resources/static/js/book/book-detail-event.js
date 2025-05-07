@@ -37,6 +37,9 @@ window.addEventListener("load", async () => {
         const isScrapped = await bookDetailService.checkBookScrap();
         updateScrapButtonUI(isScrapped);
 
+        // ai 추천도서 혹은 인기도서
+        await bookDetailService.getRecommendedBooks();
+
     } catch (error) {
         console.error("상세 페이지 로딩 중 오류 발생:", error);
     } finally {

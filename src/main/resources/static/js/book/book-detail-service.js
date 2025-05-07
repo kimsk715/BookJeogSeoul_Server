@@ -194,5 +194,60 @@ const bookDetailService = (() => {
         }
     };
 
-    return { getScrapCount : getScrapCount , addBookScrap : addBookScrap, deleteBookScrap : deleteBookScrap, getAuthorBooks : getAuthorBooks, getThisBookPosts : getThisBookPosts, getThisBookPostsCount : getThisBookPostsCount, checkBookScrap : checkBookScrap, saveBookHistory : saveBookHistory};
+    // 추천 도서 받기(알라딘 인기순 or ai추천)
+    const getRecommendedBooks = async () => {
+        try {
+            // 서버에서 추천용 데이터 요청
+            const springRes = await fetch("/book/recommend", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json;charset=utf-8"
+                }
+            });
+
+            const springData = await springRes.json();
+
+            // 로그인 정보나 기록이 없다면
+            if (springData.type === "bestseller") {
+                bookDetailLayout.showRecommendedBooks(springData.books, "bestseller");
+                return;
+            }
+            // 기록이 있다면(ai 요청)
+            if (springData.type === "ai") {
+                const { target, feature } = springData;
+                const AI_RECOMMEND_API = "http://localhost:8000/recommend";
+
+                // FastAPI 서버에 AI 추천 요청
+                const aiRes = await fetch(AI_RECOMMEND_API, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ target, feature })
+                });
+
+                const aiData = await aiRes.json();
+                const isbnList = aiData.recommendedBookIsbns;
+
+                // 3단계: 추천 ISBN 리스트로 개별 도서 상세 정보 가져오기
+                const books = await Promise.all(
+                    isbnList.map(isbn =>
+                        fetch(`/book/api/${isbn}`)
+                            .then(res => res.json())
+                            .catch(() => null) // 개별 실패 무시
+                    )
+                );
+
+                // 렌더링
+                bookDetailLayout.showRecommendedBooks(books.filter(book => book !== null, "ai"));
+            }
+        } catch (error) {
+            console.error("AI 추천 도서 fetch 에러:", error);
+        }
+    };
+
+    return { getScrapCount : getScrapCount , addBookScrap : addBookScrap, deleteBookScrap : deleteBookScrap,
+        getAuthorBooks : getAuthorBooks, getThisBookPosts : getThisBookPosts,
+        getThisBookPostsCount : getThisBookPostsCount, checkBookScrap : checkBookScrap,
+        saveBookHistory : saveBookHistory, getRecommendedBooks : getRecommendedBooks };
 })();
