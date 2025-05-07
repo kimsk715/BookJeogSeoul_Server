@@ -2,12 +2,15 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.controller.exception.UnauthenticatedException;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
+import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 import com.app.bookJeog.repository.FavoriteDAO;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -101,4 +104,16 @@ public class FavoriteServiceImpl implements FavoriteService {
     public int countBookPostLike(Long bookPostId){
         return favoriteDAO.countBookPostLike(bookPostId);
     };
+
+    // 마이페이지의 스크랩 도서 전체목록(무한스크롤)
+    public List<Long> getScrappedIsbnList(Long memberId, int offset, String orderType) {
+        return favoriteDAO.selectScrappedIsbnList(memberId, offset, orderType);
+    }
+
+    @Override
+    public void voteToReceiver(ReceiverLikeVO receiverLikeVO) {
+        favoriteDAO.voteToReceiver(receiverLikeVO);
+    }
+
+    ;
 }

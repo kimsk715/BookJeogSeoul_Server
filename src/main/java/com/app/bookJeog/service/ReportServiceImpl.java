@@ -22,9 +22,9 @@ public class ReportServiceImpl implements ReportService {
     private final ReportDAO reportDAO;
     private final MemberDAO memberDAO;
     private final PostDAO postDAO;
-    private final BookService bookService; // api가 서비스 계층에 있어서 어쩔 수 없이 서비스 계층 가져다 씀.
+
     private final CommentDAO commentDAO;
-    private final PostService postService;
+    private final BookService bookService;
 
 
     @Override
@@ -42,6 +42,7 @@ public class ReportServiceImpl implements ReportService {
                 bookPostReportInfoDTO.setMemberName(memberDAO.findSponsorMemberById(report.getBookPostReporterId()).getSponsorName());
             }
             bookPostReportInfoDTO.setBookPostTitle(postDAO.findBookPostById(report.getBookPostId()).getBookPostTitle());
+            bookPostReportInfoDTO.setBookTitle(postDAO.findBookPostById(report.getBookPostId()).getBookTitle());
             bookPostReportInfoDTOList.add(bookPostReportInfoDTO);
         }
         return bookPostReportInfoDTOList;

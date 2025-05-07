@@ -1291,9 +1291,9 @@ em {
     align-items: flex-start;
     display: flex;
 }
-.book-shelf {
-    margin: 12px -24px 0;
-}
+/*.book-shelf {*/
+/*    margin: 12px -24px 0;*/
+/*}*/
 .sgst-book-container {
     overflow: hidden;
     cursor: grab;

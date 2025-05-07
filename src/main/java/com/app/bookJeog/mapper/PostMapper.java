@@ -159,5 +159,12 @@ public interface PostMapper {
     public void updateReceiverPost(ReceiverVO receiverVO);
 
     public void updateDonateCertPost(DonateCertVO donateCertVO);
+
+    // 내가 쓴 독후감 정보 조회
+    public List<FileBookPostDTO> selectMyBookPosts(@Param("memberId") Long memberId, @Param("sort") String sort, @Param("offset") int offset);
+
+    // 독후감 삭제
+    public void deletePost(Long bookPostId);
+    public void deleteBookPost(Long bookPostId);
 }
 

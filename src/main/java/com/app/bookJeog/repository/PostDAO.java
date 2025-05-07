@@ -13,6 +13,7 @@ import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.mapper.PostMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -255,4 +256,13 @@ public class PostDAO {
     public void updateDonateCertPost(DonateCertVO donateCertVO){
         postMapper.updateDonateCertPost(donateCertVO);
     }
+
+    // 내가 쓴 독후감 정보 조회
+    public List<FileBookPostDTO> findMyBookPosts(@Param("memberId") Long memberId, @Param("sort") String sort, @Param("offset") int offset){
+        return postMapper.selectMyBookPosts(memberId, sort, offset);
+    };
+
+    // 독후감 삭제
+    public void deletePost(Long bookPostId){postMapper.deletePost(bookPostId);};
+    public void deleteBookPost(Long bookPostId){postMapper.deleteBookPost(bookPostId);};
 }

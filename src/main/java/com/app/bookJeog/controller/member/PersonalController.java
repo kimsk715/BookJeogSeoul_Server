@@ -1,8 +1,12 @@
 package com.app.bookJeog.controller.member;
 
+import com.app.bookJeog.domain.dto.AladinBookDTO;
+import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.app.bookJeog.domain.dto.MemberPersonalMemberDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
+import com.app.bookJeog.service.AladinService;
+import com.app.bookJeog.service.FavoriteService;
 import com.app.bookJeog.service.MemberService;
 import com.app.bookJeog.service.MemberServiceImpl;
 import jakarta.mail.MessagingException;
@@ -22,6 +26,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,6 +43,8 @@ public class PersonalController {
     private final PersonalMemberDTO personalMemberDTO;
     private final HttpServletResponse response;
     private final HttpServletRequest request;
+    private final FavoriteService favoriteService;
+    private final AladinService aladinService;
 
     // 개인 마이페이지 조회
     @GetMapping("mypage")
@@ -121,20 +129,65 @@ public class PersonalController {
         return ResponseEntity.ok("비밀번호가 변경되었습니다.");
     }
 
+    // 개인 마이페이지 - 관리 메뉴
+    @GetMapping("mypage/settings")
+    public String settings(HttpSession session, Model model) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return "redirect:/personal/login";
+        }
+        return "member/member-menu";
+    }
+
 
     // 개인 마이페이지 - 내 스크랩(도서 찜)
     @GetMapping("mypage/scrap")
-    public String gotoMemberScrap() {
+    public String gotoMemberScrap(HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return "redirect:/personal/login";
+        }
+
         return "member/scrap-mypage";
     }
 
 
-    // 개인 마이페이지 - 내 독후감
-    @GetMapping("mypage/book-post")
-    public String gotoMemberBookPost() {
-        return "member/my-post";
+    // 내 스크랩 데이터
+    @GetMapping("/sorted-books")
+    @ResponseBody
+    public Map<String, Object> getScrappedBooks(
+            @RequestParam("offset") int offset,
+            @RequestParam("sort") String sort,
+            HttpSession session) {
+
+        Long memberId = ((PersonalMemberDTO) session.getAttribute("member")).getId();
+        String orderType = "created-at".equals(sort) ? "latest" : "scrap";
+
+        List<Long> isbnList = favoriteService.getScrappedIsbnList(memberId, offset, orderType);
+
+        List<AladinBookDTO> books = "created-at".equals(sort)
+                ? aladinService.getBooksByIsbnList(isbnList)
+                : aladinService.getSortedBooksByIsbnList(isbnList, sort);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("books", books);
+        response.put("hasMore", isbnList.size() == 18);
+
+        return response;
     }
 
+    // 개인 마이페이지 - 내 독후감
+    @GetMapping("mypage/book-post")
+    public String gotoMemberBookPost(HttpSession session, Model model) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return "redirect:/personal/login";
+        }
+        Long memberId = member.getId();
+        int postCount = memberService.findMyBookPostCount(memberId);
+        model.addAttribute("postCount", postCount);
+        return "member/my-post";
+    }
 
     // 개인 마이페이지 - 프로필 수정
     @GetMapping("mypage/profile")
@@ -203,10 +256,39 @@ public class PersonalController {
 
     // 개인 회원탈퇴
     @GetMapping("leave")
-    public String gotoMemberLeave() {
+    public String gotoMemberLeave(HttpSession session, Model model) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return "redirect:/personal/login";
+        }
+        Long memberId = member.getId();
+
+        // 회원 정보 조회
+        Map<String, Object> memberInfo = memberService.findMyActivities(memberId);
+
+        // Map 생성
+        memberInfo.put("memberId", memberId);
+        memberInfo.put("nickname", member.getMemberNickName());
+
+        // Model에 추가
+        log.info("memberInfo: " + memberInfo);
+        model.addAttribute("memberInfo", memberInfo);
         return "member/leave-member";
     }
 
+    @PostMapping("/leave/confirm")
+    public String leaveMember(@RequestParam("memberId") Long memberId, HttpSession session, RedirectAttributes redirectAttributes) {
+        // 회원 상태 업데이트 (탈퇴 처리)
+        memberService.updateDeletedMemberStatus(memberId);
+
+        // 세션 무효화
+        session.invalidate();
+
+        // Flash Attribute로 메시지 전달
+        redirectAttributes.addFlashAttribute("message", "탈퇴가 완료되었습니다.");
+
+        return "redirect:/";
+    }
 
     // 개인 회원탈퇴 - 탈퇴사유 입력
     @GetMapping("leave/reason")
@@ -372,7 +454,15 @@ public class PersonalController {
         return "redirect:/personal/login";
     };
 
-    // 내 프사
+
+    @GetMapping("logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("member");
+        session.removeAttribute("sponsorMember");
+
+        return "redirect:/personal/login";
+    }
+// 내 프사
     @GetMapping("profile")
     @ResponseBody
     public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,

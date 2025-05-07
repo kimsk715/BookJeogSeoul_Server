@@ -643,4 +643,13 @@ public class MemberServiceImpl implements MemberService {
     public void updateMemberPassword(PersonalMemberVO personalMemberVO){
         memberMapper.updateMemberPassword(personalMemberVO);
     };
+
+    // 탈퇴전에 활동 조회
+    public Map<String, Object> findMyActivities(Long memberId){return memberDAO.findMyActivities(memberId);};
+
+    // 개인회원 탈퇴
+    public void updateDeletedMemberStatus(Long memberId){memberDAO.updateDeletedMemberStatus(memberId);};
+
+    // 내가 쓴 전체 독후감 개수 조회
+    public int findMyBookPostCount(Long memberId){return memberDAO.findMyBookPostCount(memberId);};
 }

@@ -2,8 +2,10 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.AladinBookDTO;
 import com.app.bookJeog.domain.dto.FileBookPostDTO;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Map;
@@ -35,4 +37,45 @@ public interface AladinService {
 
     // 여러개의 도서 정보를 isbn으로 가져와 List로 반환
     public List<AladinBookDTO> getBooksByIsbnList(List<Long> isbnList);
+
+    // ISBN 리스트로 도서 정보를 정렬하여 조회
+    default AladinBookDTO fetchSortedBook(Long isbn, String sort) {
+        String baseUrl = "https://www.aladin.co.kr/ttb/api/ItemLookUp.aspx";
+        String ttbkey = "YOUR_ALADIN_TTB_KEY";
+
+        StringBuilder urlBuilder = new StringBuilder(baseUrl);
+        urlBuilder.append("?ttbkey=").append(ttbkey)
+                .append("&itemIdType=ISBN&ItemId=").append(isbn)
+                .append("&output=js");
+
+        if (sort != null && !sort.equals("default")) {
+            urlBuilder.append("&sort=").append(sort);
+        }
+
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            String response = restTemplate.getForObject(urlBuilder.toString(), String.class);
+
+            JSONObject json = new JSONObject(response);
+            JSONArray items = json.optJSONArray("item");
+
+            if (items != null && items.length() > 0) {
+                JSONObject item = items.getJSONObject(0);
+                AladinBookDTO dto = new AladinBookDTO();
+                dto.setBookIsbn(isbn);
+                dto.setBookTitle(item.optString("title"));
+                dto.setBookAuthor(item.optString("author"));
+                dto.setBookPublisher(item.optString("publisher"));
+                dto.setBookCover(item.optString("cover"));
+                return dto;
+            }
+
+        } catch (Exception e) {
+            System.err.println("Failed to fetch book for ISBN: " + isbn);
+        }
+
+        return null;
+    }
+
+    List<AladinBookDTO> getSortedBooksByIsbnList(List<Long> isbnList, String sort);
 }

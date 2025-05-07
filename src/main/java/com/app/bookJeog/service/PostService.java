@@ -145,6 +145,12 @@ public interface PostService {
 
     public void updateDonateCertPost(DonateCertDTO donateCertDTO);
 
+    // 내가 작성한 독후감 조회
+    List<FileBookPostDTO> getMyBookPosts(Long memberId, String sort, int offset);
+
+    // 독후감 삭제
+    public void deleteBookPost(Long bookPostId);
+
     public String getPostType(Long postId);
 }
 
