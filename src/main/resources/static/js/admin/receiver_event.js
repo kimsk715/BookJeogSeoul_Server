@@ -27,10 +27,11 @@ const receiverChooseButton = document.querySelector(".receiver-choose-btn");
 receiverChooseButton.addEventListener("click", (e) => {
     if (
         confirm(
-            "후원대상을 선정 및 확정하시겠습니까? 해당 단체에 선정 결과를 이메일로 안내하게 됩니다."
+            "후원대상을 선정 및 확정하시겠습니까?"
         )
     ) {
         receiverService.chooseTopReceiver();
+        alert("해당 단체에 안내해주시기 바랍니다!")
     } else {
         e.preventDefault();
     }

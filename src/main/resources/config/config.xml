@@ -59,5 +59,6 @@
         <typeHandler handler="com.app.bookJeog.mybatis.BookReceivedStatusHandler"/>
         <typeHandler handler="com.app.bookJeog.mybatis.ReceiverStatusHandler"/>
         <typeHandler handler="com.app.bookJeog.mybatis.AdminMemberStatusHandler"/>
+        <typeHandler handler="com.app.bookJeog.mybatis.CommentReportTypeHandler"/>
     </typeHandlers>
 </configuration>

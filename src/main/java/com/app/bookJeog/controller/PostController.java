@@ -6,6 +6,7 @@ import com.app.bookJeog.domain.enumeration.MemberType;
 import com.app.bookJeog.domain.enumeration.PostType;
 import com.app.bookJeog.domain.vo.CommentVO;
 import com.app.bookJeog.domain.vo.PostVO;
+import com.app.bookJeog.domain.vo.ReceiverLikeVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.service.*;
 import com.app.bookJeog.controller.exception.UnauthenticatedException;
@@ -43,7 +44,11 @@ public class PostController {
     private final CommentService commentService;
     private final MemberService memberService;
     private final FIleService fileService;
+
+    private final FavoriteService favoriteService;
+
     private final AlarmService alarmService;
+
 
     // 토론게시판 이동
     @GetMapping("discussion")
@@ -242,8 +247,6 @@ public class PostController {
         }
         model.addAttribute("files", postFiles);
         model.addAttribute("thumbNail", fileService.getDonateCertFileByPostId(postId));
-
-
         model.addAttribute("DonateCert",postService.getDonateCertById(postId));
         model.addAttribute("member", session.getAttribute("member"));
         model.addAttribute("sponsorMember", session.getAttribute("sponsorMember"));
@@ -421,7 +424,7 @@ public class PostController {
             fileDTO.setId((long) i+1);
         }
         model.addAttribute("files", postFiles);
-
+        model.addAttribute("postId", postId );
         model.addAttribute("member", session.getAttribute("member"));
         model.addAttribute("sponsorMember", session.getAttribute("sponsorMember"));
         List<CommentInfoDTO> commentList = new ArrayList<>();
@@ -467,7 +470,20 @@ public class PostController {
         }
 
         model.addAttribute("mentions", mentionList);
+
+
         return "donation/receiver_post";
+    }
+
+    @GetMapping("receiver/vote")
+    @ResponseBody
+    public void voteToReceiver(@RequestParam int point, Model model,HttpSession session) {
+        PersonalMemberDTO foundMember = (PersonalMemberDTO) session.getAttribute("member");
+        ReceiverLikeDTO receiverLikeDTO = new ReceiverLikeDTO();
+        receiverLikeDTO.setMemberId(foundMember.getId());
+        receiverLikeDTO.setReceiverLikePoint(point);
+        receiverLikeDTO.setReceiverId((Long) model.getAttribute("postId"));
+        favoriteService.voteToReceiver(receiverLikeDTO.toVO());
     }
 
 

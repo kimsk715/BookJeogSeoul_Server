@@ -66,7 +66,11 @@ bookMarkInput.addEventListener('input',() =>{
         bookMarkInput.value = 1000
     }
 })
-
+const applyButton = document.querySelector(".apply");
+applyButton.addEventListener("click", async () => {
+    let point = document.querySelector(".dialog-content").value;
+    await fetch(`/post/receiver/vote?point=${point}`);
+})
 
 const imageModal = document.querySelector(".full-image")
 const thumbnailWrappers = document.querySelectorAll(".list li")
@@ -107,7 +111,15 @@ moreButton.forEach((button) => {
 })
 
 //  신고 모달
-
+let commentId = "";
+const commentReportButton = document.querySelectorAll(".comment-report")
+commentReportButton.forEach((button) => {
+    button.addEventListener('click',(e) => {
+        commentId = button.value;
+        reportPopup.removeAttribute("style")
+        console.log(commentId)
+    })
+})
 
 const reportConfirmButton = document.querySelector(".btn-review-police")
 document.addEventListener("change",()=>{
@@ -124,6 +136,39 @@ const reportCancelButton = document.querySelector(".police-cancel")
 reportCancelButton.addEventListener('click',() =>{
     reportPopup.style.display = "none"
 })
+
+reportConfirmButton.addEventListener("click",(e) => {
+    let reportNum = parseInt(document.querySelector("input[type=radio]:checked").value);
+    let reportType = "";
+    switch (reportNum){
+        case 1:
+            reportType = "ABUSE";
+            break;
+        case 2:
+            reportType = "SEXUAL";
+            break;
+        case 3:
+            reportType = "SPAM";
+            break;
+        case 4:
+            reportType = "SPOILER";
+            break;
+        case 0:
+            reportType = "ETC";
+            break;
+    }
+    console.log(reportType)
+    reportPopup.style.display = "none"
+    reportService.reportComment(commentId, reportType)
+})
+
+const reportService = (() => {
+    const reportComment = async(commentId, reportType) => {
+        let path = `/report-comment?commentId=${commentId}&reportType=${reportType}`;
+        await fetch(path);
+    }
+    return {reportComment: reportComment}
+})();
 
 const addComment = document.querySelector(".post-btn");
 const commentArea = document.querySelector(".register-box-inner textarea");

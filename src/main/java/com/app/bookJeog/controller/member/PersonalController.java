@@ -361,7 +361,15 @@ public class PersonalController {
         return "redirect:/personal/login";
     };
 
-    // 내 프사
+
+    @GetMapping("logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("member");
+        session.removeAttribute("sponsorMember");
+
+        return "redirect:/personal/login";
+    }
+// 내 프사
     @GetMapping("profile")
     @ResponseBody
     public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,
