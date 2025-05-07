@@ -1,3 +1,5 @@
+
+
 const reportButton = document.querySelector(".more-item");
 const reportModal = document.querySelector(".more-ul");
 const reportModalOpenButton = reportModal.querySelector("a")
@@ -193,28 +195,9 @@ const commentService = (() =>{
         }
     }
 
-    const checkComment = async (content) => {
-        try {
-            const response = await fetch('http://localhost:8000/api/reply-check', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ content })
-            });
 
-            const result = await response.json();
-            console.log(result); //  isBadWord: true
 
-            // 비속어가 없으면 true 반환, 있으면 false
-            return result.isBadWord;
-        } catch (error) {
-            console.error('댓글 검사 실패', error);
-            return false;
-        }
-    };
-
-    return {addComment : addComment, checkComment:checkComment}
+    return {addComment : addComment}
 })();
 
 const commentLayout =(() =>{

@@ -559,3 +559,7 @@ from tbl_alarm a
          join tbl_follow f on f.follow_receiver_id = p.member_id
 WHERE a.alarm_receiver_id = 11;
 
+
+select *
+from tbl_post p join tbl_comment c
+on p.id = c.post_id and p.member_id = #{memberId}

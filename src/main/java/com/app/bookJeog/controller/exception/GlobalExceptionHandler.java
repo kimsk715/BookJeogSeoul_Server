@@ -13,10 +13,17 @@ public class GlobalExceptionHandler {
     
     // 로그인 안 했는데 회원 서비스를 시도할 때
 
+    @ExceptionHandler(MemberLoginFailException.class)
+    protected String memberLoginFail(MemberLoginFailException e) {
+        log.error(e.getMessage());
+        return "redirect:/personal/login?result=fail";
+    }
+
+
     @ExceptionHandler(LoginFailException.class)
     protected String loginFail(LoginFailException e) {
         log.error(e.getMessage());
-        return "/login/login?result=fail";
+        return "redirect:/sponsor/login/sponsorship?result=fail";
     }
 
     @ExceptionHandler(UnauthenticatedException.class)

@@ -53,6 +53,15 @@ public class PersonalController {
         return "member/mypage";
     }
 
+
+    // 로그아웃
+    @PostMapping("logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/personal/login";
+    }
+
+
     // 프사 생성 또는 수정
     @PostMapping("/upload-profile")
     @ResponseBody
@@ -221,7 +230,9 @@ public class PersonalController {
         PersonalMemberDTO foundMember = memberServiceImpl.loginPersonalMember(personalMemberDTO);
 
         if(foundMember != null) {
+            log.info("여기들어옴");
             session.setAttribute("member", foundMember);
+            log.info("여기까지 들어옴");
             return "redirect:/main/main";
         } else {
             return "redirect:/personal/login?result=fail";

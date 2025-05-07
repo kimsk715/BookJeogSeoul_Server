@@ -1,19 +1,19 @@
 package com.app.bookJeog.domain.dto;
 
-import lombok.EqualsAndHashCode;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 @Component
+@ToString
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class AlarmCommentAlarmDTO {
-    @EqualsAndHashCode.Include
-    private Long id;
-    private Long postId;
+@NoArgsConstructor
+
+public class CommentAlarmInfoDTO {
+    private String commentPath;
     private String memberNickname;
 }
