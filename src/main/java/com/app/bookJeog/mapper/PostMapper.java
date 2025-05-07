@@ -24,6 +24,10 @@ public interface PostMapper {
 
     public int countAllDiscussionPost(Pagination pagination);
 
+    // 게시물 id 로 memberId 조회
+    public PostVO selectMemberIdByPostId(Long postId);
+
+
     //   이 책으로 작성한 독후감 일부 조회
     public ArrayList<BookPostMemberDTO> selectThisBookPosts(Long isbn);
 
@@ -141,7 +145,6 @@ public interface PostMapper {
 
     public void insertDonateCertPost(DonateCertVO donateCertVO);
 
-<<<<<<< HEAD
     // 독후감 수정을 위한 데이터 조회
     public FileBookPostDTO selectWrittenBookPost(Long bookPostId);
     public FileBookPostDTO selectWrittenSelectedPost(Long bookPostId);
@@ -151,12 +154,10 @@ public interface PostMapper {
     public void updateBookPost(BookPostVO bookPostVO);
     public void updateSelectedBookPost(SelectedBookPostVO selectedBookPostVO);
 
-=======
     public void insertReceiverPost(ReceiverVO receiverVO);
 
     public void updateReceiverPost(ReceiverVO receiverVO);
 
     public void updateDonateCertPost(DonateCertVO donateCertVO);
->>>>>>> master
 }
 

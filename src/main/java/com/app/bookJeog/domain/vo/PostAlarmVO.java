@@ -14,6 +14,6 @@ import org.springframework.stereotype.Component;
 public class PostAlarmVO extends AlarmVO {
     @EqualsAndHashCode.Include
     private Long id;
-    private Long commentId;
+    private Long postId;
 
 }

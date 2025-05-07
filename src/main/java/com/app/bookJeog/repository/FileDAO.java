@@ -65,7 +65,6 @@ public class FileDAO {
         fileMapper.insertSponsorInquiryFile(sponsorInquiryFileVO);
     }
 
-<<<<<<< HEAD
     // 독후감 첨부파일 수정용 조회
     public List<BookPostFileDTO> findWrittenBookPostFiles(Long bookPostId){
         return fileMapper.selectWrittenBookPostFiles(bookPostId);
@@ -80,7 +79,6 @@ public class FileDAO {
 
     // 독후감 첨부파일 이미지만 변경
     public void updateFile(FileVO fileVO){fileMapper.updateFile(fileVO);}
-=======
 //   슈퍼 키 삭제
     public void deleteFile(Long fileId){
         fileMapper.deleteFile(fileId);
@@ -93,5 +91,4 @@ public class FileDAO {
     public void deleteDonateCertFileByPostId(Long postId){
         fileMapper.deleteDonateCertFileByPostId(postId);
     }
->>>>>>> master
 }
