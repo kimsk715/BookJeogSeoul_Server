@@ -23,7 +23,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -499,4 +502,144 @@ public class MemberServiceImpl implements MemberService {
 
         return result;
     }
+
+
+    @Override
+    // 비밀번호 유효성검사
+    public boolean checkPassword(Long memberId, String password) {
+        return memberDAO.checkPassword(memberId, password);
+    }
+
+    @Override
+    // 세션에서 개인회원정보 가져오기
+    public PersonalMemberDTO getCurrentMember(HttpSession session) {
+        return (PersonalMemberDTO) session.getAttribute("member");
+    }
+
+    @Override
+    // 프사 가져오기
+    public String getProfileImageUrl(Long memberId) {
+        FileVO profileFile = memberDAO.findMyProfile(memberId);
+
+        if (profileFile != null) {
+            return "/personal/profile?path=" + profileFile.getFilePath() + "&name=" + profileFile.getFileName();
+        } else {
+            return "/images/common/user_profile_example.png";
+        }
+    }
+
+    // 프사 수정
+    @Override
+    public void updateProfileImage(Long memberId, MultipartFile file) {
+        Long fileId = memberDAO.selectProfileFileId(memberId);
+        if (fileId == null) {
+            throw new IllegalStateException("프로필 이미지가 존재하지 않습니다.");
+        }
+
+        String todayPath = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        String rootPath = "C:/upload/" + todayPath;
+        File uploadDir = new File(rootPath);
+        if (!uploadDir.exists()) uploadDir.mkdirs();
+
+        String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+
+        FileDTO dto = new FileDTO();
+        dto.setId(fileId);
+        dto.setFilePath(todayPath);
+        dto.setFileName(fileName);
+
+        try {
+            file.transferTo(new File(rootPath, fileName));
+            memberDAO.updateMemberFile(dto.toVO());
+        } catch (IOException e) {
+            throw new RuntimeException("프로필 이미지 업데이트 실패", e);
+        }
+    }
+
+    // 프사 삭제
+    @Override
+    public void deleteProfileImage(Long memberId) {
+        Long fileId = memberDAO.selectProfileFileId(memberId);
+        if (fileId == null) return;
+
+        // 파일 경로 조회
+        FileVO fileVO = memberDAO.findMyProfile(memberId);
+        String fullPath = "C:/upload/" + fileVO.getFilePath() + "/" + fileVO.getFileName();
+
+        // DB 삭제 (순서: 서브키 → 슈퍼키)
+        memberDAO.deleteMemberProfile(memberId);
+        memberDAO.deleteMemberFile(fileId);
+
+        // 실제 파일 삭제
+        File file = new File(fullPath);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    // 프사 생성
+    @Override
+    public void saveNewProfileImage(MultipartFile file, Long memberId) {
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("업로드된 파일이 없습니다.");
+        }
+
+        try {
+            // 1. 경로 준비
+            String todayPath = getPath(); // 예: 2025/05/06
+            String rootPath = "C:/upload/" + todayPath;
+            File uploadDir = new File(rootPath);
+            if (!uploadDir.exists()) uploadDir.mkdirs();
+
+            // 2. 파일 이름 설정 및 저장
+            String uuidFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            file.transferTo(new File(uploadDir, uuidFileName));
+
+            // 3. DTO에 세팅
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setFileName(uuidFileName);
+            fileDTO.setFilePath(todayPath);
+
+            // 4. DB에 파일 insert → 생성된 id 필요
+            FileVO fileVO = fileDTO.toVO();
+            memberDAO.insertProfileFile(fileVO);
+
+            // 5. tbl_member_profile용 DTO 설정
+            MemberProfileDTO profileDTO = new MemberProfileDTO();
+            profileDTO.setId(fileVO.getId()); // insert 후 id가 세팅돼야 함
+            profileDTO.setMemberId(memberId);
+
+            // 6. member_profile 테이블에 insert
+            memberDAO.insertMemberProfile(profileDTO.toVO());
+
+        } catch (IOException e) {
+            throw new RuntimeException("프로필 이미지 저장 실패", e);
+        }
+    }
+
+    // 파일 생성 또는 수정
+    @Override
+    public void saveOrUpdateProfileImage(MultipartFile file, Long memberId) {
+        Long fileId = memberDAO.selectProfileFileId(memberId);
+        if (fileId == null) {
+            saveNewProfileImage(file, memberId);
+        } else {
+            updateProfileImage(memberId, file);
+        }
+    }
+
+    // 오늘 날짜로 경로 반환
+    private String getPath(){
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+    }
+
+    // 개인회원 닉네임 변경
+    public void updateNickname(PersonalMemberVO personalMemberVO){
+        memberMapper.updateNickname(personalMemberVO);
+    };
+
+    // 개인회원 비밀번호 변경
+    public void updateMemberPassword(PersonalMemberVO personalMemberVO){
+        memberMapper.updateMemberPassword(personalMemberVO);
+    };
 }

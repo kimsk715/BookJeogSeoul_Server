@@ -17,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,6 +53,65 @@ public class PersonalController {
         return "member/mypage";
     }
 
+    // 프사 생성 또는 수정
+    @PostMapping("/upload-profile")
+    @ResponseBody
+    public ResponseEntity<String> uploadProfile(@RequestParam("file") MultipartFile file,
+                                                HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
+        memberService.saveOrUpdateProfileImage(file, member.getId());
+        return ResponseEntity.ok("프로필 이미지가 저장되었습니다.");
+    }
+
+    // 프로필 이미지 삭제
+    @DeleteMapping("/delete-profile")
+    @ResponseBody
+    public ResponseEntity<String> deleteProfile(HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
+        memberService.deleteProfileImage(member.getId());
+        return ResponseEntity.ok("프로필 이미지가 삭제되었습니다.");
+    }
+
+    // 닉네임 변경
+    @PostMapping("/nickname")
+    @ResponseBody
+    public ResponseEntity<String> updateNickname(@RequestParam("nickname") String nickname,
+                                                 HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
+        log.info("nickname: " + nickname);
+        log.info("member: " + member);
+        member.setMemberNickName(nickname); // DTO에 적용
+        memberService.updateNickname(member.toVO());
+        return ResponseEntity.ok("닉네임이 변경되었습니다.");
+    }
+
+    // 비밀번호 변경
+    @PostMapping("/password")
+    @ResponseBody
+    public ResponseEntity<String> updatePassword(@RequestParam("password") String password,
+                                                 HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+        }
+
+        member.setMemberPassword(password); // DTO에 적용
+        memberService.updateMemberPassword(member.toVO());
+        return ResponseEntity.ok("비밀번호가 변경되었습니다.");
+    }
+
 
     // 개인 마이페이지 - 내 스크랩(도서 찜)
     @GetMapping("mypage/scrap")
@@ -68,15 +129,59 @@ public class PersonalController {
 
     // 개인 마이페이지 - 프로필 수정
     @GetMapping("mypage/profile")
-    public String gotoMemberProfile() {
+    public String gotoMemberProfile(HttpSession session, Model model) {
+        PersonalMemberDTO member = memberService.getCurrentMember(session);
+        if (member == null) {
+            return "redirect:/personal/login";
+        }
+
+        model.addAttribute("member", member);
+        model.addAttribute("profileUrl", memberService.getProfileImageUrl(member.getId()));
+
         return "member/my-profile";
+    }
+
+    // 개인 마이페이지 - 프로필 수정(카카오)
+    @GetMapping("mypage/profile-kakao")
+    public String gotoKakaoMemberProfile() {
+        return "member/my-profile-kakao";
     }
 
 
     // 개인 마이페이지 - 비밀번호 확인
     @GetMapping("mypage/password-check")
-    public String gotoMemberPasswordCheck() {
+    public String gotoMemberPasswordCheck( HttpSession session) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if (member == null) {
+            return "redirect:/personal/login";
+        }
+
+        // 비밀번호가 없으면 카카오 회원이므로 바로 프로필 편집으로 이동
+        if (member.getMemberPassword() == null) {
+            return "redirect:/personal/mypage/profile-kakao";
+        }
+
         return "member/password-check";
+    }
+
+    @PostMapping("/password-check")
+    public String checkPassword(@RequestParam("password") String password,
+                                HttpSession session,
+                                RedirectAttributes redirect) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+
+        if (member == null) {
+            return "redirect:/personal/login";
+        }
+
+        boolean isCorrect = memberService.checkPassword(member.getId(), password);
+
+        if (isCorrect) {
+            return "redirect:/personal/mypage/profile";
+        } else {
+            redirect.addFlashAttribute("error", "비밀번호가 일치하지 않습니다.");
+            return "redirect:/personal/mypage/password-check";
+        }
     }
 
 
