@@ -97,4 +97,8 @@ public class FavoriteDAO {
                                              @Param("orderType") String orderType){
         return favoriteMapper.selectScrappedIsbnList(memberId, offset, orderType);
     }
+
+    public int countAllVoteByPostId(ReceiverLikeVO receiverLikeVO){
+        return favoriteMapper.countAllVoteByPostId(receiverLikeVO);
+    }
 }
