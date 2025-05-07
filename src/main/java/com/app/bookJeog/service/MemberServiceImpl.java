@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 
+import com.app.bookJeog.controller.exception.MemberLoginFailException;
 import com.app.bookJeog.controller.exception.UnauthenticatedException;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.MemberType;
@@ -188,8 +189,8 @@ public class MemberServiceImpl implements MemberService {
 
 
         // 로그인 실패 시 null 반환
-        if (foundMember == null) {
-            return null;
+        if (foundMember.isEmpty()) {
+            throw new  MemberLoginFailException("로그인 실패");
         }
 
         // VO를 DTO로 다시 변환 후 반환

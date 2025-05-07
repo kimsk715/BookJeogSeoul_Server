@@ -38,8 +38,8 @@ public class WebController {
     // 메인으로 이동
     @GetMapping("main/main")
     public String goToMain(Model model) throws IOException {
-            if(session.getAttribute("member") != null && session.getAttribute("sponsor") != null) {
-                throw new LoginFailException("로그인 정보가없음");
+            if(session.getAttribute("member") == null && session.getAttribute("sponsor") == null) {
+                throw new LoginFailException("로그인 실패");
             }
 
             model.addAttribute("bookInfoDTO",bookService.getPopularBooks());
