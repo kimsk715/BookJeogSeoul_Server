@@ -18,96 +18,9 @@
     </head>
     <body>
         <div id="wrap">
-            <!-- 헤더 영역 -->
-            <div class="top-header background on">
-                <div class="inner">
-                    <header>
-                        <h1>
-                            <a href="" class="logo">
-                                <img
-                                    src="/images/common/Logo.png"
-                                    alt="북적서울"
-                                    class="bookjeog-logo"
-                                    style="scale: 1.5"
-                                />
-                            </a>
-                        </h1>
-                        <nav>
-                            <ul class="gnb">
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="book-report"
-                                        class="book-report"
-                                        >독후감</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="donation"
-                                        class="donation"
-                                        >기부</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="search"
-                                        class="search"
-                                        >검색</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="book-shelf"
-                                        class="book-shelf"
-                                        >내서재</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="manage"
-                                        class="manage"
-                                        >관리</a
-                                    >
-                                </li>
-                                <li class="">
-                                    <a
-                                        href=""
-                                        data-content-type="discussion"
-                                        class="discussion"
-                                        >북적북적</a
-                                    >
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="util-wrap">
-                            <!-- data-count가 알람 개수 -->
-                            <a
-                                href=""
-                                class="alarm-button"
-                                data-content-type="alarmCenter"
-                                data-count="10"
-                            >
-                                <span class="mds-icon-alarm">
-                                    <span class="ir">알림센터</span>
-                                </span>
-                            </a>
-                            <ul class="util">
-                                <li class="sign sign-in">
-                                    <a href="" data-content-type="login"
-                                        >로그아웃</a
-                                    >
-                                </li>
-                            </ul>
-                        </div>
-                    </header>
-                </div>
-            </div>
-            <!-- // 헤더 영역 -->
+            <!-- 헤더 시작 -->
+            <div th:replace="~{main/header :: header-sc}"></div>
+            <!-- 헤더끝 -->
             <main class="library-main">
                 <div class="library-main-wrapper">
                     <div class="back-wrapper">
@@ -122,9 +35,9 @@
                                     <div class="profile-info">
                                         <div class="profile-image-wrapper">
                                             <img
-                                                src="/images/main/organization_example.png"
+                                                th:src="@{/personal/profile(path=${sponsor.filePath}, name=${sponsor.fileName})}"
                                                 alt="프로필 이미지"
-                                                class="profile-image"
+                                                onerror="this.src='/images/common/user_profile_example.png'" />
                                             />
                                             <button class="edit-button">
                                                 <svg
@@ -153,6 +66,7 @@
                                                 class="profile-nickname-wrapper"
                                             >
                                                 <span class="profile-nickname"
+                                                      th:text="${sponsor.sponsorName}"
                                                     >한국백혈병환우회</span
                                                 >
                                             </div>
@@ -164,18 +78,18 @@
                                     <a href="" class="posts-button">
                                         <dl class="content-count-info">
                                             <dt class="content-label">
-                                                후원글
+                                                기부글
                                             </dt>
-                                            <dd class="content-count">2</dd>
+                                            <dd class="content-count" th:text="${sponsor.totalPostCount}">0</dd>
                                         </dl>
                                     </a>
                                     <hr class="separater" />
                                     <a href="" class="mileage-button">
                                         <dl class="content-count-info">
                                             <dt class="content-label">
-                                                도서 기부
+                                                기부 인증글
                                             </dt>
-                                            <dd class="content-count">12</dd>
+                                            <dd class="content-count" th:text="${sponsor.donateCertCount}">0</dd>
                                         </dl>
                                     </a>
                                 </div>
@@ -211,7 +125,7 @@
                         <div class="content-bottom">
                             <section class="scrap-book-list">
                                 <div class="title-wrapper">
-                                    <h3 class="title-text">후원글</h3>
+                                    <h3 class="title-text">기부글</h3>
                                     <a href="" class="books-button">전체보기</a>
                                 </div>
                                 <ul class="donate slide-wrapper">

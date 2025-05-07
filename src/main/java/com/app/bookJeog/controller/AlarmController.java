@@ -72,6 +72,7 @@ public class AlarmController {
             followPaths.add(followPath);
         }
 
+<<<<<<< Updated upstream
         List<String> postPaths = new ArrayList<>();
         for(PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList){
             Long postId = postAlarmPersonalMemberDTO.getPostId();
@@ -80,6 +81,21 @@ public class AlarmController {
             postPaths.add(postPath);
 
         }
+=======
+        model.addAttribute("postAlarms", postAlarmInfoDTOS);
+
+//        for(PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList){
+//            Long postId = postAlarmPersonalMemberDTO.getPostId();
+//            String postPath = postService.getPostType(postId);
+//            postPath += postId;
+//            postAlarmInfoDTOS.forEach(postAlarmInfoDTO -> {
+////                postAlarmInfoDTO.setMemberName(alarmService.);
+//            });
+//            postPaths.add(postPath);
+//
+//        }
+//        log.info(postAlarmInfoDTOS.toString());
+>>>>>>> Stashed changes
 
 
 

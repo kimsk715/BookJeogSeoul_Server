@@ -490,7 +490,7 @@ public class PersonalController {
 
         return "redirect:/personal/login";
     }
-// 내 프사
+    // 내 프사
     @GetMapping("profile")
     @ResponseBody
     public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,
