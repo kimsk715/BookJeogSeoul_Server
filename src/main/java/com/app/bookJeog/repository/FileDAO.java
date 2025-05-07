@@ -1,5 +1,6 @@
 package com.app.bookJeog.repository;
 
+import com.app.bookJeog.domain.dto.BookPostFileDTO;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.mapper.FileMapper;
 import lombok.RequiredArgsConstructor;
@@ -64,6 +65,22 @@ public class FileDAO {
         fileMapper.insertSponsorInquiryFile(sponsorInquiryFileVO);
     }
 
+<<<<<<< HEAD
+    // 독후감 첨부파일 수정용 조회
+    public List<BookPostFileDTO> findWrittenBookPostFiles(Long bookPostId){
+        return fileMapper.selectWrittenBookPostFiles(bookPostId);
+    };
+
+    // 독후감 첨부파일 삭제(수정용)
+    public void deleteFiles(Long id){fileMapper.deleteFiles(id);};
+    public void deleteBookPostFiles(Long id){fileMapper.deleteBookPostFiles(id);};
+
+    // 독후감 첨부파일 메모만 변경
+    public void setFileText(String fileText, Long id){fileMapper.updateFileText(fileText, id);};
+
+    // 독후감 첨부파일 이미지만 변경
+    public void updateFile(FileVO fileVO){fileMapper.updateFile(fileVO);}
+=======
 //   슈퍼 키 삭제
     public void deleteFile(Long fileId){
         fileMapper.deleteFile(fileId);
@@ -76,4 +93,5 @@ public class FileDAO {
     public void deleteDonateCertFileByPostId(Long postId){
         fileMapper.deleteDonateCertFileByPostId(postId);
     }
+>>>>>>> master
 }

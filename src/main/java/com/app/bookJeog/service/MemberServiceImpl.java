@@ -1,13 +1,12 @@
 package com.app.bookJeog.service;
 
 
+import com.app.bookJeog.controller.exception.UnauthenticatedException;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.MemberType;
-import com.app.bookJeog.domain.vo.AdminVO;
-import com.app.bookJeog.domain.vo.MemberVO;
-import com.app.bookJeog.domain.vo.PersonalMemberVO;
-import com.app.bookJeog.domain.vo.SponsorMemberVO;
+import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.mapper.MemberMapper;
+import com.app.bookJeog.repository.FavoriteDAO;
 import com.app.bookJeog.repository.MemberDAO;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -23,15 +22,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Optional;
-import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +44,8 @@ public class MemberServiceImpl implements MemberService {
     private final HttpSession session;
     private final PersonalMemberVO personalMemberVO;
     private final JavaMailSender javaMailSender;
+    private final FavoriteDAO favoriteDAO;
+    private final AladinService aladinService;
 
 
 
@@ -442,4 +444,202 @@ public class MemberServiceImpl implements MemberService {
     public List<PersonalMemberPostMemberProfileDTO> selectTopBookPostMemberProfile() {
         return memberDAO.findMemberInfoWithThumbnail();
     }
+
+    // 개인 마이페이지 데이터
+    @Override
+    public Map<String, Object> getMyPageData(HttpSession session, Model model) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        if(member == null){
+            throw new UnauthenticatedException("로그인이 필요한 서비스입니다.");
+        }
+
+        Long memberId = member.getId();
+        String memberNickname = member.getMemberNickName();
+
+        Map<String, Object> result = new HashMap<>();
+
+        // 1. 내가 쓴 전체 독후감 수
+        int totalPosts = memberDAO.findMyBookPostCount(memberId);
+
+        // 2. 이번 달 쓴 독후감 수
+        int monthlyPosts = memberDAO.findMyMonthlyBookPostCount(memberId);
+
+        // 3. 이번 달 평균 독후감 수
+        int averagePosts = memberDAO.findAverageBookPostCount();
+
+        // 4. 내 마일리지
+        int mileage = memberDAO.findMyMileage(memberId);
+
+        // 5. 팔로워 수
+        int followers = favoriteDAO.findMyFollowers(memberId);
+
+        // 6. 팔로우 수
+        int following = favoriteDAO.findMyFollowing(memberId);
+
+        // 7. 찜한 도서 정보 (isbn만 가져와서 API 조회)
+        List<Long> isbnList = favoriteDAO.findMyScrappedBooks(memberId);
+        List<AladinBookDTO> scrappedBooks = aladinService.getBooksByIsbnList(isbnList);
+
+        // 결과 담기
+        result.put("totalPosts", totalPosts);
+        result.put("monthlyPosts", monthlyPosts);
+        result.put("averagePosts", averagePosts);
+        result.put("mileage", mileage);
+        result.put("followers", followers);
+        result.put("following", following);
+        result.put("scrappedBooks", scrappedBooks);
+        result.put("memberNickName", memberNickname);
+
+        // 프사
+        FileDTO profileImage = toFileDTO(memberDAO.findMyProfile(memberId));
+
+        if (profileImage == null) {
+            profileImage = new FileDTO();
+            profileImage.setFilePath("images/common");
+            profileImage.setFileName("user_profile_example.png");
+        }
+        model.addAttribute("file", profileImage);
+
+        return result;
+    }
+
+
+    @Override
+    // 비밀번호 유효성검사
+    public boolean checkPassword(Long memberId, String password) {
+        return memberDAO.checkPassword(memberId, password);
+    }
+
+    @Override
+    // 세션에서 개인회원정보 가져오기
+    public PersonalMemberDTO getCurrentMember(HttpSession session) {
+        return (PersonalMemberDTO) session.getAttribute("member");
+    }
+
+    @Override
+    // 프사 가져오기
+    public String getProfileImageUrl(Long memberId) {
+        FileVO profileFile = memberDAO.findMyProfile(memberId);
+
+        if (profileFile != null) {
+            return "/personal/profile?path=" + profileFile.getFilePath() + "&name=" + profileFile.getFileName();
+        } else {
+            return "/images/common/user_profile_example.png";
+        }
+    }
+
+    // 프사 수정
+    @Override
+    public void updateProfileImage(Long memberId, MultipartFile file) {
+        Long fileId = memberDAO.selectProfileFileId(memberId);
+        if (fileId == null) {
+            throw new IllegalStateException("프로필 이미지가 존재하지 않습니다.");
+        }
+
+        String todayPath = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        String rootPath = "C:/upload/" + todayPath;
+        File uploadDir = new File(rootPath);
+        if (!uploadDir.exists()) uploadDir.mkdirs();
+
+        String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+
+        FileDTO dto = new FileDTO();
+        dto.setId(fileId);
+        dto.setFilePath(todayPath);
+        dto.setFileName(fileName);
+
+        try {
+            file.transferTo(new File(rootPath, fileName));
+            memberDAO.updateMemberFile(dto.toVO());
+        } catch (IOException e) {
+            throw new RuntimeException("프로필 이미지 업데이트 실패", e);
+        }
+    }
+
+    // 프사 삭제
+    @Override
+    public void deleteProfileImage(Long memberId) {
+        Long fileId = memberDAO.selectProfileFileId(memberId);
+        if (fileId == null) return;
+
+        // 파일 경로 조회
+        FileVO fileVO = memberDAO.findMyProfile(memberId);
+        String fullPath = "C:/upload/" + fileVO.getFilePath() + "/" + fileVO.getFileName();
+
+        // DB 삭제 (순서: 서브키 → 슈퍼키)
+        memberDAO.deleteMemberProfile(memberId);
+        memberDAO.deleteMemberFile(fileId);
+
+        // 실제 파일 삭제
+        File file = new File(fullPath);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    // 프사 생성
+    @Override
+    public void saveNewProfileImage(MultipartFile file, Long memberId) {
+        if (file == null || file.isEmpty()) {
+            throw new IllegalArgumentException("업로드된 파일이 없습니다.");
+        }
+
+        try {
+            // 1. 경로 준비
+            String todayPath = getPath(); // 예: 2025/05/06
+            String rootPath = "C:/upload/" + todayPath;
+            File uploadDir = new File(rootPath);
+            if (!uploadDir.exists()) uploadDir.mkdirs();
+
+            // 2. 파일 이름 설정 및 저장
+            String uuidFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            file.transferTo(new File(uploadDir, uuidFileName));
+
+            // 3. DTO에 세팅
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setFileName(uuidFileName);
+            fileDTO.setFilePath(todayPath);
+
+            // 4. DB에 파일 insert → 생성된 id 필요
+            FileVO fileVO = fileDTO.toVO();
+            memberDAO.insertProfileFile(fileVO);
+
+            // 5. tbl_member_profile용 DTO 설정
+            MemberProfileDTO profileDTO = new MemberProfileDTO();
+            profileDTO.setId(fileVO.getId()); // insert 후 id가 세팅돼야 함
+            profileDTO.setMemberId(memberId);
+
+            // 6. member_profile 테이블에 insert
+            memberDAO.insertMemberProfile(profileDTO.toVO());
+
+        } catch (IOException e) {
+            throw new RuntimeException("프로필 이미지 저장 실패", e);
+        }
+    }
+
+    // 파일 생성 또는 수정
+    @Override
+    public void saveOrUpdateProfileImage(MultipartFile file, Long memberId) {
+        Long fileId = memberDAO.selectProfileFileId(memberId);
+        if (fileId == null) {
+            saveNewProfileImage(file, memberId);
+        } else {
+            updateProfileImage(memberId, file);
+        }
+    }
+
+    // 오늘 날짜로 경로 반환
+    private String getPath(){
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+    }
+
+    // 개인회원 닉네임 변경
+    public void updateNickname(PersonalMemberVO personalMemberVO){
+        memberMapper.updateNickname(personalMemberVO);
+    };
+
+    // 개인회원 비밀번호 변경
+    public void updateMemberPassword(PersonalMemberVO personalMemberVO){
+        memberMapper.updateMemberPassword(personalMemberVO);
+    };
 }
