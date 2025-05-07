@@ -5,10 +5,7 @@ import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.dto.PersonalMemberPostMemberProfileDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberProfileDTO;
-import com.app.bookJeog.domain.vo.AdminVO;
-import com.app.bookJeog.domain.vo.MemberVO;
-import com.app.bookJeog.domain.vo.PersonalMemberVO;
-import com.app.bookJeog.domain.vo.SponsorMemberVO;
+import com.app.bookJeog.domain.vo.*;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Optional;
@@ -86,4 +83,40 @@ public interface MemberMapper {
 
     // 독후감 많이쓴 멤버 조회 썸넬 포함
     public List<PersonalMemberPostMemberProfileDTO> selectMemberInfoWithThumbnail ();
+
+    // 내가 쓴 전체 독후감 개수 조회
+    public int selectMyBookPostCount(Long memberId);
+
+    // 내 이번 달 쓴 독후감 수
+    public int selectMyMonthlyBookPostCount(Long memberId);
+
+    // 이번 달 독후감 쓴 회원들의 평균 독후감
+    public int selectAverageBookPostCount();
+
+    // 내 마일리지 조회
+    public int selectMyMileage(Long memberId);
+
+    // 내 프로필 이미지 조회
+    public FileVO selectMyProfile(Long memberId);
+
+    // 비밀번호 유효성검사
+    public boolean checkPassword(Long memberId, String password);
+
+    // 회원 프사 조회, 삭제, 변경
+    public Long selectProfileFileId(Long memberId);
+
+    public void updateMemberFile(FileVO fileVO);
+
+    public void deleteMemberFile(Long id);
+    public void deleteMemberProfile(Long memberId);
+
+    // 프사 만들기
+    public void insertProfileFile(FileVO fileVO);
+    public void insertMemberProfile(MemberProfileVO memberProfileVO);
+
+    // 개인회원 닉네임 변경
+    public void updateNickname(PersonalMemberVO personalMemberVO);
+
+    // 개인회원 비밀번호 변경
+    public void updateMemberPassword(PersonalMemberVO personalMemberVO);
 }

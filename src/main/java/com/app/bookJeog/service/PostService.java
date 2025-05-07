@@ -126,5 +126,19 @@ public interface PostService {
     public Long write(FileBookPostDTO fileBookPostDTO, List<MultipartFile> files);
 
     public void setDonateCertPost(DonateCertVO donateCertVO);
+
+    // 독후감 수정
+    public void setBookPost(FileBookPostDTO fileBookPostDTO, List<Long> deletedFileIds);
+
+    // 독후감 수정을 위한 정보 조회
+    FileBookPostDTO findWrittenBookPost(Long bookPostId);
+
+    // 독후감 수정을 위한 첨부파일 조회
+    public List<BookPostFileDTO> findWrittenBookPostFiles(Long bookPostId);
+    public void setReceiverPost(ReceiverVO receiverVO);
+
+    public void updateReceiverPost(ReceiverDTO receiverDTO);
+
+    public void updateDonateCertPost(DonateCertDTO donateCertDTO);
 }
 

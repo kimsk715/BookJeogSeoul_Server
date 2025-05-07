@@ -28,5 +28,6 @@ public class ReceiverPostDTO {
     private String createdDate;
     private String sponsorName;
     private int likeScore;
+    private int commentCount;
     private String updatedDate;
 }
