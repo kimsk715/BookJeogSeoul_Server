@@ -47,5 +47,5 @@ public interface FavoriteService {
     public List<Long> getScrappedIsbnList(Long memberId, int offset, String orderType);
     public void voteToReceiver(ReceiverLikeVO receiverLikeVO);
 
-    public int countAllVoteByPostId(ReceiverLikeDTO receiverLikeDTO);
+    public Integer countAllVoteByPostId(ReceiverLikeDTO receiverLikeDTO);
 }

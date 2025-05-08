@@ -35,12 +35,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     protected String handleMypageSelectException(ResourceNotFoundException e){
         log.error(e.getMessage());
-        return "/error/error";
+        return "error/error";
     }
 
     @ExceptionHandler(RuntimeException.class)
     protected String RuntimeException(RuntimeException e){
         log.error(e.getMessage());
-        return "/error/error";
+        return "error/error";
     }
 }

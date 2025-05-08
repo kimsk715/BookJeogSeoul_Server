@@ -186,13 +186,14 @@ const commentLayout =(() =>{
         const addedComment = document.createElement('li');
         addedComment.classList.add("comment-item");
         let name = (member !== null) ? member.memberName : sponsorMember.sponsorName;
+        let id = (member !== null) ? member.id : sponsorMember.id;
         if(mentionedName != null){
             addedComment.innerHTML = `
                                 <div class="comment-item-inner flex-container">
                                     <div class="user-img" style="
                                                 background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
                                             ">
-                                        <a href="#"></a>
+                                        <a href="/personal/mypage/${id}"></a>
                                     </div>
                                     <div class="com-contents">
                                         <div class="com-contents-head">

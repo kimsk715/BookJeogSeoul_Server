@@ -32,7 +32,7 @@ public class SelectedBookTask {
     /*
      *   0 * * * * * : 매 분 0초마다
      *   0/30 * * * * * : 매 30초 간격
-     *   0 0/1 * * * : 매 1분 간격
+     *   0 0/1 * * * * : 매 1분 간격
      *   0 0/5 * ? : 매 5분 간격
      *   0 0 0/1 * * * : 매 1시간 간격
      *   0 0 0 * * ? : 매일 0시 마다
@@ -60,7 +60,7 @@ public class SelectedBookTask {
     }
 
 //    매달 N 일에 좋아요 수를 기준으로 이 달의 독후감 후보 선정
-    @Scheduled(cron = "0 0 0 1 * ?")
+    @Scheduled(cron = "0 0 0 20 * ?")
     public void insertTopPosts() {
         List<BookPostVO> tempList = postService.getTopPosts();
         log.info(tempList.toString());

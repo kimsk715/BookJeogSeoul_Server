@@ -37,11 +37,7 @@ const bookPostLayout = (() =>{
                 <td>
                     <span class="status ${statusName}">${post.bookPostIsPublic}</span>
                 </td>
-                <td>
-                    <button type="button" class="detail-btn book-detail-btn">
-                        상세보기
-                    </button>
-                </td>
+              
             </tr>
             `
         })
@@ -103,9 +99,11 @@ const bookPostLayout = (() =>{
                 <td>${post.bookPostVoteCount}</td>
                 
                 <td>
+                <a href="/post/bookpost/${post.bookPostId}">
                     <button type="button" class="detail-btn book-detail-btn">
                         상세보기
                     </button>
+                    </a>
                 </td>
             </tr>
             `
