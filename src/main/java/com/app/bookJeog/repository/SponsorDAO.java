@@ -28,8 +28,8 @@ public class SponsorDAO {
 
 
     // 비밀번호 변경
-    public void updateSponsorMember(SponsorMemberVO sponsorMemberVO, String newPasswd) {
-        sponsorMapper.updatePassword(sponsorMemberVO, newPasswd);
+    public void updatePassword(SponsorMemberVO sponsorMemberVO) {
+        sponsorMapper.updateSponsorPasswd(sponsorMemberVO);
     }
 
     // 마이페이지 기업회원 조회

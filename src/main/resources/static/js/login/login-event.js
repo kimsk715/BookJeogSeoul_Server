@@ -43,12 +43,14 @@ inputPw.addEventListener("focus", () => {
     if (inputPw.value.length > 0) {
         cleartBtnPw.style.display = "block";
     } else {
+        e.preventDefault()
         cleartBtnPw.style.display = "none";
     }
 });
 inputPw.addEventListener("blur", () => {
     pwLabel.style.borderColor = "";
     if (inputPw.value.length >= 0) {
+
         cleartBtnPw.style.display = "none";
     }
 });
@@ -77,6 +79,7 @@ const activeLoginBtn = () => {
         loginBtn.style.opacity = "1";
         loginBtn.style.cursor = "pointer";
     } else {
+        e.preventDefault()
         loginBtn.style.opacity = ".4";
         loginBtn.style.cursor = "not-allowed";
     }

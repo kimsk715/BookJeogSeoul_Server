@@ -48,7 +48,7 @@ public class AlarmController {
 
         List<String> paths = new ArrayList<>();
         Long memberId = foundMember.getId();
-        AlarmListDTO alarmListDTO =  alarmService.selectAlarmList(memberId);
+        AlarmListDTO alarmListDTO = alarmService.selectAlarmList(memberId);
 
         List<AlarmFollowAlarmDTO> alarmFollowAlarmDTOList = alarmListDTO.getAlarmFollowAlarmDTOS();
         List<AlarmCommentAlarmDTO> commentAlarmDTOList = alarmListDTO.getAlarmCommentAlarmDTOS();
@@ -57,8 +57,9 @@ public class AlarmController {
         List<CommentAlarmInfoDTO> commentAlarmInfoDTOS = new ArrayList<>();
         String followAlarmPath = "/personal/mypage/";
 
+        FollowMemberAlarmDTO followMemberAlarmDTO = null;
         for (AlarmFollowAlarmDTO alarmFollowAlarmDTO : alarmFollowAlarmDTOList) {
-            FollowMemberAlarmDTO followMemberAlarmDTO = new FollowMemberAlarmDTO();
+            followMemberAlarmDTO = new FollowMemberAlarmDTO();
 
             followMemberAlarmDTO.setMemberNickName(alarmFollowAlarmDTO.getMemberNickName());
 
@@ -68,13 +69,13 @@ public class AlarmController {
             followMemberAlarmDTO.setFollowPath(followAlarmPath);
         }
 
-        model.addAttribute("followAlarmPath", followAlarmPath);
+        model.addAttribute("followAlarmPath", followMemberAlarmDTO);
 
 
-        for(AlarmCommentAlarmDTO commentAlarmDTO : commentAlarmDTOList){
+        for (AlarmCommentAlarmDTO commentAlarmDTO : commentAlarmDTOList) {
             CommentAlarmInfoDTO commentAlarmInfoDTO = new CommentAlarmInfoDTO();
 
-           Long postId = commentAlarmDTO.getPostId();
+            Long postId = commentAlarmDTO.getPostId();
 
             String path = postService.getPostType(postId);
             path += postId;
@@ -85,7 +86,7 @@ public class AlarmController {
         model.addAttribute("commentAlarms", commentAlarmInfoDTOS);
 
         List<MentionAlarmInfoDTO> mentionAlarmInfoDTOS = new ArrayList<>();
-        for(AlarmMentionAlarmDTO mentionAlarmDTO : mentionAlarmDTOList){
+        for (AlarmMentionAlarmDTO mentionAlarmDTO : mentionAlarmDTOList) {
             MentionAlarmInfoDTO mentionAlarmInfoDTO = new MentionAlarmInfoDTO();
             Long postId = mentionAlarmDTO.getPostId();
             String mentionPath = postService.getPostType(postId);
@@ -99,7 +100,7 @@ public class AlarmController {
 
         List<String> followPaths = new ArrayList<>();
         List<PostAlarmInfoDTO> postAlarmInfoDTOS = new ArrayList<>();
-        for(PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList){
+        for (PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList) {
             PostAlarmInfoDTO postAlarmInfoDTO = new PostAlarmInfoDTO();
             Long postId = postAlarmPersonalMemberDTO.getPostId();
             String followPath = postService.getPostType(postId);
@@ -112,7 +113,7 @@ public class AlarmController {
         List<String> postPaths = new ArrayList<>();
         model.addAttribute("postAlarms", postAlarmInfoDTOS);
 
-        for(PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList){
+        for (PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList) {
             Long postId = postAlarmPersonalMemberDTO.getPostId();
             String postPath = postService.getPostType(postId);
             postPath += postId;

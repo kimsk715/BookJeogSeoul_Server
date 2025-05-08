@@ -18,6 +18,7 @@ public class TopBookPostDTO {
     private String imageUrl;
     private String title;
     private String author;
+    private String description;
     private Long isbn;
 
 }

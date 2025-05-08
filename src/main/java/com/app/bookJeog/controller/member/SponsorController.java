@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.Optional;
 
@@ -126,7 +127,7 @@ public class SponsorController {
     @PostMapping("send-mail")
     public String sendMail(SponsorMemberDTO sponsormemberDTO, HttpServletResponse response, HttpSession session) throws MessagingException {
         Optional<SponsorMemberVO> foundEmail = sponsorServiceImpl.selectEmailForPassword(sponsormemberDTO);
-            if(foundEmail.isPresent()) {
+        if(foundEmail.isPresent()) {
                 sponsorServiceImpl.sendMail(sponsormemberDTO, response, session);
                 return "redirect:/sponsor/input-code";
             }
@@ -162,18 +163,18 @@ public class SponsorController {
     }
 
     @PostMapping("sponsor-change-passwd")
-    public String changePasswd (String newPasswd, HttpServletRequest request, HttpSession session){
-        session = request.getSession();
+    public String changePasswd (String newPasswd, HttpSession session){
         sponsorMemberDTO.setSponsorEmail((String) session.getAttribute("email"));
-        String memberEmail = (String) session.getAttribute("email");
+        String memberEmail = sponsorMemberDTO.getSponsorEmail();
+        sponsorMemberDTO.setSponsorPassword(newPasswd);
 
-        if(memberEmail != null) {
-            sponsorServiceImpl.changePassword(sponsorMemberDTO, newPasswd);
+        if(!memberEmail.isEmpty()) {
+            sponsorService.changePassword(sponsorMemberDTO);
+            log.info("여긴 통과해야함");
             session.invalidate();
             return "redirect:/personal/login";
         }
-        return "/personal/login?result=tokken-lose";}
-
+        return "redirect:/personal/login?result=tokken-lose";}
 }
 
 
