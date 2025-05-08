@@ -31,7 +31,7 @@
     </update>
 
     <!--  마이페이지 기업회원 조회  -->
-    <select id="selectSponsorMypage" resultType="SponsorMypageDTO">
+    <select id="selectSponsorMypage" resultType="sponsorPostDTO">
         SELECT
             (SELECT COUNT(*)
              FROM tbl_post p

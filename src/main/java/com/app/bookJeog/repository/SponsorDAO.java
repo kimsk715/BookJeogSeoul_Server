@@ -1,6 +1,7 @@
 package com.app.bookJeog.repository;
 
 
+import com.app.bookJeog.domain.dto.SponsorPostDTO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.mapper.SponsorMapper;
 import lombok.RequiredArgsConstructor;
@@ -30,4 +31,9 @@ public class SponsorDAO {
     public void updateSponsorMember(SponsorMemberVO sponsorMemberVO, String newPasswd) {
         sponsorMapper.updatePassword(sponsorMemberVO, newPasswd);
     }
+
+    // 마이페이지 기업회원 조회
+    public SponsorPostDTO selectSponsorMypage(Long sponsorId){
+        return sponsorMapper.selectSponsorMypage(sponsorId);
+    };
 }
