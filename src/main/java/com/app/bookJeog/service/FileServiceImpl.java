@@ -121,7 +121,7 @@ public class FileServiceImpl implements FIleService {
     @Override
     public void uploadReceiverFiles(Long postId, List<MultipartFile> files) {
         String todayPath = getPath();
-        String rootPath = "C:/upload/" + todayPath;
+        String rootPath = "/upload/" + todayPath;
         File directory = new File(rootPath);
         if(!directory.exists()){
             directory.mkdirs();

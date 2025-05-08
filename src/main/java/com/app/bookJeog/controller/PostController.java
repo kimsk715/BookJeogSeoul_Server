@@ -307,7 +307,7 @@ public class PostController {
     public RedirectView write(@RequestParam String title, @RequestParam String content, @RequestParam(required = false) List<MultipartFile> files, HttpSession session) {
         log.info("첨부 파일 배열 : {}",files);
         DonateCertDTO donateCertDTO = new DonateCertDTO();
-        SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+        SponsorMemberDTO foundMember = (SponsorMemberDTO) session.getAttribute("sponsorMember");
         PostDTO postDTO = new PostDTO();
         postDTO.setPostType(PostType.DONATE_CERT);
         postDTO.setMemberId(foundMember.getId());
@@ -372,7 +372,7 @@ public class PostController {
         }
 
         DonateCertDTO donateCertDTO = new DonateCertDTO();
-        SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+        SponsorMemberDTO foundMember = (SponsorMemberDTO) session.getAttribute("sponsorMember");
         PostDTO postDTO = new PostDTO();
         donateCertDTO.setId(postId);
         donateCertDTO.setDonateCertTitle(title);
@@ -505,7 +505,7 @@ public class PostController {
     public RedirectView writeReceiverPost(@RequestParam String title, @RequestParam String content, @RequestParam(required = false) List<MultipartFile> files, HttpSession session) {
         log.info("첨부 파일 배열 : {}",files);
         ReceiverDTO receiverDTO = new ReceiverDTO();
-        SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+        SponsorMemberDTO foundMember = (SponsorMemberDTO) session.getAttribute("sponsorMember");
         PostDTO postDTO = new PostDTO();
         postDTO.setPostType(PostType.RECEIVER);
         postDTO.setMemberId(foundMember.getId());
@@ -569,7 +569,7 @@ public class PostController {
         }
 
         ReceiverDTO receiverDTO = new ReceiverDTO();
-        SponsorMemberVO foundMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+        SponsorMemberDTO foundMember = (SponsorMemberDTO) session.getAttribute("sponsorMember");
         PostDTO postDTO = new PostDTO();
 
 
