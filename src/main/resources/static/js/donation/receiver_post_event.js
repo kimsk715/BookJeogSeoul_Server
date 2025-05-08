@@ -194,12 +194,12 @@ addComment.addEventListener("click", async (e) => {
     const commentText = commentArea.value;
 
     // 비속어 검사
-    const isClean = await commentService.checkComment(commentText);
-    if (!isClean) {
-        alert("댓글에 비속어가 포함되어 있습니다.");
-        console.log("이건 말도안됀다")
-        return; // 중지
-    }
+    // const isClean = await commentService.checkComment(commentText);
+    // if (!isClean) {
+    //     alert("댓글에 비속어가 포함되어 있습니다.");
+    //     console.log("이건 말도안됀다")
+    //     return; // 중지
+    // }
 
     // 댓글 등록
     if (mentionId) {
