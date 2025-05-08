@@ -2,6 +2,7 @@ package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
 import com.app.bookJeog.domain.dto.SponsorMemberDTO;
+import com.app.bookJeog.domain.dto.SponsorPostDTO;
 import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import com.app.bookJeog.mapper.MemberMapper;
@@ -131,5 +132,9 @@ public class SponsorServiceImpl implements SponsorService {
         return code;
     }
 
+    // 마이페이지 기업회원 조회
+    public SponsorPostDTO getSponsorMypage(Long sponsorId) {
+        return sponsorDAO.selectSponsorMypage(sponsorId);
+    }
 
 }

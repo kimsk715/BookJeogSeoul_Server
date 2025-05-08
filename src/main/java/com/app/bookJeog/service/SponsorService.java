@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.SponsorMemberDTO;
+import com.app.bookJeog.domain.dto.SponsorPostDTO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 
 import java.util.Optional;
@@ -46,4 +47,7 @@ public interface SponsorService {
 
     // 이메일 중복검사
     Optional<SponsorMemberVO> selectEmailForPassword(SponsorMemberDTO sponsorMemberDTO);
+
+    // 마이페이지 기업회원 조회
+    public SponsorPostDTO getSponsorMypage(Long sponsorId);
 }
