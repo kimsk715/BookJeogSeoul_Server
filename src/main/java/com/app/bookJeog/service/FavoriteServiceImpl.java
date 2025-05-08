@@ -117,7 +117,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
-    public int countAllVoteByPostId(ReceiverLikeDTO receiverLikeDTO) {
+    public Integer countAllVoteByPostId(ReceiverLikeDTO receiverLikeDTO) {
         return favoriteDAO.countAllVoteByPostId(receiverLikeDTO.toVO());
     }
 
