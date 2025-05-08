@@ -40,7 +40,7 @@ public class FileServiceImpl implements FIleService {
             // 서버에서 쓸 경로
 //            String rootPath = "/upload/" + todayPath;
             // 로컬용 경로
-                String rootPath = "C:/upload/" + todayPath;
+                String rootPath = "/upload/" + todayPath;
             // 업로드할 폴더가 존재하지 않으면 생성
             File directory = new File(rootPath);
             if(!directory.exists()){
