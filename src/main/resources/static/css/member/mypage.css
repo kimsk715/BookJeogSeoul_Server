@@ -816,3 +816,9 @@ ul.report-list li:last-child div.progress-state{
     animation: fadeInOut 2.5s ease-in-out;
 }
 /* // 잠깐 뜨는 창(토스트) */
+
+.add-book.active {
+    color: white;
+    background-color: var(--text-03);
+    border: none;
+}
