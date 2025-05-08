@@ -497,18 +497,22 @@ public class PersonalController {
     @GetMapping("profile")
     @ResponseBody
     public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,
+
                                                   @RequestParam("name") String name) throws IOException {
         // 이미지 파일 경로 설정
         File imageFile = new File("C:/upload/" + path.replace("/", File.separator) + "/" + name);
+
 
         // 파일이 없으면 기본 이미지 사용
         if (!imageFile.exists()) {
             imageFile = new File("src/main/resources/static/images/common/user_profile_example.png");
         }
 
+
         // 이미지 파일을 바이트 배열로 읽기
         byte[] imageBytes = FileCopyUtils.copyToByteArray(imageFile);
         log.info("📷 이미지 path:", path, "파일명:", name);
+
 
         // 응답 반환
         return new ResponseEntity<>(imageBytes, HttpStatus.OK);
