@@ -37,6 +37,7 @@ public class WebController {
 
     // 메인으로 이동
     @GetMapping("main/main")
+
     public String goToMain(Model model, HttpSession session) throws IOException {
             if(session.getAttribute("member") == null && session.getAttribute("sponsorMember") == null) {
                 throw new LoginFailException("로그인 실패");
