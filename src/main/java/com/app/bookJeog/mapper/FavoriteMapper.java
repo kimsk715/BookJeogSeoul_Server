@@ -65,6 +65,6 @@ public interface FavoriteMapper {
     public List<Long> selectScrappedIsbnList(@Param("memberId") Long memberId, @Param("offset") int offset,
                                              @Param("orderType") String orderType);
 
-    public int countAllVoteByPostId(ReceiverLikeVO receiverLikeVO);
+    public Integer countAllVoteByPostId(ReceiverLikeVO receiverLikeVO);
 }
 
