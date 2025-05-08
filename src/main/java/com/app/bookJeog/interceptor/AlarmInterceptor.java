@@ -1,11 +1,7 @@
-
 package com.app.bookJeog.interceptor;
 
 import com.app.bookJeog.domain.dto.PersonalMemberDTO;
-import com.app.bookJeog.domain.vo.MemberVO;
-import com.app.bookJeog.domain.vo.PersonalMemberVO;
 import com.app.bookJeog.service.AlarmService;
-import com.app.bookJeog.service.AlarmServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
