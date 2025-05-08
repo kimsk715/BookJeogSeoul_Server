@@ -30,9 +30,11 @@ const receiverLayout = (() =>{
                 <td>${post.receiverLikeCount}</td>
                 <td><span class="status ${className}">${statusText}</span></td>
                 <td>
+                <a href="/post/receiver/post/${post.receiverDTO.id}">
                     <button type="button" class="detail-btn modal-detail-btn">
                         상세보기
                     </button>
+                    </a>
                 </td>
             </tr>
             `
