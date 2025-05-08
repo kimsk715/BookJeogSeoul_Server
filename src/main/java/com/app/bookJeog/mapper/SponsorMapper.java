@@ -1,6 +1,7 @@
 package com.app.bookJeog.mapper;
 
 
+import com.app.bookJeog.domain.dto.SponsorPostDTO;
 import com.app.bookJeog.domain.vo.SponsorMemberVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,7 @@ public interface SponsorMapper {
 
     // 비밀번호 변경
     public void updatePassword(SponsorMemberVO sponsorMemberVO, String newPasswd);
+
+    // 마이페이지 기업회원 조회
+    public SponsorPostDTO selectSponsorMypage(Long sponsorId);
 }

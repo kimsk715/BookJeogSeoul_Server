@@ -109,6 +109,7 @@ public class AlarmController {
             postAlarmInfoDTOS.add(postAlarmInfoDTO);
         }
 
+        List<String> postPaths = new ArrayList<>();
         model.addAttribute("postAlarms", postAlarmInfoDTOS);
 
         for(PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList){
@@ -121,7 +122,19 @@ public class AlarmController {
             postPaths.add(postPath);
 
         }
-        log.info(postAlarmInfoDTOS.toString());
+        model.addAttribute("postAlarms", postAlarmInfoDTOS);
+
+//        for(PostAlarmPersonalMemberDTO postAlarmPersonalMemberDTO : postAlarmPersonalMemberDTOList){
+//            Long postId = postAlarmPersonalMemberDTO.getPostId();
+//            String postPath = postService.getPostType(postId);
+//            postPath += postId;
+//            postAlarmInfoDTOS.forEach(postAlarmInfoDTO -> {
+////                postAlarmInfoDTO.setMemberName(alarmService.);
+//            });
+//            postPaths.add(postPath);
+//
+//        }
+//        log.info(postAlarmInfoDTOS.toString());
 
 
 
