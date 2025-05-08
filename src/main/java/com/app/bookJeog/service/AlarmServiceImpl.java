@@ -111,6 +111,7 @@ public class AlarmServiceImpl implements AlarmService {
 
         alarmDTO.setAlarmType(AlarmType.FOLLOW);
         alarmDTO.setAlarmReceiverId(memberId);
+        alarmDTO.setAlarmType(AlarmType.FOLLOW);
         alarmVO = toAlarmVO(alarmDTO);
 
         alarmDAO.setAlarm(alarmVO);

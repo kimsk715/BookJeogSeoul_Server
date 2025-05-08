@@ -29,4 +29,30 @@
         where sponsor_email = #{sponsorEmail}
 
     </update>
+
+    <!--  마이페이지 기업회원 조회  -->
+    <select id="selectSponsorMypage" resultType="SponsorMypageDTO">
+        SELECT
+            (SELECT COUNT(*)
+             FROM tbl_post p
+             WHERE p.member_id = sm.id
+               AND EXISTS (
+                 SELECT 1
+                 FROM tbl_donate_cert dc
+                 WHERE dc.id = p.id
+             )) AS donateCertCount,
+
+            (SELECT COUNT(*)
+             FROM tbl_post p
+             WHERE p.member_id = sm.id) AS totalPostCount,
+
+            sm.sponsor_name AS sponsorName,
+            f.file_name AS fileName,
+            f.file_path AS filePath
+
+        FROM tbl_sponsor_member sm
+                 LEFT JOIN tbl_member_profile mp ON mp.member_id = sm.id
+                 LEFT JOIN tbl_file f ON f.id = mp.id
+        WHERE sm.id = #{sponsorId}
+    </select>
 </mapper>
