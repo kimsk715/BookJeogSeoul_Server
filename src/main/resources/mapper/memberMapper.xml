@@ -259,18 +259,26 @@
 
     <!--썸네일 가져오기-->
     <select id="selectMemberInfoWithThumbnail" resultType="personalMemberPostMemberProfileDTO">
-        select p.member_id, member_nickname, file_path, file_name, count(p.id) as post_count
-        FROM tbl_personal_member m
-                 JOIN tbl_post p
-                      ON m.id = p.member_id
-                 join tbl_member_profile mp
-                      on m.id = mp.member_id
-                 join tbl_file f
-                      on mp.id = f.id
-        where post_type = 'BOOK_POST'
-        group by p.member_id, member_nickname, file_path, file_name
-        ORDER BY post_count DESC
-        limit 4
+        SELECT
+            m.member_nickname,
+            f.file_path,
+            f.file_name,
+            COUNT(p.id) AS post_count
+        FROM
+            tbl_personal_member m
+                JOIN
+            tbl_post p ON m.id = p.member_id
+                JOIN
+            tbl_member_profile mp ON m.id = mp.member_id
+                JOIN
+            tbl_file f ON mp.id = f.id
+        WHERE
+            p.post_type = 'BOOK_POST'
+        GROUP BY
+            m.member_nickname, f.file_path, f.file_name
+        ORDER BY
+            post_count DESC
+        LIMIT 4;
     </select>
 
 
