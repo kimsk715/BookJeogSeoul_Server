@@ -65,9 +65,12 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Optional<PersonalMemberDTO> checkEmail(String email) {
         Optional<PersonalMemberVO> memberVO = memberDAO.findByEmail(email);
-       PersonalMemberVO foundMemberVO = memberVO.orElseThrow(() -> new RuntimeException("Email not found"));
-        Optional<PersonalMemberDTO> foundMemberDTO = Optional.ofNullable(toPersonalMemberDTO(foundMemberVO));
-        return foundMemberDTO;
+        PersonalMemberDTO personalMemberDTO = new PersonalMemberDTO();
+        if (memberVO.isPresent()) {
+            PersonalMemberVO member = memberVO.get();
+            personalMemberDTO.setMemberEmail(member.getMemberEmail());
+        }
+        return Optional.of(personalMemberDTO);
     }
 
     @Override
@@ -212,6 +215,8 @@ public class MemberServiceImpl implements MemberService {
     // 비밀번호 찾기에서 등록되어있다면 인증메일발송
     public void sendMail(String email, HttpServletResponse response, HttpSession session) throws MessagingException {
         String code = createCode();
+        log.info(code);
+        log.info(email);
 
         // 1. 쿠키로 인증 코드 저장
         Cookie cookie = new Cookie("token", code);
@@ -264,7 +269,7 @@ public class MemberServiceImpl implements MemberService {
         helper.setSubject(title);
         helper.setText(body.toString(), true);
 
-        FileSystemResource fileSystemResource = new FileSystemResource(new File("src/main/resources/static/images/common/Logo.png"));
+        FileSystemResource fileSystemResource = new FileSystemResource(new File("/usr/bjseoul/Logo.png"));
         helper.addInline("logoImage", fileSystemResource);
 
         // 4. 메일 발송
@@ -298,7 +303,7 @@ public class MemberServiceImpl implements MemberService {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             StringBuilder stringBuilder = new StringBuilder();
             BufferedWriter bufferedWriter = null;
-            String redirectURI = "http://localhost:10000/personal/kakao/login";
+            String redirectURI = "http://43.201.248.187:10000/personal/kakao/login";
 
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);

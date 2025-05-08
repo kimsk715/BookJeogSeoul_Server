@@ -14,6 +14,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -24,6 +25,7 @@ import java.io.File;
 import java.util.Optional;
 import java.util.Random;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor @Transactional(rollbackFor = Exception.class)
 public class SponsorServiceImpl implements SponsorService {
@@ -45,9 +47,9 @@ public class SponsorServiceImpl implements SponsorService {
     }
 
     @Override
-    public void changePassword(SponsorMemberDTO sponsorMemberDTO, String newPasswd) {
+    public void changePassword(SponsorMemberDTO sponsorMemberDTO) {
         SponsorMemberVO sponsorMemberVO = toSponsorMemberVO(sponsorMemberDTO);
-        sponsorDAO.findSponsorMemberEmail(sponsorMemberVO);
+        sponsorDAO.updatePassword(sponsorMemberVO);
     }
 
 
@@ -115,7 +117,7 @@ public class SponsorServiceImpl implements SponsorService {
         helper.setSubject(title);
         helper.setText(body.toString(), true);
 
-        FileSystemResource fileSystemResource = new FileSystemResource(new File("src/main/resources/static/images/common/Logo.png"));
+        FileSystemResource fileSystemResource = new FileSystemResource(new File("/usr/bjseoul/Logo.png"));
         helper.addInline("logoImage", fileSystemResource);
 
         // 4. 메일 발송

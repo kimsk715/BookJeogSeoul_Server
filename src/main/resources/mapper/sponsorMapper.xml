@@ -25,9 +25,8 @@
     <!--단체 비밀번호 변경-->
     <update id="updateSponsorPasswd">
         update tbl_sponsor_member
-        set sponsor_password = #{newPasswd}
+        set sponsor_password = #{sponsorPassword}
         where sponsor_email = #{sponsorEmail}
-
     </update>
 
     <!--  마이페이지 기업회원 조회  -->

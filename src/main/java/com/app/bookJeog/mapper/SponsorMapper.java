@@ -19,7 +19,7 @@ public interface SponsorMapper {
 
 
     // 비밀번호 변경
-    public void updatePassword(SponsorMemberVO sponsorMemberVO, String newPasswd);
+    public void updateSponsorPasswd(SponsorMemberVO sponsorMemberVO);
 
     // 마이페이지 기업회원 조회
     public SponsorPostDTO selectSponsorMypage(Long sponsorId);

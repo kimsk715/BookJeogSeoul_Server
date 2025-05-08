@@ -22,6 +22,8 @@ const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
 
+
+
 const checkInput = () => {
     if (
         genderInput.value !== "" &&
@@ -256,7 +258,7 @@ nicknameclrBtn.addEventListener("mousedown", (e) => {
 const checkEmail = () => {
     emailcheckService.getTrueFalse(document.querySelector("#bjs-email").value)
 }
-
+console.log(checkEmail())
 const checkBirth = () => {
     if (birthInput.value.length > 8) {
         checkBtn.style.opacity = "0.5";
@@ -264,13 +266,15 @@ const checkBirth = () => {
     }
 };
 
-
+console.log(!pattern.test(emailInput.value))
 
 checkBtn.addEventListener("click", (e) => {
     if ((emailInput.value && !pattern.test(emailInput.value)) ||
         birthInput.value.length < 6 || checkEmail())
     {
-        console.log(checkEmail());
+        nextBtn.preventDefault()
+        nextBtn.style.opacity = "0.5";
+        nextBtn.style.cursor = "not-allowed";
         modalHeader.innerText = "형식&중복 오류";
         modalBody.innerText = "이메일 또는 생년월일 형식&중복을 확인해주세요.";
         modal.classList.remove("fade-out");

@@ -17,3 +17,8 @@ from tbl_comment c join tbl_member m
 on c.member_id = m.id
 join tbl_post p
 on c.post_id = p.id
+
+
+
+alter table tbl_book_donate
+    alter column book_received_status set default '수취대기';

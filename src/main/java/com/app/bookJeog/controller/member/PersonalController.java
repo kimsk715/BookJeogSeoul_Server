@@ -343,9 +343,7 @@ public class PersonalController {
         PersonalMemberDTO foundMember = memberServiceImpl.loginPersonalMember(personalMemberDTO);
 
         if(foundMember != null) {
-            log.info("여기들어옴");
             session.setAttribute("member", foundMember);
-            log.info("여기까지 들어옴");
             return "redirect:/main/main";
         } else {
             return "redirect:/personal/login?result=fail";
@@ -445,22 +443,28 @@ public class PersonalController {
     public String login(@RequestParam String code, HttpSession session) {
         // 1. 전달받은 인가 코드(code)를 이용해 액세스 토큰 요청
         String token = memberServiceImpl.getKakaoAccessToken(code);
+        log.info("여기까지옴 1");
 
         // 2. 액세스 토큰을 사용해 카카오로부터 사용자 정보 조회
         Optional<PersonalMemberDTO> foundInfo = memberServiceImpl.getKakaoInfo(token);
-
+        log.info("여기까지옴 2");
 
         // 3. 사용자 정보가 없을 경우 예외 발생
         PersonalMemberDTO personalMemberDTO = foundInfo.orElseThrow(RuntimeException::new);
+        log.info("여기까지옴 3");
+
 
         // 4. 사용자 이메일로 기존 가입 여부 확인
         Optional<PersonalMemberDTO> foundMember = memberServiceImpl.checkEmail(personalMemberDTO.getMemberEmail());
         log.info("foundMember: {}", foundMember);
+        log.info("여기까지옴 4");
+
         // 5. 가입된 회원이 없으면 회원가입 처리
-        if (foundMember.isEmpty()) {
+        if (foundMember.isPresent()) {
             session.setAttribute("tempMemberInfo", personalMemberDTO);
             return "redirect:/personal/more-info-for-kakao";// 회원가입 로직 실행
         }
+        log.info("여기까지옴 5");
 
         // 6. 세션에 회원 정보 저장 (로그인 상태 유지 목적)
         session.setAttribute("member", foundMember.orElseThrow(RuntimeException::new));
