@@ -19,7 +19,7 @@
 
     <!--인기도서 최다조회-->
     <select id="selectTopViewBook" resultType="memberHistoryVO">
-        SELECT  id, member_id, book_isbn, count(*) as count
+        SELECT  book_isbn, count(*) as count
         FROM tbl_member_history
         GROUP BY book_isbn
         order by count desc
@@ -37,7 +37,7 @@
 
     <!--인기독후감 도서-->
     <select id="selectTopBookPost" resultType="bookPostVO">
-        select  member_id, book_post_title, book_isbn, count(*) as count
+        select  book_isbn, count(*) as count
         from tbl_book_post_like bpl
         join tbl_book_post bp
         on bpl.book_post_id = bp.id
