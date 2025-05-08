@@ -259,7 +259,7 @@
 
     <!--썸네일 가져오기-->
     <select id="selectMemberInfoWithThumbnail" resultType="personalMemberPostMemberProfileDTO">
-        select member_nickname, file_path, file_name, count(p.id) as post_count
+        select p.member_id, member_nickname, file_path, file_name, count(p.id) as post_count
         FROM tbl_personal_member m
                  JOIN tbl_post p
                       ON m.id = p.member_id
@@ -268,6 +268,7 @@
                  join tbl_file f
                       on mp.id = f.id
         where post_type = 'BOOK_POST'
+        group by p.member_id, member_nickname, file_path, file_name
         ORDER BY post_count DESC
         limit 4
     </select>

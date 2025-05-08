@@ -119,8 +119,6 @@ public class AlarmController {
             postAlarmInfoDTOS.forEach(postAlarmInfoDTO -> {
 //                postAlarmInfoDTO.setMemberName(alarmService.);
             });
-            postPaths.add(postPath);
-
         }
         model.addAttribute("postAlarms", postAlarmInfoDTOS);
 
@@ -135,7 +133,6 @@ public class AlarmController {
 //
 //        }
 //        log.info(postAlarmInfoDTOS.toString());
-
 
 
         return "main/alarm";
