@@ -37,9 +37,18 @@ public class SponsorController {
     private HttpSession session;
 
     // 단체 마이페이지 조회
-    @GetMapping("/mypage/{id}")
-    public String getSponsorMypage(@PathVariable("id") Long sponsorId, Model model) {
+    @GetMapping("/mypage")
+    public String getSponsorMypage(HttpSession session, Model model) {
+        SponsorMemberDTO sponsorMember = (SponsorMemberDTO) session.getAttribute("sponsorMember");
+
+        if (sponsorMember == null) {
+            // 세션에 sponsorMember가 없는 경우, 로그인 페이지로 리다이렉트
+            return "redirect:/sponsor/login/sponsorship";
+        }
+
+        Long sponsorId = sponsorMember.getId();
         SponsorPostDTO sponsor = sponsorService.getSponsorMypage(sponsorId);
+
         model.addAttribute("sponsor", sponsor);
         return "organization/mypage";
     }
