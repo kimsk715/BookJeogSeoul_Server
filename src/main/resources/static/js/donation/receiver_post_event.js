@@ -194,12 +194,12 @@ addComment.addEventListener("click", async (e) => {
     const commentText = commentArea.value;
 
     // 비속어 검사
-    const isClean = await commentService.checkComment(commentText);
-    if (!isClean) {
-        alert("댓글에 비속어가 포함되어 있습니다.");
-        console.log("이건 말도안됀다")
-        return; // 중지
-    }
+    // const isClean = await commentService.checkComment(commentText);
+    // if (!isClean) {
+    //     alert("댓글에 비속어가 포함되어 있습니다.");
+    //     console.log("이건 말도안됀다")
+    //     return; // 중지
+    // }
 
     // 댓글 등록
     if (mentionId) {
@@ -250,6 +250,7 @@ const commentLayout =(() =>{
         const addedComment = document.createElement('li');
         addedComment.classList.add("comment-item");
         let name = (member !== null) ? member.memberName : sponsorMember.sponsorName;
+        let id = (member !== null) ? member.id : sponsorMember.id;
         if(mentionedName != null){
             addedComment.innerHTML = `
                                 <div class="comment-item-inner flex-container">
@@ -262,7 +263,7 @@ const commentLayout =(() =>{
                                         <div class="com-contents-head">
                                             <div class="com-contents-top flex-container">
                                                 <p class="nickname">
-                                                    <a href="#">${name}</a>
+                                                    <a href="/personal/mypage/${id}">${name}</a>
                                                 </p>
                                             </div>
                                             <span class="com-contents-date">2025-04-28 11:35:49</span>

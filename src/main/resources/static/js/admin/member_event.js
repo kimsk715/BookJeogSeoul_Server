@@ -118,4 +118,8 @@ adminRegisterButton.addEventListener("click",(e)=> {
     memberService.insertAdmin(infoArray);
 })
 
-
+document.addEventListener("click",(e) => {
+    if(e.target.classList.contains("admin-detail-btn")){
+        alert("추후 서비스 상황에 따라 기능을 추가할 예정입니다.")
+    }
+})
