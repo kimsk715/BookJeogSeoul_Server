@@ -33,6 +33,16 @@
                                             <p class="txt" th:text="|${comment.memberNickname}님이 포스트에 댓글을 남겼습니다.|"></p> <time class="time">2025.04.05</time>
                                         </div>
                                     </a></li>
+                                <li th:each="followAlarm : ${followAlarmPath}">
+                                    <a th:href="${followAlarm.followPath}">
+                                        <div class="img"><img
+                                                src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/49b7b494d18c580785ad15efa1c7eb46.jpg">
+                                        </div>
+                                        <div class="context"><!---->
+                                            <p class="txt" th:text="|[내서재 알림] ${followAlarm.memberNickName}님이 회원님을 팔로우했습니다|">
+                                            </p> <time class="time">2025.04.04</time>
+                                        </div>
+                                    </a></li>
 <!--                                <li th:each="followAlarm : ${followAlarmPath}">-->
 <!--                                    <a th:src="followAlarm.">-->
 <!--                                        <div class="img"><img-->

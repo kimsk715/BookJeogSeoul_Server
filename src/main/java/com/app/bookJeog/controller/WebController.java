@@ -10,6 +10,8 @@ import com.app.bookJeog.service.MemberServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,10 +40,11 @@ public class WebController {
     // 메인으로 이동
     @GetMapping("main/main")
 
-    public String goToMain(Model model, HttpSession session) throws IOException {
+    public String goToMain(Model model, HttpSession session) throws IOException, JSONException {
             if(session.getAttribute("member") == null && session.getAttribute("sponsorMember") == null) {
                 throw new LoginFailException("로그인 실패");
             }
+
 
             model.addAttribute("bookInfoDTO",bookService.getPopularBooks());
             List<TopBookVO> bookInfoDTOList = bookService.getPopularBooks();
@@ -50,6 +53,7 @@ public class WebController {
                 TopBookDTO topBookDTO = new TopBookDTO();
                 topBookDTO.setTopBookVO(topBookVO);
                 topBookDTO.setImageUrl(aladinService.getBookCover(Long.valueOf(topBookVO.getIsbn())));
+
                 topBookDTOS.add(topBookDTO);
             }
         model.addAttribute("topBookDTOS",topBookDTOS);
@@ -67,12 +71,17 @@ public class WebController {
                // 새로운 DTO 객체 생성
                TopViewBookDTO topViewBookDTO = new TopViewBookDTO();
 
+
                // 알라딘 API를 통해 책 표지 이미지 URL 가져오기
 
                topViewBookDTO.setImageUrl(aladinService.getBookCover(memberHistoryVO.getBookIsbn()));
 
                // ISBN 저장
                topViewBookDTO.setIsbn(memberHistoryVO.getBookIsbn());
+
+               // 줄거리 저장
+               JSONObject json = aladinService.getBookInfo(topViewBookDTO.getIsbn());
+               topViewBookDTO.setDescription(json.getString("description"));
 
                // ISBN으로 책 정보를 조회해서 저자(author) 저장
                topViewBookDTO.setAuthor(bookService.getBookByIsbn(topViewBookDTO.getIsbn()).get(0).getAuthor());
@@ -116,10 +125,15 @@ public class WebController {
       try {
           for (BookPostVO bookPostVO : tempPost) {
               TopBookPostDTO topBookPostDTO = new TopBookPostDTO();
+
+
+              JSONObject json = aladinService.getBookInfo(bookPostVO.getBookIsbn());
+
               topBookPostDTO.setIsbn(bookPostVO.getBookIsbn());
               topBookPostDTO.setImageUrl(aladinService.getBookCover(bookPostVO.getBookIsbn()));
               topBookPostDTO.setTitle(bookService.getBookByIsbn(bookPostVO.getBookIsbn()).get(0).getTitle());
               topBookPostDTO.setAuthor(bookService.getBookByIsbn(bookPostVO.getBookIsbn()).get(0).getAuthor());
+              topBookPostDTO.setDescription(json.optString("description"));
               topBookPostDTOS.add(topBookPostDTO);
           }
 

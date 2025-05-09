@@ -41,7 +41,7 @@ public interface SponsorService {
 
 
     // 비밀번호 변경
-    void changePassword(SponsorMemberDTO sponsorMemberDTO, String newPasswd);
+    void changePassword(SponsorMemberDTO sponsorMemberDTO);
 
 
 
