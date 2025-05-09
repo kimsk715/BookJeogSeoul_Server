@@ -455,12 +455,13 @@ public class PersonalController {
 
 
         // 4. 사용자 이메일로 기존 가입 여부 확인
-        Optional<PersonalMemberDTO> foundMember = memberServiceImpl.checkEmail(personalMemberDTO.getMemberEmail());
+        Optional<PersonalMemberDTO> foundMember = memberService.checkEmail(personalMemberDTO.getMemberEmail());
+       PersonalMemberDTO checkMember = foundMember.orElse(personalMemberDTO);
         log.info("foundMember: {}", foundMember);
         log.info("여기까지옴 4");
 
         // 5. 가입된 회원이 없으면 회원가입 처리
-        if (foundMember.isPresent()) {
+        if (checkMember.getMemberEmail() == null) {
             log.info("여기들어옴");
             session.setAttribute("tempMemberInfo", personalMemberDTO);
             log.info("personalMemberDTO: {}", personalMemberDTO);
