@@ -103,6 +103,7 @@ const commentLayout =(() =>{
         const addedComment = document.createElement('li');
         addedComment.classList.add("comment-item");
         let name = (member !== null) ? member.memberName : sponsorMember.sponsorName;
+        let id = (member !== null) ? member.id : sponsorMember.id;
         if(mentionedName != null){
             addedComment.innerHTML = `
                                 <div class="comment-item-inner flex-container">
@@ -115,7 +116,7 @@ const commentLayout =(() =>{
                                         <div class="com-contents-head">
                                             <div class="com-contents-top flex-container">
                                                 <p class="nickname">
-                                                    <a href="#">${name}</a>
+                                                    <a href="/personal/mypage/${id}">${name}</a>
                                                 </p>
                                             </div>
                                             <span class="com-contents-date">2025-04-28 11:35:49</span>
@@ -155,7 +156,7 @@ const commentLayout =(() =>{
                                         <div class="com-contents-head">
                                             <div class="com-contents-top flex-container">
                                                 <p class="nickname">
-                                                    <a href="#">${name}</a>
+                                                    <a href="/personal/mypage/${id}">${name}</a>
                                                 </p>
                                             </div>
                                             <span class="com-contents-date">2025-04-28 11:35:49</span>

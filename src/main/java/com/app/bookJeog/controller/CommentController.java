@@ -56,7 +56,7 @@ public class CommentController implements MemberControllerDocs {
             commentDTO.setMemberId(foundMember.getId());
         }
         else if(session.getAttribute("sponsorMember") != null){
-            SponsorMemberVO foundSponsorMember = (SponsorMemberVO) session.getAttribute("sponsorMember");
+            SponsorMemberDTO foundSponsorMember = (SponsorMemberDTO) session.getAttribute("sponsorMember");
             commentDTO.setMemberId(foundSponsorMember.getId());
         }
         else{

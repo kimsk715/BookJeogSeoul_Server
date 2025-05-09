@@ -151,8 +151,8 @@
         limit #{offset}, 18
     </select>
 
-    <select id="countAllVoteByPostId" resultType="_int">
-        select sum(receiver_like_point)
+    <select id="countAllVoteByPostId" resultType="Integer">
+        select coalesce(sum(receiver_like_point),0)
         from tbl_receiver_like
         where member_id =#{memberId} and receiver_id = #{receiverId}
     </select>

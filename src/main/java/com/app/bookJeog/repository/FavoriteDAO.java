@@ -98,7 +98,7 @@ public class FavoriteDAO {
         return favoriteMapper.selectScrappedIsbnList(memberId, offset, orderType);
     }
 
-    public int countAllVoteByPostId(ReceiverLikeVO receiverLikeVO){
+    public Integer countAllVoteByPostId(ReceiverLikeVO receiverLikeVO){
         return favoriteMapper.countAllVoteByPostId(receiverLikeVO);
     }
 }

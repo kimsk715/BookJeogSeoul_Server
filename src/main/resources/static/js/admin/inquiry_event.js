@@ -67,7 +67,7 @@ sponsorInquiryWrapper.addEventListener("click",(e) =>{
 
 document.addEventListener("click",(e) =>{
     const inquiryAnswerArea = commonModalContainer.querySelector("#sponsor-inquiry-answer")
-    if(e.target.classList.contains("save-btn") && e.target.classList.contains("sponsor-inquiry-footer")){
+    if(e.target.classList.contains("save-btn") && e.target.parentElement.classList.contains("sponsor-inquiry-footer")){
         const inquiryAnswer = inquiryAnswerArea.value;
         const inquiryId = e.target.value;
         inquiryService.sponsorInquiryAnswer(inquiryId, inquiryAnswer)

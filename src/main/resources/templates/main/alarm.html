@@ -43,6 +43,16 @@
                                             </p> <time class="time">2025.04.04</time>
                                         </div>
                                     </a></li>
+<!--                                <li th:each="followAlarm : ${followAlarmPath}">-->
+<!--                                    <a th:src="followAlarm.">-->
+<!--                                        <div class="img"><img-->
+<!--                                                src="https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/49b7b494d18c580785ad15efa1c7eb46.jpg">-->
+<!--                                        </div>-->
+<!--                                        <div class="context">&lt;!&ndash;&ndash;&gt;-->
+<!--                                            <p class="txt">[내서재 알림]<br>LeJulesVerne님이 회원님을 팔로우했습니다-->
+<!--                                            </p> <time class="time">2025.04.04</time>-->
+<!--                                        </div>-->
+<!--                                    </a></li>-->
                                 <li th:each="mention: ${mentionAlarms}"><a
                                         th:href="${mention.mentionedPath}">
                                         <div class="img"><img

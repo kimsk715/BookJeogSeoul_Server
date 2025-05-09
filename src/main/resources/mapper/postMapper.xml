@@ -178,7 +178,7 @@
 
     <!-- top1 독후감 select -->
     <select id="selectBestPost" resultType="monthlyBookPostVO">
-        select *
+        select mbp.id, book_post_title, book_post_text, mbp.book_post_id, createdDate, updatedDate, book_post_like_count, bookPostVoteCount
         from tbl_monthly_book_post mbp
                  left join
              (
