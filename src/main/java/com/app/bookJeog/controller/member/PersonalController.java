@@ -461,7 +461,9 @@ public class PersonalController {
 
         // 5. 가입된 회원이 없으면 회원가입 처리
         if (foundMember.isPresent()) {
+            log.info("여기들어옴");
             session.setAttribute("tempMemberInfo", personalMemberDTO);
+            log.info("personalMemberDTO: {}", personalMemberDTO);
             return "redirect:/personal/more-info-for-kakao";// 회원가입 로직 실행
         }
         log.info("여기까지옴 5");
@@ -478,6 +480,7 @@ public class PersonalController {
     @GetMapping("more-info-for-kakao")
     public String moreInfoForKakao(Model model, HttpSession session) {
         PersonalMemberDTO tempMemberInfo = (PersonalMemberDTO) session.getAttribute("tempMemberInfo");
+        log.info("tempMemberInfo: {}", tempMemberInfo);
         model.addAttribute("tempMemberInfo", tempMemberInfo);
         return "register/register-kakao-member";
     }
@@ -485,6 +488,7 @@ public class PersonalController {
     // 카카오 회원가입 완료
     @PostMapping("kakako-register-member")
     public String joinKakaoMember(MemberPersonalMemberDTO memberPersonalMemberDTO) {
+        log.info("memberPersonalMemberDTO: {}", memberPersonalMemberDTO);
         memberServiceImpl.insertPersonalMember(memberPersonalMemberDTO);
         return "redirect:/personal/login";
     };
