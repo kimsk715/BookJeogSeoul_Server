@@ -1,0 +1,182 @@
+.popup {
+    display: -ms-flexbox;
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.8);
+    outline: 0;
+}
+
+.popup_inner {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 93%;
+    max-width: 328px;
+    min-height: 200px;
+    overflow: hidden;
+    padding: 24px 24px 80px;
+    max-height: 80%;
+    background-color: var(--ui-up-03);
+    word-break: keep-all;
+    border-radius: 6px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.popup.alert .popup_inner {
+    max-width: 328px;
+}
+
+.popup_inner .popup_content {
+    overflow-y: auto;
+    margin: -24px -16px;
+    padding: 24px 16px;
+}
+
+.popup_inner_header {
+    font-size: 20px;
+    color: var(--text-01);
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 16px;
+}
+
+.popup_inner_body {
+    word-break: keep-all;
+    color: var(--text-03);
+}
+
+.popup.alert .popup_inner_body {
+    word-break: keep-all;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-height: 50px;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    color: var(--text-03);
+    line-height: 22px;
+}
+
+.mds-radio {
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+.police-popup .report-list .mds-radio {
+    width: 100%;
+}
+
+.mds-radio input {
+    position: absolute;
+}
+
+.mds-radio .mds-radio-view {
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.police-popup .report-list .mds-radio .mds-radio-view {
+    width: 100%;
+    height: 48px;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+
+.mds-radio:not(.mds-radio--button) .check {
+    overflow: hidden;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 6px;
+    border: 2px solid var(--ui-06);
+    border-radius: 50%;
+    transition: border-width .2s linear;
+}
+
+.police-popup .report-list .mds-radio .mds-radio-view .check {
+    margin-right: 0;
+}
+
+
+.mds-radio:not(.mds-radio--button).mds-radio:has(input[type=radio]:checked).mds-radio--secondary .check {
+    border-width: 6px;
+    border-color: var(--secondary);
+}
+
+.mds-radio:not(.mds-radio--button).mds-radio:has(input[type=radio]:checked) .label {
+    color: var(--text-01);
+}
+
+.mds-radio .label {
+    -ms-flex: 1;
+    flex: 1;
+    font-size: 14px;
+    transition: color .3s linear;
+}
+
+.mds-radio:not(.mds-radio--button) .label {
+    color: var(--text-04);
+}
+
+.popup_inner_footer {
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 56px;
+    margin: 24px -24px 0;
+}
+
+.popup_inner_footer>a, .popup_inner_footer>button {
+    -ms-flex: 1;
+    flex: 1;
+    background: var(--primary);
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #242424;
+}
+
+.popup_inner_footer>a.gray, .popup_inner_footer>button.gray {
+    background-color: var(--cancel);
+    color: var(--text-01);
+}
+
+.police-popup .btn-review-police:disabled {
+    opacity: .4;
+}

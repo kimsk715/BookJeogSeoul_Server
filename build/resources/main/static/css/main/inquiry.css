@@ -1,0 +1,393 @@
+#wrap.show-top-header .content {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.customer {
+    padding-bottom: 0;
+}
+
+.back-component {
+    height: 48px;
+    background: var(--ui-background);
+}
+
+.back-component.border-hidden {
+    border: none!important;
+}
+
+.back-component .back {
+    position: relative;
+    max-width: var(--header-width);
+    margin: 0 auto;
+    height: 48px;
+}
+
+
+.back-component .back .close-button {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    width: 24px;
+    height: 24px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.back-component .back .close-button {
+    display: none;
+}
+
+.millieroad-button-list, .web-mount .back-component .close-button, .web-mount .back-component.pc-hidden {
+    display: none;
+}
+
+.back-component i[class^=mds-icon-] {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 23px;
+    color: var(--text-01);
+}
+
+.back-component .back h2 {
+    overflow: hidden;
+    padding: 0 45px;
+    font-size: 18px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    line-height: 48px;
+    color: var(--text-01);
+}
+
+.customer-container {
+    padding: 0;
+}
+
+.customer-container .faq-nav {
+    background: var(--ui-background);
+    padding: 24px 20px;
+}
+
+.customer-container .faq-nav ul {
+    display: -ms-flexbox;
+    display: flex;
+    box-shadow: 0 0 2px rgba(0,0,0,.2),2px 2px 6px rgba(0,0,0,.1);
+    border-radius: 12px;
+    background: var(--ui-up-01);
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.customer-container .faq-nav ul li {
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+    padding: 11px 12px;
+    cursor: pointer;
+}
+
+.customer-container .faq-nav ul li.active {
+    background: var(--secondary);
+    color: var(--ui-background);
+    font-weight: 700;
+}
+
+.customer-container .faq-nav ul li.active.question {
+    border-radius: 12px 0 0 12px;
+}
+
+.customer-content {
+    max-width: var(--customer-width);
+    margin: 0 auto;
+    background: var(--ui-background);
+}
+
+.customer-content[data-v-71f65a12] {
+    max-width: var(--customer-width);
+    margin: 0 auto;
+    background: var(--ui-background);
+}
+
+.question .form{
+    background: var(--ui-02);
+}
+
+.question .form .question-header{
+    background: var(--ui-background);
+}
+
+.question .form .select-box{
+    padding: 24px;
+    border-bottom: 1px solid var(--ui-06);
+}
+
+.question .form .select-box h4{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.question .form .select-box .mds-select{
+    width: 100%;
+}
+
+.question .form .select-box .inquiry-type{
+    top: 63.3056px;
+}
+.question .form .question-body {
+    background: var(--ui-background);
+    margin-bottom: 12px;
+    padding: 24px;
+}
+
+.question .form .question-body .fillin {
+    margin-bottom: 16px;
+}
+
+.question .form .question-body .fillin .upload {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.question .form .question-body .fillin .upload .input-file {
+    display: none;
+}
+
+.question .form .question-body .fillin .upload .input-file [type=file] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    opacity: 0;
+    display: none;
+}
+
+.question .form .question-body .fillin .upload label {
+    color: var(--ui-09);
+    border-radius: 4px;
+    text-align: center;
+    width: 100%;
+    border: 1px solid var(--ui-09);
+    padding: 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+.question .form .question-body .fillin .upload label:before {
+    content: "";
+    background-image: url("https://d3udu241ivsax2.cloudfront.net/v3/images/customer/camera.248d53b7eb8aa6c73569441da1f6dcc4.png");
+    background-size: 24px;
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-52px,-50%);
+    transform: translate(-52px,-50%);
+}
+
+.question .form .question-body .fillin .filelist {
+    display: -ms-flexbox;
+    display: flex;
+    border: 1px solid var(--ui-06);
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px 4px;
+    margin-bottom: 4px;
+    min-height: 125px;
+}
+
+.question .form .question-body .fillin .filelist li {
+    margin: 4px;
+    max-width: 105px;
+    max-height: 105px;
+    overflow: hidden;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.question .form .question-body .fillin .filelist li div {
+    position: relative;
+    margin: 0 auto;
+}
+
+.question .form .question-body .fillin .filelist li div img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    max-width: 105px;
+    max-height: 105px;
+    min-height: 105px;
+    min-width: 105px;
+}
+
+.question .form .question-body .fillin .filelist li div button {
+    position: absolute;
+    background-image: url(https://d3udu241ivsax2.cloudfront.net/v3/images/customer/close.f5ee2f39cad6fa837e3ee250ab9489a2.png);
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    background-size: 24px;
+}
+
+
+.question .toast {
+    margin: 2px 8px;
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--text-04);
+}
+
+
+.question .form .question-footer{
+    background: var(--ui-background);
+    padding: 24px;
+}
+
+.question .form .question-footer ul{
+    margin-bottom: 24px;
+}
+
+.check-box li {
+    margin-bottom: 12px;
+}
+
+.question .form .question-footer ul .check-box-list{
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
+}
+
+.question .form .question-footer ul .check-box-list button{
+    padding: 0;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+    -webkit-text-decoration-line: underline;
+    text-decoration-line: underline;
+    color: var(--text-04);
+    right: 0;
+    position: absolute;
+}
+
+.question .form .question-footer strong{
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--text-03);
+    font-weight: 700;
+}
+
+.question .form .question-footer p{
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--text-04);
+    text-indent: -8px;
+    padding-left: 8px;
+    margin-top: 8px;
+}
+
+.question .form .question-footer p:before {
+    content: "・";
+    margin-right: 4px;
+}
+
+.question .form .question-footer p em{
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--danger);
+}
+
+/* 답변 섹션 */
+.empty-data{
+    padding-top : 125px
+}
+
+.empty-data img{
+    max-width : 80px;
+    margin: 0 auto;
+    display: block;
+}
+
+.empty-data p{
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    color: var(--text-04);
+    margin-top: 8px;
+}
+ol.list-inner li, ul.list-inner li {
+    border-bottom: 1px solid rgba(176,179,188,.5);
+}
+
+ol.list-inner li:last-child, ul.list-inner li:last-child {
+    border: none;
+}
+
+ol.list-inner li .question, ul.list-inner li .question {
+    cursor: pointer;
+    padding: 20px 24px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+}
+
+ol.list-inner li .question .bundle, ul.list-inner li .question .bundle {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+ol.list-inner li .question .bundle .category-name, ul.list-inner li .question .bundle .category-name {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--text-01);
+}
+
+ol.list-inner li .question p, ul.list-inner li .question p {
+    font-size: 16px;
+    line-height: 22px;
+    color: var(--text-01);
+    padding-right: 34px;
+}
+
+ol.list-inner li .write-date, ul.list-inner li .write-date {
+    font-size: 12px;
+    line-height: 18px;
+    color: var(--text-04);
+    margin-top: 4px;
+}
+
+ol.list-inner li .answer, ul.list-inner li .answer {
+    background: var(--ui-02);
+    display: none;
+}
+
+ol.list-inner li.active .answer, ul.list-inner li.active .answer {
+    display: block;
+}
+
+ol.list-inner li .answer .inner, ul.list-inner li .answer .inner {
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--text-01);
+    word-break: break-all;
+}

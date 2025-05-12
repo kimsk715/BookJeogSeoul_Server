@@ -66,5 +66,7 @@ public interface FavoriteMapper {
                                              @Param("orderType") String orderType);
 
     public Integer countAllVoteByPostId(ReceiverLikeVO receiverLikeVO);
+
+    public void voteBookPost(Long memberId, Long bookPostId);
 }
 

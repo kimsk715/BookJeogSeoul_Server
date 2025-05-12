@@ -2,6 +2,7 @@ package com.app.bookJeog.service;
 
 
 import com.app.bookJeog.domain.dto.NoticeDTO;
+import com.app.bookJeog.domain.dto.NoticeInfoDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.NoticeVO;
 import java.util.List;
@@ -25,5 +26,7 @@ public interface NoticeService {
 
     public void updateNotice(NoticeVO noticeVO);
 
-    public void insertNotice(NoticeVO noticeVO);
+    public NoticeVO insertNotice(NoticeVO noticeVO);
+
+    public List<NoticeInfoDTO> getAllNoticeClient();
 }

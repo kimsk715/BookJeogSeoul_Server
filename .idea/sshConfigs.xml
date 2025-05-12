@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="3.34.183.241" id="72dc8868-8c82-4ef3-8d0a-c7c87cbe9d1e" keyPath="O:\gb_0900_ksg\aws\bjSEOUL.pem" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

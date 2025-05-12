@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.app.bookJeog.mapper.SponsorMapper">
+
+
+    <!--단체 로그인-->
+    <select id="loginSponsorMember" resultType="SponsorMemberVO">
+        select id, sponsor_id, sponsor_password, sponsor_name, sponsor_main_address, sponsor_sub_address, sponsor_phone_number
+        from tbl_sponsor_member
+        where sponsor_password = #{sponsorPassword} and sponsor_id = #{sponsorId}
+    </select>
+
+
+    <!--단체 비밀번호 찾기전 정보조회 -->
+    <select id="selectSponsorMember" resultType="SponsorMemberVO">
+        select *
+        from tbl_sponsor_member
+        where sponsor_email = #{sponsorEmail}
+    </select>
+
+    
+    
+    
+    
+    <!--단체 비밀번호 변경-->
+    <update id="updateSponsorPasswd">
+        update tbl_sponsor_member
+        set sponsor_password = #{sponsorPassword}
+        where sponsor_email = #{sponsorEmail}
+    </update>
+
+    <!--  마이페이지 기업회원 조회  -->
+    <select id="selectSponsorMypage" resultType="sponsorPostDTO">
+        SELECT
+            (SELECT COUNT(*)
+             FROM tbl_post p
+             WHERE p.member_id = sm.id
+               AND EXISTS (
+                 SELECT 1
+                 FROM tbl_donate_cert dc
+                 WHERE dc.id = p.id
+             )) AS donateCertCount,
+
+            (SELECT COUNT(*)
+             FROM tbl_post p
+             WHERE p.member_id = sm.id) AS totalPostCount,
+
+            sm.sponsor_name AS sponsorName,
+            f.file_name AS fileName,
+            f.file_path AS filePath
+
+        FROM tbl_sponsor_member sm
+                 LEFT JOIN tbl_member_profile mp ON mp.member_id = sm.id
+                 LEFT JOIN tbl_file f ON f.id = mp.id
+        WHERE sm.id = #{sponsorId}
+    </select>
+</mapper>

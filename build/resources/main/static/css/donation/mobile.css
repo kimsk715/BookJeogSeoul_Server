@@ -1,0 +1,234 @@
+@media (max-width: 999px) {
+    #wrap.show-header {
+        padding-bottom: 50px;
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 51;
+        padding-top: env(safe-area-inset-top);
+        border-bottom: 0;
+        opacity: 1;
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header.on {
+        background: #000;
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header.floating {
+        background: var(--ui-background);
+        color: var(--text-01) !important;
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header.background {
+        background: var(--ui-background);
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header.floating.on {
+        background: var(--ui-background);
+    }
+}
+
+@media (max-width: 999px) and (prefers-color-scheme: dark) {
+    .top-header.floating.on {
+        background: #000;
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header header {
+        height: 44px;
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header nav {
+        display: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 131;
+        padding-bottom: env(safe-area-inset-bottom);
+        border-top: 1px solid var(--ui-06);
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+}
+
+@media (max-width: 999px) {
+    .show-header .top-header nav {
+        display: block;
+        background-color: var(--ui-up);
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header nav .gnb {
+        width: 100%;
+        max-width: 700px;
+        height: 49px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header nav .gnb li {
+        -ms-flex: 1;
+        flex: 1;
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header nav .gnb li a {
+        display: block;
+        height: 49px;
+        padding: 6px 0 0;
+        font-size: 11px;
+        text-align: center;
+        color: var(--text-03);
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header nav .gnb li a:before {
+        overflow: hidden;
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin: 0 auto 3px;
+        content: "";
+        background-position: 0 0;
+        background-repeat: no-repeat;
+        background-size: 24px;
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header nav .gnb li:first-child a:before {
+        background-image: url(https://d3udu241ivsax2.cloudfront.net/v3/images/common/gnb-today.147349a….png);
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header nav .gnb li a {
+        display: block;
+        height: 49px;
+        padding: 6px 0 0;
+        font-size: 11px;
+        text-align: center;
+        color: var(--text-03);
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header nav .gnb li.on a {
+        color: #ffc004 !important;
+    }
+}
+
+@media (max-width: 999px) {
+
+    .top-header.floating header .util-wrap .alarm-btn,
+    .top-header.floating header .util-wrap .search-btn {
+        z-index: 1;
+        color: var(--secondary-press);
+    }
+}
+
+@media (max-width: 999px) {
+    .top-header header .util-wrap ul.util {
+        display: none;
+    }
+}
+
+@media (max-width: 999px) {
+    .feed-header {
+        top: 44px;
+    }
+}
+
+@media (max-width: 999px) {
+    .feed-header .menu-list {
+        padding-left: 16px;
+    }
+}
+
+@media (max-width: 999px) {
+    .sub-menu .type-list {
+        padding-left: 24px;
+    }
+}
+
+/* 1440px~ */
+
+
+
+
+
+
+@media (min-width:500px){
+    .card-wrapper {
+    box-sizing: border-box;
+    background-clip: padding-box;
+    width: 100%;
+    border-width: 0px 0px 0px 16px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+}
+}
+
+@media (min-width:700px){
+    .card-wrapper {
+    box-sizing: border-box;
+    background-clip: padding-box;
+    width: 50%;
+    border-width: 0px 0px 0px 16px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+}
+}
+
+@media (min-width:1000px){
+    .card-wrapper {
+    box-sizing: border-box;
+    background-clip: padding-box;
+    width: 33.3333%;
+    border-width: 0px 0px 0px 16px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+}
+}
+
+@media (min-width:1440px){
+    .card-wrapper {
+    box-sizing: border-box;
+    background-clip: padding-box;
+    width: 25%;
+    border-width: 0px 0px 0px 16px;
+    border-style: solid;
+    border-color: transparent;
+    border-image: initial;
+}
+}
+/* 1000px~ 1440px*/
+
+
+/*  700px ~ 1000px */
+
+/* 700px 이하 */

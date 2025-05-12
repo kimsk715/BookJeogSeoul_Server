@@ -27,7 +27,7 @@ public class AlarmInterceptor implements HandlerInterceptor {
 
             // userType 설정
             if (sponsorMember != null) {
-                modelAndView.addObject("userType", "sponsor");
+                modelAndView.addObject("userType", "sponsorMember");
             } else if (member != null) {
                 modelAndView.addObject("userType", "member");
             }

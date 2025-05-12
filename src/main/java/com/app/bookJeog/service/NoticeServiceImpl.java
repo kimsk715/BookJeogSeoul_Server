@@ -1,6 +1,7 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.NoticeDTO;
+import com.app.bookJeog.domain.dto.NoticeInfoDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.vo.NoticeVO;
 import com.app.bookJeog.repository.NoticeDAO;
@@ -48,8 +49,21 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public void insertNotice(NoticeVO noticeVO) {
+    public NoticeVO insertNotice(NoticeVO noticeVO) {
         noticeDAO.insertNotice(noticeVO);
+        return noticeVO;
+    }
+
+    @Override
+    public List<NoticeInfoDTO> getAllNoticeClient() {
+        List<NoticeInfoDTO> noticeList = new ArrayList<>();
+        for(NoticeVO noticeVO : noticeDAO.findAllNoticeClient()){
+            NoticeInfoDTO noticeInfoDTO = new NoticeInfoDTO();
+            noticeInfoDTO.setNoticeVO(noticeVO);
+            noticeList.add(noticeInfoDTO);
+            // 이미지 추가 예정.
+        }
+        return noticeList;
     }
 
 

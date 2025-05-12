@@ -101,4 +101,8 @@ public class FavoriteDAO {
     public Integer countAllVoteByPostId(ReceiverLikeVO receiverLikeVO){
         return favoriteMapper.countAllVoteByPostId(receiverLikeVO);
     }
+
+    public void voteBookPost(Long memberId, Long bookPostId){
+        favoriteMapper.voteBookPost(memberId, bookPostId);
+    }
 }

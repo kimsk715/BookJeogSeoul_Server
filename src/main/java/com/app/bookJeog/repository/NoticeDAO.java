@@ -33,4 +33,7 @@ public class NoticeDAO {
         noticeMapper.insertNotice(noticeVO);
     }
 
+    public List<NoticeVO> findAllNoticeClient(){
+        return noticeMapper.selectAllNoticeClient();
+    }
 }

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
+    <title>북적 서울 | 후원 대상 게시글</title>
+    <link rel="stylesheet"
+        href="/css/donation/receiver_post.css" />
+    <link rel="stylesheet"
+        href="/css/donation/feed_common.css" />
+        <link rel="stylesheet" href="/css/donation/report_popup.css">
+    <link rel="shortcut icon" href="/images/admin/favicon.ico"
+        type="image/x-icon" />
+</head>
+
+<body>
+    <div id="wrap" class="web-mount pcv-mount" th:object="${post}">
+        <!---->
+        <!---->
+        <!---->
+        <input type="hidden" id="memberId" th:if="${member} != null" th:value="${member.id}" />
+        <input type="hidden" id="sponsorName" th:if="${sponsorMember} != null" th:value="${sponsorMember.sponsorName}" />
+        <section class="content">
+            <div class="view">
+                <div class="view-header">
+                    <div class="vheader">
+                        <div class="vheader-inner">
+                            <div id="backComponent"
+                                data-article-type="back-component"
+                                class="back-component border-hidden">
+                                <div class="back line">
+                                    <button type="button"
+                                        data-content-type="back-button"
+                                        class="close-button"
+                                        style="display: block;">
+                                        <i
+                                            class="mds-icon--arrow-left"></i>
+                                    </button>
+                                    <!---->
+                                    <!---->
+                                    <!---->
+                                </div>
+                            </div>
+                            <ul class="util">
+<!--                                <li class="like-item">-->
+<!--                                    <button type="button">-->
+<!--                                        <i-->
+<!--                                            class="editor-icon&#45;&#45;heart"></i><span></span>-->
+<!--                                    </button>-->
+<!--                                </li>-->
+<!--                                <li class="like-item">-->
+<!--                                    <button type="button">-->
+<!--                                        <i-->
+<!--                                            class="editor-icon&#45;&#45;heart_filled"></i><span>1</span>-->
+<!--                                    </button>-->
+<!--                                </li>-->
+
+                                <li class="comment-item">
+                                    <button type="button">
+                                        <i
+                                            class="editor-icon--comment"></i><span>0</span>
+                                    </button>
+                                </li>
+<!--                                <li class="share-item">-->
+<!--                                    <button type="button">-->
+<!--                                        <i-->
+<!--                                            class="editor-icon&#45;&#45;share"></i><span></span>-->
+<!--                                    </button>-->
+<!--                                </li>-->
+                                <li class="more-item">
+                                    <button type="button">
+                                        <i
+                                            class="editor-icon--more"></i>
+                                    </button>
+                                    <ul class="more-ul"
+                                        style="display: none">
+                                        <li><a>신고하기</a></li>
+                                        <li class="post-edit-button" style="display: none;"><a th:href="|/post/receiver/edit/${post.id}|">수정하기</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-expand diary">
+                    <div class="title">
+                        <div class="title-inner container">
+                            <h1 th:text="*{receiverTitle}">
+
+                            </h1>
+                            <div class="flex-container space-between">
+                                <a href="#"
+                                    class="writer flex-container post-writer-container">
+                                    <div class="user-img" th:if="${thumbNail} != null" th:style="'background-image: url(' + '\'' + '/image/' + ${thumbNail.FilePath} + '/' + ${thumbNail.FileName} + '\'' + ')'  ">
+                                    </div>
+                                    <div class="writer-info">
+                                        <div class="nickname-wrapper">
+                                            <p
+                                                class="name mds-font--caption" th:text="*{sponsorName}">
+
+                                            </p>
+                                            <!---->
+                                        </div>
+                                        <p class="date" th:text="*{createdDate}">
+                                        </p>
+                                    </div>
+                                </a>
+                                <button type="button" style="display: none;"
+                                    class="button-follow mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4">
+                                    <span>팔로우</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail" style="--loader-top: 214px">
+                        <div class="detail-inner container">
+                            <div class="diary-container">
+                                <div class="thumbnail-container" th:if="${thumbNail} != null"
+                                     th:style="|background-image: url('/image/${thumbNail.FilePath}/${thumbNail.FileName}');
+               background-repeat: no-repeat;
+               background-position: center center;
+               background-size: contain;
+               background-color: rgb(240,240,240);|">
+                                    <span class="background"
+                                        style="color: deeppink; text-align: center; font-size: 50px;"></span>
+
+                                </div>
+
+                                <div class="reading-diary-container">
+                                    <p class="title" th:text="*{receiverTitle}"></p>
+                                    <p class="text-post" th:text="*{receiverText}">
+
+                                    </p>
+                                </div>
+                                <div class="images-container">
+                                    <p class="title">이미지</p>
+                                    <ul class="list">
+                                        <li th:each="image : ${files}"><img
+                                                th:src="|/image/${image.filePath}/${image.fileName}|">
+                                            <p class="text" th:text="${image.id}">
+
+                                            </p> <span
+                                                class="nickname" th:text="|ⓒ*{sponsorName}|">
+                                                </span>
+                                        </li>
+                                    </ul>
+
+                                    <div class="full-image"
+                                        style="display: none;">
+                                        <div class="img-close"><i
+                                                class="mds-icon--x"></i>
+                                        </div>
+
+                                        <img src="" alt="">
+                                    </div>
+                                </div>
+                                <!---->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="view-autor mds-font--subhead01">ⓒ 북적서울</p>
+                <div class="like">
+                    <div class="like-inner container">
+                        <button type="button" th:value="*{id}"
+                            class="like-btn mds-button mds-button--cancel mds-button--line mds-button--flex mds-button--h32 mds-button--r100">
+                            <span><i class="editor-icon--clip"></i>책갈피
+                                나누기</span>
+                        </button>
+                        <span class="like-list">
+                            가장 먼저 이 게시글에 책갈피를 나눠주세요.
+                        </span>
+                    </div>
+                    <div class="mds-dialog unload-popup mds-dialog--open"
+                        style="display: none;">
+                        <div class="mds-dialog--wrap">
+                            <div class="mds-dialog--inner">
+                                <div class="mds-dialog--header">
+                                    <strong id="dialog-676-title">책갈피
+                                        꽂아두기</strong> <!---->
+                                </div>
+                                <div class="mds-dialog--body">
+                                    <input type="number"
+                                        class="dialog-content">
+                                    <span>책갈피</span>
+                                </div>
+                            </div>
+                            <div class="mds-dialog--footer"><button
+                                    type="button"
+                                    class="close mds-button mds-button--cancel mds-button--h56"><span>취소</span></button>
+                                <button type="button"
+                                    class="apply mds-button mds-button--danger mds-button--h56"><span>확인</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!---->
+
+                <div class="meta">
+                    <div class="meta-contents container">
+                        <div class="top-row flex-container">
+                            <div class="top-row-info">
+                                <div class="owner flex-container">
+                                    <a href="" class="owner-img"
+                                        style="
+                                                background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/ntruss/cffcc17f5c95881b480ff2e87187c0ea.png');
+                                            "></a>
+                                    <div class="owner-info">
+                                        <h3 class="owner-name">
+                                            <a href="" th:text="|*{sponsorName} 님의
+                                                게시글|"></a>
+                                        </h3>
+                                        <div class="owner-sub-count">
+                                            <a href=""
+                                                class="following">팔로잉<span>0</span></a>
+                                            <a href=""
+                                                class="follower">팔로워<span>15</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="top-row-btn">
+                                <button type="button" style="display: none;"
+                                    class="mds-button mds-button--secondary mds-button--flex mds-button--h32 mds-button--r4">
+                                    <span>팔로우</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="post-card">
+                            <a href="" class="post-card-before">
+                                <div class="post-img">
+                                    <div class="post-img-content">
+                                        <div class="block-tool-book"
+                                            style="
+                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/179629201/1aaf5876839740a1a1a0db328f9c35d2.jpg);
+                                                ">
+                                            <div class="book-inner">
+                                                <div
+                                                    class="book-cover">
+                                                    <div
+                                                        class="book-thumb">
+                                                        <img src="https://img.millie.co.kr/200x/service/cover/179629201/1aaf5876839740a1a1a0db328f9c35d2.jpg"
+                                                            alt="작은 빛을 따라서"
+                                                            class="book-image" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="prev-post"
+                                    style="color: rgb(139, 139, 139)">
+                                    이전글
+                                </p>
+                                <p class="post-author">아이들에겐 한 줄기 빛과도
+                                    같은 도서</p>
+                            </a>
+                            <a href="/v3/post/1146335?nav_hidden=y"
+                                class="post-card-after">
+                                <div class="post-img">
+                                    <div class="post-img-content">
+                                        <div class="block-tool-book"
+                                            style="
+                                                    --background-image: url(https://img.millie.co.kr/200x/service/cover/180061007/998a7748131540c4bce8b6f526d9df36.jpg);
+                                                ">
+                                            <div class="book-inner">
+                                                <div
+                                                    class="book-cover">
+                                                    <div
+                                                        class="book-thumb">
+                                                        <img src="https://img.millie.co.kr/200x/service/cover/180061007/998a7748131540c4bce8b6f526d9df36.jpg"
+                                                            alt="간소한 삶에 관한 작은 책"
+                                                            class="book-image" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="prev-post"
+                                    style="color: rgb(139, 139, 139)">
+                                    다음글
+                                </p>
+                                <p class="post-author">
+                                    당신의 따스함을 나눠주세요!
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="popup alert police-popup" style="display: none;">
+                    <div class="popup_inner">
+                        <div class="popup_content">
+                            <div class="popup_inner_header">
+                                <h2>신고하기</h2>
+                            </div>
+                            <div class="popup_inner_body">
+                                <div class="report-list"><label
+                                        class="mds-radio mds-radio--secondary"><input
+                                            type="radio"
+                                            id="input-3019"
+                                            name="report-kind"
+                                            value="1"> <span
+                                            class="mds-radio-view"><span
+                                                class="check"></span>
+                                            <span class="label">단순 비방,
+                                                욕설 등 불쾌감을 주는
+                                                내용</span></span></label>
+                                    <label
+                                        class="mds-radio mds-radio--secondary"><input
+                                            type="radio"
+                                            id="input-3020"
+                                            name="report-kind"
+                                            value="2"> <span
+                                            class="mds-radio-view"><span
+                                                class="check"></span>
+                                            <span class="label">음란성 또는
+                                                청소년에게
+                                                부적합</span></span></label>
+                                    <label
+                                        class="mds-radio mds-radio--secondary"><input
+                                            type="radio"
+                                            id="input-3021"
+                                            name="report-kind"
+                                            value="3"> <span
+                                            class="mds-radio-view"><span
+                                                class="check"></span>
+                                            <span class="label">주제와 관련
+                                                없거나 부적절한 홍보
+                                            </span></span></label>
+                                    <label
+                                        class="mds-radio mds-radio--secondary"><input
+                                            type="radio"
+                                            id="input-3022"
+                                            name="report-kind"
+                                            value="4"> <span
+                                            class="mds-radio-view"><span
+                                                class="check"></span>
+                                            <span class="label">스포일러가
+                                                포함된
+                                                내용</span></span></label>
+                                    <label
+                                        class="mds-radio mds-radio--secondary"><input
+                                            type="radio"
+                                            id="input-3023"
+                                            name="report-kind"
+                                            value="0"> <span
+                                            class="mds-radio-view"><span
+                                                class="check"></span>
+                                            <span
+                                                class="label">기타</span></span></label>
+                                    <!---->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popup_inner_footer"><button
+                                type="button"
+                                class="gray gtm-review-police police-cancel">취소</button>
+                            <button type="button" disabled="disabled"
+                                class="gtm-review-policecon btn-review-police">등록</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment">
+                    <div class="comment-inner container">
+                        <div class="register flex-container">
+                            <div class="user-img" style="
+                                        margin-right: 0px;
+                                        background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
+                                    "></div>
+                            <div class="register-box">
+                                <div class="register-box-inner">
+                                    <div class="mention-wrapper" style="display: none;"></div>
+                                    <label>
+                                            <textarea contenteditable="plaintext-only"
+                                                      data-placeholder="내용 입력">
+                                            </textarea>
+                                        <input type="hidden" value="" class="mention-value">
+                                    </label>
+                                    </label>
+                                    <div id="mention-menu" style="display:none;">
+                                        <ul id="mention-inner">
+                                            <li th:each=" mention : ${mentions}" th:text="${mention.memberName}" th:value="${mention.commentDTO.memberId}"></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" disabled
+                                    class="post-btn flex-container mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4" th:value="*{id}">
+                                <span>등록</span>
+                            </button>
+                        </div>
+                        <h3 class="comment-title">
+                            댓글 <span
+                                class="comment-title-length">0</span>
+                        </h3>
+                        <ul class="comment-list" >
+                            <li class="comment-item" th:each = "comment : ${comments}">
+                                <div
+                                        class="comment-item-inner flex-container">
+                                    <div class="user-img" style="
+                                                background-image: url('https://d3uz7kn1zskbbz.cloudfront.net/profile/05ce9d4466834b948dc0c43e49f001a5.jpeg');
+                                            ">
+                                        <a
+                                                href="#"></a>
+                                    </div>
+                                    <div class="com-contents">
+                                        <div
+                                                class="com-contents-head">
+                                            <div
+                                                    class="com-contents-top flex-container">
+                                                <p class="nickname">
+                                                    <a
+                                                           href="#"  th:text="${comment.memberName}"></a>
+                                                </p>
+                                            </div>
+                                            <span
+                                                    class="com-contents-date" th:text="${comment.commentDTO.createdDate}"></span>
+                                        </div>
+                                        <div
+                                                class="com-contents-body">
+                                            <button type="button" class="tag-button" th:if="${comment.mentionedName} != null" th:text="${comment.mentionedName}" th:title="${comment.mentionedName}"></button>
+                                            <p
+                                                    class="comment-text show" th:text="${comment.commentDTO.commentText}">
+
+                                            </p>
+                                            <div class="comment-text">
+                                                <p
+                                                        contenteditable="plaintext-only" th:text="${comment.commentDTO.commentText}">
+
+                                                </p>
+                                                <button type="button"
+                                                        class="mds-button mds-button--secondary mds-button--flex mds-button--h56 mds-button--r4">
+                                                    <span>등록</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="reply-setting">
+                                            <button type="button"
+                                                    class="more-btn">
+                                                <img src="https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/more-icon.df2e02aec2252c2847fbe9e490cd4354.png"
+                                                     alt="더보기" />
+                                            </button>
+                                            <div class="more-area"
+                                                 style="display: none;">
+                                                <button
+                                                        type="button">답글달기</button>
+                                                <button
+                                                        type="button" class="comment-report" th:value="${comment.commentDTO.id}">신고하기</button>
+                                                <input type="hidden" class="reported-id" th:value="${comment.commentDTO.memberId}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!---->
+                            </li>
+                        </ul>
+                    </div>
+                    <!---->
+                    <!---->
+                </div>
+                <!---->
+                <!---->
+                <!---->
+            </div>
+        </section>
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+        <!---->
+    </div>
+</body>
+<script src="/js/donation/receiver_post_event.js"></script>
+<script th:inline="javascript">
+    const member = /*[[${member}]]*/ {};
+    const sponsorMember = /*[[${sponsorMember}]]*/ {};
+    const postId = /*[[${postId}]]*/ {};
+</script>
+</html>

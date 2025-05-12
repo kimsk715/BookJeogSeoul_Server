@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title th:text="${title} + ' | 북적서울'"></title>
+        <link
+            rel="stylesheet"
+            href="/css/main/global-settings.css"
+        />
+        <link rel="stylesheet" href="/css/book/book-detail.css" />
+        <link
+            rel="shortcut icon"
+            href="/images/common/favicon.ico"
+            type="image/x-icon"
+        />
+        <link rel="stylesheet" href="/css/main/header.css" />
+    </head>
+    <body>
+        <!-- 로딩 이미지 -->
+        <div id="loading" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); z-index: 9999;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                <img src="/images/common/loading.gif" alt="로딩 중..." style="width: 80px;" />
+            </div>
+        </div>
+        <div id="wrap" class="show-top-header">
+            <!-- 상단 이벤트 배너 -->
+            <div class="book-detail-banner">
+                <div class="home-banner">
+                    <a href="">
+                        <p>지금 <strong>이달의 독후감</strong> 투표중! 🗳️</p>
+                    </a>
+                </div>
+            </div>
+            <!-- // 상단 이벤트 배너 -->
+            <!-- 헤더 시작 -->
+            <div th:replace="~{main/header :: header-sc}"></div>
+            <!-- 헤더끝 -->
+            <section class="content">
+                <div class="book-detail-container">
+                    <!-- 반응형 상단 메뉴 -->
+                    <div id="backComponent" class="back-component">
+                        <div class="back line">
+                            <!-- 뒤로가기 버튼 -->
+                            <button
+                                type="button"
+                                onclick="history.back()"
+                                class="close-button"
+                            >
+                                <i class="mds-icon-arrow-left"></i>
+                            </button>
+                            <!-- // 뒤로가기 버튼 -->
+                            <h2 class="book-detail-header" th:text="${title}">제목</h2>
+                            <!-- 책 찜하기 버튼 -->
+                            <button type="button" class="scrap-button">
+                                <!-- 찜 안 했을 때 -->
+                                <img
+                                    src="https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-off.b5cd493b0e38b74654f26e2ebf2a3aaf.png"
+                                    alt=""
+                                    class="dark-img"
+                                />
+                                <!-- // 찜 안 했을 때 -->
+                                <!-- 찜 했을 때 -->
+                                <!-- <img
+                                    src="https://d3udu241ivsax2.cloudfront.net/v3/images/bookDetail/back-heart-on.d6a405d1a7177f4eaeb7ddd3793866c4.png"
+                                    alt=""
+                                    class="red-img"
+                                /> -->
+                                <!-- // 찜 했을 때 -->
+                            </button>
+                            <!-- // 책 찜하기 버튼 -->
+                        </div>
+                    </div>
+                    <!-- // 반응형 상단 메뉴 -->
+                    <!-- 책 정보 영역 -->
+                    <div class="book-detail-info">
+                        <div class="book-cover-frame">
+                            <!-- 책 이미지 영역 -->
+                            <div class="book-cover-box">
+                                <div class="book-cover-inner-box">
+                                    <div class="book-cover-container">
+                                        <!-- 책 썸네일 -->
+                                        <div class="thumbnail">
+                                            <div class="inner">
+                                                <div class="book-picture">
+                                                    <picture>
+                                                        <img
+                                                            th:src="${cover}"
+                                                            alt="도서 썸네일"
+                                                            width="200"
+                                                            style="
+                                                                min-height: 0;
+                                                            "
+                                                        />
+                                                    </picture>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- // 책 썸네일 -->
+                                    </div>
+                                </div>
+                                <!-- 책 썸네일 배경화면 -->
+                                <div class="background">
+                                    <div class="background-cover">
+                                        <picture>
+                                            <img
+                                                th:src="${cover}"
+                                                alt="책 배경 썸네일"
+                                                width="200"
+                                                style="min-height: 0"
+                                            />
+                                        </picture>
+                                    </div>
+                                    <div class="dim"></div>
+                                </div>
+                                <!-- // 책 썸네일 배경화면 -->
+                            </div>
+                            <!-- // 책 이미지 영역 -->
+                            <div class="book-cover-info">
+                                <div class="book-cover-info-box">
+                                    <div class="book-cover-info-box-body">
+                                        <div>
+                                            <p class="book-cover-info-title" th:text="${title}">
+                                                용의자 X의 헌신
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <p id="author" class="book-cover-info-athor" th:text="${author}">
+                                                히가시노 게이고
+                                            </p>
+                                            <p class="book-cover-info-text" th:text="${pubDate}">
+                                                <span th:text="${publisher}">재인</span>
+                                                <span class="middot"></span>
+                                                2022.06.16
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="book-cover-info-box-footer">
+                                        <div class="book-cover-footer-count">
+                                            이 책이 담긴 서재
+                                            <b class="scrapCount">0+</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="book-cover-info-btns">
+                                    <button
+                                        type="button"
+                                        class="button-report mds-button"
+                                    >
+                                        <a th:href="@{/post/bookpost/write(isbn=${isbn})}"><span
+                                        ><i class="mds-icon-write"></i>
+                                            <span>&nbsp;&nbsp;독후감 작성</span>
+                                        </span></a>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="button-discussion mds-button"
+                                    >
+                                        <span>
+                                            <a th:href="@{/search/result/discussions(keyword=${title})}">
+                                                <i class="mds-icon-discussion"></i>
+                                            토론방&nbsp;
+                                            <span class="hidden-text"
+                                            >이동</span
+                                            >
+                                            </a>
+                                        </span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="button-scrap mds-button"
+                                    >
+                                        <span
+                                            ><i class="mds-icon-scrap"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- // 책 정보 영역 -->
+                    <div class="book-detail-content-cont">
+                        <div class="book-detail-content-frm">
+                            <!--  -->
+                            <div id="anchorRecommend" class="book-tab-frm">
+                                <div class="mds-tab mds-tab-line">
+                                    <ul role="menu" class="mds-tab-wrapper">
+                                        <li
+                                            class="mds-tab-item"
+                                            data-target="intro"
+                                        >
+                                            <a role="menuitem" href="#intro">
+                                                <span>책 소개</span>
+                                            </a>
+                                        </li>
+                                        <li
+                                            class="mds-tab-item"
+                                            data-target="anchorReport"
+                                        >
+                                            <a
+                                                role="menuitem"
+                                                href="#anchorReport"
+                                                ><span>독후감</span></a
+                                            >
+                                        </li>
+                                    </ul>
+                                    <span class="mds-tab-bar transition"></span>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <div
+                                id="anchorIntro"
+                                class="book-container book-info"
+                            >
+                                <div class="introduction section" id="intro">
+                                    <h3 class="book-info-title">책 소개</h3>
+                                    <div class="book-info-more-cont more-text">
+                                        <div
+                                            class="book-info-more-cont-inner hidden"
+                                        >
+                                            <div
+                                                class="desc-box"
+                                                id="intro-more"
+                                                th:text="${description}"
+                                            >
+                                                히가시노 게이고 문학의 정수로
+                                                일컬어지는 [용의자 X의 헌신]이
+                                                새롭게 번역되어 출간됐다. 일본
+                                                문학 전문 번역가 양억관 씨가
+                                                자신의 번역을 대폭 손질해 원작이
+                                                지닌 문학적 향기와 감동을 오롯이
+                                                되살려 냈다. [용의자 X의 헌신]은
+                                                명실상부 히가시노 게이고의
+                                                출세작이자 대표작으로 평가되는
+                                                장편 미스터리 소설이다. 출간된
+                                                해에[주간 문춘 미스터리 베스트
+                                                10] 1위를 수상한 것을 시작으로
+                                                이듬해 [본격 미스터리 대상] 1위,
+                                                [이 미스터리가 대단하다] 1위를
+                                                차지했으며, 급기야 일본의
+                                                대표적인 문학상인 제134회 나오키
+                                                상을 거머쥐었다. 2008년 일본에서
+                                                영화로 만들어져 그 해 개봉한
+                                                일본 영화 가운데 흥행 수입 3위를
+                                                기록했다. 이어 한국(류승범,
+                                                이요원 주연, 2012년)과
+                                                중국(2017년 3월)에서도 영화화
+                                                되었으며, 일본 추리 소설로는
+                                                드물게 영어로도 번역, 출간됐다.
+                                            </div>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            data-content-type="intro-more-button"
+                                        >
+                                            더보기
+                                        </button>
+                                    </div>
+                                    <div
+                                        class="book-info-detail slide-container"
+                                    >
+                                        <ul class="slide-wrapper">
+                                            <li class="slide-item">
+                                                <p>카테고리</p>
+                                                <strong th:text="${category}">소설</strong>
+                                            </li>
+                                            <li class="slide-item">
+                                                <p>출판사</p>
+                                                <strong th:text="${publisher}">재인</strong>
+                                            </li>
+                                            <li class="slide-item">
+                                                <p>출간일</p>
+                                                <strong th:text="${pubDate}">2017.08.30</strong>
+                                            </li>
+                                            <li class="slide-item">
+                                                <p>ISBN</p>
+                                                <strong th:text="${isbn}">9791197893506</strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <!--  -->
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="banner">
+                                <a href="/book/detail/9788925562360" class="link-banner">
+                                    <div class="inner-banner">
+                                        <strong
+                                            class="text-title mds-font-subhead"
+                                            >표현에 서툰 나를 위한 감정 심리학</strong
+                                        >
+                                        <p class="text-desc mds-font-body">
+                                            감정에 솔직하지 못한 나에게
+                                        </p>
+                                    </div>
+                                    <img
+                                        src="/images/book/recomment-book.png"
+                                        alt=""
+                                    />
+                                </a>
+                            </div>
+                            <div
+                                id="anchorReport"
+                                class="report-container thin-line"
+                            >
+                                <h3 class="book-info-title link">
+                                    <a
+                                        id="thisBookPostsBtn"
+                                        href="javascript:void(0);"
+                                        data-content-type="post-more-button"
+                                        class="gtm-report"
+                                        >이 책의 독후감
+                                        <span class="number">0</span></a
+                                    >
+                                </h3>
+                                <!-- 독후감 목록 -->
+                                <div class="slide-container">
+                                    <ul class="slide-wrapper report-list">
+<!--                                        <li class="slide-item">-->
+<!--                                            <a href="" class="report-cont">-->
+<!--                                                <p class="title">-->
+<!--                                                    영화로 먼저 접하고, 그 뒤에-->
+<!--                                                    읽은 책-->
+<!--                                                </p>-->
+<!--                                                <p class="cont">-->
+<!--                                                    용의자 X는 무슨 의미일까? 이-->
+<!--                                                    책을 읽고 히가시노 게이고의-->
+<!--                                                    열렬한 팬이 되어버렸다. 모든-->
+<!--                                                    책을 책장에 담을 정도로. 한-->
+<!--                                                    여자를 사랑하기 때문에-->
+<!--                                                    본인의 인생을 포기한 남자와,-->
+<!--                                                    그 남자의 진심을 알고 마음을-->
+<!--                                                    열어가는 여자의 추리로맨스-->
+<!--                                                    소설이다. 영화로 먼저 접하고-->
+<!--                                                    읽게 되어서 영화주인공이었던-->
+<!--                                                    이요원과 류승범에게 이입해서-->
+<!--                                                    읽게 되었다. 영화와는 다르게-->
+<!--                                                    더 많은 용의주도함이 보였고,-->
+<!--                                                    더 많은 오브젝트가 있었다.-->
+<!--                                                    한 천재의 눈물겨운 사랑이 한-->
+<!--                                                    나라-->
+<!--                                                </p>-->
+<!--                                            </a>-->
+<!--                                            <div class="profile">-->
+<!--                                                <a-->
+<!--                                                    href=""-->
+<!--                                                    data-content-type="user-profile-button"-->
+<!--                                                    class="inner gtm-report-lib"-->
+<!--                                                >-->
+<!--                                                    <div-->
+<!--                                                        class="image"-->
+<!--                                                        style="-->
+<!--                                                            background-image: url(/images/common/favicon.png);-->
+<!--                                                        "-->
+<!--                                                    ></div>-->
+<!--                                                    <p class="name">한지수</p>-->
+<!--                                                </a>-->
+<!--                                                <button-->
+<!--                                                    type="button"-->
+<!--                                                    class="gtm-report-follow"-->
+<!--                                                >-->
+<!--                                                    팔로우-->
+<!--                                                </button>-->
+<!--                                            </div>-->
+<!--                                        </li>-->
+                                    </ul>
+                                </div>
+                                <!-- // 독후감 목록 -->
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <!-- 이 작가의 다른 도서 -->
+                            <div class="relate-container thin-line">
+                                <div class="relate-inner">
+                                    <h3 class="book-info-title link">
+                                        <a
+                                            href=""
+                                            data-content-type="best-more-button"
+                                            th:text="${author} + '의 다른 책'"
+                                            >이 작가의 다른 책</a>
+                                    </h3>
+                                    <div class="book-shelf overflow">
+                                        <div class="slide-container">
+                                            <ul class="slide-wrapper">
+<!--                                                <li class="slide-item">-->
+<!--                                                    <div-->
+<!--                                                        class="bookjeog-book books"-->
+<!--                                                    >-->
+<!--                                                        <a-->
+<!--                                                            href=""-->
+<!--                                                            class="book-image"-->
+<!--                                                        >-->
+<!--                                                            <div-->
+<!--                                                                class="thumbnail"-->
+<!--                                                            >-->
+<!--                                                                <div-->
+<!--                                                                    class="thumbnail-inner"-->
+<!--                                                                >-->
+<!--                                                                    <div-->
+<!--                                                                        class="book-picture"-->
+<!--                                                                    >-->
+<!--                                                                        <picture>-->
+<!--                                                                            <img-->
+<!--                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"-->
+<!--                                                                                alt="도서 썸네일"-->
+<!--                                                                                width="145"-->
+<!--                                                                                style="-->
+<!--                                                                                    min-height: 0;-->
+<!--                                                                                "-->
+<!--                                                                            />-->
+<!--                                                                        </picture>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </a>-->
+<!--                                                        <a-->
+<!--                                                            href=""-->
+<!--                                                            class="book-data"-->
+<!--                                                        >-->
+<!--                                                            <div-->
+<!--                                                                class="metadata"-->
+<!--                                                            >-->
+<!--                                                                <p-->
+<!--                                                                    class="title"-->
+<!--                                                                >-->
+<!--                                                                    콘클라베-->
+<!--                                                                </p>-->
+<!--                                                                <p-->
+<!--                                                                    class="author"-->
+<!--                                                                >-->
+<!--                                                                    로버트해리스-->
+<!--                                                                </p>-->
+<!--                                                            </div>-->
+<!--                                                        </a>-->
+<!--                                                    </div>-->
+<!--                                                </li>-->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // 이 작가의 다른 도서 -->
+                            <!-- ai 추천도서 -->
+                            <div class="relate-container thin-line">
+                                <div class="relate-inner">
+                                    <h3 class="book-info-title recommend link">
+                                        <a
+                                                href=""
+                                                data-content-type="best-more-button"
+                                        >당신만을 위한 도서 추천</a>
+                                    </h3>
+                                    <div class="book-shelf recommend">
+                                        <div class="slide-container">
+                                            <ul class="slide-wrapper">
+                                                <!--                                                <li class="slide-item">-->
+                                                <!--                                                    <div-->
+                                                <!--                                                        class="bookjeog-book books"-->
+                                                <!--                                                    >-->
+                                                <!--                                                        <a-->
+                                                <!--                                                            href=""-->
+                                                <!--                                                            class="book-image"-->
+                                                <!--                                                        >-->
+                                                <!--                                                            <div-->
+                                                <!--                                                                class="thumbnail"-->
+                                                <!--                                                            >-->
+                                                <!--                                                                <div-->
+                                                <!--                                                                    class="thumbnail-inner"-->
+                                                <!--                                                                >-->
+                                                <!--                                                                    <div-->
+                                                <!--                                                                        class="book-picture"-->
+                                                <!--                                                                    >-->
+                                                <!--                                                                        <picture>-->
+                                                <!--                                                                            <img-->
+                                                <!--                                                                                src="https://cover.millie.co.kr/service/cover/15800295/cc216d8e1eff4b9bb2399f0d7d24c1f8.jpg?w=145&f=webp&q=80"-->
+                                                <!--                                                                                alt="도서 썸네일"-->
+                                                <!--                                                                                width="145"-->
+                                                <!--                                                                                style="-->
+                                                <!--                                                                                    min-height: 0;-->
+                                                <!--                                                                                "-->
+                                                <!--                                                                            />-->
+                                                <!--                                                                        </picture>-->
+                                                <!--                                                                    </div>-->
+                                                <!--                                                                </div>-->
+                                                <!--                                                            </div>-->
+                                                <!--                                                        </a>-->
+                                                <!--                                                        <a-->
+                                                <!--                                                            href=""-->
+                                                <!--                                                            class="book-data"-->
+                                                <!--                                                        >-->
+                                                <!--                                                            <div-->
+                                                <!--                                                                class="metadata"-->
+                                                <!--                                                            >-->
+                                                <!--                                                                <p-->
+                                                <!--                                                                    class="title"-->
+                                                <!--                                                                >-->
+                                                <!--                                                                    콘클라베-->
+                                                <!--                                                                </p>-->
+                                                <!--                                                                <p-->
+                                                <!--                                                                    class="author"-->
+                                                <!--                                                                >-->
+                                                <!--                                                                    로버트해리스-->
+                                                <!--                                                                </p>-->
+                                                <!--                                                            </div>-->
+                                                <!--                                                        </a>-->
+                                                <!--                                                    </div>-->
+                                                <!--                                                </li>-->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- // ai 추천도서 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+    <script src="/js/book/book-detail-service.js"></script>
+    <script src="/js/book/book-detail-layout.js"></script>
+    <script src="/js/book/book-detail-event.js"></script>
+</html>

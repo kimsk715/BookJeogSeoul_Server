@@ -18,4 +18,6 @@ public interface NoticeMapper {
     public void updateNotice(NoticeVO noticeVO);
 
     public void insertNotice(NoticeVO noticeVO);
+
+    public List<NoticeVO> selectAllNoticeClient();
 }

@@ -653,7 +653,7 @@
         join tbl_member m on p.member_id = m.id
         join tbl_personal_member pm on pm.id = m.id
         join tbl_member_profile mp on mp.member_id = m.id
-        join tbl_file f on f.id = mp.id
+        left join tbl_file f on f.id = mp.id
         where bp.book_post_is_public = 'PUBLIC'
         order by p.createdDate desc
         limit 12 offset #{offset}
@@ -671,7 +671,7 @@
                  join tbl_member m on p.member_id = m.id
                  join tbl_personal_member pm on pm.id = m.id
                  join tbl_member_profile mp on mp.member_id = m.id
-                 join tbl_file f on f.id = mp.id
+                 left join tbl_file f on f.id = mp.id
                  join tbl_follow fl on fl.follow_receiver_id = m.id
         where bp.book_post_is_public = 'PUBLIC' and fl.follow_sender_id = #{loginMemberId}
         order by p.createdDate desc
@@ -799,6 +799,16 @@
     <delete id="deleteBookPost">
         delete from tbl_book_post where id = #{bookPostId}
     </delete>
+
+    <!--이 달의 독후감 투표 후보 (20개)_-->
+    <select id="selectAllMonthlyBookPosts" resultType="monthlyBookPostVO">
+            select mbp.id, book_post_title, book_post_text, date_format(createdDate, '%y%m') as createdDate, updatedDate, book_post_id, book_post_like_count
+            from tbl_event e
+                     join tbl_monthly_book_post mbp on date_format(mbp.createdDate, '%y%m') = concat(e.year,e.month) and e.event_type = 'VOTE'
+            order by
+                id desc
+            limit 20
+    </select>
 </mapper>
 
 

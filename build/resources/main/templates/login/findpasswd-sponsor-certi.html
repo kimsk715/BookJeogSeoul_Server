@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>이메일인증</title>
+        <link
+            rel="stylesheet"
+            href="/css/login/findpasswd-member-certi.css"
+        />
+        <link
+            rel="shortcut icon"
+            href="/images/admin/favicon.ico"
+            type="image/x-icon"
+        />
+    </head>
+    <body>
+        <!-- 로그인 하는 영역 -->
+        <div class="certi-container">
+            <div class="certi-content">
+                <h3 class="title">번호를 입력해주세요</h3>
+                <!-- 인증 -->
+                <div class="input-item">
+                    <div class="bjs-input-name">
+                        <label class="input-label-name" style="cursor: text">
+                            <div class="inner">
+                                <form action="/sponsor/check-sponsor-code" id="code-form" method="post">
+                                    <div class="input">
+                                        <span class="input-certi-label">번호입력</span>
+                                        <input
+                                            autocomplete="off"
+                                            name="code"
+                                            id="bjs-certi-code"
+                                            type="text"
+                                            maxlength="5"
+                                            placeholder="번호입력"
+                                            style="outline: none; border: none; cursor: text"
+                                        />
+                                    </div>
+                                </form>
+                                <button
+                                    type="button"
+                                    class="clear-button"
+                                    id="clear-button-for-name"
+                                ></button>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 다음 버튼 -->
+                <div class="next-btn-area">
+                    <button id="next-btn">
+                        <span class="login-btn-tag">다음</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 로그인 fail 모달 -->
+        <div class="modal">
+            <div class="modal-wrap">
+                <div class="modal-inner">
+                    <div class="modal-header">
+                        <strong></strong>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button>
+                        <span>확인</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="/js/login/findpasswd-member-certi.js"></script>
+</html>

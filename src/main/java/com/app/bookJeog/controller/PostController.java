@@ -17,6 +17,7 @@ import com.app.bookJeog.service.PostService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -320,7 +321,10 @@ public class PostController {
         log.info(postVO.toString());
         log.info(donateCertDTO.toString());
         postService.setDonateCertPost(donateCertDTO.toVO());
-        fileService.uploadDonateCertFiles(postId, files);
+        if(files !=null && !files.isEmpty())
+        {
+            fileService.uploadDonateCertFiles(postId, files);
+        }
 
         return new RedirectView("/post/donate");
 
@@ -352,22 +356,24 @@ public class PostController {
         session.removeAttribute("postId");
         fileService.deleteDonateCertFileByPostId(postId);
         fileService.deleteFile(postId);
-        for (String imageUrl : existingImageUrls) {
-            // "/image" 부분을 제외하고 실제 경로를 분리
-            if (imageUrl.startsWith("/image")) {
-                String relativePath = imageUrl.substring(7); // "/image"를 제외한 나머지 경로
-                String[] pathParts = relativePath.split("/"); // 경로를 슬래시로 나눔
+        if(remainingImageUrls != null) {
+            for (String imageUrl : existingImageUrls) {
+                // "/image" 부분을 제외하고 실제 경로를 분리
+                if (imageUrl.startsWith("/image")) {
+                    String relativePath = imageUrl.substring(7); // "/image"를 제외한 나머지 경로
+                    String[] pathParts = relativePath.split("/"); // 경로를 슬래시로 나눔
 
-                String filePath = String.join("/", Arrays.copyOfRange(pathParts, 0, pathParts.length - 1)); // 마지막 부분 제외한 경로
-                String fileName = pathParts[pathParts.length - 1]; // 마지막 부분은 파일명
+                    String filePath = String.join("/", Arrays.copyOfRange(pathParts, 0, pathParts.length - 1)); // 마지막 부분 제외한 경로
+                    String fileName = pathParts[pathParts.length - 1]; // 마지막 부분은 파일명
 
-                log.info("분리된 filePath: {}, fileName: {}", filePath, fileName);
+                    log.info("분리된 filePath: {}, fileName: {}", filePath, fileName);
 
-                FileDTO fileDTO = new FileDTO();
-                fileDTO.setFileName(fileName);
-                fileDTO.setFilePath(filePath);
-                fileService.insertExistingDonateCertFile(fileDTO, postId);
+                    FileDTO fileDTO = new FileDTO();
+                    fileDTO.setFileName(fileName);
+                    fileDTO.setFilePath(filePath);
+                    fileService.insertExistingDonateCertFile(fileDTO, postId);
 
+                }
             }
         }
 
@@ -378,8 +384,9 @@ public class PostController {
         donateCertDTO.setDonateCertTitle(title);
         donateCertDTO.setDonateCertText(content);
         postService.updateDonateCertPost(donateCertDTO);
-
-        fileService.uploadDonateCertFiles(postId, files);
+        if(files !=null && !files.isEmpty()) {
+            fileService.uploadDonateCertFiles(postId, files);
+        }
 
         return new RedirectView("/post/donate");
 
@@ -518,7 +525,9 @@ public class PostController {
         log.info(postVO.toString());
         log.info(receiverDTO.toString());
         postService.setReceiverPost(receiverDTO.toVO());
-        fileService.uploadReceiverFiles(postId, files);
+        if(files !=null && !files.isEmpty()) {
+            fileService.uploadReceiverFiles(postId, files);
+        }
 
         return new RedirectView("/post/receiver");
 
@@ -546,25 +555,28 @@ public class PostController {
                 : new ArrayList<>();
         Long postId = (Long) session.getAttribute("postId");
         session.removeAttribute("postId");
+
         fileService.deleteReceiverFileByPostId(postId);
         fileService.deleteFile(postId);
-        log.info(postId.toString());
-        for (String imageUrl : existingImageUrls) {
-            // "/image" 부분을 제외하고 실제 경로를 분리
-            if (imageUrl.startsWith("/image")) {
-                String relativePath = imageUrl.substring(7); // "/image"를 제외한 나머지 경로
-                String[] pathParts = relativePath.split("/"); // 경로를 슬래시로 나눔
+        if(remainingImageUrls != null)
+        {
+            for (String imageUrl : existingImageUrls) {
+                // "/image" 부분을 제외하고 실제 경로를 분리
+                if (imageUrl.startsWith("/image")) {
+                    String relativePath = imageUrl.substring(7); // "/image"를 제외한 나머지 경로
+                    String[] pathParts = relativePath.split("/"); // 경로를 슬래시로 나눔
 
-                String filePath = String.join("/", Arrays.copyOfRange(pathParts, 0, pathParts.length - 1)); // 마지막 부분 제외한 경로
-                String fileName = pathParts[pathParts.length - 1]; // 마지막 부분은 파일명
+                    String filePath = String.join("/", Arrays.copyOfRange(pathParts, 0, pathParts.length - 1)); // 마지막 부분 제외한 경로
+                    String fileName = pathParts[pathParts.length - 1]; // 마지막 부분은 파일명
 
-                log.info("분리된 filePath: {}, fileName: {}", filePath, fileName);
+                    log.info("분리된 filePath: {}, fileName: {}", filePath, fileName);
 
-                FileDTO fileDTO = new FileDTO();
-                fileDTO.setFileName(fileName);
-                fileDTO.setFilePath(filePath);
-                fileService.insertExistingReceiverFile(fileDTO, postId);
+                    FileDTO fileDTO = new FileDTO();
+                    fileDTO.setFileName(fileName);
+                    fileDTO.setFilePath(filePath);
+                    fileService.insertExistingReceiverFile(fileDTO, postId);
 
+                }
             }
         }
 
@@ -577,8 +589,10 @@ public class PostController {
         receiverDTO.setReceiverTitle(title);
         receiverDTO.setReceiverText(content);
         postService.updateReceiverPost(receiverDTO);
-
-        fileService.uploadReceiverFiles(postId, files);
+    if(files !=null && !files.isEmpty())
+        {
+            fileService.uploadReceiverFiles(postId, files);
+        }
 
         return new RedirectView("/post/receiver");
 
@@ -632,11 +646,15 @@ public class PostController {
     public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,
                                                   @RequestParam("name") String name) throws IOException {
         // 이미지 파일 경로 설정
-        File imageFile = new File("C:/upload/" + path.replace("/", File.separator) + "/" + name);
+        File imageFile = new File("/upload/" + path.replace("/", File.separator) + "/" + name);
 
         // 파일이 없으면 기본 이미지 사용
         if (!imageFile.exists()) {
-            imageFile = new File("src/main/resources/static/images/common/default-donate-image.png");
+            try {
+                imageFile = new ClassPathResource("static/images/common/user_profile_example.png").getFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         // 이미지 파일을 바이트 배열로 읽기
@@ -652,11 +670,15 @@ public class PostController {
     public ResponseEntity<byte[]> getPostImage(@RequestParam("path") String path,
                                                   @RequestParam("name") String name) throws IOException {
         // 이미지 파일 경로 설정
-        File imageFile = new File("C:/upload/" + path.replace("/", File.separator) + "/" + name);
+        File imageFile = new File("/upload/" + path.replace("/", File.separator) + "/" + name);
 
         // 파일이 없으면 기본 이미지 사용
         if (!imageFile.exists()) {
-            imageFile = new File("src/main/resources/static/images/common/default-book-cover.png");
+            try {
+                imageFile = new ClassPathResource("static/images/common/user_profile_example.png").getFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         // 이미지 파일을 바이트 배열로 읽기

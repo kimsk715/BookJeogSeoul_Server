@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>로그인 | 북적북적</title>
+        <link
+            rel="stylesheet"
+            href="/css/register/register-member.css"
+        />
+        <link
+            rel="shortcut icon"
+            href="/images/admin/favicon.ico"
+            type="image/x-icon"
+        />
+    </head>
+    <body>
+        <!-- 로그인 하는 영역 -->
+        <div class="login-container">
+            <div class="login-content">
+                <h3 class="title">카카오 회원가입</h3>
+                <h3>정보를 입력해주세요</h3>
+                <form action="/personal/kakako-register-member" method="post" id="register-form">
+                    <!-- 이메일 -->
+                    <div class="input-item">
+                        <div class="bjs-input-email">
+                            <label class="input-label-email" style="cursor: text">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-email-label"
+                                        >이메일</span
+                                        >
+                                        <input
+                                                autocomplete="off"
+                                                type="text"
+                                                name="memberEmail"
+                                                id="bjs-email"
+                                                placeholder="이메일"
+                                                style="outline: none; border: none; cursor: text"
+                                                th:value="${tempMemberInfo.memberEmail}"
+                                                readonly
+                                        />
+                                    </div>
+                                    <button
+                                            type="button"
+                                            class="clear-button"
+                                            id="clear-button-email"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+<!--                    &lt;!&ndash; 비밀번호 &ndash;&gt;-->
+<!--                    <div class="input-item">-->
+<!--                        <div class="bjs-input-name">-->
+<!--                            <label class="input-label-pw" style="cursor: text">-->
+<!--                                <div class="inner">-->
+<!--                                    <div class="input">-->
+<!--                                        <span class="input-pw-label">비밀번호</span>-->
+<!--                                        <input-->
+<!--                                            autocomplete="off"-->
+<!--                                            type="password"-->
+<!--                                            name="memberPassword"-->
+<!--                                            id="bjs-pw"-->
+<!--                                            placeholder="비밀번호를 적어주세요"-->
+<!--                                            style="outline: none; border: none; cursor: text"-->
+<!--                                        />-->
+<!--                                    </div>-->
+<!--                                    <button-->
+<!--                                        type="button"-->
+<!--                                        class="clear-button"-->
+<!--                                        id="clear-button-for-pw"-->
+<!--                                    ></button>-->
+<!--                                </div>-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <!-- 이름 -->
+                    <div class="input-item">
+                        <div class="bjs-input-email">
+                            <label class="input-label-email" style="cursor: text">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-email-label"
+                                        >이름</span
+                                        >
+                                        <input
+                                                autocomplete="off"
+                                                type="text"
+                                                name="memberName"
+                                                id="bjs-name"
+                                                placeholder="이름을 적어주세요"
+                                                maxlength="6"
+                                                style="outline: none; border: none; cursor: text"
+                                                th:value="${tempMemberInfo.memberName}"
+                                                readonly
+                                        />
+                                    </div>
+                                    <button
+                                            type="button"
+                                            class="clear-button"
+                                            id="clear-button-name"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 폰번호 -->
+                    <div class="input-item">
+                        <div class="bjs-input-email">
+                            <label class="input-label-email" style="cursor: text">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-email-label"
+                                        >핸드폰 번호</span
+                                        >
+                                        <input
+                                                type="text"
+                                                name="memberPhone"
+                                                id="bjs-phone"
+                                                placeholder="-빼고 작성해주세요."
+                                                maxlength="11"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                autocomplete="off"
+                                                style="outline: none; border: none; cursor: text"
+                                        />
+                                    </div>
+                                    <button
+                                            type="button"
+                                            class="clear-button"
+                                            id="clear-button-phone"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 닉네임 -->
+                    <div class="input-item">
+                        <div class="bjs-input-nickname">
+                            <label class="input-label-nickname" style="cursor: text">
+                                <div class="inner">
+                                    <div class="input">
+                                        <span class="input-nickname-label"
+                                        >닉네임</span
+                                        >
+                                        <input
+                                                autocomplete="off"
+                                                type="text"
+                                                name="memberNickName"
+                                                id="bjs-nickname"
+                                                placeholder="닉네임"
+                                                style="outline: none; border: none; cursor: text"
+                                        />
+                                    </div>
+                                    <button
+                                            type="button"
+                                            class="clear-button"
+                                            id="clear-button-nickname"
+                                    ></button>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 생년월일 -->
+                    <div class="input-item">
+                        <div class="input-birth-gender">
+                            <div class="birth-num">
+                                <div class="birth-wrap">
+                                    <label for="bjs-birth" style="cursor: text">
+                                        <div class="inner">
+                                            <div class="input">
+                                                <span>생년월일,성별</span>
+                                                <input
+                                                    type="text"
+                                                    placeholder="생년월일"
+                                                    maxlength="6"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                    autocomplete="off"
+                                                    id="bjs-birth"
+                                                    name="memberBirth"
+                                                />
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <span class="birth-line">-</span>
+                            </div>
+                            <!-- 성별 -->
+                            <div class="gender-num">
+                                <div class="gender-wrap">
+                                    <label>
+                                        <div class="inner">
+                                            <div class="input">
+                                                <input
+                                                    type="text"
+                                                    autocomplete="off"
+                                                    class="gender-input"
+                                                    placeholder="0"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                    maxlength="1"
+                                                    id="bjs-gender"
+                                                    name="memberGender"
+                                                />
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                                <span class="gender-dot">● ● ● ● ● ●</span>
+                            </div>
+                            <button
+                                type="button"
+                                class="clear-button"
+                                id="clear-button-gender"
+                            ></button>
+                        </div>
+                    </div>
+                </form>
+                <!-- 체크버튼 -->
+                <div class="check-btn-area check-button">
+                    <button id="check-btn">
+                        <span class="login-btn-tag">확인하기</span>
+                    </button>
+                </div>
+                <!-- 가입하기 버튼 -->
+                <div class="next-btn-area">
+                    <button type="button" id="next-btn">
+                        <span class="login-btn-tag">회원가입 하기</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 로그인 fail 모달 -->
+        <div class="modal">
+            <div class="modal-wrap">
+                <div class="modal-inner">
+                    <div class="modal-header">
+                        <strong></strong>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button>
+                        <span>확인</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="/js/register/register-service.js"></script>
+    <script src="/js/register/register-kakao-event.js"></script>
+    <script src="/js/register/register-form.js"></script>
+</html>

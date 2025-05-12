@@ -121,5 +121,10 @@ public class FavoriteServiceImpl implements FavoriteService {
         return favoriteDAO.countAllVoteByPostId(receiverLikeDTO.toVO());
     }
 
+    @Override
+    public void voteBookPost(Long memberId, Long bookPostId) {
+        favoriteDAO.voteBookPost(memberId, bookPostId);
+    }
+
     ;
 }
