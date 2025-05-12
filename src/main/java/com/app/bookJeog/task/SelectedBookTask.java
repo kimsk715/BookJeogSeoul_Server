@@ -88,7 +88,7 @@ public class SelectedBookTask {
     }
 
 //   투표 결과 1등인 독후감 저장.
-    @Scheduled(cron = "0 0 0 1 * ?")
+    @Scheduled(cron = "0 0 12 30 * ?")
     public void insertTopBookPost() {
         Optional<MonthlyBookPostVO> topPost = postService.getBestPost();
         log.info(topPost.toString());

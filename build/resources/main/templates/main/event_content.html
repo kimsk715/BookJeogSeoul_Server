@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<div id="__next">
+<div id="__next" th:object="${event}">
     <div>
         <div
                 class="page-wrapper not-dark">
@@ -36,8 +36,7 @@
             <section class="on">
                 <div data-section-name="이벤트"
                      class="info-wrapper">
-                    <article><span class="caption">이달의 밀리로드
-                                크리에이터</span>
+                    <article>
                         <h3><span>이달의 독후감이란?</span></h3>
                         <div class="info-desc">
                             <p class="only">회원 여러분이 작성해주신 독후감 중 가장 많은 관심을 받은 20개의 독후감을 선정합니다.
@@ -49,46 +48,36 @@
                         class="gift-wrapper">
                     <article
                             class="gift-inner">
-                        <span class="caption">이달의 밀크 혜택</span>
-                        <h3><span>창작 지원금</span><span>총 500만
-                                    원</span></h3>
-                        <p>신규 작품 에피소드 3화 이상 연재하고</p>
-                        <p>밀어주리 5개 이상 받으면 참여 완료</p>
-                        <ul class="card">
-                            <li>
-                                <div class="introduction">
-                                    <strong>각 100만 원</strong>
-                                    <div>
-                                        <p>이달의 밀크 필수 활동 진행 시 창작
-                                            지원금을 드려요. 상세내용은 유의사항을
-                                            확인해주세요.</p><span>5명
-                                                선정</span>
-                                    </div>
-                                </div>
-                                <div class="image"><img
-                                        src="https://d2j6uvfek9vas1.cloudfront.net/event/image/676258b48efb9.jpg"
-                                        alt="각 100만 원" width="311"
-                                        height="154"></div>
-                            </li>
-                        </ul>
-                        <hr>
-                        <div class="notification">
+                        <div class="notification" th:if="${event.eventType.name()} == 'VOTE'">
                             <dl>
                                 <dt>참여 대상</dt>
                                 <dd>만 14세 이상 회원 (단체 회원 제외)</dd>
                             </dl>
                             <dl>
-                                <dt>참여 기간</dt>
-                                <dd>2025.4.1(화)~2025.4.30(수)</dd>
+                                <dt>투표 기간</dt>
+                                <dd th:text="|20*{year}.*{month}.20~20*{year}.*{month}.30|"></dd>
                             </dl>
                             <dl>
-                                <dt>당첨자 발표</dt>
-                                <dd>2025.05.16(금) 18시 이내</dd>
+                                <dt>이 달의 독후감 선정결과 발표</dt>
+                                <dd th:if="*{month % 2 == 1}" th:text="|20*{year}.*{month}.31 오후 12시|"></dd>
+                                <dd th:if="*{month == 2}" th:text="|20*{year}.*{month}.28 오후 12시|"></dd>
+                                <dd th:if="*{month % 2 == 0 and month != 2}" th:text="|20*{year}.*{month}.30 오후 12시|"></dd>
                             </dl>
-                            <dl>
-                                <dt>경품 발송</dt>
-                                <dd>2025.07.31(목)이내 창작 지원금 지급</dd>
-                            </dl>
+                        </div>
+                        <div class="notification" th:unless="${event.eventType.name()} == 'VOTE'">
+                            <div th:object="${bestPost}">
+                                <a href="/post/bookpost/*{bookPostId}">
+                                <dl>
+                                    <dt>작성자</dt>
+                                    <dd th:text="${memberName}"></dd>
+                                </dl>
+                                <dl>
+                                    <dt>독후감 제목</dt>
+                                    <dd th:text="*{bookPostTitle}"></dd>
+                                </dl>
+                                </a>
+                            </div>
+
                         </div>
                     </article>
                 </div>
@@ -108,17 +97,7 @@
                         <button class="multiplebutton1 tertiary vote-button">투표하기</button>
                     </article>
                 </div>
-                <div data-section-name="이벤트"
-                     class="info-wrapper">
-                    <article>
-                        <h3><span>넉넉한 밀리, 분기별 지원도!</span></h3>
-                        <div class="info-desc">
-                            <p class="only">이달의 밀크 당선작 중
-                                분기별로 '밀어주리+댓글'을 가장 많이 받은
-                                1명의 작가님께 100만 원을 지원해요.</p>
-                        </div>
-                    </article>
-                </div>
+
                 <div
                         class="multiplebutton-wrapper1">
                     <article
@@ -130,9 +109,7 @@
                                 width="375" height="375"></div>
                         <p>이 작품들은 추가 창작 지원금 100만원의 후보가 됩니다.</p>
                         <div class="con-btn"><button type="button"
-                                                     class="multiplebutton1 tertiary"><span>2월
-                                        밀크
-                                        보러가기</span></button></div>
+                                                     class="multiplebutton1 tertiary"><span th:text="|(*{month}-1)월 독후감 보러가기|"></span></button></div>
                     </article>
                 </div>
 
@@ -145,7 +122,7 @@
                 </div>
 
             </section>
-         
+
         </div>
     </div>
     <div id="portal"></div>

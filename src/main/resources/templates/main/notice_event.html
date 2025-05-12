@@ -130,14 +130,15 @@
                             </div>
                         <div class="event-content" style="display: none;">
                             <ul>
-                                <li class="mds-shadow--card02"><a
-                                        href="">
+                                <li class="mds-shadow--card02" th:each="event : ${eventList}"><a
+                                        th:href="|/event/detail/${event.id}|">
                                     <div class="img"><img
                                             src="https://d2j6uvfek9vas1.cloudfront.net/millie_logo/67ee78c82986e.jpg"
                                             alt="《귀화서, 마지막 꽃을 지킵니다》 출간 이벤트"></div>
                                     <div class="context"><strong class="title mds-font--subhead03"><!---->
-                                        <span>《귀화서,
-                                                    마지막 꽃을 지킵니다》 출간 이벤트</span></strong>
+                                        <span th:if="${event.eventType.name()} == 'VOTE'" th:text="|20${event.year}년 ${event.month}월 이 달의 독후감 투표|"></span>
+                                        <span th:unless="${event.eventType.name()} == 'VOTE'" th:text="|20${event.year}년 ${event.month}월 이 달의 독후감 선정 결과입니다.|"></span>
+                                    </strong>
                                         <p class="sub-title mds-font--body01">영혼이 꽃으로 피어난다면?
                                             런던도서전 화제작 출간!<br>신작 읽고 이북리더기, 책가방 받아 가세요</p> <span
                                                 class="date mds-font--caption">2025.04.07 - 2025.04.27</span>

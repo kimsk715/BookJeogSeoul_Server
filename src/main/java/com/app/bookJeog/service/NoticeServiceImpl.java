@@ -1,8 +1,10 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.EventDTO;
 import com.app.bookJeog.domain.dto.NoticeDTO;
 import com.app.bookJeog.domain.dto.NoticeInfoDTO;
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.vo.EventVO;
 import com.app.bookJeog.domain.vo.NoticeVO;
 import com.app.bookJeog.repository.NoticeDAO;
 import lombok.RequiredArgsConstructor;
@@ -64,6 +66,22 @@ public class NoticeServiceImpl implements NoticeService {
             // 이미지 추가 예정.
         }
         return noticeList;
+    }
+
+    @Override
+    public List<EventDTO> getAllEvent() {
+       List<EventVO> eventVOs = noticeDAO.findAllEvent();
+       List<EventDTO> eventDTOList = new ArrayList<>();
+       for(EventVO eventVO : eventVOs){
+           EventDTO eventDTO = toEventDTO(eventVO);
+           eventDTOList.add(eventDTO);
+       }
+        return eventDTOList;
+    }
+
+    @Override
+    public EventDTO getEventById(Long id) {
+        return toEventDTO(noticeDAO.findEventById(id));
     }
 
 

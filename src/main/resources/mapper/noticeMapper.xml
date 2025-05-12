@@ -57,4 +57,18 @@
         from tbl_notice
         order by id desc
     </select>
+
+    <select id="selectAllEvents">
+        select *
+        from tbl_event
+        order by id desc
+    </select>
+
+    <select id="selectEventById" resultType="eventVO">
+        select id, year, month, event_type
+        from tbl_event
+        where id = #{id}
+    </select>
+
+
 </mapper>

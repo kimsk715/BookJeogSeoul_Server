@@ -266,7 +266,11 @@ public class PostDAO {
     public void deletePost(Long bookPostId){postMapper.deletePost(bookPostId);};
     public void deleteBookPost(Long bookPostId){postMapper.deleteBookPost(bookPostId);};
 
-    public List<MonthlyBookPostVO> findAllMonthlyBookPosts(){
-        return postMapper.selectAllMonthlyBookPosts();
+    public List<MonthlyBookPostVO> findAllMonthlyBookPosts(String date){
+        return postMapper.selectAllMonthlyBookPosts(date);
+    }
+
+    public BestBookPostVO findBestBookPostByDate(String date){
+        return postMapper.selectBestBookPostByDate(date);
     }
 }

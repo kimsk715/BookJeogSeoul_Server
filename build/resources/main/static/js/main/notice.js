@@ -20,11 +20,12 @@ noticeButton.addEventListener('click',()=>{
     eventArea.style.display = "none"
 })
 
-eventButton.addEventListener('click',()=>{
+eventButton.addEventListener('click',async()=>{
     eventButton.classList.add("active")
     eventButton.classList.add("selected")
     noticeButton.classList.remove("active")
     noticeButton.classList.remove("selected")
     eventArea.removeAttribute("style")
     noticeArea.style.display = "none"
+    await fetch('/event')
 })

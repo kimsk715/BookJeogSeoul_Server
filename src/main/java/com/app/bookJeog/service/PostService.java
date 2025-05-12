@@ -153,7 +153,7 @@ public interface PostService {
 
     public String getPostType(Long postId);
 
-    public List<MonthlyBookPostDTO> getMonthlyBookPosts();
+    public List<MonthlyBookPostDTO> getMonthlyBookPosts(String date);
 
     public default MonthlyBookPostDTO toMonthlyBookPostDTO(MonthlyBookPostVO monthlyBookPostVO) {
         if(monthlyBookPostVO != null){
@@ -171,5 +171,7 @@ public interface PostService {
         }
         return null;
     }
+
+    public BestBookPostVO getBestBookPostByDate(String date);
 }
 

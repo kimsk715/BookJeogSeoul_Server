@@ -54,6 +54,8 @@
         <typeAlias type="com.app.bookJeog.domain.dto.AlarmCommentAlarmDTO" alias="alarmCommentAlarmDTO"/>
         <typeAlias type="com.app.bookJeog.domain.dto.AlarmMentionAlarmDTO" alias="alarmMentionAlarmDTO"/>
         <typeAlias type="com.app.bookJeog.domain.dto.SponsorPostDTO" alias="sponsorPostDTO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.EventVO" alias="eventVO"/>
+        <typeAlias type="com.app.bookJeog.domain.vo.BestBookPostVO" alias="bestBookPostVO"/>
     </typeAliases>
     <typeHandlers>
         <typeHandler handler="com.app.bookJeog.mybatis.MemberTypeHandler"/>

@@ -588,14 +588,19 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<MonthlyBookPostDTO> getMonthlyBookPosts() {
-        List<MonthlyBookPostVO> postList = postDAO.findAllMonthlyBookPosts();
+    public List<MonthlyBookPostDTO> getMonthlyBookPosts(String date) {
+        List<MonthlyBookPostVO> postList = postDAO.findAllMonthlyBookPosts(date);
         List<MonthlyBookPostDTO> monthlyBookPostDTOList = new ArrayList<>();
         for (MonthlyBookPostVO post : postList) {
             MonthlyBookPostDTO monthlyBookPostDTO = toMonthlyBookPostDTO(post);
             monthlyBookPostDTOList.add(monthlyBookPostDTO);
         }
         return monthlyBookPostDTOList;
+    }
+
+    @Override
+    public BestBookPostVO getBestBookPostByDate(String date) {
+        return postDAO.findBestBookPostByDate(date);
     }
 
 };

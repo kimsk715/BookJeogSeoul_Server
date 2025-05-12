@@ -1,6 +1,7 @@
 package com.app.bookJeog.repository;
 
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.vo.EventVO;
 import com.app.bookJeog.domain.vo.NoticeVO;
 import com.app.bookJeog.mapper.NoticeMapper;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +36,13 @@ public class NoticeDAO {
 
     public List<NoticeVO> findAllNoticeClient(){
         return noticeMapper.selectAllNoticeClient();
+    }
+
+    public List<EventVO> findAllEvent(){
+        return noticeMapper.selectAllEvents();
+    }
+
+    public EventVO findEventById(Long id){
+        return noticeMapper.selectEventById(id);
     }
 }
