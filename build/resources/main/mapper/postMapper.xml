@@ -802,8 +802,9 @@
 
     <!--이 달의 독후감 투표 후보 (20개)_-->
     <select id="selectAllMonthlyBookPosts" resultType="monthlyBookPostVO">
-            select *
-            from tbl_monthly_book_post
+            select mbp.id, book_post_title, book_post_text, date_format(createdDate, '%y%m') as createdDate, updatedDate, book_post_id, book_post_like_count
+            from tbl_event e
+                     join tbl_monthly_book_post mbp on date_format(mbp.createdDate, '%y%m') = concat(e.year,e.month) and e.event_type = 'VOTE'
             order by
                 id desc
             limit 20

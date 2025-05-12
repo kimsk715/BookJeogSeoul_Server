@@ -38,6 +38,7 @@ public class NoticeController  {
     @GetMapping("/event/detail")
     public String goToEventDetail(Model model){
          model.addAttribute("posts",postService.getMonthlyBookPosts());
+
         return "main/event_content";
     }
 }

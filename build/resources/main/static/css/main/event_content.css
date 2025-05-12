@@ -137,7 +137,7 @@
 .info-wrapper article > div.info-desc > p {
     display: -webkit-box;
     white-space: pre-wrap;
-    overflow: hidden;
+    /*overflow: hidden;*/
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     font-size: 16px;
@@ -497,16 +497,16 @@
     overflow: hidden;
 }
 
-.info-wrapper article > div.info-desc > p {
-    display: -webkit-box;
-    white-space: pre-wrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-box-orient: vertical;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 28px;
-}
+/*.info-wrapper article > div.info-desc > p {*/
+/*    display: -webkit-box;*/
+/*    white-space: pre-wrap;*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*    -webkit-box-orient: vertical;*/
+/*    font-size: 16px;*/
+/*    font-weight: 400;*/
+/*    line-height: 28px;*/
+/*}*/
 
 .info-wrapper article > div.info-desc > p.only {
     -webkit-line-clamp: 4;

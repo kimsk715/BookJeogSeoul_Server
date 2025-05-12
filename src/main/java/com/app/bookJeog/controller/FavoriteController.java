@@ -107,7 +107,6 @@ public class FavoriteController {
     @ResponseBody
     public void voteBookPost(@RequestParam Long bookPostId, HttpSession session){
         PersonalMemberDTO foundMember = (PersonalMemberDTO) session.getAttribute("member");
-        log.info(foundMember.toString());
         if(foundMember != null) {
             Long memberId = foundMember.getId();
             favoriteService.voteBookPost(memberId, bookPostId);

@@ -119,3 +119,6 @@ from tbl_book_post bp
          join tbl_member m on p.member_id = m.id
          join tbl_personal_member pm on pm.id = m.id
 where bp.book_post_is_public = 'PUBLIC';
+
+select mbp.id, mbp.book_post_id, date_format(mbp.createdDate, '%y%m') as createdDate from tbl_event e
+join tbl_monthly_book_post mbp on date_format(mbp.createdDate, '%y%m') = concat(e.year,e.month)
