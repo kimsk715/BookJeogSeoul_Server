@@ -25,7 +25,7 @@ const postListLayout = (() => {
             }
 
             const profileImg = (post.filePath && post.fileName)
-                ? `/member/profile?path=${post.filePath.replace("C:\\upload\\", "").replace(/\\/g, "/")}&name=${post.fileName}`
+                ? `/member/profile?path=${post.filePath.replace(/^\/upload\//, "").replace(/\\/g, "/")}&name=${post.fileName}`
                 : "/images/common/user-profile-example.png";
 
             const formattedTime = formatTime(post.createdDate);
@@ -42,9 +42,9 @@ const postListLayout = (() => {
 
             cardItem.innerHTML = `
                 <div class="user diary-theme">
-                    <a href="#" class="profile-image" style="background-image: url('${profileImg}');"></a>
+                    <a href="/personal/mypage/${post.memberId}" class="profile-image" style="background-image: url('${profileImg}');"></a>
                     <div class="metadata">
-                        <a href="#" class="nickname-link"><span class="nickname">${post.memberNickName}</span></a>
+                        <a href="/personal/mypage/${post.memberId}" class="nickname-link"><span class="nickname">${post.memberNickName}</span></a>
                         <div><span class="time">${formattedTime}</span></div>
                     </div>
                     <button type="button" class="button follow-btn">팔로우</button>

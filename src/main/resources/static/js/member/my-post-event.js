@@ -101,24 +101,28 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// 삭제 관련 이벤트
+// 수정/삭제 관련 모달 요소들
 const deleteOverlay = document.querySelector(".modal-overlay2");
 const deleteModal = document.querySelector(".delete-menu");
 const realDelModal = document.querySelector(".delete-confirm");
 let targetListItem = null;
+let selectedPostId = null;
 
-// 삭제 메뉴 열기
+// 메뉴 버튼 클릭 시 - 모달 열기 및 postId 저장
 document.addEventListener("click", (e) => {
     const target = e.target;
 
     if (target.classList.contains("more-button")) {
         targetListItem = target.closest(".list-item");
+        selectedPostId = target.getAttribute("data-id");
+
+        // 모달 열기
         deleteOverlay.style.display = "flex";
         deleteModal.style.display = "block";
     }
 });
 
-// 삭제 취소
+// 모달 닫기
 document.addEventListener("click", (e) => {
     const target = e.target;
 
@@ -127,10 +131,22 @@ document.addEventListener("click", (e) => {
         deleteModal.style.display = "none";
         realDelModal.style.display = "none";
         targetListItem = null;
+        selectedPostId = null;
     }
 });
 
-// 삭제 확인창 열기
+// 수정하기 버튼 클릭 시 - 수정 페이지로 이동
+document.addEventListener("click", (e) => {
+    const target = e.target;
+
+    if (target.classList.contains("update-button") && selectedPostId) {
+        navigateToEditPage(selectedPostId);
+        deleteOverlay.style.display = "none";
+        selectedPostId = null;
+    }
+});
+
+// 삭제 버튼 클릭 시 - 삭제 확인 모달 열기
 document.addEventListener("click", (e) => {
     const target = e.target;
 
@@ -140,7 +156,7 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// 삭제 확인
+// 삭제 확인 버튼 클릭 시 - 삭제 처리
 document.addEventListener("click", async (e) => {
     const target = e.target;
 
@@ -164,5 +180,12 @@ document.addEventListener("click", async (e) => {
         deleteOverlay.style.display = "none";
         realDelModal.style.display = "none";
         targetListItem = null;
+        selectedPostId = null;
     }
 });
+
+// 수정 페이지로 이동 함수
+function navigateToEditPage(postId) {
+    const editUrl = `/post/bookpost/edit/${postId}`;
+    window.location.href = editUrl;
+}

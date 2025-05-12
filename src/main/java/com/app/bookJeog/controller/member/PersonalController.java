@@ -12,7 +12,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,6 +146,12 @@ public class PersonalController {
     // 개인 마이페이지 - 관리 메뉴
     @GetMapping("mypage/settings")
     public String settings(HttpSession session, Model model) {
+
+        SponsorMemberDTO sponsorMemberDTO = (SponsorMemberDTO) session.getAttribute("sponsorMember");
+        if(sponsorMemberDTO != null) {
+            return "redirect:/preparing";
+        }
+
         PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
         if (member == null) {
             return "redirect:/personal/login";
@@ -361,8 +370,12 @@ public class PersonalController {
     // 이메일 중복검사
     @ResponseBody
     @PostMapping("check-email")
-    public Optional<PersonalMemberDTO> checkEmail(@RequestParam String memberEmail) {
-        return memberServiceImpl.checkEmail(memberEmail);
+    public PersonalMemberDTO checkEmail(@RequestParam String memberEmail) {
+        PersonalMemberDTO personalMemberDTO = new PersonalMemberDTO();
+        personalMemberDTO.setMemberEmail(memberEmail);
+
+
+        return memberServiceImpl.checkEmail(personalMemberDTO);
     }
 
 
@@ -406,14 +419,16 @@ public class PersonalController {
     public String confirmCode(@CookieValue(name = "token", required = false) String token, String code, HttpServletRequest request) {
         // 쿠키에서 'token'을 가져와 입력받은 코드와 비교
 
+        log.info("token: {}", token);
             if(token == null) {
                 return "redirect:/personal/login?result=tokken-lose";
             }
 
         if (token.equals(code)) {
+            log.info("code: {}", code);
             return "redirect:/personal/change-passwd"; // 비밀번호 재설정 페이지로 리디렉션
         } else {
-            return "redirect:/personal/login/check?result=fail";
+            return "redirect:/personal/login?result=tokken-lose";
         }
     }
 
@@ -434,7 +449,7 @@ public class PersonalController {
                 session.invalidate();
                 return "redirect:/personal/login";
             }
-        return "/personal/login?result=tokken-lose";
+        return "personal/login?result=tokken-lose";
     }
 
 
@@ -455,22 +470,19 @@ public class PersonalController {
 
 
         // 4. 사용자 이메일로 기존 가입 여부 확인
-        Optional<PersonalMemberDTO> foundMember = memberService.checkEmail(personalMemberDTO.getMemberEmail());
-       PersonalMemberDTO checkMember = foundMember.orElse(personalMemberDTO);
-        log.info("foundMember: {}", foundMember);
-        log.info("여기까지옴 4");
+        PersonalMemberDTO checkMember = memberService.checkEmail(personalMemberDTO);
+        log.info("checkMember: {}", checkMember);
 
         // 5. 가입된 회원이 없으면 회원가입 처리
         if (checkMember.getMemberEmail() == null) {
-            log.info("여기들어옴");
             session.setAttribute("tempMemberInfo", personalMemberDTO);
-            log.info("personalMemberDTO: {}", personalMemberDTO);
+            session.invalidate();
             return "redirect:/personal/more-info-for-kakao";// 회원가입 로직 실행
         }
         log.info("여기까지옴 5");
 
         // 6. 세션에 회원 정보 저장 (로그인 상태 유지 목적)
-        session.setAttribute("member", foundMember.orElseThrow(RuntimeException::new));
+        session.setAttribute("member", checkMember);
         log.info(session.getAttribute("member").toString());
         // 7. 게시글 목록 페이지로 리다이렉트
         return "redirect:/main/main";
@@ -506,25 +518,49 @@ public class PersonalController {
     @GetMapping("profile")
     @ResponseBody
     public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,
-
                                                   @RequestParam("name") String name) throws IOException {
-        // 이미지 파일 경로 설정
-        File imageFile = new File("C:/upload/" + path.replace("/", File.separator) + "/" + name);
 
+        // 이미지 파일 경로 설정
+        File imageFile = new File("/upload/" + path.replace("/", File.separator) + "/" + name);
+
+        byte[] imageBytes;
 
         // 파일이 없으면 기본 이미지 사용
         if (!imageFile.exists()) {
-            imageFile = new File("src/main/resources/static/images/common/user_profile_example.png");
+            try {
+                // InputStream을 통해 리소스 접근
+                InputStream inputStream = new ClassPathResource("static/images/common/user_profile_example.png").getInputStream();
+                imageBytes = inputStream.readAllBytes();
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            }
+        } else {
+            // 파일이 존재할 경우
+            imageBytes = FileCopyUtils.copyToByteArray(imageFile);
         }
 
+        // 파일 확장자에 따른 ContentType 설정
+        String extension = name.substring(name.lastIndexOf(".") + 1).toLowerCase();
+        MediaType mediaType;
 
-        // 이미지 파일을 바이트 배열로 읽기
-        byte[] imageBytes = FileCopyUtils.copyToByteArray(imageFile);
-        log.info("📷 이미지 path:", path, "파일명:", name);
+        switch (extension) {
+            case "png":
+                mediaType = MediaType.IMAGE_PNG;
+                break;
+            case "jpg":
+            case "jpeg":
+                mediaType = MediaType.IMAGE_JPEG;
+                break;
+            case "gif":
+                mediaType = MediaType.IMAGE_GIF;
+                break;
+            default:
+                mediaType = MediaType.APPLICATION_OCTET_STREAM;
+                break;
+        }
 
-
-        // 응답 반환
-        return new ResponseEntity<>(imageBytes, HttpStatus.OK);
-
+        return ResponseEntity.ok().contentType(mediaType).body(imageBytes);
     }
 }

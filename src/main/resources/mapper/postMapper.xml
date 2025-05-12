@@ -653,7 +653,7 @@
         join tbl_member m on p.member_id = m.id
         join tbl_personal_member pm on pm.id = m.id
         join tbl_member_profile mp on mp.member_id = m.id
-        join tbl_file f on f.id = mp.id
+        left join tbl_file f on f.id = mp.id
         where bp.book_post_is_public = 'PUBLIC'
         order by p.createdDate desc
         limit 12 offset #{offset}
@@ -671,7 +671,7 @@
                  join tbl_member m on p.member_id = m.id
                  join tbl_personal_member pm on pm.id = m.id
                  join tbl_member_profile mp on mp.member_id = m.id
-                 join tbl_file f on f.id = mp.id
+                 left join tbl_file f on f.id = mp.id
                  join tbl_follow fl on fl.follow_receiver_id = m.id
         where bp.book_post_is_public = 'PUBLIC' and fl.follow_sender_id = #{loginMemberId}
         order by p.createdDate desc

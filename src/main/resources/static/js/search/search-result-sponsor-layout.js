@@ -13,7 +13,7 @@ const searchResultSponsorLayout = (() => {
             li.className = "slide-item";
 
             const profileImg = (sponsor.filePath && sponsor.fileName)
-                ? `/member/profile?path=${sponsor.filePath.replace("C:\\upload\\", "").replace(/\\/g, "/")}&name=${sponsor.fileName}`
+                ? `/member/profile?path=${sponsor.filePath.replace(/^\/upload\//, "").replace(/\\/g, "/")}&name=${sponsor.fileName}`
                 : "/images/common/user-profile-example.png";
 
             li.innerHTML = `

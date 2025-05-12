@@ -18,12 +18,12 @@ const searchResultReceiverLayout = (() => {
 
             // 프로필 이미지 경로
             const profileUrl = (receiver.profileFilePath && receiver.profileFileName)
-                ? `/member/profile?path=${receiver.profileFilePath.replace("C:\\upload\\", "").replace(/\\/g, "/")}&name=${receiver.profileFileName}`
+                ? `/member/profile?path=${receiver.profileFilePath.replace(/^\/upload\//, "").replace(/\\/g, "/")}&name=${receiver.profileFileName}`
                 : "/images/common/user-profile-example.png";
 
             // 본문 썸네일 이미지 경로
             const receiverImageUrl = (receiver.receiverFilePath && receiver.receiverFileName)
-                ? `/post/thumbnail?path=${receiver.receiverFilePath.replace("C:\\upload\\", "").replace(/\\/g, "/")}&name=${receiver.receiverFileName}`
+                ? `/post/thumbnail?path=${receiver.receiverFilePath.replace(/^\/upload\//, "").replace(/\\/g, "/")}&name=${receiver.receiverFileName}`
                 : "/images/common/default-donate-image.png";
 
             // 날짜 포맷

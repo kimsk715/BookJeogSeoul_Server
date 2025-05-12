@@ -5,14 +5,17 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>북적북적</title>
+        <link
+                rel="shortcut icon"
+                href="/images/common/favicon.ico"
+                type="image/x-icon"
+        />
         <link rel="stylesheet" href="/css/main/header.css" />
         <link rel="stylesheet" href="/css/main/bjs-main-category-popup.css" />
         <link rel="stylesheet" href="/css/main/global-settings.css">
         <link rel="stylesheet" href="/css/main/bjs-main.css">
         <link rel="shortcut icon" href="/images/common/favicon.ico" type="image/x-icon">
     </head>
-    </head>
-    <body>
     <body>
         <div>
             <!-- 헤더 시작 -->
@@ -20,7 +23,7 @@
             <!-- 헤더끝 -->
             <section class="content">
                 <div class="bjs-home">
-                    <!-- 햄버거 탭 -->
+                    <!-- e 탭 -->
                     <div class="home-tab">
                         <div class="home-tab-inner">
                             <a type="button" class="hamburger">
@@ -588,8 +591,10 @@
                                                     </div>
                                                         <div class="info-box">
                                                             <a class="profile-img"
+                                                               th:href="|/personal/mypage/${profile.memberId}|"
                                                             ><span
-                                                            ><img th:src="${profile.filePath}"
+                                                            ><img th:src="@{/personal/profile(path=${profile.filePath}, name=${profile.fileName})}"
+
                                                             /></span
                                                             ></a>
                                                             <div class="info-blk">

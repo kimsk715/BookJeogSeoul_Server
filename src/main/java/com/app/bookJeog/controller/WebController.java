@@ -143,6 +143,7 @@ public class WebController {
       }
         model.addAttribute("topBookPostDTOS", topBookPostDTOS);
         List<PersonalMemberPostMemberProfileDTO> PersonalMemberPostMemberProfileDTO = memberServiceImpl.selectTopBookPostMemberProfile();
+        log.info("메인페이지에서 받는 즐겨찾기 회원정보: {}", PersonalMemberPostMemberProfileDTO);
 
       model.addAttribute("bookPostMember", PersonalMemberPostMemberProfileDTO);
 
@@ -152,8 +153,15 @@ public class WebController {
     }
     
     // 로그아웃기능
-    @PostMapping("/main/logout")
+    @PostMapping("main/logout")
     public String logout(){
+        session.invalidate();
         return "redirect:/personal/login";
+    }
+
+    // 준비중인 페이지
+    @GetMapping("preparing")
+    public String prepare(){
+        return "error/coming-soon";
     }
 }

@@ -63,14 +63,17 @@ public class MemberServiceImpl implements MemberService {
 
     // 이메일 중복검사
     @Override
-    public Optional<PersonalMemberDTO> checkEmail(String email) {
-        Optional<PersonalMemberVO> memberVO = memberDAO.findByEmail(email);
-        PersonalMemberDTO personalMemberDTO = new PersonalMemberDTO();
+    public PersonalMemberDTO checkEmail(PersonalMemberDTO personalMemberDTO) {
+        PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
+        Optional<PersonalMemberVO> memberVO = memberDAO.findByEmail(personalMemberVO.getMemberEmail());
         if (memberVO.isPresent()) {
             PersonalMemberVO member = memberVO.get();
-            personalMemberDTO.setMemberEmail(member.getMemberEmail());
+            PersonalMemberDTO memberDTO = toPersonalMemberDTO(member);
+//            personalMemberDTO.setMemberEmail(member.getMemberEmail());
+            log.info("이메일로 받아온 회원정보 : {}", memberDTO);
+            return memberDTO;
         }
-        return Optional.of(personalMemberDTO);
+     return null;
     }
 
     @Override
@@ -303,7 +306,7 @@ public class MemberServiceImpl implements MemberService {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             StringBuilder stringBuilder = new StringBuilder();
             BufferedWriter bufferedWriter = null;
-            String redirectURI = "http://43.201.248.187:10000/personal/kakao/login";
+            String redirectURI = "http://bookjeogseoul.site/personal/kakao/login";
 
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
@@ -543,7 +546,7 @@ public class MemberServiceImpl implements MemberService {
         }
 
         String todayPath = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        String rootPath = "C:/upload/" + todayPath;
+        String rootPath = "/upload/" + todayPath;
         File uploadDir = new File(rootPath);
         if (!uploadDir.exists()) uploadDir.mkdirs();
 
@@ -570,7 +573,7 @@ public class MemberServiceImpl implements MemberService {
 
         // 파일 경로 조회
         FileVO fileVO = memberDAO.findMyProfile(memberId);
-        String fullPath = "C:/upload/" + fileVO.getFilePath() + "/" + fileVO.getFileName();
+        String fullPath = "/upload/" + fileVO.getFilePath() + "/" + fileVO.getFileName();
 
         // DB 삭제 (순서: 서브키 → 슈퍼키)
         memberDAO.deleteMemberProfile(memberId);
@@ -593,7 +596,7 @@ public class MemberServiceImpl implements MemberService {
         try {
             // 1. 경로 준비
             String todayPath = getPath(); // 예: 2025/05/06
-            String rootPath = "C:/upload/" + todayPath;
+            String rootPath = "/upload/" + todayPath;
             File uploadDir = new File(rootPath);
             if (!uploadDir.exists()) uploadDir.mkdirs();
 

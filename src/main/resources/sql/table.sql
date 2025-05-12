@@ -90,3 +90,32 @@ where c.id = ${commentId};
 
 select *
 from tbl_follow;
+
+select bp.id as book_post_id, bp.book_post_title, bp.book_post_text, pm.member_name, pm.member_nickname, bp.book_isbn, p.member_id, f.file_name, f.file_path, p.createdDate,
+       (select count(*)
+        from tbl_book_post_like l
+        where l.book_post_id = bp.id) as like_count
+from tbl_book_post bp
+         join tbl_post p on p.id = bp.id
+         join tbl_member m on p.member_id = m.id
+         join tbl_personal_member pm on pm.id = m.id
+         join tbl_member_profile mp on mp.member_id = m.id
+         left join tbl_file f on f.id = mp.id
+where bp.book_post_is_public = 'PUBLIC'
+order by p.createdDate desc
+limit 12 offset 0;
+
+select
+    bp.id as book_post_id,
+    bp.book_post_title,
+    bp.book_post_is_public,
+    p.id as post_id,
+    p.member_id,
+    m.id as member_id,
+    pm.member_name,
+    pm.member_nickname
+from tbl_book_post bp
+         join tbl_post p on p.id = bp.id
+         join tbl_member m on p.member_id = m.id
+         join tbl_personal_member pm on pm.id = m.id
+where bp.book_post_is_public = 'PUBLIC';

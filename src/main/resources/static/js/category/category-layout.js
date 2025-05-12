@@ -1,47 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>전체보기</title>
-        <link rel="stylesheet" href="/css/main/header.css" />
-        <link
-            rel="stylesheet"
-            href="/css/category/category-overview.css"
-        />
-    </head>
-    <body>
-        <div>
-            <section class="content">
-                <div>
-                    <div class="sub-content">
-                        <div class="sub-inner">
-                            <!-- 헤더 -->
-                            <div class="category-title-wrap">
-                                <h2 class="category-title" th:text="${className}"></h2>
-                            </div>
-                            <!-- 헤더끝 -->
-                            <!-- 책 view 시작 -->
-                            <div class="books-container">
-                                <div class="books-wrapper">
-                                    <!-- 책 view 필터 -->
-                                    <div class="info">
-                                        <div>
-                                            <button
-                                                type="button"
-                                                class="filter-popup"
-                                            >
-                                                <span></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!-- 책 목록 여기서부터 -->
-                                    <ul class="list-view">
-                                        <li class="book-item" th:each="books : ${bookList}">
+const categoryLayout = (() => {
+
+    const kdcNameMap = {
+        "000": "총류",
+        "100": "철학",
+        "200": "종교",
+        "300": "사회과학",
+        "400": "자연과학",
+        "500": "기술과학",
+        "600": "예술",
+        "700": "언어",
+        "800": "문학",
+        "900": "역사"
+    };
+
+    const books = async (bookList, kdc) => {
+        const categoryName = document.querySelector(".category-title");
+        const listView = document.querySelector(".list-view");
+
+        // KDC 값으로 카테고리 이름 설정
+        categoryName.textContent = kdcNameMap[kdc] || "카테고리 없음";
+
+
+        let text = ``
+
+        bookList.forEach((book) => {
+            text += `
+                <li class="book-item">
                                             <div class="search-book-list">
                                                 <div class="bjs-book">
                                                     <a
-                                                            th:href="|/book/detail/${books.isbn13}|"
+                                                        href=""
                                                         class="book-image"
                                                     >
                                                         <div class="thumbnail">
@@ -55,8 +43,7 @@
                                                                         class="book-picture"
                                                                     >
                                                                         <img
-                                                                            th:src="${books.bookImage}"
-
+                                                                            src="${book.image}"
                                                                             width="145"
                                                                     /></picture>
                                                                 </div>
@@ -71,29 +58,26 @@
                                                             <p
                                                                 data-v-55d598cc=""
                                                                 class="title"
-                                                                th:text="${books.bookName}"
                                                             >
+                                                                ${book.bookName}
                                                             </p>
                                                             <p
                                                                 data-v-55d598cc=""
                                                                 class="author"
-                                                                th:text="|${books.publisher}${books.author}|"
                                                             >
+                                                                ${book.author}
+                                                                ${book.publisher}
                                                             </p>
                                                         </div></a
                                                     >
                                                 </div>
                                             </div>
                                             <!-- 찜 버튼 만들거면만드셈 -->
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- 끝 -->
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </body>
-</html>
+                                        </li>           
+            `
+
+            listView.innerHTML = text;
+        })
+    }
+    return {books:books}
+})();

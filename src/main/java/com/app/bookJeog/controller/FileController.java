@@ -24,7 +24,7 @@ public class FileController {
     public byte[] display(@RequestParam String path) throws IOException {
         byte[] file = null;
         try {
-            file = FileCopyUtils.copyToByteArray(new File("C:/upload/" + path));
+            file = FileCopyUtils.copyToByteArray(new File("/upload/" + path));
         }catch (NoSuchFileException e){
             throw new RuntimeException();
         }

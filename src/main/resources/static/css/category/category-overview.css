@@ -298,3 +298,11 @@ html {
     color: var(--text-02);
     cursor: pointer;
 }
+.category-title {
+    text-align: center;
+    font-size: 18px;
+    margin: 15px;
+}
+.category-title-wrap{
+    border-bottom: 1px solid var(--ui-06);
+}
