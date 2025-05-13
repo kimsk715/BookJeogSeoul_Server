@@ -22,4 +22,5 @@ public class EventVO extends Period {
     private int year;
     private int month;
     private EventType eventType;
+    private String eventText;
 }

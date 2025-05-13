@@ -66,7 +66,7 @@
                         </div>
                         <div class="notification" th:unless="${event.eventType.name()} == 'VOTE'">
                             <div th:object="${bestPost}">
-                                <a href="/post/bookpost/*{bookPostId}">
+                                <a th:href="|/post/bookpost/*{bookPostId}|">
                                 <dl>
                                     <dt>작성자</dt>
                                     <dd th:text="${memberName}"></dd>
@@ -82,7 +82,7 @@
                     </article>
                 </div>
                 <div
-                        class="process-wrapper">
+                        class="process-wrapper" th:if="${event.eventType.name()} == 'VOTE'">
                     <article
                             class="process-inner">
                         <h3>이 달의 독후감 후보</h3>
