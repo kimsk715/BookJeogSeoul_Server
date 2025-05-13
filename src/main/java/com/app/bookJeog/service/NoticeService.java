@@ -48,4 +48,5 @@ public interface NoticeService {
 
 
     }
+    public void setEvent(EventVO eventVO);
 }

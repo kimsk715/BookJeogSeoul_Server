@@ -25,7 +25,7 @@ public class EventDTO {
     private EventType eventType;
     private String eventText;
 
-    public EventVO toVO(EventDTO eventDTO) {
+    public EventVO toVO() {
         return EventVO.builder().id(id).year(year).month(month).eventType(eventType).eventText(eventText).build();
 
     }
