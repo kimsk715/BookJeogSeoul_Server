@@ -107,6 +107,19 @@
             values (#{id}, #{noticeId})
     </insert>
 
+    <select id="selectNoticeFilesByNoticeId" resultType="fileVO">
+        select f.id, file_name, file_path, file_text, createdDate, updatedDate, notice_id
+            from tbl_file f
+            join tbl_notice_file nf on f.id = nf.id
+            where notice_id = #{noticeId}
+            order by f.id desc
+    </select>
+
+    <delete id="deleteNoticeFileByNoticeId">
+     delete from tbl_notice_file
+     where id = #{id}
+    </delete>
+
     <insert id="insertReceiverFile">
         insert into tbl_receiver_file(id, receiver_id)
             values (#{id}, #{receiverId})

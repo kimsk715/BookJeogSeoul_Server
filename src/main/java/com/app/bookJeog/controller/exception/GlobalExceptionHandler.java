@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UnauthenticatedException.class)
     protected String UnauthenticatedException(UnauthenticatedException e) {
         log.error(e.getMessage());
-        return "/login/login";
+        return "login/login";
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)

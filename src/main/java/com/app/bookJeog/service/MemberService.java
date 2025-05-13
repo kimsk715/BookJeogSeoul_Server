@@ -53,7 +53,7 @@ public interface MemberService {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberDTO> checkEmail(String email);
+    public PersonalMemberDTO checkEmail(PersonalMemberDTO personalMemberDTO);
 
     public SponsorMemberVO getSponsorMemberById(Long id);
 

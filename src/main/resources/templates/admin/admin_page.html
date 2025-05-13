@@ -1259,14 +1259,10 @@
                     <h4>공지 내용</h4>
                     <textarea class="detail-content" id="new-notice-text"></textarea>
                 </div>
-                <div class="notice-detail">
+                <div class="notice-detail notice-files">
                     <h4>첨부 파일</h4>
-                    <input type="file">
-                    <img src="/images/common/favicon.png" alt="임시 이미지">
-                    <img src="/images/common/favicon.png" alt="임시 이미지">
-                    <img src="/images/common/favicon.png" alt="임시 이미지">
-                    <img src="/images/common/favicon.png" alt="임시 이미지">
-
+                    <input type="file" name="noticeFile" multiple="multiple" accept=".jpg, .png, .jpeg, .heic" />
+                    <div class="file-preview" style="display: flex"></div>
                 </div>
 
             </div>

@@ -3,6 +3,7 @@ package com.app.bookJeog.repository;
 import com.app.bookJeog.domain.dto.BookPostFileDTO;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.mapper.FileMapper;
+import com.app.bookJeog.mapper.NoticeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FileDAO {
     private final FileMapper fileMapper ;
+    private final NoticeMapper noticeMapper;
 
     // 독후감 첨부파일 넣기
     public void insertFiles(FileVO fileVO){
@@ -46,6 +48,10 @@ public class FileDAO {
 
     public void setNoticeFile(NoticeFileVO noticeFileVO){
         fileMapper.insertNoticeFile(noticeFileVO);
+    }
+
+    public List<FileVO> findNoticeFilesByNoticeId(Long noticeId){
+        return fileMapper.selectNoticeFilesByNoticeId(noticeId);
     }
 
     public void setReceiverFile(ReceiverFileVO receiverFileVO){

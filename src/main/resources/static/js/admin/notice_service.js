@@ -38,9 +38,20 @@ const noticeService= (() => {
         await fetch(path);
     }
 
-    const addNotice = async(noticeTitle, noticeText) => {
-        let path = `/admin/notice-add?title=${noticeTitle}&text=${noticeText}`;
-        await fetch(path)
+    const addNotice = async(noticeTitle, noticeText, files) => {
+        const formData = new FormData();
+        formData.append("title", noticeTitle);
+        formData.append("text", noticeText);
+
+        for (const file of files) {
+            formData.append("files", file); // name=files인 파라미터로 여러 파일
+        }
+
+        fetch("/admin/notice-add", {
+            method: "POST",
+            body: formData,
+        })
+            .then(response => response.json());
     }
     return {getAllNotice : getAllNotice,
         getNoticeDetail : getNoticeDetail,

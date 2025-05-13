@@ -73,18 +73,27 @@
                     </li>
                     <li class="">
                         <a
-
+                                href="/preparing"
                                 type="button"
                                 data-content-type="self-donation"
                                 class="self-donation"
                         >개인기부</a
                         >
                     </li>
+                    <li class="">
+                        <a
+                                href="/notice"
+                                type="button"
+                                data-content-type="self-donation"
+                                class="self-donation"
+                        >공지</a
+                        >
+                    </li>
                 </ul>
             </nav>
             <div class="util-wrap" >
                 <!-- data-count가 알람 개수 -->
-                <a th:style="${userType == 'sponsor'} ? 'display:none;' : ''"
+                <a th:style="${userType == 'sponsorMember'} ? 'display:none;' : ''"
                         href="/post-alarm"
                         class="alarm-button"
                         data-content-type="alarmCenter"

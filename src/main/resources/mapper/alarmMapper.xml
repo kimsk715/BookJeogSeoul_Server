@@ -83,7 +83,7 @@
 
     <!--팔로우 조회-->
     <select id="selectFollowAlarms" resultType="alarmFollowAlarmDTO">
-        select member_nickname, pm.id
+        select member_nickname, alarm_sender_id, pm.id
         from tbl_alarm a
             join tbl_follow_alarm fa
                 on a.id = fa.id

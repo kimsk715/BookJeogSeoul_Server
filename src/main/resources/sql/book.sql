@@ -97,4 +97,6 @@ ORDER BY post_count DESC
 limit 4;
 
 
-
+select *
+from tbl_personal_member
+where member_email = 'rksel0712@gmail.com'

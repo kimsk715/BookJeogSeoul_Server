@@ -47,9 +47,5 @@ const observer = new IntersectionObserver(
 
 fadeEls.forEach((el) => observer.observe(el));
 
-// 로그인 페이지로 이동
-const goToLogin = () => {
-    window.location.href ="http://43.201.248.187:10000/personal/login"
-}
 
 

@@ -65,7 +65,7 @@ const myPostLayout = (() => {
                     <span class="like-label">좋아요</span>
                     <span class="like-count">${post.likeCount}</span>
                 </button>
-                <button class="more-button" data-id="${post.bookPostId}">
+                <button class="more-button" data-id="${post.bookPostId}" onclick="openModal(this)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 25" class="mds-icon" color="var(--text-01)">
                         <path d="M13 6.245a1 1 0 1 1-2 0 1 1 0 0 1 2 0M13 12.245a1 1 0 1 1-2 0 1 1 0 0 1 2 0M12 19.245a1 1 0 1 0 0-2 1 1 0 0 0 0 2" fill="currentColor"></path>
                     </svg>

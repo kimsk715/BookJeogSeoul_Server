@@ -96,7 +96,7 @@ const bookDetailLayout = (() => {
 
             if (post.filePath && post.fileName) {
                 const rawPath = post.filePath;
-                const relativePath = rawPath.replace("C:\\upload\\", "").replace(/\\/g, "/");
+                const relativePath = rawPath.replace("/upload/", "").replace(/\\/g, "/");
                 imageUrl = `/member/profile?path=${relativePath}&name=${post.fileName}`;
             } else {
                 imageUrl = "/images/common/default-profile.png";

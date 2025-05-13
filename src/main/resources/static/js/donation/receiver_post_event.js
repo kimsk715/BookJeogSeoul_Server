@@ -194,12 +194,12 @@ addComment.addEventListener("click", async (e) => {
     const commentText = commentArea.value;
 
     // 비속어 검사
-    // const isClean = await commentService.checkComment(commentText);
-    // if (!isClean) {
-    //     alert("댓글에 비속어가 포함되어 있습니다.");
-    //     console.log("이건 말도안됀다")
-    //     return; // 중지
-    // }
+    const isClean = await commentService.checkComment(commentText);
+    console.log(isClean)
+    if (isClean) {
+        alert("댓글에 비속어가 포함되어 있습니다.");
+        return; // 중지
+    }
 
     // 댓글 등록
     if (mentionId) {
@@ -239,10 +239,31 @@ const commentService = (() =>{
             callback(commentText)
         }
     }
+    const checkComment = async (content) => {
+        try {
+            const response = await fetch('http://3.37.128.152/api/reply-check', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ content })
+            });
+
+            const result = await response.json();
+            console.log(result); //  isBadWord: true
+
+            // 비속어가 없으면 true 반환, 있으면 false
+            return result.isBadWord;
+        } catch (error) {
+            console.error('댓글 검사 실패', error);
+            alert("검사 실패 다시 시도해주세요")
+            return false;
+        }
+    };
 
 
 
-    return {addComment : addComment}
+    return {addComment : addComment, checkComment:checkComment}
 })();
 
 const commentLayout =(() =>{

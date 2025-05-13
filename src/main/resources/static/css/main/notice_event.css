@@ -188,6 +188,10 @@
     display: block;
 }
 
+.alarm-center-container .alarm-list-container .notice-content li.open dl dd .image{
+    display: flex;
+}
+
 .alarm-center-container .alarm-list-container .notice-content li dl dd .content {
     word-break: break-all;
 }

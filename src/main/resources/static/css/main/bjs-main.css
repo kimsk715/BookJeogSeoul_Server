@@ -513,7 +513,7 @@ a {
     display: flex;
     min-width: 280px;
     height: 424px;
-    padding: 45px 24px 30px;
+    padding: 20px 24px 30px;
     -ms-flex-direction: column;
     flex-direction: column;
     -ms-flex-align: center;
@@ -523,10 +523,15 @@ a {
     backdrop-filter: blur(12.5px);
     background: #000;
 }
+
+.bjs-ai-card .book-card{
+    background-image: url(https://d3udu241ivsax2.cloudfront.net/common/images/common/background-gradient-07.jpg);
+}
+
 .content-data {
     display: -ms-flexbox;
     display: flex;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     -ms-flex-direction: column;
     flex-direction: column;
     -ms-flex-pack: center;
@@ -544,15 +549,15 @@ a {
 }
 .title > span {
     display: block;
-    color: #fbfbfb;
+    color: black;
 }
 .book-picture {
     overflow: hidden;
     position: relative;
-    max-height: 240px;
+    max-height: 303px;
     padding-top: 0;
     margin-bottom: 33px;
-    height: 176px;
+    /*height: 176px;*/
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, .24), 7px 6px 16px 0 rgba(0, 0, 0, .28)
 }
 .book-picture > picture {
@@ -781,9 +786,15 @@ a {
     gap: 2px;
 }
 .pagination-button-wrapper > em {
+    color: white;
     font-weight: 700;
     opacity: 1;
 }
+
+.pagination-button-wrapper > span{
+    color: white;
+}
+
 .separation {
     opacity: .5;
 }
@@ -1069,7 +1080,7 @@ em {
     overflow: hidden;
     width: 100%;
     max-width: 327px;
-    min-height: 464px;
+    min-height: 350px;
     border-radius: 12px;
     background-color: var(--ui-up-01);
     margin-right: 16px;
@@ -1087,7 +1098,7 @@ em {
 .info-box {
     position: relative;
     z-index: 1;
-    height: 281px;
+    /*height: 172px;*/
     padding: 0 16px 24px;
 }
 .profile-item .img-box > img {
@@ -1099,7 +1110,7 @@ em {
 .info-box {
     position: relative;
     z-index: 1;
-    height: 281px;
+    /*height: 281px;*/
     padding: 0 16px 24px;
 }
 .profile-img {
@@ -1236,7 +1247,7 @@ em {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px 24px 0;
+    padding: 21px 24px 0;
     background: linear-gradient(328.08deg, hsla(0, 0%, 100%, .6) -3.32%, hsla(0, 0%, 100%, .8));
     z-index: -1;
     position: absolute;
@@ -1248,6 +1259,12 @@ em {
     font-family: SpoqaHanSansNeo, Apple SD Gothic Neo, Malgun Gothic, sans-serif;
     border: 0;
     letter-spacing: -.6px;
+    line-height: 27px;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 .b-cover {
     max-width: 160px;
@@ -1302,6 +1319,7 @@ em {
     margin-top: -16px;
 }
 .sgst-book-wrapper {
+    margin-top: 40px;
     padding-top: 16px;
     align-items: baseline;
     display: inline-flex;
@@ -1310,10 +1328,13 @@ em {
     padding-right: 24px;
 }
 .sgst-item {
-    margin-left: 24px !important;
+    margin-left: 24px;
     width: 20%;
     min-width: 145px;
     max-width: 145px;
+}
+.sgst-item:first-child {
+    margin-left: 0; !important;
 }
 .bookjeog-book .book-image {
     display: flex
@@ -1354,6 +1375,11 @@ em {
     -webkit-line-clamp: 2;
     text-align: center;
 }
+
+.sgst-item .v-b-title{
+    text-align: left;
+}
+
 .v-b-author {
     overflow: hidden;
     text-overflow: ellipsis;

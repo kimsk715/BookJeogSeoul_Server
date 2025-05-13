@@ -358,7 +358,7 @@ public class PostServiceImpl implements PostService {
     public Long write(FileBookPostDTO fileBookPostDTO, List<MultipartFile> files) {
         log.info("fileBookPostDTO: {}", fileBookPostDTO);
         String todayPath = getPath(); // 오늘 날짜 폴더 경로 생성
-        String rootPath = "C:/upload/" + todayPath; // 실제 저장할 경로
+        String rootPath = "/upload/" + todayPath; // 실제 저장할 경로
 
         // 일반 독후감 글 작성 (tbl_post)
         PostVO postVO = fileBookPostDTO.toPostVO();
@@ -443,7 +443,7 @@ public class PostServiceImpl implements PostService {
     // 독후감 수정
     public void setBookPost(FileBookPostDTO fileBookPostDTO, List<Long> deletedFileIds) {
         String todayPath = getPath();
-        String rootPath = "C:/upload/" + todayPath;
+        String rootPath = "/upload/" + todayPath;
 
         // 게시글 내용 수정
         PostVO postVO = fileBookPostDTO.toPostVO();
@@ -585,6 +585,22 @@ public class PostServiceImpl implements PostService {
 
             return path;
 
+    }
+
+    @Override
+    public List<MonthlyBookPostDTO> getMonthlyBookPosts(String date) {
+        List<MonthlyBookPostVO> postList = postDAO.findAllMonthlyBookPosts(date);
+        List<MonthlyBookPostDTO> monthlyBookPostDTOList = new ArrayList<>();
+        for (MonthlyBookPostVO post : postList) {
+            MonthlyBookPostDTO monthlyBookPostDTO = toMonthlyBookPostDTO(post);
+            monthlyBookPostDTOList.add(monthlyBookPostDTO);
+        }
+        return monthlyBookPostDTOList;
+    }
+
+    @Override
+    public BestBookPostVO getBestBookPostByDate(String date) {
+        return postDAO.findBestBookPostByDate(date);
     }
 
 };

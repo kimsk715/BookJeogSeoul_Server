@@ -3,6 +3,7 @@ package com.app.bookJeog.controller;
 import com.app.bookJeog.controller.member.MemberControllerDocs;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,11 +33,15 @@ public class MemberController implements MemberControllerDocs {
     public ResponseEntity<byte[]> getProfileImage(@RequestParam("path") String path,
                                                   @RequestParam("name") String name) throws IOException {
         // 이미지 파일 경로 설정
-        File imageFile = new File("C:/upload/" + path.replace("/", File.separator) + "/" + name);
+        File imageFile = new File("/upload/" + path.replace("/", File.separator) + "/" + name);
 
         // 파일이 없으면 기본 이미지 사용
         if (!imageFile.exists()) {
-            imageFile = new File("src/main/resources/static/images/common/user_profile_example.png");
+            try {
+                imageFile = new ClassPathResource("static/images/common/user_profile_example.png").getFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         // 이미지 파일을 바이트 배열로 읽기

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8bc3ec4d-206a-4995-bd68-550e7d5244be" name="bjseoul">
+        <fileTransfer rootFolder="/usr/bjseoul" accessType="SFTP" host="3.34.183.241" port="22" sshConfigId="72dc8868-8c82-4ef3-8d0a-c7c87cbe9d1e" sshConfig="ubuntu@3.34.183.241:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

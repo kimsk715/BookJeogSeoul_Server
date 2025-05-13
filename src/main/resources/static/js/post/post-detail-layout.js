@@ -43,7 +43,7 @@ const postDetailLayout = (() => {
             if (post.profileFilePath && post.profileFileName) {
                 let relativePath = post.profileFilePath
                     .replaceAll("\\", "/")
-                    .replace(/^C:\/upload\//i, "");
+                    .replace(/^\/upload\//, "");
 
                 const profileUrl = `/member/profile?path=${encodeURIComponent(relativePath)}&name=${encodeURIComponent(post.profileFileName)}`;
                 userImgDiv.style.backgroundImage = `url('${profileUrl}')`;
@@ -67,7 +67,7 @@ const postDetailLayout = (() => {
             // 🔧 경로 슬래시 정리 + upload 제거
             let relativePath = filePath
                 .replaceAll("\\", "/")
-                .replace(/^C:\/upload\//i, "");
+                .replace(/^\/upload\//, "");
 
             const imageUrl = `/post/post-image?path=${encodeURIComponent(relativePath)}&name=${encodeURIComponent(fileName)}`;
 

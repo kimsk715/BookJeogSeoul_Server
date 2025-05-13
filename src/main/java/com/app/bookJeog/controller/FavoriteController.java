@@ -101,4 +101,19 @@ public class FavoriteController {
     public int getLikeCount(@RequestParam Long bookPostId){
         return favoriteService.countBookPostLike(bookPostId);
     }
+
+    // 특정 독후감에 투표하기
+    @GetMapping("/vote/book-post")
+    @ResponseBody
+    public void voteBookPost(@RequestParam Long bookPostId, HttpSession session){
+        PersonalMemberDTO foundMember = (PersonalMemberDTO) session.getAttribute("member");
+        if(foundMember != null) {
+            Long memberId = foundMember.getId();
+            favoriteService.voteBookPost(memberId, bookPostId);
+        }
+        else{
+            throw new RuntimeException();
+        }
+    }
+
 }

@@ -25,7 +25,6 @@ public class ReportController  {
     @PostMapping("/post/report-add")
     @ResponseBody
     public void addReportService(@RequestBody BookPostReportDTO bookPostReportDTO) {
-        log.info("받은 신고 타입: " + bookPostReportDTO.getBookPostReportType());
         reportService.insertBookPostReport(bookPostReportDTO);
     }
 

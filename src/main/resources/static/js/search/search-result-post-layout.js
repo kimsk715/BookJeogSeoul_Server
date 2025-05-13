@@ -13,7 +13,7 @@ const searchResultPostLayout = (() => {
         let text = "";
         posts.forEach((post) => {
             const profileImg = (post.filePath && post.fileName)
-                ? `/member/profile?path=${post.filePath.replace("C:\\upload\\", "").replace(/\\/g, "/")}&name=${post.fileName}`
+                ? `/member/profile?path=${post.filePath.replace(/^\/upload\//, "").replace(/\\/g, "/")}&name=${post.fileName}`
                 : "/images/common/user-profile-example.png";
 
             const formattedDate = post.createdDate.split(" ")[0];

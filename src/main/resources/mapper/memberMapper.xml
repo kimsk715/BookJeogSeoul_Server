@@ -47,7 +47,7 @@
 
     <!--이메일 중복검사-->
     <select id="selectByEmail" resultType="personalMemberVO">
-        select member_email
+        select id, member_email, member_password, member_name, member_phone, member_nickname, member_mileage, member_status, member_gender, member_birth
         from tbl_personal_member
         where member_email = #{memberEmail}
     </select>
@@ -261,6 +261,7 @@
     <select id="selectMemberInfoWithThumbnail" resultType="personalMemberPostMemberProfileDTO">
         SELECT
             m.member_nickname,
+            m.id as member_id,
             f.file_path,
             f.file_name,
             COUNT(p.id) AS post_count
@@ -275,7 +276,7 @@
         WHERE
             p.post_type = 'BOOK_POST'
         GROUP BY
-            m.member_nickname, f.file_path, f.file_name
+            m.member_nickname, m.id, f.file_path, f.file_name
         ORDER BY
             post_count DESC
         LIMIT 4;
@@ -400,6 +401,13 @@
         from tbl_personal_member
         where id = #{memberId}
     </select>
+
+    <!-- 멤버 마일리지 {point} 만큼 추가 (댓글, 독후감)-->
+    <update id="updateMemberMileage">
+        update tbl_personal_member
+        set member_mileage = member_mileage + #{point}
+        where id = #{id};
+    </update>
 </mapper>
 
 

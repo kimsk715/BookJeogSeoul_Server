@@ -1,6 +1,7 @@
 package com.app.bookJeog.mapper;
 
 import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.vo.EventVO;
 import com.app.bookJeog.domain.vo.NoticeVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,4 +19,10 @@ public interface NoticeMapper {
     public void updateNotice(NoticeVO noticeVO);
 
     public void insertNotice(NoticeVO noticeVO);
+
+    public List<NoticeVO> selectAllNoticeClient();
+
+    public List<EventVO> selectAllEvents();
+
+    public EventVO selectEventById(Long id);
 }

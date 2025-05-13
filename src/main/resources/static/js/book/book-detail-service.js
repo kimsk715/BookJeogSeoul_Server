@@ -215,7 +215,7 @@ const bookDetailService = (() => {
             // 기록이 있다면(ai 요청)
             if (springData.type === "ai") {
                 const { target, feature } = springData;
-                const AI_RECOMMEND_API = "http://localhost:8000/recommend";
+                const AI_RECOMMEND_API = "http://13.125.246.224/recommend";
 
                 // FastAPI 서버에 AI 추천 요청
                 const aiRes = await fetch(AI_RECOMMEND_API, {
