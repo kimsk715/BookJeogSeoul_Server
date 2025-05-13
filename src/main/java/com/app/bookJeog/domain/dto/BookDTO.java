@@ -17,19 +17,18 @@ public class BookDTO {
     @EqualsAndHashCode.Include
     private Long id;
     private String bookIsbn;
-//    private String bookIntro;
-//    private String bookIntroUrl;
     private String bookSummary;
-//    private String bookSummaryUrl;
+    private String bookTitle;
+    private String bookImage;
+    private String bookAuthor;
+    private String publisher;
+
 
     public BookVO toVO() {
         return BookVO.builder()
                 .id(id)
                 .bookIsbn(bookIsbn)
-//                .bookIntro(bookIntro)
-//                .bookIntroUrl(bookIntroUrl)
                 .bookSummary(bookSummary)
-//                .bookSummaryUrl(bookSummaryUrl)
                 .build();
     }
 

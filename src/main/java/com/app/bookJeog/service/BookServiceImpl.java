@@ -1,25 +1,33 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.BookDTO;
+import com.app.bookJeog.domain.dto.BrailleBookDTO;
 import com.app.bookJeog.domain.vo.*;
 import com.app.bookJeog.domain.dto.FileBookPostDTO;
 import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.domain.vo.TempSelectedBookVO;
 import com.app.bookJeog.repository.BookDAO;
 import com.app.bookJeog.controller.exception.ResourceNotFoundException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @Slf4j
@@ -44,6 +52,7 @@ public class BookServiceImpl implements BookService {
     }
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+
 
 
 
@@ -185,7 +194,54 @@ public class BookServiceImpl implements BookService {
     // 최근 조회한 도서 10개 줄거리와 함께
     public String findBookSummaryToString(Long memberId){
         return bookDAO.findBookSummaryToString(memberId);
-    };
-};
+    }
+
+    @Override
+    public List<BrailleBookDTO> getBrailleBooks() {
+        RestTemplate restTemplate = new RestTemplate();
+        ObjectMapper objectMapper = new ObjectMapper();
+        HttpHeaders headers = new HttpHeaders();
+
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        String url = "https://api.odcloud.kr/api/15004147/v1/uddi:d35c9e96-d405-4352-80d5-94dd7b134913";
+        String rawServiceKey = "K/kXjZc7XJr5t9u3YIf8H6FPEUNjmaiYXUdakteMHXnE9YmSvd8P7fKbyEh1VL6Gih0l8qY/jtHl3MRnqYoHvA==";
+
+        String finalUrl = url + "?page=1&perPage=30&serviceKey=" + rawServiceKey;
+
+        ResponseEntity<JsonNode> response = restTemplate.exchange(
+                finalUrl,
+                HttpMethod.GET,
+                entity,
+                JsonNode.class
+        );
+
+        JsonNode root = response.getBody();
+
+        if (root != null) {
+            JsonNode dataNode = root.path("data");
+            try {
+                if (dataNode != null && !dataNode.isMissingNode()) {
+                    List<BrailleBookDTO> books = objectMapper.readValue(
+                            dataNode.traverse(),
+                            new TypeReference<List<BrailleBookDTO>>() {}
+                    );
+                    return books;
+                } else {
+                    throw new RuntimeException("No data found in response");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("점자책 가져오는데 실패했음", e);
+            }
+        } else {
+            throw new RuntimeException("API 응답이 없습니다.");
+        }
+    }
+
+
+}
+
+
+
 
 

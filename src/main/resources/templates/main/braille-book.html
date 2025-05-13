@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>전체보기</title>
+        <link rel="stylesheet" href="/css/main/header.css" />
+        <link
+            rel="stylesheet"
+            href="/css/category/category-overview.css"
+        />
+    </head>
+    <body>
+        <div>
+            <section class="content">
+                <div>
+                    <div class="sub-content">
+                        <div class="sub-inner">
+                            <!-- 헤더 -->
+                            <div class="category-title-wrap">
+                                <h2 class="category-title">점자책</h2>
+                            </div>
+                            <!-- 헤더끝 -->
+                            <!-- 책 view 시작 -->
+                            <div class="books-container">
+                                <div class="books-wrapper">
+                                    <!-- 책 view 필터 -->
+                                    <div class="info">
+                                        <div>
+                                            <button
+                                                type="button"
+                                                class="filter-popup"
+                                            >
+                                                <span></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- 책 목록 여기서부터 -->
+                                    <ul class="list-view">
+                                        <li class="book-item" th:each=" books : ${bookDTOS}">
+                                            <div class="search-book-list">
+                                                <div class="bjs-book">
+                                                    <a
+                                                        th:href="|/book/detail/${books.bookIsbn}|"
+                                                        class="book-image"
+                                                    >
+                                                        <div class="thumbnail">
+                                                            <div
+                                                                class="thumbnail-inner"
+                                                            >
+                                                                <div
+                                                                    class="book-picture-wrap"
+                                                                >
+                                                                    <picture
+                                                                        class="book-picture"
+                                                                    >
+                                                                        <img
+                                                                            th:src="${books.bookImage}"
+
+                                                                            width="145"
+                                                                    /></picture>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a href="" class="book-data"
+                                                        ><div
+                                                            data-v-55d598cc=""
+                                                            class="metadata"
+                                                        >
+                                                            <p
+                                                                data-v-55d598cc=""
+                                                                class="title"
+                                                                th:text="${books.bookTitle}"
+                                                            >
+                                                            </p>
+                                                            <p
+                                                                data-v-55d598cc=""
+                                                                class="author"
+                                                                th:utext="|${books.bookAuthor}  ${books.publisher}|"
+                                                            >
+                                                            </p>
+                                                        </div></a
+                                                    >
+                                                </div>
+                                            </div>
+                                            <!-- 찜 버튼 만들거면만드셈 -->
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- 끝 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </body>
+</html>

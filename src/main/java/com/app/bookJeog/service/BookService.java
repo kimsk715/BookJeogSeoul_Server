@@ -449,4 +449,7 @@ public interface BookService {
 
     // 최근 조회한 도서 10개 줄거리와 함께
     public String findBookSummaryToString(Long memberId);
+
+    // 점자책 조회
+    public List<BrailleBookDTO> getBrailleBooks();
 }
