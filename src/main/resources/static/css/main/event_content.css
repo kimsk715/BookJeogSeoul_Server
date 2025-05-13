@@ -364,6 +364,7 @@
     width: 100%;
     min-width: 320px;
     background-color: rgb(35, 129, 230);
+    padding-bottom: 100px;
 }
 
 .process-inner {
