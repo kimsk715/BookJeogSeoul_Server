@@ -70,5 +70,9 @@
         where id = #{id}
     </select>
 
+    <insert id="insertEvent">
+        insert into tbl_event(year, month, event_type, event_text)
+        values (#{year}, #{month}, #{eventType}, #{eventText})
+    </insert>
 
 </mapper>

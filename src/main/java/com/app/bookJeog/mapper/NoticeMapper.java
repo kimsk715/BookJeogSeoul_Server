@@ -25,4 +25,6 @@ public interface NoticeMapper {
     public List<EventVO> selectAllEvents();
 
     public EventVO selectEventById(Long id);
+
+    public void insertEvent(EventVO eventVO);
 }

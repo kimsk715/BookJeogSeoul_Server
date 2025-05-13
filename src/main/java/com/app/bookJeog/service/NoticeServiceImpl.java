@@ -84,5 +84,10 @@ public class NoticeServiceImpl implements NoticeService {
         return toEventDTO(noticeDAO.findEventById(id));
     }
 
+    @Override
+    public void setEvent(EventVO eventVO) {
+        noticeDAO.setEvent(eventVO);
+    }
+
 
 }

@@ -45,4 +45,8 @@ public class NoticeDAO {
     public EventVO findEventById(Long id){
         return noticeMapper.selectEventById(id);
     }
+
+    public void setEvent(EventVO eventVO){
+        noticeMapper.insertEvent(eventVO);
+    }
 }
