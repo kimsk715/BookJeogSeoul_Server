@@ -125,6 +125,7 @@ public class SelectedBookTask {
         eventDTO.setEventType(EventType.RESULT);
         String message = "20" + String.valueOf(year) + "년 " + String.valueOf(month) + "월 이 달의 독후감 선정 결과입니다.";
         eventDTO.setEventText(message);
+        
         noticeService.setEvent(eventDTO.toVO());
     }
 }
