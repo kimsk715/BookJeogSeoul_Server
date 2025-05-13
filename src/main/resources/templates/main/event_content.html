@@ -64,15 +64,15 @@
                                 <dd th:if="*{month % 2 == 0 and month != 2}" th:text="|20*{year}.*{month}.30 오후 12시|"></dd>
                             </dl>
                         </div>
-                        <div class="notification" th:unless="${event.eventType.name()} == 'VOTE'">
+                        <div class="notification best-post" th:unless="${event.eventType.name()} == 'VOTE'">
                             <div th:object="${bestPost}">
                                 <a th:href="|/post/bookpost/*{bookPostId}|">
-                                <dl>
-                                    <dt>작성자</dt>
+                                <dl style="display: flex">
+                                    <dt>작성자 :</dt>
                                     <dd th:text="${memberName}"></dd>
                                 </dl>
-                                <dl>
-                                    <dt>독후감 제목</dt>
+                                <dl style="display: flex">
+                                    <dt>독후감 제목 :</dt>
                                     <dd th:text="*{bookPostTitle}"></dd>
                                 </dl>
                                 </a>
@@ -99,26 +99,12 @@
                 </div>
 
                 <div
-                        class="multiplebutton-wrapper1">
-                    <article
-                            class="multiplebutton-inner1">
-                        <h3>지난 수상작 공개</h3>
-                        <div class="con-img"><img
-                                src="https://d2j6uvfek9vas1.cloudfront.net/event/image/67e2185712373.jpg"
-                                alt="지난 수상작 공개 2월 밀크 보러가기 이미지"
-                                width="375" height="375"></div>
-                        <p>이 작품들은 추가 창작 지원금 100만원의 후보가 됩니다.</p>
-                        <div class="con-btn"><button type="button"
-                                                     class="multiplebutton1 tertiary"><span th:text="|(*{month}-1)월 독후감 보러가기|"></span></button></div>
-                    </article>
-                </div>
-
-                <div
                         class="multiplebutton-wrapper2">
+                    <a href="/post/bookpost/write">
                     <button type="button"
                             class="multiplebutton2 floating primary"><span>지금
                                 글 쓰러
-                                가기</span></button>
+                                가기</span></button></a>
                 </div>
 
             </section>
