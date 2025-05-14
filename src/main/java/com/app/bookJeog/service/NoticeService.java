@@ -1,6 +1,8 @@
 package com.app.bookJeog.service;
 
 
+import com.app.bookJeog.domain.dto.NoticeDTO;
+import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.EventDTO;
 import com.app.bookJeog.domain.dto.NoticeDTO;
 import com.app.bookJeog.domain.dto.NoticeInfoDTO;

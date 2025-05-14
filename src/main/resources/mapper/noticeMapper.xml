@@ -46,6 +46,10 @@
         where id = #{id}
     </update>
 
+    <insert id="insertNotice">
+        insert into tbl_notice (notice_title, notice_text)
+        values (#{noticeTitle}, #{noticeText})
+    </insert>
     <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_notice (notice_title, notice_text)
         values (#{noticeTitle}, #{noticeText})

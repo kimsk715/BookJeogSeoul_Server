@@ -1,5 +1,10 @@
 package com.app.bookJeog.service;
 
+import com.app.bookJeog.domain.dto.DonateCertDTO;
+import com.app.bookJeog.domain.dto.DonateCertFileDTO;
+import com.app.bookJeog.domain.dto.FileDTO;
+import com.app.bookJeog.domain.dto.ReceiverFileDTO;
+import com.app.bookJeog.domain.vo.FileVO;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.FileVO;
 import com.app.bookJeog.domain.vo.NoticeFileVO;
@@ -255,5 +260,4 @@ public class FileServiceImpl implements FIleService {
         }
         return fileList;
     }
-
 }

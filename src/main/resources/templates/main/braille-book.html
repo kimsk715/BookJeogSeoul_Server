@@ -18,7 +18,7 @@
                         <div class="sub-inner">
                             <!-- 헤더 -->
                             <div class="category-title-wrap">
-                                <h2 class="category-title" th:text="${className}"></h2>
+                                <h2 class="category-title">점자책</h2>
                             </div>
                             <!-- 헤더끝 -->
                             <!-- 책 view 시작 -->
@@ -37,12 +37,11 @@
                                     </div>
                                     <!-- 책 목록 여기서부터 -->
                                     <ul class="list-view">
-                                        <li class="book-item" th:each="books : ${bookList}">
+                                        <li class="book-item" th:each=" books : ${bookDTOS}">
                                             <div class="search-book-list">
                                                 <div class="bjs-book">
                                                     <a
-                                                            th:href="|/book/detail/${books.isbn13}|"
-
+                                                        th:href="|/book/detail/${books.bookIsbn}|"
                                                         class="book-image"
                                                     >
                                                         <div class="thumbnail">
@@ -57,6 +56,7 @@
                                                                     >
                                                                         <img
                                                                             th:src="${books.bookImage}"
+
                                                                             width="145"
                                                                     /></picture>
                                                                 </div>
@@ -71,13 +71,13 @@
                                                             <p
                                                                 data-v-55d598cc=""
                                                                 class="title"
-                                                                th:text="${books.bookName}"
+                                                                th:text="${books.bookTitle}"
                                                             >
                                                             </p>
                                                             <p
                                                                 data-v-55d598cc=""
                                                                 class="author"
-                                                                th:text="|${books.publisher}${books.author}|"
+                                                                th:utext="|${books.bookAuthor}  ${books.publisher}|"
                                                             >
                                                             </p>
                                                         </div></a

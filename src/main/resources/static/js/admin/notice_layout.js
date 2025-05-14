@@ -103,6 +103,9 @@ const noticeLayout = (() =>{
         `
     }
 
+
+
+    return{showNoticeList : showNoticeList, showNoticeDetail : showNoticeDetail};
     const showAddedFile = (imageUrl, file, index) => {
         const fileLists = [];
         const fileArea = document.querySelector(".file-preview")

@@ -178,7 +178,7 @@
 
     <!-- top1 독후감 select -->
     <select id="selectBestPost" resultType="monthlyBookPostVO">
-        select mbp.id, book_post_title, book_post_text, mbp.book_post_id, createdDate, updatedDate, book_post_like_count, bookPostVoteCount
+        select mbp.id, book_post_title, book_post_text, mbp.book_post_id, createdDate, updatedDate, mbp.book_post_like_count, bookPostVoteCount
         from tbl_monthly_book_post mbp
                  left join
              (
@@ -799,6 +799,8 @@
     <delete id="deleteBookPost">
         delete from tbl_book_post where id = #{bookPostId}
     </delete>
+<<<<<<< HEAD
+=======
 
     <!--이 달의 독후감 투표 후보 (20개)_-->
     <select id="selectAllMonthlyBookPosts" resultType="monthlyBookPostVO">
@@ -816,6 +818,7 @@
     from tbl_best_book_post
     where date_format(createdDate, '%y%m') = #{createdDate}
     </select>
+>>>>>>> 84c60330da74071b7291a34c6a4bddda6d25b589
 </mapper>
 
 

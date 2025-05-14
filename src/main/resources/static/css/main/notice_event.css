@@ -7,7 +7,6 @@
 }
 
 .bg-sub-inner .back-component {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
     left: 0;
@@ -69,7 +68,6 @@
 }
 
 .alarm-center-container .alarm-tabs {
-    position: -webkit-sticky;
     position: sticky;
     z-index: 2;
     top: 44px;

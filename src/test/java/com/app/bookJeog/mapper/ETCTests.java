@@ -1,6 +1,7 @@
 package com.app.bookJeog.mapper;
 
 
+import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.EventDTO;
 import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.enumeration.EventType;
@@ -8,6 +9,10 @@ import com.app.bookJeog.domain.vo.ChatGPTRequest;
 import com.app.bookJeog.domain.vo.MemberVO;
 import com.app.bookJeog.domain.vo.PostVO;
 import com.app.bookJeog.repository.PostDAO;
+import com.app.bookJeog.service.BookService;
+import com.app.bookJeog.service.MemberService;
+import com.app.bookJeog.service.PostService;
+import com.app.bookJeog.service.ReportService;
 import com.app.bookJeog.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -32,6 +37,10 @@ public class ETCTests {
 
     @Autowired
     private PostService postService;
+
+
+
+//  댓글 신고 조회 테스트
     @Autowired
     private NoticeService noticeService;
 
@@ -65,6 +74,7 @@ public class ETCTests {
 
     @Test
     public void openAITest(){
+
         log.info(noticeService.getAllNoticeClient().toString());
     }
 

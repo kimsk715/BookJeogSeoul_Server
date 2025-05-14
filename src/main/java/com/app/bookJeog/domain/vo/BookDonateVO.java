@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @ToString
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @SuperBuilder
 public class BookDonateVO extends Period {
     @EqualsAndHashCode.Include

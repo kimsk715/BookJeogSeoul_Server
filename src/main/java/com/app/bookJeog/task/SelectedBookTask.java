@@ -1,5 +1,14 @@
 package com.app.bookJeog.task;
 
+import com.app.bookJeog.domain.dto.MonthlyBookPostDTO;
+import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.SelectedBookDTO;
+import com.app.bookJeog.domain.vo.BookPostVO;
+import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
+import com.app.bookJeog.domain.vo.SelectedBookVO;
+import com.app.bookJeog.domain.vo.TempSelectedBookVO;
+import com.app.bookJeog.service.AladinService;
+import com.app.bookJeog.service.BookService;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.EventType;
 import com.app.bookJeog.domain.vo.*;
