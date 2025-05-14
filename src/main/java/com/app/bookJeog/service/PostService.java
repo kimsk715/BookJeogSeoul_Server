@@ -152,5 +152,26 @@ public interface PostService {
     public void deleteBookPost(Long bookPostId);
 
     public String getPostType(Long postId);
+
+    public List<MonthlyBookPostDTO> getMonthlyBookPosts(String date);
+
+    public default MonthlyBookPostDTO toMonthlyBookPostDTO(MonthlyBookPostVO monthlyBookPostVO) {
+        if(monthlyBookPostVO != null){
+            MonthlyBookPostDTO postDTO = new MonthlyBookPostDTO();
+            postDTO.setId(monthlyBookPostVO.getId());
+            postDTO.setBookPostId(monthlyBookPostVO.getBookPostId());
+            postDTO.setBookPostVoteCount(monthlyBookPostVO.getBookPostVoteCount());
+            postDTO.setBookPostTitle(monthlyBookPostVO.getBookPostTitle());
+            postDTO.setBookPostText(monthlyBookPostVO.getBookPostText());
+            postDTO.setBookPostLikeCount(monthlyBookPostVO.getBookPostLikeCount());
+            postDTO.setCreatedDate(monthlyBookPostVO.getCreatedDate());
+            postDTO.setUpdatedDate(monthlyBookPostVO.getUpdatedDate());
+            return postDTO;
+
+        }
+        return null;
+    }
+
+    public BestBookPostVO getBestBookPostByDate(String date);
 }
 

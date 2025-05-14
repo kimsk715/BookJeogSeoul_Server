@@ -23,7 +23,6 @@ public class BookDTO {
     private String bookAuthor;
     private String publisher;
 
-
     public BookVO toVO() {
         return BookVO.builder()
                 .id(id)
@@ -31,6 +30,4 @@ public class BookDTO {
                 .bookSummary(bookSummary)
                 .build();
     }
-
-
 }

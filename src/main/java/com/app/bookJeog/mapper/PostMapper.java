@@ -166,5 +166,9 @@ public interface PostMapper {
     // 독후감 삭제
     public void deletePost(Long bookPostId);
     public void deleteBookPost(Long bookPostId);
+
+    public List<MonthlyBookPostVO> selectAllMonthlyBookPosts(String date);
+
+    public BestBookPostVO selectBestBookPostByDate(String date);
 }
 

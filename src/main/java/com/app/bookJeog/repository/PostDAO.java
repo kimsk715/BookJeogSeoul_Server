@@ -265,4 +265,12 @@ public class PostDAO {
     // 독후감 삭제
     public void deletePost(Long bookPostId){postMapper.deletePost(bookPostId);};
     public void deleteBookPost(Long bookPostId){postMapper.deleteBookPost(bookPostId);};
+
+    public List<MonthlyBookPostVO> findAllMonthlyBookPosts(String date){
+        return postMapper.selectAllMonthlyBookPosts(date);
+    }
+
+    public BestBookPostVO findBestBookPostByDate(String date){
+        return postMapper.selectBestBookPostByDate(date);
+    }
 }

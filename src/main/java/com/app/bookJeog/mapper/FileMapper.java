@@ -39,6 +39,8 @@ public interface FileMapper {
 
     public void insertNoticeFile(NoticeFileVO noticeFileVO);
 
+    public List<FileVO> selectNoticeFilesByNoticeId(Long noticeId);
+
     public void insertReceiverFile(ReceiverFileVO receiverFileVO);
 
     public FileVO selectReceiverFileByPostId(Long postId);

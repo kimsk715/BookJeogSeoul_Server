@@ -58,7 +58,44 @@ addNoticeButton.addEventListener("click", () =>{
 confirmNoticeButton.addEventListener('click',() =>{
     const noticeTitle = document.querySelector("#new-notice-title").value;
     const noticeText = document.querySelector("#new-notice-text").value;
+
+
+    const files = noticeFileInput.files;
+    console.log(files)
+
+    if (noticeTitle.trim() === "" || noticeText.trim() === "") {
+        alert("제목과 내용을 입력하세요.");
+        return;
+    }
     noticeService.addNotice(noticeTitle, noticeText)
     closeModal(addNoticeModal);
+
+    noticeService.addNotice(noticeTitle, noticeText, files)
+closeModal(addNoticeModal);
 })
+
+const noticeFileInput = document.querySelector("input[name=noticeFile]")
+noticeFileInput.addEventListener('change',(e) => {
+    const files = e.target.files;
+    const imageList = [];
+    let index = 0;
+    if(files.length > 4){
+        e.preventDefault();
+        alert("파일은 최대 4개까지 첨부할 수 있습니다.")
+    }
+    for(const file of files){
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const imageUrl = URL.createObjectURL(file);
+            noticeLayout.showAddedFile(imageUrl, file, index)
+            index += 1;
+            imageList.push(imageUrl);
+        }
+        reader.readAsDataURL(file);
+    }
+    console.log(imageList)
+    console.log(files)
+})
+
+
 

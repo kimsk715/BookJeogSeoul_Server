@@ -5,6 +5,9 @@ import com.app.bookJeog.domain.dto.DonateCertFileDTO;
 import com.app.bookJeog.domain.dto.FileDTO;
 import com.app.bookJeog.domain.dto.ReceiverFileDTO;
 import com.app.bookJeog.domain.vo.FileVO;
+import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.vo.FileVO;
+import com.app.bookJeog.domain.vo.NoticeFileVO;
 import com.app.bookJeog.domain.vo.ReceiverFileVO;
 import com.app.bookJeog.repository.FileDAO;
 import com.app.bookJeog.repository.PostDAO;
@@ -210,4 +213,51 @@ public class FileServiceImpl implements FIleService {
         fileDAO.setDonateCertFile(donateCertFileDTO.toVO());
     }
 
+    @Override
+    public void uploadNoticeFiles(Long noticeId, List<MultipartFile> files) {
+        String todayPath = getPath();
+        String rootPath = "/upload/notice/" + todayPath;
+        File directory = new File(rootPath);
+        if(!directory.exists()){
+            directory.mkdirs();
+        }
+        files.forEach((file) -> {
+            try {
+                if(file.getOriginalFilename().equals("")){
+                    return;
+                }
+                UUID uuid = UUID.randomUUID();
+                FileDTO fileDTO = new FileDTO();
+                fileDTO.setFileName(uuid.toString() + "_" + file.getOriginalFilename());
+                fileDTO.setFilePath(todayPath);
+                FileVO fileVO = fileDTO.toVO();
+                fileDAO.setFile(fileVO);
+                NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
+                noticeFileDTO.setId(fileVO.getId());
+                noticeFileDTO.setNoticeId(noticeId);
+                fileDAO.setNoticeFile(noticeFileDTO.toVO());
+                file.transferTo(new File(rootPath, uuid.toString() + "_" + file.getOriginalFilename()));
+                if(file.getContentType().startsWith("image")){
+                    FileOutputStream out = new FileOutputStream(new File(rootPath, "t_" + uuid.toString() + "_" + file.getOriginalFilename()));
+                    Thumbnailator.createThumbnail(file.getInputStream(), out, 100, 100);
+                    out.close();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+
+
+    @Override
+    public List<FileDTO> getNoticeFilesByNoticeId(Long noticeId) {
+        List<FileVO> fileVOs = fileDAO.findNoticeFilesByNoticeId(noticeId);
+        List<FileDTO> fileList = new ArrayList<>();
+        for(FileVO fileVO : fileVOs){
+            FileDTO fileDTO = toFileDTO(fileVO);
+            fileList.add(fileDTO);
+        }
+        return fileList;
+    }
 }

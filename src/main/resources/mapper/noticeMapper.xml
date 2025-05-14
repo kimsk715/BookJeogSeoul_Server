@@ -50,4 +50,33 @@
         insert into tbl_notice (notice_title, notice_text)
         values (#{noticeTitle}, #{noticeText})
     </insert>
+    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_notice (notice_title, notice_text)
+        values (#{noticeTitle}, #{noticeText})
+    </insert>
+
+    <!-- 공지 목록 조회(클라이언트용)-->
+    <select id="selectAllNoticeClient" resultType="noticeVO">
+        select id, notice_title, notice_text, date(createdDate) as createdDate , date(updatedDate) as updatedDate
+        from tbl_notice
+        order by id desc
+    </select>
+
+    <select id="selectAllEvents">
+        select *
+        from tbl_event
+        order by id desc
+    </select>
+
+    <select id="selectEventById" resultType="eventVO">
+        select id, year, month, event_type
+        from tbl_event
+        where id = #{id}
+    </select>
+
+    <insert id="insertEvent">
+        insert into tbl_event(year, month, event_type, event_text)
+        values (#{year}, #{month}, #{eventType}, #{eventText})
+    </insert>
+
 </mapper>

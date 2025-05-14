@@ -106,5 +106,15 @@ const noticeLayout = (() =>{
 
 
     return{showNoticeList : showNoticeList, showNoticeDetail : showNoticeDetail};
+    const showAddedFile = (imageUrl, file, index) => {
+        const fileLists = [];
+        const fileArea = document.querySelector(".file-preview")
+        const newFile = document.createElement("li");
+        newFile.dataset.index = index; // data-index 속성 부여
+        newFile.innerHTML = `<img src="${imageUrl}" style="width : 100px" alt="임시 이미지">`
+        fileArea.append(newFile);
+    }
+
+    return{showNoticeList : showNoticeList, showNoticeDetail : showNoticeDetail, showAddedFile:showAddedFile};
 
     })();

@@ -17,12 +17,7 @@ create table tbl_admin(
 /* tbl_normal_book_post 테이블 */
 /* book_id 컬럼 --> book_isbn 이름 수정하기. */
 
-desc tbl_comment;
-member_name, file_path, file_name, count(p.id) as post_count
 
-ORDER BY post_count DESC
-
-GROUP BY p.id
 
 
 select *, count(p.id) as post_count
@@ -40,19 +35,6 @@ FROM tbl_personal_member m
                 limit 4;
 
 
-
-select member_nickname, file_path, file_name, count(p.id) as post_count
-FROM tbl_personal_member m
-         JOIN tbl_post p
-              ON m.id = p.member_id
-         join tbl_member_profile mp
-              on m.id = mp.member_id
-         join tbl_file f
-              on mp.id = f.id
-where post_type = 'BOOK_POST'
-group by m.id
-ORDER BY post_count DESC
-limit 4
 
 
 
@@ -119,3 +101,6 @@ from tbl_book_post bp
          join tbl_member m on p.member_id = m.id
          join tbl_personal_member pm on pm.id = m.id
 where bp.book_post_is_public = 'PUBLIC';
+
+select mbp.id, mbp.book_post_id, date_format(mbp.createdDate, '%y%m') as createdDate from tbl_event e
+join tbl_monthly_book_post mbp on date_format(mbp.createdDate, '%y%m') = concat(e.year,e.month)

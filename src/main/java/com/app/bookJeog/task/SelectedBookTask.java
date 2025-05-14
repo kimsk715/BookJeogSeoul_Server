@@ -9,6 +9,12 @@ import com.app.bookJeog.domain.vo.SelectedBookVO;
 import com.app.bookJeog.domain.vo.TempSelectedBookVO;
 import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.BookService;
+import com.app.bookJeog.domain.dto.*;
+import com.app.bookJeog.domain.enumeration.EventType;
+import com.app.bookJeog.domain.vo.*;
+import com.app.bookJeog.service.AladinService;
+import com.app.bookJeog.service.BookService;
+import com.app.bookJeog.service.NoticeService;
 import com.app.bookJeog.service.PostService;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +35,7 @@ public class SelectedBookTask {
     private final BookService bookService;
     private final PostService postService;
     private final AladinService aladinService;
+    private final NoticeService noticeService;
 
     /*
      *   0 * * * * * : 매 분 0초마다
@@ -88,12 +96,44 @@ public class SelectedBookTask {
     }
 
 //   투표 결과 1등인 독후감 저장.
-    @Scheduled(cron = "0 0 0 1 * ?")
+    @Scheduled(cron = "0 0 12 30 * ?")
     public void insertTopBookPost() {
         Optional<MonthlyBookPostVO> topPost = postService.getBestPost();
         log.info(topPost.toString());
         MonthlyBookPostVO foundTopPost = topPost.orElse(null);
         log.info(foundTopPost.toString());
         postService.insertBestPost(foundTopPost);
+    }
+
+    // 투표 후보 선정
+    @Scheduled(cron = "10 0 0 20 * ?")
+    public void insertVoteEvent(){
+        EventDTO eventDTO = new EventDTO();
+        LocalDate localDate = LocalDate.now();
+        int year = localDate.getYear() % 100;
+        int month = localDate.getMonthValue();
+        eventDTO.setYear(year);
+        eventDTO.setMonth(month);
+        eventDTO.setEventType(EventType.VOTE);
+        String message = "20" + String.valueOf(year) + "년 " + String.valueOf(month) + "월 이 달의 독후감 투표입니다.";
+        eventDTO.setEventText(message);
+        noticeService.setEvent(eventDTO.toVO());
+    }
+
+    // 투표 결과 발표
+    // (25년 7월에 생성된 데이터라면, 25년 6월의 선정 결과이므로
+    // month 의 값을 1 빼주었음.)
+    @Scheduled(cron = "1 0 0 1 * ?")
+    public void insertResultEvent(){
+        EventDTO eventDTO = new EventDTO();
+        LocalDate localDate = LocalDate.now();
+        int year = localDate.getYear() % 100;
+        int month = localDate.getMonthValue()-1;
+        eventDTO.setYear(year);
+        eventDTO.setMonth(month);
+        eventDTO.setEventType(EventType.RESULT);
+        String message = "20" + String.valueOf(year) + "년 " + String.valueOf(month) + "월 이 달의 독후감 선정 결과입니다.";
+        eventDTO.setEventText(message);
+        noticeService.setEvent(eventDTO.toVO());
     }
 }

@@ -41,6 +41,7 @@ document.addEventListener("click", (e) => {
         closeModal(adminModal)
         closeModal(discussionModal)
         closeModal(openAIModal)
+        closeModal(addNoticeModal)
     }
 });
 
@@ -52,6 +53,7 @@ document.addEventListener("keydown", (e) => {
         closeModal(adminModal)
         closeModal(discussionModal)
         closeModal(openAIModal)
+        closeModal(addNoticeModal)
     }
 });
 

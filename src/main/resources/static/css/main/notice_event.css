@@ -7,7 +7,6 @@
 }
 
 .bg-sub-inner .back-component {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
     left: 0;
@@ -69,7 +68,6 @@
 }
 
 .alarm-center-container .alarm-tabs {
-    position: -webkit-sticky;
     position: sticky;
     z-index: 2;
     top: 44px;
@@ -186,6 +184,10 @@
 
 .alarm-center-container .alarm-list-container .notice-content li.open dl dd {
     display: block;
+}
+
+.alarm-center-container .alarm-list-container .notice-content li.open dl dd .image{
+    display: flex;
 }
 
 .alarm-center-container .alarm-list-container .notice-content li dl dd .content {

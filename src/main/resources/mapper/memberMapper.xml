@@ -401,6 +401,13 @@
         from tbl_personal_member
         where id = #{memberId}
     </select>
+
+    <!-- 멤버 마일리지 {point} 만큼 추가 (댓글, 독후감)-->
+    <update id="updateMemberMileage">
+        update tbl_personal_member
+        set member_mileage = member_mileage + #{point}
+        where id = #{id};
+    </update>
 </mapper>
 
 

@@ -48,4 +48,6 @@ public interface FavoriteService {
     public void voteToReceiver(ReceiverLikeVO receiverLikeVO);
 
     public Integer countAllVoteByPostId(ReceiverLikeDTO receiverLikeDTO);
+
+    public void voteBookPost(Long memberId, Long bookPostId);
 }
