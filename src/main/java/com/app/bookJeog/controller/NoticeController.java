@@ -31,10 +31,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class NoticeController  {
 
-        @GetMapping("/notice")
-    public String goToNoticeList(){
-        return "main/notice_event";
-    }
     private final NoticeService noticeService;
     private final FIleService fileService;
     private final PostService postService;

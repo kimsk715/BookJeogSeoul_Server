@@ -29,7 +29,7 @@ public interface MemberMapper {
 
 
     // 이메일 중복검사
-    public Optional<PersonalMemberVO> selectByEmail(String email);
+    public Optional<PersonalMemberVO> selectByEmail(PersonalMemberVO personalMemberVO);
 
     // 기업회원 통합검색 조회
     public List<SponsorMemberProfileDTO> selectSponsorMembersWithProfile(String keyword);
