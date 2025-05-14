@@ -65,15 +65,14 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public PersonalMemberDTO checkEmail(PersonalMemberDTO personalMemberDTO) {
         PersonalMemberVO personalMemberVO = toPersonalMemberVO(personalMemberDTO);
-        Optional<PersonalMemberVO> memberVO = memberDAO.findByEmail(personalMemberVO.getMemberEmail());
+        Optional<PersonalMemberVO> memberVO = memberDAO.findByEmail(personalMemberVO);
+        log.info("memberVO: {}", memberVO);
+
         if (memberVO.isPresent()) {
-            PersonalMemberVO member = memberVO.get();
-            PersonalMemberDTO memberDTO = toPersonalMemberDTO(member);
-//            personalMemberDTO.setMemberEmail(member.getMemberEmail());
-            log.info("이메일로 받아온 회원정보 : {}", memberDTO);
-            return memberDTO;
+            return toPersonalMemberDTO(memberVO.get());
+        } else {
+            return null;
         }
-     return null;
     }
 
     @Override
@@ -306,7 +305,7 @@ public class MemberServiceImpl implements MemberService {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             StringBuilder stringBuilder = new StringBuilder();
             BufferedWriter bufferedWriter = null;
-            String redirectURI = "http://bookjeogseoul.site/personal/kakao/login";
+            String redirectURI = "http://bookjeog.site/personal/kakao/login";
 
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);

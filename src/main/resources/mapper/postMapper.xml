@@ -652,7 +652,7 @@
         join tbl_post p on p.id = bp.id
         join tbl_member m on p.member_id = m.id
         join tbl_personal_member pm on pm.id = m.id
-        join tbl_member_profile mp on mp.member_id = m.id
+        left join tbl_member_profile mp on mp.member_id = m.id
         left join tbl_file f on f.id = mp.id
         where bp.book_post_is_public = 'PUBLIC'
         order by p.createdDate desc
@@ -661,7 +661,7 @@
 
     <!--  독후감 팔로잉 전체조회(무한스크롤)  -->
     <select id="selectFollowBookPostFeed" resultType="fileBookPostDTO">
-        select bp.id as book_post_id, bp.book_post_title, bp.book_post_text, bp.book_isbn, pm.member_name,
+        select bp.id as book_post_id, bp.book_post_title, bp.book_post_text, bp.book_isbn, pm.member_nickname,
                p.member_id, f.file_name, f.file_path, p.createdDate,
                (select count(*)
                 from tbl_book_post_like l
@@ -670,7 +670,7 @@
                  join tbl_post p on p.id = bp.id
                  join tbl_member m on p.member_id = m.id
                  join tbl_personal_member pm on pm.id = m.id
-                 join tbl_member_profile mp on mp.member_id = m.id
+                 left join tbl_member_profile mp on mp.member_id = m.id
                  left join tbl_file f on f.id = mp.id
                  join tbl_follow fl on fl.follow_receiver_id = m.id
         where bp.book_post_is_public = 'PUBLIC' and fl.follow_sender_id = #{loginMemberId}
@@ -799,12 +799,10 @@
     <delete id="deleteBookPost">
         delete from tbl_book_post where id = #{bookPostId}
     </delete>
-<<<<<<< HEAD
-=======
 
     <!--이 달의 독후감 투표 후보 (20개)_-->
     <select id="selectAllMonthlyBookPosts" resultType="monthlyBookPostVO">
-            select mbp.id, book_post_title, book_post_text, date_format(mbp.createdDate, '%y%m') as createdDate, updatedDate, book_post_id, book_post_like_count
+            select mbp.id, book_post_title, book_post_text, date_format(mbp.createdDate, '%y%m') as createdDate, updatedDate, book_post_id, mbp.book_post_like_count
             from tbl_event e
                      join tbl_monthly_book_post mbp on
                          date_format(mbp.createdDate, '%y%m') = concat(e.year,lpad(e.month, 2, '0')) and e.event_type = 'VOTE'
@@ -818,7 +816,7 @@
     from tbl_best_book_post
     where date_format(createdDate, '%y%m') = #{createdDate}
     </select>
->>>>>>> 84c60330da74071b7291a34c6a4bddda6d25b589
+
 </mapper>
 
 

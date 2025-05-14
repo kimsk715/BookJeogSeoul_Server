@@ -76,7 +76,7 @@ const commentService = (() =>{
     }
     const checkComment = async (content) => {
         try {
-            const response = await fetch('http://3.37.128.152/api/reply-check', {
+            const response = await fetch('http://13.125.236.210/api/reply-check', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
