@@ -1,6 +1,8 @@
 package com.app.bookJeog.service;
 
 import com.app.bookJeog.domain.dto.FileDTO;
+import com.app.bookJeog.domain.vo.BookPostFileVO;
+import com.app.bookJeog.domain.vo.FileVO;
 import com.app.bookJeog.domain.dto.NoticeFileDTO;
 import com.app.bookJeog.domain.vo.BookPostFileVO;
 import com.app.bookJeog.domain.vo.FileVO;
@@ -61,6 +63,4 @@ public interface FIleService{
     public void uploadNoticeFiles(Long noticeId, List<MultipartFile> files);
 
     public List<FileDTO> getNoticeFilesByNoticeId(Long noticeId);
-
-
 }

@@ -3,6 +3,7 @@ package com.app.bookJeog.configuration;
 
 import com.app.bookJeog.interceptor.ImageInterceptor;
 import com.app.bookJeog.interceptor.AlarmInterceptor;
+import com.app.bookJeog.interceptor.LoginIntercepter;
 import com.app.bookJeog.interceptor.TestInterceptor;
 import com.app.bookJeog.service.AlarmService;
 import lombok.RequiredArgsConstructor;

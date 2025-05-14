@@ -164,4 +164,41 @@ public class WebController {
     public String prepare(){
         return "error/coming-soon";
     }
+
+    // 점자책
+    @GetMapping("braille-book")
+    public String brailleBook(Model model) {
+        List<BookDTO> bookDTOS = new ArrayList<>();
+
+        // 1. 점자책 리스트 가져오기
+        List<BrailleBookDTO> brailleBookDTOs = bookService.getBrailleBooks();
+        log.info("brailleBookDTOS = {}", brailleBookDTOs);
+        // 2. 점자책 기준으로 알라딘에서 검색해서 BookDTO에 담기
+        for (BrailleBookDTO brailleBook : brailleBookDTOs) {
+            String title = brailleBook.getBookTitle();
+            String author = brailleBook.getAuthor();
+
+            // 알라딘 검색
+            AladinBookDTO aladinBookDTO = aladinService.getBooksByTitle(title, author);
+            log.info("aladinBookDTO = {}", aladinBookDTO);
+
+            if (aladinBookDTO != null) {
+                // BookDTO에 값 넣기
+                BookDTO bookDTO = new BookDTO();
+                bookDTO.setBookTitle(aladinBookDTO.getBookTitle());
+                bookDTO.setBookAuthor(aladinBookDTO.getBookAuthor());
+                bookDTO.setPublisher(aladinBookDTO.getBookPublisher());
+                bookDTO.setBookImage(aladinBookDTO.getBookCover());
+                bookDTO.setBookIsbn(String.valueOf(aladinBookDTO.getBookIsbn()));
+
+                bookDTOS.add(bookDTO);
+            }
+        }
+
+        // 3. 모델에 담기
+        model.addAttribute("bookDTOS", bookDTOS);
+
+        return "main/braille-book";
+    }
+
 }

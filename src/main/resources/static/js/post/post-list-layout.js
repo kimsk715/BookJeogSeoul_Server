@@ -1,5 +1,6 @@
 const postListLayout = (() => {
     let currentMode = "all"; // 현재 모드 ("all" | "following")
+    const memberId = document.querySelector("#memberId").value;
 
     const recommendList = document.querySelector(".card-list.recommend");
     const followingList = document.querySelector(".card-list.following");
@@ -39,6 +40,8 @@ const postListLayout = (() => {
             cardItem.dataset.bookPostId = post.bookPostId;
             cardItem.dataset.memberId = post.memberId;
             cardItem.dataset.bookIsbn = post.bookIsbn;
+            console.log("로그인한 id: " + memberId);
+            console.log("독후감 쓴 사람 id: " + window.loggedInMemberId.toString());
 
             cardItem.innerHTML = `
                 <div class="user diary-theme">
@@ -47,7 +50,9 @@ const postListLayout = (() => {
                         <a href="/personal/mypage/${post.memberId}" class="nickname-link"><span class="nickname">${post.memberNickName}</span></a>
                         <div><span class="time">${formattedTime}</span></div>
                     </div>
-                    <button type="button" class="button follow-btn">팔로우</button>
+                            ${post.memberId.toString() !== memberId.toString()
+                ? '<button type="button" class="button follow-btn">팔로우</button>'
+                : ""}
                 </div>
 
                 <div class="post">

@@ -12,88 +12,87 @@
 
 
 <body data-theme="light">
-    <div id="wrap" class="web-mount pcv-mount"><!----> <!----> <!---->
-        <section class="content">
-            <div class="bg-sub-inner">
-                <div id="backComponent" data-article-type="back-component" class="back-component border-hidden">
-                    <div class="back line"><button type="button" data-content-type="back-button" class="close-button"><i
-                                class="mds-icon--arrow-left"></i></button>
-                        <h2 class="">공지/이벤트</h2> <!----> <!---->
-                    </div>
+<div id="wrap" class="web-mount pcv-mount"><!----> <!----> <!---->
+    <section class="content">
+        <div class="bg-sub-inner">
+            <div id="backComponent" data-article-type="back-component" class="back-component border-hidden">
+                <div class="back line"><button type="button" data-content-type="back-button" class="close-button"><i
+                        class="mds-icon--arrow-left"></i></button>
+                    <h2 class="">공지/이벤트</h2> <!----> <!---->
                 </div>
-                <div class="sub-content header column alarm-center-container">
-                    <div class="alarm-tabs">
-                        <div class="tabs notice"><button
-                                type="button" class="notice-btn active selected"><span class="">공지사항</span></button><button type="button"
-                                class="event-btn"><span class="">
+            </div>
+            <div class="sub-content header column alarm-center-container">
+                <div class="alarm-tabs">
+                    <div class="tabs notice"><button
+                            type="button" class="notice-btn active selected"><span class="">공지사항</span></button><button type="button"
+                                                                                                                        class="event-btn"><span class="">
                                     이벤트</span></button> </div>
+                </div>
+                <div class="alarm-list-container">
+                    <div class="notice-content" >
+                        <ul>
+                            <li class="" th:each="notice : ${noticeList}">
+                                <dl class="notice-item">
+                                    <dt><button type="button">
+                                        <div class="badge"><span class="category">공지</span> <!----></div>
+                                        <strong class="title" th:text="${notice.noticeVO.noticeTitle}"></strong> <time class="date">2025-04-10</time>
+                                    </button></dt>
+                                    <dd>
+                                        <div class="content" th:text="${notice.noticeVO.noticeText}">
+                                        </div>
+                                        <div class="content image">
+                                            <img th:if="${notice.fileList != null}" th:each = "file : ${notice.fileList}" th:src="|/image/notice/${file.filePath}/${file.fileName}|"
+                                                 style="width : 300px; height : 200px;">
+                                        </div>
+
+                                    </dd>
+                                </dl>
+                            </li>
+
+
+                        </ul>
                     </div>
-                    <div class="alarm-list-container">
-                        <div class="notice-content" >
+                    <div class="event-content" style="display: none;">
+                        <ul>
+                            <li class="mds-shadow--card02" th:each="event : ${eventList}"><a
+                                    th:href="|/event/detail/${event.id}|">
+                                <div class="img"><img
+                                        src="https://d2j6uvfek9vas1.cloudfront.net/millie_logo/67ee78c82986e.jpg"
+                                        alt="《귀화서, 마지막 꽃을 지킵니다》 출간 이벤트"></div>
+                                <div class="context"><strong class="title mds-font--subhead03"><!---->
+                                    <span th:if="${event.eventType.name()} == 'VOTE'" th:text="|20${event.year}년 ${event.month}월 이 달의 독후감 투표|"></span>
+                                    <span th:unless="${event.eventType.name()} == 'VOTE'" th:text="|20${event.year}년 ${event.month}월 이 달의 독후감 선정 결과입니다.|"></span>
+                                </strong>
+                                    <p class="sub-title mds-font--body01" th:text="${event.eventText}"></p> <span
+                                            class="date mds-font--caption"></span>
+                                </div>
+                            </a></li>
+                        </ul>
+                        <div class="close-event">
+                            <h4 class="mds-font--subhead03">종료된 이벤트</h4>
                             <ul>
-                                <li class="" th:each="notice : ${noticeList}">
-                                    <dl class="notice-item">
-                                        <dt><button type="button">
-                                                <div class="badge"><span class="category">공지</span> <!----></div>
-                                                <strong class="title" th:text="${notice.noticeVO.noticeTitle}"></strong> <time class="date">2025-04-10</time>
-                                            </button></dt>
-                                        <dd>
-                                            <div class="content" th:text="${notice.noticeVO.noticeText}">
-                                            </div>
-                                            <div class="content image">
-                                                <img th:if="${notice.fileList != null}" th:each = "file : ${notice.fileList}" th:src="|/image/notice/${file.filePath}/${file.fileName}|"
-                                                     style="width : 300px; height : 200px;">
-                                            </div>
-
-                                        </dd>
-                                    </dl>
-                                </li>
-
-
-                                </ul>
-                            </div>
-                        <div class="event-content" style="display: none;">
-                            <ul>
-                                <li class="mds-shadow--card02" th:each="event : ${eventList}"><a
-                                        th:href="|/event/detail/${event.id}|">
+                                <li class="mds-shadow--card02"><a
+                                        href="">
                                     <div class="img"><img
-                                            src="https://d2j6uvfek9vas1.cloudfront.net/millie_logo/67ee78c82986e.jpg"
-                                            alt="《귀화서, 마지막 꽃을 지킵니다》 출간 이벤트"></div>
-                                    <div class="context"><strong class="title mds-font--subhead03"><!---->
-                                        <span th:if="${event.eventType.name()} == 'VOTE'" th:text="|20${event.year}년 ${event.month}월 이 달의 독후감 투표|"></span>
-                                        <span th:unless="${event.eventType.name()} == 'VOTE'" th:text="|20${event.year}년 ${event.month}월 이 달의 독후감 선정 결과입니다.|"></span>
-                                    </strong>
-                                        <p class="sub-title mds-font--body01" th:text="${event.eventText}"></p> <span
-                                                class="date mds-font--caption"></span>
+                                            src="https://d2j6uvfek9vas1.cloudfront.net/millie_logo/67b71abf4930d.jpg"
+                                            alt="나를 위한 기록 챌린지, Dear me."></div>
+                                    <div class="context"><strong class="title mds-font--subhead03">나를 위한 기록 챌린지,
+                                        Dear me.</strong>
+                                        <p class="sub-title mds-font--body01">밀리 필기모드를 활용해
+                                            챌린지를 시작해 보세요<br>기록을 남기면 아이패드를 드려요!</p> <span
+                                                class="date mds-font--caption">2025.03.15 - 2025.03.28</span>
                                     </div>
                                 </a></li>
+
                             </ul>
-                            <div class="close-event">
-                                <h4 class="mds-font--subhead03">종료된 이벤트</h4>
-                                <ul>
-                                    <li class="mds-shadow--card02"><a
-                                            href="">
-                                        <div class="img"><img
-                                                src="https://d2j6uvfek9vas1.cloudfront.net/millie_logo/67b71abf4930d.jpg"
-                                                alt="나를 위한 기록 챌린지, Dear me."></div>
-                                        <div class="context"><strong class="title mds-font--subhead03">나를 위한 기록 챌린지,
-                                            Dear me.</strong>
-                                            <p class="sub-title mds-font--body01">밀리 필기모드를 활용해
-                                                챌린지를 시작해 보세요<br>기록을 남기면 아이패드를 드려요!</p> <span
-                                                    class="date mds-font--caption">2025.03.15 - 2025.03.28</span>
-                                        </div>
-                                    </a></li>
-
-                                </ul>
-                            </div>
                         </div>
-                        </div>
-                    </div> <!--saeqs-->
-
-                </div> <!----> <!---->
-            </div>
-        </section> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!---->
+                    </div>
+                </div>
+            </div> <!--saeqs-->
+        </div> <!----> <!---->
     </div>
+</section> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!----> <!---->
+</div>
 
 
 </body>

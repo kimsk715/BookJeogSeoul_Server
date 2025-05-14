@@ -123,7 +123,9 @@ public class PostController {
 
     // 독후감 게시판
     @GetMapping("bookpost")
-    public String goToBookPost() {
+    public String goToBookPost(HttpSession session, Model model) {
+        PersonalMemberDTO member = (PersonalMemberDTO) session.getAttribute("member");
+        model.addAttribute("memberId", member.getId());
         return "post/post-list";
     }
 
@@ -180,7 +182,7 @@ public class PostController {
 
     @PostMapping("bookpost/write")
     public String writeBookPost(@ModelAttribute("post") FileBookPostDTO fileBookPostDTO,
-                                @RequestParam("file") List<MultipartFile> files, RedirectAttributes redirectAttributes,
+                                @RequestParam(value = "file", required = false) List<MultipartFile> files, RedirectAttributes redirectAttributes,
                                 HttpSession session) {
         PostAlarmDTO postAlarmDTO = new PostAlarmDTO();
         fileBookPostDTO.setMemberId(((PersonalMemberDTO)session.getAttribute("member")).getId());

@@ -18,6 +18,12 @@ import java.util.List;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.ui.Model;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
 
@@ -255,6 +261,70 @@ public interface BookService {
 
     public List<TempSelectedBookVO> getTempSelectedBook();
 
+
+
+
+
+
+    default List<CategoryBookDTO> selectBooksByKdc(Long kdc) {
+        // URI 생성
+        // API 기본 정보 상수 정의
+        String API_URL = "http://data4library.kr/api/loanItemSrch";
+        String API_KEY = "2a2893619b1a01c249f465c9e4475255647474a6cc24b11f6b177a8c925f78c2"; //
+
+        String url = UriComponentsBuilder.fromHttpUrl(API_URL)
+                .queryParam("authKey", API_KEY)        // 인증키
+                .queryParam("pageNo", "1")             // 페이지 번호
+                .queryParam("pageSize", "50")          // 한 페이지에 가져올 도서 수
+                .queryParam("format", "json")          // JSON 형식 요청
+                .queryParam("type", "ALL")             // 전체 유형 검색
+                .queryParam("kdc", kdc)                // KDC 분류 코드 전달
+                .toUriString();
+
+        List<CategoryBookDTO> books = new ArrayList<>();         // 결과 리스트
+        RestTemplate restTemplate = new RestTemplate();          // HTTP 요청 객체
+        ObjectMapper objectMapper = new ObjectMapper();          // JSON 파서
+
+        try {
+            // API 응답 받기 (문자열로)
+            String response = restTemplate.getForObject(url, String.class);
+
+            // 응답 JSON을 파싱
+            JsonNode root = objectMapper.readTree(response);
+            JsonNode docs = root.path("response").path("docs");
+
+
+
+            // 각 도서 항목 반복 처리
+            for (JsonNode docNode : docs) {
+                JsonNode doc = docNode.path("doc");
+
+                // 필드 추출
+                String title = doc.path("bookname").asText();
+                String authors = doc.path("authors").asText();
+                String isbn = doc.path("isbn13").asText();
+                String publisher = doc.path("publisher").asText();
+                String className = doc.path("class_nm").asText();
+
+                // ✅ 새 DTO 인스턴스 생성
+                CategoryBookDTO book = new CategoryBookDTO();
+                book.setAuthor(authors);
+                book.setBookName(title);
+                book.setIsbn13(isbn);
+                book.setPublisher(publisher);
+                book.setClassName(className);
+
+                books.add(book); // 리스트에 추가
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // 예외 발생 시 콘솔에 출력
+        }
+        return books;
+    }
+
+
+
+
     public void insertSelectedBook(SelectedBookVO selectedBookVO);
 //    api 요청 코드를 default 메소드로 인터페이스에 분리해서 구현
 //    ex) 신착도서 정보 요청 코드를 bookservice 에 넣기
@@ -381,4 +451,7 @@ public interface BookService {
 
     // 최근 조회한 도서 10개 줄거리와 함께
     public String findBookSummaryToString(Long memberId);
+
+    // 점자책 조회
+    public List<BrailleBookDTO> getBrailleBooks();
 }
