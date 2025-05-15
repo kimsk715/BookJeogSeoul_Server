@@ -408,6 +408,8 @@
         set member_mileage = member_mileage + #{point}
         where id = #{id};
     </update>
+
+
 </mapper>
 
 

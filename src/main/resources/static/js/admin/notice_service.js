@@ -38,7 +38,7 @@ const noticeService= (() => {
         await fetch(path);
     }
 
-    const addNotice = async(noticeTitle, noticeText) => {
+    const addNotice = async(noticeTitle, noticeText,files) => {
         let path = `/admin/notice-add?title=${noticeTitle}&text=${noticeText}`;
         await fetch(path)
         const formData = new FormData();

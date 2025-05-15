@@ -1,7 +1,6 @@
 package com.app.bookJeog.task;
 
 import com.app.bookJeog.domain.dto.MonthlyBookPostDTO;
-import com.app.bookJeog.domain.dto.Pagination;
 import com.app.bookJeog.domain.dto.SelectedBookDTO;
 import com.app.bookJeog.domain.vo.BookPostVO;
 import com.app.bookJeog.domain.vo.MonthlyBookPostVO;
@@ -11,12 +10,8 @@ import com.app.bookJeog.service.AladinService;
 import com.app.bookJeog.service.BookService;
 import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.enumeration.EventType;
-import com.app.bookJeog.domain.vo.*;
-import com.app.bookJeog.service.AladinService;
-import com.app.bookJeog.service.BookService;
 import com.app.bookJeog.service.NoticeService;
 import com.app.bookJeog.service.PostService;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -26,7 +21,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -67,7 +61,7 @@ public class SelectedBookTask {
         selectedList.forEach(bookService::insertSelectedBook);
     }
 
-//    매달 N 일에 좋아요 수를 기준으로 이 달의 독후감 후보 선정
+//    매달 20 일에 좋아요 수를 기준으로 이 달의 독후감 후보 선정
     @Scheduled(cron = "0 0 0 20 * ?")
     public void insertTopPosts() {
         List<BookPostVO> tempList = postService.getTopPosts();
@@ -105,7 +99,7 @@ public class SelectedBookTask {
         postService.insertBestPost(foundTopPost);
     }
 
-    // 투표 후보 선정
+    // 투표 후보 선정(tbl_event)
     @Scheduled(cron = "10 0 0 20 * ?")
     public void insertVoteEvent(){
         EventDTO eventDTO = new EventDTO();
@@ -120,7 +114,7 @@ public class SelectedBookTask {
         noticeService.setEvent(eventDTO.toVO());
     }
 
-    // 투표 결과 발표
+    // 투표 결과 발표(tbl_event)
     // (25년 7월에 생성된 데이터라면, 25년 6월의 선정 결과이므로
     // month 의 값을 1 빼주었음.)
     @Scheduled(cron = "1 0 0 1 * ?")

@@ -416,7 +416,7 @@
                     <!-- 회원관리 컨텐츠 -->
                     <div class="member-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="member-search-filter-container member-filter">
+                        <div class="member-search-filter-container member-filter" style="visibility: hidden;">
                             <div class="search-box member-search">
                                 <input type="text" placeholder="검색어를 입력하세요" class="search-input member-search-input" />
                                 <button type="button" class="search-btn member-search-btn">
@@ -467,7 +467,7 @@
                     <!-- 도서관리 컨텐츠 -->
                     <div class="book-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="book-search-filter-container book-filter">
+                        <div class="book-search-filter-container book-filter" >
                             <div class="search-box book-search">
                                 <input type="text" placeholder="검색어를 입력하세요" class="search-input book-search-input" />
                                 <div class="filter-box book-filter-box">
@@ -479,15 +479,15 @@
                                     </select>
 
                                 </div>
-                                <div class="filter-box book-filter-box">
-                                    <select class="status-filter book-status-filter">
+                                <div class="filter-box book-filter-box" style="visibility: hidden;">
+                                    <select class="status-filter book-status-filter" style="visibility: hidden">
                                         <option value="all">전체</option>
                                         <option value="pending">심사중</option>
                                         <option value="hold">보류</option>
                                         <option value="approved">승인</option>
                                         <option value="rejected">반려</option>
                                     </select>
-                                    <select class="date-filter book-date-filter">
+                                    <select class="date-filter book-date-filter" style="visibility: hidden">
                                         <option value="week">최근 1주일</option>
                                         <option value="month">
                                             최근 1개월
@@ -558,7 +558,7 @@
                     <div class="book-post-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
                         <div class="book-post-search-filter-container book-post-filter">
-                            <div class="search-box book-post-search">
+                            <div class="search-box book-post-search" >
                                 <input type="text" placeholder="검색어를 입력하세요"
                                     class="search-input book-post-search-input" />
                                 <button type="button" class="search-btn book-post-search-btn">
@@ -568,7 +568,7 @@
                                     이달의 독후감 후보 선정
                                 </button>
                             </div>
-                            <div class="filter-box book-post-filter-box">
+                            <div class="filter-box book-post-filter-box" style="visibility: hidden;">
                                 <select class="status-filter book-post-status-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">심사중</option>
@@ -615,7 +615,7 @@
                     <!-- 이 달의 독후감 컨텐츠 -->
                     <div class="top-post-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="top-post-search-filter-container top-post-filter">
+                        <div class="top-post-search-filter-container top-post-filter" >
                             <div class="search-box top-post-search">
                                 <input type="text" placeholder="검색어를 입력하세요"
                                     class="search-input top-post-search-input" />
@@ -626,7 +626,7 @@
                                     이 달의 독후감 선정
                                 </button>
                             </div>
-                            <div class="filter-box top-post-filter-box">
+                            <div class="filter-box top-post-filter-box" style="visibility: hidden;">
                                 <select class="status-filter top-post-status-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">심사중</option>
@@ -671,7 +671,7 @@
                     <!-- 토론방 컨텐츠 -->
                     <div class="discussion-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="discussion-search-filter-container discussion-filter">
+                        <div class="discussion-search-filter-container discussion-filter" style="visibility: hidden;">
                             <div class="search-box discussion-search">
                                 <input type="text" placeholder="검색어를 입력하세요"
                                     class="search-input discussion-search-input" />
@@ -725,7 +725,7 @@
                     <!-- 후원단체 컨텐츠 -->
                     <div class="sponsorship-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="sponsorship-search-filter-container sponsorship-filter">
+                        <div class="sponsorship-search-filter-container sponsorship-filter" >
                             <div class="search-box sponsorship-search">
                                 <input type="text" placeholder="검색어를 입력하세요"
                                     class="search-input sponsorship-search-input" />
@@ -736,7 +736,7 @@
                                     단체 등록(관리자)
                                 </button>
                             </div>
-                            <div class="filter-box sponsorship-filter-box">
+                            <div class="filter-box sponsorship-filter-box" style="visibility: hidden;">
                                 <select class="status-filter sponsorship-status-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">심사중</option>
@@ -782,7 +782,7 @@
                     <!-- 개인후원 컨텐츠 -->
                     <div class="book-donate-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="book-donate-search-filter-container book-donate-filter">
+                        <div class="book-donate-search-filter-container book-donate-filter" >
                             <div class="search-box book-donate-search">
                                 <input type="text" placeholder="검색어를 입력하세요"
                                     class="search-input book-donate-search-input" />
@@ -796,7 +796,7 @@
                                     수취대기
                                 </button>
                             </div>
-                            <div class="filter-box book-donate-filter-box">
+                            <div class="filter-box book-donate-filter-box" style="visibility: hidden;">
                                 <select class="status-filter book-donate-status-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">심사중</option>
@@ -843,7 +843,7 @@
                     <!-- 후원대상 컨텐츠 -->
                     <div class="receiver-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="receiver-search-filter-container receiver-filter">
+                        <div class="receiver-search-filter-container receiver-filter" >
                             <div class="search-box receiver-search">
                                 <input type="text" placeholder="검색어를 입력하세요"
                                     class="search-input receiver-search-input" />
@@ -854,7 +854,7 @@
                                     후원대상 선정하기
                                 </button>
                             </div>
-                            <div class="filter-box receiver-filter-box">
+                            <div class="filter-box receiver-filter-box" style="visibility: hidden;">
                                 <select class="status-filter receiver-status-filter">
                                     <option value="all">전체</option>
                                     <option value="completed">기부완료</option>
@@ -897,7 +897,7 @@
                     <!-- 공지 컨텐츠 -->
                     <div class="notice-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="notice-search-filter-container notice-filter">
+                        <div class="notice-search-filter-container notice-filter" >
                             <div class="search-box notice-search">
                                 <input type="text" placeholder="검색어를 입력하세요" class="search-input notice-search-input" />
                                 <button type="button" class="search-btn notice-search-btn">
@@ -907,7 +907,7 @@
                                     작성
                                 </button>
                             </div>
-                            <div class="filter-box notice-filter-box">
+                            <div class="filter-box notice-filter-box" style="visibility: hidden;">
                                 <select class="status-filter notice-status-filter">
                                     <option value="all">전체</option>
                                     <option value="notice">공지</option>
@@ -956,7 +956,7 @@
                                     검색
                                 </button>
                             </div>
-                            <div class="filter-box normal-inquiry-filter-box">
+                            <div class="filter-box normal-inquiry-filter-box" style="visibility: hidden;">
                                 <select class="status-filter normal-inquiry-type-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">도서 관련 문의</option>
@@ -1003,7 +1003,7 @@
                     <!-- 단체 문의 컨텐츠 -->
                     <div class="sponsor-inquiry-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="sponsor-inquiry-search-filter-container sponsor-inquiry-filter">
+                        <div class="sponsor-inquiry-search-filter-container sponsor-inquiry-filter" >
                             <div class="search-box sponsor-inquiry-search">
                                 <input type="text" placeholder="검색어를 입력하세요"
                                     class="search-input sponsor-inquiry-search-input" />
@@ -1011,7 +1011,7 @@
                                     검색
                                 </button>
                             </div>
-                            <div class="filter-box sponsor-inquiry-filter-box">
+                            <div class="filter-box sponsor-inquiry-filter-box" style="visibility: hidden;">
                                 <select class="status-filter sponsor-inquiry-type-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">기부 관련 문의</option>
@@ -1059,7 +1059,7 @@
                     <!-- 댓글 신고 컨텐츠 -->
                     <div class="comment-report-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="comment-report-search-filter-container comment-report-filter">
+                        <div class="comment-report-search-filter-container comment-report-filter" >
                             <div class="search-box comment-report-search">
                                 <input type="text" placeholder="검색어를 입력하세요"
                                     class="search-input comment-report-search-input" />
@@ -1067,7 +1067,7 @@
                                     검색
                                 </button>
                             </div>
-                            <div class="filter-box comment-report-filter-box">
+                            <div class="filter-box comment-report-filter-box" style="visibility: hidden;">
                                 <select class="status-filter comment-report-status-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">처리대기</option>
@@ -1110,7 +1110,7 @@
                     <!-- 독후감 신고 컨텐츠 -->
                     <div class="book-post-report-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="book-post-report-search-filter-container book-post-report-filter">
+                        <div class="book-post-report-search-filter-container book-post-report-filter" >
                             <div class="search-box book-post-report-search">
                                 <input type="text" placeholder="검색어를 입력하세요"
                                     class="search-input book-post-report-search-input" />
@@ -1118,7 +1118,7 @@
                                     검색
                                 </button>
                             </div>
-                            <div class="filter-box book-post-report-filter-box">
+                            <div class="filter-box book-post-report-filter-box" style="visibility: hidden;">
                                 <select class="status-filter book-post-report-status-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">처리대기</option>
@@ -1161,7 +1161,7 @@
                     <!-- 관리자 등록 컨텐츠 -->
                     <div class="admin-management" style="display: none">
                         <!-- 상단 검색/필터 영역 -->
-                        <div class="admin-search-filter-container admin-filter">
+                        <div class="admin-search-filter-container admin-filter" >
                             <div class="search-box admin-search">
                                 <input type="text" placeholder="검색어를 입력하세요" class="search-input admin-search-input" />
                                 <button type="button" class="search-btn admin-search-btn">
@@ -1171,7 +1171,7 @@
                                     신규 관리자 등록하기
                                 </button>
                             </div>
-                            <div class="filter-box admin-filter-box">
+                            <div class="filter-box admin-filter-box" style="visibility: hidden;">
                                 <select class="status-filter admin-status-filter">
                                     <option value="all">전체</option>
                                     <option value="pending">심사중</option>
@@ -1212,16 +1212,14 @@
                         </div>
                         <div class="admin-pagination"></div>
                     </div>
-
-
                 </div>
 
                 <!-- 사이드바 토글 버튼 -->
                 <button type="button" class="sidebar-toggle-btn sidebar-expanded">
                     <i class="toggle-icon"></i>
                 </button>
+                </div>
             </div>
-        </div>
     </div>
 
 

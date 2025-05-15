@@ -143,7 +143,7 @@ public interface MemberService {
 
             stringBuilder.append("grant_type=authorization_code");
             stringBuilder.append("&client_id=c87c26c641832d92e09c529afe085195");
-            stringBuilder.append("&redirect_uri=http://localhost:10000/kakao/login");
+            stringBuilder.append("&redirect_uri=http://3.34.183.241/kakao/login");
             stringBuilder.append("&code=" + code);
 
             bufferedWriter = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()));

@@ -23,7 +23,7 @@
         FROM tbl_member_history
         GROUP BY book_isbn
         order by count desc
-        LIMIT 10;
+        LIMIT 4;
     </select>
 
 
@@ -43,7 +43,7 @@
         on bpl.book_post_id = bp.id
         group by book_isbn
         order by count desc
-        limit 10
+        limit 8
     </select>
 
     <!--  선정 도서 여부 조회  -->
