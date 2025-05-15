@@ -1,9 +1,7 @@
 package com.app.bookJeog.controller.admin;
 
 
-import com.app.bookJeog.domain.dto.AdminNoticeDTO;
-import com.app.bookJeog.domain.dto.NoticeDTO;
-import com.app.bookJeog.domain.dto.Pagination;
+import com.app.bookJeog.domain.dto.*;
 import com.app.bookJeog.domain.vo.NoticeVO;
 import com.app.bookJeog.service.FIleService;
 import com.app.bookJeog.service.NoticeService;
@@ -42,9 +40,13 @@ public class AdminNoticeController {
 
     @GetMapping("admin/notice")
     @ResponseBody
-    public NoticeDTO getNotice(@RequestParam("id") Long id) {
+    public NoticeInfoDTO getNotice(@RequestParam("id") Long id) {
         NoticeVO noticeVO = noticeService.selectNoticeById(id);
-        return noticeService.toNoticeDTO(noticeVO);
+        List<FileDTO> fileList = fileService.getNoticeFilesByNoticeId(noticeVO.getId());
+        NoticeInfoDTO noticeInfoDTO = new NoticeInfoDTO();
+        noticeInfoDTO.setNoticeVO(noticeVO);
+        noticeInfoDTO.setFileList(fileList);
+        return noticeInfoDTO;
     }
 
     @GetMapping("admin/notice-edit")

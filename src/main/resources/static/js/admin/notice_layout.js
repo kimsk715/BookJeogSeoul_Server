@@ -45,6 +45,13 @@ const noticeLayout = (() =>{
     }
 
     const showNoticeDetail = (notice) => {
+        const filePreviewHTML = notice.fileList.map(file => `
+    <div class="file-preview" style="display: flex">
+        <img src="/image/notice/${file.filePath}/${file.fileName}" style="width: 100px; height: auto; border: 1px solid #ccc; border-radius: 4px;" />
+        <p style="text-align: center; font-size: 12px;">${file.fileName}</p>
+    </div>
+`).join('');
+
         commonModalContainer.innerHTML = `
         <div class="modal-header">
                     <h3>공지 상세정보</h3>
@@ -67,9 +74,9 @@ const noticeLayout = (() =>{
                             <tbody>
                                 <tr>
                                     <th>공지번호</th>
-                                    <td id="notice-id">${notice.id}</td>
+                                    <td id="notice-id">${notice.noticeVO.id}</td>
                                     <th>작성일시</th>
-                                    <td id="notice-date">${notice.createdDate}</td>
+                                    <td id="notice-date">${notice.noticeVO.createdDate}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -78,19 +85,17 @@ const noticeLayout = (() =>{
                     <!-- 공지 상세 내용 -->
                     <div class="notice-detail">
                         <h4>공지 제목</h4>
-                        <textarea class="detail-content" id="notice-title">${notice.noticeTitle}</textarea>
+                        <textarea class="detail-content" id="notice-title">${notice.noticeVO.noticeTitle}</textarea>
                     </div>
                     <div class="notice-detail">
                         <h4>공지 내용</h4>
-                        <textarea class="detail-content" id="notice-text">${notice.noticeText}</textarea>
+                        <textarea class="detail-content" id="notice-text">${notice.noticeVO.noticeText}</textarea>
                     </div>
                     <div class="notice-detail">
                         <h4>첨부 파일</h4>
-                        <img src="/images/common/favicon.png" alt="임시 이미지">
-                        <img src="/images/common/favicon.png" alt="임시 이미지">
-                        <img src="/images/common/favicon.png" alt="임시 이미지">
-                        <img src="/images/common/favicon.png" alt="임시 이미지">
-                        
+                        <div class="file-preview" style="display: flex">
+                        ${filePreviewHTML}
+                </div>             
                     </div>
                     
                 </div>
@@ -98,7 +103,7 @@ const noticeLayout = (() =>{
                 <!-- 모달 푸터 -->
                 <div class="modal-footer notice-footer">
                     <button type="button" class="cancel-btn close-button">취소</button>
-                    <button type="button" class="save-btn close-button" value="${notice.id}">저장</button>
+                    <button type="button" class="save-btn close-button" value="${notice.noticeVO.id}">저장</button>
                 </div>
         `
     }
