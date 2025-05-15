@@ -31,9 +31,11 @@ donationWrapper.addEventListener('click',(e) => {
     console.log(valueList);
 
     if(e.target.classList.contains("donate-ok")){
+        alert("수취완료 상태로 변경되었습니다.")
         donateService.updateStatus(valueList)
     }
     else if(e.target.classList.contains("donate-fail")){
+        alert("수취대기 상태로 변경되었습니다.")
         donateService.cancelStatus(valueList)
     }
 })

@@ -67,11 +67,15 @@ confirmNoticeButton.addEventListener('click',() =>{
         alert("제목과 내용을 입력하세요.");
         return;
     }
-    noticeService.addNotice(noticeTitle, noticeText)
-    closeModal(addNoticeModal);
+    if(files == null) {
+        noticeService.addNotice(noticeTitle, noticeText)
+        closeModal(addNoticeModal);
+    }
+    else{
+        noticeService.addNotice(noticeTitle, noticeText, files)
+        closeModal(addNoticeModal);
+    }
 
-    noticeService.addNotice(noticeTitle, noticeText, files)
-closeModal(addNoticeModal);
 })
 
 const noticeFileInput = document.querySelector("input[name=noticeFile]")
