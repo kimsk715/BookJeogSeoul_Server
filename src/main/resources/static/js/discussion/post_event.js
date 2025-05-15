@@ -275,8 +275,8 @@ moreButton.forEach((button) => {
         let memberId = member == null ? sponsorMember.id : member.id;
         console.log(button.nextElementSibling.querySelector(".reported-id").value)
         console.log(memberId)
-        console.log(memberId === button.nextElementSibling.querySelector(".reported-id").value)
-        if(memberId === button.nextElementSibling.querySelector(".reported-id").value){
+        console.log(memberId == button.nextElementSibling.querySelector(".reported-id").value)
+        if(memberId == button.nextElementSibling.querySelector(".reported-id").value){
             const commentDeleteButton = button.nextElementSibling.querySelector(".comment-delete")
             console.log(commentDeleteButton)
                 commentDeleteButton.removeAttribute("style")
@@ -302,6 +302,7 @@ commentDeleteButton.forEach((button) => {
     {
         let deleteCommentId = button.value;
         if(confirm("댓글을 삭제하시겠습니까?")){
+            button.closest('li').remove()
             reportService.deleteComment(deleteCommentId);
         }
         button.parentElement.style.display = "none";
