@@ -305,7 +305,7 @@ public class MemberServiceImpl implements MemberService {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             StringBuilder stringBuilder = new StringBuilder();
             BufferedWriter bufferedWriter = null;
-            String redirectURI = "http://3.34.183.241//personal/kakao/login";
+            String redirectURI = "http://3.34.183.241/personal/kakao/login";
 
 
             connection.setRequestMethod("POST");
@@ -359,6 +359,9 @@ public class MemberServiceImpl implements MemberService {
         }
         else if(memberVO.getMemberType().equals(MemberType.SPONSOR)){
             memberName = memberDAO.findSponsorMemberById(memberId).getSponsorName();
+        }
+        else if(memberVO.getMemberType().equals(MemberType.ADMIN)){
+
         }
         return memberName;
     }

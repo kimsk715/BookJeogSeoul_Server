@@ -10,7 +10,7 @@ discussions.forEach( post => {
                                             style="background-image: url(&quot;https://d3uz7kn1zskbbz.cloudfront.net/profile/00ecbef493114ef5a7eaccaa8ae46142.jpeg&quot;);"></a>
                                         <div class="metadata"><a href=""
                                                 class="nickname-link gtm-feed-recommend-post-tem-library"><span
-                                                    class="nickname">${post.sponsorName}</span> <!----></a>
+                                                    class="nickname">관리자</span> <!----></a>
                                             <div><span class="type">포스트</span>
                                                 <span class="time">${post.createdDate}일 전</span>
                                             </div>
@@ -33,9 +33,7 @@ discussions.forEach( post => {
                                     </div>
                                     <div class="bottom"><button type="button" class="btn comment"><i
                                                 class="mds-icon--comment"></i> <span class="label">댓글</span> <span
-                                                class="value">${post.commentCount}</span></button> <button type="button"
-                                            class="btn like"><i class="mds-icon--clip"></i> <span
-                                                class="label">책갈피</span> <span class="value">${post.likeScore}</span></button></div>   
+                                                class="value">${post.commentCount}</span></button></div>   
                                 </div>
                             </div>`;
 }

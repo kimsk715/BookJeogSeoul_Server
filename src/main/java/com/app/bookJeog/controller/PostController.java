@@ -247,6 +247,7 @@ public class PostController {
         for(int i=0 ; i<postFiles.size() ; i++){
             FileDTO fileDTO = postFiles.get(i);
             fileDTO.setId((long) i+1);
+            // 이미지 렌더링시 순서를 부여하기 위함.
         }
         model.addAttribute("files", postFiles);
         model.addAttribute("thumbNail", fileService.getDonateCertFileByPostId(postId));
@@ -256,6 +257,7 @@ public class PostController {
         List<CommentInfoDTO> commentList = new ArrayList<>();
         List<CommentVO> tempList = commentService.getAllCommentByPostId(postId);
         for(CommentVO commentVO : tempList) {
+            // 서비스에서 원래 합치고 컨트롤러로 올려야 함.
             CommentInfoDTO commentInfoDTO = new CommentInfoDTO();
             CommentDTO commentDTO = commentService.toCommentDTO(commentVO);
             commentInfoDTO.setCommentDTO(commentDTO);
@@ -275,6 +277,7 @@ public class PostController {
         }
         model.addAttribute("comments", commentList);
 
+        // 멘션 가능한 회원 목록
         List<CommentVO> comments = commentService.getAllMembersByPostId(postId);
         List<CommentInfoDTO> mentionList = new ArrayList<>();
         for(CommentVO comment : comments) {
@@ -315,17 +318,17 @@ public class PostController {
         postDTO.setPostType(PostType.DONATE_CERT);
         postDTO.setMemberId(foundMember.getId());
         PostVO postVO = postDTO.toVO();
-        postService.insertPost(postVO);
+        postService.insertPost(postVO); // post 슈퍼키
         Long postId = postVO.getId();
         donateCertDTO.setId(postId);
         donateCertDTO.setDonateCertTitle(title);
         donateCertDTO.setDonateCertText(content);
         log.info(postVO.toString());
         log.info(donateCertDTO.toString());
-        postService.setDonateCertPost(donateCertDTO.toVO());
+        postService.setDonateCertPost(donateCertDTO.toVO()); // post 서브키
         if(files !=null && !files.isEmpty())
         {
-            fileService.uploadDonateCertFiles(postId, files);
+            fileService.uploadDonateCertFiles(postId, files); // 파일  --> 이걸
         }
 
         return new RedirectView("/post/donate");

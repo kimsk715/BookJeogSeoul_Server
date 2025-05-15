@@ -83,4 +83,10 @@ public class CommentController implements MemberControllerDocs {
             alarmService.commentAlarm(receiverId, commentVO.getId());
         }
     }
+
+    @GetMapping("delete-comment")
+    @ResponseBody
+    public void deleteComment(@RequestParam Long commentId) {
+        commentService.updateCommentStatus(commentId);
+    }
 }
