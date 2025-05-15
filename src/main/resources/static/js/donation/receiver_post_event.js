@@ -120,6 +120,16 @@ const moreButton = document.querySelectorAll(".more-btn");
 
 moreButton.forEach((button) => {
     button.addEventListener("click",() =>{
+        let memberId = member == null ? sponsorMember.id : member.id;
+        console.log(button.nextElementSibling.querySelector(".reported-id").value)
+        console.log(memberId)
+        console.log(memberId == button.nextElementSibling.querySelector(".reported-id").value)
+        if(memberId == button.nextElementSibling.querySelector(".reported-id").value){
+            const commentDeleteButton = button.nextElementSibling.querySelector(".comment-delete")
+            console.log(commentDeleteButton)
+            commentDeleteButton.removeAttribute("style")
+        }
+        console.log("클릭 확인")
         button.nextElementSibling.classList.toggle("more-active");
     })
 })
@@ -134,7 +144,18 @@ commentReportButton.forEach((button) => {
         console.log(commentId)
     })
 })
-
+const commentDeleteButton = document.querySelectorAll(".comment-delete");
+commentDeleteButton.forEach((button) => {
+    button.addEventListener('click',() =>
+    {
+        let deleteCommentId = button.value;
+        if(confirm("댓글을 삭제하시겠습니까?")){
+            button.closest('li').remove()
+            reportService.deleteComment(deleteCommentId);
+        }
+        button.parentElement.style.display = "none";
+    })
+})
 const reportConfirmButton = document.querySelector(".btn-review-police")
 document.addEventListener("change",()=>{
     const reportType = document.querySelector(".report-list input[type=radio]:checked")
@@ -181,7 +202,10 @@ const reportService = (() => {
         let path = `/report-comment?commentId=${commentId}&reportType=${reportType}`;
         await fetch(path);
     }
-    return {reportComment: reportComment}
+    const deleteComment = async(deleteCommentId) =>{
+        await fetch(`/delete-comment?commentId=${deleteCommentId}`);
+    }
+    return {reportComment: reportComment, deleteComment:deleteComment}
 })();
 
 const addComment = document.querySelector(".post-btn");

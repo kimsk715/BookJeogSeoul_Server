@@ -449,6 +449,8 @@
                                                         type="button">답글달기</button>
                                                 <button
                                                         type="button" class="comment-report" th:value="${comment.commentDTO.id}">신고하기</button>
+                                                <button
+                                                        type="button" class="comment-delete" style="display: none;" th:value="${comment.commentDTO.id}">삭제하기</button>
                                                 <input type="hidden" class="reported-id" th:value="${comment.commentDTO.memberId}">
                                             </div>
                                         </div>
