@@ -16,33 +16,39 @@
 
 -   Java<br>
 -   Spring Boot<br>
+-   FastAPI<br>
+-   python<br>
 -   Java Script<br>
 -   tomcat<br>
 -   MySQL<br>
+-   MyBatis<br>
 -   Visual Studio Code<br>
 -   InteliJ<br>
 -   PyCharm<br>
 -   Postman<br>
--   
+-   Quartz<br>
 -   DBeaver<br>
 -   Sourcetree<br>
--   git, github<br>
+-   Thymeleaf<br>
 -   JSON<br>
 -   Ajax<br>
 -   JDK 17.0.15<br>
 -   Kakao DEVELOPER API<br>
 -   SMTP Gmail API<br>
+-   OpenAI Platform
+-   OpenAPI<br>
+-   git, github<br>
 -   Slack<br>
 
 # 4. ERD
 
-<img src="https://github.com/kimsk715/kimsk715/blob/249d365380746c016d0618c0f6a11a82a72cf0e1/temp_ERD.jpg">
+<img src="https://github.com/kimsk715/kimsk715/blob/cf030030f710cda685d357f6b89dc69dbd418b3f/bjseoul_ERD.png">
 
 # 5. 담당 업무
 
 ## 5-1. 퍼블리싱
 
-<img src="https://github.com/kimsk715/kimsk715/blob/5f49b8d575e2f714406e4ec7a4cc18bdd239aad8/temp_publishing.jpg">
+<img src="https://github.com/kimsk715/kimsk715/blob/09e60ba1051b86db9645da6b0edf8b705b5d9f8e/bjseoul_publishing.png">
 
 ### ※ 일반 회원 마이페이지
 
@@ -72,8 +78,8 @@
 
 ## 5-2 백엔드
 
-<img src="https://github.com/kimsk715/kimsk715/blob/d25158a4df0a71c04f02c198509b75a9205b106d/temp_server1.jpg">
-<img src="https://github.com/kimsk715/kimsk715/blob/d25158a4df0a71c04f02c198509b75a9205b106d/temp_server2.jpg">
+<img src="https://github.com/kimsk715/kimsk715/blob/09e60ba1051b86db9645da6b0edf8b705b5d9f8e/bjseoul_server1.png">
+<img src="https://github.com/kimsk715/kimsk715/blob/09e60ba1051b86db9645da6b0edf8b705b5d9f8e/bjseoul_server2.png">
 
 ### ※ 관리자 페이지
 
