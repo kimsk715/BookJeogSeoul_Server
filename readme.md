@@ -311,7 +311,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
 
      API 요청 시 parameter가 누락되어 있다는 로그와 함께 API로부터 데이터를 조회할 수 없었다.
 <p align="center">
- <img src="https://github.com/kimsk715/kimsk715/blob/f72dd80435ef1fd81bc28bf83172cf1ab583e3d5/API_%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0_%EC%98%A4%EB%A5%98.jpg">
+ <img src="https://github.com/kimsk715/kimsk715/blob/ad6bafb515346923525155d0f1ed4488a52b2bba/API_%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0_%EC%98%A4%EB%A5%982.jpg">
 </p>
 
      오류 로그
