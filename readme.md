@@ -266,7 +266,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
 ### 1. 파일 첨부 및 수정 시 외래 키 제약 조건 위반 오류.
 
 <p align="center">
-<img src="https://github.com/kimsk715/kimsk715/blob/d18435752c7fc10be2a57bfc64e3dcee5281107e/post_edit_error_log.png">
+<img src="https://github.com/kimsk715/kimsk715/blob/d18435752c7fc10be2a57bfc64e3dcee5281107e/post_edit_error_log.png"><br>
 <span>오류 발생 로그</span>
 </p>    
 
@@ -286,7 +286,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
      먼저 입력하고 서브키를 입력해야 하는데, 슈퍼키가 생성되지 않은 상태에서 서브키의 ID를 입력하려고 해서 오류가 발생하였다.
 
 <p align="center">
-<img src="https://github.com/kimsk715/kimsk715/blob/b59d4986fb17b0a5525a50ce2943215255b81c7a/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%98%A4%EB%A5%98.jpg">
+<img src="https://github.com/kimsk715/kimsk715/blob/b59d4986fb17b0a5525a50ce2943215255b81c7a/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%98%A4%EB%A5%98.jpg"><br>
 <span>오류 코드</span>    
 </p>    
     
@@ -302,7 +302,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
      그리고 코드의 실행 순서를 바꾸어,
      첨부는 슈퍼키 --> 서브키, 삭제는 서브키 --> 슈퍼키 순서대로 실행되도록 수정하였다.
 <p align="center">
-<img src="https://github.com/kimsk715/kimsk715/blob/8f3fb2b11d826eaa66cf7444c94efd38b3d329a5/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%BD%94%EB%93%9C.jpg">
+<img src="https://github.com/kimsk715/kimsk715/blob/8f3fb2b11d826eaa66cf7444c94efd38b3d329a5/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%BD%94%EB%93%9C.jpg"><br>
 <span>수정된 코드</span>
 </p> 
 
@@ -314,7 +314,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
 
      API 요청 시 parameter가 누락되어 있다는 로그와 함께 API로부터 데이터를 조회할 수 없었다.
 <p align="center">
- <img src="https://github.com/kimsk715/kimsk715/blob/ad6bafb515346923525155d0f1ed4488a52b2bba/API_%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0_%EC%98%A4%EB%A5%982.jpg">
+ <img src="https://github.com/kimsk715/kimsk715/blob/ad6bafb515346923525155d0f1ed4488a52b2bba/API_%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0_%EC%98%A4%EB%A5%982.jpg"><br>
 <span>오류 로그</span>
 </p>
 
@@ -332,7 +332,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
      한 뒤, API에 다시 요청한 결과, 정상적으로 데이터를 조회할 수 있었다.
      
 <p align="center">
- <img src="https://github.com/kimsk715/kimsk715/blob/f72dd80435ef1fd81bc28bf83172cf1ab583e3d5/BookInfoVO.png">
+ <img src="https://github.com/kimsk715/kimsk715/blob/f72dd80435ef1fd81bc28bf83172cf1ab583e3d5/BookInfoVO.png"><br>
 <span>수정된 VO</span>   
 </p>
 
@@ -371,7 +371,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
     결과에 알맞은 페이지가 생성되도록 처리하였다.
 
 <p>
-    <img src="https://github.com/kimsk715/kimsk715/blob/871f3f51f9a2a1fb4a466901327ae569de88707e/bookService_totatCount.jpg">
+    <img src="https://github.com/kimsk715/kimsk715/blob/871f3f51f9a2a1fb4a466901327ae569de88707e/bookService_totatCount.jpg"><br>
     <span>검색 결과의 전체 개수를 조회하는 코드</span>
 </p>
      
