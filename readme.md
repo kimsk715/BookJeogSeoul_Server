@@ -267,7 +267,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
 
 <p align="center">
 <img src="https://github.com/kimsk715/kimsk715/blob/d18435752c7fc10be2a57bfc64e3dcee5281107e/post_edit_error_log.png">
-오류 발생 로그
+<span>오류 발생 로그</span>
 </p>    
 
 #### 문제 상황
@@ -287,7 +287,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
 
 <p align="center">
 <img src="https://github.com/kimsk715/kimsk715/blob/b59d4986fb17b0a5525a50ce2943215255b81c7a/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%98%A4%EB%A5%98.jpg">
-오류 코드
+<span>오류 코드</span>    
 </p>    
     
 
@@ -315,7 +315,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
      API 요청 시 parameter가 누락되어 있다는 로그와 함께 API로부터 데이터를 조회할 수 없었다.
 <p align="center">
  <img src="https://github.com/kimsk715/kimsk715/blob/ad6bafb515346923525155d0f1ed4488a52b2bba/API_%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0_%EC%98%A4%EB%A5%982.jpg">
-    오류 로그
+<span>오류 로그</span>
 </p>
 
 
@@ -333,7 +333,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
      
 <p align="center">
  <img src="https://github.com/kimsk715/kimsk715/blob/f72dd80435ef1fd81bc28bf83172cf1ab583e3d5/BookInfoVO.png">
-수정된 VO
+<span>수정된 VO</span>   
 </p>
 
 ### 3. 후원 대상 게시판 접속 불가 오류.
