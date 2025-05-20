@@ -1,16 +1,16 @@
-# 취업 체험 서비스 제공 플랫폼 - 템프
+# 독후감 공유 및 기부 중개 플랫폼.
 
 # 1. 기획 의도
 
-<img src="https://github.com/kimsk715/kimsk715/blob/3985bad5da05d4e9262a3ffede56fb3d6fdb78b7/temp_purpose.jpg">
+<img src="https://github.com/kimsk715/kimsk715/blob/e5129335eb79e35adecd2e1ad74bf416261f3602/%EB%B6%81%EC%A0%81%EC%84%9C%EC%9A%B8_%EA%B8%B0%ED%9A%8D%EC%9D%98%EB%8F%84.png">
 
-청년 실업이 늘어갈 뿐만 아니라, 전체적으로 취업이 쉽지 않은 요즘, 취업에 대한 장벽 중 하나로 꼽히는 것이 실무 경험의 부재이다. 인턴십 또한 기회가 많이 주어지지 않기 때문에, 이러한 점을 해소하고자 취업 체험 서비스를 제공하고자 '템프' 라는 플랫폼을 기획하였다.
+대한민국 성인의 독서량이 감소해가는 추세를 해결하는 동시에, 독서 활동을 기부할 수 있는 기회와 연결하여, 독서를 생산적인 활동을 만드는 것을 목표로 '북적서울' 이라는 플랫폼을 기획하였습니다.
 
 # 2. 기대 효과
 
-<img src="https://github.com/kimsk715/kimsk715/blob/fdff249fa363019eb58325c78bfd4f08bf65cdef/temp_effect.jpg">
+<img src="https://github.com/kimsk715/kimsk715/blob/e5129335eb79e35adecd2e1ad74bf416261f3602/%EB%B6%81%EC%A0%81%EC%84%9C%EC%9A%B8_%EA%B8%B0%EB%8C%80%ED%9A%A8%EA%B3%BC.png">
 
-청년층의 취업 의지 독려뿐만 아니라, 실무 경험을 통한 개인의 역량 상승이나 특정 직종에 대한 확신을 얻을 수 있고, 기업 입장에서도 이미지 개선 뿐만 아니라, 채용이나 인턴 이외의 추가적인 인재 발굴의 기회를 가질 수 있다.
+대한민국 성인의 독서율을 개선하고, 도서를 접하기 힘든 이들에게 독서의 기회를 골고루 제공할 수 있으며, 기부에 대한 접근성을 높일 수 있을 것으로 예상됩니다.
 
 # 3. 프로젝트 사용 Tool
 
@@ -18,15 +18,18 @@
 -   Spring Boot<br>
 -   Java Script<br>
 -   tomcat<br>
--   ORACLE<br>
--   Spring Boot<br>
+-   MySQL<br>
 -   Visual Studio Code<br>
+-   InteliJ<br>
+-   PyCharm<br>
+-   Postman<br>
+-   
 -   DBeaver<br>
 -   Sourcetree<br>
 -   git, github<br>
 -   JSON<br>
 -   Ajax<br>
--   JDK 11.0.15<br>
+-   JDK 17.0.15<br>
 -   Kakao DEVELOPER API<br>
 -   SMTP Gmail API<br>
 -   Slack<br>
