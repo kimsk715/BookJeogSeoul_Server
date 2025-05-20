@@ -305,16 +305,24 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
 
 #### ♨ 문제 상황 ♨
 
-     일부 parameter가
+     API 요청 시 parameter가 누락되어 있다는 로그와 함께 API로부터 데이터를 조회할 수 없었다.
+
+ <img src="https://github.com/kimsk715/kimsk715/blob/f72dd80435ef1fd81bc28bf83172cf1ab583e3d5/API_%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0_%EC%98%A4%EB%A5%98.jpg">
+
+     오류 로그
 
 #### 문제 원인
 
-     API로부터 데이터를 요청할 때, 전체 parameter를 받을 VO가 있어야 하는데, 서비스에 필요한 데이터만 필드에 선언한 VO를 사용하여
+     API로부터 데이터를 요청할 때, 전체 parameter를 받을 VO가 있어야 하는데, 서비스에 필요한 데이터만 필드에 선언한 VO를
+     이용하였기 때문에, parameter가 누락되어있다는 오류가 발생하였다. 추가적으로, 필드명 또한 PUBLER 와 같이
+     데이터를 제공한 측에서 정의한 이름이 아닌, PUBLISHER 등으로 선언한 경우에도 오류가 발생하였다.
 
 #### 해결 방법
 
-     기업 이미지가 담긴 테이블과 전체 파일들에 대한 정보가 담긴 테이블 join하는 과정에서 테스트를 위해 사용했던 고정된 COMPANY_ID를 
-     제거하지 않아 발생했던 오류로, 테스트용 데이터를 제거하였더니 해결되었다.
+     브라우저 상에서 url을 입력하여 json의 형태로 먼저 출력하여, 컬럼명을 확인하고, 해당 컬럼명에 맞게 VO를 재정의
+     한 뒤, API에 다시 요청한 결과, 정상적으로 데이터를 조회할 수 있었다.
+
+ <img src="https://github.com/kimsk715/kimsk715/blob/f72dd80435ef1fd81bc28bf83172cf1ab583e3d5/BookInfoVO.png">
 
 ### 3. 후원 대상 게시판 접속 불가 오류.
 
