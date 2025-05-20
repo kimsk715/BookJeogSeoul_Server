@@ -39,6 +39,13 @@
 -   OpenAPI<br>
 -   git, github<br>
 -   Slack<br>
+-   POSTMAN<br>
+-   AWS<br>
+-   AMAZON EC2<br>
+-   ubuntu<br>
+-   FileZilla<br>
+-   Putty<br>
+-   Junit 5<br>
 
 # 4. ERD
 
@@ -370,7 +377,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
     해당 parameter를 조회하고 페이징 처리를 담당하는 pagination 클래스의 count에 대입되도록 하여, 검색
     결과에 알맞은 페이지가 생성되도록 처리하였다.
 
-<p>
+<p align="center">
     <img src="https://github.com/kimsk715/kimsk715/blob/871f3f51f9a2a1fb4a466901327ae569de88707e/bookService_totatCount.jpg"><br>
     <span>검색 결과의 전체 개수를 조회하는 코드</span>
 </p>
