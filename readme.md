@@ -275,10 +275,6 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
     위의 이미지에서는 삭제 과정에서 오류가 발생하였지만, 첨부를 하는 과정에서도 똑같은 종류의
     오류가 발생하였음.
 
-
-
-##### 파일 첨부 오류 코드
-
 #### 문제 원인
 
      게시글 수정에서 기존 파일의 제거가 제일 먼저 실행되고, 그 뒤에 기존 파일이 다시 첨부되고 추가된 파일이 첨부되는 방식으로 파일 
@@ -287,7 +283,9 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
      외래 키 제약 조건을 어긴 상태로 실행되어 발생한 오류는 위의 그림에서 usegeneratedkey를 통해 생성된 id를 슈퍼키의 ID로 
      먼저 입력하고 서브키를 입력해야 하는데, 슈퍼키가 생성되지 않은 상태에서 서브키의 ID를 입력하려고 해서 오류가 발생하였다.
 
-    <img src="https://github.com/kimsk715/kimsk715/blob/b59d4986fb17b0a5525a50ce2943215255b81c7a/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%98%A4%EB%A5%98.jpg" style="align-items : center>
+<img src="https://github.com/kimsk715/kimsk715/blob/b59d4986fb17b0a5525a50ce2943215255b81c7a/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%98%A4%EB%A5%98.jpg">
+    
+    오류 코드
 
 
 
@@ -299,7 +297,9 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
      그리고 코드의 실행 순서를 바꾸어,
      첨부는 슈퍼키 --> 서브키, 삭제는 서브키 --> 슈퍼키 순서대로 실행되도록 수정하였다.
 
-    <img src="https://github.com/kimsk715/kimsk715/blob/8f3fb2b11d826eaa66cf7444c94efd38b3d329a5/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%BD%94%EB%93%9C.jpg">
+<img src="https://github.com/kimsk715/kimsk715/blob/8f3fb2b11d826eaa66cf7444c94efd38b3d329a5/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%BD%94%EB%93%9C.jpg">
+    
+    수정된 코드
 
 ### 2. API 사용 시, parameter 에러.
 
