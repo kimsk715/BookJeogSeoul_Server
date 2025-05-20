@@ -288,7 +288,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
 <img src="https://github.com/kimsk715/kimsk715/blob/b59d4986fb17b0a5525a50ce2943215255b81c7a/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%98%A4%EB%A5%98.jpg">
 </p>    
     
-    오류 코드
+##### 오류 코드
 
 
 
@@ -303,7 +303,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
 <img src="https://github.com/kimsk715/kimsk715/blob/8f3fb2b11d826eaa66cf7444c94efd38b3d329a5/%ED%8C%8C%EC%9D%BC_%EC%B2%A8%EB%B6%80_%EC%8A%88%ED%8D%BC%ED%82%A4_%EC%88%9C%EC%84%9C_%EC%BD%94%EB%93%9C.jpg">
 </p> 
 
-    수정된 코드
+##### 수정된 코드
 
 ### 2. API 사용 시, parameter 에러.
 
@@ -314,7 +314,7 @@ VO와 DTO도 각각의 목적에 맞게 적용하는 것을 목표로 프로젝�
  <img src="https://github.com/kimsk715/kimsk715/blob/ad6bafb515346923525155d0f1ed4488a52b2bba/API_%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0_%EC%98%A4%EB%A5%982.jpg">
 </p>
 
-     오류 로그
+##### 오류 로그
 
 #### 문제 원인
 
